@@ -1,0 +1,178 @@
+﻿@using FNTC.Finansoft.Accounting.DTO.Result
+@model IEnumerable<FNTC.Finansoft.Accounting.DTO.Accounting.FormasDePagoDTO>
+
+@{
+   // Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+    var result = (Result)ViewBag.result;
+
+
+
+    if (Model == null)
+    {
+        Response.Redirect(Url.Action("Index", "FormasPago"));
+    }
+
+    var menu = (string)TempData["menu"];
+}
+
+@*<link href="~/Content/stylegeneral.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jsgeneral.js"></script>*@
+
+
+ 
+
+<div class="col-md-12">
+    <div class="form-group">
+        <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 123%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Formas de pago registradas</h3></div>
+        <div class="col-md-2" style=" margin-top: 3%;">
+            <a href="/Accounting/FormasPago/Create" class="AddUser btn btn-success btn-xs btnnuevo" data-toggle="modal" data-target="#centro">Nuevo</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12" style="margin-left: 26px;">
+    <div class="form-group">
+        <button class="js-refrescar"><i class="fa fa-refresh" aria-hidden="true"></i> Actualizar</button>
+    </div>
+</div>
+   
+<div class="modal fade" data-backdrop="static" id="centro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="table-responsive col-md-12">
+    <table class="table table-bordered table-hover table-responsive tablaspeq">
+
+        <tr>
+            <th class="columnatablaazul">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th class="columnatablaazul2">
+                @Html.DisplayNameFor(model => model.Activo)
+            </th>
+            <th class="columnatablaazul">
+                @Html.DisplayNameFor(model => model.CodigoCuenta)
+            </th>
+            <th class="columnatablaazul2">
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th class="columnatablaazul">
+                <label>RC</label>
+            </th>
+            <th class="columnatablaazul2">
+                <label>CE</label>
+            </th>
+            <th class="columnatablaazul">Opciones</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td class="alinearcentro">
+                    @Html.DisplayFor(modelItem => item.Activo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodigoCuenta)
+                </td>
+                <td class="alinearcentro">
+                    @Html.DisplayFor(modelItem => item.Tipo)
+                </td>
+                <td class="alinearcentro">
+                    @Html.DisplayFor(modelItem => item.AplicaParaReciboCaja_Ingresos)
+                </td>
+                <td class="alinearcentro">
+                    @Html.DisplayFor(modelItem => item.AplicaPara_ComprobanteEgreso_Pagos)
+                </td>
+                <td class="alinearcentro">
+
+                    <a class="editartablas" id="editarboton" href="/Accounting/FormasPago/Edit?ID=@item.ID" data-toggle="modal" data-target="#centro">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </a>|
+
+                    <a class="eliminartablas" data-codigo="@item.ID" title="Eliminar" style="padding: 5%;">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<script>
+
+    //refrescar un div
+    $(".js-refrescar").click(function () {
+        $("#mostrar").html("");
+        $("#mostrar").load("/Accounting/FormasPago/index");
+    });
+
+
+    //Al Ocultar el modal
+    $(document.body).on('hidden.bs.modal', function () {
+        $('#centro').removeData('bs.modal');
+        $(".js-refrescar").click();
+    });
+
+
+    $().ready(function () {
+        var href = "";
+        var data = "";
+        $(".eliminartablas").click(function (event) {
+            if (confirm("Solo se eliminirá si no presenta movimientos o no est'a asignado a un comprobante") == true) {
+                href = $(this).prev().attr('href');
+                // data = href.split("/")[4];
+                data = $(this).data('codigo');
+                //event.preventDefault();
+
+                $.ajax({
+                    type: "POST",
+                    url: '/Accounting/FormasPago/Delete',
+                    data: { id: data },
+                    success: function () {
+
+                        //var urlpartial = '@Url.Action("catalogos2", "Default", new { Area = "dashboard"})';
+                        var urlpartial = "/Accounting/Formaspago/index"; 
+                        //    alert(urlpartial);
+                        //                        $("#mostrar").html("");
+                        //  $("#mostrar").load(urlpartial);
+                        $(".js-refrescar").click();
+                        //  window.location ="/Dashboard/Default/catalogos2?url=Accounting/CentroCosto/index&menu=contabilidad";
+                        alert("eliminado");
+                    },
+                    error: function () {
+                        alert("No se puedo Eliminar");
+                    }
+                });
+            }
+            //post a
+        });
+    })
+</script>
+
+<style>
+
+
+    .ui-widget-header
+{
+    background: none !important;
+}
+    .ui-icon, .ui-widget-content .ui-icon 
+    {
+        background-image: none!important;
+    }
+
+</style>

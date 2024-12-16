@@ -1,0 +1,49 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.Nomina.Discriminacion>
+
+
+
+<div class="modal-body">
+    <div class="col-md-2" style=" padding-bottom: 1%; margin-left: 80%;">
+
+        <button class="btn btn-success" onclick=" $('#divmodal').load('@Url.Action("Create","Discriminacions",new { })')">Crear Nueva Discriminacion</button>
+
+    </div>
+
+    <table class="table table-striped table-bordered dataTable no-footer" style="background-color: #FFF;">
+
+        <tr>
+            <th class="columnatablaazul2">
+                <label>ID</label>
+            </th>
+            <th class="columnatablaazul2">
+                <label>EMPRESA</label>
+            </th>
+            <th class="columnatablaazul2">
+                <label>Periodo De Deducción</label>
+            </th>
+            <th class="columnatablaazul2">
+                <label>Mes de Deducción:</label>
+            </th>
+            <th class="columnatablaazul2">
+                <label>Plano:</label>
+            </th>
+
+        </tr>
+
+        @*@foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CODIGO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cuenta.NOMBRE)
+                </td>
+                
+
+            </tr>
+        }*@
+
+    </table>
+
+</div>

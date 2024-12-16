@@ -1,0 +1,51 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.DeterioroCartera.CuentaDeterioroCartera
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CuentaDeterioroCartera</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CuentaDeterioro.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CuentaDeterioro.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CuentaGastosProvision.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CuentaGastosProvision.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoComprobante.CLASEComprobante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoComprobante.CLASEComprobante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreSeleccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreSeleccion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

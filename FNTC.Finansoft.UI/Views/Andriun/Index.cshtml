@@ -1,0 +1,12 @@
+﻿
+@using (Html.BeginForm("Upload", "Home", FormMethod.Post,
+    new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset>
+        <legend>UAca esta gestion con todos sus botones raros</legend>
+       
+       
+    </fieldset>
+}

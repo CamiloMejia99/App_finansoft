@@ -1,0 +1,11 @@
+﻿
+@model IEnumerable<FNTC.Finansoft.Accounting.DTO.FabricaCreditos.FCSedes>
+
+
+<select class="form-control" id="idSede" name="idSede">
+    <option value="">Seleccionar</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.idSede">/Sede: @item.direccion</option>
+    }
+</select>

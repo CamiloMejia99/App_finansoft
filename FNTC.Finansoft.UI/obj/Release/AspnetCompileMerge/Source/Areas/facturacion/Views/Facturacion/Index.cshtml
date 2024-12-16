@@ -1,0 +1,413 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.Facturacion.producto>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "VENDER";
+}
+
+@section Styles{
+    <link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/css/chosen.css" rel="stylesheet" />
+}
+
+<script src="~/Scripts/sweetalert2@9.js"></script>
+<script src="~/Scripts/datatable.js"></script>
+<script src="~/Scripts/dataTables.buttons.min.js"></script>
+<script src="~/Scripts/datatables.js"></script>
+<script src="~/Scripts/jquery.dataTablesform.min.js"></script>
+<div class="col-md-12" style="background:#ECECEC; width:100%;left: 10px;">
+    <br />
+    <ul class="col-md-offset-2 nav nav-tabs" style="margin-top:0%;border: none; margin-left: 2%;">
+        <li><a href="/facturacion/Producto" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Productos </a></li>
+        <li class="active"><a href="/facturacion/Facturacion" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Facturación </a></li>
+        <li><a href="/facturacion/FacConfiguracion" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Configuración </a></li>
+    </ul>
+    <div class="tab-content contenedortabs">
+        <br />
+        <div class="card" style="background-color:white;margin-left:10px;margin-right:10px;">
+            <div class="card-header" style="background-color:#274766;color:white;border-radius:5px;">
+                PRODUCTOS EN LISTA
+            </div>
+            <div class="card-body" style="background-color:white;margin-left:10px;margin-right:10px">
+                <br />
+                <table class="table table-responsive table-bordered" border="1" cellpadding="0">
+                    <thead id="headamorti" class="thead-inverse" style="background-color:#E3E3E3;">
+                        <tr>
+                            <th>Intern</th>
+                            <th>#</th>
+                            <th>Cantidad</th>
+                            <th>Nombre</th>
+                            <th>Precion Unidad</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaPedido"></tbody>
+                </table>
+
+                <div class="row">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-2">
+                        <h3>TOTAL</h3>
+                    </div>
+                    <div class="col-md-2">
+                        <input id="valorTotal" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr />
+        <div class="row" style="margin-left: 10px; margin-right: 10px;">
+            <div class="card" style="background-color:white;">
+                <div class="card-header" style="background-color:#274766;color:white;border-radius:5px;">
+                    PROCESOS
+                </div>
+                <div class="card-body">
+                    <br />
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>CLIENTE:</label>
+                                    <div>
+                                        @Html.DropDownList("clientes", null, new { @class = "chosen-select-single", @id = "cliente" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>FORMA DE PAGO:</label>
+                                    <div>
+                                        @Html.DropDownList("formasPago", null, new { @class = "form-control", @id = "formasPago" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button id="btnTerminarFactura" class="btn btn-success">FINALIZAR VENTA</button>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+
+        <hr />
+        <div class="row" style="margin-left:10px;margin-right:10px;">
+            <div class="card" style="background-color:white;">
+                <div class="card-header" style="background-color:#274766;color:white;border-radius:5px;">
+                    PRODUCTOS DISPONIBLES
+                </div>
+                <div class="card-body">
+                    <br /> 
+                    <div class="row" style="margin-left:10px;margin-right:10px;">
+                        <table id="myTable" class="table table-striped table-bordered table-responsive" style="margin-left:10px;margin-right:10px;">
+                            <thead style="background-color:#E3E3E3">
+                                <tr>
+                                    <th>
+                                        Id
+                                    </th>
+                                    <th>
+                                        Producto
+                                    </th>
+                                    <th>
+                                        Precio
+                                    </th>
+                                    <th>
+                                        En Inventario
+                                    </th>
+                                    <th width="10%">
+                                        Cantidad
+                                    </th>
+                                    <th width="10%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.nomProducto)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.precioSalida)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.inventarioInicial)
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="@item.id" />
+                                        </td>
+                                        <td>
+                                            <button class="classBtnAgregar btn btn-success" id="@item.id">Agregar</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+
+        <br />
+        <br />
+        <br />
+    </div>
+
+
+</div>
+
+
+
+
+
+
+@section scripts
+{
+
+    <script>
+
+
+
+        $("#btnTerminarFactura").click(function () {
+            $("#btnTerminarFactura").prop("disabled", true);
+
+            var cliente = $("#cliente").val();
+            var formaPago = $("#formasPago").val();
+            var total = $("#valorTotal").val();
+
+
+            var siHayProductos = $('td:nth-child(1)', "#tablaPedido").text();
+
+            if (siHayProductos != "") {
+                if (cliente != "") {
+
+                    total = parseInt(total);
+
+
+                            $.ajax({
+                                type: "POST",
+                                url: "@Url.Action("terminarFacturaVenderCaja", "Facturacion")",
+                                datatype: "Json",
+                                data: { cliente: cliente, efectivo: total, formaPago: formaPago },
+                                success: function (data) {
+                                    Swal.fire({
+                                        title: 'Factura realizada Correctamente!',
+                                        icon: 'success',
+                                        confirmButtonColor: '#3085d6',
+                                        confirmButtonText: 'Imprimir'
+
+                                    }).then((result) => {
+                                        if (result.value) {
+                                            var url = "/facturacion/Facturacion/imprimirFacturaCaja?id=" + data;
+                                            //window.open(url, '_blank');
+                                            print_link(url);
+                                            location.reload();
+                                        } else {
+                                            var url = "/facturacion/Facturacion/imprimirFacturaCaja?id=" + data;
+                                            //window.open(url, '_blank');
+                                            print_link(url);
+                                            location.reload();
+                                        };
+                                    });
+                                }
+                            });
+
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Seleccione un Cliente!'
+                    })
+                    $("#btnTerminarFactura").prop("disabled", false);
+                }
+            } else {
+                $("#btnTerminarFactura").prop("disabled", false);
+            }
+
+        });
+
+        function print_link(link) {
+            var mywindow = window.open(link, 'title', 'height=500,width=500');
+            mywindow.onload = function () { mywindow.print();}
+        }
+
+        $(document).ready(function () {
+
+            $(document).ready(function () {
+                $(".chosen-select-single").chosen();
+                $(".chosen-select-multiple").chosen();
+
+            });
+
+            renderTabla();
+
+            $('#myTable').DataTable({
+                "language": {
+                    "url": "/Content/Spanish.json"
+                }
+            });
+
+
+            //$(".chosen-select-single").chosen();
+            //$(".chosen-select-multiple").chosen();
+        });
+
+        $("#tablaPedido").on('click', 'button.borrar', function () {
+            var id = $(this).parents('tr');
+            var cId = $('td:nth-child(1)', id).text();
+
+            Swal.fire({
+                title: 'Quitar Producto?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI'
+            }).then((result) => {
+                if (result.value) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("DeleteProductoContado", "Facturacion")",
+                    datatype: "Json",
+                    data: { id: cId },//solo para enviar datos
+                    success: function (data) {
+                        Swal.fire(
+                            'Eliminado!',
+                            '',
+                            'success'
+                        )
+                        renderTabla();
+                    }
+                });
+                };
+            });
+        });
+
+        $(".classBtnAgregar").click(function () {
+                var id = $(this).attr("id");
+                var valInput = $("#" + id).val();
+
+                if (valInput > 0) {
+                    $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("verificarExistencia", "Facturacion")",
+                    datatype: "Json",
+                    data: { id: id, cantidadPedida: valInput },
+                        success: function (data) {
+                            if (data == 0) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Cantidad insuficiente en Inventario!'
+                                })
+                            } else {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "@Url.Action("AddProductoVendiendoCaja", "Facturacion")",
+                                    datatype: "Json",
+                                    data: { id: id, cantidad: valInput },
+                                    success: function (data) {
+                                        if (data == 1) {
+                                            renderTabla();
+                                            //Swal.fire({
+                                            //    icon: 'success',
+                                            //    title: 'Ok',
+                                            //    text: 'Producto Agregado!'
+                                            //})
+                                        }
+                                        $("#elBuscador").val("");
+                                        $("#elBuscador").focus();
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+
+        function renderTabla() {
+            $("#tablaPedido").empty();
+
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("getVendiendoCaja", "Facturacion")",
+                    datatype: "Json",
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        var total = 0;
+                        $.each(data, function (key, val) {
+
+                            total = total + val.total;
+
+                            var tr = '<tr>';
+                            tr += '<td>' + val.operatioId + '</td>';
+                            tr += '<td>' + (key + 1) + '</td>';
+                            tr += '<td>' + val.cantidad + '</td>';
+                            tr += '<td>' + val.nombre + '</td>';
+                            tr += '<td>' + val.unidad + '</td>';
+                            tr += '<td>' + val.total + '</td>';
+                            tr += '<td><button class="borrar btn btn-danger btn-xs" id="' + val.operatioId + '">X</button></td>';
+                            tr += '</tr>';
+                            $('#tablaPedido').append(tr);
+                        });
+                        total = parseInt(total);
+                        $("#valorTotal").val(formatNumberMiles.new(total));
+                    }
+            });
+        }
+
+
+
+        //FORMATEAR UN NUMERO
+        var formatNumberMiles = {
+            separador: ".", // separador para los miles
+            sepDecimal: ',', // separador para los decimales
+            formatear: function (num) {
+                num += '';
+                var splitStr = num.split('.');
+                var splitLeft = splitStr[0];
+                var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+                var regx = /(\d+)(\d{3})/;
+                while (regx.test(splitLeft)) {
+                    splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+                }
+                return this.simbol + splitLeft + splitRight;
+            },
+            new: function (num, simbol) {
+                this.simbol = simbol || '';
+                return this.formatear(num);
+            }
+        }
+
+        /* SEPARADOR DE MILES POR KEY UP */
+        $(document).ready(function () {
+            $("#efectivo").on({
+                "focus": function (event) {
+                    $(event.target).select();
+                },
+                "keyup": function (event) {
+                    $(event.target).val(function (index, value) {
+                        return value.replace(/\D/g, "")
+                            .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                    });
+                }
+            });
+        });
+        /*FIN SEPARADOR DE MILES POR KEY UP*/
+
+
+
+
+    </script>
+}

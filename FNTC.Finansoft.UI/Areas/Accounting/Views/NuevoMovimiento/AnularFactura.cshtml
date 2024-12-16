@@ -1,0 +1,129 @@
+﻿
+
+@{
+    ViewBag.Title = "Anular Factura";
+    Layout = "~/Views/Shared/_Layoutahorros.cshtml";
+}
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.dataTablesform.min.js"></script>
+<link href="~/Content/css/jquery.dataTablesform.min.css" rel="stylesheet" />
+
+
+<div class="row">
+    <div class="fondoPantalla">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="bg-primary CuadroSuperior">
+                    <img class="img-fluid" alt="" src="~/Content/vistaEstandarIconos/factura.png" style="margin-left:-10%" />
+                    <strong class="TituloPrincipal">ANULAR FACTURA</strong>
+                </div>
+
+            </div>
+        </div>
+        <br />
+        @{
+            if (TempData["error"] != null)
+            {
+                <br />
+                <div class="alert alert-danger fuenteEstandar" style="width:98%; margin-left:1%">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Información! </strong> @TempData["error"]
+                </div>
+            }
+            else
+                 if (TempData["exito"] != null)
+            {
+                <br />
+                <div class="alert alert-info fuenteEstandar" style="width:98%; margin-left:1%">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Información! </strong> @TempData["exito"]
+                </div>
+            }
+
+        }
+
+        <br />
+        <div class="container-fluid margensuperior">
+            <div class="table-responsive col-md-12 mt-5 margensuperior">
+                <br />
+                <div class="col-md-12 margensuperior">
+                    <table id="TBFacturas" class="table table-striped table-bordered  no-footer" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th width="15%" class="columnA3">
+                                    CÓDIGO
+                                </th>
+                                <th width="10%" class="columnB3">
+                                    NÚMERO
+                                </th>
+                                <th width="30%" class="columnA3">
+                                    DETALLE
+                                </th>
+                                <th width="15%" class="columnB3">
+                                    VALOR
+                                </th>
+                                <th width="15%" class="columnA3">
+                                    FECHA
+                                </th>
+                                <th width="15%" class="columnB3">
+                                    OPCIONES
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row margensuperior">
+            <div style="margin-left:60px">
+                <a href="/OperativaDeCaja/FactOpcajas/CuentaOperacion" class="btn botonRegresar" id="n"><i class="fa fa-arrow-left"></i>&nbsp;Regresar</a>
+            </div>
+        </div>
+        <br />
+    </div>
+
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#TBFacturas').dataTable({
+                "ajaxSource": '../../../Accounting/NuevoMovimiento/GetFacturas',
+                "order": [[0, 'desc']],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json"
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function Anular(row) {
+
+            var aceptar = ` <label class="fuenteSweetAlert">Aceptar</label>`
+            var cancelar = ` <label class="fuenteSweetAlert">Cancelar</label>`
+            var tipo = row.closest('tr').children[0].innerHTML;
+            var numero = row.closest('tr').children[1].innerHTML;
+            Swal.fire({
+                title: '¿Está seguro de anular el comprobante '+ tipo + '-' + numero+'?' ,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#8ED813',
+                cancelButtonColor: '#FF2929',
+                confirmButtonText: aceptar,
+                cancelButtonText: cancelar
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var url = "/Accounting/NuevoMovimiento/AnularComprobanteCajero?tipo=" + tipo + " &numero=" + numero;
+                    window.location.href = url
+                }
+            });
+
+        }
+    </script>
+
+}

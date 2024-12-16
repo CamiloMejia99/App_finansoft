@@ -1,0 +1,87 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Terceros.TerceroDTO
+
+@{
+
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Modal.cshtml";
+    var post2 = (string)ViewBag.Post2;
+    var action = (string)ViewBag.action;
+    var boton = (string)ViewBag.boton;
+    var estado_ter = (string)ViewBag.Estado_ter;
+
+
+}
+@using Mvc.CascadeDropDown
+@*<link href="~/Content/stylegeneral.css" rel="stylesheet" />*@
+@*@Scripts.Render("~/bundles/jquery")*@
+@*@Scripts.Render("~/bundles/jqueryval")*@
+@*<script src="~/Content/tools/direccion/Nomemclaturas.min.js"></script>*@
+@*<script src="~/Content/css/bootstrap-switch.js"></script>
+    <link href="~/Content/css/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+
+<div class="modal-body" id="modal_terceros">
+    <style>
+        legend {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        fieldset, td {
+            padding-top: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+        <div class="form-horizontal">
+            <div class="modalheadergeneral"><h4>Eliminar Tercero</h4></div>
+            <hr />
+            <div id="accordion" role="tablist" aria-multiselectable="true" style="margin-top:2%">
+
+                <table>
+                    <tr>
+                        <td>
+                            <h3>Seguro desea eliminar este tercero?</h3>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <h3>Cedula</h3>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.DisplayFor(model => model.NIT, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    @Html.ActionLink("Eliminar", "EliminarTercero", new { nit = Model.NIT }, new { @class = "btn btn-danger btn-block"})
+                    <a id="cance" class="btn btn-default btn-block" href="/Terceros/Terceros/Index">Cancelar</a>                </div>
+            </div>
+        </div>
+    <script>
+
+
+        //refrescar un div
+        $(".js-refrescar").click(function () {
+
+            var tabla = $("")
+
+        });
+
+    </script>   
+    
+    <style>
+        body {
+            background-color: #DDDDDD !important;
+        }
+    </style>

@@ -1,0 +1,41 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Nomina.SeleccionCuenta
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>SeleccionCuenta</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.CODIGO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CODIGO)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TIPOCUENTA)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TIPOCUENTA)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.CODIGO }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

@@ -1,0 +1,67 @@
+﻿@model List<FNTC.Finansoft.Accounting.DTO.ControlCartera.Curso>
+@{
+    ViewBag.Title = "CARTERA";
+    Layout = "~/Views/Shared/_LayoutCR.cshtml";
+}
+
+<br />
+<h4>Gestión de Procesos</h4>
+<div class="alert alert-@ViewBag.alerta"> - - <b>@ViewBag.res</b> - - </div>
+<form action="/Curso/Index" method="post">
+    <table>
+        <tr>
+            <td style="padding: 10px">Proceso:</td>
+            <td style="padding: 10px"><input class="form-control" placeholder="Proceso Gestion Cartera " maxlength="20" type="text" name="des" id="des" required /></td>
+        </tr>
+        <tr>
+            <td style="padding: 10px">Estado:</td>
+            <td style="padding: 10px">Disponible @Html.CheckBox("est", true)</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px"></td>
+            <td style="padding: 10px">
+                <button class="btn btn-success" type="submit" name="btn1" id="btn1"><span class="glyphicon glyphicon-save"> Registrar</span></button>
+                <button class="btn btn-primary" type="reset" name="btn2" id="btn2"><span class="glyphicon glyphicon-remove"> Resetear</span></button>
+                <a class="btn btn-danger" href="~/Seccion/Index"><span class="glyphicon glyphicon-backward"> Volver</span></a>
+            </td>
+        </tr>
+    </table>
+</form>
+<br />
+<br />
+<table id="tabla_cursos" class="table table-bordered">
+    <thead style="background-color: black; color: white">
+        <tr>
+            <th>Codigo</th>
+            <th>Proceso</th>
+            <th style="text-align: center">Estado</th>
+            <th style="text-align: center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody style="background-color: white">
+        @foreach (var f in Model)
+        {
+            <tr>
+                <td>@f.id_cur</td>
+                <td>@f.descripcion_cur</td>
+                @{
+                    string estado = "Disponible";
+                    if (f.estado_cur.Equals(false))
+                    {
+                        estado = "No " + estado;
+                    }
+                }
+                <td style="text-align: center">@estado</td>
+                <td style="text-align: center">
+                    <button class="btn btn-warning" type="button" id="btn_act" name="btn_act" onclick="location.href='../Curso/Editar?id=@f.id_cur'"><span class="glyphicon glyphicon-edit"> Actualizar</span></button>
+                    <button class="btn btn-danger" type="button" id="btn_eli" name="btn_eli" onclick="location.href='../Curso/Eliminar?id=@f.id_cur'"><span class="glyphicon glyphicon-trash"> Eliminar</span></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        $('#tabla_cursos').DataTable();
+    });
+</script>

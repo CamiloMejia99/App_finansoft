@@ -1,0 +1,11 @@
+﻿
+@model IEnumerable<FNTC.Finansoft.Accounting.DTO.MediosMagneticos.formatos>
+
+<select class="form-control" id="idFormatos" name="formato" required>
+    <option value="">Seleccionar</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.idFormato">@item.codigoFormato</option>
+    }
+</select>
+

@@ -1,0 +1,50 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Scoring.ScoringVariableCapacidadPago
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>ScoringVariableCapacidadPago</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.NombreCapacidadPago)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.NombreCapacidadPago)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DescripcionCapacidadPago)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DescripcionCapacidadPago)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PuntajeCapacidadPagos)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PuntajeCapacidadPagos)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

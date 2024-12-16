@@ -1,0 +1,144 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.OperativaDeCaja.factOpCajaConsCuotaCredito
+<script src="~/Scripts/jquery-1.11.0.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
+<link href="~/Content/css/compressed2.css" rel="stylesheet" />
+<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.masknumber.js"></script>
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="modalheadergeneral" style="margin-top: 1%;"><h4><i class="fas fa-edit"></i>&nbsp;&nbsp;Detalles de Factura</h4></div>
+
+<div class="center contenido" id="areaImprimir">
+
+    <div style=" position: relative; top: 0px;  left: 100px;  background-color: white;  width: 450px;">
+        <div class="dl-horizontal">
+
+            <h4 class="center">
+                &nbsp;&nbsp;&nbsp;&nbsp;N° TRN: @Html.DisplayFor(model => model.factura)&nbsp;&nbsp; Consignación Cuota Crédito
+            </h4>
+            <h4 class="center">
+                &nbsp;&nbsp;&nbsp;&nbsp;Fecha: @Html.DisplayFor(model => model.fecha)
+            </h4>
+            <div class="row">
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Código caja:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.codigoCaja)
+            </div>
+            <div class="row">
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Cédula Cajero:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.nitCajero)</p>
+            </div>
+            <div class="row">
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Documento Del Asociado:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.NIT)</p>
+            </div>
+            <div class="row">
+                <p class="col-md-6">&nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.Terceros.NOMBRE1)&nbsp;@Html.DisplayFor(model => model.Terceros.NOMBRE2)&nbsp;@Html.DisplayFor(model => model.Terceros.APELLIDO1)&nbsp;@Html.DisplayFor(model => model.Terceros.APELLIDO2)</p>
+            </div>
+            <div class="row">
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Pagaré:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.pagare)</p>
+            </div>
+            <div class="row">
+                <label class="col-md-12"><b>&nbsp;&nbsp;&nbsp;&nbsp;Cuota Numero:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.numeroCuota)</label>
+            </div>
+                <div class="row">
+                    <label class="col-md-12"><b>&nbsp;&nbsp;&nbsp;&nbsp;Abono a Capital:</b>&nbsp;&nbsp;<label id="abonoCapital">$ @Html.DisplayFor(model => model.abonoCapital)</label></label>
+                    <div class="row">
+                        <label class="col-md-12"><b>&nbsp;&nbsp;&nbsp;&nbsp;Interes Corriente:</b>&nbsp;&nbsp;<label id="interesCorriente">$ @Html.DisplayFor(model => model.interesCorriente)</label></label>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-12"><b>&nbsp;&nbsp;&nbsp;&nbsp;Interes Mora:</b>&nbsp;&nbsp;<label id="interesMora">$ @Html.DisplayFor(model => model.interesMora)</label></label>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-12"><b>&nbsp;&nbsp;&nbsp;&nbsp;Valor Seguro:</b>&nbsp;&nbsp;<label id="seguros">$ @Html.DisplayFor(model => model.seguros)</label></label>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-12"><b>&nbsp;&nbsp;&nbsp;&nbsp;Total:</b>&nbsp;&nbsp;<label id="valorConsignado">$ @Html.DisplayFor(model => model.valorConsignado)</label></label>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-12"><b>&nbsp;&nbsp;&nbsp;&nbsp;Saldo Capital:</b>&nbsp;&nbsp;<label id="saldoCapital">$ @Html.DisplayFor(model => model.saldoCapital)</label></label>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-6">&nbsp;&nbsp;&nbsp;&nbsp;****POR FAVOR VERIFIQUE QUE LA INFORMACION IMPRESA ES CORRECTA****</p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-6">&nbsp;&nbsp;&nbsp;&nbsp;VIGILADO SUPERINTENDENCIA DE ECONOMIA SOLIDARIA</p>
+                    </div>
+                </div>
+    </div>
+</div>
+</div>
+
+<p>
+    <button id="btnRegresar" class="btn btn-default">Regresar</button>
+    <input type="button" onclick="printDiv('areaImprimir')" value="Imprimir" />
+</p>
+
+<script>
+    $("#btnRegresar").click(function () {
+        document.getElementById("btnRegresar").disabled = true;
+        window.location.href = "/OperativaDeCaja/FactOpcajas/CuentaOperacion";
+    });
+
+    $(document).ready(function () {
+        var abonoCapital = $("#abonoCapital").text().slice(0, -7);
+        var interesCorriente = $("#interesCorriente").text().slice(0, -7);
+        var interesMora = $("#interesMora").text().slice(0, -7);
+        var seguros = $("#seguros").text().slice(0, -7);
+
+        var saldoCapital = $("#saldoCapital").text().slice(0, -7);
+        $("#abonoCapital").text(formatNumberMiles.new(abonoCapital));
+        $("#interesCorriente").text(formatNumberMiles.new(interesCorriente));
+        $("#interesMora").text(formatNumberMiles.new(interesMora));
+        $("#seguros").text(formatNumberMiles.new(seguros));
+        $("#valorConsignado").text(formatNumberMiles.new($("#valorConsignado").text()));
+        if (saldoCapital == "") {
+            $("#saldoCapital").text("0,00");
+        } else {
+            $("#saldoCapital").text(formatNumberMiles.new(saldoCapital));
+        }
+        
+	});
+
+	function printDiv(areaImprimir) {
+		var contenido = document.getElementById(areaImprimir).innerHTML;
+		var contenidoOriginal = document.body.innerHTML;
+
+		document.body.innerHTML = contenido;
+
+		window.print();
+
+        document.body.innerHTML = contenidoOriginal;
+        window.location.reload();
+	}
+
+</script>
+
+<script>
+    //FORMATEAR UN NUMERO
+    var formatNumberMiles = {
+        separador: ".", // separador para los miles
+        sepDecimal: ',', // separador para los decimales
+        formatear: function (num) {
+            num += '';
+            var splitStr = num.split('.');
+            var splitLeft = splitStr[0];
+            var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+            var regx = /(\d+)(\d{3})/;
+            while (regx.test(splitLeft)) {
+                splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+            }
+            return this.simbol + splitLeft + splitRight;
+        },
+        new: function (num, simbol) {
+            this.simbol = simbol || '';
+            return this.formatear(num);
+        }
+    }
+        //FIN FORMATEAR UN NUMERO
+        /*
+        * FUNCIONALIDAD DE LA 'FUNCION'
+        formatNumber.new(123456779.18, "$") // retorna "$123.456.779,18"
+        formatNumber.new(123456779.18) // retorna "123.456.779,18"
+        formatNumber.new(123456779) // retorna "$123.456.779"
+        */
+        //formatNumberMiles.new(realValor);//ACCESO A LA VARIABLE
+</script>

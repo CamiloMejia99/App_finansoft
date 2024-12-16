@@ -1,0 +1,1 @@
+28/12/2021 10:43:23 a. m. - No se ha llamado al método "RenderBody" para la página de diseño "~/Areas/OperativaDeCaja/Views/Shared/_Layout.cshtml". ---_Void VerifyRenderedBodyOrSections()

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.Nomina.CorreccionNomina>
+
+@{
+    Layout = null;
+}
+
+<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+<style>
+    .ui-autocomplete {
+        z-index: 5000;
+    }
+</style>
+
+
+
+<script>
+    function inicializarFormulario() {
+        //autocomplete Persona
+        $("#idPersona").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Ahorros/Ahorros/BuscarAsociadosNoAfiliados",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        busqueda: request.term
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.nombres, value: item.id, empresa: item.empresa, dependencia: item.dependencia, salario: item.salario };
+                        }));
+                    }
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                $('#nomPersona').text(ui.item.label);
+                $('#empresa').val(ui.item.empresa);
+                $('#agencia').val(ui.item.dependencia);
+                $('#salarioAsociado').val(formatearNumero(ui.item.salario));
+                seleccionado();
+                return false;
+            }, change: function (event, ui) {
+                if (!ui.item) {
+                    $(this).val("");
+                    $('#nomPersona').text("");
+                    desseleccionado();
+                }
+            },
+            open: function () {
+                $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            },
+            focus: function (event, ui) {
+                $('#idPersona').val(ui.item.value);
+                return false;
+            }
+        });
+    }
+</script>
+
+
+

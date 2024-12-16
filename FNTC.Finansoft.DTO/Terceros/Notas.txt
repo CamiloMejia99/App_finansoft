@@ -1,0 +1,24 @@
+﻿Las entidades que vna a heredar de terceros 
+Convenio
+implemente
+EsConvenio
+otros campos de convenio
+
+EsBanco
+ -> NombreBanco
+ -> 
+
+ EsAsociado
+  ->Campos especificos de Asociados como ciuu y trabaja en
+
+
+
+  Empleado
+  -> Codigo AFP
+  -> Codigo CCF
+  -> Salario
+
+
+  Administradora
+   ->Nit
+   ->

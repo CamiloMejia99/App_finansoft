@@ -1,0 +1,541 @@
+﻿@model FNTC.Finansoft.Accounting.BLL.ComprobanteBO
+
+@{
+    if (Model == null)
+    {
+        //error
+    }
+    ViewBag.Title = "NotaContabilidad";
+    //  Layout = "~/Views/Shared/_Layoutoriginal.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var consecutivo = Model.TipoComprobante + "-000" + Model.GetConsecutivo();
+}
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<link href="~/Content/stylemovimientos.css" rel="stylesheet" />
+<script src="~/Scripts/jsgeneral.js"></script>
+
+<div id="log"></div>
+
+<!-- #region Comprobante -->
+<div class="container content">
+
+    <div class="panel panel-default" style="margin-top:5%">
+
+        <div class="panel-heading">
+            <h3 class="panel-title col-md-9">@Model.NombreComprobante No @consecutivo </h3>
+            @*@Html.Partial(@"~/Areas/Tools/Views/Barra/index.cshtml", null)*@
+            <div class="col-md-3"></div>
+            <div class="clearfix"></div>
+        </div>
+
+
+        <div class="panel-body " style="padding: 23px;">
+
+            <div id="asiento">
+
+                <div id="encabezado">
+                    <!-- #region Body tabla
+                    <div class="col-sm-8">
+                        <label class="col-sm-12 letrastablas"></label>
+                        <div class="col-sm-12">
+                            <div class="form-control" id="nodenota">@consecutivo </div>
+                            @Html.EditorFor(model => model.Consecutivo, new { @class = "form-control" })
+                        </div>
+                    </div>-->
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="col-sm-12 letrastablas">Fecha</label>
+                            <div class="col-sm-12">
+                                @Html.EditorFor(model => model.FechaComprobante, new { @class = "form-control", @readonly = true, @style = "background-color:white" })
+                                @Html.ValidationMessageFor(model => model.FechaComprobante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Model.Clase != "NC" && Model.Clase != "SI")
+                    {
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label class="col-sm-12 letrastablas">Forma de Pago</label>
+                                <div class="col-sm-10">
+                                    @Html.DropDownListFor(model => model.FPago, new SelectList(@ViewBag.FP, "Id", "Nombre"), new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="col-sm-12">No ext</label>
+                                <div class="col-sm-12">
+                                    @Html.TextBoxFor(model => model.NumeroExterno, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                    <div class="clearfix"></div>
+                    <div class=" col-sm-12">
+                        <div class="form-group">
+                            <label class="col-sm-12 letrastablas">Detalle</label>
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(model => model.Detalle, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Detalle, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- #endregion Body tabla-->
+                </div><br />
+
+                <!--    #region comandos -->
+                <div id="comandos" style="margin-top:40px; margin-bottom:5px;">
+                    <div>
+                        <button type="button" class="btn botonagregar addmore" aria-label="Left Align">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar cuenta
+                        </button>
+
+                        <button type="button" class="btn btn-danger delete" aria-label="Left Align">
+                            <i class="fa fa-minus-circle" aria-hidden="true"></i>   Eliminar cuenta
+                        </button>
+
+                        <a class="verify" aria-label="Left Align" data-toggle="modal" data-target="#centro" style="background-color: #509601; color: #FFF; padding: 6px; border: 1px solid; border-radius: 5px;">
+                            <i class="fa fa-check-circle" aria-hidden="true"></i> Grabar
+                        </a>
+
+                        <button type="button" class="dismiss" aria-label="Right Align" style="background-color: rgba(241, 132, 25, 0.87); color: #FFF; padding: 6px;  border: 1px solid;  border-radius: 5px;  float: right!important;   margin-right: 16px;">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Descartar
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" data-backdrop="static" id="centro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <table class="col-md-offset-2 col-md-8" style="font-size:12px">
+                                    <tr>
+                                        <td colspan="2">
+                                            <img src="~/Content/imagenes/check.png" width="48" height="48" />
+                                            <label class="letrasmodal">..PROCESANDO por favor espere..</label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-md-offset-2 col-md-3">
+                                    <div class="col-md-12"><img src="~/Content/imagenes/print.png" /></div>
+                                    <label class="col-md-12">Imprimir</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="col-md-12"><img src="~/Content/imagenes/plus.png" /></div>
+                                    <label class="col-md-12">Crear</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-12"><img src="~/Content/imagenes/lupa.png" /></div>
+                                    <label class="col-md-12" style="margin-left: -17%;">Ver movimientos</label>
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-danger alert-dismissible" role="alert" id="dismiss" style="margin-right: 15px; padding-bottom:5px; padding-top:5px; margin-top:3px; margin-bottom:4px;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Recuerda!</strong> Todos los campos en rojo son requeridos.
+                </div>
+                <!--    #region  -->
+                <!-- #region  anotaciones-->
+
+
+                <div id="anotaciones2">
+                    <div class='row'>
+                        <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                            <div>
+                                @*CPalacios - problema en barra de desplazamiento
+                                    <div class="aaa">*@
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-responsive" id="anotaciones" style="font-size: 13px;">
+                                        <thead>
+                                            <tr>
+                                                <th width="2%"><input id="check_all" class="formcontrol" type="checkbox" /></th>
+                                                <th width="1%" class="columnatablaazul">Cuenta</th>
+                                                <th width="20%" class="columnatablaazul2">Detalle</th>
+                                                <th width="1%" class="columnatablaazul">Tercero</th>
+                                                <th width="12%" class="columnatablaazul">Número Cuenta</th>
+                                                <th width="1%" class="columnatablaazul2">CC</th>
+                                                <th width="15%" class="columnatablaazul">Base</th>
+                                                <th width="15%" class="columnatablaazul2">Debito</th>
+                                                <th width="15%" class="columnatablaazul">Credito</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Entries)
+                                            {
+                                            <tr id="tr" data-index="@item.Index">
+                                                <td style="text-align:center;">
+                                                    @if (item.Index == 1 && (Model.Clase != "NC" && Model.Clase != "SI"))
+                                                    {
+                                                        <p style="margin:0px;" title="Forma de pago">FP</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p style="margin:0px;">@item.Index</p>
+                                                        <input class="case" type="checkbox">
+                                                    }
+                                                </td>
+
+                                                <td>
+                                                    @if (item.Index == 1 && (Model.Clase != "NC" && Model.Clase != "SI"))
+                                                    {
+                                                        if (item.Base != 0)
+                                                        {
+                                                            <input type="text" value="" name="cuenta" readonly id="cta_@item.Index" class="ctas form-control" style="width: 71px; margin-top: 4px; font-size: 11px;" />
+                                                            item.Cuenta = "";
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="text" value="@item.Cuenta" name="cuenta" readonly id="cta_@item.Index" class="ctas form-control" style="width: 71px; margin-top: 4px; font-size: 11px;" />
+
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        if (item.Base != 0)
+                                                        {
+                                                            <select data-type="auxiliares" class="ctas s2" id="cta_@item.Index">
+                                                                <option value=""></option>
+                                                            </select>
+                                                            item.Cuenta = "";
+                                                        }
+                                                        else
+                                                        {
+                                                            <select data-type="auxiliares" class="ctas s2" id="cta_@item.Index">
+                                                                <option value="@item.Cuenta">@item.Cuenta</option>
+                                                            </select>
+
+                                                        }
+
+                                                    }
+                                                </td>
+
+                                                <td class="nc-oculto" style="display: table-cell;">
+                                                    <input type="text" value="@item.Descripcion" id="detalle_@item.Index" class="form-control" style="background-color: rgb(242, 222, 222);">
+                                                </td>
+                                                <td class="nc-oculto" style="display: table-cell;">
+                                                    <select id="terceros_@item.Index" data-type="terceros" class="s2 JACZ">
+                                                        <option value="@item.Tercero">@item.Tercero</option>
+                                                    </select>
+                                                </td>
+
+                                                <td class="nc-oculto" style="display: table-cell;">
+                                                    <select id="cuentasPagares_@item.Index" name="cuentasPagares_@item.Index" class="cuenPag_@item.Index form-control input-sm">
+                                                        <option value=""></option>
+                                                    </select>
+                                                </td>
+
+                                                <td class="nc-oculto" style="display: table-cell;">
+                                                    <select id="cc_@item.Index" data-type="CC" class="cc s2">
+                                                        <option value="@item.CentroDeCosto">@item.CentroDeCosto</option>
+                                                    </select>
+                                                </td>
+
+                                                <td class="nc-oculto" style="display: table-cell;">
+                                                    @if (item.Index == 1 && (Model.Clase != "NC" && Model.Clase != "SI"))
+                                                    {
+                                                        if (item.Base != 0)
+                                                        {
+                                                            <input type="text" value="" id="base_@item.Index" class="form-control" data-a-dec="." data-a-sep="," readonly>
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="text" value="@item.Base" id="base_@item.Index" class="form-control" data-a-dec="." data-a-sep="," readonly>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        if (item.Base != 0)
+                                                        {
+                                                            <input type="text" value="" id="base_@item.Index" class="form-control" data-a-dec="." data-a-sep=",">
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="text" value="@item.Base" id="base_@item.Index" class="form-control" data-a-dec="." data-a-sep=",">
+                                                        }
+                                                    }
+                                                </td>
+                                                <td class="nc-oculto" style="display: table-cell;">
+                                                    @if (item.Index == 1 && (Model.Clase != "NC" && Model.Clase != "SI"))
+                                                    {
+                                                        if (item.Base != 0)
+                                                        {
+                                                            <input type="text" value="" id="debito_@item.Index" class="form-control decimal" onkeypress="debito_credito(this.id)" readonly data-a-dec="." data-a-sep=",">
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="text" value="@item.Debito" id="debito_@item.Index" class="form-control decimal" onkeypress="debito_credito(this.id)" readonly data-a-dec="." data-a-sep=",">
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        if (item.Base != 0)
+                                                        {
+                                                            <input type="text" value="" id="debito_@item.Index" class="form-control decimal" onkeypress="debito_credito(this.id)" data-a-dec="." data-a-sep=",">
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="text" value="@item.Debito" id="debito_@item.Index" class="form-control decimal" onkeypress="debito_credito(this.id)" data-a-dec="." data-a-sep=",">
+                                                        }
+                                                        @*<input type="text" value="@item.Debito" id="debito_@item.Index" class="form-control decimal" onkeypress="debito_credito(this.id)" data-a-dec="." data-a-sep=",">*@
+                                                        @*@Html.TextBoxFor(modelItem => item.Debito, new { @class = "form-control decimal" ,data_a_dec=".", data_a_sep="," ,id = "debito_"+item.Index+""})*@
+                                                    }
+
+                                                </td>
+                                                <td class="nc-oculto" style="display: table-cell;">
+                                                    @if (item.Index == 1 && (Model.Clase != "NC" && Model.Clase != "SI"))
+                                                    {
+                                                        if (item.Base != 0)
+                                                        {
+                                                            <input type="text" value="" id="credito_@item.Index" class="form-control decimal credito_ce" onkeypress="debito_credito(this.id)" disabled data-a-dec="." data-a-sep=",">
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="text" value="@item.Credito" id="credito_@item.Index" class="form-control decimal credito_ce" onkeypress="debito_credito(this.id)" disabled data-a-dec="." data-a-sep=",">
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        if (item.Base != 0)
+                                                        {
+                                                            <input type="text" value="" id="credito_@item.Index" class="form-control decimal" onkeypress="debito_credito(this.id)" data-a-dec="." data-a-sep=",">
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="text" value="@item.Credito" id="credito_@item.Index" class="form-control decimal" onkeypress="debito_credito(this.id)" data-a-dec="." data-a-sep=",">
+                                                        }
+                                                    }
+                                                </td>
+                                                <td class="nc-oculto" style="display: table-cell;">
+                                                    <i class="fa fa-exclamation-triangle" onclick="vererrores(@item.Index);" id="icono_@item.Index" style="color:orange; font-size:12px;" aria-hidden="true" data-a-dec="." data-a-sep=",">
+                                                </td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #endregion Tabla Anotaciones-->
+                <!-- #region Tabla Detalles-->
+                @*<div class="col-sm-offset-3 col-sm-9 divdetallesnota">*@
+                <div class="col-sm-offset-3 col-sm-9">
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-responsive" id="tabladetalle" style="font-size: 13px;">
+                            <thead>
+                                <tr>
+                                    <th width="60%" class="headercrematablas">Sumas</th>
+                                    <th width="20%" class="headercrematablas">Debito</th>
+                                    <th width="20%" class="headercrematablas">Credito</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="form-control decimal" id="sumas" placeholder="Notas" ondrop="return false;" onpaste="return false;"></td>
+                                    <td><input readonly type="text" class="form-control decimal" id="totDebito" placeholder="Debito" onkeypress="return false;" ondrop="return false;" onpaste="return false;" value="@Model.Debito"></td>
+                                    <td><input readonly type="text" class="form-control decimal" id="totCredito" placeholder="Credito" onkeypress="return false;" ondrop="return false;" onpaste="return false;" value="@Model.Credito"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- #endregion -->
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<!-- #region Scripts -->
+@section Scripts {
+
+    <script src="~/Scripts/acc/ajax.js"></script>
+    <script src="~/Scripts/acc/EdisonDev.js"></script>
+    <script src="~/Scripts/acc/autoNumeric-min.js"></script>
+
+}
+
+<!-- #endregion -->
+<!-- #region combosCuentas -->
+<script>
+
+    //function format(input) {
+    //    var num = input.value.replace(/\./g, '');
+    //    if (!isNaN(num)) {
+    //        num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
+    //        num = num.split('').reverse().join('').replace(/^[\.]/, '');
+    //        input.value = num;
+    //    }
+
+    //    else { //alert('Solo se permiten numeros');
+    //        input.value = input.value.replace(/[^\d\.]*/g, '');
+    //    }
+    //}
+
+    $('body').on('DOMNodeInserted', 'select', function () {
+        initSelect2($(this));
+        $('.decimal').autoNumeric('init');
+    });
+
+    $('body').on('DOMNodeInserted', '.decimal', function () {
+        //initSelect2($(this));
+        $(this).autoNumeric('init');
+    });
+
+
+    //$('.decimal').keyup(function () {
+    //    //   alert(data);
+    //    $(this).autoNumeric('init');
+    //})
+
+    $(document).ready(function () {
+
+
+        $(".dismiss").click(function () {
+
+            $.get("dismiss", null, function (data) {
+                if (data == true) {
+                    alert("Eliminado");
+                    window.location.href = "/Accounting/Movimientos/Nuevo?titulo=nuevo&menu=movimientos";
+                }
+            })
+        })
+
+
+        //obtenemos la altura del documento
+        var altura = $(document).height();
+        $("html, body").animate({ scrollTop: altura + "px" });
+
+        //   $('.decimal').autoNumeric('init');
+
+        $('.decimal').each(function () {
+            $(this).autoNumeric('init');
+        })
+
+
+        $(".s2").each(function () {
+            initSelect2($(this));
+        });
+
+
+    });
+
+    //$(".addmore").on('click', function () {
+
+    //    $("#more").append($("<select/>"));
+
+    //});
+    function formatRepo(repo) {
+        if (repo.loading) return repo.text;
+        var markup = repo.id + " - " + repo.text;
+        return markup;
+    };
+    function formatRepoSelection(repo) {
+        return repo.id || repo.text;
+    }
+
+
+    function initSelect2(s2) {
+        var urlbyType = "";
+        switch (s2.data("type")) {
+            case "auxiliares": urlbyType = "/accounting/plandecuentas/GetCuentas4Selects"; break;
+            case "terceros": urlbyType = "/terceros/terceros/GetTerceros4S2"; break;
+            case "CC": urlbyType = "/Accounting/CentroCosto/GetCC4Selects"; break;
+
+            default:
+
+        }
+        //  alert(s2);
+        s2.select2({
+            ajax: {
+                //   containerClass: "select2-container.input-mini",
+                url: urlbyType,
+                dataType: 'json',
+                type: "GET",
+                delay: 250,
+                data: function (params) {
+                    return {
+                        term: params.term, // search term
+                        type: $(this).data("type")
+                    };
+                },
+                results: function (data, params) {
+                    return {
+                        results: data,
+                    };
+                },
+                cache: false
+            },
+            templateResult: formatRepo,
+            templateSelection: formatRepoSelection
+        }).on('select2:close', function (evt) {
+            var context = $(evt.target);
+
+            $(document).on('keydown.select2', function (e) {
+                if (e.which === 9) { // tab
+                    var highlighted = context
+                        .data('select2')
+                        .$dropdown
+                        .find('.select2-results__option--highlighted');
+                    if (highlighted) {
+                        var id = highlighted.data('data').id;
+                        context.val(id).trigger('change');
+                    }
+                }
+            });
+
+            // unbind the event again to avoid binding multiple times
+            setTimeout(function () {
+                $(document).off('keydown.select2');
+            }, 1);
+        });;
+
+    }
+
+</script>
+
+
+<!-- #endregion -->
+<!--NUEVO-->
+<div id="mensajes-error">
+    <i class="fa fa-times cerrar cerrar-info" aria-hidden="true"></i>
+    <div id="info-error">
+
+    </div>
+</div>
+<div id="mensajes-alerta">
+    <i class="fa fa-times cerrar cerrar-info" aria-hidden="true"></i>
+    <div id="info-alerta">
+
+    </div>
+</div>
+
+
+<style>
+    .form-control {
+        height: 26px !important;
+    }
+</style>
+
+<!--NUEVO-->

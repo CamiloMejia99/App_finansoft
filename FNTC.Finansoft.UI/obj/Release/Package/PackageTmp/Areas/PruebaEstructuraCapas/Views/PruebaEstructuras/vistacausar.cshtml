@@ -1,0 +1,246 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<h2>
+    CAUSADOR
+</h2>
+
+<h1><label id="numero"></label></h1>
+
+<div class="form-group">
+    <div class="col-md-12">
+        <button class="btn btn-success" id="btnReseteo">RESET</button>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<div class="row">
+    <div class="form-group">
+        <label class="control-label col-md-2">PAGARE A CAUSAR</label>
+        <div class="col-md-2">
+            <input class="form-control" id="pagareCausar" type="text" />
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="form-group">
+        <label class="control-label col-md-2">NUMERO DE VECES</label>
+        <div class="col-md-2">
+            <input class="form-control" id="numeroRepetir" type="text" />
+        </div>
+    </div>
+</div>
+
+
+<br />
+<div class="form-group">
+    <div class="col-md-10">
+        <button class="btn btn-success" id="causar">CAUSAR</button>
+    </div>
+</div>
+
+@*<h2>
+        PAGO ANTICIPADO O CUMPLIDO
+    </h2>
+    <button id="btnDuplicar">duplicar historial</button>
+
+    pagare <input id="pagare" type="text" />
+    <br />
+    idFactura <input id="idFactura" type="text" />
+    <br />
+    numeroCuota <input id="numeroCuota" type="text" />
+    <br />
+
+    <br />
+
+    <h2>
+        COLOCAR EN MORA
+    </h2>
+    <button id="btnMora">Colocar en Mora</button>
+
+    pagare <input id="pagareMora" type="text" />
+    <br />
+    numeroCuota <input id="numeroCuotaMora" type="text" />
+    <br />
+
+
+    <br />
+
+    <h2>
+        COLOCAR PAZ Y SALVO UNO EN MORA
+    </h2>
+    <button id="btnPazSalvoMora">Colocar paz y salvo en mora</button>
+
+    pagare <input id="pagareMoraPaz" type="text" />
+    <br />
+    idHistorial en mora <input id="idHistorialMoraPaz" type="text" />
+    <br />
+    idFactura <input id="idFacturaMoraPaz" type="text" />
+    <br />
+
+
+    <h2>
+        COLOCAR EN PAUSA POR DIAS TERMINADOS
+    </h2>
+    <button id="btnPausa">Colocar En pausa</button>
+
+    pagare <input id="pagarePausa" type="text" />
+    <br />
+    numeroCuota <input id="numeroCuotaPausa" type="text" />
+    <br />
+
+    <h2>
+        COLOCAR PAZ Y SALVO UNO DE DIAS TERMINADOS
+    </h2>
+    <button id="btnDiasTerminadosPaz">Colocar En pausa</button>
+    idHistorial<input id="idHistorialDiasTerminadosPaz" type="text" />
+    <br />
+    idFactura <input id="idFacturaDiasTerminadosPaz" type="text" />
+    <br />
+
+    <h2>
+        COLOCAR EN MORA UNO DE DIAS TERMINADOS
+    </h2>
+    <button id="btnDiasTerminadosMora">Colocar En mora</button>
+    idHistorial<input id="idHistorialDiasTerminadosMora" type="text" />
+    <br />*@
+<script>
+    $("#btnReseteo").click(function () {
+
+    $.ajax({
+        type: "POST",
+        url: "@Url.Action("cambioFecha", "PruebaEstructuras")",
+        datatype: "Json",
+        success: function (data) {
+            $("#numero").text(0);
+        }
+    });
+
+    });
+
+    $("#causar").click(function () {
+        //$("#causar").prop("disabled", true);
+        var vecesActual = parseInt($("#numero").text());
+        $("#numero").text(vecesActual + 1);
+        vecesActual = parseInt($("#numero").text());
+
+        var numeroRepetir = parseInt($("#numeroRepetir").val());
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("causar", "PruebaEstructuras")",
+                    datatype: "Json",
+                    data: { pagare: $('#pagareCausar').val() },//solo para enviar datos
+                    success: function (data) {
+                        if (data == "ok") {
+                            if (vecesActual < numeroRepetir) {
+                                document.getElementById("causar").click();
+                            } else {
+                                swal({
+                                    title: "Proceso exitoso..",
+                                    type: "success",
+                                    confirmButtonText: "Ok",
+                                })
+                            }
+                        }
+                        //$("#causar").prop("disabled", false);
+                    }
+                });
+    });
+
+
+    $("#btnDuplicar").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("pagoantesocumplido", "PruebaEstructuras")",
+                    datatype: "Json",
+                    data: {
+                        pagare: $('#pagare').val(),
+                        idFactura: $('#idFactura').val(),
+                        numeroCuota: $('#numeroCuota').val()
+                    },//solo para enviar datos
+                    success: function (data) {
+                        alert(data);
+                    }
+                });
+    });
+
+    $("#btnMora").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("colocarenmora", "PruebaEstructuras")",
+                    datatype: "Json",
+                    data: {
+                        pagare: $('#pagareMora').val(),
+                        numeroCuota: $('#numeroCuotaMora').val()
+                    },//solo para enviar datos
+                    success: function (data) {
+                        alert(data);
+                    }
+                });
+    });
+
+    $("#btnPazSalvoMora").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("colocarpazysalvo", "PruebaEstructuras")",
+                    datatype: "Json",
+                    data: {
+                        pagare: $('#pagareMoraPaz').val(),
+                        idHistorial: $('#idHistorialMoraPaz').val(),
+                        idFactura: $('#idFacturaMoraPaz').val()
+                    },//solo para enviar datos
+                    success: function (data) {
+                        alert(data);
+                    }
+                });
+    });
+
+    $("#btnPausa").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("diasterminados", "PruebaEstructuras")",
+                    datatype: "Json",
+                    data: {
+                        pagare: $('#pagarePausa').val(),
+                        numeroCuota: $('#numeroCuotaPausa').val()
+                    },//solo para enviar datos
+                    success: function (data) {
+                        alert(data);
+                    }
+                });
+    });
+
+    $("#btnDiasTerminadosPaz").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("colocarpazysalvoDiasTerminados", "PruebaEstructuras")",
+                    datatype: "Json",
+                    data: {
+                        idHistorial: $('#idHistorialDiasTerminadosPaz').val(),
+                        idFactura: $('#idFacturaDiasTerminadosPaz').val()
+                    },//solo para enviar datos
+                    success: function (data) {
+                        alert(data);
+                    }
+                });
+    });
+
+    $("#btnDiasTerminadosMora").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("colocarenmoraDiasTerminados", "PruebaEstructuras")",
+                    datatype: "Json",
+                    data: {
+                        idHistorial: $('#idHistorialDiasTerminadosMora').val()
+                    },//solo para enviar datos
+                    success: function (data) {
+                        alert(data);
+                    }
+                });
+    });
+</script>

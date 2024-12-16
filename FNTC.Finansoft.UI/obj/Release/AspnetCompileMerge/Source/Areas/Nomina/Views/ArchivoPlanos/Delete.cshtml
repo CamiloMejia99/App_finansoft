@@ -1,0 +1,77 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Nomina.ArchivoPlano
+
+@if (ViewBag.guardado == "S")
+{
+    <script>
+       // recargar();
+    </script>
+}
+else
+{
+
+    <div class="modal-content">
+        <div class="modal-header">
+
+            <h4 class="modal-title">ClaseDePlano</h4>
+        </div>
+        <div class="modal-body">
+            <center>
+                <h3>Seguro desea eliminar este registro?</h3>
+            </center>
+            <div>
+
+
+                <dl class="dl-horizontal"></dl>
+
+                @using (Html.BeginForm("Delete", "ArchivoPlanos", new { area = "Nomina" }, FormMethod.Post, new { id = "theFormDelete", autocomplete = "off" }))
+
+                {
+                    <center>
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.ID)
+                        <div class="form-actions no-color">
+                            <input type="button" value="Eliminar" class="btn btn-danger" onclick="Delete();" />  |
+                            <button type="button" id="close" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+                        </div>
+                    </center>
+                }
+            </div>
+        </div>
+    </div>
+    <script>
+                            /*
+                            $(document).ready(function () {
+
+
+                            });
+                            //Al Ocultar el modal
+                            $(document.body).on('hidden.bs.modal', function () {
+                                $('#centro').removeData('bs.modal');
+                            });
+
+                            $("#theFormDelete").submit(function (event) {
+                                event.preventDefault();
+                                var theForm = $(this);
+                                var theAction = theForm.attr("action");
+                                //if (!theForm.valid()) {
+                                //    return false;
+                                //}
+                                $.post('/Nomina/ArchivoPlanos/Delete', theForm.serialize())
+                                    .done(function (result) {
+                                        event.preventDefault();
+                                        swal({
+                                            title: "Alerta",
+                                            type: "info",
+                                            text: "Datos Guardados Correctamente..",
+                                            confirmButtonText: "Ok!",
+                                        }, function () {
+
+                                            $("#close").click();
+                                        });
+
+                                    });
+                            });
+                            */
+
+    </script>
+}

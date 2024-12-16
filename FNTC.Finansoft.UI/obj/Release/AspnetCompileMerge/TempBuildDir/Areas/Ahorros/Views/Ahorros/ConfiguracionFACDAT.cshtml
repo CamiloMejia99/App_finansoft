@@ -1,0 +1,1892 @@
+﻿@using FNTC.Finansoft.DTO.Respuestas
+@model FNTC.Finansoft.DTO.Ahorros.DTOConfiguracionAhorros
+
+@{
+    ViewBag.Title = "ConfiguracionFACDAT";
+    Layout = "~/Views/Shared/_Layoutahorros.cshtml";
+    DTORespuesta respuesta = ViewBag.Respuesta;
+}
+
+@section Styles{
+    <link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/css/chosen.css" rel="stylesheet" />
+    <style>
+        .ui-autocomplete {
+            z-index: 5000;
+        }
+    </style>
+}
+
+<div class="container" style="margin-top:2%; background: rgb(248, 248, 248);">
+    <ul class="col-md-offset-2 nav nav-tabs" style="margin-top:2%;border: none; margin-left: 118px;">
+        <li><a href="/Ahorros/Ahorros/ConfiguracionFAP" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Configuracion</a></li>
+        <li><a href="/Ahorros/Ahorros/AhorroPermante" class="tabsnota"><i class="fa fa-calculator" aria-hidden="true"></i> Fichas Ahorro Permanente</a></li>
+        <li class="active"><a data-toggle="tab" href="#menu1" class="tabsnota"><i class="fa fa-calculator" aria-hidden="true"></i> Fichas Ahorro CDAT</a></li>
+        <li><a href="/Ahorros/Ahorros/ConfiguracionFAC" class="tabsnota"><i class="fa fa-calculator" aria-hidden="true"></i> Fichas Ahorro Contractual</a></li>
+    </ul>
+    <div class="tab-content contenedortabs">
+        <div id="menu1" class="tab-pane fade in active">
+            <div class="col-md-12"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Fichas Ahorro CDAT</h3></div>
+            <div class="col-md-12">
+                <table id="tablaConfiguracionesCDAT" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th>Codigo</th>
+                            <th>Nombre</th>
+                            <th>Tasa Efectiva</th>
+                            <th>Multiplicador</th>
+                            <th>Valor Minimo</th>
+                            <th>Valor Maximo</th>
+                            <th>Periodo De Liquidacion Minima</th>
+                            <th>Fecha De Registro</th>
+                            <th>Activa</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+                <div id="nuevaConfiguracion" hidden>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="text-center"><strong>Configuracion</strong></div>
+                        </div>
+                        <div class="panel-body">
+                            @using (Html.BeginForm("ConfiguracionFACDAT", "Ahorros", FormMethod.Post, new { id = "formConfiguracion", autocomplete = "off" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="row">
+                                    <input id="id" name="id" hidden readonly />
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.cuentaContable, htmlAttributes: new { @class = "control-label" })
+                                        <div class="input-group">
+                                            @Html.DropDownList("Cuentas", null, new { @class = "chosen-select-single", @id = "CuentaContable", @RequiredFieldValidator = "required" })
+
+                                            <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                            <p style="color:red">@ViewBag.mensaje</p>       <!-- <span class="input-group-addon" id="nomCuentaContable"></span>-->
+                                            @Html.HiddenFor(model => model.cuentaContable, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre", @required = "required" } })
+                                        </div>
+
+                                        @Html.ValidationMessageFor(model => model.cuentaContable, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre" } })
+                                        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.tasaEfectiva, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.tasaEfectiva, new { htmlAttributes = new { @class = "form-control", placeholder = "Tasa Efectiva", type = "number" } })
+                                        @Html.ValidationMessageFor(model => model.tasaEfectiva, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.multiplicador, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.multiplicador, new { htmlAttributes = new { @class = "form-control", placeholder = "Multiplicador" } })
+                                        @Html.ValidationMessageFor(model => model.multiplicador, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @*Html.EditorFor(model => model.peridoLiquidacionMinima, new { htmlAttributes = new { @class = "form-control", placeholder = "Periodo de liquidacion minima" } }) *@
+
+                                        @Html.LabelFor(model => model.peridoLiquidacionMinima, htmlAttributes: new { @class = "control-label" })
+                                        @Html.ValidationMessageFor(model => model.peridoLiquidacionMinima, "", new { @class = "text-danger" })
+                                        <select name="peridoLiquidacionMinima" class="form-control" id="peridoLiquidacionMinimas">
+                                            <option value="30">30</option>
+                                            <option value="60">60</option>
+                                            <option value="120">120</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.valorMinimo, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.valorMinimo, new { htmlAttributes = new { @class = "form-control", placeholder = "Valor Minimo" } })
+                                        @Html.ValidationMessageFor(model => model.valorMinimo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.valorMaximo, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.valorMaximo, new { htmlAttributes = new { @class = "form-control", placeholder = "Valor Maximo" } })
+                                        @Html.ValidationMessageFor(model => model.valorMaximo, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.diasGracia, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.diasGracia, new { htmlAttributes = new { @class = "form-control", placeholder = "Dias de Gracia" } })
+                                        @Html.ValidationMessageFor(model => model.diasGracia, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.periodoGraciaRenovable, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.periodoGraciaRenovable, new { htmlAttributes = new { @class = "form-control", placeholder = "Perido De Gracia Renovable" } })
+                                        @Html.ValidationMessageFor(model => model.periodoGraciaRenovable, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.periodoInactividadMinima, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.periodoInactividadMinima, new { htmlAttributes = new { @class = "form-control", placeholder = "Periodo Inactividad Minima" } })
+                                        @Html.ValidationMessageFor(model => model.periodoInactividadMinima, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.cuotasMorosasLiquidacionTitulo, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.cuotasMorosasLiquidacionTitulo, new { htmlAttributes = new { @class = "form-control", placeholder = "Cuotas Morosas Liquidacion Titulo" } })
+                                        @Html.ValidationMessageFor(model => model.cuotasMorosasLiquidacionTitulo, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.modalidad, htmlAttributes: new { @class = "control-label" })
+                                        <select name="modalidad" class="form-control" id="modalidades">
+                                            <option value="1">Vencido</option>
+                                            <option value="2">Anticipado</option>
+                                            <option value="3">Combinado</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.tipoRetencion, htmlAttributes: new { @class = "control-label" })
+                                        <select name="tipoRetencion" class="form-control" id="tipoRetenciones">
+                                            <option value="1">Al momento de causacion</option>
+                                            <option value="2">Al momento de vencimiento de interes</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.fuenteContable, htmlAttributes: new { @class = "control-label" })
+                                        <div class="input-group">
+                                            @*Html.EditorFor(model => model.fuenteContable, new { htmlAttributes = new { @class = "form-control cuentasContables", type = "text", nombreSpan = "nomFuenteContable", placeholder = "Fuente Contable" } })*@
+                                            <!-- <span class="input-group-addon" id="nomFuenteContable"></span>-->
+                                            @Html.DropDownList("ClaseComprobantes", null, new { @class = "chosen-select-single", @id = "nomFuenteContable", nombreSpan = "nomFuenteContable" })
+
+                                            <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                            <p style="color:red">@ViewBag.mensaje</p>       <!-- <span class="input-group-addon" id="nomCuentaContable"></span>-->
+
+                                            @Html.HiddenFor(model => model.fuenteContable, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.fuenteContable, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.cuentaRetencion, htmlAttributes: new { @class = "control-label" })
+                                        <div class="input-group">
+
+                                            @Html.DropDownList("Cuentas", null, new { @class = "chosen-select-single", @id = "nomCuentaRetencion", nombreSpan = "nomCuentaRetencion" })
+                                            <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                            <p style="color:red">@ViewBag.mensaje</p>
+
+                                            @Html.HiddenFor(model => model.cuentaRetencion, new { htmlAttributes = new { @class = "form-control" } })
+                                            @*Html.EditorFor(model => model.cuentaRetencion, new { htmlAttributes = new { @class = "form-control cuentasContables", type = "text", nombreSpan = "nomCuentaRetencion", placeholder = "Cuenta Retencion" } })*@
+                                            <!-- <span class="input-group-addon" id="nomCuentaRetencion"></span>-->
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.cuentaRetencion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.cuentaGastoInteres, htmlAttributes: new { @class = "control-label" })
+                                        <div class="input-group">
+
+                                            @Html.DropDownList("Cuentas", null, new { @class = "chosen-select-single", @id = "nomcuentaGastoInteres", nombreSpan = "nomcuentaGastoInteres" })
+                                            <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                            <p style="color:red">@ViewBag.mensaje</p>
+                                            @Html.HiddenFor(model => model.cuentaGastoInteres, new { htmlAttributes = new { @class = "form-control" } })
+                                            @*Html.EditorFor(model => model.cuentaGastoInteres, new { htmlAttributes = new { @class = "form-control cuentasContables", type = "text", nombreSpan = "nomcuentaGastoInteres", placeholder = "Cuenta Gasto Interes" } })*@
+                                            <!--<span class="input-group-addon" id="nomcuentaGastoInteres"></span>-->
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.cuentaGastoInteres, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.cuentaCausacion, htmlAttributes: new { @class = "control-label" })
+                                        <div class="input-group">
+
+
+                                            @Html.DropDownList("Cuentas", null, new { @class = "chosen-select-single", @id = "nomcuentaCausacion", nombreSpan = "nomcuentaCausacion" })
+                                            <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                            <p style="color:red">@ViewBag.mensaje</p>
+                                            @Html.HiddenFor(model => model.cuentaCausacion, new { htmlAttributes = new { @class = "form-control" } })
+
+                                            @*Html.EditorFor(model => model.cuentaCausacion, new { htmlAttributes = new { @class = "form-control cuentasContables", type = "text", nombreSpan = "nomcuentaCausacion", placeholder = "Cuenta Causacion" } })*@
+                                            <!--<span class="input-group-addon" id="nomcuentaCausacion"></span>-->
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.cuentaCausacion, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.cuentaIngresos, htmlAttributes: new { @class = "control-label" })
+                                        <div class="input-group">
+
+                                            @Html.DropDownList("Cuentas", null, new { @class = "chosen-select-single", @id = "nomcuentaIngresos", nombreSpan = "nomcuentaIngresos" })
+                                            <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                            <p style="color:red">@ViewBag.mensaje</p>
+                                            @Html.HiddenFor(model => model.cuentaIngresos, new { htmlAttributes = new { @class = "form-control" } })
+
+                                            @*Html.EditorFor(model => model.cuentaIngresos, new { htmlAttributes = new { @class = "form-control cuentasContables", type = "text", nombreSpan = "nomcuentaIngresos", placeholder = "Cuenta Ingresos" } })*@
+                                            <!-- <span class="input-group-addon" id="nomcuentaIngresos"></span>-->
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.cuentaIngresos, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.cuentaMayor6Menor12, htmlAttributes: new { @class = "control-label" })
+                                        <div class="input-group">
+                                            @Html.DropDownList("Cuentas", null, new { @class = "chosen-select-single", @id = "nomcuentaMayor6Menor12", nombreSpan = "nomcuentaMayor6Menor12", @required = "required" })
+                                            <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                            <p style="color:red">@ViewBag.mensaje</p>
+                                            @Html.HiddenFor(model => model.cuentaMayor6Menor12, new { htmlAttributes = new { @class = "form-control" } })
+
+                                            @*Html.EditorFor(model => model.cuentaMayor6Menor12, new { htmlAttributes = new { @class = "form-control cuentasContables", type = "text", nombreSpan = "nomcuentaMayor6Menor12", placeholder = "Cuenta Mayor a 6 y Menor a 12" } })*@
+                                            <!--<span class="input-group-addon" id="nomcuentaMayor6Menor12"></span>-->
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.cuentaMayor6Menor12, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.cuentaMayor12Menor18, htmlAttributes: new { @class = "control-label" })
+                                        <div class="input-group">
+
+                                            @Html.DropDownList("Cuentas", null, new { @class = "chosen-select-single", @id = "nomcuentaMayor12Menor18", nombreSpan = "nomcuentaMayor12Menor18" })
+                                            <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                            <p style="color:red">@ViewBag.mensaje</p>
+                                            @Html.HiddenFor(model => model.cuentaMayor12Menor18, new { htmlAttributes = new { @class = "form-control" } })
+
+                                            @*Html.EditorFor(model => model.cuentaMayor6Menor12, new { htmlAttributes = new { @class = "form-control cuentasContables", type = "text", nombreSpan = "nomcuentaMayor12Menor18", placeholder = "Cuenta Mayor a 12 y Menor a 18" } })*@
+                                            <!--<span class="input-group-addon" id="nomcuentaMayor12Menor18"></span>-->
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.cuentaMayor12Menor18, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.cuentaMayor18, htmlAttributes: new { @class = "control-label" })
+                                        <div class="input-group">
+
+                                            @Html.DropDownList("Cuentas", null, new { @class = "chosen-select-single", @id = "nomcuentaMayor18", nombreSpan = "nomcuentaMayor18" })
+                                            <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                            <p style="color:red">@ViewBag.mensaje</p>
+                                            @Html.HiddenFor(model => model.cuentaMayor18, new { htmlAttributes = new { @class = "form-control" } })
+
+                                            @*Html.EditorFor(model => model.cuentaMayor18, new { htmlAttributes = new { @class = "form-control cuentasContables", type = "text", nombreSpan = "nomcuentaMayor18", placeholder = "Cuenta Mayor a 18" } })*@
+                                            <!--<span class="input-group-addon" id="nomcuentaMayor18"></span>-->
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.cuentaMayor18, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.generaInteresCausacion, htmlAttributes: new { @class = "control-label" })
+                                        <select class="form-control" name="generaInteresCausacion" id="generaInteresCausacions">
+                                            <option value="True">Si</option>
+                                            <option value="False">No</option>
+
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.generaInteresCausacion, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.permiteConsignacionSaldo, htmlAttributes: new { @class = "control-label" })
+                                        <select class="form-control" name="permiteConsignacionSaldo" id="permiteConsignacionSaldos">
+                                            <option value="True">Si</option>
+                                            <option value="False">No</option>
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.permiteConsignacionSaldo, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.reconoceInteres, htmlAttributes: new { @class = "control-label" })
+                                        <select class="form-control" name="reconoceInteres" id="reconoceIntereses">
+                                            <option value="True">Si</option>
+                                            <option value="False">No</option>
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.reconoceInteres, "", new { @class = "text-danger" })
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.permiteAsociadoDiferente, htmlAttributes: new { @class = "control-label" })
+                                        <select class="form-control" name="permiteAsociadoDiferente" id="permiteAsociadoDiferentes">
+                                            <option value="True">Si</option>
+                                            <option value="False">No</option>
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.permiteAsociadoDiferente, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.permiteCambiarFechaCreacion, htmlAttributes: new { @class = "control-label" })
+                                        <select class="form-control" name="permiteCambiarFechaCreacion" id="permiteCambiarFechaCreaciones">
+                                            <option value="True">Si</option>
+                                            <option value="False">No</option>
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.permiteCambiarFechaCreacion, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.activo, htmlAttributes: new { @class = "control-label" })
+                                        <select class="form-control" name="activo" id="activos">
+                                            <option value="True">Si</option>
+                                            <option value="False">No</option>
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.activo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="modal-footer">
+                                        <button id="cancelarConfiguracion" type="button" class="btn btn-default">Cancelar</button>
+                                        <button id="guardarConfiguracion" type="submit" class="hide"></button>
+                                        <button type="button" class="btn btn-primary" id="guardar">Guardar</button>
+
+
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="AfiliacionesAhorros" hidden>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="text-center"><strong>Afiliados</strong></div>
+                        </div>
+                        <div class="panel-body">
+                            <table id="tablaAfiliacionesCDAT" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Cuenta</th>
+                                        <th>Identificacion</th>
+                                        <th>empresa</th>
+                                        <!--<th>Nombres</th>-->
+                                        <th>Forma de Pago</th>
+                                        <th>Forma Devolucion</th>
+                                        <th>Valor Titulo</th>
+                                        <th>Plazo</th>
+                                        <th>Fecha Afiliacion</th>
+                                        <th>empresa</th>
+                                        <th>agencia</th>
+                                        <th>Activa</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="AfiliarAhorros" data-backdrop="false" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Afiliacion CDAT</h4>
+                            </div>
+
+                            <div class="modal-body">
+                                @using (Html.BeginForm("CrearFACDAT", "Ahorros", FormMethod.Post, htmlAttributes: new { id = "formAfiliacion", autocomplete = "off" }))
+                                {
+
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <input id="id1" name="id" hidden readonly />
+                                    <input id="ideditar" name="ideditar" hidden readonly />
+                                    <input id="fechaApertura1" name="fechaApertura" hidden readonly />
+
+                                    <div class="row">
+                                        <!--
+                                        <div class="form-group col-md-12">
+                                            <label class="control-label" for="idPersona">Identificacion:</label>
+                                            <div class="input-group">
+                                                <input class="form-control text-box single-line" data-val="true" data-val-number="The field Identificacion: must be a number." data-val-required="El campo Identificacion: es obligatorio." id="idPersona" name="idPersona" placeholder="Identificacion" type="text" value="" />
+                                                <span class="input-group-addon" id="nomPersona"></span>
+                                            </div>
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="idPersona" data-valmsg-replace="true"></span>
+                                        </div>
+                                        -->
+
+                                        <div class="form-group col-md-12">
+                                            <label class="control-label" for="idPersona">Identificacion:</label>
+                                            <div class="input-group">
+                                                @Html.DropDownList("Terceros", null, new { @class = "chosen-select-single", @id = "idPersona", @required = "required" })
+                                                <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                                <p style="color:red">@ViewBag.mensaje</p>
+                                                <input type="hidden" data-val="true" data-val-number="The field Identificacion: must be a number." data-val-required="El campo Identificacion: es obligatorio." id="idPersona1" name="idPersona" />
+                                                @*Html.EditorFor(model => model.cuentaMayor6Menor12, new { htmlAttributes = new { @class = "form-control cuentasContables", type = "text", nombreSpan = "nomcuentaMayor6Menor12", placeholder = "Cuenta Mayor a 6 y Menor a 12" } })*@
+                                                <!--<span class="input-group-addon" id="nomcuentaMayor6Menor12"></span>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+
+
+                                        <div class="form-group col-md-6">
+                                            <input id="salarioAsociado" value="" readonly hidden />
+                                            <label>Empresa:</label>
+                                            <input id="empresa" type="text" class="form-control" , placeholder="Empresa" name="empresa" value="Empresa" />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Agencia:</label>
+                                            <input id="agencia" type="text" class="form-control" , placeholder="Agencia" readonly />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+
+                                            <!-- <label class="control-label" for="idBeneficiario1">Beneficiario 1:</label>
+                                                 <div class="input-group">
+                                                     <span class="input-group-btn">
+                                                         <button class="btn btn-success nuevoTercero" type="button">+</button>
+                                                     </span>
+                                                     <input nombreSpan="nomidBeneficiario1" class="form-control text-box single-line tercero" data-val="true" data-val-number="The field Identificacion: must be a number." data-val-required="El campo Beneficiario 1: es obligatorio." id="idBeneficiario1" name="idBeneficiario1" placeholder="Identificacion" type="text" value="" />
+                                                     <span class="input-group-addon" id="nomidBeneficiario1"></span>
+                                                 </div>
+                                                 <span class="field-validation-valid text-danger" data-valmsg-for="idBeneficiario1" data-valmsg-replace="true"></span>
+                                            -->
+                                            <label class="control-label" for="idBeneficiario1">Beneficiario 1:</label>
+
+                                            <div class="input-group">
+                                                @Html.DropDownList("Terceros", null, new { @class = "chosen-select-single", @id = "idBeneficiario1", @required = "required" })
+                                                <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                                <p style="color:red">@ViewBag.mensaje</p>
+                                                <input type="hidden" data-val="true" data-val-number="The field Identificacion: must be a number." data-val-required="El campo Identificacion: es obligatorio." id="idBeneficiario11" name="idBeneficiario1" />
+
+                                                @*Html.EditorFor(model => model.cuentaMayor6Menor12, new { htmlAttributes = new { @class = "form-control cuentasContables", type = "text", nombreSpan = "nomcuentaMayor6Menor12", placeholder = "Cuenta Mayor a 6 y Menor a 12" } })*@
+                                                <!--<span class="input-group-addon" id="nomcuentaMayor6Menor12"></span>-->
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <input id="idConfiguracion" name="idConfiguracion" readonly hidden />
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <!--
+                                              <label class="control-label" for="idBeneficiario2">Beneficiario 2:</label>
+                                              <div class="input-group">
+                                                  <span class="input-group-btn">
+                                                      <button class="btn btn-success nuevoTercero" type="button">+</button>
+                                                  </span>
+                                                  <input nombreSpan="nomidBeneficiario2" class="form-control text-box single-line tercero" data-val="true" data-val-number="The field Identificacion: must be a number." data-val-required="El campo Beneficiario 2: es obligatorio." id="idBeneficiario2" name="idBeneficiario2" placeholder="Identificacion" type="text" value="" />
+                                                  <span class="input-group-addon" id="nomidBeneficiario2"></span>
+                                              </div>
+                                              <span class="field-validation-valid text-danger" data-valmsg-for="idBeneficiario2" data-valmsg-replace="true"></span>
+                                            -->
+                                            <label class="control-label" for="idBeneficiario2">Beneficiario 2:</label>
+
+                                            <div class="input-group">
+
+
+
+                                                @Html.DropDownList("Terceros", null, new { @class = "chosen-select-single", @id = "idBeneficiario2", @required = "required" })
+                                                <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                                <p style="color:red">@ViewBag.mensaje</p>
+                                                <input type="hidden" data-val="true" data-val-number="The field Identificacion: must be a number." data-val-required="El campo Identificacion: es obligatorio." id="idBeneficiario22" name="idBeneficiario2" />
+
+                                                @*Html.EditorFor(model => model.cuentaMayor6Menor12, new { htmlAttributes = new { @class = "form-control cuentasContables", type = "text", nombreSpan = "nomcuentaMayor6Menor12", placeholder = "Cuenta Mayor a 6 y Menor a 12" } })*@
+                                                <!--<span class="input-group-addon" id="nomcuentaMayor6Menor12"></span>-->
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label>Forma de Pago:</label>
+                                            <select id="tipoPago" name="tipoPago" class="form-control">
+                                                <option value="Caja">Caja</option>
+                                                <option value="Nomina">Nomina</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Tipo de Devolucion:</label>
+                                            <select id="tipoDevolucion" name="tipoDevolucion" class="form-control">
+                                                <option value="Efectivo">Efectivo</option>
+                                                <option value="Trasnferencia">Trasnferencia</option>
+                                                <option value="Cheque">Cheque</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="valorTitulo">Valor del Titulo:</label>
+                                            <input id="valorTitulo" type="text" name="valorTitulo" class="form-control" placeholder="Valor Titulo" />
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="valorTitulo" data-valmsg-replace="true"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Plazo:</label>
+                                            <select id="plazo" name="plazo" class="form-control">
+                                                <option value="7">7 dias</option>
+                                                <option value="14">14 dias</option>
+                                                <option value="15">15 dias</option>
+                                                <option value="30">30 dias</option>
+                                                <option value="60">60 dias</option>
+                                                <option value="90">90 dias</option>
+                                                <option value="120">120 dias</option>
+                                                <option value="180">180 dias</option>
+                                                <option value="360">360 dias</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="form-group col-md-6">
+                                            <label>¿Titulo Pignorado?</label>
+                                            <select id="tituloPignorado" name="tituloPignorado" class="form-control">
+                                                <option value="False">No</option>
+                                                <option value="True">Si</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label>¿Capitaliza Intereses?</label>
+                                            <select id="capitalizaInteres" name="capitalizaInteres" class="form-control">
+                                                <option value="False">No</option>
+                                                <option value="True">Si</option>
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label" for="idLineaDeposito">Linea de deposito:</label>
+                                            <div class="input-group">
+                                                <input nombreSpan="" class="form-control text-box single-line" id="idLineaDeposito" name="idLineaDeposito" placeholder="Linea de deposito" type="text" value="" />
+                                                <span class="input-group-addon" id=""></span>
+                                            </div>
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="idPersona" data-valmsg-replace="true"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="activo">Activo:</label>
+                                            <select id="activo" name="activo" class="form-control">
+                                                <option value="True">Si</option>
+                                                <option value="False">No</option>
+                                            </select>
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="activo" data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="modal-footer">
+                                            <button id="cancelarAfiliacion" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            <button id="guardarAfiliacionboton" type="button" class="btn btn-primary">Guardar</button>
+                                            <button id="guardarAfiliacion" type="submit" class="hide"></button>
+
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--CONTENIDO TAB-->
+        </div><!--MENU-->
+    </div><!--CONTENEDOR TABS-->
+</div>
+
+
+
+
+
+@section Scripts{
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/datatables.js"></script>
+    <script src="~/Scripts/jquery.price.format2.js"></script>
+    <script src="~/Scripts/DinamismoCliente/Dinamismos.js"></script>
+
+    @*si hay alguna respuesta*@
+    @if (respuesta != null)
+    {
+        if (respuesta.Mensaje != null)
+        {
+            var tipo = respuesta.Correcto ? "success" : "error";
+            var titulo = respuesta.Correcto ? "Correcto" : "Error";
+            <script>
+                        swal({ title: "@titulo", text: "@respuesta.Mensaje", type: "@tipo" });
+            </script>
+        }
+    }
+    @*si hay alguna respuesta*@
+
+    <script>
+
+        //DATATABLES
+
+        //tabla configuraciones
+        var columnas = [
+            { data: "cuentaContable" },
+            { data: "fuenteContable" },
+            { data: "cuentaRetencion" },
+            { data: "cuentaGastoInteres" },
+            { data: "cuentaCausacion" },
+            { data: "periodoGraciaRenovable" },
+            { data: "periodoInactividadMinima" },
+            { data: "cuotasMorosasLiquidacionTitulo" },
+            { data: "modalidad" },
+            { data: "generaInteresCausacion" },
+            { data: "permiteConsignacionSaldo" },
+            { data: "reconoceInteres" },
+            { data: "permiteAsociadoDiferente" },
+            { data: "permiteCambiarFechaCreacion" },
+            { data: "tipoRetencion" },
+            { data: "cuentaIngresos" },
+            { data: "cuentaMayor6Menor12" },
+            { data: "cuentaMayor12Menor18" },
+            { data: "cuentaMayor18" },
+            { data: "id" },
+            { data: "nombre" },
+            { data: "tasaEfectiva" },
+            { data: "multiplicador" },
+            // { data: "valorMinimo", render: function (data) { return Miles(data); } },
+            // { data: "valorMaximo", render: function (data) { return Miles(data); } },
+            // { data: "peridoLiquidacionMinima", render: function (data) { return Miles(data); } },
+            //valmax = formatNumberMiles.new(valmax);
+            { data: "valorMinimo", render: function (data) { return formatNumberMiles.new(data); } },
+            { data: "valorMaximo", render: function (data) { return formatNumberMiles.new(data); } },
+            { data: "peridoLiquidacionMinima", render: function (data) { return (data); } },
+            { data: "fechaRegistro", render: function (data) { return FormatoFecha(data); } },
+            { data: "activo", render: function (data) { return data ? "Si" : "No" } }
+        ];
+
+        var botones = [
+            {
+                text: "Nueva Configuracion",
+                action: function () {
+                    $("#nuevaConfiguracion").show();
+                    $('html,body').animate({
+                        scrollTop: $("#nuevaConfiguracion").offset().top
+                    }, 1000);
+                    limpiar();
+                }
+            },
+            {
+                text: "Editar",
+                action: function () {
+                    if (table.rows({ selected: true }).count() == 1) {
+                        $("#nuevaConfiguracion").show();
+                        $('html,body').animate({
+                            scrollTop: $("#nuevaConfiguracion").offset().top
+                        }, 1000);
+                        $("#formConfiguracion").attr("action", "/Ahorros/Ahorros/EditarConfiguracionesFACDAT");
+                        $("#id").val(table.rows({ selected: true }).data()[0]["id"]);
+                        $("#cuentaContable").val(table.rows({ selected: true }).data()[0]["cuentaContable"]);
+
+                        var CuentaContable1 = $("#cuentaContable").val();
+                        $('#CuentaContable').val(CuentaContable1).trigger('chosen:updated');
+
+                        $("#nombre").val(table.rows({ selected: true }).data()[0]["nombre"]);
+                        $("#tasaEfectiva").val(table.rows({ selected: true }).data()[0]["tasaEfectiva"]);
+                        $("#multiplicador").val(table.rows({ selected: true }).data()[0]["multiplicador"]);
+                        $("#peridoLiquidacionMinima").val(table.rows({ selected: true }).data()[0]["peridoLiquidacionMinima"]);
+
+                        var peridoLiquidacionMinima1 = table.rows({ selected: true }).data()[0]["peridoLiquidacionMinima"];
+                        $('#peridoLiquidacionMinimas').val(peridoLiquidacionMinima1).trigger('chosen:updated');
+
+
+
+                        $("#valorMinimo").val(table.rows({ selected: true }).data()[0]["valorMinimo"]);
+                        var valmin = $("#valorMinimo").val();
+                        valmin = formatNumberMiles.new(valmin);
+                        $("#valorMinimo").val(valmin);
+
+                        $("#valorMaximo").val(table.rows({ selected: true }).data()[0]["valorMaximo"]);
+                        var valmax = $("#valorMaximo").val();
+                        valmax = formatNumberMiles.new(valmax);
+                        $("#valorMaximo").val(valmax);
+
+                        $("#diasGracia").val(table.rows({ selected: true }).data()[0]["diasGracia"]);
+                        $("#fuenteContable").val(table.rows({ selected: true }).data()[0]["fuenteContable"]);
+
+                        var fuenteContable1 = $("#fuenteContable").val();
+                        $('#nomFuenteContable').val(fuenteContable1).trigger('chosen:updated');
+
+                        $("#cuentaRetencion").val(table.rows({ selected: true }).data()[0]["cuentaRetencion"]);
+
+                        var cuentaRetencion1 = $("#cuentaRetencion").val();
+                        $('#nomCuentaRetencion').val(cuentaRetencion1).trigger('chosen:updated');
+
+                        $("#cuentaGastoInteres").val(table.rows({ selected: true }).data()[0]["cuentaGastoInteres"]);
+
+                        var cuentaGastoInteres1 = $("#cuentaGastoInteres").val();
+                        $('#nomcuentaGastoInteres').val(cuentaGastoInteres1).trigger('chosen:updated');
+
+                        $("#cuentaCausacion").val(table.rows({ selected: true }).data()[0]["cuentaCausacion"]);
+
+                        var cuentaCausacion1 = $("#cuentaCausacion").val();
+                        $('#nomcuentaCausacion').val(cuentaCausacion1).trigger('chosen:updated');
+
+                        $("#periodoGraciaRenovable").val(table.rows({ selected: true }).data()[0]["periodoGraciaRenovable"]);
+                        $("#periodoInactividadMinima").val(table.rows({ selected: true }).data()[0]["periodoInactividadMinima"]);
+                        $("#cuotasMorosasLiquidacionTitulo").val(table.rows({ selected: true }).data()[0]["cuotasMorosasLiquidacionTitulo"]);
+                        $("#modalidad").val(table.rows({ selected: true }).data()[0]["modalidad"]);
+
+                        var modalidad1 = table.rows({ selected: true }).data()[0]["modalidad"];
+                        $('#modalidades').val(modalidad1).trigger('chosen:updated');
+
+                        var generaInteresCausacion1 = table.rows({ selected: true }).data()[0]["generaInteresCausacion"];
+                        if (generaInteresCausacion1 == "") {
+                            $('#generaInteresCausacions').val("False").trigger('chosen:updated');
+                        }
+                        else {
+                            $('#generaInteresCausacions').val("True").trigger('chosen:updated');
+                        }
+
+                        $("#generaInteresCausacion").val(table.rows({ selected: true }).data()[0]["generaInteresCausacion"]);
+
+                        var permiteConsignacionSaldo1 = table.rows({ selected: true }).data()[0]["permiteConsignacionSaldo"];
+                        if (permiteConsignacionSaldo1 == "") {
+                            $('#permiteConsignacionSaldos').val("False").trigger('chosen:updated');
+                        }
+                        else {
+                            $('#permiteConsignacionSaldos').val("True").trigger('chosen:updated');
+                        }
+                        $("#permiteConsignacionSaldo").val(table.rows({ selected: true }).data()[0]["permiteConsignacionSaldo"]);
+
+
+                        var reconoceInteres1 = table.rows({ selected: true }).data()[0]["reconoceInteres"];
+                        if (reconoceInteres1 == "") {
+                            $('#reconoceIntereses').val("False").trigger('chosen:updated');
+                        }
+                        else {
+                            $('#reconoceIntereses').val("True").trigger('chosen:updated');
+                        }
+                        $("#reconoceInteres").val(table.rows({ selected: true }).data()[0]["reconoceInteres"]);
+
+
+
+                        var permiteAsociadoDiferente1 = table.rows({ selected: true }).data()[0]["permiteAsociadoDiferente"];
+                        if (permiteAsociadoDiferente1 == "") {
+                            $('#permiteAsociadoDiferentes').val("False").trigger('chosen:updated');
+                        }
+                        else {
+                            $('#permiteAsociadoDiferentes').val("True").trigger('chosen:updated');
+                        }
+                        $("#permiteAsociadoDiferente").val(table.rows({ selected: true }).data()[0]["permiteAsociadoDiferente"]);
+
+
+                        var permiteCambiarFechaCreacion1 = table.rows({ selected: true }).data()[0]["permiteCambiarFechaCreacion"];
+
+                        if (permiteCambiarFechaCreacion1 == "") {
+                            $('#permiteCambiarFechaCreaciones').val("False").trigger('chosen:updated');
+                        }
+                        else {
+                            $('#permiteCambiarFechaCreaciones').val("True").trigger('chosen:updated');
+                        }
+
+                        $("#permiteCambiarFechaCreacion").val(table.rows({ selected: true }).data()[0]["permiteCambiarFechaCreacion"]);
+
+                        $("#tipoRetencion").val(table.rows({ selected: true }).data()[0]["tipoRetencion"]);
+
+                        var tipoRetencion1 = table.rows({ selected: true }).data()[0]["tipoRetencion"];
+                        $('#tipoRetenciones').val(tipoRetencion1).trigger('chosen:updated');
+
+                        $("#cuentaIngresos").val(table.rows({ selected: true }).data()[0]["cuentaIngresos"]);
+
+                        var cuentaIngresos1 = $("#cuentaIngresos").val();
+                        $('#nomcuentaIngresos').val(cuentaIngresos1).trigger('chosen:updated');
+
+                        $("#cuentaMayor6Menor12").val(table.rows({ selected: true }).data()[0]["cuentaMayor6Menor12"]);
+
+                        var cuentaMayor6Menor121 = $("#cuentaMayor6Menor12").val();
+                        $('#nomcuentaMayor6Menor12').val(cuentaMayor6Menor121).trigger('chosen:updated');
+
+                        $("#cuentaMayor12Menor18").val(table.rows({ selected: true }).data()[0]["cuentaMayor12Menor18"]);
+
+                        var cuentaMayor12Menor181 = $("#cuentaMayor12Menor18").val();
+                        $('#nomcuentaMayor12Menor18').val(cuentaMayor12Menor181).trigger('chosen:updated');
+
+                        $("#cuentaMayor18").val(table.rows({ selected: true }).data()[0]["cuentaMayor18"]);
+
+                        var cuentaMayor181 = $("#cuentaMayor18").val();
+                        $('#nomcuentaMayor18').val(cuentaMayor181).trigger('chosen:updated');
+
+
+                        var activo1 = table.rows({ selected: true }).data()[0]["activo"];
+
+                        if (activo1 == "") {
+                            $('#activos').val("False").trigger('chosen:updated');
+                        }
+                        else {
+                            $('#activos').val("True").trigger('chosen:updated');
+                        }
+
+                       // $("#activo").val(table.rows({ selected: true }).data()[0]["activo"]);
+
+                    } else {
+                        swal({ title: "Recuerda", text: "Primero selecciona un registro", confirmButtonText: "Lo recordare" });
+                    }
+                }
+            },
+            {
+                text: "Nueva Afiliacion",
+                action: function () {
+                    if (table.rows({ selected: true }).count() == 1) {
+                        $('#idPersona').prop('disabled', false).trigger('chosen:updated');
+                        $('#empresa').val("Empresa");
+                        $("#ideditar").val("false");
+
+                        $("#AfiliarAhorros").modal("show");
+                        $("#idConfiguracion").val(table.rows({ selected: true }).data()[0]["id"]);
+                    } else {
+                        swal({ title: "Recuerda", text: "Primero selecciona una configuracion", confirmButtonText: "Lo recordare" });
+                    }
+                }
+            },
+            {
+                text: "Ver Afiliaciones",
+                action: function () {
+                    if (table.rows({ selected: true }).count() == 1) {
+                        VerAfiliacionesAhorro(table.rows({ selected: true }).data()[0]["id"]);
+                    } else {
+                        swal({ title: "Recuerda", text: "Primero selecciona una configuracion", confirmButtonText: "Lo recordare" });
+                    }
+                }
+            },
+            {
+                extend: 'collection',
+                text: 'Exportar A',
+                autoClose: true,
+                buttons: [
+                    {
+                        extend: 'excel',
+                        text: "Excel",
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        text: "PDF",
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        text: "Imprimir",
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    }
+                ]
+            }
+        ];
+
+        agregarDataTable("#tablaConfiguracionesCDAT", columnas, '/Ahorros/Ahorros/ObtenerConfiguracionesFACDAT', botones, false, true, true);
+        for (var i = 0; i < 19; i++) {
+            table.columns(i).visible(false);
+        }
+        //tabla configuraciones
+
+        function VerAfiliacionesAhorro(idConfiguracion) {
+            $("#AfiliacionesAhorros").show();
+            $('html,body').animate({
+                scrollTop: $("#AfiliacionesAhorros").offset().top
+            }, 1000);
+            //tabla afiliaciones
+            var columnas = [
+                { data: "numeroCuenta" },
+                { data: "idPersona" },
+                { data: "empresa" },
+                //{ data: "nombres" },
+                { data: "tipoPago" },
+                { data: "tipoDevolucion" },
+                //{ data: "valorTitulo", render: function (data) { return Miles(data); } },
+                { data: "valorTitulo", render: function (data) { return formatNumberMiles.new(data); } },
+                { data: "plazo" },
+                { data: "fechaApertura", render: function (data) { return FormatoFecha(data); } },
+                { data: "empresa" },
+                { data: "empresa" },
+                //{ data: "oficina" },
+                { data: "activo", render: function (data) { return data ? "Si" : "No" } },
+
+                //{ data: "empresa" },
+
+            ];
+
+            var botones = [
+                {
+                    text: "Editar",
+                    action: function () {
+                        if (dtTable.rows({ selected: true }).count() == 1) {
+
+                            $("#ideditar").val("true");
+                            $("#AfiliarAhorros").modal("show");
+
+                            $("#formAfiliacion").attr("action", "/Ahorros/Ahorros/EditarFACDAT");
+                            $("#id1").val(dtTable.rows({ selected: true }).data()[0]["id"]);
+                            $("#idConfiguracion").val(table.rows({ selected: true }).data()[0]["id"]);
+                            var fecha = dtTable.rows({ selected: true }).data()[0]["fechaApertura"];
+                            $("#fechaApertura1").val(FormatoFecha(fecha));
+
+
+                            $("#idPersona").val(dtTable.rows({ selected: true }).data()[0]["idPersona"]);
+                            $("#idPersona1").val(dtTable.rows({ selected: true }).data()[0]["idPersona"]);
+                              var idPersona1 = $("#idPersona").val();
+                            $('#idPersona').prop('disabled', true).val(idPersona1).trigger('chosen:updated');
+
+                                     //$("#idPersona1").val(idPersona);
+
+                                     $('#mitabla tr').empty();
+                                $.ajax({
+                                        type: "POST",
+                                        url: "@Url.Action("GetDatosTercero", "Ahorros")",
+                                        datatype: "Json",
+                                    data: { NIT: $('#idPersona').val() },
+                                        success: function (data) {
+                                            $("#agencia").val(data[0]);
+                                          }
+                                     });
+
+                            $("#idBeneficiario1").val(dtTable.rows({ selected: true }).data()[0]["idBeneficiario1"]);
+                            $("#idBeneficiario11").val(dtTable.rows({ selected: true }).data()[0]["idBeneficiario1"]);
+                            var idBeneficiario11 = $("#idBeneficiario1").val();
+                            $('#idBeneficiario1').val(idBeneficiario11).trigger('chosen:updated');
+
+                            $("#idBeneficiario2").val(dtTable.rows({ selected: true }).data()[0]["idBeneficiario2"]);
+                            $("#idBeneficiario22").val(dtTable.rows({ selected: true }).data()[0]["idBeneficiario2"]);
+                            var idBeneficiario22 = $("#idBeneficiario2").val();
+                            $('#idBeneficiario2').val(idBeneficiario22).trigger('chosen:updated');
+
+                            $("#empresa").val(dtTable.rows({ selected: true }).data()[0]["empresa"]);
+                            $("#tipoPago").val(dtTable.rows({ selected: true }).data()[0]["tipoPago"]);
+                            $("#tipoDevolucion").val(dtTable.rows({ selected: true }).data()[0]["tipoDevolucion"]);
+                            $("#plazo").val(dtTable.rows({ selected: true }).data()[0]["plazo"]);
+
+                            $("#idLineaDeposito").val(dtTable.rows({ selected: true }).data()[0]["idLineaDeposito"]);
+                            //agencia
+
+                            var tituloPignorado1 = dtTable.rows({ selected: true }).data()[0]["tituloPignorado"];
+
+                            if (tituloPignorado1 == "") {
+                                $('#tituloPignorado').val("False").trigger('chosen:updated');
+                            }
+                            else {
+                                $('#tituloPignorado').val("True").trigger('chosen:updated');
+                            }
+
+                            var capitalizaInteres1 = dtTable.rows({ selected: true }).data()[0]["capitalizaInteres"];
+
+                            if (capitalizaInteres1 == "") {
+                                $('#capitalizaInteres').val("False").trigger('chosen:updated');
+                            }
+                            else {
+                                $('#capitalizaInteres').val("True").trigger('chosen:updated');
+                            }
+
+                            var activo1 = dtTable.rows({ selected: true }).data()[0]["activo"];
+
+                            if (activo1 == "") {
+                                $('#activo').val("False").trigger('chosen:updated');
+                            }
+                            else {
+                                $('#activo').val("True").trigger('chosen:updated');
+                            }
+
+
+
+                            $("#valorTitulo").val(dtTable.rows({ selected: true }).data()[0]["valorTitulo"]);
+                            var valtitu = $("#valorTitulo").val();
+                            valtitu = formatNumberMiles.new(valtitu);
+                            $("#valorTitulo").val(valtitu);
+
+
+
+                        } else {
+                            swal({ title: "Recuerda", text: "Primero selecciona un registro", confirmButtonText: "Lo recordare" });
+                        }
+                    }
+                },
+                {
+                    text: "Ocultar",
+                    action: function () {
+                        $("#tablaAfiliacionesCDAT").dataTable().fnDestroy();
+                        $("#AfiliacionesAhorros").hide();
+                    }
+                },
+                {
+                    extend: 'collection',
+                    text: 'Exportar A',
+                    autoClose: true,
+                    buttons: [
+                        {
+                            extend: 'excel',
+                            text: "Excel",
+                            exportOptions: {
+                                columns: ':visible'
+                            }
+                        },
+                        {
+                            extend: 'pdf',
+                            text: "PDF",
+                            exportOptions: {
+                                columns: ':visible'
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            text: "Imprimir",
+                            exportOptions: {
+                                columns: ':visible'
+                            }
+                        }
+                    ]
+                }
+            ];
+            $("#tablaAfiliacionesCDAT").dataTable().fnDestroy();
+            agregarDataTable2("#tablaAfiliacionesCDAT", columnas, '/Ahorros/Ahorros/ObtenerAfiliadosConfiguracionesFACDAT?idConfiguracionCDAT=' + idConfiguracion, botones, false, true, true);
+            dtTable.columns(8).visible(false); dtTable.columns(9).visible(false);
+        }
+
+        //tabla afiliaciones
+
+        //FIN DATATABLES
+
+
+
+        //autocomplete cuenta Contable
+        $(".cuentasContables").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Aportes/Aportes/BuscarCuentasContables",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        busqueda: request.term
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.nombre, value: item.id };
+                        }));
+                    }
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                $('#' + $(this).attr("nombreSpan")).text(ui.item.label);
+                return false;
+            }, change: function (event, ui) {
+                if (!ui.item) {
+                    $(this).val("");
+                    $('#' + $(this).attr("nombreSpan")).text("");
+                }
+            },
+            open: function () {
+                $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            },
+            focus: function (event, ui) {
+                $('#' + $(this).attr("id")).val(ui.item.value);
+                //$('.cuentasContables').val(ui.item.value);
+                return false;
+            }
+        });//autocomplete cuenta Contable
+
+
+        //autocomplete personas
+        //autocomplete Persona
+        $("#idPersona").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Ahorros/Ahorros/BuscarAsociadosNoAfiliadosFACDAT",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        busqueda: request.term
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.nombres, value: item.nit, empresa: item.empresa, oficina: item.oficina };
+                        }));
+                    }
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                $('#nomPersona').text(ui.item.label);
+                $('#empresa').val(ui.item.empresa);
+                $('#agencia').val(ui.item.oficina);
+                seleccionado();
+                return false;
+            }, change: function (event, ui) {
+                if (!ui.item) {
+                    $(this).val("");
+                    $('#nomPersona').text("");
+                    desseleccionado();
+                }
+            },
+            open: function () {
+                $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            },
+            focus: function (event, ui) {
+                $('#idPersona').val(ui.item.value);
+                return false;
+            }
+        });//autocomplete Persona
+
+
+        //Eventos
+        $("#cancelarConfiguracion").on("click", function () {
+            $("#formConfiguracion")[0].reset();
+            $("#nuevaConfiguracion").hide();
+
+            limpiar();
+        });
+        //Fin Eventos
+        $("#cancelarAfiliacion").on("click", function () {
+
+            limpiarAfiliacion();
+        });
+
+
+
+        function limpiar() {
+            $('#CuentaContable').val("").trigger('chosen:updated');
+            $('#nombre').val("");
+            $('#tasaEfectiva').val("");
+            $('#multiplicador').val("");
+
+            $('#peridoLiquidacionMinimas').val("30").trigger('chosen:updated');
+            $('#valorMinimo').val("");
+            $('#valorMaximo').val("");
+            $('#diasGracia').val("");
+            $('#periodoGraciaRenovable').val("");
+            $('#periodoInactividadMinima').val("");
+            $('#cuotasMorosasLiquidacionTitulo').val("");
+
+            $('#modalidades').val("1").trigger('chosen:updated');
+            $('#tipoRetenciones').val("1").trigger('chosen:updated');
+
+            $('#nomFuenteContable').val("").trigger('chosen:updated');
+            $('#nomCuentaRetencion').val("").trigger('chosen:updated');
+            $('#nomcuentaGastoInteres').val("").trigger('chosen:updated');
+            $('#nomcuentaCausacion').val("").trigger('chosen:updated');
+            $('#nomcuentaGastoInteres').val("").trigger('chosen:updated');
+            $('#nomcuentaIngresos').val("").trigger('chosen:updated');
+            $('#nomcuentaMayor6Menor12').val("").trigger('chosen:updated');
+            $('#nomcuentaMayor12Menor18').val("").trigger('chosen:updated');
+            $('#nomcuentaMayor18').val("").trigger('chosen:updated');
+            $('#activos').val("True").trigger('chosen:updated');
+            $('#generaInteresCausacions').val("True").trigger('chosen:updated');
+            $('#permiteConsignacionSaldos').val("True").trigger('chosen:updated');
+            $('#reconoceIntereses').val("True").trigger('chosen:updated');
+            $('#permiteAsociadoDiferentes').val("True").trigger('chosen:updated');
+            $('#permiteCambiarFechaCreaciones').val("True").trigger('chosen:updated');
+
+
+        }
+        function limpiarAfiliacion() {
+
+            $('#idPersona').val("").trigger('chosen:updated');
+            $('#empresa').val("");
+            $('#agencia').val("");
+            $('#idBeneficiario1').val("").trigger('chosen:updated');
+            $('#idBeneficiario2').val("").trigger('chosen:updated');
+            $('#agencia').val("");
+            $('#tipoPago').val("Caja").trigger('chosen:updated');
+            $('#tipoDevolucion').val("Efectivo").trigger('chosen:updated');
+            $('#valorTitulo').val("");
+            $('#plazo').val("7").trigger('chosen:updated');
+            $('#tituloPignorado').val("False").trigger('chosen:updated');
+            $('#capitalizaInteres').val("False").trigger('chosen:updated');
+            $('#idLineaDeposito').val("");
+            $('#activo').val("True").trigger('chosen:updated');
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+    <script type="text/javascript">
+        $("#guardarAfiliacionboton").click(function () {
+            var idPersona = $("#idPersona").val();
+            var idBeneficiario1 = $("#idBeneficiario1").val();
+            var idBeneficiario2 = $("#idBeneficiario2").val();
+            var empresa = $("#empresa").val();
+            var valorTitulo = $("#valorTitulo").val();
+            var idLineaDeposito = $("#idLineaDeposito").val();
+
+            if (idPersona == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar una tercero",
+                })
+            }
+            else
+                if (idBeneficiario1 == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar Beneficiario 1",
+                })
+                }
+            else
+
+                    if (empresa == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Nombre de Empresa Requerido",
+                })
+                    }
+            else
+
+                if (valorTitulo == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Valor del Titulo necesario",
+                })
+            }
+            else
+               if (idLineaDeposito == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Linea de deposito requerido",
+                })
+               }
+
+               else {
+
+
+                   $("#idPersona1").val(idPersona);
+
+                    $('#mitabla tr').empty();
+                                $.ajax({
+                                    type: "POST",
+                                    url: "@Url.Action("validarIdPersona", "Ahorros")",
+                                    datatype: "Json",
+                                    data: { idPersona: $('#idPersona').val(), id1: $("#id1").val(), idConfiguracion: $('#idConfiguracion').val() },
+
+                                    success: function (data) {
+                                        var validar = (data[0]);
+
+                                        var ideditar = $("#ideditar").val();
+                                        if (ideditar=="true")
+                                        {
+
+                                            if (validar == "true") {
+
+                                                      $('#mitabla tr').empty();
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            url: "@Url.Action("validarMaxMin", "Ahorros")",
+                                                            datatype: "Json",
+                                                            data: { idConfiguracion: $('#idConfiguracion').val() },
+                                                            success: function (data) {
+                                                                var Minimo = (data[0]);
+                                                                var Maximo = (data[1]);
+                                                                valorTitulo = valorTitulo.replace(".", "");
+                                                                valorTitulo = valorTitulo.replace(".", "");
+                                                                valorTitulo = valorTitulo.replace(".", "");
+                                                                valorTitulo = valorTitulo.replace(".", "");
+
+
+                                                                Minimo1 = parseInt(Minimo);
+                                                                Maximo1 = parseInt(Maximo);
+                                                                valorTitulo1 = parseInt(valorTitulo);
+
+                                                                if (valorTitulo1 >= Minimo1 && valorTitulo1 <= Maximo1) {
+                                                                    document.getElementById("guardarAfiliacion").click();
+                                                                }
+                                                                else {
+                                                                    var Minimo2 = Minimo;
+                                                                    var Maximo2 = Maximo;
+                                                                    Minimo2 = formatNumberMiles.new(Minimo2);
+                                                                    Maximo2 = formatNumberMiles.new(Maximo2);
+
+
+
+                                                                    swal({
+                                                                        title: "Alerta",
+                                                                        type: "info",
+                                                                        text: "El valor del titulo debe estar entre " + Minimo2 + " Y " + Maximo2,
+                                                                    })
+                                                                }
+
+                                                             }
+                                                         });
+
+                                        }
+
+
+                                            else {
+                                            swal({
+                                                title: "Alerta",
+                                                type: "info",
+                                                text: "Ya se ha afiliado un usuario con esta identificación",
+                                            })
+                                               }
+
+
+
+
+                                        }
+                                        else
+                                        if (ideditar == "false")
+                                        {
+                                            if (validar == "true") {
+
+                                                      $('#mitabla tr').empty();
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            url: "@Url.Action("validarMaxMin", "Ahorros")",
+                                                            datatype: "Json",
+                                                            data: { idConfiguracion: $('#idConfiguracion').val() },
+                                                            success: function (data) {
+                                                                var Minimo = (data[0]);
+                                                                var Maximo = (data[1]);
+                                                                valorTitulo = valorTitulo.replace(".", "");
+                                                                valorTitulo = valorTitulo.replace(".", "");
+                                                                valorTitulo = valorTitulo.replace(".", "");
+                                                                valorTitulo = valorTitulo.replace(".", "");
+
+
+                                                                Minimo1 = parseInt(Minimo);
+                                                                Maximo1 = parseInt(Maximo);
+                                                                valorTitulo1 = parseInt(valorTitulo);
+
+                                                                if (valorTitulo1 >= Minimo1 && valorTitulo1 <= Maximo1) {
+                                                                    document.getElementById("guardarAfiliacion").click();
+                                                                }
+                                                                else {
+                                                                    var Minimo2 = Minimo;
+                                                                    var Maximo2 = Maximo;
+                                                                    Minimo2 = formatNumberMiles.new(Minimo2);
+                                                                    Maximo2 = formatNumberMiles.new(Maximo2);
+
+
+
+                                                                    swal({
+                                                                        title: "Alerta",
+                                                                        type: "info",
+                                                                        text: "El valor del titulo debe estar entre " + Minimo2 + " Y " + Maximo2,
+                                                                    })
+                                                                }
+
+                                                             }
+                                                         });
+
+                                        }
+                                        else {
+                                            swal({
+                                                title: "Alerta",
+                                                type: "info",
+                                                text: "Ya se ha afiliado un usuario con esta identificación",
+                                            })
+                                        }
+
+
+
+
+
+                                        }
+
+
+
+                                     }
+                                 });
+
+
+
+                //document.forms["formConfiguracion"].submit();
+               //
+            }
+        });
+
+
+    </script>
+    <script type="text/javascript">
+        $("#guardar").click(function () {
+            var CuentaContable = $("#CuentaContable").val();
+            var nomFuenteContable = $("#nomFuenteContable").val();
+            var nomCuentaRetencion = $("#nomCuentaRetencion").val();
+            var nomcuentaGastoInteres = $("#nomcuentaGastoInteres").val();
+            var nomcuentaCausacion = $("#nomcuentaCausacion").val();
+            var nomcuentaIngresos = $("#nomcuentaIngresos").val();
+            var nomcuentaMayor6Menor12 = $("#nomcuentaMayor6Menor12").val();
+            var nomcuentaMayor12Menor18 = $("#nomcuentaMayor12Menor18").val();
+            var nomcuentaMayor18 = $("#nomcuentaMayor18").val();
+
+            if (CuentaContable == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar una cuenta contable",
+                })
+            }
+
+            else
+                if (nomFuenteContable == "")
+                    {
+                        swal({
+                            title: "Alerta",
+                            type: "info",
+                            text: "Debe Seleccionar una fuente contable",
+                        })
+
+                }
+                else
+                    if (nomCuentaRetencion == "") {
+                        swal({
+                            title: "Alerta",
+                            type: "info",
+                            text: "Debe Seleccionar una cuenta para Retención",
+                        })
+
+                    }
+                    else
+                        if (nomcuentaGastoInteres == "") {
+                            swal({
+                                title: "Alerta",
+                                type: "info",
+                                text: "Debe Seleccionar una cuenta Para Gastos",
+                            })
+
+                        }
+                        else
+                            if (nomcuentaCausacion == "") {
+                                swal({
+                                    title: "Alerta",
+                                    type: "info",
+                                    text: "Debe Seleccionar una cuenta Para Causación",
+                                })
+
+                            }
+                            else
+                                if (nomcuentaIngresos == "") {
+                                    swal({
+                                        title: "Alerta",
+                                        type: "info",
+                                        text: "Debe Seleccionar una cuenta Para Ingresos",
+                                    })
+
+                                }
+                                else
+                                    if (nomcuentaMayor6Menor12 == "") {
+                                        swal({
+                                            title: "Alerta",
+                                            type: "info",
+                                            text: "Debe Seleccionar una cuenta Mayor a 6 y Menor a 12 Meses",
+                                        })
+
+                                    }
+                                    else
+                                        if (nomcuentaMayor12Menor18 == "") {
+                                            swal({
+                                                title: "Alerta",
+                                                type: "info",
+                                                text: "Debe Seleccionar una cuenta Mayor a 12 y Menor a 18 Meses",
+                                            })
+
+                                        }
+                                        else
+                                            if (nomcuentaMayor18 == "") {
+                                                swal({
+                                                    title: "Alerta",
+                                                    type: "info",
+                                                    text: "Debe Seleccionar una cuenta Mayor a 18",
+                                                })
+
+                                            }
+            else {
+               // document.forms["formConfiguracion"].submit();
+                document.getElementById("guardarConfiguracion").click();
+            }
+        });
+
+
+
+
+        $("#CuentaContable").chosen().change(function () {
+            var CuentaContable = $("#CuentaContable").val();
+            if (CuentaContable == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar una cuenta contable",
+                })
+            }
+            else {
+                $("#cuentaContable").val(CuentaContable);
+            }
+
+        });
+        $("#nomFuenteContable").chosen().change(function () {
+            var nomFuenteContable = $("#nomFuenteContable").val();
+            if (nomFuenteContable == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar una Fuente Contable",
+                })
+            }
+            else {
+                $("#fuenteContable").val(nomFuenteContable);
+            }
+        });
+        $("#nomCuentaRetencion").chosen().change(function () {
+
+            var nomCuentaRetencion = $("#nomCuentaRetencion").val();
+            if (nomCuentaRetencion == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar una Cuenta Para Retención",
+                })
+            }
+            else {
+                $("#cuentaRetencion").val(nomCuentaRetencion);
+            }
+
+
+        });
+        $("#nomcuentaGastoInteres").chosen().change(function () {
+
+            var nomcuentaGastoInteres = $("#nomcuentaGastoInteres").val();
+            if (nomcuentaGastoInteres == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar una Cuenta Para Gastos",
+                })
+            }
+            else {
+                $("#cuentaGastoInteres").val(nomcuentaGastoInteres);
+            }
+
+
+        });
+        $("#nomcuentaCausacion").chosen().change(function () {
+
+            var nomcuentaCausacion = $("#nomcuentaCausacion").val();
+            if (nomcuentaCausacion == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar una Cuenta Para Causación",
+                })
+            }
+            else {
+                $("#cuentaCausacion").val(nomcuentaCausacion);
+            }
+
+
+        });
+        $("#nomcuentaIngresos").chosen().change(function () {
+
+            var nomcuentaIngresos = $("#nomcuentaIngresos").val();
+            if (nomcuentaIngresos == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar una Cuenta Para Ingresos",
+                })
+            }
+            else {
+                $("#cuentaIngresos").val(nomcuentaIngresos);
+            }
+
+
+        });
+
+        $("#nomcuentaMayor6Menor12").chosen().change(function () {
+
+            var nomcuentaMayor6Menor12 = $("#nomcuentaMayor6Menor12").val();
+            if (nomcuentaMayor6Menor12 == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar una Cuenta Mayor a 6 y Menor a 12 Meses",
+                })
+            }
+            else {
+                $("#cuentaMayor6Menor12").val(nomcuentaMayor6Menor12);
+            }
+
+
+        });
+        $("#nomcuentaMayor12Menor18").chosen().change(function () {
+
+            var nomcuentaMayor12Menor18 = $("#nomcuentaMayor12Menor18").val();
+            if (nomcuentaMayor12Menor18 == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar una Cuenta Mayor a 12 y Menor a 18 Meses",
+                })
+            }
+            else {
+                $("#cuentaMayor12Menor18").val(nomcuentaMayor12Menor18);
+            }
+
+
+        });
+        $("#nomcuentaMayor18").chosen().change(function () {
+
+            var nomcuentaMayor18 = $("#nomcuentaMayor18").val();
+            if (nomcuentaMayor18 == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar una Cuenta Mayor a 18",
+                })
+            }
+            else {
+                $("#cuentaMayor18").val(nomcuentaMayor18);
+            }
+
+
+        });
+
+        $("#idPersona").chosen().change(function () {
+           // $('#empresa').val("empresa1");
+           // $('#agencia').val("Agencia1");
+
+            var idPersona = $("#idPersona").val();
+            if (idPersona == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar Un Tercero",
+                })
+            }
+            else {
+
+                $("#idPersona1").val(idPersona);
+
+                 $('#mitabla tr').empty();
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetDatosTercero", "Ahorros")",
+                    datatype: "Json",
+                data: { NIT: $('#idPersona').val() },
+                    success: function (data) {
+                        $("#agencia").val(data[0]);
+                      }
+                 });
+            }
+        });
+        $("#idBeneficiario1").chosen().change(function () {
+
+            var idBeneficiario1 = $("#idBeneficiario1").val();
+            if (idBeneficiario1 == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar un Beneficiario",
+                })
+            }
+            else {
+                $("#idBeneficiario11").val(idBeneficiario1);
+            }
+
+        });
+        $("#idBeneficiario2").chosen().change(function () {
+
+            var idBeneficiario2 = $("#idBeneficiario2").val();
+            if (idBeneficiario2 == "") {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar un Beneficiario",
+                })
+            }
+            else {
+
+                $("#idBeneficiario22").val(idBeneficiario2);
+            }
+
+
+        });
+        $("#multiplicador").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, "");
+                });
+            }
+        });
+
+        $("#valorMinimo").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                });
+            }
+        });
+
+        $("#valorMaximo").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                });
+            }
+        });
+
+        $("#diasGracia").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, "");
+                });
+            }
+        });
+
+        $("#periodoGraciaRenovable").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, "");
+                });
+            }
+        });
+
+        $("#periodoInactividadMinima").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, "");
+                });
+            }
+        });
+
+        $("#cuotasMorosasLiquidacionTitulo").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, "");
+                });
+            }
+        });
+        $("#valorTitulo").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                });
+            }
+        });
+        $("#idLineaDeposito").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, "");
+                });
+            }
+        });
+        var formatNumberMiles = {
+            separador: ".", // separador para los miles
+            sepDecimal: ',', // separador para los decimales
+            formatear: function (num) {
+                num += '';
+                var splitStr = num.split('.');
+                var splitLeft = splitStr[0];
+                var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+                var regx = /(\d+)(\d{3})/;
+                while (regx.test(splitLeft)) {
+                    splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+                }
+                return this.simbol + splitLeft + splitRight;
+            },
+            new: function (num, simbol) {
+                this.simbol = simbol || '';
+                return this.formatear(num);
+            }
+        }
+
+
+
+    </script>
+
+
+
+
+
+}

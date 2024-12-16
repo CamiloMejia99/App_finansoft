@@ -1,0 +1,80 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.LiquidacionesDefinitivas.LiquidacionDefinitivaAso>
+
+@{
+    Layout = "~/Views/Shared/_Layoutahorros.cshtml";
+}
+
+<div class="col-md-12" style="background: rgb(248, 248, 248); width:1200px;left: 100px;">
+
+    <div class="form-group">
+        <div class="col-md-8"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 1150px; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Liquidaciones Asociados</h3></div>
+        <div class="col-md-2" style=" margin-top:35px;">
+            <a class="" href="/Aportes/Aportes/Index" title="Atras">
+                <i class="fa fa-arrow-circle-o-left fa-2x " aria-hidden="true">Volver</i>
+            </a>
+
+        </div><div class="col-md-2" style=" margin-top:35px;">
+            <a href="/LiquidacionDefinitiva/LiquidacionDefinitiva/Create" class="AddUser btn btn-success btn-small btnnuevo">Nueva Liquidacion</a>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <div style="width:1150px">
+            <table id="myTable" class="table table-striped table-bordered dataTable no-border">
+                <thead style="background-color:lightslategray">
+                    <tr>
+                        <th>
+                            NIT
+                        </th>
+                        <th>
+                            FECHA
+                        </th>
+                        <th>
+                            VALOR TOTAL LIQUIDADO
+                        </th>                
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="align-center medium">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NIT)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fechaLiquidacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.saldoAFavor)
+                            </td>
+                            <td class="align-center">
+                                <a id="editar" class="btn btn-inline btn-xs btn-success" href="/LiquidacionDefinitiva/LiquidacionDefinitiva/Details?id=@item.id" title="Editar">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<link href="~/Content/css/jquery.dataTablesform.min.css" rel="stylesheet" />
+@section scripts
+{
+    <script src="~/Scripts/jquery.dataTablesform.min.js"></script>
+
+    <script>
+		$(document).ready(function () {
+			$('#myTable').DataTable({
+				"language": {
+					"url": "/Content/Spanish.json"
+				}
+			});
+		});
+    </script>
+}

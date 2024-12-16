@@ -1,0 +1,81 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Nomina.SeleccionCuenta
+
+@{
+    //Layout = "~/Views/Shared/_Modal.cshtml";
+    var action = (string)ViewBag.action;
+    var boton = (string)ViewBag.boton;
+
+    var TipoCuenta = @ViewBag.TipoCuenta;
+
+}
+
+
+
+@if (ViewBag.guardado == "S")
+{
+    <script>
+        recargar();
+    </script>
+}
+else
+{
+    <div id="centro" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title">Eliminar cuenta</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class=" panel panel-body">
+
+                        
+                        @using (Ajax.BeginForm("Edit", "SeleccionCuentas", null, null, new { id = "FormularioSeleccion", autocomplete = "off" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <center>
+                                <div class="form-horizontal">
+                                    <h3>Seguro desea eliminar esta cuenta?</h3>
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.ID)
+
+                                    <div class="form-group">
+
+                                        <div class="form-actions no-color">
+
+                                            <input type="button" value="Eliminar" class="btn btn-danger" onclick="Delete();" />  |
+                                            <button type="button" id="close" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancelar</button>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </center>
+                        }
+                        @if (ViewBag.Error != null && ViewBag.Error != "")
+                        {
+                            <div class="text-danger">
+                                @ViewBag.Error
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    /**/
+    <script>
+        $(document).ready(function () {
+            inicializarFormulario();
+            $('#centro').modal('show');
+        });
+    </script>
+}

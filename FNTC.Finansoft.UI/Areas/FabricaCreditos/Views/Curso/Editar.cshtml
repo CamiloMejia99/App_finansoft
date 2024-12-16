@@ -1,0 +1,31 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.ControlCartera.Curso
+@{
+    ViewBag.Title = "CARTERA";
+    Layout = "~/Views/Shared/_LayoutCR.cshtml";
+}
+
+<br />
+<h4>Gestión de Procesos</h4>
+<div class="alert alert-@ViewBag.alerta"> - - <b>@ViewBag.res</b> - - </div>
+<form action="/Curso/Editar" method="post">
+    <input type="hidden" id="id" name="id" value="@Model.id_cur" />
+    <table>
+        <tr>
+            <td style="padding: 10px">Proceso:</td>
+            <td style="padding: 10px"><input class="form-control" value="@Model.descripcion_cur" placeholder="Base de Datos I " maxlength="20" type="text" name="des" id="des" required /></td>
+        </tr>
+        <tr>
+            <td style="padding: 10px">Estado:</td>
+            <td style="padding: 10px">Disponible @Html.CheckBox("est", @Model.estado_cur)</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px"></td>
+            <td style="padding: 10px">
+                <button class="btn btn-success" type="submit" name="btn1" id="btn1"><span class="glyphicon glyphicon-save"> Registrar</span></button>
+                <button class="btn btn-primary" type="reset" name="btn2" id="btn2"><span class="glyphicon glyphicon-remove"> Resetear</span></button>
+                <a class="btn btn-danger" href="~/Curso/Index"><span class="glyphicon glyphicon-backward"> Volver</span></a>
+            </td>
+        </tr>
+    </table>
+</form>
+

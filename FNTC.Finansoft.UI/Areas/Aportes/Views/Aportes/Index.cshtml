@@ -1,0 +1,895 @@
+﻿@using FNTC.Finansoft.DTO.Ahorros
+@using FNTC.Finansoft.DTO.Aportes
+@model DTOFichasAportes
+
+@{
+    ViewBag.Title = "Afiliados Aporte Ordinario";
+    Layout = "~/Views/Shared/_Layoutahorros.cshtml";
+    DTOConfiguracionAportes configuracion = ViewBag.configuracion;
+    DTOConfiguracionAhorros configuracionAhorros = ViewBag.ConfiguracionAhorros;
+    string inhabilitado = "", cuota = "", porcentaje = "";
+    if (configuracion != null)
+    {
+        porcentaje = configuracion.porcentajeCuota;
+        cuota = configuracion.valorCuota;
+        // 5 es ingreso manual de cuota y porcentaje
+        inhabilitado = configuracion.idTipoCuotaCalculo == 5 ? "" : "readonly";
+    }
+}
+
+@section Styles{
+
+    <style>
+        .ui-autocomplete {
+            z-index: 5000;
+        }
+    </style>
+}
+
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+<div class="container" style="margin-top:2%; background: rgb(248, 248, 248);">
+    <ul class="col-md-offset-2 nav nav-tabs" style="margin-top:2%;border: none; margin-left: 118px;">
+        <li><a href="/Aportes/Aportes/Configuracion" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Configuración</a></li>
+        <li class="active"><a data-toggle="tab" href="#menu1" class="tabsnota"><i class="fa fa-calculator" aria-hidden="true"></i> Fichas Aportes</a></li>
+
+        @*<li><a href="/formularioVinculacion/formatoVinculacions/Index" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Formulario Vinculación</a></li>*@
+        <li><a href="/formularioVinculacion/FormularioVinculacion/Index" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Formulario Vinculación</a></li>
+        <li><a href="/formularioRetiro/FormularioRetiro/Index" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Formulario Retiro</a></li>
+        <li><a href="/LiquidacionDefinitiva/LiquidacionDefinitiva/Index" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Liquidacion Asociados</a></li>
+        <li><a href="#" id="VistaCuentasDistribucion" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Otras Cuentas</a></li>
+        <li><a href="/Aportes/AportesExtra/AportesExtra" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Fichas - Aporte Extraordinario</a></li>
+    </ul>
+    <div class="tab-content contenedortabs">
+        <div id="menu1" class="tab-pane fade in active">
+            <div class="col-md-12"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Configuracion Aportes</h3></div>
+            <div class="col-md-12">
+                <table id="tablaAfiliadosAportes" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Cuenta</th>
+                            <th>Identificacion</th>
+                            <th>Nombres</th>
+                            <th>Forma de Pago</th>
+                            <th>Porcentaje</th>
+                            <th>Valor</th>
+                            <th>Valor Cuota</th>
+                            <th>Total Aportes</th>
+                            <th>Fecha Afiliacion</th>
+                            <th>Activa</th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <div id="detallesFichas" hidden>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="text-center"><strong>Detalles de los aportes</strong></div>
+                        </div>
+                        <div class="panel-body">
+                            <table id="tablaADetallesAportes" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Cuenta</th>
+                                        <th>Identificacion</th>
+                                        <th>Nombres</th>
+                                        <th>Forma de Pago</th>
+                                        <th>Porcentaje</th>
+                                        <th>Valor</th>
+                                        <th>Valor Cuota</th>
+                                        <th>Total Aportes</th>
+                                        <th>Fecha Afiliacion</th>
+                                        <th>empresa</th>
+                                        <th>agencia</th>
+                                        <th>Activa</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="2" style="text-align:right">Total Aportes:</th>
+                                        <th id="total">$0</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div><!--CONTENIDO TAB-->
+        </div><!--MENU-->
+    </div><!--CONTENEDOR TABS-->
+</div>
+
+
+
+@* Modal Afiliacion *@
+
+<div id="AfiliarAporte" data-backdrop="false" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Afiliacion</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("CrearFichaAporte", "Aportes", FormMethod.Post, htmlAttributes: new { id = "formAfiliacion", autocomplete = "off" }))
+                {
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    if (configuracion != null)
+                    {
+                        var porcentajeAporte = configuracion.porcentajeCuota == null ? configuracion.porcentaje : configuracion.porcentajeCuota;
+                        var tipoCalculo = "";
+                        switch (configuracion.idTipoCuotaCalculo)
+                        {
+                            case 1:
+                                tipoCalculo = "Salario Minimo Legal Vigente";
+                                break;
+                            case 2:
+                                tipoCalculo = "Salario Asociado";
+                                break;
+                            case 3:
+                                tipoCalculo = "Valor Fijo";
+                                break;
+                            case 4:
+                                tipoCalculo = "Cuota Fija";
+                                break;
+                            case 5:
+                                tipoCalculo = "Ingreso Manual";
+                                break;
+                        }
+                        <input type="hidden" name="name" value="@configuracion.idTipoCuotaCalculo" id="auxTipoCalculo" />
+                        <div class="alert alert-warning" role="alert">
+                            <i class="fa fa-exclamation-circle"></i> Si el usuario ya tiene una ficha de aporte registrada, esta se inactivará automáticamente.
+                        </div>
+                        <div class="row">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#informacion">Mas Informacion</a>
+                                    </h4>
+                                </div>
+                                <div id="informacion" class="panel-collapse collapse">
+                                    <table class="table table-condensed">
+                                        <tr><th>Calcula Sobre:</th><td>@tipoCalculo</td></tr>
+                                        <tr><th>Porcentaje Base:</th><td id="porcentajeManual">@configuracion.porcentaje%</td></tr>
+                                        <tr><th>Valor Calculado:</th><td id="valorCalculado">@configuracion.valor</td></tr>
+                                        <tr><th>Porcentaje Para Aporte:</th><td id="porcentajeAporteManual">@porcentajeAporte%</td></tr>
+                                        <tr><th>Cuota para Aporte:</th><td id="cuotaParaAporte">@configuracion.valorCuota</td></tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            @Html.LabelFor(model => model.idPersona, htmlAttributes: new { @class = "control-label" })
+                            <div class="input-group">
+                                @Html.DropDownList("tercerosNoAfiliados", null, new { @class = "chosen-select-single", @id = "tercerosList" })
+                                @Html.HiddenFor(model => model.idPersona, new { @id = "PersonaId" })
+                                @Html.HiddenFor(model => model.asesor, new { @id = "asesor" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.idPersona, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!--
+            <div class="form-group col-md-6">
+                <input id="salarioAsociado" value="" readonly hidden />
+                <label>Empresa:</label>
+                <input id="empresa" type="text" class="form-control" , placeholder="Empresa" disabled />
+            </div>-->
+                        <div class="form-group col-md-6">
+                            <input id="numeroCuenta" name="numeroCuenta" readonly hidden />
+                            <label>Agencia:</label>
+                            <input id="agencia" type="text" class="form-control" disabled />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Asesor Comercial:</label>
+                            <input id="asesorComercial" type="text" class="form-control" readonly />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.porcentaje)
+                            <input type="number" id="porcentaje" name="porcentaje" class="form-control" value="@porcentaje" placeholder="Porcentaje" @inhabilitado />
+                            @Html.ValidationMessageFor(model => model.porcentaje, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.valor)
+                            <input id="valor" type="text" name="valor" class="form-control" value="@cuota" placeholder="Valor" @inhabilitado />
+                            @Html.ValidationMessageFor(model => model.valor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Forma de Pago:</label>
+                            <select id="tipoPago" name="tipoPago" class="form-control">
+                                <option value="Caja">Caja</option>
+                                <option value="Nomina">Nomina</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Activa)
+                            <select id="activa" name="activa" class="form-control">
+                                <option value="true">Si</option>
+                                <option value="false">No</option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.Activa, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="modal-footer">
+                            <button id="cancelarAfiliacion" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button id="guardarAfiliacion" type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="EditarAporte" data-backdrop="false" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Afiliacion</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("EditarFichaAporte", "Aportes", FormMethod.Post, htmlAttributes: new { id = "formAfiliacion", autocomplete = "off" }))
+                {
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    if (configuracion != null)
+                    {
+                        var porcentajeAporte = configuracion.porcentajeCuota == null ? configuracion.porcentaje : configuracion.porcentajeCuota;
+                        var tipoCalculo = "";
+                        switch (configuracion.idTipoCuotaCalculo)
+                        {
+                            case 1:
+                                tipoCalculo = "Salario Minimo Legal Vigente";
+                                break;
+                            case 2:
+                                tipoCalculo = "Salario Asociado";
+                                break;
+                            case 3:
+                                tipoCalculo = "Valor Fijo";
+                                break;
+                            case 4:
+                                tipoCalculo = "Cuota Fija";
+                                break;
+                            case 5:
+                                tipoCalculo = "Ingreso Manual";
+                                break;
+                        }
+                        <div class="row">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#informacion">Mas Informacion</a>
+                                    </h4>
+                                </div>
+                                <div id="informacion" class="panel-collapse collapse">
+                                    <table class="table table-condensed">
+                                        <tr><th>Calcula Sobre:</th><td>@tipoCalculo</td></tr>
+                                        <tr><th>Porcentaje Base:</th><td id="porcentajeManual">@configuracion.porcentaje%</td></tr>
+                                        <tr><th>Valor Calculado:</th><td id="valorCalculado">@configuracion.valor</td></tr>
+                                        <tr><th>Porcentaje Para Aporte:</th><td id="porcentajeAporteManual">@porcentajeAporte%</td></tr>
+                                        <tr><th>Cuota para Aporte:</th><td id="cuotaParaAporte">@configuracion.valorCuota</td></tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            @Html.LabelFor(model => model.idPersona, htmlAttributes: new { @class = "control-label" })
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.idPersona, new { @id = "PersonaIdEdit", @class = "form-control", @readonly = "true" })
+                                <span class="input-group-addon" id="nomPersona"></span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.idPersona, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!--
+                        <div class="form-group col-md-6">
+                            <input id="salarioAsociado" value="" readonly hidden />
+                            <label>Empresa:</label>
+                            <input id="empresa" type="text" class="form-control" , placeholder="Empresa" disabled />
+                        </div>-->
+                        <div class="form-group col-md-6">
+                            <input id="numeroCuenta" name="numeroCuenta" readonly hidden />
+                            <label>Agencia:</label>
+                            <input id="agenciaEdit" type="text" class="form-control" disabled />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Asesor Comercial:</label>
+                            @Html.TextBoxFor(model => model.asesor, new { @class = "form-control", @readonly = "true", @id = "asesorEdit" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.porcentaje)
+                            <input type="number" id="porcentajeEdit" name="porcentaje" class="form-control" value="@porcentaje" @inhabilitado required />
+                            @Html.ValidationMessageFor(model => model.porcentaje, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.valor)
+                            <input id="valorEdit" type="text" name="valor" class="form-control" value="@cuota" @inhabilitado required />
+                            @Html.ValidationMessageFor(model => model.valor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Forma de Pago:</label>
+                            <select id="tipoPagoEdit" name="tipoPago" class="form-control">
+                                <option value="Caja">Caja</option>
+                                <option value="Nomina">Nomina</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Activa)
+                            <select id="activaEdit" name="activa" class="form-control">
+                                <option value="true">Si</option>
+                                <option value="false">No</option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.Activa, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="modal-footer">
+                            <button id="cancelarAfiliacion" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button id="guardarAfiliacion" type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="EliminarF" data-backdrop="false" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Elimimar Ficha</h4>
+            </div>
+            <div class="modal-body">
+
+                <table>
+                    <tr>
+                        <td>
+                            <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3><b>Seguro desea eliminar esta Ficha?</b></h3>
+                        </td>
+                        <td>
+                            <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><h4>¡Por favor verifique que el asociado no tenga saldo en aportes, de ser asi éste no se eliminara!</h4></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                        </td>
+                    </tr>
+                </table>
+
+                <a id="elimin" class="btn btn-danger btn-block">Eliminar</a>
+                <a id="cance" class="btn btn-default btn-block" data-dismiss="modal">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/datatables.js"></script>
+    <script src="~/Scripts/DinamismoCliente/formatMilesDec.js"></script>
+    <script src="~/Scripts/Aportes/Validaciones.js"></script>
+    @*<script src="~/Scripts/DinamismoCliente/Dinamismos.js"></script>*@
+    @*Respuestas*@
+    @if (configuracion != null)
+    {
+        if (configuracion.Respuesta != null)
+        {
+            var titulo = configuracion.Respuesta.Correcto ? "Correcto" : "Error";
+            var texto = configuracion.Respuesta.Mensaje;
+            var tipo = configuracion.Respuesta.Correcto ? "success" : "error";
+            <script>
+                //swal({ title: "@titulo", text: "@texto", type: "@tipo", confirmButtonText: "Aceptar" }, function (isConfirm) { if (isConfirm) { } });
+                Swal.fire({
+                        icon: '@tipo',
+                        title: '@titulo',
+                        text: ''
+                });
+            </script>
+        }
+
+    
+    }
+    @*Respuestas*@
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetUsuario", "Aportes")",
+                datatype: "Json",
+                success: function (data) {
+                    if (data == "noRegistrado") {
+                        window.location.href = '@Url.Action("Login", "Login", new { Area = "" })';
+                    } else {
+                        $("#asesorComercial").val(data);
+                    }
+                }
+            });
+        });
+    </script>
+
+    @*Sin Configuracion*@
+    @if (ViewBag.configuracionGeneral == null)
+    {
+        <script>
+            swal({ title: "Sin Configuracion", text: "No se ha creado una configuracion General", type: "warning", confirmButtonText: "Aceptar" }, function (isConfirm) { if (isConfirm) { location.reload(true) } });
+        </script>
+    }
+    else
+    {
+        if (configuracion == null)
+        {
+            <script>
+                swal({ title: "Sin Configuracion", text: "No se ha creado una configuracion para aportes", type: "warning", confirmButtonText: "Crear" }, function (isConfirm) { if (isConfirm) { location.href = "/Aportes/Aportes/Configuracion" } });
+            </script>
+        }
+        @*Sin Configuracion*@
+        else
+        {
+            var existeConfiguracionAhorros = false;
+            if (configuracionAhorros != null) { existeConfiguracionAhorros = true; }
+
+
+            <script>
+
+        $("#tercerosList").change(function () {
+            var nit = $('#tercerosList').val();
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetAgenciaTercero", "Aportes")",
+                data: { NIT: nit },
+                datatype: "Json",
+                success: function (data) {
+                    $("#agencia").val(data);
+                }
+            });//fin ajax
+
+            if (nit != "") {
+                var IdTipoCalculo = $("#auxTipoCalculo").val();
+                if (IdTipoCalculo == "2") {
+                    GetValorCuota(nit);
+                }
+            } else {
+                $("#valor").val("0");
+                $("#cuotaParaAporte").val("0");
+            }
+
+        });
+
+                function GetValorCuota(nit) {
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("ObtenerCuotaSobreSalario", "Aportes")",
+                        data: { NIT: nit },
+                        datatype: "Json",
+                        success: function (data) {
+                            $("#valor").val(data.cuota);
+                            $("#cuotaParaAporte").text(data.cuota);
+                        }
+                    });//fin ajax
+                };
+
+                 type="text/javascript">
+                    $(document).ready(function () {
+                        $(".chosen-select-single").chosen();
+                    $(".chosen-select-multiple").chosen();    //DESPUES DEL FINAL DEL DOCUMENTO AL PRINCIPIO DE LOS SCRIPTS
+                });
+
+
+                var table;
+                var mydata = "";
+
+
+                $(document).on("ready", function () {
+                    //listar();
+
+                   table = $('#tablaAfiliadosAportes').dataTable({
+                        "ajaxSource": '/Aportes/Aportes/ObtenerAfiliadosAportes',
+                        "language": {
+                            "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json"
+                        },
+                        dom: 'Bfrtip',
+                        select: true,
+                        buttons: [
+                            {
+                                text: "Nueva Afiliacion",
+                                action: function () {
+                                    $("#AfiliarAporte").modal("show");
+                                }
+                            },
+                            {
+                                text: "Editar",
+                                action: function () {
+                                    if (mydata != "") {
+                                        $("#EditarAporte").modal("show");
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "@Url.Action("GetInfoAporte", "Aportes")",
+                                                data: { NIT: mydata },
+                                                datatype: "Json",
+                                                success: function (data) {
+                                                    $("#PersonaIdEdit").val(data.identificacion);
+                                                    $("#nomPersona").text(data.nombre);
+                                                    $("#agenciaEdit").val(data.agencia);
+                                                    $("#asesorEdit").val(data.asesor);
+                                                    $("#porcentajeEdit").val(data.porcentaje);
+                                                    $("#valorEdit").val(data.valor);
+                                                    if (data.formadepago == "Caja") {
+                                                        $("#tipoPagoEdit > option[value='Caja']").attr("selected", true);
+                                                    } else if (data.formadepago == "Nomina") {
+                                                        $("#tipoPagoEdit > option[value='Nomina']").attr("selected", true);
+                                                    }
+                                                    if (data.activa == "true") {
+                                                        $("#activaEdit > option[value='true']").attr("selected", true);
+                                                    } else if (data.activa == "false") {
+                                                        $("#activaEdit > option[value='false']").attr("selected", true);
+                                                    }
+
+                                                }
+                                            });
+                                        /*
+                                        $("#nomPersona").text(table.rows({ selected: true }).data()[0]["nombres"]);
+                                        $("#empresa").val(table.rows({ selected: true }).data()[0]["empresa"]);
+                                        $("#agencia").val(table.rows({ selected: true }).data()[0]["oficina"]);
+                                        $("#tipoPago").val(table.rows({ selected: true }).data()[0]["tipoPago"]);
+                                        $("#porcentaje").val(table.rows({ selected: true }).data()[0]["porcentaje"]);
+                                        $("#valor").val(formatearNumero(table.rows({ selected: true }).data()[0]["valor"]));
+                                        $("#activa").val(table.rows({ selected: true }).data()[0]["activa"].toString());
+                                    */
+                                    } else {
+                                        Swal.fire({ title: "Recuerda", text: "Primero selecciona un registro", confirmButtonText: "Lo recordare" });
+                                    }
+                                }
+                            },
+                            {
+                                text: "Eliminar",
+                                action: function () {
+                                    if (mydata != "") {
+                                        $("#EliminarF").modal("show");
+                                        $("#elimin").attr("href", "/Aportes/Aportes/Delete?id=" + mydata);
+                                    } else {
+                                        Swal.fire({ title: "Recuerda", text: "Primero selecciona un registro", confirmButtonText: "Lo recordare" });
+                                    }
+                                }
+                            },
+                            /*
+                            {
+                                text: "Ver Detalles",
+                                action: function () {
+                                    if (table.rows({ selected: true }).count() == 1) {
+                                        var numeroFicha = table.rows({ selected: true }).data()[0]["numeroCuenta"];
+                                        var totalAportes = table.rows({ selected: true }).data()[0]["totalAportes"] == null ? "0" : table.rows({ selected: true }).data()[0]["totalAportes"] == null;
+                                        var columnas =
+                                            [
+                                                { data: "numeroFicha" },
+                                                { data: "valorPagado", render: function (data) { return formatearNumero(data); } },
+                                                { data: "fechaPago", render: function (data) { return FormatoFecha(data); } }
+                                            ];
+                                        var botones =
+                                            [
+                                                {
+                                                    extend: 'collection',
+                                                    text: 'Exportar A',
+                                                    autoClose: true,
+                                                    buttons: [
+                                                        {
+                                                            extend: 'excel',
+                                                            text: "Excel",
+                                                            exportOptions: {
+                                                                columns: ':visible'
+                                                            }
+                                                        },
+                                                        {
+                                                            extend: 'pdf',
+                                                            text: "PDF",
+                                                            exportOptions: {
+                                                                columns: ':visible'
+                                                            }
+                                                        },
+                                                        {
+                                                            extend: 'print',
+                                                            text: "Imprimir",
+                                                            exportOptions: {
+                                                                columns: ':visible'
+                                                            }
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    text: "Ocultar",
+                                                    action: function () {
+                                                        $("#detallesFichas").hide();
+                                                    }
+                                                }
+                                            ];
+
+                                        $("#tablaADetallesAportes").dataTable().fnDestroy();
+                                        agregarDataTable2("#tablaADetallesAportes", columnas, "/Aportes/Aportes/ObtenerDetallesFichasAportes?numeroFicha=" + numeroFicha, botones, false, true, false);
+                                        $("#total").text("$" + totalAportes);
+                                        $("#detallesFichas").show();
+                                        $('html,body').animate({
+                                            scrollTop: $("#tablaADetallesAportes").offset().top
+                                        }, 1000);
+                                    } else {
+                                        swal({ title: "Recuerda", text: "Primero selecciona un registro", confirmButtonText: "Lo recordare" });
+                                    }
+                                }
+                            },
+                            */
+                            {
+                                extend: 'collection',
+                                text: 'Exportar A',
+                                autoClose: true,
+                                buttons: [
+                                    {
+                                        extend: 'excel',
+                                        text: "Excel",
+                                        exportOptions: {
+                                            columns: ':visible'
+                                        }
+                                    },
+                                    {
+                                        extend: 'pdf',
+                                        text: "PDF",
+                                        exportOptions: {
+                                            columns: ':visible'
+                                        }
+                                    },
+                                    {
+                                        extend: 'print',
+                                        text: "Imprimir",
+                                        exportOptions: {
+                                            columns: ':visible'
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    });
+                    $('#tablaAfiliadosAportes tbody').on('click', 'tr', function () {
+                        mydata = $(this).find("td:eq(1)").text();
+                        //alert('se ha echo clik en: ' + data);
+                    });
+
+
+                });
+                $("#idPersona").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/Aportes/Aportes/BuscarAsociados",
+                            type: "POST",
+                            dataType: "json",
+                            data: {
+                                busqueda: request.term
+                            },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return { label: item.NIT, value: item.CODIGO, empresa: item.NOMBRE };
+                                }));
+                            }
+                        });
+                    },
+                    minLength: 1,
+                    select: function (event, ui) {
+                        $('#nomPersona').text(ui.item.label);
+                        $('#empresa').val(ui.item.empresa);
+                        $('#agencia').val(ui.item.dependencia);
+                        $('#salarioAsociado').val(formatearNumero(ui.item.salario));
+                        seleccionado();
+                        return false;
+                    }, change: function (event, ui) {
+                        if (!ui.item) {
+                            $(this).val("");
+                            $('#nomPersona').text("");
+                            desseleccionado();
+                        }
+                    },
+                    open: function () {
+                        $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+                    },
+                    close: function () {
+                        $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+                    },
+                    focus: function (event, ui) {
+                        $('#idPersona').val(ui.item.value);
+                        return false;
+                    }
+                });//autocomplete Persona
+                /*
+                var listar = function () {
+                    var table = $("#tablaAfiliadosAportes").DataTable({
+                        "ajax": {
+                            "method": "GET",
+                            "url": "/Aportes/Aportes/ObtenerAfiliadosAportes",
+                            "datatype": "json"
+                        },
+                        columns: [
+                            { "data": "numeroCuenta"},
+                            { "data": "idPersona"},
+                            { "data": "totalAportes"}
+                        ]
+                    });
+                }
+                */
+
+                /* SEPARADOR DE MILES POR KEY UP */
+                $("#valorEdit").on({
+                    "focus": function (event) {
+                        $(event.target).select();
+                    },
+                    "keyup": function (event) {
+                        $(event.target).val(function (index, value) {
+                            return value.replace(/\D/g, "")
+                                .replace(/([0-9])([0-9]{3})$/, '$1,$2')
+                                .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+                        });
+                    }
+                });
+    /* FIN SEPARADOR DE MILES POR KEY UP */
+    /* SEPARADOR DE MILES POR KEY UP */
+    $("#valor").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value) {
+                return value.replace(/\D/g, "")
+                    .replace(/([0-9])([0-9]{3})$/, '$1,$2')
+                    .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+            });
+        }
+    });
+    /* FIN SEPARADOR DE MILES POR KEY UP */
+
+    var existeConfiguracionAhorros = "@existeConfiguracionAhorros";
+    $("#valorCalculado").text(formatearNumero($("#valorCalculado").text()));
+    $("#cuotaParaAporte").text(formatearNumero($("#cuotaParaAporte").text()));
+    //AportesIndex();
+    var tipo = "@configuracion.idTipoCuotaCalculo";
+    var valorMinimo = "@configuracion.SaldoMinimo";
+    function seleccionado() {
+        switch (tipo) {
+            case "2":
+                var salarioAsociado = $("#salarioAsociado").val();
+                var valorCalculado = parseFloat(salarioAsociado) * parseFloat("@configuracion.porcentaje") / 100;
+                var valorCuota = parseFloat(valorCalculado) * parseFloat("@configuracion.porcentajeCuota") / 100;
+                $("#valorCalculado").text(formatearNumero(valorCalculado));
+                $("#cuotaParaAporte").text(formatearNumero(valorCuota));
+                break;
+
+        }
+    }
+    function desseleccionado() {
+        $("#valorCalculado").text("");
+        $("#cuotaParaAporte").text("");
+    }
+    //calculo cuota
+    $("#valor").on("keyup", function () {
+        if (tipo == "5") {
+            $("#valorCalculado").text($(this).val());
+            var cuota = parseFloat(quitarFormato($(this).val())) * parseFloat($("#porcentaje").val()) / 100;
+            $("#cuotaParaAporte").text(formatearNumero(cuota));
+            $("#porcentajeManual").text($("#porcentaje").val());
+            $("#porcentajeAporteManual").text($("#porcentaje").val());
+        }
+    });
+    $("#porcentaje").on("keyup", function () {
+        //porcentajeManual porcentajeAporteManual
+        if (tipo == "5") {
+            $("#valorCalculado").text($("#valor").val());
+            var cuota = parseFloat(quitarFormato($("#valor").val())) * parseFloat($(this).val()) / 100;
+            $("#cuotaParaAporte").text(formatearNumero(cuota));
+            $("#porcentajeManual").text($(this).val());
+            $("#porcentajeAporteManual").text($(this).val());
+
+            $("#valorCuota").val(cuota);
+        }
+    });
+    //calculo cuota
+
+        $("#guardarAfiliacion").on("click", function (e) {
+
+        $("#guardarAfiliacion").prop("disabled", true);
+        e.preventDefault();
+        var iporcentaje = $("#porcentaje").val();
+        var ivalor = $("#valor").val();
+        if ($("#tercerosList").val() != "") {
+            $("#PersonaId").val($("#tercerosList").val());
+            if (iporcentaje != '' && iporcentaje > 0 && ivalor != '' && ivalor != 0) {
+                var valorAporte = $("#cuotaParaAporte").text().replace(",", "");
+                $("#asesor").val($("#asesorComercial").val());
+                if (parseFloat(valorAporte) < parseFloat(valorMinimo)) {
+                    swal("el valor minimo permitido es: " + valorMinimo);
+                } else {
+                    if ((tipo == "1" || tipo == "2") && $("#formAfiliacion").attr("action") == "/Aportes/Aportes/CrearFichaAporte") {
+                        Swal.fire({title: 'Importante!', text: "Se creara la ficha de ahorros automaticamente con el porcentaje configurado", icon: 'warning', showCancelButton: false, confirmButtonColor: '#3085d6', cancelButtonColor: '#d33', confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                if (existeConfiguracionAhorros == "True") {
+                                    $("#numeroCuenta").val("AfiliarAhorros");
+                                    $("#formAfiliacion").submit();
+                                }
+                                else {
+                                    setTimeout(function () {
+                                        Swal.fire({title: 'Sin Configuración',text: "No existe ninguna configuración para ahorros permanentes",icon: 'warning',showCancelButton: true,confirmButtonColor: '#3085d6',cancelButtonColor: '#d33',confirmButtonText: 'Si, gracias!',cancelButtonText: 'No, gracias!'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                $("#numeroCuenta").val("");
+                                                $("#formAfiliacion").submit();
+                                            }
+                                        });
+                                    }, 500);
+                                }
+                            } else {
+                                $("#formAfiliacion").submit();
+                            }
+                        });
+                    } else {
+                        $("#formAfiliacion").submit();
+                    }
+                }
+            } else {
+                Swal.fire({
+                    title: "Error",
+                    text: "Los campos porcentaje y valor son obligatorios",
+                    icon: 'warning',
+                    confirmButtonText: 'Aceptar'
+                })
+                $("#guardarAfiliacion").prop("disabled", false);
+            }
+        } else {
+            Swal.fire({
+                title: "Error",
+                text: "Seleccione un Tercero en el campo 'Identificación'",
+                icon: 'warning',
+                confirmButtonText: 'Aceptar'
+            })
+            $("#guardarAfiliacion").prop("disabled", false);
+
+        }
+    });
+
+            </script>
+
+        }
+    }
+}

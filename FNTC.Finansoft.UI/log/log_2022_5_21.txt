@@ -1,0 +1,1 @@
+21/05/2022 10:12:33 a. m. - An error occurred while executing the command definition. See the inner exception for details. ---_System.Data.Common.DbDataReader ExecuteStoreCommands(System.Data.Entity.Core.EntityClient.EntityCommand, System.Data.CommandBehavior)

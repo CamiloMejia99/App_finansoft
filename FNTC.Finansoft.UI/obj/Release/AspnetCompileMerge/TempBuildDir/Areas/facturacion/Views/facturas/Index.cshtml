@@ -1,0 +1,98 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.Facturacion.factura>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="margin-top:4%; background: rgb(248, 248, 248);">
+    <ul class="col-md-offset-2 nav nav-tabs" style="margin-top:2%;border: none; margin-left: 2%;">
+        <li><a href="/facturacion/facturacion" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Productos </a></li>
+        <li><a href="/facturacion/configuracion/Edit/1" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Configuraciones </a></li>
+        <li class="active"><a href="/facturacion/facturas" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Facturacion </a></li>
+    </ul>
+    <div class="tab-content contenedortabs">
+        <div id="menu1" class="tab-pane fade in active">
+            <div class="col-md-12"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Facturas</h3></div>
+            <div class="col-md-12">
+
+                <p>
+                    @Html.ActionLink("Nueva Factura", "Create", null, null, new { @class = "btn btn-primary btn-large" })
+                </p>
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.terceroNit)
+                            </th>                      
+                            <th>
+                                @Html.DisplayNameFor(model => model.date)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.observation)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.total)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.tipo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.saldoCredito)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.fechaPagoCredito)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.codConsecutivo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.numeroFactura)
+                            </th>                          
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.terceroNit)
+                                </td>                               
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.observation)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.total)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tipo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.saldoCredito)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.fechaPagoCredito)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.codConsecutivo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.numeroFactura)
+                                </td>                              
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+
+                </div>
+            </div>
+        </div><!--MENU-->
+    </div><!--CONTENEDOR TABS-->
+</div>

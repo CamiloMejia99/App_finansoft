@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var titulo = (string)ViewBag.titulo;
+    var menu = (string)ViewBag.menu;
+
+}
+
+
+<div id="mostrar-wrapper">
+
+
+
+    <div id="mostrar" style="width:100%;  overflow:auto; margin: 0 auto; display:none; padding-bottom:5%; background:#f8f8f8; overflow-x:hidden">
+
+    </div>
+</div>
+
+
+<div style="width:100%;  display:table; overflow:hidden; margin: 0 auto" id="menu">
+    <div style="margin-top: 2.5%;   font-size: 24px;   color: #274766; " class="titulocatalogos col-md-12">
+        @titulo
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-md-4">
+        <a data-url="/Nomina/SeleccionCuentas/index" class="verinfo">
+            <div id="btn1" style="float:left;">
+                <i class="fa fa-money iconosmenu" aria-hidden="true"></i> <p style="margin-top:10px"> Seleccion Cuentas </p>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a data-url="/Nomina/JerarquiaDescuentos/index" class=" verinfo">
+            <div id="btn2" style="float:left">
+                <i class="fa fa-university iconosmenu" aria-hidden="true"></i><p style="margin-top:10px"> Prioridades </p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a data-url="/Nomina/ClaseDePlanos/index" class=" verinfo">
+            <div id="btn3" style="float:left">
+                <i class="fa fa-file-text-o iconosmenu" aria-hidden="true"></i><p style="margin-top:10px"> Clases de Planos </p>
+            </div>
+        </a>
+    </div><div class="clearfix"></div>
+
+    <div class="col-md-4">
+        <a data-url="/Nomina/ArchivoPlanos/index" class=" verinfo">
+            <div id="btn4" style="float:left">
+                <i class="fa fa-calendar iconosmenu" aria-hidden="true"></i><p style="margin-top:10px"> Archivos Planos </p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a data-url="/Nomina/PlanoEmpresas/index" class=" verinfo">
+            <div id="btn1" style="float:left">
+                <i class="fa fa-calendar iconosmenu" aria-hidden="true"></i><p style="margin-top:10px"> Planos Empresa </p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a data-url="/Nomina/Discriminacions/index" class=" verinfo">
+            <div id="btn2" style="float:left">
+                <i class="fa fa-file-excel-o iconosmenu" aria-hidden="true"></i> <p style="margin-top:10px">  Discriminación Nomina </p>
+            </div>
+        </a>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="col-md-4">
+        <a data-url="/Nomina/CorreccionNominas/index" class=" verinfo">
+            <div id="btn3" style="float:left">
+                <i class="fa fa-exchange iconosmenu" aria-hidden="true"></i><p style="margin-top:10px">Corrección Nomina </p>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a data-url="/Nomina/EnvioPlanoes/index" class=" verinfo">
+            <div id="btn4" style="float:left">
+                <i class="fa fa-file-archive-o iconosmenu" aria-hidden="true"></i><p style="margin-top:10px">Envio de planos </p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a data-url="/Nomina/ComparacionArchivoes/index" class=" verinfo">
+            <div id="btn1" style="float:left">
+                <i class="fa fa-file-code-o iconosmenu" aria-hidden="true"></i><p style="margin-top:10px">Comparación Archivos </p>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+    });
+
+    $(".verinfo").click(function () {
+        var url = $(this).attr("data-url");
+        //  var urlpartial = '@Url.Action("catalogos2", "Default")';
+        //  urlpartial += '?url=' + url + "&menu=" + "@menu";
+        $("#mostrar").html("");
+        $("#mostrar").load(url);
+        $("#menu").hide();
+        $("#mostrar").show();
+
+
+    });
+
+    function refrescar( url) {
+       @*var urlpartial = '@Url.Action("catalogos2", "Default", new { Area = "dashboard"})';
+        urlpartial += '?url=' + "Accounting/CentroCosto/index&menu" + "contabilidad";*@
+
+        var urlpartial = url;
+        $("#mostrar").load(url);
+        $('#centro2').removeData('bs.modal');
+     //   $("#mostrar").load(urlpartial);
+    };
+
+</script>

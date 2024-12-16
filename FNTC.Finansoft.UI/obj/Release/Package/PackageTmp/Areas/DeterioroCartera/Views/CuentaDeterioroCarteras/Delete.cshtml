@@ -1,0 +1,57 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.DeterioroCartera.CuentaDeterioroCartera
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CuentaDeterioroCartera</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CuentaDeterioro.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CuentaDeterioro.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CuentaGastosProvision.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CuentaGastosProvision.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoComprobante.CLASEComprobante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoComprobante.CLASEComprobante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreSeleccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreSeleccion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

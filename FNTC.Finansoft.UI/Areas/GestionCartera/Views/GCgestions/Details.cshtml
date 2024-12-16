@@ -1,0 +1,75 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.GestionCartera.GCgestion
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GCgestion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idAsociado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idAsociado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClaseGestion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClaseGestion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaGestion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaGestion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RespuestaGestion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RespuestaGestion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResOpcionalGestion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResOpcionalGestion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactoGestion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactoGestion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GestionVerificada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GestionVerificada)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

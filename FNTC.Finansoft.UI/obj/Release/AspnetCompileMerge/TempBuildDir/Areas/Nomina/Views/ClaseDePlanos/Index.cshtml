@@ -1,0 +1,208 @@
+﻿@using FNTC.Finansoft.Accounting.DTO.Result
+@model IEnumerable<FNTC.Finansoft.Accounting.DTO.Nomina.ClaseDePlano>
+
+@{
+    ViewBag.Title = "Index";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+
+<div class="col-md-12">
+    <div class="form-group">
+        <div>
+            <input type="button" value="Regresar" class="btn btn-purple" onclick="Regresar();" style=" margin-top: 1%; margin-left: 1%; margin-bottom: 1%;" />
+        </div>
+        <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 123%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Clases de Planos</h3></div>
+        <div class="col-md-2" style=" margin-top: 3%;">
+
+            <a href="/Nomina/ClaseDePlanos/Create" class="AddUser btn btn-success btn-xs btnnuevo" data-toggle="modal" data-target="#centro">Nuevo</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="form-group">
+
+        <button class="js-refrescar"><i class="fa fa-refresh" aria-hidden="true"></i> Actualizar</button>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="centro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="table-responsive col-md-12">
+    <table class="table table-bordered table-hover table-responsive" style="background-color: #FFF;">
+        <tr>
+            <th class="columnatablaazul">
+                @Html.DisplayNameFor(model => model.NOMBRE)
+            </th>
+            <th class="columnatablaazul">
+                @Html.DisplayNameFor(model => model.TIPOPLANO)
+            </th>
+            <th class="columnatablaazul">
+                @Html.DisplayNameFor(model => model.TIPORECEPCION)
+            </th>
+            <th class="columnatablaazul">
+                @Html.DisplayNameFor(model => model.EXTENSION)
+            </th>
+            <th class="columnatablaazul">
+                @Html.DisplayNameFor(model => model.DELIMITADOR)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TIPOPLANO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TIPORECEPCION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EXTENSION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DELIMITADOR)
+                </td>
+
+
+                <td style="text-align:center">
+
+                    <a id="editar" class="editartablas" href="/Nomina/ClaseDePlanos/Edit?id=@item.ID" data-toggle="modal" data-target="#centro">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </a>
+
+                    <a id="cc_@item.ID" class="eliminartablas" href="/Nomina/ClaseDePlanos/Delete?id=@item.ID" data-toggle="modal" data-target="#centro" data-codigo="@item.ID" title="Eliminar" value="Eliminar">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+
+
+                </td>
+
+            </tr>
+        }
+
+    </table>
+
+</div>
+
+<script>
+
+
+
+    //refrescar un div refresca todo para actualizar los datos, se podria hacer sin refrescar nada toca ver como
+    
+    $(".js-refrescar").click(function () {
+        $("#mostrar").html("");
+        $("#mostrar").load("/Nomina/ClaseDePlanos/index");
+    });
+    
+
+    //Al Ocultar el modal
+
+    $(document.body).on('hidden.bs.modal', function () {
+        $('#centro').removeData('bs.modal');
+        $(".js-refrescar").click();
+    });
+
+    /*
+    $().ready(function () {
+
+        var href = "";
+        var data = "";
+        $(".eliminartablas11").click(function (event) {
+                href = $(this).prev().attr('href');
+                // data = href.split("/")[4];
+                data = $(this).data('codigo');
+                //event.preventDefault();
+
+                $.ajax({
+                    type: "POST",
+                    url: '/Nomina/ClaseDePlanos/Delete',
+                    data: { codigo: data },
+                    success: function () {
+
+                        $(".js-refrescar").click();
+
+                        alert("Eliminado");
+                    }
+                });
+
+        });//eliminar
+    });//documen.ready
+    */
+    function Delete() {
+      
+        
+        
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("ValidarPlano", "ClaseDePlanos")",
+                            datatype: "Json",
+                            data: { id: $('#ID').val()},
+
+                            success: function (data) {                         
+                                var validar = (data[0]);
+                                if (validar == "true") {
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "@Url.Action("DeleteConfirmed", "ClaseDePlanos")",
+                                        datatype: "Json",
+                                        data: { id: $('#ID').val() },
+                                        success: function (partialViewResult) {
+                                            $('#centro').html(partialViewResult);
+                                            $('#centro').modal('hide');
+                                            //$('body').removeClass('modal-open');
+                                            //$('#centro').modal('show');
+                                            //location.reload();
+                                        }
+                                    });
+                                }
+                                else {
+                                    $('#centro').modal('hide');
+                                    swal({
+                                        title: "Alerta",
+                                        type: "info",
+                                        text: validar,
+                                    }) 
+                                }
+                                  
+                                                 
+                            }
+
+        });
+   
+          
+       
+      
+    }
+    function Regresar() {
+        location.reload();
+    }
+
+
+    function recargar() {
+        $('#contenidoJD').load('@Url.Action("Index")');
+    }
+
+</script>
+<div id="contenidoJD">
+    @*Html.Partial("List", Model)*@
+</div>
+<div id="divmodal"></div>

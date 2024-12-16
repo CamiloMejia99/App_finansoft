@@ -1,0 +1,40 @@
+27/04/2022 9:01:36 a. m. - "<" no es válido al inicio de un bloque de código. Solo son válidos los identificadores, palabras clave, comentarios, "(" y "{".
+ ---_Void EnsureGeneratedCode()
+27/04/2022 9:01:40 a. m. - "<" no es válido al inicio de un bloque de código. Solo son válidos los identificadores, palabras clave, comentarios, "(" y "{".
+ ---_Void EnsureGeneratedCode()
+27/04/2022 4:32:11 p. m. - No se encuentra la vista 'CrearConfigAhorroContractual' ni su vista maestra o no hay un motor de búsqueda que admita las ubicaciones de búsqueda. Se buscó en las siguientes ubicaciones: 
+~/Areas/Ahorros/Views/Ahorros/CrearConfigAhorroContractual.aspx
+~/Areas/Ahorros/Views/Ahorros/CrearConfigAhorroContractual.ascx
+~/Areas/Ahorros/Views/Shared/CrearConfigAhorroContractual.aspx
+~/Areas/Ahorros/Views/Shared/CrearConfigAhorroContractual.ascx
+~/Views/Ahorros/CrearConfigAhorroContractual.aspx
+~/Views/Ahorros/CrearConfigAhorroContractual.ascx
+~/Views/Shared/CrearConfigAhorroContractual.aspx
+~/Views/Shared/CrearConfigAhorroContractual.ascx
+~/Areas/Ahorros/Views/Ahorros/CrearConfigAhorroContractual.cshtml
+~/Areas/Ahorros/Views/Ahorros/CrearConfigAhorroContractual.vbhtml
+~/Areas/Ahorros/Views/Shared/CrearConfigAhorroContractual.cshtml
+~/Areas/Ahorros/Views/Shared/CrearConfigAhorroContractual.vbhtml
+~/Views/Ahorros/CrearConfigAhorroContractual.cshtml
+~/Views/Ahorros/CrearConfigAhorroContractual.vbhtml
+~/Views/Shared/CrearConfigAhorroContractual.cshtml
+~/Views/Shared/CrearConfigAhorroContractual.vbhtml ---_System.Web.Mvc.ViewEngineResult FindView(System.Web.Mvc.ControllerContext)
+27/04/2022 4:32:13 p. m. - No se encuentra un método de acción público 'CrearConfigAhorroContractual' en el controlador 'FNTC.Finansoft.Areas.Ahorros.Controllers.AhorrosController'. ---_Void HandleUnknownAction(System.String)
+27/04/2022 4:36:06 p. m. - No se encuentra la vista 'CrearConfigAhorroContractual' ni su vista maestra o no hay un motor de búsqueda que admita las ubicaciones de búsqueda. Se buscó en las siguientes ubicaciones: 
+~/Areas/Ahorros/Views/Ahorros/CrearConfigAhorroContractual.aspx
+~/Areas/Ahorros/Views/Ahorros/CrearConfigAhorroContractual.ascx
+~/Areas/Ahorros/Views/Shared/CrearConfigAhorroContractual.aspx
+~/Areas/Ahorros/Views/Shared/CrearConfigAhorroContractual.ascx
+~/Views/Ahorros/CrearConfigAhorroContractual.aspx
+~/Views/Ahorros/CrearConfigAhorroContractual.ascx
+~/Views/Shared/CrearConfigAhorroContractual.aspx
+~/Views/Shared/CrearConfigAhorroContractual.ascx
+~/Areas/Ahorros/Views/Ahorros/CrearConfigAhorroContractual.cshtml
+~/Areas/Ahorros/Views/Ahorros/CrearConfigAhorroContractual.vbhtml
+~/Areas/Ahorros/Views/Shared/CrearConfigAhorroContractual.cshtml
+~/Areas/Ahorros/Views/Shared/CrearConfigAhorroContractual.vbhtml
+~/Views/Ahorros/CrearConfigAhorroContractual.cshtml
+~/Views/Ahorros/CrearConfigAhorroContractual.vbhtml
+~/Views/Shared/CrearConfigAhorroContractual.cshtml
+~/Views/Shared/CrearConfigAhorroContractual.vbhtml ---_System.Web.Mvc.ViewEngineResult FindView(System.Web.Mvc.ControllerContext)
+27/04/2022 4:36:07 p. m. - No se encuentra un método de acción público 'CrearConfigAhorroContractual' en el controlador 'FNTC.Finansoft.Areas.Ahorros.Controllers.AhorrosController'. ---_Void HandleUnknownAction(System.String)

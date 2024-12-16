@@ -1,0 +1,156 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Matriz de Calor";
+}
+
+@section Styles{
+    <link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/css/chosen.css" rel="stylesheet" />
+    
+    <style>
+        .centrado{
+            text-align:center;
+        }
+
+        .blanco{
+            background-color:white;
+        }
+
+        .verde {
+            background-color: mediumseagreen;
+        }
+
+        .amarillo {
+            background-color: yellow;
+        }
+
+        .naranja {
+            background-color: orange;
+        }
+
+        .rojo {
+            background-color:#fc4104;
+        }
+
+        #fila th{
+            width: 130px;
+            overflow:auto;
+        }
+
+    </style>
+}
+
+<link href="~/Content/css/buttons.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/dataTables.buttons.min.js"></script>
+<script src="~/Scripts/buttons.flash.min.js"></script>
+<script src="~/Scripts/jszip.min.js"></script>
+<script src="~/Scripts/pdfmake.min.js"></script>
+<script src="~/Scripts/vfs_fonts.js"></script>
+<script src="~/Scripts/buttons.html5.min.js"></script>
+<script src="~/Scripts/buttons.print.min.js"></script>
+<div class="col-md-12" style="background:#ECECEC; width:100%;left: 10px;">
+    <br />
+    <ul class="col-md-offset-2 nav nav-tabs" style="margin-top:0%;border: none; margin-left: 2%;">
+        <li class="active"><a href="/SIAR/Sarlaft/ViewMatrizCalor" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Matriz de Calor </a></li>
+        <li><a href="/SIAR/Sarlaft/ViewContextoEmpresarial" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Contexto Empresarial </a></li>
+        <li><a href="/SIAR/Sarlaft/ViewMacroprocesos" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Macroprocesos </a></li>
+        <li><a href="/SIAR/CargoResponsable" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Cargos Responsables </a></li>
+        <li><a href="/SIAR/Proceso/Index" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Procesos </a></li>
+    </ul>
+    <div class="tab-content contenedortabs">
+        <div class="row" style="margin-top:0.5%;margin-left:auto;margin-right:auto">
+            <div class="col-lg-offset-10 col-lg-2 col-sm-12">
+                <a href="/../SIAR/CargoResponsable/Index"><i class="fa fa-arrow-circle-left fa-lg" aria-hidden="true">Salir al menú</i></a>
+            </div>
+
+        </div>
+        <div class="row">
+            <h3 style="margin-left:3%;color:#6f6f6f"><b>Previsualización Matriz de Calor</b></h3>
+        </div>
+        <div class="card" style="background-color:white;margin-left:10px;margin-right:10px;">
+            <div class="card-header" style="background-color:#274766;color:white;border-radius:5px;">
+                Previsualización Matriz de Calor
+            </div>
+            <div class="card-body" style="background-color:white;margin-left:10px;margin-right:10px">
+                <br />
+                <div class="row">
+                    <div style="width:90%;margin-left:auto;margin-right:auto">
+                        <table id="tabla1" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed table-responsive">
+                            <thead class="thead-inverse" style="background-color:#E3E3E3;">
+                                <tr class="centrado" style="height:40px">
+                                    <th style="width:16%" class="centrado blanco">Niveles</th>
+                                    <th style="width:21%" class="centrado verde">DESCRIPCIÓN</th>
+                                    <th style="width:21%" class="centrado amarillo">CÓDIGO</th>
+                                    <th style="width:21%" class="centrado naranja">ESTADO</th>
+                                    <th style="width:21%" class="centrado rojo">ESTADO</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div style="width:90%;margin-left:auto;margin-right:auto">
+                        <table id="tabla2" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed table-responsive">
+                            <thead class="thead-inverse" style="background-color:#E3E3E3;">
+                                <tr class="centrado" style="height:40px">
+                                    <th style="width:20%" class="centrado blanco">Casi seguro 5.1</th>
+                                    <th style="width:16%" class="centrado amarillo">5.1</th>
+                                    <th style="width:16%" class="centrado naranja">10.2</th>
+                                    <th style="width:16%" class="centrado naranja">15.3</th>
+                                    <th style="width:16%" class="centrado rojo">20.4</th>
+                                    <th style="width:16%" class="centrado rojo">25.5</th>
+                                </tr>
+                                <tr class="centrado" style="height:40px">
+                                    <th style="width:20%" class="centrado blanco">Probable 4.1</th>
+                                    <th style="width:16%" class="centrado verde">4.1</th>
+                                    <th style="width:16%" class="centrado amarillo">8.2</th>
+                                    <th style="width:16%" class="centrado naranja">12.3</th>
+                                    <th style="width:16%" class="centrado rojo">16.4</th>
+                                    <th style="width:16%" class="centrado rojo">20.5</th>
+                                </tr>
+                                <tr class="centrado" style="height:40px">
+                                    <th style="width:20%" class="centrado blanco">Posible 3.1</th>
+                                    <th style="width:16%" class="centrado verde">3.1</th>
+                                    <th style="width:16%" class="centrado amarillo">6.2</th>
+                                    <th style="width:16%" class="centrado naranja">9.3</th>
+                                    <th style="width:16%" class="centrado naranja">12.4</th>
+                                    <th style="width:16%" class="centrado rojo">15.5</th>
+                                <tr class="centrado" style="height:40px">
+                                    <th style="width:20%" class="centrado blanco">Improbable 2.1</th>
+                                    <th style="width:16%" class="centrado verde">2.1</th>
+                                    <th style="width:16%" class="centrado amarillo">4.2</th>
+                                    <th style="width:16%" class="centrado amarillo">6.3</th>
+                                    <th style="width:16%" class="centrado naranja">8.4</th>
+                                    <th style="width:16%" class="centrado naranja">10.5</th>
+                                </tr>
+                                <tr class="centrado" style="height:40px">
+                                    <th style="width:20%" class="centrado blanco">Raro 1.1</th>
+                                    <th style="width:16%" class="centrado verde">1.1</th>
+                                    <th style="width:16%" class="centrado verde">2.2</th>
+                                    <th style="width:16%" class="centrado verde">3.3</th>
+                                    <th style="width:16%" class="centrado amarillo">4.4</th>
+                                    <th style="width:16%" class="centrado amarillo">5.5</th>
+                                </tr>
+                                <tr class="centrado" style="height:40px">
+                                    <th style="width:20%" class="centrado blanco"></th>
+                                    <th style="width:16%" class="centrado blanco">1 Insignificante</th>
+                                    <th style="width:16%" class="centrado blanco">2 Menor</th>
+                                    <th style="width:16%" class="centrado blanco">3 Moderado</th>
+                                    <th style="width:16%" class="centrado blanco">4 Mayor</th>
+                                    <th style="width:16%" class="centrado blanco">5 Catastrófico</th>
+                                </tr>
+
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+        <br />
+    </div>
+    <br />
+</div>

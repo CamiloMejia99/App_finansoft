@@ -1,0 +1,89 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.MCreditos.Prestamos
+
+@{
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Esta Seguro de Eliminar Este Registro??</h3>
+<div>
+    <h4>Prestamos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Forma_Pago.Forma_Pago_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Forma_Pago.Forma_Pago_Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo_Periodo.Tipo_Periodo_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo_Periodo.Tipo_Periodo_Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capital)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capital)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Interes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Interes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Plazo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Plazo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_Prestamo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_Prestamo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_Primer_Pago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_Primer_Pago)
+        </dd>
+
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la Lista", "Index")
+        </div>
+    }
+</div>

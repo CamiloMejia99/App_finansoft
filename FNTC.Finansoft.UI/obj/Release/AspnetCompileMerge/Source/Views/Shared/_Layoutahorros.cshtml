@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="Description" content="Software financiero para Medianas y Grandes empresas">
+    <meta name="keywords" content="Software financiero, contabilidad">
+    <link rel="icon" type="image/ico" href="">
+    <meta name="viewport" content="width=1024,initial-scale=1.00, minimum-scale=1.00">
+    <title>@ViewBag.title FinanSoft</title>
+    <link href="~/Content/css/datatables.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css/compressed2.css" rel="stylesheet" />
+    <link href="~/Content/styleMenu.css" rel="stylesheet" />
+    <link href="~/Content/stylegeneral.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />    
+    <link href="~/Content/css/styleGeneral.css" rel="stylesheet" />
+    <link href="~/Content/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+
+    @Html.Partial(@"~/Views/Home/Menu.cshtml", null)
+
+    <!--header-->
+    <div class="body-content" style="max-width:93%; margin:0px auto">
+
+        @RenderBody()
+    </div>
+    <script src="~/Scripts/jquery-1.11.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/select2.min.js"></script>
+    <script src="~/Scripts/i18n/es.js"></script>
+    <script src="~/Scripts/sweetalert.min.js"></script>
+
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>

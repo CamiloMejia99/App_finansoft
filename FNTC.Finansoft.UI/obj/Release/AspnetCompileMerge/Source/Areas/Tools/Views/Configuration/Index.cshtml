@@ -1,0 +1,421 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Terceros.TerceroDTO
+
+@{
+
+    Layout = null;
+}
+
+@using Mvc.CascadeDropDown
+@Scripts.Render("~/bundles/jquery")
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Wizard/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Wizard/gsdk-base.css" rel="stylesheet" />
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+    <link href="~/Content/stylegeneral.css" rel="stylesheet" />
+    <link href="~/Content/Wizard/animate.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="image-container set-full-height" style="background-image: url('../../Content/Wizard/img/fondo.jpg')">
+        <img src="~/Content/Wizard/img/logof.png" style="position:absolute; top:2%; left:1%;width: 17%;" />
+        <!--   Big container   -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+
+                    <!--      Wizard container        -->
+                    <div class="wizard-container">
+
+                        <div class="card wizard-card ct-wizard-orange" id="wizardProfile">
+                            <form action="" method="">
+                                <!--        You can switch "ct-wizard-orange"  with one of the next bright colors: "ct-wizard-blue", "ct-wizard-green", "ct-wizard-orange", "ct-wizard-red"             -->
+
+                                <div class="wizard-header">
+                                    <h3>
+                                        <b>BIENVENIDOS</b><br>
+                                        <small style="color:#274766">Creciendo. Solidaria, financiera y tecnológicamente</small>
+                                    </h3>
+                                </div>
+                                <ul>
+                                    <li><a href="#about" data-toggle="tab">Inicio</a></li>
+                                    <li><a href="#account" data-toggle="tab">Creación empresa</a></li>
+                                    <li><a href="#address" data-toggle="tab">PUC</a></li>
+                                    <li><a href="#centro" data-toggle="tab">Centro de costo</a></li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div class="tab-pane" id="about">
+                                        <div style="padding: 4%; text-align: justify;">
+                                            Las presentes condiciones generales de uso de la página web, regulan los términos y condiciones de acceso y uso de www.direcciónweb.com, propiedad de (indicar el nombre de la empresa o profesional propietario de el portal), con domicilio en (indicar) y con Código de Identificación Fiscal número (indicar), en adelante, «la Empresa», que el usuario del Portal deberá de leer y aceptar para usar todos los servicios e información que se facilitan desde el portal. El mero acceso y/o utilización del portal, de todos o parte de sus contenidos y/o servicios significa la plena aceptación de las presentes condiciones generales de uso.
+                                            <br /><br />
+                                            Las presentes condiciones generales de uso del portal regulan el acceso y la utilización del portal, incluyendo los contenidos y los servicios puestos a disposición de los usuarios en y/o a través del portal, bien por el portal, bien por sus usuarios, bien por terceros.
+                                            <div class="" data-toggle="wizard-checkbox" style="margin-top: 6%;">
+                                                <label class="checkbox-inline" style="font-weight:bold">
+                                                    <input type="checkbox" name="jobb" value="Design" id="acepto" required>
+                                                    He leído y acepto los términos y condiciones de uso
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="account" style="padding: 3%;">
+                                        <div class="barratitulo"><i class="fa fa-building" aria-hidden="true"></i> Datos Empresa</div>
+                                        <div class="col-md-6" style="padding:2px">
+                                            @Html.TextBoxFor(model => model.NombreComercial, new { @class = "form-control", @placeholder = "Nombre Comercial", required = "required" })
+                                            @Html.ValidationMessageFor(model => model.NombreComercial, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="col-md-4" style="padding:2px">
+                                            @Html.TextBoxFor(model => model.NIT, new { @placeholder = "NIT", @class = "form-control", required = "required", onkeypress = "return valida(event)" })
+                                            @Html.ValidationMessageFor(model => model.NIT, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="col-md-2" style="padding:2px">
+                                            @Html.TextBoxFor(model => model.DIGVER, new { @placeholder = "D.V", @class = "form-control", @readonly = true })
+                                            @Html.ValidationMessageFor(model => model.DIGVER, "", new { @class = "text-danger" })
+                                        </div><div class="clearfix"></div>
+
+                                        <div class="col-md-4" style="padding:2px">
+                                            @Html.DropDownListFor(model => model.PAIS, new SelectList(Model._paises, "Value", "Text"), "Pais...", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.PAIS, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="col-md-4" style="padding:2px">
+                                            @Html.CascadingDropDownList("DEPTO", "DEPTO", "PAIS", "/tools/GEO/GetDepartamentosByPaisId2", "pais", "Departamento...", true, new { @class = "form-control", required = "required" })
+                                            @Html.ValidationMessageFor(model => model.DEPTO, "", new { @class = "text-danger" })
+                                        </div>
+
+
+                                        <div class="col-md-4" style="padding:2px">
+                                            @Html.CascadingDropDownList("CIUDAD", "CIUDAD", "DEPTO", "/tools/GEO/GetMunicipiosbyDeptoId2", "deptoId", "Municipio...", true, new { @class = "form-control", required = "required" })
+                                            @Html.ValidationMessageFor(model => model.DEPTO, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-8" style="padding:2px; margin-top: -8px;">
+                                            @Html.TextBoxFor(model => model.DIR,
+                                            new { @style = "margin-top: 10px;", @class = "form-control", required = "required", @placeholder = "Direccion. Ej CR 24 NO 18 64" })
+                                            @Html.ValidationMessageFor(model => model.DIR, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="col-md-4" style="padding:2px">
+                                        @Html.DropDownListFor(model => model.REGIMEN, new SelectList(Model._regimen, "Value", "Text"), "Régimen de Ventas..", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.REGIMEN, "", new { @class = "text-danger" })
+                                        </div><div class="clearfix"></div>
+
+                                        <div class="col-md-8" style="padding:2px">
+                                            @Html.TextBoxFor(model => model.EMAIL, new { @class = "form-control", required = "required", placeholder = "Correo Electrónico" })
+                                            @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="col-md-4" style="padding:2px">
+                                            @Html.TextBoxFor(model => model.TEL, new { @class = "form-control", placeholder = "Telefono " })
+                                            @Html.ValidationMessageFor(model => model.TEL, "", new { @class = "text-danger" })
+                                        </div><div class="clearfix"></div>
+                                        <div class="barratitulo" style="margin-top:7px"><i class="fa fa-user" aria-hidden="true"></i> Datos Contador</div><div class="clearfix"></div>
+
+                                        <div class="col-md-3" style="padding:0px">
+                                            <div class="col-md-12" style="padding:2px">
+                                                @Html.TextBoxFor(model => model.NOMBRE1, new { @placeholder = "NOMBRE1",required = "required", @class = "form-control natural" })
+                                                @Html.ValidationMessageFor(model => model.NOMBRE1, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3" style="padding:0px">
+                                            <div class="col-md-12" style="padding:2px">
+                                                @Html.TextBoxFor(model => model.NOMBRE2, new { @class = "form-control natural", @placeholder = "NOMBRE2" })
+                                                @Html.ValidationMessageFor(model => model.NOMBRE2, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3" style="padding:0px">
+                                            <div class="col-md-12" style="padding:2px">
+                                                @Html.TextBoxFor(model => model.APELLIDO1, new { @placeholder = "APELLIDO1", required = "required", @class = "form-control natural" })
+                                                @Html.ValidationMessageFor(model => model.APELLIDO1, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3" style="padding:0px">
+                                            <div class="col-md-12" style="padding:2px">
+                                                @Html.TextBoxFor(model => model.APELLIDO2, new { @placeholder = "APELLIDO2", @class = "form-control natural" })
+                                                @Html.ValidationMessageFor(model => model.APELLIDO2, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div><div class="clearfix"></div>
+                                        <div class="col-md-4" style="padding:2px">
+                                           @Html.DropDownListFor(model => model.CLASEID, new SelectList(Model._clasesID, "value", "Text"), "Tipo Documento..", new { @class = "form-control", required = "required" })
+                                        @*@Html.ValidationMessageFor(model => model.CLASEID, "", new { @class = "text-danger" })*@
+                                        </div>
+                                        <div class="col-md-4" style="padding:0px;margin-top: 2px;">
+                                            @Html.TextBoxFor(model =>
+                                                     model.NIT, new { @placeholder = "No documento", @class = "form-control", required = "required", onkeypress = "return valida(event)" })
+                                            @Html.ValidationMessageFor(model => model.NIT, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="col-md-4" style="padding:2px">
+                                            <input type="text" class="form-control" placeholder="No tarjeta profesional" />
+                                        </div>
+
+                                    </div>
+                                    <div class="tab-pane" id="address">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h4 class="info-text"> Escoge el tipo de PUC </h4>
+                                            </div>
+                                            <div class="col-md-offset-4 col-sm-4">
+                                                <div class="form-group">
+
+                                                    <select name="country" class="form-control">
+                                                        <option value="Afghanistan"> Seleccione... </option>
+                                                        <option value="Afghanistan"> Solidario</option>
+                                                       
+                                                    </select>
+                                                </div>
+                                            </div><div class="clearfix"></div>
+
+                                            <div class="col-md-offset-3 col-md-7" style="margin-top: 7%;text-align: center;padding: 0%;margin-left: 23%;">
+                                                <div class="divbien">
+                                                    <img src="~/Content/Wizard/img/muybien.png" />
+                                                    <label style="margin-left:16px;font-size: 16px;"><strong> Muy bien,</strong> has escogido el PUC solidario</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane" id="centro" style="padding: 3%;">
+                                        <div class="row">
+                                            <div class="divtitulocentro">
+                                                Antes de comenzar, crea un centro costo
+                                            </div>
+                                            <div class="col-md-10" style="text-align:left"><h4 style="border-bottom: 5px solid #2B7785 !important; width: 121%; color: #2B7785 !important; padding: 9px 20px 6px 0px !important;margin-bottom: 21px !important;"><i class="fa fa-file-text" aria-hidden="true"></i> Crear centro de costo</h4></div><div class="clearfix"></div>
+                                            <div class="col-md-2">
+                                                <input type="text" placeholder="Codigo" class="form-control" />
+                                            </div>
+
+                                            <div class="col-md-6" style="padding:0px">
+                                                <input type="text" placeholder="Nombre" class="form-control" />
+                                            </div>
+
+                                            <div class="col-md-2" style="padding:5px; text-align: center;">
+                                                <label class="checkbox-inline"><input type="checkbox" value="">Activo</label>
+                                            </div>
+
+                                            <div class="col-md-2" style="padding:0px; text-align: right;">
+                                                <button type="submit" class="botonguardar" style="margin-top: 0px; width: 100% !important; border: 1px solid #8BC34A;"><i class="fa fa-floppy-o" aria-hidden="true"></i> Crear</button>
+                                            </div>
+
+                                            <div class="col-md-offset-3 col-md-4">
+                                                <button type="button" class="btn btn-primary botonvertutorial"
+                                                        data-toggle="modal" data-target="#exampleModal" style="margin-top:12%; background-color:#1D62F0; color:#FFF; margin-left: 18%;">
+
+                                                    Como crear centro de costo
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="wizard-footer">
+                                    <div class="pull-right">
+                                        <input type='button' class='btn btn-next btn-fill btn-warning btn-wd btn-sm' name='next' value='Siguiente' />
+                                        <input type='button' class='btn btn-finish btn-fill btn-warning btn-wd btn-sm' name='finish' value='Terminar' />
+
+                                    </div>
+
+                                    <div class="pull-left">
+                                        <input type='button' class='btn btn-previous btn-fill btn-default btn-wd btn-sm' style="background-color:#00B8D4; border:1px solid #00B8D4" name='previous' value='Anterior' />
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div> <!-- wizard container -->
+                </div>
+            </div><!-- end row -->
+        </div> <!--  big container -->
+
+
+
+    </div>
+
+</body>
+</html>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="overflow-y: hidden; border:none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style=" width: 1500px;">
+            <div class="modal-header titulotutorial">
+                Como crear un centro de costo
+                <h4 class="modal-title" id="exampleModalLabel">
+                    <button style="position: absolute; top: 8px; left: 42%;" type="button" class="btn btn-default btn-cerrartutorial" data-dismiss="modal">
+                        <i class="fa fa-times-circle" aria-hidden="true" style="font-size: 30px;"></i>
+                    </button>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <img style="width: 46%;" src="~/Content/Wizard/img/centro.gif" />
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Content/Wizard/jquery-1.10.2.js"></script>
+<script src="~/Content/Wizard/bootstrap.min.js"></script>
+<script src="~/Content/Wizard/jquery.bootstrap.wizard.js"></script>
+<script src="~/Content/Wizard/jquery.validate.min.js"></script>
+<script src="~/Content/Wizard/wizard.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+
+        jQuery.extend(jQuery.validator.messages, {
+            required: "Este campo es obligatorio.",
+            remote: "Por favor, rellena este campo.",
+            email: "Por favor, escribe una dirección de correo válida",
+            url: "Por favor, escribe una URL válida.",
+            date: "Por favor, escribe una fecha válida.",
+            dateISO: "Por favor, escribe una fecha (ISO) válida.",
+            number: "Por favor, escribe un número entero válido.",
+            digits: "Por favor, escribe sólo dígitos.",
+            creditcard: "Por favor, escribe un número de tarjeta válido.",
+            equalTo: "Por favor, escribe el mismo valor de nuevo.",
+            accept: "Por favor, escribe un valor con una extensión aceptada.",
+            maxlength: jQuery.validator.format("Por favor, no escribas más de {0} caracteres."),
+            minlength: jQuery.validator.format("Por favor, no escribas menos de {0} caracteres."),
+            rangelength: jQuery.validator.format("Por favor, escribe un valor entre {0} y {1} caracteres."),
+            range: jQuery.validator.format("Por favor, escribe un valor entre {0} y {1}."),
+            max: jQuery.validator.format("Por favor, escribe un valor menor o igual a {0}."),
+            min: jQuery.validator.format("Por favor, escribe un valor mayor o igual a {0}.")
+        });
+
+        $('input[name="NIT"]').on("change", (function () {
+            var claseId = $('select[name="CLASEID"]').val();
+            //alert(claseId);
+            if (claseId == 31) {
+                $.get("/tools/nits/GetDigitoVerificacion", { nit: $(this).val() }, function (response) {
+                    $("#DIGVER").val(response.DV);
+                    // alert(response.DV);
+                })
+            }
+
+            //  alert("blur claseid");
+        }));
+
+        $("#CLASEID").change(function () {
+            var claseId = $('select[name="CLASEID"]').val();
+            // alert("cambio clase id");
+            if (claseId != 31) {
+                $("#DIGVER").val("");
+
+            }
+            else {
+                $("#NIT").trigger('change');
+
+            }
+        });
+
+        $('#DEPTO').change(function () {
+            //   alert("depto chamged");
+            // $("#CIUDAD").openSelect();
+            //   $("#CIUDAD").val($("#CIUDAD option:last").attr('selected','selected'));
+        });
+
+    });
+
+    //  $('button').on('click', function() {
+
+    ///autocomplete de direccion
+
+    $("input[name=]").bind("keydown", function (event) {
+        if (event.keyCode === $.ui.keyCode.TAB &&
+            $(this).autocomplete("instance").menu.active) {
+            event.preventDefault();
+        }
+    })
+   .autocomplete({
+       minLength: 0,
+       source: function (request, response) {
+           // delegate back to autocomplete, but extract the last term
+           console.log(response);
+           response($.ui.autocomplete.filter(
+             n, extractLast(request.term)));
+       },
+       focus: function () {
+           // prevent value inserted on focus
+           return false;
+       },
+       select: function (event, ui) {
+           var terms = split(this.value);
+           // remove the current input
+           terms.pop();
+           // add the selected item
+           terms.push(ui.item.value);
+           // add placeholder to get the comma-and-space at the end
+           terms.push("");
+           this.value = terms.join(" ");
+           return false;
+       }
+   });
+
+
+
+    // SOLO NUMEROS
+    function valida(e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+
+        //Tecla de retroceso para borrar, siempre la permite
+        if (tecla == 8) {
+            return true;
+        }
+        // Patron de entrada, en este caso solo acepta numeros
+        patron = /[0-9]/;
+        tecla_final = String.fromCharCode(tecla);
+        return patron.test(tecla_final);
+    }
+
+
+</script>
+
+
+
+<style>
+    .form-control {
+        height: 29px !important;
+    }
+
+    .modal {
+        top: 8% !important;
+        left: 14% !important;
+        z-index: 1050;
+        width: 806px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        outline: 0;
+        -webkit-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+        box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+        -webkit-background-clip: padding-box;
+        -moz-background-clip: padding-box;
+        background-clip: padding-box;
+        background-color: transparent !important;
+    }
+
+label.error {
+    color: #992D2B !important;
+    margin-top: 5px;
+    margin-bottom: 0;
+    background-color: #FFEAEF;
+    padding: 1%;
+    border: 1px solid #992D2B;
+}
+</style>

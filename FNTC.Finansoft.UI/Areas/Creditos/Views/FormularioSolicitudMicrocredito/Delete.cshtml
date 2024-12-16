@@ -1,0 +1,32 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.FormulariosSolicitud.solicitudCredito
+
+@{
+    Layout = "~/Views/Shared/_Layoutahorros.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Seguro desea eliminar este formulario?</h3>
+    <div>
+
+        <hr />
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(model => model.id_solicitud)
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                @Html.ActionLink("Regresar a la lista", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

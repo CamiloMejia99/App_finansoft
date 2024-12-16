@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{558241BA-C4AD-4046-913D-6AA72DA71249}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FNTC.Finansoft.Accounting.BLL</RootNamespace>
+    <AssemblyName>FNTC.Finansoft.Accounting.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Lib.Web.Mvc, Version=6.7.0.0, Culture=neutral, PublicKeyToken=92212eec0425916e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lib.Web.Mvc.6.7.0\lib\net40\Lib.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Html.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Html.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Html.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Razor, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Razor.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Razor.Runtime, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Razor.Runtime.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Razor.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ahorros\BLLAhorros.cs" />
+    <Compile Include="Aportes\BLLAportes.cs" />
+    <Compile Include="Caja\BLLOperacionesCaja.cs" />
+    <Compile Include="CentrosDeCostos\CentrosCosto.cs" />
+    <Compile Include="Comprobantes\ComprobantesBLL.cs" />
+    <Compile Include="Comprobantes\FormasPagoBLL.cs" />
+    <Compile Include="configuracion\idTipoCuotaCalculo.cs" />
+    <Compile Include="DescuentosNomina\GestionConfiguracionBLL.cs" />
+    <Compile Include="Empresa\EmpresaBLL.cs" />
+    <Compile Include="EntryCollection.cs" />
+    <Compile Include="FabricaCreditosBll\ConfiguracionBll.cs" />
+    <Compile Include="FormulariosSolicitud\solicitudCreditoBLL.cs" />
+    <Compile Include="Informes\InformesBLL.cs" />
+    <Compile Include="Init\Init.cs" />
+    <Compile Include="Movimientos\MovimientosBLL.cs" />
+    <Compile Include="Nomina\ArchivoPlanosBLL.cs" />
+    <Compile Include="Nomina\ClaseDePlanosBLL.cs" />
+    <Compile Include="Nomina\ConsolidadoNominaBLL.cs" />
+    <Compile Include="Nomina\ExcelUtilsBLL.cs" />
+    <Compile Include="Nomina\PlanoEmpresasBLL.cs" />
+    <Compile Include="Nomina\TipoDeCamposBLL.cs" />
+    <Compile Include="PartidaDoble\ComprobanteBO.cs" />
+    <Compile Include="PartidaDoble\Issue.cs" />
+    <Compile Include="PartidaDoble\IssueStruct.cs" />
+    <Compile Include="PlanDeCuentas\PlanDeCuentasBLL.cs" />
+    <Compile Include="ProcesosCrediticios\ProcesoCrediticioBLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PartidaDoble\Anotacion.cs" />
+    <Compile Include="PruebaEstructuraCapas\PruebaEstructuraCapasBLL.cs" />
+    <Compile Include="respuesta\Mensaje.cs" />
+    <Compile Include="Terceros\AdministradorasBLL.cs" />
+    <Compile Include="Terceros\TercerosBLL.cs" />
+    <Compile Include="valorSalario\ToString.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GestionDocumental\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="bin\Debug\FNTC.Finansoft.Accounting.BLL.dll.config" />
+    <None Include="bin\Debug\FNTC.Finansoft.Accounting.DAL.dll.config" />
+    <None Include="bin\Debug\FNTC.Finansoft.Accounting.DTO.dll.config" />
+    <None Include="bin\Debug\FNTC.Framework.dll.config" />
+    <None Include="bin\Release\FNTC.Finansoft.Accounting.BLL.dll.config" />
+    <None Include="bin\Release\FNTC.Finansoft.Accounting.DAL.dll.config" />
+    <None Include="bin\Release\FNTC.Finansoft.Accounting.DTO.dll.config" />
+    <None Include="bin\Release\FNTC.Framework.dll.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FNTC.Finansoft.DAL\FNTC.Finansoft.DAL.csproj">
+      <Project>{b8b4007f-6e01-402a-9c0e-87248e0328b9}</Project>
+      <Name>FNTC.Finansoft.Accounting.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FNTC.Finansoft.DTO\FNTC.Finansoft.DTO.csproj">
+      <Project>{6505b3ee-90a5-46e7-bf9f-ede35df7831a}</Project>
+      <Name>FNTC.Finansoft.Accounting.DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\AutoMapper.dll" />
+    <Content Include="bin\Debug\AutoMapper.xml" />
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="bin\Debug\es\EntityFramework.resources.dll" />
+    <Content Include="bin\Debug\es\EntityFramework.SqlServer.resources.dll" />
+    <Content Include="bin\Debug\es\System.Web.Helpers.resources.dll" />
+    <Content Include="bin\Debug\es\System.Web.Mvc.resources.dll" />
+    <Content Include="bin\Debug\es\System.Web.Razor.resources.dll" />
+    <Content Include="bin\Debug\es\System.Web.WebPages.Deployment.resources.dll" />
+    <Content Include="bin\Debug\es\System.Web.WebPages.Razor.resources.dll" />
+    <Content Include="bin\Debug\es\System.Web.WebPages.resources.dll" />
+    <Content Include="bin\Debug\FNTC.Finansoft.Accounting.BLL.dll" />
+    <Content Include="bin\Debug\FNTC.Finansoft.Accounting.BLL.pdb" />
+    <Content Include="bin\Debug\FNTC.Finansoft.Accounting.DAL.dll" />
+    <Content Include="bin\Debug\FNTC.Finansoft.Accounting.DAL.pdb" />
+    <Content Include="bin\Debug\FNTC.Finansoft.Accounting.DTO.dll" />
+    <Content Include="bin\Debug\FNTC.Finansoft.Accounting.DTO.pdb" />
+    <Content Include="bin\Debug\FNTC.Framework.dll" />
+    <Content Include="bin\Debug\FNTC.Framework.pdb" />
+    <Content Include="bin\Debug\Lib.Web.Mvc.dll" />
+    <Content Include="bin\Debug\Lib.Web.Mvc.xml" />
+    <Content Include="bin\Debug\Microsoft.AspNetCore.Html.Abstractions.dll" />
+    <Content Include="bin\Debug\Microsoft.AspNetCore.Html.Abstractions.xml" />
+    <Content Include="bin\Debug\Microsoft.AspNetCore.Razor.dll" />
+    <Content Include="bin\Debug\Microsoft.AspNetCore.Razor.Runtime.dll" />
+    <Content Include="bin\Debug\Microsoft.AspNetCore.Razor.Runtime.xml" />
+    <Content Include="bin\Debug\Microsoft.AspNetCore.Razor.xml" />
+    <Content Include="bin\Debug\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Debug\Microsoft.Win32.Primitives.dll" />
+    <Content Include="bin\Debug\netstandard.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.xml" />
+    <Content Include="bin\Debug\System.AppContext.dll" />
+    <Content Include="bin\Debug\System.Collections.Concurrent.dll" />
+    <Content Include="bin\Debug\System.Collections.dll" />
+    <Content Include="bin\Debug\System.Collections.NonGeneric.dll" />
+    <Content Include="bin\Debug\System.Collections.Specialized.dll" />
+    <Content Include="bin\Debug\System.ComponentModel.dll" />
+    <Content Include="bin\Debug\System.ComponentModel.EventBasedAsync.dll" />
+    <Content Include="bin\Debug\System.ComponentModel.Primitives.dll" />
+    <Content Include="bin\Debug\System.ComponentModel.TypeConverter.dll" />
+    <Content Include="bin\Debug\System.Console.dll" />
+    <Content Include="bin\Debug\System.Data.Common.dll" />
+    <Content Include="bin\Debug\System.Diagnostics.Contracts.dll" />
+    <Content Include="bin\Debug\System.Diagnostics.Debug.dll" />
+    <Content Include="bin\Debug\System.Diagnostics.FileVersionInfo.dll" />
+    <Content Include="bin\Debug\System.Diagnostics.Process.dll" />
+    <Content Include="bin\Debug\System.Diagnostics.StackTrace.dll" />
+    <Content Include="bin\Debug\System.Diagnostics.TextWriterTraceListener.dll" />
+    <Content Include="bin\Debug\System.Diagnostics.Tools.dll" />
+    <Content Include="bin\Debug\System.Diagnostics.TraceSource.dll" />
+    <Content Include="bin\Debug\System.Diagnostics.Tracing.dll" />
+    <Content Include="bin\Debug\System.Drawing.Primitives.dll" />
+    <Content Include="bin\Debug\System.Dynamic.Runtime.dll" />
+    <Content Include="bin\Debug\System.Globalization.Calendars.dll" />
+    <Content Include="bin\Debug\System.Globalization.dll" />
+    <Content Include="bin\Debug\System.Globalization.Extensions.dll" />
+    <Content Include="bin\Debug\System.IO.Compression.dll" />
+    <Content Include="bin\Debug\System.IO.Compression.ZipFile.dll" />
+    <Content Include="bin\Debug\System.IO.dll" />
+    <Content Include="bin\Debug\System.IO.FileSystem.dll" />
+    <Content Include="bin\Debug\System.IO.FileSystem.DriveInfo.dll" />
+    <Content Include="bin\Debug\System.IO.FileSystem.Primitives.dll" />
+    <Content Include="bin\Debug\System.IO.FileSystem.Watcher.dll" />
+    <Content Include="bin\Debug\System.IO.IsolatedStorage.dll" />
+    <Content Include="bin\Debug\System.IO.MemoryMappedFiles.dll" />
+    <Content Include="bin\Debug\System.IO.Pipes.dll" />
+    <Content Include="bin\Debug\System.IO.UnmanagedMemoryStream.dll" />
+    <Content Include="bin\Debug\System.Linq.dll" />
+    <Content Include="bin\Debug\System.Linq.Expressions.dll" />
+    <Content Include="bin\Debug\System.Linq.Parallel.dll" />
+    <Content Include="bin\Debug\System.Linq.Queryable.dll" />
+    <Content Include="bin\Debug\System.Net.Http.dll" />
+    <Content Include="bin\Debug\System.Net.NameResolution.dll" />
+    <Content Include="bin\Debug\System.Net.NetworkInformation.dll" />
+    <Content Include="bin\Debug\System.Net.Ping.dll" />
+    <Content Include="bin\Debug\System.Net.Primitives.dll" />
+    <Content Include="bin\Debug\System.Net.Requests.dll" />
+    <Content Include="bin\Debug\System.Net.Security.dll" />
+    <Content Include="bin\Debug\System.Net.Sockets.dll" />
+    <Content Include="bin\Debug\System.Net.WebHeaderCollection.dll" />
+    <Content Include="bin\Debug\System.Net.WebSockets.Client.dll" />
+    <Content Include="bin\Debug\System.Net.WebSockets.dll" />
+    <Content Include="bin\Debug\System.ObjectModel.dll" />
+    <Content Include="bin\Debug\System.Reflection.dll" />
+    <Content Include="bin\Debug\System.Reflection.Extensions.dll" />
+    <Content Include="bin\Debug\System.Reflection.Primitives.dll" />
+    <Content Include="bin\Debug\System.Resources.Reader.dll" />
+    <Content Include="bin\Debug\System.Resources.ResourceManager.dll" />
+    <Content Include="bin\Debug\System.Resources.Writer.dll" />
+    <Content Include="bin\Debug\System.Runtime.CompilerServices.VisualC.dll" />
+    <Content Include="bin\Debug\System.Runtime.dll" />
+    <Content Include="bin\Debug\System.Runtime.Extensions.dll" />
+    <Content Include="bin\Debug\System.Runtime.Handles.dll" />
+    <Content Include="bin\Debug\System.Runtime.InteropServices.dll" />
+    <Content Include="bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="bin\Debug\System.Runtime.Numerics.dll" />
+    <Content Include="bin\Debug\System.Runtime.Serialization.Formatters.dll" />
+    <Content Include="bin\Debug\System.Runtime.Serialization.Json.dll" />
+    <Content Include="bin\Debug\System.Runtime.Serialization.Primitives.dll" />
+    <Content Include="bin\Debug\System.Runtime.Serialization.Xml.dll" />
+    <Content Include="bin\Debug\System.Security.Claims.dll" />
+    <Content Include="bin\Debug\System.Security.Cryptography.Algorithms.dll" />
+    <Content Include="bin\Debug\System.Security.Cryptography.Csp.dll" />
+    <Content Include="bin\Debug\System.Security.Cryptography.Encoding.dll" />
+    <Content Include="bin\Debug\System.Security.Cryptography.Primitives.dll" />
+    <Content Include="bin\Debug\System.Security.Cryptography.X509Certificates.dll" />
+    <Content Include="bin\Debug\System.Security.Principal.dll" />
+    <Content Include="bin\Debug\System.Security.SecureString.dll" />
+    <Content Include="bin\Debug\System.Text.Encoding.dll" />
+    <Content Include="bin\Debug\System.Text.Encoding.Extensions.dll" />
+    <Content Include="bin\Debug\System.Text.Encodings.Web.dll" />
+    <Content Include="bin\Debug\System.Text.Encodings.Web.xml" />
+    <Content Include="bin\Debug\System.Text.RegularExpressions.dll" />
+    <Content Include="bin\Debug\System.Threading.dll" />
+    <Content Include="bin\Debug\System.Threading.Overlapped.dll" />
+    <Content Include="bin\Debug\System.Threading.Tasks.dll" />
+    <Content Include="bin\Debug\System.Threading.Tasks.Parallel.dll" />
+    <Content Include="bin\Debug\System.Threading.Thread.dll" />
+    <Content Include="bin\Debug\System.Threading.ThreadPool.dll" />
+    <Content Include="bin\Debug\System.Threading.Timer.dll" />
+    <Content Include="bin\Debug\System.ValueTuple.dll" />
+    <Content Include="bin\Debug\System.Web.Helpers.dll" />
+    <Content Include="bin\Debug\System.Web.Helpers.xml" />
+    <Content Include="bin\Debug\System.Web.Mvc.dll" />
+    <Content Include="bin\Debug\System.Web.Mvc.xml" />
+    <Content Include="bin\Debug\System.Web.Razor.dll" />
+    <Content Include="bin\Debug\System.Web.Razor.xml" />
+    <Content Include="bin\Debug\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\Debug\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\Debug\System.Web.WebPages.dll" />
+    <Content Include="bin\Debug\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\Debug\System.Web.WebPages.Razor.xml" />
+    <Content Include="bin\Debug\System.Web.WebPages.xml" />
+    <Content Include="bin\Debug\System.Xml.ReaderWriter.dll" />
+    <Content Include="bin\Debug\System.Xml.XDocument.dll" />
+    <Content Include="bin\Debug\System.Xml.XmlDocument.dll" />
+    <Content Include="bin\Debug\System.Xml.XmlSerializer.dll" />
+    <Content Include="bin\Debug\System.Xml.XPath.dll" />
+    <Content Include="bin\Debug\System.Xml.XPath.XDocument.dll" />
+    <Content Include="bin\Release\AutoMapper.dll" />
+    <Content Include="bin\Release\AutoMapper.xml" />
+    <Content Include="bin\Release\EntityFramework.dll" />
+    <Content Include="bin\Release\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Release\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\Release\EntityFramework.xml" />
+    <Content Include="bin\Release\es\EntityFramework.resources.dll" />
+    <Content Include="bin\Release\es\EntityFramework.SqlServer.resources.dll" />
+    <Content Include="bin\Release\es\System.Web.Helpers.resources.dll" />
+    <Content Include="bin\Release\es\System.Web.Mvc.resources.dll" />
+    <Content Include="bin\Release\es\System.Web.Razor.resources.dll" />
+    <Content Include="bin\Release\es\System.Web.WebPages.Deployment.resources.dll" />
+    <Content Include="bin\Release\es\System.Web.WebPages.Razor.resources.dll" />
+    <Content Include="bin\Release\es\System.Web.WebPages.resources.dll" />
+    <Content Include="bin\Release\FNTC.Finansoft.Accounting.BLL.dll" />
+    <Content Include="bin\Release\FNTC.Finansoft.Accounting.BLL.pdb" />
+    <Content Include="bin\Release\FNTC.Finansoft.Accounting.DAL.dll" />
+    <Content Include="bin\Release\FNTC.Finansoft.Accounting.DAL.pdb" />
+    <Content Include="bin\Release\FNTC.Finansoft.Accounting.DTO.dll" />
+    <Content Include="bin\Release\FNTC.Finansoft.Accounting.DTO.pdb" />
+    <Content Include="bin\Release\FNTC.Framework.dll" />
+    <Content Include="bin\Release\FNTC.Framework.pdb" />
+    <Content Include="bin\Release\Lib.Web.Mvc.dll" />
+    <Content Include="bin\Release\Lib.Web.Mvc.xml" />
+    <Content Include="bin\Release\Microsoft.AspNetCore.Html.Abstractions.dll" />
+    <Content Include="bin\Release\Microsoft.AspNetCore.Html.Abstractions.xml" />
+    <Content Include="bin\Release\Microsoft.AspNetCore.Razor.dll" />
+    <Content Include="bin\Release\Microsoft.AspNetCore.Razor.Runtime.dll" />
+    <Content Include="bin\Release\Microsoft.AspNetCore.Razor.Runtime.xml" />
+    <Content Include="bin\Release\Microsoft.AspNetCore.Razor.xml" />
+    <Content Include="bin\Release\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Release\Microsoft.Win32.Primitives.dll" />
+    <Content Include="bin\Release\netstandard.dll" />
+    <Content Include="bin\Release\Newtonsoft.Json.dll" />
+    <Content Include="bin\Release\Newtonsoft.Json.xml" />
+    <Content Include="bin\Release\System.AppContext.dll" />
+    <Content Include="bin\Release\System.Collections.Concurrent.dll" />
+    <Content Include="bin\Release\System.Collections.dll" />
+    <Content Include="bin\Release\System.Collections.NonGeneric.dll" />
+    <Content Include="bin\Release\System.Collections.Specialized.dll" />
+    <Content Include="bin\Release\System.ComponentModel.dll" />
+    <Content Include="bin\Release\System.ComponentModel.EventBasedAsync.dll" />
+    <Content Include="bin\Release\System.ComponentModel.Primitives.dll" />
+    <Content Include="bin\Release\System.ComponentModel.TypeConverter.dll" />
+    <Content Include="bin\Release\System.Console.dll" />
+    <Content Include="bin\Release\System.Data.Common.dll" />
+    <Content Include="bin\Release\System.Diagnostics.Contracts.dll" />
+    <Content Include="bin\Release\System.Diagnostics.Debug.dll" />
+    <Content Include="bin\Release\System.Diagnostics.FileVersionInfo.dll" />
+    <Content Include="bin\Release\System.Diagnostics.Process.dll" />
+    <Content Include="bin\Release\System.Diagnostics.StackTrace.dll" />
+    <Content Include="bin\Release\System.Diagnostics.TextWriterTraceListener.dll" />
+    <Content Include="bin\Release\System.Diagnostics.Tools.dll" />
+    <Content Include="bin\Release\System.Diagnostics.TraceSource.dll" />
+    <Content Include="bin\Release\System.Diagnostics.Tracing.dll" />
+    <Content Include="bin\Release\System.Drawing.Primitives.dll" />
+    <Content Include="bin\Release\System.Dynamic.Runtime.dll" />
+    <Content Include="bin\Release\System.Globalization.Calendars.dll" />
+    <Content Include="bin\Release\System.Globalization.dll" />
+    <Content Include="bin\Release\System.Globalization.Extensions.dll" />
+    <Content Include="bin\Release\System.IO.Compression.dll" />
+    <Content Include="bin\Release\System.IO.Compression.ZipFile.dll" />
+    <Content Include="bin\Release\System.IO.dll" />
+    <Content Include="bin\Release\System.IO.FileSystem.dll" />
+    <Content Include="bin\Release\System.IO.FileSystem.DriveInfo.dll" />
+    <Content Include="bin\Release\System.IO.FileSystem.Primitives.dll" />
+    <Content Include="bin\Release\System.IO.FileSystem.Watcher.dll" />
+    <Content Include="bin\Release\System.IO.IsolatedStorage.dll" />
+    <Content Include="bin\Release\System.IO.MemoryMappedFiles.dll" />
+    <Content Include="bin\Release\System.IO.Pipes.dll" />
+    <Content Include="bin\Release\System.IO.UnmanagedMemoryStream.dll" />
+    <Content Include="bin\Release\System.Linq.dll" />
+    <Content Include="bin\Release\System.Linq.Expressions.dll" />
+    <Content Include="bin\Release\System.Linq.Parallel.dll" />
+    <Content Include="bin\Release\System.Linq.Queryable.dll" />
+    <Content Include="bin\Release\System.Net.Http.dll" />
+    <Content Include="bin\Release\System.Net.NameResolution.dll" />
+    <Content Include="bin\Release\System.Net.NetworkInformation.dll" />
+    <Content Include="bin\Release\System.Net.Ping.dll" />
+    <Content Include="bin\Release\System.Net.Primitives.dll" />
+    <Content Include="bin\Release\System.Net.Requests.dll" />
+    <Content Include="bin\Release\System.Net.Security.dll" />
+    <Content Include="bin\Release\System.Net.Sockets.dll" />
+    <Content Include="bin\Release\System.Net.WebHeaderCollection.dll" />
+    <Content Include="bin\Release\System.Net.WebSockets.Client.dll" />
+    <Content Include="bin\Release\System.Net.WebSockets.dll" />
+    <Content Include="bin\Release\System.ObjectModel.dll" />
+    <Content Include="bin\Release\System.Reflection.dll" />
+    <Content Include="bin\Release\System.Reflection.Extensions.dll" />
+    <Content Include="bin\Release\System.Reflection.Primitives.dll" />
+    <Content Include="bin\Release\System.Resources.Reader.dll" />
+    <Content Include="bin\Release\System.Resources.ResourceManager.dll" />
+    <Content Include="bin\Release\System.Resources.Writer.dll" />
+    <Content Include="bin\Release\System.Runtime.CompilerServices.VisualC.dll" />
+    <Content Include="bin\Release\System.Runtime.dll" />
+    <Content Include="bin\Release\System.Runtime.Extensions.dll" />
+    <Content Include="bin\Release\System.Runtime.Handles.dll" />
+    <Content Include="bin\Release\System.Runtime.InteropServices.dll" />
+    <Content Include="bin\Release\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="bin\Release\System.Runtime.Numerics.dll" />
+    <Content Include="bin\Release\System.Runtime.Serialization.Formatters.dll" />
+    <Content Include="bin\Release\System.Runtime.Serialization.Json.dll" />
+    <Content Include="bin\Release\System.Runtime.Serialization.Primitives.dll" />
+    <Content Include="bin\Release\System.Runtime.Serialization.Xml.dll" />
+    <Content Include="bin\Release\System.Security.Claims.dll" />
+    <Content Include="bin\Release\System.Security.Cryptography.Algorithms.dll" />
+    <Content Include="bin\Release\System.Security.Cryptography.Csp.dll" />
+    <Content Include="bin\Release\System.Security.Cryptography.Encoding.dll" />
+    <Content Include="bin\Release\System.Security.Cryptography.Primitives.dll" />
+    <Content Include="bin\Release\System.Security.Cryptography.X509Certificates.dll" />
+    <Content Include="bin\Release\System.Security.Principal.dll" />
+    <Content Include="bin\Release\System.Security.SecureString.dll" />
+    <Content Include="bin\Release\System.Text.Encoding.dll" />
+    <Content Include="bin\Release\System.Text.Encoding.Extensions.dll" />
+    <Content Include="bin\Release\System.Text.Encodings.Web.dll" />
+    <Content Include="bin\Release\System.Text.Encodings.Web.xml" />
+    <Content Include="bin\Release\System.Text.RegularExpressions.dll" />
+    <Content Include="bin\Release\System.Threading.dll" />
+    <Content Include="bin\Release\System.Threading.Overlapped.dll" />
+    <Content Include="bin\Release\System.Threading.Tasks.dll" />
+    <Content Include="bin\Release\System.Threading.Tasks.Parallel.dll" />
+    <Content Include="bin\Release\System.Threading.Thread.dll" />
+    <Content Include="bin\Release\System.Threading.ThreadPool.dll" />
+    <Content Include="bin\Release\System.Threading.Timer.dll" />
+    <Content Include="bin\Release\System.ValueTuple.dll" />
+    <Content Include="bin\Release\System.Web.Helpers.dll" />
+    <Content Include="bin\Release\System.Web.Helpers.xml" />
+    <Content Include="bin\Release\System.Web.Mvc.dll" />
+    <Content Include="bin\Release\System.Web.Mvc.xml" />
+    <Content Include="bin\Release\System.Web.Razor.dll" />
+    <Content Include="bin\Release\System.Web.Razor.xml" />
+    <Content Include="bin\Release\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\Release\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\Release\System.Web.WebPages.dll" />
+    <Content Include="bin\Release\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\Release\System.Web.WebPages.Razor.xml" />
+    <Content Include="bin\Release\System.Web.WebPages.xml" />
+    <Content Include="bin\Release\System.Xml.ReaderWriter.dll" />
+    <Content Include="bin\Release\System.Xml.XDocument.dll" />
+    <Content Include="bin\Release\System.Xml.XmlDocument.dll" />
+    <Content Include="bin\Release\System.Xml.XmlSerializer.dll" />
+    <Content Include="bin\Release\System.Xml.XPath.dll" />
+    <Content Include="bin\Release\System.Xml.XPath.XDocument.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Habilite la restauración del paquete NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

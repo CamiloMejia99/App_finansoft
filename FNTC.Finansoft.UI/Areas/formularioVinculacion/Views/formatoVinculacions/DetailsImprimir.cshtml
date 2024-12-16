@@ -1,0 +1,678 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.FormularioVinculacion.formatoVinculacion
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Imprimir</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+
+
+    <div class="form-horizontal ">
+
+        <div style="border:2px solid grey; border-radius:22px; background-color:white; width:1200px;">
+
+            <table width="100%" height="124.8" border="0">
+                <tbody>
+                    <tr>
+                        <td width="40%">
+
+
+                            <img src="~/Areas/formularioVinculacion/Imagenes/LOGOCOOMISOL.png" width="100%" height="100" alt="" />
+                        </td>
+                        <td width="60%" align="center"><h3>SOLICITUD DE VINCULACIÓN PERSONA NATURAL</h3></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="0">
+                <tbody>
+                    <tr>
+                        <td width="40%"><i>Unidos somos más</i><br><b>COOPERATIVA MULTIACTIVA DE INTEGRACIÓN SOCIAL <br />NIT. 901022853-9 </b></td>
+
+                        <td width="20%">
+
+                            <table width="200" style="border-radius:14px;" border="1">
+                                <tbody>
+                                    <tr>
+                                        <th scope="col" style="text-align:center; background-color: antiquewhite"><b>ASESOR COMERCIAL</b></th>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">
+                                            @Html.DisplayFor(model => model.asesorcomercial)
+                                        </td>
+                                    </tr>
+                            </table>
+
+                        </td>
+
+                        <td width="20%">
+
+                            <table width="200" style="border-radius:14px;" border="1">
+                                <tbody>
+                                    <tr>
+                                        <th scope="col" style="text-align:center; background-color: antiquewhite"><b>CIUDAD</b></th>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">
+                                            @Html.DisplayFor(model => model.ciudadsolicitud)
+                                        </td>
+                                    </tr>
+                            </table>
+
+                        </td>
+                        <td width="20%">
+
+                            <table width="200" style="border-radius:14px;" border="1">
+                                <tbody>
+                                    <tr>
+                                        <th scope="col" style="text-align:center; background-color: antiquewhite"><b>N° REGISTRO</b></th>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">
+                                            @Html.DisplayFor(model => model.registrosolicitud)
+                                        </td>
+                                    </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table width="100%" border="0">
+                <tbody>
+                    <tr>
+                        <td width="40%">
+                            @Html.DisplayFor(model => model.tipo)
+                        </td>
+                        <td>Diligenciar en letra imprenta, sin tachones, borrones o enmendadras.Anexar fotocopia de la cédula</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td align="center" style="background-color: red; color:white;"><b>1. DATOS PERSONALES</b></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1px">
+                <tbody>
+                    <tr>
+                        <td width="40%">
+                            <b>Nombre:</b>
+                            @Html.DisplayFor(model => model.nombreaso)
+                        </td>
+                        <td width="30%">
+                            <strong>Primer apellido:</strong>
+                            @Html.DisplayFor(model => model.apellidoaso1)
+                        </td>
+                        <td width="30%">
+                            <b>Segundo apellido:</b>
+                            @Html.DisplayFor(model => model.apellidoaso2)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td width="30%">
+                            <b>Cédula N°:</b>
+                            @Html.DisplayFor(model => model.cedulaaso)
+                        </td>
+                        <td width="50%">
+                            <strong>Lugar y fecha de expedición:</strong>
+                            @Html.DisplayFor(model => model.lugarfechaexpaso)
+                        </td>
+                        <td width="20%">
+                            <b>Sexo:</b>
+                            <br />
+                            @Html.DisplayFor(model => model.sexo)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr style="background-color: antiquewhite">
+                        <th width="25%" scope="col">Fecha nacimiento</th>
+                        <th width="25%" scope="col">Lugar de Nacimiento</th>
+                        <th width="25%" scope="col">Estado civil</th>
+                        <th width="25%" scope="col">N° hijos -personas a cargo</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => model.fechanacimiento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.lugarnacimiento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.estadocivil)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.personascargo)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tr>
+                    <td>
+                        <b>Nivel de Estudios</b>
+                        @Html.DisplayFor(model => model.nivelestudio)
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" style="background-color:red;color:white; "><b>2. INFORMACIÓN RESIDENCIA</b></td>
+                </tr>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr style="background-color: antiquewhite">
+                        <th width="20%" scope="col">Dirección de residencia</th>
+                        <th width="20%" scope="col">Barrio/Vereda</th>
+                        <th width="20%" scope="col">Ciudad/Municipio</th>
+                        <th width="20%" scope="col">Departamento</th>
+                        <th width="20%" scope="col">Estrato</th>
+
+
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                            @Html.DisplayFor(model => model.direccionresidencia)
+                        </td>
+                        <td width="20%">
+                            @Html.DisplayFor(model => model.barrioresidencia)
+                        </td>
+                        <td width="20%">
+                            @Html.DisplayFor(model => model.ciudadresidencia)
+                        </td>
+                        <td width="20%">
+                            @Html.DisplayFor(model => model.departamentoresidencia)
+                        </td>
+                        <td width="20%">
+                            @Html.DisplayFor(model => model.estratoresidencia)
+                        </td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1px">
+                <tbody>
+                    <tr style="background-color: antiquewhite">
+                        <th width="25%" scope="col">Teléfono</th>
+                        <th width="25%" scope="col">Celular</th>
+                        <th width="25%" scope="col">Correo</th>
+                        <th width="25%" scope="col">Tipo de vivienda</th>
+                    </tr>
+                    <tr>
+                        <td width="25%">
+                            @Html.DisplayFor(model => model.telefonoresidencia)
+                        </td>
+                        <td width="25%">
+                            @Html.DisplayFor(model => model.celularresidencia)
+                        </td>
+                        <td width="25%">
+                            @Html.DisplayFor(model => model.correo)
+                        </td>
+                        <td width="25%">
+                            @Html.DisplayFor(model => model.tipovivienda)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td align="center" style="background-color: red;color:white;"><b>3. INFORMACIÓN DE CONYUGE</b></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td width="50%">
+                            <b>Nombres y Apellidos</b>@Html.DisplayFor(model => model.nombreconyugue)
+                        </td>
+                        <td width="25%">
+                            Cédula N°: @Html.DisplayFor(model => model.cedulaconyuge)
+                        </td>
+                        <td width="25%">
+                            Celular: @Html.DisplayFor(model => model.celularconyugue)
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td width="33.3%">
+                            <b>Ocupación/Cargo</b> @Html.DisplayFor(model => model.ocupacionconyugue)
+                        </td>
+                        <td width="33.3%">
+                            Empresa:  @Html.DisplayFor(model => model.empresaconyugue)
+                        </td>
+                        <td width="33.3%">
+                            Teléfono empresa:  @Html.DisplayFor(model => model.telefonoconyugue)
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <table border="1" width="100%">
+                <tr style="background-color: red;color:white;">
+                    <td align="center"><b>4. INFORMACIÓN BENEFICIARIOS</b></td>
+                </tr>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td width="40%">
+                            <b>1.Nombres y Apellidos</b> @Html.DisplayFor(model => model.nombre1)
+                        </td>
+                        <td width="25%">
+                            <b>Documeto N°:</b> @Html.DisplayFor(model => model.documento1)
+                        </td>
+                        <td width="20%">
+                            <b>Parentesco</b> @Html.DisplayFor(model => model.parentesco1)
+                        </td>
+                        <td width="15%">
+                            <b>Sexo:</b>
+                            <br />@Html.DisplayFor(model => model.sexo1)
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td width="30%">
+                            <b>Fecha Nacimiento</b>    @Html.DisplayFor(model => model.fechanacimiento1)
+                        </td>
+                        <td width="25%">
+                            <b>Porcentaje:</b>@Html.DisplayFor(model => model.porcentaje1)
+                        </td>
+                        <td width="20%">
+                            <b>Edad:</b>
+                            @Html.DisplayFor(model => model.edad1)
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td width="40%">
+                            <b>2.Nombres y Apellidos</b> @Html.DisplayFor(model => model.nombre2)
+                        </td>
+                        <td width="25%">
+                            <b>Documeto N°:</b> @Html.DisplayFor(model => model.documento2)
+                        </td>
+                        <td width="20%">
+                            <b>Parentesco</b> @Html.DisplayFor(model => model.parentesco2)
+                        </td>
+                        <td width="15%">
+                            <b>Sexo:</b>
+                            <br />
+                            @Html.DisplayFor(model => model.sexo2)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td width="30%">
+                            <b>Fecha Nacimiento</b> @Html.DisplayFor(model => model.fechanacimiento2)
+                        </td>
+                        <td width="25%">
+                            <b>Porcentaje:</b> @Html.DisplayFor(model => model.porcentaje2)
+                        </td>
+                        <td width="20%">
+                            <b>Edad:</b>
+                            @Html.DisplayFor(model => model.edad2)
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td width="40%">
+                            <b>3.Nombres y Apellidos</b> @Html.DisplayFor(model => model.nombre3)
+                        </td>
+                        <td width="25%">
+                            <b>Documeto N°:</b> @Html.DisplayFor(model => model.documento3)
+                        </td>
+                        <td width="20%">
+                            <b>Parentesco</b> @Html.DisplayFor(model => model.parentesco3)
+                        </td>
+                        <td width="15%">
+                            <b>Sexo:</b>
+                            <br />
+                            @Html.DisplayFor(model => model.sexo3)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td width="30%">
+                            <b>Fecha Nacimiento</b> @Html.DisplayFor(model => model.fechanacimiento3)
+                        </td>
+                        <td width="25%">
+                            <b>Porcentaje:</b>@Html.DisplayFor(model => model.porcentaje3)
+                        </td>
+                        <td width="20%">
+                            <b>Edad:</b>
+                            @Html.DisplayFor(model => model.edad3)
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td width="40%">
+                            <b>4.Nombres y Apellidos</b>  @Html.DisplayFor(model => model.nombre4)
+                        </td>
+                        <td width="25%">
+                            <b>Documeto N°:</b> @Html.DisplayFor(model => model.documento4)
+                        </td>
+                        <td width="20%">
+                            <b>Parentesco</b> @Html.DisplayFor(model => model.parentesco4)
+                        </td>
+                        <td width="15%">
+                            <b>Sexo:</b>
+                            <br />
+                            @Html.DisplayFor(model => model.sexo4)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td width="30%">
+                            <b>Fecha Nacimiento</b> @Html.DisplayFor(model => model.fechanacimiento4)
+                        </td>
+                        <td width="25%">
+                            <b>Porcentaje:</b> @Html.DisplayFor(model => model.porcentaje4)
+                        </td>
+                        <td width="20%">
+                            <b>Edad:</b>@Html.DisplayFor(model => model.edad4)
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td width="40%">
+                            <b>5.Nombres y Apellidos</b>@Html.DisplayFor(model => model.nombre5)
+                        </td>
+                        <td width="25%">
+                            <b>Documeto N°:</b> @Html.DisplayFor(model => model.documento5)
+                        </td>
+                        <td width="20%">
+                            <b>Parentesco</b>@Html.DisplayFor(model => model.parentesco5)
+                        </td>
+                        <td width="15%">
+                            <b>Sexo:</b>
+                            <br />
+                            @Html.DisplayFor(model => model.sexo5)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td width="30%">
+                            <b>Fecha Nacimiento</b>  @Html.DisplayFor(model => model.fechanacimiento5)
+                        </td>
+                        <td width="25%">
+                            <b>Porcentaje:</b>@Html.DisplayFor(model => model.porcentaje5)
+                        </td>
+                        <td width="20%">
+                            <b>Edad:</b>
+                            @Html.DisplayFor(model => model.edad5)
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td width="40%">
+                            <b>6.Nombres y Apellidos</b>@Html.DisplayFor(model => model.nombre6)
+                        </td>
+                        <td width="25%">
+                            <b>Documeto N°:</b>@Html.DisplayFor(model => model.documento6)
+                        </td>
+                        <td width="20%">
+                            <b>Parentesco</b> @Html.DisplayFor(model => model.parentesco6)
+                        </td>
+                        <td width="15%">
+                            <b>Sexo:</b>
+                            <br />
+                            @Html.DisplayFor(model => model.sexo6)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr>
+                        <td width="30%">
+                            @Html.DisplayFor(model => model.fechanacimiento6)
+                        </td>
+                        <td width="25%">
+                            <b>Porcentaje:</b>  @Html.DisplayFor(model => model.porcentaje6)
+                        </td>
+                        <td width="20%">
+                            <b>Edad:</b>@Html.DisplayFor(model => model.edad6)
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <table border="1" width="100%">
+                <tr style="background-color: red;color:white;">
+                    <td align="center"><b>5. INFORMACIÓN LABORAL</b></td>
+                </tr>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr style="background-color: antiquewhite">
+                        <th width="20%" scope="col">Entidad donde labora:</th>
+                        <th width="20%" scope="col">Fecha de Vinculación:</th>
+                        <th width="20%" scope="col">Tipo de Contrato:</th>
+                        <th width="20%" scope="col">Oficina y/o Dependencia:</th>
+                        <th width="20%" scope="col">Código:</th>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                            @Html.DisplayFor(model => model.entidadlabora)
+                        </td>
+                        <td width="20%">
+                            @Html.DisplayFor(model => model.fechavinculacion)
+                        </td>
+                        <td width="20%">
+                            @Html.DisplayFor(model => model.tipocontrato)
+                        </td>
+                        <td width="20%">
+                            @Html.DisplayFor(model => model.oficina)
+                        </td>
+                        <td width="20%">
+                            @Html.DisplayFor(model => model.codigo)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr style="background-color: antiquewhite">
+                        <th whidth="30%" scope="col">Dirección:</th>
+                        <th whidth="20%" scope="col">Teléfono</th>
+                        <th whidth="10%" scope="col">Extensión:</th>
+                        <th whidth="25%" scope="col">Cargo Actual</th>
+                        <th whidth="10%" scope="col">Actividad Ecónomica</th>
+                        <th whidth="5%" scope="col">CIIU</th>
+                    </tr>
+                    <tr>
+                        <td width="30%">
+                            @Html.DisplayFor(model => model.direccionabora)
+                        </td>
+                        <td width="20%">
+                            @Html.DisplayFor(model => model.telefonolabora)
+                        </td>
+                        <td width="10%">
+                            @Html.DisplayFor(model => model.extencionlabora)
+                        </td>
+                        <td width="25%">
+                            @Html.DisplayFor(model => model.cargolabora)
+                        </td>
+                        <td width="10%">
+                            @Html.DisplayFor(model => model.actividadeconomica)
+                        </td>
+                        <td width="5%">
+                            @Html.DisplayFor(model => model.CIIU)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr style="background-color: antiquewhite">
+                        <th width="20%" scope="col">Sueldo Básico</th>
+                        <th width="30%" scope="col">Correo Entidad:</th>
+                        <th width="30%" scope="col">Sus cesantias estan depositadas en:</th>
+                        <th width="20%" scope="col">Administra recursos publicos</th>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                            @Html.DisplayFor(model => model.sueldobasico)
+                        </td>
+                        <td width="30%">
+                            @Html.DisplayFor(model => model.correolabora)
+                        </td>
+                        <td width="30%">
+                            @Html.DisplayFor(model => model.cesantiaslabora)
+                        </td>
+                        <td width="20%">
+                            @Html.DisplayFor(model => model.adminrecursospublicos)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table border="1" width="100%">
+                <tr style="background-color: red;color:white;">
+                    <td align="center"><b>6. INFORMACIÓN ECONOMICA</b></td>
+                </tr>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+                    <tr style="background-color: antiquewhite">
+                        <th width="40%" scope="col">Ingresos</th>
+                        <th width="60%" scope="col">Egresos</th>
+                    </tr>
+                    <tr>
+                        <td width="40%">
+
+                            Ingreso Basico:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$@Html.DisplayFor(model => model.ingresobasico)<br>
+                            Otros Ingresos:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$@Html.DisplayFor(model => model.otrosingresos)<br />
+                            Total Ingresos :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$@Html.DisplayFor(model => model.totalingresos)<br>
+                            Gastos Mensuales:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$@Html.DisplayFor(model => model.gastosmensuales)<br>
+                            Descripción otros ingresos:&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.descotrosingresos)<br>
+                        </td>
+                        <td width="60%">
+
+                            <table width="100%" border="0">
+                                <tr>
+                                    <td width="35%">
+                                        Total activos: $ @Html.DisplayFor(model => model.totalactivos)
+                                    </td>
+                                    <td width="15%"></td>
+                                    <td width="25%">Saldo a la fecha</td>
+                                    <td width="25%">Cuota mensual</td>
+                                </tr>
+                                <tr>
+                                    <td width="35%"></td>
+                                    <td width="15%" align="right">Bancarias:</td>
+                                    <td width="25%">
+                                        $@Html.DisplayFor(model => model.bancarias)
+                                    </td>
+                                    <td width="25%">
+                                        $@Html.DisplayFor(model => model.bancarias1)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="35%">
+                                        Total Pasivos:$@Html.DisplayFor(model => model.totalpasivos)
+                                    </td>
+                                    <td align="right" width="15%">Con entidades financieras:</td>
+                                    <td width="25%">
+                                        $@Html.DisplayFor(model => model.entidadesfinancieras)
+                                    </td>
+                                    <td width="25%">
+                                        $@Html.DisplayFor(model => model.entidadesfinancieras1)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="35%"></td>
+                                    <td align="right" width="15%">Otros</td>
+                                    <td width="25%">
+                                        $@Html.DisplayFor(model => model.otrosegresos)
+                                    </td>
+                                    <td width="25%">
+                                        $@Html.DisplayFor(model => model.otrosegresos1)
+                                    </td>
+                                </tr>
+                            </table>
+                            <p>
+                                Descripción otros egresos: @Html.DisplayFor(model => model.descotrosegresos)
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+
+        </div>
+
+    </div>
+    <div>
+
+    </div>
+</body>
+</html>

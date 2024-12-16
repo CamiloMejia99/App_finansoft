@@ -1,0 +1,329 @@
+﻿
+
+@model FNTC.Finansoft.Accounting.DTO.FabricaCreditos.FCSolicitudes
+
+@{
+
+    ViewBag.Title = "EVALUACIÓN CREDITO";
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+    var Nombre = ViewBag.Nombre;
+    var idSolicitud = ViewBag.idSolicitud;
+    var Capital = ViewBag.ValorPrestamo;
+    var Plazo = ViewBag.NoCuotasPrestamo;
+    var NombreDependencia = ViewBag.NombreDependencia;
+    var minimo = ViewBag.Min;
+    var maximo = ViewBag.Max;
+}
+
+
+
+@using (Html.BeginForm("Evaluacion", "CrearSolicitud", new { area = "FabricaCreditos" }, FormMethod.Post, new { id = "theForm" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.idSolicitud)
+
+
+    <div class="form"><h3><span class="label label-info">Informacion Prestamo</span></h3></div>
+    <div class="row">
+
+        <div class="form-group col-md-6">
+            <label>+ Nombre del Asociado:</label>
+            <input type="text" value="@Nombre" class="form-control" autocomplete="off" readonly />
+
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>+ No. de Cuotas:</label>
+            <input type="text" id="Plazo" value="@Plazo" class="form-control" autocomplete="off" readonly />
+
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="form-group col-md-6">
+            <label>+ Capital a Prestar:</label>
+            <input type="text" id="Capital" value="@Capital" class="form-control" autocomplete="off" readonly />
+
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>+ Pre-Estado:</label>
+            <input type="text" name="PreEstado" id="PreEstado" value="Pendiente" class="form-control" autocomplete="off" readonly />
+
+        </div>
+
+
+    </div>
+    <div class="row">
+
+        <div class="form-group col-md-6">
+            <button type="button" class="btn btn-dark btnAction" onclick="calculo();">Calcular</button>
+            <input type="hidden" id="NombreDependencia" value="@NombreDependencia" readonly />
+            <input type="hidden" id="minimo" value="@minimo" readonly />
+            <input type="hidden" id="maximo" value="@maximo" readonly />
+        </div>
+
+    </div>
+    <div class="form"><h3><span class="label label-info">Informacion Financiera</span></h3></div>
+    <div class="form"><h4><span class="label label-info">Ingresos Mensuales</span></h4></div>
+
+    <div class="row">
+
+        <div class="form-group col-md-6">
+            <label>+ Salario/Pension:</label>
+            <input type="text" id="Salario" placeholder="" class="form-control miles" autocomplete="off" readonly />
+
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>+ Otros Ingresos:</label>
+            <input type="text" id="OtrosIngresos" placeholder="" class="form-control miles" autocomplete="off" readonly />
+
+        </div>
+
+
+    </div>
+    <div class="row">
+
+        <div class="form-group col-md-6">
+
+            <label>+ Descripcion:</label>
+     
+            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", Style = "text-transform: none", @readonly= "readonly"} })
+
+        </div>
+
+    </div>
+    <div class="form"><h4><span class="label label-info">Egresos mensuales</span></h4></div>
+    <div class="row">
+
+        <div class="form-group col-md-6">
+            <label>+ Gastos Asociados a Resta de Inmuebles:</label>
+            <input type="text" name="Renta" id="Renta" placeholder="" class="form-control miles" autocomplete="off" readonly />
+
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>Gastos Asociados a Prestamos Financieros:</label>
+            <input type="text" name="Prestamo" id="Prestamo" placeholder="" class="form-control miles" autocomplete="off" readonly />
+
+        </div>
+
+
+    </div>
+    <div class="row">
+
+        <div class="form-group col-md-6">
+            <label>+ Gastos por Trasporte:</label>
+            <input type="text" name="Transporte" id="Transporte" placeholder="" class="form-control miles" autocomplete="off" readonly />
+
+        </div>
+
+        <div class="form-group col-md-6">
+
+            <label>+ Alimentacion:</label>
+            <input type="text" name="Alimentacion" id="Alimentacion" placeholder="" class="form-control miles" autocomplete="off" readonly />
+
+        </div>
+
+
+    </div>
+    <div class="row">
+
+        <div class="form-group col-md-6">
+            <label>+ Ropa - Deportes - Ocio:</label>
+            <input type="text" name="RDO" id="RDO" placeholder="" class="form-control miles" autocomplete="off" readonly />
+
+        </div>
+
+        <div class="form-group col-md-6">
+
+            <label>+ Servicios Publicos:</label>
+            <input type="text" name="Servicios" id="Servicios" placeholder="" class="form-control miles" autocomplete="off" readonly />
+
+        </div>
+
+
+    </div>
+    <div class="row">
+
+        <div class="form-group col-md-6">
+            <label>+ Pago Internet - Planes Moviles:</label>
+            <input type="text" name="IntPM" id="IntPM" placeholder="" class="form-control miles" autocomplete="off" readonly />
+
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>+ Otros Gastos:</label>
+            <input type="text" name="OtrosGastos" id="OtrosGastos" placeholder="" class="form-control miles" autocomplete="off" readonly />
+
+        </div>
+
+
+    </div>
+    <div class="row">
+
+        <div class="form-group col-md-6">
+
+            <label>+ Descripcion Descriminada de Otros Gastos:</label>
+           
+            @Html.EditorFor(model => model.DescripcionG, new { htmlAttributes = new { @class = "form-control", Style = "text-transform: none", @readonly = "readonly" } })
+
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="form-group col-md-6">
+
+            <button id="guardarConfig" type="button" class="btn btn-primary btnAction">Guardar</button>
+
+        </div>
+
+    </div>
+
+
+</div>
+}
+
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+
+    $("#guardarConfig").click(function () {
+
+        $(function () {
+            var VSalario, VOtrosIngresos, VRenta, VPrestamo, VTransporte, VAlimentacion, VRDO, VServicios, VIntPM, VOtrosGastos;
+      /*      $("#guardarConfig").on('click', function () {*/
+                VSalario = $("#Salario").val();
+                VOtrosIngresos = $("#OtrosIngresos").val();
+                
+                VRenta = $("#Renta").val();
+                VPrestamo = $("#Prestamo").val();
+                VTransporte = $("#Transporte").val();
+                VAlimentacion = $("#Alimentacion").val();
+                VRDO = $("#RDO").val();
+                VServicios = $("#Servicios").val();
+                VIntPM = $("#IntPM").val();
+                VOtrosGastos = $("#OtrosGastos").val();
+               
+
+                if (VSalario.length == 0 || VOtrosIngresos.length == 0 || VRenta.length == 0 || VPrestamo.length == 0 || VTransporte.length == 0 || VAlimentacion.length == 0 || VRDO.length == 0 || VServicios.length == 0 || VIntPM.length == 0 || VOtrosGastos.length == 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Diligenciar Todos los Campos'
+                    });
+                } else {
+                    $("#theForm").submit();
+                }
+           /* });*/
+
+        });
+    });
+
+
+</script>
+<script>
+    
+    $("#PreEstado").val("@Model.PreEstado");
+    $("#Salario").val("@Model.Salario");
+    $("#OtrosIngresos").val("@Model.OtrosIngresos");
+    $("#Renta").val("@Model.Renta");
+    $("#Prestamo").val("@Model.Prestamo");
+    $("#Transporte").val("@Model.Transporte");
+    $("#Alimentacion").val("@Model.Alimentacion");
+    $("#RDO").val("@Model.RDO");
+    $("#Servicios").val("@Model.Servicios");
+    $("#IntPM").val("@Model.IntPM");
+    $("#OtrosGastos").val("@Model.OtrosGastos");
+   
+
+</script>
+<script>
+
+
+    function calculo() {
+        var CalSalario = parseInt(document.getElementById('Salario').value);
+        var CalOtrosIngresos = parseInt(document.getElementById('OtrosIngresos').value);
+        var TotalIngresos = CalSalario + CalOtrosIngresos;
+
+        var CalRenta = parseInt(document.getElementById('Renta').value);
+        var CalPrestamo = parseInt(document.getElementById('Prestamo').value);
+        var CalTransporte = parseInt(document.getElementById('Transporte').value);
+        var CalAlimentacion = parseInt(document.getElementById('Alimentacion').value);
+        var CalRDO = parseInt(document.getElementById('RDO').value);
+        var CalServicios = parseInt(document.getElementById('Servicios').value);
+        var CalIntPM = parseInt(document.getElementById('IntPM').value);
+        var CalOtrosGastos = parseInt(document.getElementById('OtrosGastos').value);
+        var TotalGastos = CalRenta + CalPrestamo + CalTransporte + CalAlimentacion + CalRDO + CalServicios + CalIntPM + CalOtrosGastos;
+
+        var CalCapital = parseInt(document.getElementById('Capital').value);
+        var CalMin = parseInt(document.getElementById('minimo').value);
+        var CalMax = parseInt(document.getElementById('maximo').value);
+        var CalPlazo = parseInt(document.getElementById('Plazo').value);
+
+        var Cuota = CalCapital / CalPlazo;
+        var InEgre = TotalIngresos - TotalGastos;
+
+        var TotalInEgre = InEgre / 2;
+
+
+        if (CalCapital < CalMin || CalCapital > CalMax) {
+
+            Swal.fire({
+                title: 'No Aprobado',
+                text: 'EL CRÉDITO NO SE PUEDE APROBAR YA QUE EL MONTO SOLICITADO NO CUMPLE CON LOS MONTOS QUE APRUEBA EL ENTE SELECCIONADO. ' + '| Capital: ' + CalCapital + '| Monto Minimo: ' + CalMin + '| Monto Maximo: ' + CalMax,
+                icon: 'error'
+
+            });
+            var mPreEstado = $("#PreEstado").val();
+            if (mPreEstado != "") {
+                mPreEstado = "NoAprobadoEnte";
+                mPreEstado = $("#PreEstado").val(mPreEstado);
+            }
+
+        } else if (Cuota > TotalInEgre) {
+
+            Swal.fire({
+                title: 'No Aprobado',
+                text: 'EL CRÉDITO NO SE PUEDE APROBAR YA QUE LOS INGRESOS NO CUMPLEN CON LAS CONDICIONES PARA LA APROBACION DEL CREDITO',
+                icon: 'error'
+
+            });
+            var mPreEstado = $("#PreEstado").val();
+            if (mPreEstado != "") {
+                mPreEstado = "NoAprobadoValorCuota";
+                mPreEstado = $("#PreEstado").val(mPreEstado);
+            }
+
+        } else if (Cuota < TotalInEgre) {
+
+            Swal.fire({
+                title: 'Aprobado',
+                text: 'EL CRÉDITO ES PRE - APROBADO',
+                icon: 'success'
+
+            });
+            var mPreEstado = $("#PreEstado").val();
+            if (mPreEstado != "") {
+                mPreEstado = "Aprobado";
+                mPreEstado = $("#PreEstado").val(mPreEstado);
+            }
+
+
+        }
+
+
+
+    }
+
+
+
+</script>

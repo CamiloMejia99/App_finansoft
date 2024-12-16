@@ -1,0 +1,41 @@
+3/05/2022 9:01:15 a. m. - La solicitud actual para la acción 'ConfiguracionAhorroContractual' en el tipo de controlador 'AhorrosController' es ambigua entre los métodos de acción siguientes: 
+System.Web.Mvc.ActionResult ConfiguracionAhorroContractual() en el tipo FNTC.Finansoft.Areas.Ahorros.Controllers.AhorrosController
+System.Web.Mvc.ActionResult ConfiguracionAhorroContractual(FNTC.Finansoft.DTO.Respuestas.DTORespuesta) en el tipo FNTC.Finansoft.Areas.Ahorros.Controllers.AhorrosController ---_System.Reflection.MethodInfo FindActionMethod(System.Web.Mvc.ControllerContext, System.String)
+3/05/2022 9:01:16 a. m. - La solicitud actual para la acción 'ConfiguracionAhorroContractual' en el tipo de controlador 'AhorrosController' es ambigua entre los métodos de acción siguientes: 
+System.Web.Mvc.ActionResult ConfiguracionAhorroContractual() en el tipo FNTC.Finansoft.Areas.Ahorros.Controllers.AhorrosController
+System.Web.Mvc.ActionResult ConfiguracionAhorroContractual(FNTC.Finansoft.DTO.Respuestas.DTORespuesta) en el tipo FNTC.Finansoft.Areas.Ahorros.Controllers.AhorrosController ---_System.Reflection.MethodInfo FindActionMethod(System.Web.Mvc.ControllerContext, System.String)
+3/05/2022 9:01:27 a. m. - La solicitud actual para la acción 'ConfiguracionAhorroContractual' en el tipo de controlador 'AhorrosController' es ambigua entre los métodos de acción siguientes: 
+System.Web.Mvc.ActionResult ConfiguracionAhorroContractual() en el tipo FNTC.Finansoft.Areas.Ahorros.Controllers.AhorrosController
+System.Web.Mvc.ActionResult ConfiguracionAhorroContractual(FNTC.Finansoft.DTO.Respuestas.DTORespuesta) en el tipo FNTC.Finansoft.Areas.Ahorros.Controllers.AhorrosController ---_System.Reflection.MethodInfo FindActionMethod(System.Web.Mvc.ControllerContext, System.String)
+3/05/2022 9:01:27 a. m. - La solicitud actual para la acción 'ConfiguracionAhorroContractual' en el tipo de controlador 'AhorrosController' es ambigua entre los métodos de acción siguientes: 
+System.Web.Mvc.ActionResult ConfiguracionAhorroContractual() en el tipo FNTC.Finansoft.Areas.Ahorros.Controllers.AhorrosController
+System.Web.Mvc.ActionResult ConfiguracionAhorroContractual(FNTC.Finansoft.DTO.Respuestas.DTORespuesta) en el tipo FNTC.Finansoft.Areas.Ahorros.Controllers.AhorrosController ---_System.Reflection.MethodInfo FindActionMethod(System.Web.Mvc.ControllerContext, System.String)
+3/05/2022 9:13:53 a. m. - Referencia a objeto no establecida como instancia de un objeto. ---_Void Execute()
+3/05/2022 9:13:59 a. m. - Referencia a objeto no establecida como instancia de un objeto. ---_Void Execute()
+3/05/2022 10:01:05 a. m. - Palabra clave "switch" inesperada después del carácter "@". Una vez dentro del código, no es necesario añadir prefijos a las construcciones, como "switch" con "@".
+ ---_Void EnsureGeneratedCode()
+3/05/2022 10:01:06 a. m. - Palabra clave "switch" inesperada después del carácter "@". Una vez dentro del código, no es necesario añadir prefijos a las construcciones, como "switch" con "@".
+ ---_Void EnsureGeneratedCode()
+3/05/2022 5:41:15 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:43:35 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:43:36 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:43:37 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:43:38 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:43:38 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:43:38 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:43:38 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:43:38 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:43:38 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:43:39 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:43:44 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:43:47 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:43:48 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:43:48 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:43:48 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:44:01 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:44:14 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:45:25 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:48:31 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:50:02 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 5:54:22 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+3/05/2022 6:01:44 p. m. - An error occurred while executing the command definition. See the inner exception for details. ---_System.Data.Common.DbDataReader ExecuteStoreCommands(System.Data.Entity.Core.EntityClient.EntityCommand, System.Data.CommandBehavior)

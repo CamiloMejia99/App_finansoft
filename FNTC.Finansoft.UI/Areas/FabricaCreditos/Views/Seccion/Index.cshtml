@@ -1,0 +1,156 @@
+﻿@model List<FNTC.Finansoft.Accounting.DTO.ControlCartera.Seccion>
+@{
+    ViewBag.Title = "CARTERA";
+    var cur = new List<FNTC.Finansoft.Accounting.DTO.ControlCartera.Curso>();
+    using (var cnx = new FNTC.Finansoft.Accounting.DTO.ControlCartera.Model1())
+    {
+        cur = cnx.Curso.ToList();
+    }
+}
+
+<style>
+    td {
+        padding: 10px;
+    }
+
+    input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        margin-left: 5px;
+        vertical-align: middle;
+    }
+</style>
+<br />
+<h4>Gestión de Seccion</h4>
+<div class="alert alert-@ViewBag.alerta"> - - <b>@ViewBag.res</b> - - </div>
+<form action="/Seccion/Index" method="post">
+    <table>
+        <tr>
+            <td style="text-align: right">Numero:</td>
+            <td><input class="form-control" style="width: 350px" type="text" name="nu" id="nu" required /></td>
+            <td style="text-align: right">Pagare:</td>
+            <td>
+                <select class="form-control" id="cu" name="cu" size="1" required>
+                    <option value="">-- Seleccionar --</option>
+                    @foreach (var c in cur)
+                    {
+                        if (c.estado_cur)
+                        {
+                            <option value="@c.id_cur">@c.descripcion_cur</option>
+                        }
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: right">Estado:</td>
+            <td>Disponible @Html.CheckBox("es", true)</td>
+            <td style="text-align: right">Fecha de Registro:</td>
+            <td><input class="form-control" type="date" name="fe" id="fe" value="2020-04-20" required /></td>
+        </tr>
+    </table>
+    <br /><br />
+    @*--------------------------------------------------*@
+    <button class="btn btn-primary" type="button" onclick="location.href='../Alumno/Index'"><span class="glyphicon glyphicon-user"> Nuevo Credito</span></button>
+    <button class="btn btn-secondary" type="button"
+            data-target="#modal_alumno" data-toggle="modal"
+            data-backdrop="static" data-keyboard="false">
+        <span class="glyphicon glyphicon-user"> Agregar Credito</span>
+    </button>
+    <br /><br />
+    <table class="table table-bordered">
+        <thead style="background-color: darkgrey; color:white">
+            <tr><th>Código</th><th>Pagare</th><th>Nombre</th><th>Apellidos</th><th>Accion</th></tr>
+        </thead>
+        <tbody id="tabla_atr"></tbody>
+    </table>
+    @*--------------------------------------------------*@
+    <br /><br />
+    <button class="btn btn-success" type="submit" name="btn1" id="btn1"><span class="glyphicon glyphicon-save"> Agregar</span></button>
+    <button class="btn btn-danger" type="reset" name="btn2" id="btn2"><span class="glyphicon glyphicon-remove"> Resetear</span></button>
+</form>
+<br />
+<h4>Listado</h4>
+@*---------------------- Código de Busqueda ----------------------------*@
+<div style="text-align: right" class="form-inline">
+    <div class="form-group">
+        <select style="text-align: right" class="form-control" id="cb_sec" name="cb_sec" size="1">
+            <option value="1">Código de Seccion</option>
+            <option value="2">Código de Credito</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input style="text-align: right" class="form-control" type="text" placeholder="Buscar por código de Seccion o de Curso" name="dato_bus_sec" id="dato_bus_sec" />
+    </div>
+    <button class="btn btn-info" type="button" onclick="bus_sec()"><span class="glyphicon glyphicon-search"> Buscar</span></button>
+</div>
+<br />
+@*--------------------------------------------------*@
+<table class="table table-bordered">
+    <thead style="background-color: black; color: white">
+        <tr>
+            <th>Código</th>
+            <th>Numero </th>
+            <th>Proceso</th>
+            <th>Estado</th>
+            <th>Fecha de Registro</th>
+            <th style="text-align: center">Mantenimiento</th>
+        </tr>
+    </thead>
+    <tbody style="background-color: white" id="tabla_seccion_bus">
+        @foreach (var f in Model)
+        {
+            <tr>
+                <td>@f.id_sec</td>
+                <td>@f.aula_sec</td>
+                @{
+                    var curso = new FNTC.Finansoft.Accounting.DTO.ControlCartera.Model1().Curso.ToList();
+                }
+                <td>
+                    @foreach (var c in curso)
+                    {
+                        if (f.id_cur == c.id_cur)
+                        {
+                            @c.descripcion_cur
+                        }
+                    }
+                </td>
+                @{
+                    string estado = "Activo";
+                    if (f.estado_sec.Equals(false))
+                    {
+                        estado = "No " + estado;
+                    }
+                }
+                <td>@estado</td>
+                <td>@f.fecha_registro_sec.ToShortDateString()</td>
+                <td style="text-align: center">
+                    <button class="btn btn-secondary" type="button"
+                            data-target="#modal_detalle_seccion" data-toggle="modal"
+                            data-backdrop="static" data-keyboard="false"
+                            onclick="detalle_seccion('@f.id_sec')">
+                        <span class="glyphicon glyphicon-eye-open"> Detalle Seccion</span>
+                    </button>
+                    <button class="btn btn-warning" type="button" id="btn_act" name="btn_act" onclick="location.href='../Seccion/Actualizar?id=@f.id_sec'"><span class="glyphicon glyphicon-edit"> Actualizar</span></button>
+                    <button class="btn btn-danger" type="button" id="btn_eli" name="btn_eli" onclick="location.href='../Seccion/Eliminar?id=@f.id_sec'"><span class="glyphicon glyphicon-trash"> Eliminar</span></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<br />
+@Html.Partial("Modal_Detalle_Seccion")
+@Html.Partial("_Modal_Alumno")
+<script>
+    bus_sec = function () {
+        $.post(
+            '/Seccion/bus_sec', {
+            tipo_bus: $('#cb_sec').val(),//--Este es el id del combobox
+            dato_bus_sec: $('#dato_bus_sec').val() //-- este es el id de caja de texto
+        }, function (res) {
+            $('#tabla_seccion_bus').html(res)//--id de la tabla
+        });
+    };
+</script>
+

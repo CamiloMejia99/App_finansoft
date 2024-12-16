@@ -1,0 +1,1 @@
+22/06/2022 3:37:53 p. m. - No hay ningún elemento ViewData de tipo 'IEnumerable<SelectListItem>' con la clave 'ListaTerceros'. ---_System.Collections.Generic.IEnumerable`1[System.Web.Mvc.SelectListItem] GetSelectData(System.Web.Mvc.HtmlHelper, System.String)

@@ -1,0 +1,50 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.ControlCartera.Seccion
+@{
+    ViewBag.Title = "CARTERA";
+}
+<style>
+    td {
+        padding: 10px;
+    }
+
+    input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        margin-left: 5px;
+        vertical-align: middle;
+    }
+</style>
+<br />
+<h4>Gestión de Seccion</h4>
+<div class="alert alert-@ViewBag.alerta"> - - <b>@ViewBag.res</b> - - </div>
+<form action="/Seccion/Eliminar" method="post">
+    <input type="hidden" name="id" id="id" value="@Model.id_sec" />
+    <table>
+        <tr>
+            <th style="text-align: right">Código:</th>
+            <td style="font-weight:bold">@Model.id_sec</td>
+        </tr>
+        <tr>
+            <th style="text-align: right">No.:</th>
+            <td style="font-weight:bold">@Model.aula_sec</td>
+        </tr>
+        <tr>
+            <th style="text-align: right">Estado:</th>
+            @{string estado = "Activo";}
+            @if (Model.estado_sec.Equals(false))
+            {
+                estado = "No Activo";
+            }
+            <td>@estado</td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+            <td>
+                <input type="submit" class="btn btn-primary" name="btn1" id="btn1" value="Confirmar" />
+                <input type="button" class="btn btn-secondary" name="btn2" id="btn2" onclick="location.href='../Seccion/Index'" value="Cancelar" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+

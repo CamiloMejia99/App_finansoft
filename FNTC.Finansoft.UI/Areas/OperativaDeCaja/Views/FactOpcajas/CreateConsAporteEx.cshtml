@@ -1,0 +1,375 @@
+﻿<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.masknumber.js"></script>
+
+@model FNTC.Finansoft.Accounting.DTO.OperativaDeCaja.FactOpcaja
+
+@{
+    ViewBag.Title = "Crear Factura Aportes Extraordinarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var fecha = DateTime.Now.ToString("yyyy-MM-dd");
+}
+
+@section Styles{
+    <link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/css/chosen.css" rel="stylesheet" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    
+}
+
+
+
+<div class="col-md-12" style="background: rgb(248, 248, 248)">
+    <div class="modal fade" data-backdrop="static" id="centro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("CreateConsAporteEx", "FactOpcajas", new { area = "OperativaDeCaja" }, FormMethod.Post, new { id = "theForm" }))
+
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group col-md-11" style="margin-left:40px">
+            <div class="caja2">
+                <div class="form-group">
+                    <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 123%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Nueva Factura - Aportes Extraordinarios</h3></div>
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="col-md-12" align="center"><h3>Datos Generales - Facturacion</h3></div>
+
+                <div class="row contenido">
+                    <div class="form-group col-md-4">
+                        <label class="control-label">FECHA DE FACTURACION:</label>
+                        <input type="text" class="form-control" value="@fecha" readonly />
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="control-label">TIPO DE OPERACIÓN: </label>
+                        <select class="form-control" id="Toperacion" name="operacion">
+                            <option value="">Seleccionar</option>
+                            <option value="PagoEfectivo">Pago Efectivo</option>
+                            <option value="Consignacion">Consignación</option>
+                        </select>
+                    </div>
+                </div>
+                <hr />
+                <div class="col-md-12" align="center"><h3>Datos - Facturador</h3></div>
+                <div class="row contenido">
+
+                    <hr />
+                    <div class="form-group col-md-4">
+                        <label class="control-label">CODIGO DE CAJA:</label>
+                        <input type="text" class="form-control" name="codigo_caja" value="@Session["cod_caja" + User.Identity.Name]" readonly />
+                        <h5 style="color:#274766">@Session["nombre_caja" + User.Identity.Name]</h5>
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">NIT - FACTURADOR:</label>
+                        <input type="text" class="form-control" name="nit_cajero" Value="@Session["nit" + User.Identity.Name]" autocomplete="off" readonly />
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">FACTURADOR:</label>
+                        <input type="text" class="form-control" Value="@Session["nombre" + User.Identity.Name]" autocomplete="off" readonly />
+                    </div>
+                </div>
+                <hr />
+                <div class="col-md-12" align="center"><h3>Datos Afiliado - Facturacion</h3></div>
+                <div class="row contenido">
+                    <hr />
+                    <div class="form-group col-md-4">
+                        <label class="control-label">NIT - ASOCIADO:</label>
+                        @Html.TextBoxFor(model => Model.nit_propietario_cuenta, new { @id = "NIT", @name = "nit_propietario_cuenta", @class = "form-control", placeholder = "Digitar NIT - Afiliado" })
+                        @Html.ValidationMessageFor(model => model.nit_propietario_cuenta, "", new { @style = "color:red" })
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">NOMBRE:</label>
+                        @Html.TextBoxFor(model => Model.nombre_propietario_cuenta, new { @id = "NOMBRE", @name = "nombre_propietario_cuenta", @class = "form-control", @readonly = true })
+                        @Html.ValidationMessageFor(model => model.nombre_propietario_cuenta, "", new { @style = "color:red" })
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">NO. CUENTA - APORTE EXTRAORDINARIO:</label>
+                        <input type="text" class="form-control " id="NCUENT" name="numero_cuenta" autocomplete="off" readonly />
+                    </div>
+
+                </div>
+
+                <div class="row contenido">
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Valor Recibido:</label>
+                        <input type="text" class="form-control miles" id="valor_efectivo" placeholder="Digitar El Efectivo Recibido" autocomplete="off" />
+
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Valor a Ingresar:</label>
+                        <input type="text" class="form-control miles" id="valor_recibido" placeholder="Digitar El Valor Que se va a Ingresar" autocomplete="off" />
+
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Dinero Sobrante:</label>
+                        <input type="text" class="form-control " id="vueltas" Value="0" autocomplete="off" readonly />
+                    </div>
+                    <button type="button" class="btn btn-dark btnAction" style="margin-left:600px" onclick="calculo();">Calcular</button>
+
+                </div>
+                <hr />
+                <div class="col-md-12" align="center"><h3>Saldos - Facturacion</h3></div>
+                <div class="row contenido">
+                    <div class="form-group col-md-4">
+                        <label class="control-label">TOTAL A INGRESAR :</label>
+                        <input type="text" class="form-control " id="total" Value="0" autocomplete="off" readonly />
+                        <input type="hidden" id="totalingres" name="total" />
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">SALDO ACTUAL EN CUENTA:</label>
+                        <input type="hidden" id="saldo_anterior_cuenta" name="saldo_anterior_cuenta" />
+                        <input type="text" id="saldo_anterior" class="form-control" Value="0" autocomplete="off" readonly />
+
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">SALDO TOTAL EN CUENTA </label>
+                        <input type="text" class="form-control " id="saldo_total" Value="0" autocomplete="off" readonly />
+                        <input type="hidden" id="saldo_total_cuenta" name="saldo_total_cuenta" />
+
+                    </div>
+                </div>
+
+                <div class="row contenido">
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Observación:</label>
+                        <input type="text" class="form-control " id="observacion" name="observacion" Value="Aporte Extraordinario" autocomplete="off" />
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <a href="/OperativaDeCaja/FactOpcajas/CuentaOperacion" class="btn btn-inline btn-small btn-danger">Cancelar</a>
+
+                    <button type="button" id="guardarConfig" class="btn btn-inline btn-small btn-success">Guardar</button>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    @*<script src="~/Scripts/DinamismoCliente/formatMilesDec.js"></script>
+        <script src="~/Scripts/DinamismoCliente/Dinamismos.js"></script>
+        <script src="~/Scripts/Aportes/Validaciones.js"></script>*@
+
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+    @*<script></script>*@
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+
+
+        $("#guardarConfig").click(function () {
+
+            $(function () {
+                var VToperacion, VNIT, Vvalor_efectivo, Vvalor_recibido, Vobservacion, Vsaldo_total_cuenta;
+                /*  $("#guardarConfig").on('click', function () {*/
+                VToperacion = $("#Toperacion").val();
+                VNIT = $("#NIT").val();
+                Vvalor_efectivo = $("#valor_efectivo").val();
+                Vvalor_recibido = $("#valor_recibido").val();
+                Vobservacion = $("#observacion").val();
+                Vsaldo_total_cuenta = $("#saldo_total_cuenta").val();
+
+
+                if (VToperacion.length == 0 || VNIT.length == 0 || Vvalor_efectivo == 0 || Vvalor_recibido == 0
+                    ||
+                    Vobservacion.length == 0 || Vsaldo_total_cuenta.length == 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error...',
+                        text: 'DILIGENCIAR TODOS LOS CAMPOS Y CALCULAR SALDOS'
+                    });
+                } else {
+                    $("#theForm").submit();
+                }
+                /* });*/
+
+            });
+        });
+        $(".miles").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                });
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".chosen-select-single").chosen();
+            $(".chosen-select-multiple").chosen();
+
+        });
+    </script><!--Script Libreria chosen-->
+
+
+
+    <script>
+        const formatterPeso = new Intl.NumberFormat('es-CO', {
+            style: 'currency',
+            currency: 'COP',
+            minimumFractionDigits: 0
+        })
+        $(document).ready(function () {
+            $('#NIT').autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/FactOpcajas/GetAutoCompletAfiliadosApEx",
+                        data: { cadena: request.term },
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.Nombre,
+                                    value: item.Id,
+                                    Ncuent: item.NoCuenta,
+                                    TotalCuent: item.TotalCuenta
+                                    //NCuenta: item.NoCuenta,
+                                    //ConfiguracionAp = item.ConfiguracionApo
+
+                                    //SALARIO: item.SALARIO
+                                }
+                            }));
+                        }
+                    })
+                },
+                select: function (event, ui) {
+                    $('#NIT').val(ui.item.value);
+                    $('#NOMBRE').val(ui.item.label);
+                    $('#NCUENT').val(ui.item.Ncuent);
+                    $('#saldo_anterior_cuenta').val(ui.item.TotalCuent);
+
+                    var entradac = $('#saldo_anterior_cuenta').val();
+
+                    var number = Math.floor(entradac);
+                    var myNumeral7 = formatterPeso.format(number)
+                    $('#saldo_anterior').val(myNumeral7);
+                    /*  $('#NCUENTA').val(ui.item.NCuenta);*/
+                    //$('#TOTALCUENTA').val(ui.item.TotalCuent);
+                    //$('#CONFIGURACIONAP').val(ui.item.ConfiguracionAp);
+
+
+                    return false;
+                },
+                minLength: 1
+            });
+
+        })
+
+    </script><!--AUTOCOMPLETE ASOCIADO-->
+
+    <script src="~/Scripts/moment.js"></script><!--Libreria para manejo de fechas u operaciones con dias-->
+
+
+
+}
+
+<style>
+    body {
+        background-color: #DDD;
+    }
+</style>
+<script>
+    function calculo() {
+
+        var mvalor_efectivo = $("#valor_efectivo").val();
+        if (mvalor_efectivo != "") {
+            mvalor_efectivo = mvalor_efectivo.split('.').join("");
+
+        }
+        var mvalor_recibido = $("#valor_recibido").val();
+        if (mvalor_recibido != "") {
+            mvalor_recibido = mvalor_recibido.split('.').join("");
+
+        }
+        var valor_efectiv = parseInt(mvalor_efectivo);
+        var valor_recibid = parseInt(mvalor_recibido);
+        var SaldoAnterior = parseInt(document.getElementById('saldo_anterior_cuenta').value);
+
+        if (valor_efectiv >= valor_recibid) {
+
+            const formatterPeso = new Intl.NumberFormat('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0
+            })
+
+            var resta = valor_recibid - valor_efectiv;
+            var TotalCuenta = valor_recibid + SaldoAnterior;
+            var totalingre = valor_recibid + 0;
+
+            var x = resta;
+            var result = x * -1;
+            
+
+            var entrada1 = valor_efectiv;
+            var number1 = Math.floor(entrada1);
+            var myNumeral1 = formatterPeso.format(number1)
+            $('#valor_efectivo').val(myNumeral1);
+
+            var entradac2 = valor_recibid;
+            var number2 = Math.floor(entradac2);
+            var myNumeral2 = formatterPeso.format(number2)
+            $('#valor_recibido').val(myNumeral2);
+
+            var entradac3 = result;
+            var number3 = Math.floor(entradac3);
+            if (number3 < 1) {
+                number3 = 0;
+            }
+            var myNumeral3 = formatterPeso.format(number3)
+            $('#vueltas').val(myNumeral3);
+
+            var entradac9 = valor_recibid;
+            var number4 = Math.floor(entradac9);
+            var NumeroPs = formatterPeso.format(number4)
+            $('#total').val(NumeroPs);
+
+
+            var entradac4 = TotalCuenta;
+            var number5 = Math.floor(entradac4);
+            var myNumeral = formatterPeso.format(number5)
+            $('#saldo_total').val(myNumeral);
+
+            $('#saldo_total_cuenta').val(entradac4);
+            $('#totalingres').val(totalingre);
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error...',
+                text: 'EL VALOR RECIBIDO DEBE SER MAYOR O IGUAL AL INGRESADO'
+            });
+        }
+
+
+    }
+</script>
+

@@ -1,0 +1,6 @@
+1/06/2022 9:24:20 a. m. - El desplazamiento y la longitud están fuera de los límites para esta matriz o el recuento es superior al número de elementos desde el índice al final de la colección de origen. ---_Void ThrowArgumentException(System.ExceptionResource)
+1/06/2022 9:27:15 a. m. - No se puede redirigir después de enviar los encabezados HTTP. ---_Void Redirect(System.String, Boolean, Boolean)
+1/06/2022 9:29:26 a. m. - No se puede redirigir después de enviar los encabezados HTTP. ---_Void Redirect(System.String, Boolean, Boolean)
+1/06/2022 9:29:59 a. m. - No se puede redirigir después de enviar los encabezados HTTP. ---_Void Redirect(System.String, Boolean, Boolean)
+1/06/2022 3:37:14 p. m. - La secuencia no contiene ningún elemento coincidente ---_TSource First[TSource](System.Collections.Generic.IEnumerable`1[TSource], System.Func`2[TSource,System.Boolean])
+1/06/2022 3:37:21 p. m. - La secuencia no contiene ningún elemento coincidente ---_TSource First[TSource](System.Collections.Generic.IEnumerable`1[TSource], System.Func`2[TSource,System.Boolean])

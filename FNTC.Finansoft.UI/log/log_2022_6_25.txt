@@ -1,0 +1,5 @@
+25/06/2022 2:49:17 p. m. - No se encuentra el controlador de la ruta de acceso '/TimerSession/ValidarSession/KeepActiveSession' o no implementa IController. ---_System.Web.Mvc.IController GetControllerInstance(System.Web.Routing.RequestContext, System.Type)
+25/06/2022 11:35:31 a. m. - Índice fuera de los límites de la matriz. ---_Void MoveNext()
+25/06/2022 11:36:09 a. m. - Índice fuera de los límites de la matriz. ---_Void MoveNext()
+25/06/2022 11:37:22 a. m. - Índice fuera de los límites de la matriz. ---_Void MoveNext()
+25/06/2022 11:37:54 a. m. - Índice fuera de los límites de la matriz. ---_Void MoveNext()

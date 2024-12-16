@@ -1,0 +1,98 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.FormularioVinculacion.formatoVinculacion>
+
+@{
+	Layout = "~/Views/Shared/_Layoutahorros.cshtml";
+}
+
+<div class="col-md-12" style="background: rgb(248, 248, 248); width:90%;align-content:center">
+
+	<div class="form-group">
+		<div class="col-md-8"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 90%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Formularios de Asociados Vinculados</h3></div>
+		<div class="col-md-2" style=" margin-top:35px;">			
+			<a class="" href="/Aportes/Aportes/Index" title="Atras">
+				<i class="fa fa-arrow-circle-o-left fa-2x " aria-hidden="true">Volver</i>
+			</a>
+			
+</div><div class="col-md-2" style=" margin-top:35px;">	
+			<a href="/formularioVinculacion/formatoVinculacions/Create"  class="AddUser btn btn-success btn-small btnnuevo">Nuevo Formulario</a>
+</div>
+
+	</div>
+	<div class="form-group">
+		<div>
+			<table id="myTable" class="table table-striped table-bordered dataTable no-border" width="90%">
+				<thead style="background-color:lightslategray">
+                    <tr>
+                        <th>
+                            Nombre Asociado
+                        </th>
+                        <th>
+                            Primer Apellido
+                        </th>
+                        <th>
+                            Segundo Apellido
+                        </th>
+                        <th>
+                            Cedula Asociado
+                        </th>
+                        <th>
+                            Fecha Solicitud
+                        </th>
+                        <th>Opciones</th>
+                    </tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+                    <tr class="align-center medium">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TerceroFK.NOMBRE1)&nbsp;@Html.DisplayFor(modelItem => item.TerceroFK.NOMBRE2)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TerceroFK.APELLIDO1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TerceroFK.APELLIDO2)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cedulaaso)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fechasolicitud)
+                        </td>
+                        <td class="align-center">
+                            <a id="editar" class="btn btn-inline btn-xs btn-primary" href="/formularioVinculacion/formatoVinculacions/Edit?id=@item.id" title="Editar">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a> &nbsp;&nbsp;
+                            <a id="editar" class="btn btn-inline btn-xs btn-success" href="/formularioVinculacion/formatoVinculacions/Details?id=@item.id" title="Editar">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </a>&nbsp;&nbsp;
+                            <a id="editar" class="btn btn-inline btn-xs btn-danger" href="/formularioVinculacion/formatoVinculacions/Delete?id=@item.id" title="Eliminar">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+
+<link href="~/Content/css/jquery.dataTablesform.min.css" rel="stylesheet" />
+@section scripts
+{
+	<script src="~/Scripts/jquery.dataTablesform.min.js"></script>
+	
+	<script>
+		$(document).ready(function () {
+			$('#myTable').DataTable({
+				"language": {
+					"url": "/Content/Spanish.json"
+				}
+			});
+		});
+	</script>
+}

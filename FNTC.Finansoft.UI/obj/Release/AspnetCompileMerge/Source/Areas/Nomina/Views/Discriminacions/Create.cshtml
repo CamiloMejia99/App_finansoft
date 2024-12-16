@@ -1,0 +1,244 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Nomina.Discriminacion
+
+@{
+    /**/
+
+    //Layout = "~/Views/Shared/_Modal.cshtml";
+    var action = (string)ViewBag.action;
+    var boton = (string)ViewBag.boton;
+
+    var Periodo = @ViewBag.PeriodoDed;
+    <link href="~/Content/css/chosen.css" rel="stylesheet" />
+}
+
+<div>
+    <input type="button" value="Regresar" class="btn btn-purple" onclick="Regresar();" style=" margin-top: 1%; margin-left: 1%; margin-bottom: 1%;" />
+</div>
+<div class="col-md-12">
+    <div class="form-group">
+        <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 123%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Discriminación Nomina de Descuentos</h3></div>
+
+    </div>
+</div>
+
+
+<div class="modal-body">
+  
+    @using (Html.BeginForm(action, "Discriminacions", new { area = "Nomina" }, FormMethod.Post, new { id = "theForm", autocomplete = "off" }))
+    {
+        @Html.AntiForgeryToken()
+        @*Html.Hidden("GENDIS", "false")*@
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+
+
+
+        <div class="form-group">
+
+            <label class="control-label col-md-2">Seleccione Empresa:</label>
+            <div class="col-md-10">
+                @Html.DropDownList("IDEMPRESA", null, new { @class = "form-control", @id = "Empresa" })
+
+                <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                <p style="color:red">@ViewBag.mensaje</p>
+                @Html.HiddenFor(model => model.EMPRESA)
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label class="control-label col-md-2">Clase de Plano:</label>
+            <div class="col-md-10">
+                @Html.DropDownList("CLASEPLANO", null, new { @class = "chosen-select-single", @id = "CLASEPLANO", @required = "required" })
+                <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                <p style="color:red">@ViewBag.mensaje</p>
+
+            </div>
+        </div>
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.PERDEDUCC, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.PERDEDUCC, new SelectList(Periodo, "Value", "Text"), "Seleccione opción...", new { @class = "form-control", @required = "required" })
+                @Html.ValidationMessageFor(model => model.PERDEDUCC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PERIODO, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PERIODO, new { htmlAttributes = new { @class = "form-control", @id = "Periodo", @readonly = "readonly", @required = "required" } })
+
+                @Html.ValidationMessageFor(model => model.PERIODO, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Generar Discriminado</label>
+            <div class="col-md-6">
+                @Html.RadioButtonFor(model => model.GENERAR, "DISCRIMINADO", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Generar Total</label>
+            <div class="col-md-6">
+                @Html.RadioButtonFor(model => model.GENERAR, "TOTAL", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @*<a href="/Nomina/Discriminacions/Exportar" class="btn btn-default "><i class="fa fa-file-excel-o" aria-hidden="true"></i> Exportar</a>*@
+                <input type="submit" value="Generar Discriminación" class="btn btn-success" id="guardar" />
+
+                @*<button type="button" id="close" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Salir</button>*@
+            </div>
+        </div>
+
+
+    </div>
+        }
+    </div>
+@*</div>
+        </div>
+    </div>*@
+
+
+
+
+
+<script>
+    function Regresar() {
+        location.reload();
+    }
+    $(document).ready(function () {
+
+
+
+
+
+
+        $('#centro').modal('show');
+
+    });
+    //Al Ocultar el modal
+    $(document.body).on('hidden.bs.modal', function () {
+        $('#centro').removeData('bs.modal');
+    });
+
+
+    // FUNCIONAN LOS MENSAJES PERO NO EXPORTA EL EXCEL
+    $("#theForm").submit(function (event) {
+        event.preventDefault();
+        var theForm = $(this);
+        $.post('/Nomina/Discriminacions/Create', theForm.serialize())
+            .done(function (result) {
+                event.preventDefault();
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Datos Guardados Correctamente..",
+                    confirmButtonText: "Ok!",
+                }, function () {
+
+                    $("#close").click();
+                });
+
+            });
+    });
+    
+
+
+
+
+    /*
+    $("#theForm").submit(function (event) {
+        var Empresa = $("#Empresa").val(); 
+        $("#EMPRESA").val(Empresa);
+
+        $("#theForm").attr('action', '/Nomina/Discriminacions/Create')       
+      });
+
+*/
+
+
+
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#GENERAR").attr('checked', 'checked');
+        $("#DIGVALOR").val("0");
+
+        $("#VALPREDETERINADO").change(function () {
+
+            var predeterminado = $("#VALPREDETERINADO").val();
+            if (predeterminado == "SI") {
+                $("#DIGVALOR").prop("disabled", false);
+                $("#DIGVALOR").val("");
+            }
+            else
+                if (predeterminado == "NO") {
+                    $("#DIGVALOR").prop("disabled", true);
+                    $("#DIGVALOR").val("0");
+                }
+            // $('#NOMBRE').val("");
+
+            // });
+        });
+    });
+
+</script>
+<script>
+    $("#Empresa").chosen().change(function () {
+
+        var Empresa = $("#Empresa").val();
+      
+        $("#EMPRESA").val(Empresa);
+
+                 if (Empresa != "") {
+                    $('#mitabla tr').empty();
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("GetDatosEmpresa", "Discriminacions")",
+                        datatype: "Json",
+                        data: { NIT: $('#Empresa').val() },
+                        success: function (data) {
+                            $("#Periodo").val(data[0]);
+                        }
+                    });
+                }
+                else {
+                    $('#Empresa').val("").trigger('chosen:updated');
+                    swal({
+                        title: "Alerta",
+                        type: "info",
+                        text: "Debe Seleccionar una Empresa",
+                    })
+
+                }
+        });
+
+</script>
+<script>
+    $("#CLASEPLANO").chosen().change(function () {
+
+        var Empresa = $("#CLASEPLANO").val();
+        if (Empresa == "") {
+            $('#CLASEPLANO').val("").trigger('chosen:updated');
+            swal({
+                title: "Alerta",
+                type: "info",
+                text: "Debe Seleccionar un Plano",
+            })
+
+        }
+
+    });
+
+</script>
+

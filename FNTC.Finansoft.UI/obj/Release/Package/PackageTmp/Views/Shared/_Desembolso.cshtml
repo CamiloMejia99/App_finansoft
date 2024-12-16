@@ -1,0 +1,473 @@
+﻿@model  List<FNTC.Finansoft.Accounting.DTO.MCreditos.ViewModelDesembolso>
+
+@{
+    var Autorizacion = ViewBag.Autorizacion;
+    var FechaA = ViewBag.FechasAtras;
+    var FechaD = ViewBag.FechasAdelante;
+
+    var creditoC = ViewBag.credito;
+    var caja = ViewBag.caja;
+    var banco = ViewBag.banco;
+    var interes = ViewBag.interes;
+    var papeleria = ViewBag.papeleria;
+    var creditoN = ViewBag.creditoN;
+    var cajaN = ViewBag.cajaN;
+    var bancoN = ViewBag.bancoN;
+    var interesN = ViewBag.interesN;
+    var papeleriaN = ViewBag.papeleriaN;
+    var ValorCapital = ViewBag.valorcapital;
+    var InteresAnticipado = ViewBag.interesvalor;
+    var ValorPapeleria = ViewBag.papeleriavalor;
+    var cajavalor = ViewBag.cajavalor;
+    var valorinter = ViewBag.ValorInteres;
+
+}
+
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Desembolso</h4>
+        </div>
+
+        <div class="modal-body">
+            <dl class="dl-horizontal"></dl>
+            <input type="hidden" id="Autorizacion" value="@Autorizacion" readonly />
+            <input type="text" id="ValorInteres" value="@valorinter" name="Resultado" hidden="hidden">
+            <table class="table table-hover">
+                <tr>
+                    <th>
+                        Numero de Cuenta
+                    </th>
+                    <th>
+                        Nombre de Cuenta
+                    </th>
+                    <th>
+                        NIT Asociado
+                    </th>
+                    <th>
+                        Nombre Asociado
+                    </th>
+                    <th>
+                        DEBITO
+                    </th>
+                    <th>
+                        CREDITO
+                    </th>
+
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <h5>@creditoC</h5>
+                        </td>
+                        <td>
+                            <h5>@creditoN</h5>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.NIT, new { @id = "NIT", @class = "form-control readonly", @readonly = true })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.NOMBRE, new { @id = "NOMBRE", @class = "form-control", @readonly = true })
+                        </td>
+                        <td>
+                            <input type="text" id="Capital" value="@ValorCapital" name="Capital" class="form-control" readonly>
+                        </td>
+                        <td>
+                        </td>
+
+                    </tr>
+                }
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <h5>@caja</h5>
+                        </td>
+                        <td>
+                            <h5>@cajaN</h5>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.NIT, new { @id = "NIT", @class = "form-control readonly", @readonly = true })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.NOMBRE, new { @id = "NOMBRE", @class = "form-control", @readonly = true })
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <input type="text" id="CajaInte" name="cajain" value="@cajavalor" class="form-control" readonly>
+                        </td>
+
+                    </tr>
+                }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <h5>@banco</h5>
+                        </td>
+                        <td>
+                            <h5>@bancoN</h5>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.NIT, new { @id = "NIT", @class = "form-control readonly", @readonly = true })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.NOMBRE, new { @id = "NOMBRE", @class = "form-control", @readonly = true })
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <input type="text" id="valorBanco" name="BANCO" value="0" class="form-control miles">
+                        </td>
+
+                    </tr>
+                }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <h5>@interes</h5>
+                        </td>
+                        <td>
+                            <h5>@interesN</h5>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.NIT, new { @id = "NIT", @class = "form-control readonly", @readonly = true })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.NOMBRE, new { @id = "NOMBRE", @class = "form-control", @readonly = true })
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <input type="text" id="intere" name="Interes" value="0" class="form-control" readonly>
+                            @*<input type="hidden" id="Banc" name="Interes" value="0" class="form-control" readonly>*@
+                        </td>
+
+                    </tr>
+                }
+                @foreach (var item in Model)
+                {
+            <tr>
+                <td>
+                    <h5>@papeleria</h5>
+                </td>
+                <td>
+                    <h5>@papeleriaN</h5>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.NIT, new { @id = "NIT", @class = "form-control readonly", @readonly = true })
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.NOMBRE, new { @id = "NOMBRE", @class = "form-control", @readonly = true })
+                </td>
+                <td>
+                </td>
+                <td>
+                    <input type="text" id="papeleria" value="@ValorPapeleria" name="" class="form-control" readonly>
+                </td>
+               
+            </tr>
+                }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <h5></h5>
+                        </td>
+                        <td>
+                            <h5></h5>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <input type="text" id="Debito" value="@ValorCapital" name="" class="form-control" readonly>
+                        </td>
+                        <td>
+                            <input type="text" id="resultado" name="Resultado" class="form-control" readonly>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+            <div style="left: 84%; position: absolute; top: 443px; ">
+
+                <button type="button" class="btn btn-default" onclick="calcular()">Calcular</button>
+
+            </div>
+            <br />
+            @using (Html.BeginForm("RealizarDesembolso", "Creditos", new { area = "Creditos" }, FormMethod.Post, new { id = "theForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <!--Campos Ocultos HIDDEN hidden="hidden"-->
+
+                foreach (var item in Model)
+                {
+
+                    <input type="text" value="@item.id" name="id" hidden="hidden">
+                    <input type="text" id="InteresInterno" name="Interes" hidden="hidden">
+                    <input type="text" id="Banc" name="BANCO" hidden="hidden">
+                    <input type="text" id="CajaResultado" name="cajain" hidden="hidden">
+                }
+
+                foreach (var item in Model)
+                {<table class="table table-hover">
+                        <tr>
+                            <th>
+                                FECHA DE DESEMBOLSO
+                            </th>
+
+                            <td>
+
+                                <input type="date" name="fechadesembolso" id="fechadesembolso" min="@FechaA" max="@FechaD" step="1">
+
+                            </td>
+                            <th>
+                                DIA DE PAGO
+                            </th>
+
+                            <td>
+                                <select class="form-control" id="diapago">
+                                    <option value="999">Ultimo Dia del Mes</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                </select>
+                                <input type="number" name="diapago" id="diapagoMes" hidden="hidden">
+                            </td>
+
+                        </tr>
+                    </table>
+                }
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <!--<label>Saldo Credito Desembolsado</label>-->
+                                <div class="col-md-10">
+                                    <input type="hidden" id="saldoCreditoDesembolsado" value="0" name="saldoCreditoDesembolsado" class="form-control">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="col-md-12">
+                    <br />
+                </div>*@
+
+                    <div class="col-md-12">
+                        <button type="button" id="realizardesembolso" class="btn btn-primary btn-block">Realizar Desembolso</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#realizardesembolso').click(function () {
+        var Autorizacion;
+        var DebitoIn = $("#Debito").val();
+        var CreditoIn = $("#resultado").val();
+
+        Autorizacion = "C-Aprobado";
+
+        if (Autorizacion == "C-Aprobado" && DebitoIn == CreditoIn) {
+            swal({
+                title: "Realizar Desembolso?",
+                text: "Esta Seguro de Realizar el Desembolso?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#6FE88B",
+                confirmButtonText: "SI",
+                closeOnConfirm: false,
+                html: false
+            }, function () {
+                $("#theForm").submit();
+            });
+
+            $(document).ready(function () {
+                /* SEPARADOR DE MILES POR KEY UP */
+                $("#saldoCreditoDesembolsado").on({
+                    "focus": function (event) {
+                        $(event.target).select();
+                    },
+                    "keyup": function (event) {
+                        $(event.target).val(function (index, value) {
+                            return value.replace(/\D/g, "")
+                                .replace(/([0-9])([0-9]{3})$/, '$1,$2')
+                                .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+                        });
+                    }
+                });
+                /* FIN SEPARADOR DE MILES POR KEY UP */
+            });
+        } else {
+            swal({
+                title: "Desembolso No Permitido!",
+                text: "(El desembolso aun no a sido Autorizado) O (El Debito & El Credito no son Iguales)",
+                type: "warning",
+
+            });
+        }
+
+
+    });
+    function calcular() {
+
+        var ValidarSeleccion = document.getElementById("fechadesembolso").value;
+        var validarCondicion = Date.parse(ValidarSeleccion);
+
+        var FechDesembolso = $("#fechadesembolso").val();
+        /*var converfech = fech.toString();*/
+
+        var CapitalBruto = $("#Capital").val();
+        var ConverCapital = parseInt(CapitalBruto)
+        var ValorInteresCredito = $("#ValorInteres").val();
+        var ConverInteres = parseInt(ValorInteresCredito)
+        var InteresTotal = ConverCapital * (ConverInteres / 100);
+
+        var converFechaA = FechDesembolso;
+        var anioActual = converFechaA.slice(0,-6);
+        var anioSelect = parseInt(anioActual);
+
+        var converFechaM = FechDesembolso;
+        var mesActual = converFechaM.slice(5, -3)
+        var mesSelect = parseInt(mesActual);
+
+        var converFechaD = FechDesembolso;
+        var DiaActual = converFechaD.slice(8);
+        var DiaSelect = parseInt(DiaActual);
+
+        
+        var DiasMes = new Date(anioSelect, mesSelect, 0).getDate();
+
+        var InteresDiario = InteresTotal / DiasMes;
+        var InteresAntic = 0;
+        var diasAnticipados = 0;
+
+        var DiaPago = $("#diapago").val();
+        if (DiaPago == 999) {
+
+            diasAnticipados = DiasMes - DiaSelect
+
+        } else if (DiaPago > DiaSelect) {
+            diasAnticipados = DiaPago - DiaSelect
+        } else if (DiaPago == DiaSelect) {
+
+            diasAnticipados = 0
+        }
+
+        InteresAntic = InteresDiario * diasAnticipados;
+        var InteresEntero = parseInt(InteresAntic);
+       
+
+        if (validarCondicion >= 0) {
+            try {
+                var mvalorBanco = $("#valorBanco").val();
+                if (mvalorBanco != 0 || mvalorBanco != "") {
+                    mvalorBanco = mvalorBanco.split('.').join("");
+                }
+                var mvalorInteres = $("#intere").val();
+               
+                var CapitalC = parseFloat(document.getElementById("Capital").value) || 0, ValorBancoC = parseFloat(mvalorBanco) || 0, InteresC = parseFloat(mvalorInteres) || 0, PapeleriaC = parseFloat(document.getElementById("papeleria").value) || 0;
+
+               
+                var InterAntic = InteresEntero + "";
+                
+                document.getElementById("intere").value = InterAntic;
+                
+                var CajaTotal = CapitalC - PapeleriaC - InteresEntero - ValorBancoC;
+                var Cajain = CajaTotal + "";
+                document.getElementById("CajaInte").value = Cajain;
+                var InterIntern = InteresC + "";
+                var BancoInter = ValorBancoC + "";
+                /*document.getElementById("intere").value = InterIntern;*/
+                if (DiaPago == 999) {
+                    document.getElementById("diapagoMes").value = DiasMes;
+
+                } else {
+                    document.getElementById("diapagoMes").value = DiaPago;
+                }
+                document.getElementById("InteresInterno").value = InterAntic;
+                document.getElementById("CajaResultado").value = Cajain;
+                document.getElementById("Banc").value = BancoInter; 
+                document.getElementById("resultado").value = CajaTotal + ValorBancoC + InteresEntero + PapeleriaC;
+                
+                swal({
+                    title: "Ok",
+                    text: "Calculando...",
+                    type: "warning",
+
+                });
+                
+
+            } catch (e) {
+                swal({
+                    title: "Error?",
+                    text: "Error al Calcular?" + e,
+                    type: "warning",
+
+                });
+            }
+        } else {
+            swal({
+                title: "Error",
+                text: "Se debe Seleccionar Fecha de Desembolso",
+                type: "warning",
+
+            });
+        }
+        
+    }
+    $(".miles").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value) {
+                return value.replace(/\D/g, "")
+                    .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                    .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    });
+</script>

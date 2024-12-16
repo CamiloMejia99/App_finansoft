@@ -1,0 +1,214 @@
+﻿@using FNTC.Finansoft.Accounting.DTO.Result
+@model IEnumerable<FNTC.Finansoft.Accounting.DTO.Nomina.ClaseDePlano>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+
+<div class="col-md-12" style="background:#ECECEC; width:100%;">
+    <br />
+    <ul class="col-md-offset-2 nav nav-tabs" style="margin-top:0%;border: none; margin-left: 2%;">
+
+        <li class="active"><a href="#" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Clases de Planos </a></li>
+
+    </ul>
+    <div class="tab-content contenedortabs">
+        <br />
+        <div class="card" style="background-color:white;margin-left:10px;margin-right:10px;">
+
+            <div class="card-header" style="background-color:#274766;color:white;border-radius:5px;">
+                + PLANOS
+            </div>
+
+            <div class="card-body" style="background-color:white;margin-left:10px;margin-right:10px">
+
+
+                <div id="contenidoJD">
+                    <div class="modal fade" data-backdrop="static" id="centro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+
+                                <div class="modal-body">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="js-refrescar"></button>
+
+
+                    <div class="col-md-2" style=" padding-bottom: 1%; margin-left: 85%; margin-top: 1%;">
+
+                        <a href="/Nomina/ClaseDePlanos/Create" class="btn btn-success" data-toggle="modal" data-target="#centro">Crear - Nuevo Plano</a>
+
+                    </div>
+
+                    <table class="table table-striped table-bordered dataTable no-footer" style="background-color: #FFF;">
+                        <tr>
+                            <th class="columnatablaazul">
+                                @Html.DisplayNameFor(model => model.NOMBRE)
+                            </th>
+                            <th class="columnatablaazul">
+                                @Html.DisplayNameFor(model => model.TIPOPLANO)
+                            </th>
+                            <th class="columnatablaazul">
+                                @Html.DisplayNameFor(model => model.TIPORECEPCION)
+                            </th>
+                            <th class="columnatablaazul">
+                                @Html.DisplayNameFor(model => model.EXTENSION)
+                            </th>
+                            <th class="columnatablaazul">
+                                @Html.DisplayNameFor(model => model.DELIMITADOR)
+                            </th>
+                            <th>
+                                <label for="Editar">Editar</label>
+                            </th>
+                            <th>
+                                <label for="Eliminar">Eliminar</label>
+                            </th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TIPOPLANO)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TIPORECEPCION)
+                                </td>
+                                <td>
+                                    @if (item.EXTENSION == "TP")
+                                    {
+                                        <span>Archivo Plano</span>
+                                    }
+                                    else if (item.EXTENSION == "EX")
+                                    {
+                                        <span>Excel</span>
+                                    }
+                                    else
+                                    {
+                                        <span> - </span>
+                                    }
+
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DELIMITADOR)
+                                </td>
+                                <td>
+                                    <a id="editar" class="editartablas" href="/Nomina/ClaseDePlanos/Edit?id=@item.ID" data-toggle="modal" data-target="#centro">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a id="cc_@item.ID" class="eliminartablas" href="/Nomina/ClaseDePlanos/Delete?id=@item.ID" data-toggle="modal" data-target="#centro" data-codigo="@item.ID" title="Eliminar" value="Eliminar">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+                        }
+
+                    </table>
+                    <br />
+                </div>
+
+            </div>
+            <div id="divmodal"></div>
+
+        </div>
+        <div>
+            <a href="/Dashboard/Default/descuentosNomina?titulo=Descuentos+Nomina&menu=movimientos" class="btn btn-info" data-toggle="modal" style=" margin-top: 1%; margin-left: 1%; margin-bottom: 1%;">
+                Regresar
+            </a>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+    $(".js-refrescar").click(function () {
+        $("#mostrar").html("");
+        $("#mostrar").load("/Nomina/ClaseDePlanos/index");
+    });
+
+
+    //Al Ocultar el modal
+
+    $(document.body).on('hidden.bs.modal', function () {
+        $('#centro').removeData('bs.modal');
+        $(".js-refrescar").click();
+    });
+
+
+    function Delete() {
+
+
+
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("ValidarPlano", "ClaseDePlanos")",
+                            datatype: "Json",
+                            data: { id: $('#ID').val()},
+
+                            success: function (data) {
+                                var validar = (data[0]);
+                                if (validar == "true") {
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "@Url.Action("DeleteConfirmed", "ClaseDePlanos")",
+                                        datatype: "Json",
+                                        data: { id: $('#ID').val() },
+                                        success: function (partialViewResult) {
+                                            $('#centro').html(partialViewResult);
+                                            $('#centro').modal('hide');
+
+                                        }
+                                    });
+                                }
+                                else {
+                                    $('#centro').modal('hide');
+                                    swal({
+                                        title: "Alerta",
+                                        type: "info",
+                                        text: validar,
+                                    })
+                                }
+
+
+                            }
+
+        });
+
+
+
+
+    }
+    function Regresar() {
+        location.reload();
+    }
+
+
+    function recargar() {
+        $('#contenidoJD').load('@Url.Action("Index")');
+    }
+
+</script>
+<div id="contenidoJD">
+    @*Html.Partial("List", Model)*@
+</div>
+<div id="divmodal"></div>

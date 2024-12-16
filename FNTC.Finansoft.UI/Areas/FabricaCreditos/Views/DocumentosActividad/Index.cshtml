@@ -1,0 +1,102 @@
+﻿@using FNTC.Finansoft.Accounting.DTO.FabricaCreditos
+@model FCDocumentosActividad
+@{
+    ViewBag.Title = "CONFIGURACION - FÁBRICA DE CRÉDITOS";
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+    var actividades = (List<FCActividades>)ViewBag.actividades;
+    var documentos = (List<FCDocumentos>)ViewBag.documentos;
+}
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<div class="container" style="margin-top:1%; background: rgb(248, 248, 248);">
+
+
+    <ul class="col-md-offset-2 nav nav-tabs" style="margin-top:0%;border: none; margin-left: 2%;">
+        <li><a href="/FabricaCreditos/CrearConfiguracion/Vista" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Configuración </a></li>
+        <li><a href="/FabricaCreditos/ActividadesAsociados" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Actividades </a></li>
+        <li><a href="/FabricaCreditos/Dependencias" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Dependencias </a></li>
+        <li><a href="/FabricaCreditos/MotivosDevolucion" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Devolución </a></li>
+        <li><a href="/FabricaCreditos/Documentos" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Documentos </a></li>
+        <li class="active"><a href="/FabricaCreditos/DocumentosActividad" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Documentos Por Actividad </a></li>
+        <li><a href="/FabricaCreditos/EntesAprobacion" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Entidades </a></li>
+        <li><a href="/FabricaCreditos/CentralRiesgo" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Centrales</a></li>
+        <li><a href="/FabricaCreditos/RolesUsuario" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Roles Usuario</a></li>
+    </ul>
+
+</div>
+    @using (Html.BeginForm("Index", "DocumentosActividad", FormMethod.Post, new { id = "formDocumentosPorActividad", autocomplete = "off" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="tab-content contenedortabs">
+            <div id="menu1" class="tab-pane fade in active">
+                <div class="col-md-12"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Documentos por Actividad</h3></div>
+                <div class="col-md-12">
+
+                    <div style="width:100%; margin:0 auto" class="tablecontainer">
+                        @Html.AntiForgeryToken()
+                        <div class="form-group col-md-6">
+                            <label>Seleccione La Actividad</label>
+                            <select class="form-control" id="selActividad" name="selActividad">
+                                <option value="0">Seleccionar actividad</option>
+                                @foreach (var actividad in actividades)
+                                {
+                                    <option value="@actividad.idActividadAso">@actividad.nombreActividad</option>
+                                }
+                            </select>
+                        </div>
+                        <br />
+                        @*<a class="popup btn btn-primary" href="/home/save/0" style="margin-bottom:20px; margin-top:20px;">Add New Employee</a>*@
+                        <table id="tablaDocxAct" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+                            <tr>
+                                <th>Codigo</th>
+                                <th>Nombre Documento</th>
+                                <th>Descripcion Documento</th>
+                                <th>Dias Vigente</th>
+                                <th>Vence</th>
+                                <th>Seleccionar</th>
+                            </tr>
+                            @foreach (var documento in documentos)
+                            {
+                                <tr>
+                                    <td>@documento.idDocumento</td>
+                                    <td>@documento.nombreDocumento</td>
+                                    <td>@documento.descripcionDocumento</td>
+                                    <td>@documento.diasVigente</td>
+                                    <td>@documento.Vence</td>
+                                    <td><input type="checkbox" name="documents[]" id="@documento.idDocumento" value="@documento.idDocumento" /></td>
+                                </tr>
+                            }
+                        </table>
+                        <input type="submit" id="guardarDocumentosxActi" value="Guardar" class="btn btn-success" disabled />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    
+}
+@section Scripts {
+    <script>
+        var documentos = @documentos.Count;
+        $("#selActividad").on("change", function () {
+            var inputs = $('#tablaDocxAct').find('input').filter('[type=checkbox]').removeProp("checked");
+            if ($(this).val() == "0" || documentos==0) {
+                $("#guardarDocumentosxActi").prop("disabled", true);
+            } else {
+                $.post('@Url.Action("ObtenerDocsPorActividad", "DocumentosActividad")', { id: $(this).val() }, function (respuesta) {
+                    var nRegistros = respuesta.length;
+                    if (nRegistros != 0) {
+                        for (var i = 0; i < nRegistros ; i++) {
+                            $("#" + respuesta[i]["idDocumento"]).prop("checked", true);
+                        }
+                    }
+                }).fail(function () {
+                });
+                $("#guardarDocumentosxActi").removeProp("disabled");
+            }
+        });
+    </script>
+}
+
+

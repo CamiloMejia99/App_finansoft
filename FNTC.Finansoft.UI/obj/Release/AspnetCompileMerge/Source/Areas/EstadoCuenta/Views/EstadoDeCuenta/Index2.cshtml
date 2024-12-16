@@ -1,0 +1,567 @@
+﻿
+@model FNTC.Finansoft.Accounting.DTO.OperativaDeCaja.CuadreCajaPorCajero
+
+@{
+    ViewBag.Title = "Crear Factura";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+<link href="~/Content/styleGeneral.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+<script src="~/Scripts/datatable.js"></script>
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<script src="~/Scripts/sweetalert.min.js"></script>
+<br />
+<br />
+<div class="col-md-12" style="background: rgb(248, 248, 248)">
+
+    <div class="form-group col-md-11" style="margin-left:40px">
+        <div class="caja2" id="imprimirTodo">
+            <br />
+            <center>
+                <h3>
+                    <b>COOPERATIVA DE APORTE Y CREDITO COOMISOL</b>
+                </h3>
+                <h4 class="center">
+                    <b>NIT: 901.022.853-9</b>
+                </h4>
+            </center>
+            <br />
+            <div class="form-group">
+                <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 123%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Estado De Cuenta</h3></div>
+            </div>
+
+            <div class="row contenido">
+                <div class="form-group col-md-3">
+                    <label class="control-label">NIT :</label>
+                    @Html.DropDownList("Terceros", null, new { @class = "chosen-select-single", @id = "Tercero" })
+                    <input type="text" id="EnviarCuentaAsociadoAporte" name="cuenta" hidden="hidden">
+                    <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                    <p style="color:red">@ViewBag.mensaje</p>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="control-label">Nombre :</label>
+                    <label class="form-control" id="nombreTercero"></label>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="control-label">Forma de Pago: </label>
+                    <label class="form-control">MENSUAL</label>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="control-label">Salario : </label>
+                    <label class="form-control" id="salario"></label>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="control-label">Antiguedad : </label>
+                    <label class="form-control" id="antiguedad"></label>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="control-label">Agencia : </label>
+                    <label class="form-control" id="agencia"></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10"><h3 style="border-bottom: 2px solid black !important; width: 123%; color: black !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Aportes Sociales Y Ahorros</h3></div>
+            </div>
+
+            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>Cuenta</th>
+                        <th>Fecha Apertura</th>
+                        <th>Cuota</th>
+                        <th>Saldo Actual</th>
+                        <th>Saldo En Mora</th>
+                        <th>Intereses</th>
+                        <th>Saldo en Canje</th>
+                        <th>Ver Cuotas Pagadas</th>
+                    </tr>
+                </thead>
+                <tbody id="mitabla"></tbody>
+            </table>
+
+            <div class="form-group">
+                <div class="col-md-10"><h3 style="border-bottom: 2px solid black !important; width: 123%; color: black !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Creditos</h3></div>
+            </div>
+
+            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>Pagare</th>
+                        <th>Fecha Desembolso</th>
+                        <th>Cuota</th>
+                        <th>Saldo Capital</th>
+                        <th>Plazo</th>
+                        <th>Ver</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaCreditos"></tbody>
+            </table>
+            <div class="form-group">
+                <div class="col-md-10"><h3 style="border-bottom: 2px solid black !important; width: 123%; color: black !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Codeudores</h3></div>
+            </div>
+
+            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>NIT</th>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaCodeudores"></tbody>
+            </table>
+        </div>
+        <button type="button" id="BtnImprimir">Imprimir Estado De Cuenta</button>
+        <button type="button" id="BtncertiAporte">Certificado De Aporte</button>
+        @*data-toggle="modal" data-target="#modalCertificadoAporte"*@
+    </div>
+</div>
+
+<div id="modalVerCuotasCreditos" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Contenido del modal -->
+        <div class="modal-content">
+            <div class="modal-body" id="imprimirCreditos">
+                <div class="center contenido" id="areaImprimir">
+                    <center>
+                        <h4>
+                            <b>COOPERATIVA DE APORTE Y CREDITO COOMISOL</b>
+                        </h4>
+                        <h5 class="center">
+                            <b>NIT: 901.022.853-9</b>
+                        </h5>
+                    </center>
+                    <br />
+                    <h4 class="center">
+                        <b>CUOTAS PAGADAS</b>
+                    </h4>
+                    <br />
+                    <div class="row">
+                        <p class="col-md-4"><b>&nbsp;&nbsp;Asociado:</b>&nbsp;&nbsp;<label id="modelAportesNIT"></label></p>
+                        <p class="col-md-8">&nbsp;&nbsp;<label id="modelAportesNombre"></label></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-6"><b>&nbsp;&nbsp;Agencia:</b>&nbsp;&nbsp;<label id="modelAportesAgencia"></label></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-6"><b>&nbsp;&nbsp;Pagaré:</b>&nbsp;&nbsp;<label id="modelPagare"></label></p>
+                    </div>
+                    <div class="row">
+                        <table class="table table-bordered col-md-10">
+                            <thead>
+                                <tr>
+                                    <th><b>N°</b></th>
+                                    <th><b>Fecha</b></th>
+                                    <th><b>Valor Consignado</b></th>
+                                    <th><b>Abono Capital</b></th>
+                                    <th><b>Numero Cuota</b></th>
+                                    <th><b>Interes Corriente</b></th>
+                                    <th><b>Seguros</b></th>
+                                    <th><b>Saldo Capital</b></th>
+                                </tr>
+                            </thead>
+                            <tbody id="datosCreditos"></tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-6"><b>TOTALES</b></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-6"><b>&nbsp;&nbsp;Total Pagado:</b>&nbsp;&nbsp;<label id="modelTotalPagado"></label></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnImprimirCreditos">Imprimir</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalVerAportes" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Contenido del modal -->
+        <div class="modal-content">
+            <div class="modal-body" id="imprimirAportes">
+                <div class="center contenido" id="areaImprimir">
+                    <center>
+                        <h4>
+                            <b>COOPERATIVA DE APORTE Y CREDITO COOMISOL</b>
+                        </h4>
+                        <h5 class="center">
+                            <b>NIT: 901.022.853-9</b>
+                        </h5>
+                    </center>
+                    <br />
+                    <h4 class="center">
+                        <b>APORTES SOCIALES</b>
+                    </h4>
+                    <br />
+                    <div class="row">
+                        <p class="col-md-4"><b>&nbsp;&nbsp;Asociado:</b>&nbsp;&nbsp;<label id="modelAportesNIT"></label></p>
+                        <p class="col-md-8">&nbsp;&nbsp;<label id="modelAportesNombre"></label></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-6"><b>&nbsp;&nbsp;Agencia:</b>&nbsp;&nbsp;<label id="modelAportesAgencia"></label></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-6"><b>&nbsp;&nbsp;Cuenta:</b>&nbsp;&nbsp;<label id="modelAportesCuenta"></label></p>
+                    </div>
+                    <div class="row">
+                        <table class="table table-bordered col-md-10">
+                            <thead>
+                                <tr>
+                                    <th><b>N°</b></th>
+                                    <th><b>Fecha</b></th>
+                                    <th><b>Clase De Movimiento</b></th>
+                                    <th><b>Valor</b></th>
+                                </tr>
+                            </thead>
+                            <tbody id="datosAportes"></tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-6"><b>TOTALES</b></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-6"><b>&nbsp;&nbsp;Retiros:</b>&nbsp;&nbsp;<label id="modelAportesRetiros"></label></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-6"><b>&nbsp;&nbsp;Consignaciones:</b>&nbsp;&nbsp;<label id="modelAportesConsignaciones"></label></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-8"><b>&nbsp;&nbsp;Consignaciones - Retiros:</b>&nbsp;<label id="modelAportesCondig-Retiros"></label></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnImprimirAportes">Imprimir</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalCertificadoAporte" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Contenido del modal -->
+        <div class="modal-content">
+            <div class="modal-body" id="IMPCertificadoAportes">
+                <div class="center contenido" id="areaImprimir">
+                    <center>
+                        <h4>
+                            <b>LA COOPERATIVA MULTIACTIVA DE APORTE Y CRÉDITO COOMISOL CON </b>
+                        </h4>
+                        <h5 class="center">
+                            <b>NIT: 901.022.853-9</b>
+                        </h5>
+                    </center>
+                    <br />
+                    <center>
+                        <h4>
+                            <b>CERTIFICA</b>
+                        </h4>
+                    </center>
+                    
+                    <br />
+                   
+                    <p>Que, <b><span id="nomCerApo"></span></b> identificado con n° de documento <b><span id="cedCerApo"></span>,</b> está afiliada
+                       <br />
+                       con nosotros desde <b><span id="fecCerApo"></span></b>, tiene un saldo de <b>$ <span id="salCerApo"></span></b>
+                        
+                    
+                    </p> @*FIN PARRAFO*@    
+                  
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+                <button type="button" id="btnImprimirCertificadoAporte">Imprimir</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #DDD;
+    }
+</style>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (ViewBag.mensaje != null)
+    {
+        <script>
+
+			window.onload = function () {
+				swal('Error', '@ViewBag.mensaje', 'warning');
+			}
+        </script>
+    }
+
+    <script>
+        $(document).on('click', '.btnVerAportes', function () {
+            var numero = 1;
+            $('#datosAportes tr').empty();
+            var sumaConsig = 0;
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetDatosAportes", "EstadoDeCuenta")",
+                    datatype: "Json",
+                    data: { NIT: $('#Tercero').val() },
+                    success: function (data) {
+                        $('#modelAportesNIT').text($('#Tercero').val());
+                        $('#modelAportesNombre').text($('#nombreTercero').text());
+                        $('#modelAportesAgencia').text($('#agencia').text());
+                        $('#modelAportesCuenta').text("FA"+$('#Tercero').val());
+                        $('#modelAportesRetiros').text("0");
+                        $.each(data, function (index, value) {
+                            var a = value[2];
+                            sumaConsig = sumaConsig + parseInt(a);
+                            $("#datosAportes").append("<tr><td>" + numero + "</td><td>" + value[0] + "</td><td>" + value[1] + "</td><td>" + formatNumberMiles.new(value[2]) + "</td></tr>");
+                            numero++;
+                        });
+                        $('#modelAportesConsignaciones').text(formatNumberMiles.new(sumaConsig));
+                        $('#modelAportesCondig-Retiros').text(formatNumberMiles.new(sumaConsig));
+                    }
+            });
+        });
+
+        $(document).on('click', '.btnVerCuotasPagadas', function () {
+            var miTr = $(this).parents('tr');
+            var pagareTabla = $('td:nth-child(1)', miTr).text();
+            var numero = 1;
+            $('#datosCreditos tr').empty();
+            var sumaConsig = 0;
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetDatosCuotasPagadas", "EstadoDeCuenta")",
+                    datatype: "Json",
+                    data: { pagare: pagareTabla },
+                    success: function (data) {
+                        $('#modelAportesNIT').text($('#Tercero').val());
+                        $('#modelAportesNombre').text($('#nombreTercero').text());
+                        $('#modelAportesAgencia').text($('#agencia').text());
+                        $('#modelPagare').text("FA"+$('#Tercero').val());
+                        $.each(data, function (index, value) {
+                            var a = value[1];
+                            sumaConsig = sumaConsig + parseInt(a);
+                            $("#datosCreditos").append("<tr><td>" + numero + "</td><td>" + value[0] + "</td><td>" + formatNumberMiles.new(value[1]) + "</td><td>" + formatNumberMiles.new(value[2]) + "</td><td>" + value[3] + "</td><td>" + formatNumberMiles.new(value[4]) + "</td><td>" + formatNumberMiles.new(value[5]) + "</td><td>" + formatNumberMiles.new(value[6]) + "</td></tr>");
+                            numero++;
+                        });
+                        $('#modelTotalPagado').text(formatNumberMiles.new(sumaConsig));
+                    }
+            });
+        });
+
+        $('#BtnImprimir').click(function () {
+            $('#imprimirTodo').printThis();
+        });
+
+        $('#btnImprimirAportes').click(function () {
+            $('#imprimirAportes').printThis();
+        });
+
+        $('#btnImprimirCreditos').click(function () {
+            $('#imprimirCreditos').printThis();
+        });
+        $('#BtncertiAporte').click(function () {
+            $('#IMPCertificadoAportes').printThis();
+        });
+    </script>
+
+    <script type="text/javascript">
+        $("#Tercero").chosen().change(function () {
+            if (!($("#Tercero").val() == ""))
+            {
+                $('#mitabla tr').empty();
+                $('#tablaCreditos tr').empty();
+
+            var cuenta = "";
+            var fechaApertura = "";
+            var cuota = "";
+            var saldoActual = "";
+            var saldoEnMora= "";
+            var intereses = "";
+            var saldoEnCanje = "";
+
+
+             
+
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetDatosEstadoCuenta", "EstadoDeCuenta")",
+                    datatype: "Json",
+                    data: { NIT: $('#Tercero').val() },
+                    success: function (data) {
+                        $("#nombreTercero").text(data[0]);
+                        $("#nomCerApo").text(data[0]); // imprime variable para modal certificado de aporte
+                        $("#cedCerApo").text(data[9]); // imprime variable para modal certificado de aporte
+                        var fff = data[5];
+                        $("#fecCerApo").text(fff.substring(0, 10)); // imprime variable para modal certificado de aporte
+                        $("#salCerApo").text(formatNumberMiles.new(data[7])); // imprime variable para modal certificado de aporte
+                        $("#salario").text(formatNumberMiles.new(data[1]));
+                        $("#antiguedad").text(data[2] + " " + "MESES");
+                        $("#agencia").text(data[3]);
+                         cuenta = data[4];
+                         fechaApertura = data[5];
+                        cuota = formatNumberMiles.new(data[6]);
+                        saldoEnMora = parseInt(data[8]);
+                        if (saldoEnMora < 0) {
+                            saldoEnMora = 0;
+                        } else {
+                            saldoEnMora = formatNumberMiles.new(data[8]);
+                        }
+                        saldoActual = formatNumberMiles.new(data[7]);
+                        saldoEnMora = saldoEnMora;
+                        var fila = "<tr><td>" + cuenta + "</td><td>" + fechaApertura + "</td><td>" + cuota + "</td><td>" + saldoActual + "</td><td>" + saldoEnMora + "</td><td>" + intereses + "</td><td>" + saldoEnCanje + "</td><td><button type='button' class='btnVerAportes btn btn - info btn - lg' data-toggle='modal' data-target='#modalVerAportes'>Ver</button></td></tr>";
+                        var btn = document.createElement("TR");
+                        btn.innerHTML = fila;
+                        document.getElementById("mitabla").appendChild(btn);
+                    }
+                });
+
+            var fechaDesembolso = "";
+            var cuota = "";
+            var pagare= "";
+            var totalPagado = "";
+            var saldoCapital = "";
+            var plazo = "";
+
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetDatosEstadoCuentaCreditos", "EstadoDeCuenta")",
+                    datatype: "Json",
+                    data: { NIT: $('#Tercero').val() },
+                    success: function (data) {
+                        fechaDesembolso = data[0];
+                        cuota = formatNumberMiles.new(data[1]);
+                        pagare = data[2];
+                        saldoCapital = formatNumberMiles.new(data[3]);
+                        plazo = data[4];
+                        var fila2 = "<tr><td>"+pagare+"</td><td>" + fechaDesembolso + "</td><td>" + cuota + "</td><td>" + saldoCapital + "</td><td>" + plazo + "</td><td><button type='button' class='btnVerCuotasPagadas btn btn - info btn - lg' data-toggle='modal' data-target='#modalVerCuotasCreditos'>Ver</button></td></tr>";
+                        var btn2 = document.createElement("TR");
+                        btn2.innerHTML = fila2;
+                        document.getElementById("tablaCreditos").appendChild(btn2);
+                    }
+                });
+
+                $.ajax({ //OBTIENE LOS CRÉDITOS
+                    type: "POST",
+                    url: "@Url.Action("GetCreditos", "EstadoDeCuenta")",
+                    data: { NIT: $('#Tercero').val() },
+                    datatype: "Json",
+                    success: function (data) {
+                        data = JSON.parse(data);//recibe datos json
+                        if (data != "NO") {
+                            $.each(data, function (key, val) {
+                                //busca en la tabla amortización
+                                var url = '/EstadoCuenta/EstadoDeCuenta/GetDataAmortizacion';
+                                var data = {
+                                    pagare: val.Pagare
+                                   
+                                };
+                                $.post(url, data).done(function (data) {
+                                    var tr = '<tr>'; //nueva fila
+                                    tr += '<td>' + val.Pagare + '</td>';
+                                    var fech = val.fechadesembolso
+                                    tr += '<td>' + fech.substring(0, 10) + '</td>';
+                                    tr += '<td>' + String(data[0].cuotaa) + '</td>';
+                                    tr += '<td>' + formatNumberMiles.new(String(data[0].saldoCapitall)) + '</td>';
+                                    tr += '<td>' + val.Plazo + '</td>';
+                                    tr += '<td><button type="button" class="btnVerCuotasPagadas btn btn - info btn - lg" data-toggle="modal" data-target="#modalVerCuotasCreditos">Ver</button></td>'
+                                    tr += '</tr>';
+                                    $('#tablaCreditos').append(tr);//añadiendo toda la fila a la tabla
+                                });
+                                //..............
+
+                               
+
+
+                            });
+                        }//fin condicion IF 
+                        
+                    }
+                });   
+
+            }
+        });
+
+        $(document).ready(function () {
+            var tope = $("#tope").val();
+            var consignacion_efectivo = $("#consignacion_efectivo").val();
+            $("#efectivoEnCajaSMiles").text(formatNumberMiles.new(tope));
+            $("#txtconsignacion_efectivo").text(formatNumberMiles.new(consignacion_efectivo));
+
+            $(".chosen-select-single").chosen();
+            $(".chosen-select-multiple").chosen();    //DESPUES DEL FINAL DEL DOCUMENTO AL PRINCIPIO DE LOS SCRIPTS
+        });
+    </script>
+
+    <script>
+        $("#BtnFormulario").on("click", function (e) {
+            $("#BtnFormulario").prop("disabled", true);
+            e.preventDefault();
+            var CuentaAsociadoAporte = $("#CuentaAsociadoAporte").val();
+            if (CuentaAsociadoAporte != "") {
+                $("#EnviarCuentaAsociadoAporte").val($("#CuentaAsociadoAporte").val());
+                $("#FormContinuar").submit();
+            } else {
+                swal({
+                    title: "Error",
+                    text: "Seleccione un Asociado",
+                    type: 'warning',
+                    confirmButtonText: 'Aceptar'
+                })
+                $("#BtnFormulario").prop("disabled", false);
+            }
+        });
+    </script>
+    <script>
+        //FORMATEAR UN NUMERO
+        var formatNumberMiles = {
+            separador: ".", // separador para los miles
+            sepDecimal: ',', // separador para los decimales
+            formatear: function (num) {
+                num += '';
+                var splitStr = num.split('.');
+                var splitLeft = splitStr[0];
+                var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+                var regx = /(\d+)(\d{3})/;
+                while (regx.test(splitLeft)) {
+                    splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+                }
+                return this.simbol + splitLeft + splitRight;
+            },
+            new: function (num, simbol) {
+                this.simbol = simbol || '';
+                return this.formatear(num);
+            }
+        }
+                    //FIN FORMATEAR UN NUMERO
+                    /*
+                    * FUNCIONALIDAD DE LA 'FUNCION'
+                    formatNumber.new(123456779.18, "$") // retorna "$123.456.779,18"
+                    formatNumber.new(123456779.18) // retorna "123.456.779,18"
+                    formatNumber.new(123456779) // retorna "$123.456.779"
+                    */
+                    //formatNumberMiles.new(realValor);//ACCESO A LA VARIABLE
+    </script>
+}
+
+
+
+

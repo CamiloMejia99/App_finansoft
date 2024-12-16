@@ -1,0 +1,335 @@
+﻿@model IdentitySample.Models.RegisterUserViewModel
+@{
+    /**/
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+    ViewBag.Title = "";
+}
+
+<!DOCTYPE html>
+<!--<script src="/assets/js/jquery.js"></script>
+<script src="~/assets/js/jquery-ui.js"></script>
+
+<script src="~/assets/js/bootstrap.js"></script>-->
+
+@*<script src="/assets/js/additional-methods.js"></script>*@
+
+<!--<script src="/assets/js/jquery.gritter.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap.css" />-->
+@*<script src="/assets/js/date-time/moment.js"></script>*@
+<!--<script src="~/Scripts/jquery.validate.min.js"></script>
+
+
+<link href="/Content/jquery-ui-autocomplete.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<link href="/assets/css/chosen.css" rel="stylesheet" />
+<link href="/assets/css/ace.css" rel="stylesheet" />
+<script src="/assets/js/chosen.jquery.js"></script>-->
+@*<link rel="stylesheet" href="/assets/css/bootstrap-datetimepicker.css" />
+    <script src="/assets/js/date-time/bootstrap-datetimepicker.js"></script>
+    <link rel="stylesheet" href="/assets/css/jquery.gritter.css" />*@
+
+
+@*<script src="~/assets/js/ace/ace.widget-box.js"></script>
+    <script src="~/assets/js/ace/ace.widget-on-reload.js"></script>*@
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<style>
+    label {
+        margin-top: 6px;
+    }
+
+    .ui-helper-hidden-accessible {
+        display: none;
+    }
+</style>
+
+
+<div class="page-content col-sm-12">
+    <h2>Registrar usuario</h2>
+    @using (Html.BeginForm("Create", "Login", FormMethod.Post, new { @id = "form1", @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+
+        <div class="row">
+            @*@Html.LabelFor(m => m.Nombres, new { @class = "col-md-6" })*@
+            <label class="col-md-6">Nombres y Apellidos</label>
+            <label class="col-md-6">Usuario/Cédula</label>
+            @*@Html.LabelFor(m => m.UserName, new { @class = "col-md-6" })*@
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                @Html.TextBoxFor(m => m.Nombres, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Nombres, "", new { @style = "color:red" })
+            </div>
+
+            <div class="col-md-6">
+                @Html.TextBoxFor(m => m.UserName, new { @id = "UserName", @class = "form-control", @autocomplete="off" })
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @style = "color:red" })
+            </div>
+
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-6"})
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-6" })
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                @Html.PasswordFor(m => m.Password, new { @id = "password", @name = "password", @class = "form-control", @autocomplete = "new-password" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @style = "color:red" })
+            </div>
+            <div class="col-md-6">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @name = "passwordconf", @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @style = "color:red" })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-4" })
+            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-4" })
+            <label class="col-md-4">Fecha Creación de Usuario</label>
+        </div>
+        <div class="row">
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Email, new { @id = "Email", @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @style = "color:red" })
+
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Fecha_Registro, new { @class = "form-control" })
+            </div>
+        </div>
+
+
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                @*<input type="button" class="btn-primary" name="name" value="Cargar Roles" id="Cargar_Roles" />*@
+                @*<button type="button" class="btn btn-warning btn-sm" name="name" value="Cargar Roles" id="Cargar_Roles">
+                        <i class="ace-icon align-top bigger-80"></i>
+                        Cargar Roles
+                    </button>*@
+            </div>
+
+        </div>
+        <hr style="width:80%;text-align:left;margin-left:0;  border-width: 5px; background:darkblue;">
+        <div class="row">
+
+            @Html.Label("LISTA DE ROLES", new { @class = " text-left col-md-12" })
+            <span class="col-md-12" style="padding-left:12px;">
+                @foreach (var item in (SelectList)ViewBag.RoleId)
+                {
+                    <span class="col-md-4 no-padding-left">
+                        <input type="checkbox" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
+                        &nbsp;@Html.Label(item.Text, new { @class = "control-label" })
+                    </span>
+                }
+            </span>
+        </div>
+
+        <hr style="width:80%;text-align:left;margin-left:0;  border-width: 5px; background:darkblue;">
+
+        <br />
+        <div class="row">
+            <div class="col-lg-12">
+                <button type="submit" class="btn btn-primary">
+                    <i class="ace-icon fa fa-save align-top bigger-125"></i>
+                    Registrar
+                </button>
+                <span>|</span>
+                <a href="/Login/Users" class="btn btn-danger">
+                    <i class="ace-icon fa fa-close align-top bigger-125"></i>
+                    Cancelar
+                </a>
+            </div>
+
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var e = new Date();
+        $("#Fecha_Registro").val(e.getFullYear() + "-" + (e.getMonth() + 1) + "-" + e.getDate());
+        $("#Fecha_Registro").attr('disabled', true);
+        //$("#txtbuscarprestador").val('');
+        $("#externo").prop("checked", false);
+
+
+        $("#form1").validate({
+
+            //rules: {
+
+            //password: {
+            //    required: true,
+            //    pwcheck: true,
+            //    minlength: 8
+            //},
+            //passwordconf: {
+            //    required: true,
+            //    equalTo: "#password"
+            //}
+            //,
+            //messages: {
+            //    password: {
+            //        required: "Contraseña requerida",
+            //        pwcheck: "Das Passwort entspricht nicht den Kriterien!",
+            //        minlength: "Minimo de caracteres"
+            //    },
+            //    passwordconf: {
+            //        required: "Passwort wiederholen",
+            //        equalTo: "las contraseñas no coinciden"
+            //    }
+            //}
+
+
+
+            //}
+
+            rules: {
+                password: {
+                    required: true,
+                    pwcheck: true,
+                    minlength: 8
+                }
+            },
+            messages: {
+                password: "Please enter a valid Name."
+            },
+
+        })
+    })
+    $(function () {
+        $("#Departamento_id").change(function () {
+            $("#resultMunicipios").html('');
+            var id = $('#Departamento_id').val();
+            $.ajax({
+                url: '/Municipios/GetMunicipiosByDepartamentoID?departamentoid=' + id,
+                type: 'get',
+            }).done(function (data) {
+                $("#resultMunicipios").html(data);
+            });
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#Cargar_Roles").click(function () {
+
+            var id = $('#Aplicacion_id').val();
+
+            $.ajax({
+                url: '/UsersAdmin/RolesAplicacionBy_id?aplicacion_id=' + id,
+                type: 'get',
+
+            }).done(function (data) {
+                $("#resultRoles").html(data);
+            });
+        });
+    });
+</script>
+
+<script>
+
+    if (!ace.vars['touch']) {
+        $('.chosen-select.dpto').chosen({ allow_single_deselect: true });
+        //resize the chosen on window resize
+
+        $(window)
+            .off('resize.chosen')
+            .on('resize.chosen', function () {
+                $('.chosen-select.dpto').each(function () {
+                    var $this = $(this);
+                    $this.next().css({ 'width': $this.parent().width() });
+                })
+            }).trigger('resize.chosen');
+        //resize chosen on sidebar collapse/expand
+        $(document).on('settings.ace.chosen', function (e, event_name, event_val) {
+            if (event_name != 'sidebar_collapsed') return;
+            $('.chosen-select.dpto').each(function () {
+                var $this = $(this);
+                $this.next().css({ 'width': $this.parent().width() });
+            })
+        });
+
+
+        $('#chosen-multiple-style .btn').on('click', function (e) {
+            var target = $(this).find('input[type=radio]');
+            var which = parseInt(target.val());
+            if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
+            else $('#form-field-select-4').removeClass('tag-input-style');
+        });
+    }
+</script>
+
+
+
+<script type="text/javascript">
+    $("#prestador").hide();
+
+
+    var op = $('#externo').val();
+
+    function checkExt() {
+        var checkbox = document.getElementById('externo');
+        if (checkbox.checked == true) {
+            op = true;
+            $("#prestador").show();
+
+            return $('#externo').val(op);
+        }
+        else {
+            op = false;
+            $("#prestador").hide();
+
+            return $('#externo').val(op);
+        }
+    }
+    //ADMINISTRACION DE USUARIOS
+    //==========================
+
+
+    //$("#txtbuscarprestador").autocomplete({
+
+    //    minLength: 4,
+
+    //    source: function (request, response) {
+
+    //        var prestador = $('#txtbuscarprestador').val();
+
+    //        $.ajax({
+    //            url: "/UsersAdmin/ListaPrestadores",
+    //            type: "GET",
+    //            dataType: "json",
+    //            data: { term: request.term, prestador: prestador },
+    //            success: function (data) {
+    //                response($.map(data, function (item) {
+    //                    return { label: item.Text, value: item.Text, id: item.Value };
+    //                }))
+    //            }
+    //        })
+    //    },
+    //    select: function (event, ui) {
+    //        document.getElementById("txtbuscarprestador").value = ui.item.Text;
+    //        $('#IDE_PRESTADOR_EXTERNO').val(ui.item.id);
+    //    }
+    //})
+</script>
+<script>
+    $('#Nombres').keyup(function () {
+        $(this).val($(this).val().toUpperCase())
+    })
+</script>

@@ -1,0 +1,158 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Scoring.ViewModelScoringModeloRiesgoRiesgos
+
+
+@{
+    Layout = "~/Views/Shared/_LayoutActivosFijos.cshtml";
+}
+
+@{
+    ViewBag.Title = "Modelos de Riesgo";
+}
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+
+
+
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Modelos de Riesgo
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            @Html.ValidationSummary(true)
+
+
+                            <table class="table">
+
+
+                                <tr>
+
+                                    <th>
+                                       <h4> Modelo de Riesgo</h4>
+                                    </th>
+                                    <th>
+                                        <h4>Estado</h4>
+                                    </th>
+
+                                </tr>
+
+
+
+
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.RiesgoImpago, htmlAttributes: new { @class = "" })
+                                    </td>
+                                    <td>
+
+                                        <div class="col-md-10">
+                                            <div class="checkbox">
+                                                @Html.EditorFor(model => model.RiesgoImpago)
+                                                @Html.ValidationMessageFor(model => model.RiesgoImpago, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.RiesgoCreditoIndividual, htmlAttributes: new { @class = "" })
+                                    </td>
+                                    <td>
+
+                                        <div class="col-md-10">
+                                            <div class="checkbox">
+                                                @Html.EditorFor(model => model.RiesgoCreditoIndividual)
+                                                @Html.ValidationMessageFor(model => model.RiesgoCreditoIndividual, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.RiesgoDeCartera, htmlAttributes: new { @class = "" })
+                                    </td>
+                                    <td>
+                                        <div class="col-md-10">
+                                            <div class="checkbox">
+                                                @Html.EditorFor(model => model.RiesgoDeCartera)
+                                                @Html.ValidationMessageFor(model => model.RiesgoDeCartera, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.RiesgoDeCalificacion, htmlAttributes: new { @class = "" })
+                                    </td>
+                                    <td>
+                                        <div class="col-md-10">
+                                            <div class="checkbox">
+                                                @Html.EditorFor(model => model.RiesgoDeCalificacion)
+                                                @Html.ValidationMessageFor(model => model.RiesgoDeCalificacion, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+
+                            </table>
+
+
+                            <br />
+                            @*HASTA AQUI*@
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="form-group">
+
+                                        <div class="col-md-2">
+                                            <input type="submit" value="Guardar Cambios" class="btn btn-success" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*HASTA AQUI*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+    }
+
+
+
+    <div>
+        @Html.ActionLink("Regresar a la Lista", "../Scoring/")
+    </div>
+</body>
+</html>

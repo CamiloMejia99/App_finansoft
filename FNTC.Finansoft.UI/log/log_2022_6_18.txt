@@ -1,0 +1,1 @@
+18/06/2022 9:50:16 a. m. - No se encuentra el controlador de la ruta de acceso '/Aportes/Prestamos/GetFechaActual' o no implementa IController. ---_System.Web.Mvc.IController GetControllerInstance(System.Web.Routing.RequestContext, System.Type)

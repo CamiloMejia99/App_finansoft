@@ -1,0 +1,2313 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Scoring.ViewModelScoringVariables
+@{
+    /**/
+
+    Layout = "~/Views/Shared/_LayoutActivosFijos.cshtml";
+}
+
+@{
+    ViewBag.Title = "Variables";
+}
+
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Agencias
+                </div>
+                <div class="panel-body">
+
+                    <dix|v class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <strong> Agencia</strong>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <strong> Puntaje</strong>
+                            </div>
+                        </div>
+                    </dix|v>
+
+                    <dix|v class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.NombreAgencia)
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeAgencia, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeAgencia, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+
+
+                    @*HASTA AQUI*@
+                    <dix|v class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.NombreAgencia2)
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeAgencia2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeAgencia2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+                    @*HASTA AQUI*@
+
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Categorias de Clientes
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <p align="justify">
+                                <strong>Categoria del cliente según el riesgo.</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <dix|v class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <strong> Categoria</strong>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <strong> Puntaje</strong>
+                            </div>
+                        </div>
+                    </dix|v>
+
+                    <dix|v class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.NombreCategoria)
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeCategorias, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeCategorias, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+                    @*HASTA AQUI*@
+                    <dix|v class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.NombreCategoria2)
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeCategorias2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeCategorias2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+                    <dix|v class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.NombreCategoria3)
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeCategorias3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeCategorias3, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+
+                    <dix|v class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.NombreCategoria4)
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeCategorias4, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeCategorias4, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+
+                    <dix|v class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.NombreCategoria5)
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeCategorias5, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeCategorias5, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Montos
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <p align="justify">
+                                <strong>  Dado en Millones de Pesos.</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <dix|v class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <strong>Desde</strong>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <strong>Hasta</strong>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <strong> Puntaje</strong>
+                            </div>
+                        </div>
+                    </dix|v>
+
+                    <dix|v class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-3">
+                            <div class="form-group">
+
+                                @Html.DisplayFor(model => model.DesdeMonto)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.HastaMonto)
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeMonto, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeMonto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+                    @*HASTA AQUI*@
+                    <dix|v class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.DesdeMonto2)
+                               
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.HastaMonto2)
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeMonto2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeMonto2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+                    <dix|v class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.DesdeMonto3)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.HastaMonto3)
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeMonto3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeMonto3, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+
+                    <dix|v class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.DesdeMonto4)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.HastaMonto4)
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeMonto4, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeMonto4, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+
+                    <dix|v class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.DesdeMonto5)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.HastaMonto5)
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeMonto5, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeMonto5, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+                    <dix|v class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.DesdeMonto6)
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.HastaMonto6)
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeMonto6, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeMonto6, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Garantias
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <p align="justify">
+                                <strong>Es la garantía que ofrece el prestatario a la entidad financiera y ésta puede ser de dos tipos: personal y real. La primera es cuando se tiene un respaldo personal otorgado por un codeudor; en la segunda se respalda el crédito por medio de un bien inmueble.</strong>
+                            </p>
+                        </div>
+                    </div>
+
+                    <dix|v class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <strong> Garantia</strong>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <strong> Puntaje</strong>
+                            </div>
+                        </div>
+                    </dix|v>
+                    <dix|v class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.NombreGarantia)
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeGarantia, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeGarantia, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+                    <dix|v class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.NombreGarantia2)
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeGarantia2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeGarantia2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+                    <dix|v class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.NombreGarantia3)
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PuntajeGarantia3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                @Html.ValidationMessageFor(model => model.PuntajeGarantia3, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </dix|v>
+
+
+
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+
+
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Reestructurado
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p align="justify">
+                                    <strong>
+                                        según el comportamiento del asociado, el crédito ha tenido
+                                        que ser modificado en sus condiciones iniciales, para asegurar
+                                        que éste cumpla con las obligaciones financieras.
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                        <dix|v class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong>Reestructurado</strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong> Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+
+                        <dix|v class="row">
+                            @Html.ValidationSummary(true)
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.EstadoReestructurado)
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeReestructurado, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeReestructurado, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+
+
+                        @*HASTA AQUI*@
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.EstadoReestructurado2)
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeReestructurado2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeReestructurado2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                        </dix|v>
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Edad Asociado
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p align="justify">
+                                    <strong>
+                                        la edad en la cual se encuentra el asociado.
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                        <dix|v class="row">
+                            @Html.ValidationSummary(true)
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <strong>Edad Desde</strong>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <strong>Edad Hasta</strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <strong> Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.EdadDesde)
+                                    Años
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.EdadHasta)
+                                    Años
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeEdad, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeEdad, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.EdadDesde2)
+                                    Años
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.EdadHasta2)
+                                    Años
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeEdad2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeEdad2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.EdadDesde3)
+                                    Años
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.EdadHasta3)
+                                    Años
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeEdad3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeEdad3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.EdadDesde4)
+                                    Años
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.EdadHasta4)
+                                    Años
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeEdad4, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeEdad4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.EdadDesde5)
+                                    Años
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.EdadHasta5)
+                                   
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeEdad5, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeEdad5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Ocupación
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p align="justify">
+                                    <strong>
+                                        Expresa la ocupación del asociado.
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                        <dix|v class="row">
+                            @Html.ValidationSummary(true)
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong>Ocupación</strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong> Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreOcupacion)
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeOcupacion, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeOcupacion, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreOcupacion2)
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeOcupacion2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeOcupacion2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreOcupacion3)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeOcupacion3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeOcupacion3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+             
+
+                        </dix|v>
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Nivel Educativo
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p align="justify">
+                                    <strong>
+                                        Grado de escolaridad del asociado
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong>Nivel Educativo</strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong> Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreNivelEducativo)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeNivelEducativo, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeNivelEducativo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreNivelEducativo2)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeNivelEducativo2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeNivelEducativo2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreNivelEducativo3)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeNivelEducativo3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeNivelEducativo3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreNivelEducativo4)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeNivelEducativo4, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeNivelEducativo4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreNivelEducativo5)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeNivelEducativo5, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeNivelEducativo5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Ingresos Totales
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p align="justify">
+                                    <strong>
+                                        En millones de pesos
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                        <dix|v class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <strong>Ingreso total desde</strong>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <strong>Ingreso total Hasta</strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <strong> Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.IngresoTotalDesde)
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.IngresoTotalHasta)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeIngresoTotal, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeIngresoTotal, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.IngresoTotalDesde2)
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.IngresoTotalHasta2)
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeIngresoTotal2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeIngresoTotal2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.IngresoTotalDesde3)
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.IngresoTotalHasta3)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeIngresoTotal3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeIngresoTotal3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+
+
+
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Estrato Social
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p align="justify">
+                                    <strong>  Estrato socioeconómico.</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <strong>Estrato Social Desde</strong>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <strong>Estrato Social Hasta</strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <strong> Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.DesdeEstrato)
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.HastaEstrato)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeEstrato, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeEstrato, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.DesdeEstrato2)
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.HastaEstrato2)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeEstrato2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeEstrato2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.DesdeEstrato3)
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.HastaEstrato3)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeEstrato3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeEstrato3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.DesdeEstrato4)
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.HastaEstrato4)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeEstrato4, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeEstrato4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+
+
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Antiguedad Laboral
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p align="justify">
+                                    <strong>Tiempo que lleva vinculado a la empresa.</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <strong>Antiguedad Laboral Desde</strong>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <strong>Antiguedad Laboral Hasta</strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <strong> Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.DesdeAntiguedad)
+                                    Meses
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.HastaAntiguedad)
+                                    Meses
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeAntiguedadL, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeAntiguedadL, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.DesdeAntiguedad2)
+                                    Meses
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.HastaAntiguedad2)
+                                    Meses
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeAntiguedadL2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeAntiguedadL2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.DesdeAntiguedad3)
+                                    Meses
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.HastaAntiguedad3)
+                                    Meses
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeAntiguedadL3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeAntiguedadL3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.DesdeAntiguedad4)
+                                    Meses
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.HastaAntiguedad4)
+                                    Meses
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeAntiguedadL4, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeAntiguedadL4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.DesdeAntiguedad5)
+                                    Meses
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.HastaAntiguedad5)
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeAntiguedadL5, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeAntiguedadL5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <br />
+                        <br />
+                        <br />
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Estado Civil
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p align="justify">
+                                    <strong>Situación Sentimental.</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong>Estado Civil</strong>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong> Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreEstadoCivil)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeEstadoCivil, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeEstadoCivil, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreEstadoCivil2)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeEstadoCivil2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeEstadoCivil2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreEstadoCivil3)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeEstadoCivil3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeEstadoCivil3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreEstadoCivil4)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeEstadoCivil4, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeEstadoCivil4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreEstadoCivil5)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeEstadoCivil5, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeEstadoCivil5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreEstadoCivil6)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeEstadoCivil6, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeEstadoCivil6, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                     
+
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Sexo
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong>Sexo</strong>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong> Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreSexo)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeSexo, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeSexo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreSexo2)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeSexo2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeSexo2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br /> 
+                        <br />
+              
+                        
+
+
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Personas a cargo
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p align="justify">
+                                    <strong>Número de personas que dependen económicamente del asociado.</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong>Numero Personas</strong>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong> Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombrePersonasACargo)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajePersonasACargo, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajePersonasACargo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombrePersonasACargo2)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajePersonasACargo2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajePersonasACargo2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombrePersonasACargo3)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajePersonasACargo3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajePersonasACargo3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombrePersonasACargo4)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajePersonasACargo4, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajePersonasACargo4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombrePersonasACargo5)
+                                    @Html.DisplayFor(model => model.DescripcionPersonasACargo5)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajePersonasACargo5, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajePersonasACargo5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+
+                        <br />
+                        <br />
+                        <br />
+                       
+
+
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Tipo de vivienda
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p align="justify">
+                                    <strong>Tipo de vivienda en la que vive el asociado.</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong>Tipo de Vivienda</strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong> Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreTipoVivienda)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeTipoVivienda, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeTipoVivienda, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreTipoVivienda2)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeTipoVivienda2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeTipoVivienda2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreTipoVivienda3)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeTipoVivienda3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeTipoVivienda3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreTipoVivienda4)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeTipoVivienda4, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeTipoVivienda4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreTipoVivienda5)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeTipoVivienda5, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeTipoVivienda5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreTipoVivienda6)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeTipoVivienda6, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeTipoVivienda6, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+              
+
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Tipo de contrato
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p align="justify">
+                                    <strong>Tipo de Contrato del asociado.</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong>Tipo de Contrato</strong>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong> Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreTipoContrato)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeTipoContrato, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeTipoContrato, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreTipoContrato2)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeTipoContrato2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeTipoContrato2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreTipoContrato3)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeTipoContrato3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeTipoContrato3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreTipoContrato4)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeTipoContrato4, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeTipoContrato4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+
+
+
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Antiguedad en la Cooperativa
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p align="justify">
+                                    <strong>Antiguedad como Asociado.</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <strong>Desde</strong>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <strong>Hasta</strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <strong>Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.DesdeAntiguedadCooperativa)
+                                    Meses
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.HastaAntiguedadCooperativa)
+                                    Meses
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeAntiguedadC, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeAntiguedadC, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.DesdeAntiguedadCooperativa2)
+                                    Meses
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.HastaAntiguedadCooperativa2)
+                                    Meses
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeAntiguedadC2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeAntiguedadC2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.DesdeAntiguedadCooperativa3)
+                                    Meses
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.HastaAntiguedadCooperativa3)
+                                    Meses
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeAntiguedadC3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeAntiguedadC3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.DesdeAntiguedadCooperativa4)
+                                    Meses
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.HastaAntiguedadCooperativa4)
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeAntiguedadC4, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeAntiguedadC4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+
+
+
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Capacidad de Pago
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p align="justify">
+                                    <strong>Capacidad de pago del asociado.</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong>Capacidad de pago</strong>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong> Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreCapacidadPago)
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeCapacidadPagos, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeCapacidadPagos, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreCapacidadPago2)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeCapacidadPagos2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeCapacidadPagos2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreCapacidadPago3)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeCapacidadPagos3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeCapacidadPagos3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Plazo
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p align="justify">
+                                    <strong>El plazo al cual se solicita el credito.</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong>Plazo</strong>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong> Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.MesesPlazo)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeMesesPlazo, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeMesesPlazo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.MesesPlazo2)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeMesesPlazo2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeMesesPlazo2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.MesesPlazo3)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeMesesPlazo3, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeMesesPlazo3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+
+
+
+
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Forma de Pago
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p align="justify">
+                                    <strong></strong>
+                                </p>
+                            </div>
+                        </div>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong>Forma de pago</strong>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong> Puntaje</strong>
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreFormaPago)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeFormaPago, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeFormaPago, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+                        <dix|v class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DisplayFor(model => model.NombreFormaPago2)
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.PuntajeFormaPago2, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", pattern = "^[0-9]+", style = "width: 80px;" } })
+                                    @Html.ValidationMessageFor(model => model.PuntajeFormaPago2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </dix|v>
+
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+        </div>
+        <!--
+             <div class="col-md-4">
+                 <div class="panel panel-primary">
+                     <div class="panel-heading">
+                         Puntaje datacredito
+                     </div>
+                     <div class="panel-body">
+                         <div class="row">
+                             @*Html.ValidationSummary(true)*@
+
+
+                         </div>
+                         @*HASTA AQUI*@
+                     </div>
+                 </div>
+             </div>
+         -->
+    </div>
+    <div class="col-md-2">
+        <input type="submit" value="Guardar Cambios" class="btn btn-success" />
+    </div>
+    <br />
+    <br />
+    <br />
+
+}
+
+<div>
+    @Html.ActionLink("Regresar a la Lista", "../Scoring/")
+</div>
+

@@ -1,0 +1,74 @@
+﻿<div id="modal_alumno" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Lista de Creditos</h4>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: right" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" style="text-align: right" placeholder="Ingresar Codigo Para Buscar" class="form-control" id="dato_bus" />
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="bus_atr()"><span class="glyphicon glyphicon-search"> Buscar</span></button>
+                </div>
+                <br />
+                <table class="table table-bordered">
+                    <thead style="background-color: darkblue; color:white">
+                        <tr>
+                            <th>Código</th>
+                            <th>Pagare</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla_bus_atr"></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"> Cancelar</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    bus_atr = function () {
+        $.post(
+            '/Seccion/bus_atr', {
+                dato_bus: $('#dato_bus').val()//en este caso sería el codigo
+            }, function (res) {
+                $('#tabla_bus_atr').html(res)
+            });
+    };
+    agr_atr = function (id, dni, nom, ape) {
+        $.post(
+            '/Seccion/agr_atr', {
+                id: id,
+                dni: dni,
+                nom: nom,
+                ape: ape
+            }, function (res) {
+                $('#tabla_atr').html(res);
+                $('#tabla_bus_atr').html('');
+                $('#dato_bus').val('');
+            });
+    };
+
+    bor_atr = function (id) {
+        $.post(
+            '/Seccion/bor_atr', {
+                id: id
+            }, function (res) {
+                $('#tabla_atr').html(res)
+            });
+    };
+
+    $(document).ready(function () {
+        $.post(
+            '/Seccion/limpiar_atr', {
+            }, null
+        );
+    });
+</script>
+

@@ -1,0 +1,876 @@
+﻿@model Ingenio.BO.Personas_Fac
+
+@{
+    ViewBag.Title = "Create";
+    string m = ViewBag.mensaje;
+}
+@if (m != null)
+{
+    <script>
+        swal({
+            title: "Alerta",
+            type: "info",
+            text: "@ViewBag.mensaje",
+            confirmButtonText: "Ok!",
+        }, function () {
+            window.location.reload();
+        });
+        setTimeout(function () {
+            window.location.reload();
+        }, 3000);
+
+    </script>
+}
+<div class="form-horizontal panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Crear Asociado</h3>
+    </div>
+    <div class="panel-body" id="General">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Primer_Nom" class="col-md-4 control-label">Primer Nombre</label>
+                <div class="col-md-7">
+                    @Html.TextBoxFor(model => model.Primer_Nom, new { @class = "form-control may" })
+                    @Html.ValidationMessageFor(model => model.Primer_Nom)
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Segundo_Nom" class="col-md-4 control-label">Segundo Nombre</label>
+                <div class="col-md-7">
+                    @Html.TextBoxFor(model => model.Segundo_Nom, new { @class = "form-control may" })
+                    @Html.ValidationMessageFor(model => model.Segundo_Nom)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Primer_Ape" class="col-md-4 control-label">Primer Apellido</label>
+                <div class="col-md-7">
+                    @Html.TextBoxFor(model => model.Primer_Ape, new { @class = "form-control may" })
+                    @Html.ValidationMessageFor(model => model.Primer_Ape)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Segundo_Ape" class="col-md-4 control-label">Segundo Apellido</label>
+                <div class="col-md-7">
+                    @Html.TextBoxFor(model => model.Segundo_Ape, new { @class = "form-control may" })
+                    @Html.ValidationMessageFor(model => model.Segundo_Ape)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Genero" class="col-md-4 control-label">Genero</label>
+                <div class="col-md-7">
+                    <select name="Genero" class="form-control">
+                        <option value=true>Masculino</option>
+                        <option value=false>Femenino</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="FechaN" class="col-md-4 control-label">Fecha de Nacimiento</label>
+                <div class="col-md-7">
+                    <input type="date" name="Fecha_Nacimiento" id="FechaN" min="1900-01-01" max=@DateTime.Now.ToString("yyyy-MM-dd") value=" " class="form-control" />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="FechaInicio" class="col-md-4 control-label">Fecha Inicio</label>
+                <div class="col-md-7">
+                    <input type="date" name="Fecha_Inicio_Aso" id="Fecha_Inicio_Aso" min="1900-01-01" max=@DateTime.Now.ToString("yyyy-MM-dd") value=" " required class="form-control" />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Tipo de Identificacion</label>
+                <div class="col-md-7">
+                    @Html.DropDownList("Id_TipoIdentificacion", new SelectList(ViewBag.Tipoi, "Id", "Descripcion"), "Seleccione una identificacion", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label"> identificacion</label>
+                <div class="col-md-7">
+                    @Html.TextBoxFor(model => model.Nit_CC, new { @class = "form-control may", @onkeypress = "return valida(event)" })
+                    @Html.ValidationMessageFor(model => model.Nit_CC)
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Fecha de Expedición</label>
+                <div class="col-md-7">
+                    <input type="date" name="Fecha_Expedicion" id="FechaN" min="1900-01-01" max=@DateTime.Now.ToString("yyyy-MM-dd") value=" " required class="form-control" />
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Pais Expedición</label>
+                <div class="col-md-7">
+                    @Html.DropDownList("PaisExpedicion", new SelectList(ViewBag.pais, "Id", "Descripcion"), "Seleccione un Pais", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Depto Expedición</label>
+                <div class="col-md-7">
+                    <select id="DeptoExpedicion" class="form-control" name="DeptoExpedicion">
+                        <option value="-1">Seleccione un Departamento</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Ciudad Expedición</label>
+                <div class="col-md-7">
+                    <select id="CiudadExpedicion" name="Id_LExpedicion" class="form-control">
+                        <option value="-1">Seleccione una Ciudad</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Pais Residencia</label>
+                <div class="col-md-7">
+                    @Html.DropDownList("PaisResidencia", new SelectList(ViewBag.pais, "Id", "Descripcion"), "Seleccione un Pais", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Depto Residencia</label>
+                <div class="col-md-7">
+                    <select id="DeptoResidencia" name="DeptoResidencia" class="form-control">
+                        <option value="-1">Seleccione un Departamento</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Ciudad Residencia</label>
+                <div class="col-md-7">
+                    <select id="CiudadResidencia" name="Id_Residencia" class="form-control">
+                        <option value="-1">Seleccione una Ciudad</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Dirección</label>
+                <div class="col-md-7">
+                    <input type="text" id="Direccion" class="form-control" name="Direccion" required>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Telefono</label>
+                <div class="col-md-7">
+                    <input type="text" id="Telefono" class="form-control" data-mask="0 00 00 00" name="Telefono" onkeypress="return valida(event)">
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Ext</label>
+                <div class="col-md-7">
+                    <input type="text" id="ext" class="form-control" name="ext" data-mask="000" onkeypress="return valida(event)">
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Celular</label>
+                <div class="col-md-7">
+                    <input type="text" id="Celular" name="Celular" class=" form-control" data-mask="000 0000000" required onkeypress="return valida(event)">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Correo</label>
+                <div class="col-md-7">
+                    <input type="text" id="Correo" name="Correo" class="email form-control">
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Estrato</label>
+                <div class="col-md-7">
+                    <select name="Id_Estrato" class="form-control">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Tipo de Estudios</label>
+                <div class="col-md-7">
+                    <select name="Id_TipoEstudio" class="form-control">
+                        <option value="1">PRIMARIA</option>
+                        <option value="2">SECUNDARIA</option>
+                        <option value="3">TÉCNICO</option>
+                        <option value="4">TECNOLOGICO</option>
+                        <option value="5">UNIVERSITARIO</option>
+                        <option value="6">POSTGRADO</option>
+                        <option value="7">CURSO</option>
+                        <option value="8">OTROS</option>
+
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Estado Civil</label>
+                <div class="col-md-7">
+                    <select name="Id_EstadoCivil" class="form-control">
+                        <option value="1">CASADO(A)</option>
+                        <option value="2">VIUDO(A)</option>
+                        <option value="3">MADRE SOLTERA</option>
+                        <option value="4">MUJER CABEZA DE FLIA</option>
+                        <option value="5">SOLTERO(A)</option>
+                        <option value="6">DIVORCIADO(A)</option>
+                        <option value="7">SEPARADO(A)</option>
+                        <option value="8">UNION LIBRE</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Profesion</label>
+                <div class="col-md-7">
+                    <input type="text" id="_Id_profesion" class=" form-control" required>
+                    <input type="hidden" name="Id_Profesion" id="Id_Profesion" value="" />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Empresa</label>
+                <div class="col-md-7">
+                    <input type="text" id="_Id_empresa" class="form-control" required>
+                    <input type="hidden" name="Id_EmpresaPaga" id="Id_EmpresaPaga" value="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Acta Ingreso</label>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" id="Acta" name="Acta" value="" onkeypress="return valida(event)">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Periodo Deducción</label>
+                <div class="col-md-7">
+                    <select name="Id_Deduccion" class="form-control">
+
+                        <option value="1">SEMANAL</option>
+                        <option value="2">CATORCENAL</option>
+                        <option value="3">QUINCENAL</option>
+                        <option value="4">MENSUAL</option>
+                        <option value="5">BIMESTRAL</option>
+                        <option value="6">TRIMESTRAL</option>
+                        <option value="7">CUATRIMESTRAL</option>
+                        <option value="8">SEMESTRAL</option>
+                        <option value="8">ANUAL</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Trabaja en</label>
+                <div class="col-md-7">
+                    <input type="text" id="_Id_TrabajaEn" class=" form-control" required>
+                    <input type="hidden" id="Id_TrabajaEn" required class="form-control" name="Id_Agencia" value="">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Dependencia</label>
+                <div class="col-md-7">
+                    <input type="text" id="_Id_dependencia" class="form-control" required>
+                    <input type="hidden" id="Id_Dependencia" class="form-control" name="Id_Dependencia" value="">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Tipo Contrato</label>
+                <div class="col-md-7">
+                    <select name="Id_Contrato" class="form-control">
+
+                        <option value="1">TERMINO INDEFINIDO</option>
+                        <option value="2">TERMINO FIJO</option>
+                        <option value="3">INDEPENDIENTE</option>
+                        <option value="4">OTRO</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Fecha Inicia Empresa</label>
+                <div class="col-md-7">
+                    <input type="date" name="Fecha_Inicio_Emp" id="Fecha_Inicio_Emp" value=" " min="1900-01-01" max=@DateTime.Now.ToString("yyyy-MM-dd") class="form-control" required />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Fecha Termina </label>
+                <div class="col-md-7">
+                    <input type="date" name="Fecha_Fin" id="FechaTermina" min="1900-01-01" max=@DateTime.Now.ToString("yyyy-MM-dd") value="" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Cargo</label>
+                <div class="col-md-7">
+                    <input type="text" id="_Id_cargo" required class=" form-control">
+                    <input type="hidden" name="Id_Cargo" id="Id_Cargo" value="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Salario</label>
+                <div class="col-md-7">
+                    <input type="text" id="Salario" required data-mask="#.##0" data-mask-reverse="true" class=" form-control" name="Salario" onkeypress="return valida(event)">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Nº Cuenta</label>
+                <div class="col-md-7">
+                    <input type="text" id="NumCuenta" class="form-control" name="Cuenta">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Tipo Cuenta</label>
+                <div class="col-md-7">
+                    <select id="Id_Tipo" name="Id_Tipo" class="form-control" disabled>
+
+                        <option value="1">AHORROS</option>
+                        <option value="2">CORRIENTE</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Banco</label>
+                <div class="col-md-7">
+                    <input type="text" id="_Id_banco" required class="form-control" disabled>
+                    <input type="hidden" name="Id_Banco" id="Id_Banco" value="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Ciiu</label>
+                <div class="col-md-7">
+                    <input type="text" id="_Id_ciiu" required class="form-control">
+                    <input type="hidden" name="Id_CIIU" id="Id_CIIU" value="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Identificacion" class="col-md-4 control-label">Tipo Vivienda</label>
+                <div class="col-md-7">
+                    <select name="Id_TipoVivienda" class="form-control">
+
+                        <option value="1">ALQUILADA</option>
+                        <option value="2">FAMILIAR</option>
+                        <option value="3">PROPIA</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="crear" value="Guardar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+        }
+    </div>
+
+
+
+</div>
+
+
+   
+
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/Mascaras")
+        @Scripts.Render("~/bundles/Nomenclaturas")
+
+
+@***********************************JAVASCRIPT********************************************@
+
+<script>
+    ////Autocomplete
+    function renderItem(ul, item) {
+
+        return $("<li>")
+        .append("<span style='display:block'>" + item.value + "</span>")
+        .append("<span style='display:block'>" + item.label + "</apan>")
+        .appendTo(ul);
+    }
+
+    //AUTOCOMPLETE PROFESION
+
+
+    $("#_Id_profesion").autocomplete({
+        source: '@Url.Action("GetProfesion")',
+        minLength: 3,
+        select: function (event, ui) {
+            $('#_Id_profesion').val(ui.item.label);
+            $('#Id_Profesion').val(ui.item.value);
+            return false;
+        }, change: function (event, ui) {
+            if (!ui.item) {
+                $(this).val("");
+            }
+        },
+        focus: function (event, ui) {
+            $('#_Id_profesion').val(ui.item.label);
+            return false;
+        }
+    })
+    //AUTOCOMPLETE EMPRESA
+
+    $("#_Id_empresa").autocomplete({
+        source: '@Url.Action("GetEmpresa")',
+        minLength: 3,
+        select: function (event, ui) {
+            $('#_Id_empresa').val(ui.item.label);
+            $('#Id_EmpresaPaga').val(ui.item.value);
+            return false;
+        }, change: function (event, ui) {
+            if (!ui.item) {
+                $(this).val("");
+            }
+        },
+        focus: function (event, ui) {
+            $('#_Id_empresa').val(ui.item.label);
+            return false;
+        }
+    })
+    //AUTOCOMPLETE TRABAJA EN
+
+    $("#_Id_TrabajaEn").autocomplete({
+        source: '@Url.Action("GetTrabajaEn")',
+        minLength: 3,
+        select: function (event, ui) {
+            $('#_Id_TrabajaEn').val(ui.item.label);
+            $('#Id_TrabajaEn').val(ui.item.value);
+            return false;
+        }, change: function (event, ui) {
+            if (!ui.item) {
+                $(this).val("");
+            }
+        },
+        focus: function (event, ui) {
+            $('#_Id_TrabajaEn').val(ui.item.label);
+            return false;
+        }
+    })
+
+    //AUTOCOMPLETE CARGO
+
+    $("#_Id_cargo").autocomplete({
+        source: '@Url.Action("GetCargo")',
+        minLength: 3,
+        select: function (event, ui) {
+            $('#_Id_cargo').val(ui.item.label);
+            $('#Id_Cargo').val(ui.item.value);
+            return false;
+        }, change: function (event, ui) {
+            if (!ui.item) {
+                $(this).val("");
+            }
+        },
+        focus: function (event, ui) {
+            $('#_Id_cargo').val(ui.item.label);
+            return false;
+        }
+    })
+    //AUTOCOMPLETE BANCO
+
+    $("#_Id_banco").autocomplete({
+        source: '@Url.Action("GetBanco")',
+        select: function (event, ui) {
+            $('#_Id_banco').val(ui.item.label);
+            $('#Id_Banco').val(ui.item.value);
+            return false;
+        }, change: function (event, ui) {
+            if (!ui.item) {
+                $(this).val("");
+            }
+        },
+        focus: function (event, ui) {
+            $('#_Id_banco').val(ui.item.label);
+            return false;
+        }
+    })
+    //AUTOCOMPLETE CIIU
+
+    $("#_Id_ciiu").autocomplete({
+        source: '@Url.Action("GetCiiu")',
+        select: function (event, ui) {
+            $('#_Id_Ciiu').val(ui.item.label);
+            $('#Id_CIIU').val(ui.item.value);
+            return false;
+        }, change: function (event, ui) {
+            if (!ui.item) {
+                $(this).val("");
+            }
+        },
+        focus: function (event, ui) {
+            $('#_Id_ciiu').val(ui.item.label);
+            return false;
+        }
+    })
+
+    //AUTOCOMPLETE DEPENDENCIA
+
+    $("#_Id_dependencia").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '@Url.Action("GetDependencia")',
+                dataType: "json",
+                data: {
+                    term: request.term,
+                    id: $("#Id_TrabajaEn").val()
+                },
+                success: function (data) {
+                    response(data);
+                }
+            });
+        },
+        change: function (event, ui) {
+            if (!ui.item) {
+                $(this).val("");
+            }
+        },
+        select: function (event, ui) {
+            $('#_Id_dependencia').val(ui.item.label);
+            $('#Id_Dependencia').val(ui.item.value);
+            return false;
+        },
+        focus: function (event, ui) {
+            $('#_Id_dependencia').val(ui.item.label);
+            return false;
+        }
+    })
+
+    // DROPDOWN PAISES
+    $('#PaisNacimiento').on('change', function () {
+        var idPais = '#PaisNacimiento',
+            idDep = "#DeptoNacimiento";
+        departamentos(idPais, idDep);
+    });
+
+    $('#PaisExpedicion').on('change', function () {
+        var idPais = '#PaisExpedicion',
+            idDep = "#DeptoExpedicion";
+        departamentos(idPais, idDep);
+    });
+
+    $('#PaisResidencia').on('change', function () {
+        var idPais = '#PaisResidencia',
+            idDep = "#DeptoResidencia";
+        departamentos(idPais, idDep);
+    });
+
+
+    function departamentos(idPais, idDep) {
+        var id = parseInt($(idPais).val());
+
+        if (!isNaN(id)) {
+            var departamento = $(idDep);
+
+            departamento.append($("<option>", { html: "Seleccione un elemento" }));
+
+            $.post("@Url.Action("Dep_Pais")", { id: id }, function (data) {
+                departamento.html("");
+                $.each(data, function (index, value) {
+                    departamento.append($("<option>", { html: value.label, value: value.value }));
+                }); DeptoResidencia
+            })
+
+        }
+    }
+
+    //DROPDOWN DEPTOS
+    $('#DeptoNacimiento').on('change', function () {
+        var idCiu = "#CiudadNacimiento",
+            idDep = "#DeptoNacimiento";
+        ciudades(idDep, idCiu);
+    });
+
+    $('#DeptoExpedicion').on('change', function () {
+        var idCiu = "#CiudadExpedicion",
+            idDep = "#DeptoExpedicion";
+        ciudades(idDep, idCiu);
+    });
+
+    $('#DeptoResidencia').on('change', function () {
+        var idCiu = "#CiudadResidencia",
+            idDep = "#DeptoResidencia";
+        ciudades(idDep, idCiu);
+    });
+
+
+    function ciudades(idDep, idCiu) {
+        var id = parseInt($(idDep).val());
+
+        if (!isNaN(id)) {
+            var ciudad = $(idCiu);
+            ciudad.html("");
+            ciudad.append($("<option>", { html: "Seleccione un elemento", value: -1 }));
+
+            $.post("@Url.Action("Ciu_Dep")", { id: id }, function (data) {
+                $.each(data, function (index, value) {
+                    ciudad.append($("<option>", { html: value.label, value: value.value }));
+                });
+            })
+
+        }
+    }
+    // SOLO NUMEROS
+    function valida(e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+
+        //Tecla de retroceso para borrar, siempre la permite
+        if (tecla == 8) {
+            return true;
+        }
+        // Patron de entrada, en este caso solo acepta numeros
+        patron = /[0-9]/;
+        tecla_final = String.fromCharCode(tecla);
+        return patron.test(tecla_final);
+    }
+
+
+    function split(val) {
+        return val.split(/ \s*/);
+    }
+    function extractLast(term) {
+        return split(term).pop();
+    }
+
+    $("#Direccion").bind("keydown", function (event) {
+          if (event.keyCode === $.ui.keyCode.TAB &&
+              $(this).autocomplete("instance").menu.active) {
+              event.preventDefault();
+          }
+      })
+      .autocomplete({
+          minLength: 0,
+          source: function (request, response) {
+              // delegate back to autocomplete, but extract the last term
+              console.log(response);
+              response($.ui.autocomplete.filter(
+                n, extractLast(request.term)));
+          },
+          focus: function () {
+              // prevent value inserted on focus
+              return false;
+          },
+          select: function (event, ui) {
+              var terms = split(this.value);
+              // remove the current input
+              terms.pop();
+              // add the selected item
+              terms.push(ui.item.value);
+              // add placeholder to get the comma-and-space at the end
+              terms.push("");
+              this.value = terms.join(" ");
+              return false;
+          }
+      });
+
+    var ban = false;
+    $("form").on("submit", function (e) {
+        if (!ban) {
+            e.preventDefault();
+            swal({
+                title: "Alerta",
+                type: "info",
+                text: "Ya existe la cedula digitada",
+                confirmButtonText: "Ok!",
+            }, function () {
+                window.location.reload();
+            });
+            setTimeout(function () {
+                window.location.reload();
+            }, 3000);
+        } else {
+            $("input[data-mask]").unmask();
+        }
+    })
+
+
+    $("#NumCuenta").keyup(function () {
+
+        var n = $("#NumCuenta").val().length;
+
+        if (n >= 5) {
+            $("#Id_Tipo").prop('disabled', false);
+            $("#_Id_banco").prop('disabled', false);
+        }
+        else {
+            $("#Id_Tipo").prop('disabled', true);
+            $("#_Id_banco").prop('disabled', true);
+        }
+
+
+    });
+
+
+
+    $("#Nit_CC").blur(function () {
+        var texto = $(this).val();
+        $.post("@Url.Action("CedulaValida")", {id :texto}, function(res){
+            if (!res) {
+                ban = false;                
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Ya existe la cedula digitada",
+                    confirmButtonText: "Ok!",
+                }, function () {
+                    window.location.reload();
+                });
+                setTimeout(function () {
+                    window.location.reload();
+                }, 3000);
+            } else {
+                ban = true;
+            }
+        });
+        
+    });
+
+
+</script>
+ 

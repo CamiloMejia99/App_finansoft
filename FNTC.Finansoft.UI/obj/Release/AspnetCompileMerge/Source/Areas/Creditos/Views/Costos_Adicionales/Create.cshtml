@@ -1,0 +1,262 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.MCreditos.Costos_Adicionales
+
+@{
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+
+@{
+    ViewBag.Title = "Crear Costo Adicional";
+}
+@section Styles{
+
+    @*Choosen*@
+    <link href="~/Content/css/chosen.css" rel="stylesheet" />
+    <link href="~/Content/css/checkbox_radio.css" rel="stylesheet" />
+
+    @*fin choseen*@
+
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    //desde
+    <div class="row">
+        <div class="col-lg-12">
+
+            <!-- Elementos del Formulario -->
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    COSTOS ADICIONALES
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Lineas_Id, new { @class = "control-label col-md-10" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("Lineas_Id", null, new { @class = "chosen-select-single" })
+                                            @*@Html.DropDownList("dropdownCountry", new SelectList(string.Empty, "Value", "Text"), "Please select a country", new { @style = "width:250px;" })*@
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Destino_Id, new { @class = "control-label col-md-10" })
+                                        <div class="col-md-10">
+                                            @*@Html.DropDownList("dropdownState", new SelectList(string.Empty, "Value", "Text"), new { @class = "chosen-select-single" })*@
+                                            @Html.DropDownList("Destino_Id", new SelectList(string.Empty, "Value", "Text"), "Seleccione Un Destino", new { @style = "width:250px;", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Cuenta_Cod, new { @class = "control-label col-md-10" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("Cuenta_Cod", null, new { @class = "chosen-select-single" })
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Tipo_Costo_Id, new { @class = "control-label col-md-10" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("Tipo_Costo_Id", null, new { @class = "chosen-select-single" })
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Incrementa_Id, new { @class = "control-label col-md-10" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("Incrementa_Id", null, new { @class = "chosen-select-single" })
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CA_Valor, new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            @Html.TextBoxFor(model => model.CA_Valor, new { @id = "Valor", @class = "form-control", @Value = 0 })
+                                            @*@Html.ValidationMessageFor(model => model.CA_Valor)*@
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CA_Porcentaje, new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            @Html.TextBoxFor(model => model.CA_Porcentaje, new { @id = "CA_Porcentaje", @class = "form-control", @Value = 0 })
+                                            @*@Html.ValidationMessageFor(model => model.CA_Valor)*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CA_Nombre, new { @class = "control-label col-md-10" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.CA_Nombre, new { @id = "Nombre", @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.CA_Nombre)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CA_estado, new { @class = "control-label col-md-10" })
+                                        <div class="col-md-10 checkbox">
+                                            @Html.CheckBoxFor(model => model.CA_estado, new { @id = "Estado", @class = "checkbox" })
+                                            <label for="Estado">Activo</label>
+                                            @Html.ValidationMessageFor(model => model.CA_estado)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-offset-0 col-md-12">
+                                <input id="Guardar" type="submit" value="Guardar" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    //hasta
+}
+<div>
+    @Html.ActionLink("Regresar a la Lista", "Index")
+</div>
+
+@section Scripts {
+
+    @*choseen*@
+
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".chosen-select-single").chosen();
+            $(".chosen-select-multiple").chosen();
+
+        });
+    </script>
+
+    <script>
+
+        //$(function () {
+        $(document).ready(function () {
+            $('#Guardar').click(function () {
+                var valor = $('#Valor').val();
+                var porcentaje = $('#CA_Porcentaje').val();
+                if (valor == 0 || valor == null) {
+                    $('#Valor').val(0);
+
+                }
+                else if (porcentaje == 0 || porcentaje == null) {
+                    $('#CA_Porcentaje').val(0);
+                }
+            })
+
+            $('#Lineas_Id').change(function () {
+
+                $('#Destino_Id').empty();
+
+                $.ajax({
+                    type: "POST",
+                    //url: "/Costos_Adicionales/GetStatesByCountryId",
+                    url: "@Url.Action("GetStatesByCountryId", "Costos_Adicionales")",
+                    datatype: "Json",
+                    data: { countryId: $('#Lineas_Id').val() },
+                    success: function (data) {
+                        $.each(data, function (index, value) {
+
+                            $('#Destino_Id').append('<option value="' + value.Value + '">' + value.Text + '</option>');
+                        });
+
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#Valor').prop('readonly', true);
+            $('#CA_Porcentaje').prop('readonly', true);
+
+            $('#Tipo_Costo_Id').change(function () {
+
+                var valor = $('#Tipo_Costo_Id').val();
+
+
+                if (valor == 2) {
+
+
+                    $('#Valor').prop('readonly', true);
+                    $("#Valor").val('0');
+                    $('#CA_Porcentaje').prop('readonly', false);
+
+                } else if (valor == 3) {
+                    $('#Valor').prop('readonly', true);
+                    $('#CA_Porcentaje').prop('readonly', false);
+                }
+                else if
+                (valor == 1) {
+                    $('#Valor').prop('readonly', false);
+
+                    $('#CA_Porcentaje').prop('readonly', true);
+                    $("#CA_Porcentaje").val('0');
+                }
+
+            })
+        });
+    </script>
+    <script>
+        /* SEPARADOR DE MILES POR KEY UP */
+        $(document).ready(function () {
+            $("#Valor").on({
+                "focus": function (event) {
+                    $(event.target).select();
+                },
+                "keyup": function (event) {
+                    $(event.target).val(function (index, value) {
+                        return value.replace(/\D/g, "")
+                            .replace(/([0-9])([0-9]{3})$/, '$1,$2')
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+                    });
+                }
+            });
+        });
+            /*FIN SEPARADOR DE MILES POR KEY UP*/
+    </script>
+}

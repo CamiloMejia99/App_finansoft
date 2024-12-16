@@ -1,0 +1,8 @@
+25/04/2022 10:46:34 a. m. - One or more validation errors were detected during model generation:
+
+ConfigAhorroContractual_ComprobanteFK_Target_ConfigAhorroContractual_ComprobanteFK_Source: : The number of properties in the Dependent and Principal Roles in a relationship constraint must be identical.
+ ---_Void Validate()
+25/04/2022 10:46:44 a. m. - One or more validation errors were detected during model generation:
+
+ConfigAhorroContractual_ComprobanteFK_Target_ConfigAhorroContractual_ComprobanteFK_Source: : The number of properties in the Dependent and Principal Roles in a relationship constraint must be identical.
+ ---_Void Validate()

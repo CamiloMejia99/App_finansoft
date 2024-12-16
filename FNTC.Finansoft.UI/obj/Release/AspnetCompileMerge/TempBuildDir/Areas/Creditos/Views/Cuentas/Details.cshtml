@@ -1,0 +1,45 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.MCreditos.Cuentas
+
+@{
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+
+@{
+    ViewBag.Title = "Cuentas";
+}
+<div>
+    <h4>Cuentas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cuenta_Cod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cuenta_Cod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cuenta_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cuenta_Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Funcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreFuncion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Regresar a la Lista", "Index")
+</p>
+</body>
+</html>

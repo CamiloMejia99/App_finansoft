@@ -1,0 +1,36 @@
+﻿<div id="modal_detalle_seccion" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Lista Detalle de Seccion</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead style="background-color: darkgrey; color:white">
+                        <tr>
+                            <td>Código</td>
+                            <td>Pagare</td>
+                            <td>Usuario</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla_det_sec"></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"> Cerrar</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    detalle_seccion = function (codigo) {
+        $.post(
+            '/Seccion/detalle_seccion', {
+                id_sec: codigo
+            }, function (res) {
+                $('#tabla_det_sec').html(res)
+            });
+    };
+</script>
+

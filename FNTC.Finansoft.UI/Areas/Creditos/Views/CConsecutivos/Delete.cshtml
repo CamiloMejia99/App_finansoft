@@ -1,0 +1,72 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.MCreditos.CConsecutivos
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>CConsecutivos</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.idAgencia)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.idAgencia)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tipoCodPagare)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tipoCodPagare)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.consecutivoPagareActual)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.consecutivoPagareActual)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tipoCodLibranza)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tipoCodLibranza)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.consecutivoLibranzaActual)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.consecutivoLibranzaActual)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Terceros.InfoTerceroFinanciera
+
+@{
+    ViewBag.Title = "Crear Datos Financieros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<script src="~/Scripts/sweetalert.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+<link href="~/Content/styleGeneral.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+<script src="~/Scripts/datatable.js"></script>
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<script src="~/Scripts/sweetalert.min.js"></script>
+
+
+
+<div class="container" style="margin-top:2%; background: rgb(248, 248, 248);">
+
+
+    <ul class="col-md-offset-2 nav nav-tabs" style="margin-top:0%;border: none; margin-left: 2%;">
+        <li><a href="/Terceros/TercerosAdicionales" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Terceros Datos Adicionales</a></li>
+        <li><a href="/Terceros/InfoTerceroFinancieras" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i>Terceros Datos Financieros </a></li>
+
+    </ul>
+
+    <div class="tab-content contenedortabs">
+        <div id="menu1" class="tab-pane fade in active">
+            <div class="col-md-5"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Crear Datos Financieros</h3></div>
+            <div class="col-md-12">
+                <div class="col m-5">
+                    <br />
+                    <a href="/Terceros/InfoTerceroFinancieras" class="btn btn-primary" data-toggle="modal">
+                        Regresar
+                    </a>
+                </div>
+                <br />
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NitTercero, "Documento Tercero", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-2">
+                                @Html.DropDownList("NitTercero", null, "Selecione Documento", htmlAttributes: new { id = "Vinculacion", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.NitTercero, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IngresosMensuales, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.IngresosMensuales, new { htmlAttributes = new { id = "DatosFinancieros", @placeholder = "Ingrese Ingresos Mensuales", @class = "form-control natural" } })
+                                @Html.ValidationMessageFor(model => model.IngresosMensuales, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.GastosMensuales, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.GastosMensuales, new { htmlAttributes = new { @class = "form-control", @placeholder = "Gastos Mensuales" } })
+                                @Html.ValidationMessageFor(model => model.GastosMensuales, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PasivosTotales, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.PasivosTotales, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ingrese Pasivos Totales" } })
+                                @Html.ValidationMessageFor(model => model.PasivosTotales, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ActivosTotales, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.ActivosTotales, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ingrese Activos totales" } })
+                                @Html.ValidationMessageFor(model => model.ActivosTotales, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="col-md-offset-2 col-md-5">
+                                <button type="submit" value="Create" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button>
+
+                            </div>
+                        </div>
+
+                    </div>
+                }
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#Vinculacion').on("change", (function () {
+
+            var nitid = $(this).val();
+
+            $.get("/terceros/InfoTerceroFinancieras/HayDatos/", { nit: $(this).val() }, function (response) {
+                if (response == "True") {
+                    swal('Error', 'El docuemento ' + nitid + ' ya tiene Datos Financieros', 'warning');
+                    $('#Vinculacion').val("");
+                }
+            })
+
+
+
+        }));
+
+    });
+
+
+
+
+</script>
+
+<script>
+
+    $("#Vinculacion").chosen().change(function () {
+
+        var vinculacion = $("#Vinculacion").val();
+    });
+
+
+</script>
+
+

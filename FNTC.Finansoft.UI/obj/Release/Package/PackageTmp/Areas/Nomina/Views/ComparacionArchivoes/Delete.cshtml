@@ -1,0 +1,88 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Nomina.ComparacionArchivo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>ComparacionArchivo</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.EMPRESA)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.EMPRESA)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PERDEDUCC)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PERDEDUCC)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PERIODO)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PERIODO)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CAMBIO)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CAMBIO)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ORDEND)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ORDEND)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PLANO)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PLANO)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.RUTA)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.RUTA)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

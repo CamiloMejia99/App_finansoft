@@ -1,0 +1,37 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.MCreditos.Incrementa
+
+@{
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalles</h2>
+
+<h3>Esta Seguro de Eliminar Este Elemento??</h3>
+<div>
+    <h4>Incrementa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Incrementa_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Incrementa_Descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        @Html.ActionLink("Regresar a la Lista", "Index")
+    </div>
+    }
+</div>

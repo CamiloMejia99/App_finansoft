@@ -1,0 +1,317 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Ahorros.ConfigAhorroContractual
+
+@{
+    ViewBag.Title = "Configuración Ahorros Contractual";
+    Layout = "~/Views/Shared/_Layoutahorros.cshtml";
+
+
+}
+
+@*<link href="~/Content/css/chosen.css" rel="stylesheet" />
+    <link href="~/Content/stylegeneral.css" rel="stylesheet" />
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+    <script src="~/Scripts/datatable.js"></script>
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />*@
+<link href="~/Content/css/Areas/Ahorros/estilosGenerales.css" rel="stylesheet" />
+
+
+
+<div class="container" style="margin-top:2%; background: rgb(248, 248, 248);">
+    <ul class="col-md-offset-2 nav nav-tabs" style="margin-top:2%;border: none; margin-left: 118px;">
+        <li><a href="/Ahorros/Ahorros/ConfiguracionFAP" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Configuracion</a></li>
+        <li><a href="/Ahorros/Ahorros/AhorroPermante" class="tabsnota"><i class="fa fa-calculator" aria-hidden="true"></i> Fichas Ahorro Permanente</a></li>
+        <li><a href="/Ahorros/Ahorros/ConfiguracionFACDAT" class="tabsnota"><i class="fa fa-calculator" aria-hidden="true"></i> Fichas Ahorro CDAT</a></li>
+        <li class="active"><a data-toggle="tab" href="#menu1" class="tabsnota"><i class="fa fa-calculator" aria-hidden="true"></i> Fichas Ahorro Contractual</a></li>
+    </ul>
+    <div class="tab-content contenedortabs">
+        <div id="menu1" class="tab-pane fade in active">
+            <div class="col-md-12"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Configuraciones Ahorro Contractual</h3></div>
+            <div class="bodycontainer">
+                <div class="row">
+                    @if (TempData["bandera"] != null)
+                    {
+                        switch (TempData["bandera"].ToString())
+                        {
+                            case "True":
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    @TempData["mensaje"].ToString()
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                break;
+                            case "False":
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    @TempData["mensaje"].ToString()
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                break;
+                            default:
+                                break;
+                        }
+                        TempData["bandera"] = null;
+                    }
+                </div>
+                <div class="row">
+                    <div class="table table-responsive">
+                        <table id="tablaConfigAhorroContractual" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
+                            <thead>
+                                <tr>
+                                    <th class="hide_me">Id</th>
+                                    <th class="tableEncabezado">Nombre</th>
+                                    <th class="tableEncabezado">Prefijo</th>
+                                    <th class="tableEncabezado">Valor Mínimo</th>
+                                    <th class="tableEncabezado">Valor Máximo</th>
+                                    <th class="tableEncabezado">Comprobante Contable</th>
+                                    <th class="tableEncabezado">Plazo Mínimo</th>
+                                    <th class="tableEncabezado">Tasa Efectiva Mínima (%)</th>
+                                    <th class="tableEncabezado">Tasa Efectiva Máxima (%)</th>
+                                    <th class="tableEncabezado">Cuenta Contable</th>
+                                    <th class="tableEncabezado">Cuenta Causación</th>
+                                    <th class="tableEncabezado">Cuenta Para Gasto</th>
+                                    <th class="tableEncabezado">¿Se Causa?</th>
+                                    <th class="tableEncabezado">¿Aplica Mora?</th>
+                                    <th class="tableEncabezado">¿Se Causa en Mora?</th>
+                                    <th class="tableEncabezado">Cuotas Permitidas en Mora</th>
+                                    <th class="tableEncabezado">¿Aplica Retiro Anticipado?</th>
+                                    <th class="tableEncabezado">Estado</th>
+                                    <th class="tableEncabezado">Opciones</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-danger" id="btnCAC">Salir</button> @*btn config ahorro contractual*@
+                </div>
+                <br />
+                <div class="modal fade" id="detailsAssetModal" tabindex="-1" role="dialog" aria-labelledby="DetailsAssetModal" aria-hidden="true" data-backdrop="static">
+                    @*<input type="text" id="alertaComprobante" value=@ViewBag.alerta hidden="hidden">*@
+                    <div id="detailsAssetContainer">
+
+                    </div>
+                </div>
+            </div>
+        </div><!--MENU-->
+    </div><!--CONTENEDOR TABS-->
+
+
+</div>
+
+
+<div id="AddConfiguracion" data-backdrop="false" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Nueva configuración</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("CrearConfigAhorroContractual", "Ahorros", FormMethod.Post, htmlAttributes: new { id = "formConfAhoCont", autocomplete = "off" }))
+                {
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="lblRequerido"> Nombre configuración:</label>
+                                @Html.TextBoxFor(model => model.NombreConfiguracion, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.NombreConfiguracion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="lblRequerido">Prefijo:</label>
+                                @Html.TextBoxFor(model => model.Prefijo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Prefijo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="lblRequerido">Valor mínimo:</label>
+                                <div class="input-group">
+                                    <label class="input-group-addon">$</label>
+                                    @Html.TextBoxFor(model => model.AuxValorMinimo, new { @class = "form-control miles rango" })
+                                </div>
+                                @Html.HiddenFor(model => model.AuxValorMinimo)
+                                @Html.ValidationMessageFor(model => model.AuxValorMinimo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="lblRequerido">Valor máximo:</label>
+                                <div class="input-group">
+                                    <label class="input-group-addon">$</label>
+                                    @Html.TextBoxFor(model => model.AuxValorMaximo, new { @class = "form-control miles rango" })
+                                </div>
+                                @Html.HiddenFor(model => model.AuxValorMaximo)
+                                @Html.ValidationMessageFor(model => model.AuxValorMaximo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="lblRequerido">Tipo coprobante:</label>
+                                @Html.DropDownListFor(model => model.IdComprobante, (IEnumerable<SelectListItem>)ViewBag.TiposComprobantes, "--Seleccione una opción-- ", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.IdComprobante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="lblRequerido">Plazo mínimo de ahorro (meses):</label>
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.PlazoMinimo, new { @class = "form-control", @type = "text" })
+                                    <label class="input-group-addon">meses</label>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.PlazoMinimo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="lblRequerido">Tasa efectiva mínima (mensual):&nbsp;<span class="hint--bottom hint--gris hint--bounce hint--rounded hint--medium toolTip" aria-label="Formatos permitos, ej: 1 - 1.1 - 1.11"><i class="fa fa-question-circle iconToolTip"></i></span></label>
+                                <div class="input-group">
+                                    <label class="input-group-addon">%</label>
+                                    @Html.TextBoxFor(model => model.AuxTasaEfectivaMinima, new { @class = "form-control subtexto tasa", @placeholder = "Rango permitido: 0.00 - 100.00", @id="AuxTasaEfectivaMinima" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.AuxTasaEfectivaMinima, "", new { @class = "text-danger", @id = "tasaEfecValidacion" })
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="lblRequerido">Tasa efectiva máxima (mensual):&nbsp;<span class="hint--bottom hint--gris hint--bounce hint--rounded hint--medium toolTip" aria-label="Formatos permitos, ej: 1 - 1.1 - 1.11"><i class="fa fa-question-circle iconToolTip"></i></span></label>
+                                <div class="input-group">
+                                    <label class="input-group-addon">%</label>
+                                    @Html.TextBoxFor(model => model.AuxTasaEfectivaMaxima, new { @class = "form-control subtexto tasa", @placeholder = "Rango permitido: 0.00 - 100.00", @id = "AuxTasaEfectivaMaxima" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.AuxTasaEfectivaMaxima, "", new { @class = "text-danger", @id = "tasaEfecValidacion" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="lblRequerido">Cuenta contable:</label><br />
+                                @Html.DropDownListFor(model => model.IdCuenta, (IEnumerable<SelectListItem>)ViewBag.Cuentas, "--Seleccione una opción-- ", new { @class = "chosen-select-single" })
+                                @Html.ValidationMessageFor(model => model.IdCuenta, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="lblRequerido">Cuenta para causación:</label><br />
+                                @Html.DropDownListFor(model => model.IdCuentaCausacion, (IEnumerable<SelectListItem>)ViewBag.Cuentas, "--Seleccione una opción-- ", new { @class = "chosen-select-single" })
+                                @Html.ValidationMessageFor(model => model.IdCuentaCausacion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="lblRequerido">Cuenta para gastos:&nbsp;<span class="hint--bottom hint--gris hint--bounce hint--rounded hint--medium toolTip" aria-label="Cuenta de gasto para pago de intereses"><i class="fa fa-question-circle iconToolTip"></i></span></label><br />
+                                @Html.DropDownListFor(model => model.IdCuentaGasto, (IEnumerable<SelectListItem>)ViewBag.Cuentas, "--Seleccione una opción-- ", new { @class = "chosen-select-single" })
+                                @Html.ValidationMessageFor(model => model.IdCuentaGasto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label>¿Aplica causación?&nbsp;<span class="hint--bottom hint--gris hint--bounce hint--rounded hint--medium toolTip" aria-label="Permite generar intereses a la cuenta de ahorro."><i class="fa fa-question-circle iconToolTip"></i></span></label>
+                                <div class="boton">
+                                    @Html.CheckBoxFor(model => model.SeCausa, new { @class = "btn-switch", @type = "checkbox", @id = "SeCausa" })
+                                    <label for="SeCausa" class="lbl-switch"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label>¿Aplica morosidad?&nbsp;<span class="hint--bottom hint--gris hint--bounce hint--rounded hint--medium toolTip" aria-label="Calcula el valor por mora y se indica en el estado de cuenta y en su reporte."><i class="fa fa-question-circle iconToolTip"></i></span></label>
+                                <div class="boton">
+                                    @Html.CheckBoxFor(model => model.Morosidad, new { @class = "btn-switch", @type = "checkbox", @id = "Morosidad" })
+                                    <label for="Morosidad" class="lbl-switch"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label>¿Se causa en mora?</label>
+                                <div class="boton">
+                                    @Html.CheckBoxFor(model => model.SeCausaEnMora, new { @class = "btn-switch", @type = "checkbox", @id = "SeCausaEnMora" })
+                                    <label for="SeCausaEnMora" class="lbl-switch"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="lblRequerido">Cuotas en mora permitidas a causar:</label>
+                                <div class="input-group">
+                                    <label class="input-group-addon">#</label>
+                                    @Html.TextBoxFor(model => model.CuotasGraciaMora, new { @class = "form-control", @type = "text", @readonly = "readonly" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.CuotasGraciaMora, "", new { @class = "text-danger" })
+                            </div>    
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label>¿Permitir retiro anticipado?&nbsp;<span class="hint--bottom hint--gris hint--bounce hint--rounded hint--medium toolTip" aria-label="Permite retirar capital e intereses antes de la fecha de vencimiento."><i class="fa fa-question-circle iconToolTip"></i></span></label>
+                                <div class="boton">
+                                    @Html.CheckBoxFor(model => model.RetiroAnticipado, new { @class = "btn-switch", @type = "checkbox", @id = "RetiroAnticipado" })
+                                    <label for="RetiroAnticipado" class="lbl-switch"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label>Estado:</label>
+                                <div class="boton">
+                                    @Html.CheckBoxFor(model => model.Estado, new { @class = "btn-switch", @type = "checkbox", @id = "Estado" })
+                                    <label for="Estado" class="lbl-switch"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            
+                <div class="row">
+                    <div class="modal-footer">
+                        <button id="cancelarCHA" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button id="guardarCHA" type="button" class="btn btn-primary" >Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/datatables.js"></script>
+    <script src="~/Scripts/Areas/Ahorros/AhorrosContractual.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".chosen-select-single").chosen();
+            $(".chosen-select-multiple").chosen();
+        });
+
+    </script>
+}

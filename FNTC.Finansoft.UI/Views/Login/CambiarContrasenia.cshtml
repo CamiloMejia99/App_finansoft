@@ -1,0 +1,161 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Login.ControlAcceso
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+
+@using (Html.BeginForm("CambiarContrasenia", "Login", new { area = "" }, FormMethod.Post, new { id = "theForm" }))
+
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.usuario, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.usuario, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+            @Html.ValidationMessageFor(model => model.usuario, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.PasswordFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">CONFIRME CONTRASEÑA</label>
+        <div class="col-md-2">
+            <input type="password" id="confirmeContrasenia">
+        </div>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-primary" type="button" onclick="mostrarContrasena()">Mostrar Contraseña</button>
+    </div>
+
+    <div class="col-md-12">
+
+    </div>
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-4">
+        <h4>La contraseña debería cumplir con los siguientes requerimientos:</h4>
+        <ul>
+            <li id="letter">Al menos debería tener <strong>una letra</strong></li>
+            <li id="number">Al menos debería tener <strong>un número</strong></li>
+            <li id="length">Debería tener <strong>8 carácteres</strong> como mínimo y <strong>50 como máximo</strong></li>
+        </ul>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" value="Cambiar" id="btnCambiar" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<script>
+
+    function mostrarContrasena() {
+        var tipo = document.getElementById("password");
+        var tipo2 = document.getElementById("confirmeContrasenia");
+        if (tipo.type == "password" && tipo2.type == "password") {
+            tipo.type = "text";
+            tipo2.type = "text";
+        } else {
+            tipo.type = "password";
+            tipo2.type = "password";
+        }
+    }
+
+    $("#confirmeContrasenia").change(function () {
+        var confirmeContrasenia = $("#confirmeContrasenia").val();
+        var password = $("#password").val();
+        if (confirmeContrasenia != "") {
+            if ((confirmeContrasenia.length >= 8) && (confirmeContrasenia.length <= 50)) {
+                if (confirmeContrasenia.match(/[A-z]/) && (confirmeContrasenia.match(/\d/))) {
+                    if (confirmeContrasenia == password) {
+                        swal({
+                            title: "OK",
+                            type: "success",
+                            text: "Las contraseñas coinciden",
+                        })
+                    }
+                    else {
+                        swal({
+                            title: "Error",
+                            type: "info",
+                            text: "Las contraseñas NO coinciden!",
+                        })
+                    }
+                } else {
+                    swal({
+                        title: "Error",
+                        type: "info",
+                        text: "La contraseña debe contener numenos y letras",
+                    })
+                }
+            } else {
+                swal({
+                    title: "Error",
+                    type: "info",
+                    text: "La contraseña debe tener 8 caracteres como mínimo y 50 como máximo",
+                })
+            }
+        }
+    });
+
+    $("#btnCambiar").click(function () {
+        var confirmeContrasenia = $("#confirmeContrasenia").val();
+        var password = $("#password").val();
+        if (confirmeContrasenia != "") {
+            if (confirmeContrasenia.length >= 8) {
+                if (confirmeContrasenia.match(/[A-z]/) && (confirmeContrasenia.match(/\d/))) {
+                    if (confirmeContrasenia == password) {
+                        $("#theForm").submit();
+                    }
+                    else {
+                        swal({
+                            title: "Error",
+                            type: "info",
+                            text: "Las contraseñas NO coinciden!",
+                        })
+                    }
+                } else {
+                    swal({
+                        title: "Error",
+                        type: "info",
+                        text: "La contraseña debe contener numenos y letras",
+                    })
+                }
+            } else {
+                swal({
+                    title: "Error",
+                    type: "info",
+                    text: "La contraseña debe tener 8 caracteres como minimo",
+                })
+            }
+        }
+    });
+</script>

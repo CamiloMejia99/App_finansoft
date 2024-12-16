@@ -1,0 +1,93 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.MCreditos.Costos_Adicionales
+
+@{
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Seguro desea eliminar este elemento?</h3>
+<div>
+    <h4>Costos_Adicionales</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Lineas_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lineas_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cuenta_Cod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cuenta_Cod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo_Costo_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo_Costo_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Incrementa_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Incrementa_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CA_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CA_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CA_Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CA_Valor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CA_estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CA_estado)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        @Html.ActionLink("Regresar a la Lista", "Index")
+    </div>
+    }
+</div>

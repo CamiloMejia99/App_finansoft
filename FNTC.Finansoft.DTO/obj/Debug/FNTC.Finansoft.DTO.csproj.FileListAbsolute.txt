@@ -1,0 +1,651 @@
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll.config
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.xml
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.xml
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.xml
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.xml
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.xml
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.xml
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.xml
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.xml
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.xml
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Helpers.resources.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Mvc.resources.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Razor.resources.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.resources.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CoreCompileInputs.cache
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CopyComplete
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.dll
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+D:\JORGE\TRABAJO\FINANTEC\respaldo\COOMISOL\coomisol\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csprojAssemblyReference.cache
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll.config
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.xml
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.xml
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.xml
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.xml
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.xml
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.xml
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.xml
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.xml
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.xml
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Helpers.resources.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Mvc.resources.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Razor.resources.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.resources.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CoreCompileInputs.cache
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CopyComplete
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.dll
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+D:\BD\FFCCOMERCIO-Pasto\Migracion\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csprojAssemblyReference.cache
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll.config
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.xml
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.xml
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.xml
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.xml
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.xml
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.xml
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.xml
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.xml
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.xml
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Helpers.resources.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Mvc.resources.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Razor.resources.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.resources.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CoreCompileInputs.cache
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CopyComplete
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.dll
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+D:\JORGE\TRABAJO\FFCC\ProyectoFFCC\ProyectoFFCC\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csprojAssemblyReference.cache
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll.config
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.Win32.Primitives.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\netstandard.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.AppContext.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Collections.Concurrent.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Collections.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Collections.NonGeneric.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Collections.Specialized.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ComponentModel.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ComponentModel.EventBasedAsync.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ComponentModel.Primitives.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ComponentModel.TypeConverter.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Console.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Data.Common.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.Contracts.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.Debug.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.FileVersionInfo.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.Process.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.StackTrace.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.TextWriterTraceListener.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.Tools.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.TraceSource.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.Tracing.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Drawing.Primitives.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Dynamic.Runtime.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Globalization.Calendars.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Globalization.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Globalization.Extensions.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.Compression.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.Compression.ZipFile.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.FileSystem.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.FileSystem.DriveInfo.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.FileSystem.Primitives.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.FileSystem.Watcher.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.IsolatedStorage.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.MemoryMappedFiles.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.Pipes.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.UnmanagedMemoryStream.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Linq.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Linq.Expressions.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Linq.Parallel.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Linq.Queryable.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Http.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.NameResolution.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.NetworkInformation.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Ping.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Primitives.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Requests.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Security.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Sockets.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.WebHeaderCollection.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.WebSockets.Client.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.WebSockets.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ObjectModel.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Reflection.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Reflection.Extensions.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Reflection.Primitives.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Resources.Reader.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Resources.ResourceManager.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Resources.Writer.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.CompilerServices.VisualC.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Extensions.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Handles.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.InteropServices.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Numerics.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Serialization.Formatters.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Serialization.Json.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Serialization.Primitives.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Serialization.Xml.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Claims.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Cryptography.Algorithms.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Cryptography.Csp.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Cryptography.Encoding.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Cryptography.Primitives.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Principal.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.SecureString.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encoding.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encoding.Extensions.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.RegularExpressions.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.Overlapped.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.Tasks.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.Tasks.Parallel.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.Thread.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.ThreadPool.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.Timer.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ValueTuple.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.ReaderWriter.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.XDocument.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.XmlDocument.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.XmlSerializer.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.XPath.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.XPath.XDocument.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Html.Abstractions.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.Runtime.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encodings.Web.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.xml
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.xml
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.xml
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.xml
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Html.Abstractions.xml
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.xml
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.Runtime.xml
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encodings.Web.xml
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.xml
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.xml
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.xml
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.xml
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.xml
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Helpers.resources.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Mvc.resources.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Razor.resources.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.resources.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CoreCompileInputs.cache
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CopyComplete
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.dll
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.AssemblyReference.cache
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll.config
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.Win32.Primitives.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\netstandard.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.AppContext.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Collections.Concurrent.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Collections.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Collections.NonGeneric.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Collections.Specialized.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ComponentModel.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ComponentModel.EventBasedAsync.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ComponentModel.Primitives.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ComponentModel.TypeConverter.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Console.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Data.Common.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.Contracts.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.Debug.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.Process.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.StackTrace.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.TextWriterTraceListener.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.Tools.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.TraceSource.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.Tracing.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Drawing.Primitives.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Dynamic.Runtime.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Globalization.Calendars.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Globalization.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Globalization.Extensions.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.Compression.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.Compression.ZipFile.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.FileSystem.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.FileSystem.DriveInfo.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.FileSystem.Primitives.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.FileSystem.Watcher.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.IsolatedStorage.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.MemoryMappedFiles.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.Pipes.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.UnmanagedMemoryStream.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Linq.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Linq.Expressions.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Linq.Parallel.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Linq.Queryable.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Http.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.NameResolution.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.NetworkInformation.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Ping.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Primitives.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Requests.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Security.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Sockets.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.WebHeaderCollection.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.WebSockets.Client.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.WebSockets.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ObjectModel.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Reflection.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Reflection.Extensions.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Reflection.Primitives.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Resources.Reader.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Resources.ResourceManager.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Resources.Writer.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.CompilerServices.VisualC.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Extensions.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Handles.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.InteropServices.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Numerics.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Serialization.Formatters.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Serialization.Json.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Serialization.Primitives.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Serialization.Xml.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Claims.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Cryptography.Algorithms.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Cryptography.Csp.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Cryptography.Encoding.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Cryptography.Primitives.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Principal.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.SecureString.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encoding.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encoding.Extensions.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.RegularExpressions.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.Overlapped.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.Tasks.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.Tasks.Parallel.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.Thread.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.ThreadPool.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.Timer.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ValueTuple.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.ReaderWriter.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.XDocument.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.XmlDocument.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.XmlSerializer.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.XPath.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.XPath.XDocument.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Html.Abstractions.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.Runtime.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.xml
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.xml
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.xml
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Html.Abstractions.xml
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.xml
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.Runtime.xml
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.xml
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.xml
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.xml
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.xml
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Helpers.resources.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Mvc.resources.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Razor.resources.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.resources.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.AssemblyReference.cache
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CoreCompileInputs.cache
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CopyComplete
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.dll
+C:\Users\Danilo\Documents\ProyectosWork\Proyects\FERAJUNAP\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll.config
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.Win32.Primitives.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\netstandard.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.AppContext.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Collections.Concurrent.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Collections.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Collections.NonGeneric.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Collections.Specialized.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ComponentModel.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ComponentModel.EventBasedAsync.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ComponentModel.Primitives.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ComponentModel.TypeConverter.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Console.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Data.Common.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.Contracts.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.Debug.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.FileVersionInfo.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.Process.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.StackTrace.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.TextWriterTraceListener.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.Tools.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.TraceSource.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Diagnostics.Tracing.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Drawing.Primitives.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Dynamic.Runtime.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Globalization.Calendars.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Globalization.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Globalization.Extensions.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.Compression.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.Compression.ZipFile.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.FileSystem.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.FileSystem.DriveInfo.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.FileSystem.Primitives.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.FileSystem.Watcher.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.IsolatedStorage.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.MemoryMappedFiles.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.Pipes.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.IO.UnmanagedMemoryStream.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Linq.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Linq.Expressions.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Linq.Parallel.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Linq.Queryable.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Http.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.NameResolution.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.NetworkInformation.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Ping.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Primitives.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Requests.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Security.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.Sockets.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.WebHeaderCollection.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.WebSockets.Client.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Net.WebSockets.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ObjectModel.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Reflection.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Reflection.Extensions.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Reflection.Primitives.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Resources.Reader.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Resources.ResourceManager.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Resources.Writer.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.CompilerServices.VisualC.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Extensions.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Handles.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.InteropServices.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Numerics.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Serialization.Formatters.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Serialization.Json.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Serialization.Primitives.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Runtime.Serialization.Xml.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Claims.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Cryptography.Algorithms.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Cryptography.Csp.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Cryptography.Encoding.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Cryptography.Primitives.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.Principal.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Security.SecureString.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encoding.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encoding.Extensions.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.RegularExpressions.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.Overlapped.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.Tasks.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.Tasks.Parallel.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.Thread.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.ThreadPool.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Threading.Timer.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.ValueTuple.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.ReaderWriter.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.XDocument.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.XmlDocument.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.XmlSerializer.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.XPath.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Xml.XPath.XDocument.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Html.Abstractions.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.Runtime.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.Web.Infrastructure.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encodings.Web.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.xml
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.xml
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.xml
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.xml
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Html.Abstractions.xml
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.xml
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.Runtime.xml
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encodings.Web.xml
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.xml
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.xml
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.xml
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.xml
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.xml
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.xml
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Helpers.resources.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Mvc.resources.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Razor.resources.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.resources.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.AssemblyReference.cache
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CoreCompileInputs.cache
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CopyComplete
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.dll
+F:\Tecnologia-Software-Finantec SAS\BDC\CLIENTES\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll.config
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Html.Abstractions.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.Runtime.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encodings.Web.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.xml
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.xml
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.xml
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.xml
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Html.Abstractions.xml
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.xml
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.Runtime.xml
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encodings.Web.xml
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.xml
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.xml
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.xml
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.xml
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.xml
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Helpers.resources.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Mvc.resources.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Razor.resources.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.resources.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.AssemblyReference.cache
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CoreCompileInputs.cache
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CopyComplete
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.dll
+D:\FERAJUNAP\Proyecto\Ferajunap\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll.config
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Html.Abstractions.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.Runtime.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encodings.Web.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.xml
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.xml
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.xml
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.xml
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Html.Abstractions.xml
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.xml
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.Runtime.xml
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encodings.Web.xml
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.xml
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.xml
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.xml
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.xml
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.xml
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Helpers.resources.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Mvc.resources.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Razor.resources.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.resources.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.AssemblyReference.cache
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CoreCompileInputs.cache
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CopyComplete
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.dll
+D:\FERAJUNAP\Proyecto\Ferajunap20241203\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll.config
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Html.Abstractions.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.Runtime.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\AutoMapper.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Lib.Web.Mvc.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Html.Abstractions.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\Microsoft.AspNetCore.Razor.Runtime.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.Helpers.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.Mvc.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.Razor.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Helpers.resources.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Mvc.resources.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.Razor.resources.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.resources.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.AssemblyReference.cache
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.DTO.csproj.CoreCompileInputs.cache
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\obj\Debug\FNTC.Fin.1B7954BB.Up2Date
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.DTO\obj\Debug\FNTC.Finansoft.Accounting.DTO.pdb

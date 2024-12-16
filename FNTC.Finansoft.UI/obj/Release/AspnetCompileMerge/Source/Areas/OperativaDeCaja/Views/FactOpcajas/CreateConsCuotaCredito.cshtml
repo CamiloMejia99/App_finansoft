@@ -1,0 +1,405 @@
+﻿<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.masknumber.js"></script>
+
+@model FNTC.Finansoft.Accounting.DTO.OperativaDeCaja.factOpCajaConsCuotaCredito
+
+@{
+    ViewBag.Title = "Crear Factura";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/styleGeneral.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script src="~/Scripts/datatable.js"></script>
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+<div class="col-md-12" style="background: rgb(248, 248, 248)">
+    <div class="modal fade" data-backdrop="static" id="centro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("CreateConsCuotaCredito", "FactOpcajas", new { area = "OperativaDeCaja" }, FormMethod.Post, new { id = "theForm" }))
+
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group col-md-11" style="margin-left:40px">
+            <div class="caja2">
+                <div class="form-group">
+                    <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 123%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Crear Factura</h3></div>
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row contenido">
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Fecha:</label>
+                        @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control", @Readonly = "readonly", @Style = "color:red", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">No Factura: </label>
+                        @Html.EditorFor(model => model.factura, new { htmlAttributes = new { @class = "form-control", @Value = Session["Factura"+User.Identity.Name], @Readonly = "readonly", @Style = "color:red", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.factura, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Operación: </label>
+                        <input class="form-control" Value=@Session["op1"+User.Identity.Name] readonly required="required" />
+                    </div>
+                </div>
+
+                <div class="row contenido">
+
+                    <hr />
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Código Caja:</label>
+                        @Html.EditorFor(model => model.codigoCaja, new { htmlAttributes = new { @class = "form-control", @Value = Session["cod_caja" + User.Identity.Name], @Readonly = "readonly", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.codigoCaja, "", new { @class = "text-danger" })
+                        <h5 style="color:#274766">@Session["nombre_caja" + User.Identity.Name]</h5>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Nit Cajero:</label>
+                        @Html.EditorFor(model => model.nitCajero, new { htmlAttributes = new { @class = "form-control", @Value = Session["nit" + User.Identity.Name], @Readonly = "readonly", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.nitCajero, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <br />
+                        <h5 style="color:#274766">@Session["nombre" + User.Identity.Name]</h5>
+                    </div>
+
+                    
+                </div>
+                <div class="row contenido">
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Pagaré: </label>
+                        @Html.EditorFor(model => model.pagare, new { htmlAttributes = new { @class = "form-control", @Readonly = "readonly" } })
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Saldo Capital: </label>
+                        <input class="form-control" id="saldoCapital" Value="" readonly />
+                    </div>
+                </div>
+                <hr />
+                <h3>Cuotas Por Pagar</h3>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th><b>Intern</b></th>
+                            <th><b>N° Cuota</b></th>
+                            <th><b>Estado</b></th>
+                            <th><b>Interes Corriente</b></th>
+                            <th><b>Capital</b></th>
+                            <th><b>Seguro</b></th>
+                            <th><b>Interes De Mora</b></th>
+                            <th><b>Dias en Mora</b></th>
+                            <th><b>Fecha Pago Oportuno</b></th>
+                            <th><b>Pagar</b></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbCuotasPagar"></tbody>
+                </table>
+                
+                <div class="row contenido">
+                    <hr />
+                    <div class="form-group col-md-4">
+                        <br />
+                        <input class="form-control" Style="background-color:transparent;border-color:transparent;" value="@ViewBag.NombreTercero" readonly />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Nit:</label>
+                        @Html.EditorFor(model => model.NIT, new { htmlAttributes = new { @class = "form-control", @Readonly = "readonly", @required = "required" } })
+                    </div>
+                </div>
+
+                <div class="row contenido">
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Valor Recibido:</label>
+                        <input type="text" class="form-control " id="recibidotxt" name="recibidotxt" Value="0" autocomplete="off" />
+
+                        @Html.HiddenFor(model => model.valorConsignado, new { @id = "valorCuotaModel" })
+                        @Html.ValidationMessageFor(model => model.valorConsignado, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Valor A Pagar:</label>
+                        <input class="form-control monto" Value="0" id="valorCuota" autocomplete="off" readonly />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Dinero Sobrante:</label>
+                        <input class="form-control monto" Value="0" id="regreso" autocomplete="off" readonly />
+                    </div>
+                </div>
+
+                <div class="row contenido">
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Realizar Abono:</label>
+                        <input class="form-control monto" Value="0" id="abonoCapital" autocomplete="off" />
+
+                        @Html.HiddenFor(model => model.abonoCapital, new { @id = "abonoCapitalModelo" })
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <a href="/OperativaDeCaja/FactOpcajas/CuentaOperacion" class="btn btn-inline btn-small btn-danger">Cancelar</a>
+
+                    <button type="button" id="BtnGuardar" class="btn btn-inline btn-small btn-success">Guardar</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    body {
+        background-color: #DDD;
+    }
+</style>
+
+<script>
+    $("#BtnGuardar").click(function () {
+        $("#BtnGuardar").prop("disabled", true);
+        var recibidotxt = $("#recibidotxt").val();
+        var valorCuota = $("#valorCuota").val();
+        var abonoCapital = $("#abonoCapital").val();
+
+        recibidotxt = recibidotxt.replace(".", "");
+        recibidotxt = recibidotxt.replace(".", "");
+        recibidotxt = recibidotxt.replace(".", "");   
+
+        abonoCapital = abonoCapital.replace(".", "");   
+        abonoCapital = abonoCapital.replace(".", "");   
+        abonoCapital = abonoCapital.replace(".", "");   
+
+        valorCuota = valorCuota.replace(".", "");
+        valorCuota = valorCuota.replace(".", "");
+        valorCuota = valorCuota.replace(".", "");
+
+        $("#abonoCapitalModelo").val(abonoCapital);
+        abonoCapital = parseInt(abonoCapital);
+        recibidotxt = parseFloat(recibidotxt);
+        valorCuota = parseFloat(valorCuota);
+
+        if (abonoCapital > 0) {
+            $("#valorCuotaModel").val(0);
+            $("#theForm").submit();
+        } else {
+            if (recibidotxt == 0 || recibidotxt == "" || valorCuota == 0 || valorCuota == '') {
+                $("#BtnGuardar").prop("disabled", false);
+            } else if (recibidotxt >= valorCuota) {
+                var valorCuota2 = $("#valorCuota").val();
+                valorCuota2 = valorCuota2.replace(".", "");
+                valorCuota2 = valorCuota2.replace(".", "");
+                valorCuota2 = valorCuota2.replace(",", ".");
+
+                $("#valorCuotaModel").val(valorCuota2);
+                $("#theForm").submit();
+            } else {
+                alert("Cantidad Insuficiente!");
+                $("#BtnGuardar").prop("disabled", false);
+            }
+        }
+
+
+
+            
+     
+
+       //incluir saldo capital
+
+              
+    });
+</script>
+
+<script>
+    //$(document).ready(function () {
+    //    var valorCuota = $("#valorCuotaModel").val();
+    //    $("#valorCuota").val(formatNumberMiles.new(valorCuota));
+    //});
+
+    $(document).on('keyup', '#recibidotxt', function () {
+        sumatotalregreso();
+    });
+
+    function sumatotalregreso() {
+        var total = 0;
+        var recibidotxt = $("#recibidotxt").val();
+        var valorCuota = $("#valorCuota").val();
+        if (recibidotxt != "") {
+            var recibidotxt = recibidotxt.replace(".", "");
+            var recibidotxt = recibidotxt.replace(".", "");
+            var recibidotxt = recibidotxt.replace(".", "");
+        } else {
+            recibidotxt = 0;
+        }
+
+        if (valorCuota != "") {
+            var valorCuota = valorCuota.replace(".", "");
+            var valorCuota = valorCuota.replace(".", "");
+            var valorCuota = valorCuota.replace(".", "");
+        } else {
+            var valorCuota = 0;
+        }
+
+        recibidotxt = parseFloat(recibidotxt);
+        valorCuota = parseFloat(valorCuota);
+
+        total = recibidotxt - valorCuota;
+        $('#regreso').val(formatNumberMiles.new(total));
+    }
+</script>
+
+
+
+<script language="javascript">
+
+</script>
+@if (ViewBag.err != null)
+{
+    <script>
+			window.onload = function () {
+				swal('Error', '@ViewBag.err', 'warning');
+			}
+
+    </script>
+}
+
+
+
+<script>
+
+    //refrescar un div
+    $(".js-refrescar").click(function () {
+        $("#mostrar").html("");
+        $("#mostrar").load("/FactOpcajas/Index");
+    });
+
+
+    //Al Ocultar el modal
+    $(document.body).on('hidden.bs.modal', function () {
+        $('#centro').removeData('bs.modal');
+        $(".js-refrescar").click();
+    });
+
+</script>
+<script>
+    //FORMATEAR UN NUMERO
+    var formatNumberMiles = {
+        separador: ".", // separador para los miles
+        sepDecimal: ',', // separador para los decimales
+        formatear: function (num) {
+            num += '';
+            var splitStr = num.split('.');
+            var splitLeft = splitStr[0];
+            var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+            var regx = /(\d+)(\d{3})/;
+            while (regx.test(splitLeft)) {
+                splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+            }
+            return this.simbol + splitLeft + splitRight;
+        },
+        new: function (num, simbol) {
+            this.simbol = simbol || '';
+            return this.formatear(num);
+        }
+    }
+//FIN FORMATEAR UN NUMERO
+/*
+* FUNCIONALIDAD DE LA 'FUNCION'
+formatNumber.new(123456779.18, "$") // retorna "$123.456.779,18"
+formatNumber.new(123456779.18) // retorna "123.456.779,18"
+formatNumber.new(123456779) // retorna "$123.456.779"
+*/
+    /* SEPARADOR DE MILES POR KEY UP */
+    $(document).ready(function () {
+        $("#recibidotxt").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                });
+            }
+        });
+    });
+            /*FIN SEPARADOR DE MILES POR KEY UP*/
+
+    /* SEPARADOR DE MILES POR KEY UP */
+    $(document).ready(function () {
+        $("#abonoCapital").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                });
+            }
+        });
+    });
+        /*FIN SEPARADOR DE MILES POR KEY UP*/
+
+    $(document).on('click', '.checkPagar', function () {
+
+        var ids = new Array(); 
+
+            $("input:checkbox:checked").each(
+                function () {
+                    var cRow = $(this).parents('tr');
+                    var cId = $('td:nth-child(1)', cRow).text();
+                    ids.push(cId);
+                }
+        );
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("getValorCuota", "FactOpCajas")",
+                datatype: "Json",
+                data: { ids: ids },//solo para enviar datos
+                success: function (data){
+                    $("#valorCuota").val(formatNumberMiles.new(data));
+                    }
+                });
+        });
+
+        $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("getHistorialCredito", "FactOpCajas")",
+            datatype: "Json",
+            data: { pagare: $('#pagare').val() },
+            success: function (data)
+            {
+                $.each(data, function (index, value) {
+                    if (value[1] != "0") {
+                        $("#tbCuotasPagar").append("<tr><td>" + value[0] + "</td><td>" + value[1] + "</td><td>" + value[2] + "</td><td>" + formatNumberMiles.new(value[3]) + "</td><td>" + formatNumberMiles.new(value[4]) + "</td><td>" + formatNumberMiles.new(value[5]) + "</td><td>" + formatNumberMiles.new(value[6]) + "</td><td>" + value[7] + "</td><td>" + value[8] + "</td><td><input type='checkbox' class='checkPagar'/></td></tr>");
+                    }
+                    
+                });
+            }
+        });
+
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetSaldoCapital", "FactOpCajas")",
+                    datatype: "Json",
+                data: { pagare: $('#pagare').val() },//solo para enviar datos
+                    success: function (data) {
+                        $("#saldoCapital").val(formatNumberMiles.new(data));
+                    }
+                });
+        });
+</script>
+
+
+

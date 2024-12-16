@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BD_finantecFabricaCreditosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ReferenciasCodeudor">
+          <Key>
+            <PropertyRef Name="nit" />
+          </Key>
+          <Property Name="nit" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre1" Type="nvarchar" MaxLength="50" />
+          <Property Name="nombre2" Type="nvarchar" MaxLength="50" />
+          <Property Name="apellido1" Type="nvarchar" MaxLength="50" />
+          <Property Name="apellido2" Type="nvarchar" MaxLength="50" />
+          <Property Name="genero" Type="nvarchar" MaxLength="50" />
+          <Property Name="fechaNacimiento" Type="nchar" MaxLength="10" />
+          <Property Name="telefono" Type="nchar" MaxLength="10" />
+          <Property Name="telefonoMovil" Type="nchar" MaxLength="10" />
+          <Property Name="correoElectronico" Type="nchar" MaxLength="10" />
+          <Property Name="esAsociado" Type="bit" />
+          <Property Name="esReferencia" Type="bit" />
+          <Property Name="esEmpleado" Type="bit" />
+          <Property Name="idActividad" Type="bit" />
+          <Property Name="idPadre" Type="nchar" MaxLength="10" />
+          <Property Name="direccionResidencia" Type="nvarchar" MaxLength="50" />
+          <Property Name="esCodeudor" Type="bit" />
+        </EntityType>
+        <EntityType Name="ReferenciasPorSolicitud">
+          <Key>
+            <PropertyRef Name="idReferencia" />
+          </Key>
+          <Property Name="idReferencia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idSolicitud" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nomEmpresa" Type="varchar" MaxLength="50" />
+          <Property Name="telEmpresa" Type="varchar" MaxLength="18" />
+          <Property Name="parentesco" Type="varchar" MaxLength="50" />
+          <Property Name="verificada" Type="bit" />
+          <Property Name="comentarios" Type="varchar(max)" />
+        </EntityType>
+        <EntityContainer Name="BD_finantecFabricaCreditosModelStoreContainer">
+          <EntitySet Name="ReferenciasCodeudor" EntityType="Self.ReferenciasCodeudor" Schema="Fcred" store:Type="Tables" />
+          <EntitySet Name="ReferenciasPorSolicitud" EntityType="Self.ReferenciasPorSolicitud" Schema="Fcred" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BD_finantecFabricaCreditosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BD_finantecFabricaCreditosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ReferenciasCodeudor" EntityType="BD_finantecFabricaCreditosModel.ReferenciasCodeudor" />
+          <EntitySet Name="ReferenciasPorSolicitud" EntityType="BD_finantecFabricaCreditosModel.ReferenciasPorSolicitud" />
+        </EntityContainer>
+        <EntityType Name="ReferenciasCodeudor">
+          <Key>
+            <PropertyRef Name="nit" />
+          </Key>
+          <Property Name="nit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nombre1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nombre2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="apellido1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="apellido2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="genero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fechaNacimiento" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="telefonoMovil" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="correoElectronico" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="esAsociado" Type="Boolean" />
+          <Property Name="esReferencia" Type="Boolean" />
+          <Property Name="esEmpleado" Type="Boolean" />
+          <Property Name="idActividad" Type="Boolean" />
+          <Property Name="idPadre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="direccionResidencia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="esCodeudor" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ReferenciasPorSolicitud">
+          <Key>
+            <PropertyRef Name="idReferencia" />
+          </Key>
+          <Property Name="idReferencia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idSolicitud" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nomEmpresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telEmpresa" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="parentesco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="verificada" Type="Boolean" />
+          <Property Name="comentarios" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BD_finantecFabricaCreditosModelStoreContainer" CdmEntityContainer="BD_finantecFabricaCreditosEntities">
+          <EntitySetMapping Name="ReferenciasCodeudor">
+            <EntityTypeMapping TypeName="BD_finantecFabricaCreditosModel.ReferenciasCodeudor">
+              <MappingFragment StoreEntitySet="ReferenciasCodeudor">
+                <ScalarProperty Name="esCodeudor" ColumnName="esCodeudor" />
+                <ScalarProperty Name="direccionResidencia" ColumnName="direccionResidencia" />
+                <ScalarProperty Name="idPadre" ColumnName="idPadre" />
+                <ScalarProperty Name="idActividad" ColumnName="idActividad" />
+                <ScalarProperty Name="esEmpleado" ColumnName="esEmpleado" />
+                <ScalarProperty Name="esReferencia" ColumnName="esReferencia" />
+                <ScalarProperty Name="esAsociado" ColumnName="esAsociado" />
+                <ScalarProperty Name="correoElectronico" ColumnName="correoElectronico" />
+                <ScalarProperty Name="telefonoMovil" ColumnName="telefonoMovil" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+                <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+                <ScalarProperty Name="nombre2" ColumnName="nombre2" />
+                <ScalarProperty Name="nombre1" ColumnName="nombre1" />
+                <ScalarProperty Name="nit" ColumnName="nit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReferenciasPorSolicitud">
+            <EntityTypeMapping TypeName="BD_finantecFabricaCreditosModel.ReferenciasPorSolicitud">
+              <MappingFragment StoreEntitySet="ReferenciasPorSolicitud">
+                <ScalarProperty Name="comentarios" ColumnName="comentarios" />
+                <ScalarProperty Name="verificada" ColumnName="verificada" />
+                <ScalarProperty Name="parentesco" ColumnName="parentesco" />
+                <ScalarProperty Name="telEmpresa" ColumnName="telEmpresa" />
+                <ScalarProperty Name="nomEmpresa" ColumnName="nomEmpresa" />
+                <ScalarProperty Name="idSolicitud" ColumnName="idSolicitud" />
+                <ScalarProperty Name="idReferencia" ColumnName="idReferencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

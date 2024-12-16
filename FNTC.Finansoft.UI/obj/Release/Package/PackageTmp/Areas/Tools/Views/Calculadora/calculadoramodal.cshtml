@@ -1,0 +1,414 @@
+﻿@using FNTC.Finansoft.Accounting.DTO.Result
+@model IEnumerable<FNTC.Finansoft.Accounting.DTO.Accounting.CuentaDTO>
+
+@{
+    ViewBag.Title = "pruebas";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    var action = (string)ViewBag.action;
+    var boton = (string)ViewBag.boton;
+
+}
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora</title>
+    <link href="~/Content/tools/SimpleCalculadorajQuery.css" rel="stylesheet" />
+    <script src="~/Content/tools/SimpleCalculadorajQuery.js"></script>
+</head>
+
+<body onload="document.forms['FCalculadora'].pantalla.value='0';document.forms['FCalculadora'].pantalla.focus();">
+    <form name="FCalculadora" action="javascript:resultado();">
+        <div class="modalheadergeneral" style="width: 100%; margin-left: 0%;"><h4>Calculadora</h4></div>
+        <hr />
+        <div class="contentcalculadora" style="width: 92% !important;">
+            <table border="1" cellpadding="0" cellspacing="0" class="calculadora">
+                <tr>
+                    <td colspan="6" align="center">
+                        <input type="text" class="display resultado" name="pantalla" value="0" align="middle" onkeydown="javascript:recogerTecla(event)" readonly>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td class="botonesteclas"><input type="button" value="7" onclick="insertaNumero('7');" class="tecla botonazul"></td>
+                    <td class="botonesteclas"><input type="button" value="8" onclick="insertaNumero('8');" class="tecla botonazul"></td>
+                    <td class="botonesteclas"><input type="button" value="9" onclick="insertaNumero('9');" class="tecla botonazul"></td>
+                    <td class="botonesteclas"><input type="button" value="+" onclick="operacion('+')" class="tecla botonamarillo"></td>
+
+                </tr>
+                <tr>
+
+                    <td class="botonesteclas"><input type="button" value="4" onclick="insertaNumero('4');" class="tecla botonazul"></td>
+                    <td class="botonesteclas"><input type="button" value="5" onclick="insertaNumero('5');" class="tecla botonazul"></td>
+                    <td class="botonesteclas"><input type="button" value="6" onclick="insertaNumero('6');" class="tecla botonazul"></td>
+                    <td class="botonesteclas"><input type="button" value="-" onclick="operacion('-');" class="tecla botonamarillo"></td>
+
+
+                </tr>
+                <tr>
+
+                    <td class="botonesteclas"><input type="button" value="1" onclick="insertaNumero('1');" class="tecla botonazul"></td>
+                    <td class="botonesteclas"><input type="button" value="2" onclick="insertaNumero('2');" class="tecla botonazul"></td>
+                    <td class="botonesteclas"><input type="button" value="3" onclick="insertaNumero('3');" class="tecla botonazul"></td>
+                    <td class="botonesteclas"><input type="button" value="*" onclick="operacion('*');" class="tecla botonamarillo"></td>
+
+                </tr>
+
+                <tr>
+
+                    <td class="botonesteclas"><input type="button" value="0" onclick="insertaNumero('0');" class="tecla botonazul"></td>
+                    <td class="botonesteclas"><input type="button" value="," onclick="insertaPunto();" class="tecla botonazul"></td>
+                    <td class="botonesteclas"><input type="button" value="=" onclick="resultado();" class="tecla botonverde" /></td>
+                    <td class="botonesteclas"><input type="button" value="/" onclick="operacion('/')" class="tecla botonamarillo"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="6" align="center">
+                        <input type="button" value="Borrar" onclick="borrar();" class="tecla botonrojo">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="modal-footer" style="margin-top:3%">
+
+            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+            @*<button type="button" class="btn btn-primary">Save changes</button>*@
+        </div>
+    </form>
+</body>
+
+<script>
+    $(document).ready(function () {
+        $("#theForm").submit(function (event) {
+            event.preventDefault();
+            var theForm = $(this);
+            var theAction = theForm.attr("action");
+            //alert(theAction);
+            $.post('/accounting/centrocosto/@action', theForm.serialize())
+                .done(function (result) {
+                    $('button[class=close]').trigger("click");
+                    // $('#centro').removeData('bs.modal')
+                    // alert("posted");
+                    //  $("#mostrar").html(result);
+                });
+        });
+
+
+    });
+
+
+    var control = 0;
+    var operando1, operando2;
+    var operador;
+    var memoria = 0;
+
+    function redondeo(Valor, decimales) {
+        var temp = Math.pow(10.0, decimales);
+        return Math.round(Valor * temp) / temp;
+    }
+
+    function convertirMoneda(cambio) {
+        var cantidad = document.forms["FCalculadora"].pantalla.value * cambio;
+        document.forms["FCalculadora"].pantalla.value = redondeo(cantidad, 3);
+    }
+
+    function insertaPunto() {
+        var valor = eval("document.forms['FCalculadora'].pantalla.value");
+        if (control == 0) {
+            if (valor.indexOf('.') == -1)
+                eval("document.forms['FCalculadora'].pantalla.value = document.forms['FCalculadora'].pantalla.value + '.'");
+        }
+        else {
+            document.forms["FCalculadora"].pantalla.value = "0.";
+            control = 0;
+        }
+        document.forms["FCalculadora"].pantalla.focus();
+    }
+
+    function insertaNumero(num) {
+        if (eval("document.forms['FCalculadora'].pantalla.value == '0'") || control == 1) {
+            eval("document.forms['FCalculadora'].pantalla.value = num");
+            control = 0;
+        }
+        else
+            eval("document.forms['FCalculadora'].pantalla.value = document.forms['FCalculadora'].pantalla.value + num");
+        document.forms["FCalculadora"].pantalla.focus();
+    }
+    function borrar() {
+        if (document.forms["FCalculadora"].pantalla.value == '0') {
+            operando1 = null;
+            operando2 = null;
+        }
+        document.forms["FCalculadora"].pantalla.value = '0';
+        document.forms["FCalculadora"].pantalla.focus();
+    }
+
+    function operacion(op) {
+        var aux = eval("document.forms['FCalculadora'].pantalla.value");  //Para acumular operaciones anteriores
+        if (operando1 != null) {
+            resultado();
+            operando1 = eval("document.forms['FCalculadora'].pantalla.value");
+        }
+        else
+            operando1 = aux;
+        operador = op;
+        control = 1;
+        document.forms["FCalculadora"].pantalla.focus();
+    }
+
+    function resultado() {
+        operando2 = eval("document.forms['FCalculadora'].pantalla.value");
+        if (operando1 != "" && operando1 != null && operador != "" && operador != null &&
+         operando2 != "" && operando2 != null) {
+            var total = eval("parseFloat(operando1)" + operador + "parseFloat(operando2)");
+            if (isNaN(total))
+                eval("document.forms['FCalculadora'].pantalla.value = 'Error'");
+            else
+                eval("document.forms['FCalculadora'].pantalla.value = total");
+            control = 1;
+        }
+        operando1 = null;
+        operando2 = null;
+        document.forms["FCalculadora"].pantalla.focus();
+    }
+
+    function porcentaje() {
+        operando2 = eval("document.forms['FCalculadora'].pantalla.value");
+        eval("document.forms['FCalculadora'].pantalla.value = (operando1 * operando2) / 100");
+        control = 1;
+        document.forms["FCalculadora"].pantalla.focus();
+    }
+
+    function guardarMemoria(signo) {
+        var valor = eval("document.forms['FCalculadora'].pantalla.value");
+        if (signo == '-')
+            memoria = parseFloat(memoria) - parseFloat(valor);
+        else
+            memoria = parseFloat(memoria) + parseFloat(valor);
+        document.forms["FCalculadora"].pantalla.focus();
+    }
+
+    function recuperarMemoria() {
+        eval("document.forms['FCalculadora'].pantalla.value = memoria");
+        document.forms["FCalculadora"].pantalla.focus();
+    }
+
+    function borrarMemoria() {
+        memoria = 0;
+        document.forms["FCalculadora"].pantalla.focus();
+    }
+
+    function cambiaSigno() {
+        var valor = eval("document.forms['FCalculadora'].pantalla.value");
+        if (valor.indexOf('-') == 0)
+            valor = valor.substring(1);
+        else
+            valor = '-' + valor;
+        eval("document.forms['FCalculadora'].pantalla.value = valor");
+        document.forms["FCalculadora"].pantalla.focus();
+    }
+
+    function recogerTecla(evt) {
+        var keyCode = document.layers ? evt.which : document.all ? evt.keyCode : evt.keyCode;
+        var keyChar = String.fromCharCode(keyCode);
+
+        if (keyCode == 13)  //Si se pulsa enter da directamente el resultado
+            resultado();
+        else {//Si se pulsa una tecla distinta de enter
+            switch (keyCode) {
+                case 96: {
+                    keyChar = "0"; break;
+                }
+                case 97: {
+                    keyChar = "1"; break;
+                }
+                case 98: {
+                    keyChar = "2"; break;
+                }
+                case 99: {
+                    keyChar = "3"; break;
+                }
+                case 100: {
+                    keyChar = "4"; break;
+                }
+                case 101: {
+                    keyChar = "5"; break;
+                }
+                case 102: {
+                    keyChar = "6"; break;
+                }
+                case 103: {
+                    keyChar = "7"; break;
+                }
+                case 104: {
+                    keyChar = "8"; break;
+                }
+                case 105: {
+                    keyChar = "9"; break;
+                }
+                case 106: { //si se pulsa la tecla x del teclado numerico
+                    operacion('*'); break;
+                }
+                case 107: { //si se pulsa la tecla + del teclado numerico
+                    operacion('+'); break;
+                }
+                case 109: { //si se pulsa la tecla - del teclado numerico
+                    operacion('-'); break;
+                }
+                case 111: { //si se pulsa la tecla / del teclado numerico
+                    operacion('/'); break;
+                }
+                case 188:   //Si se pulsa coma o punto inserta un punto y convierte la cantidad
+                case 190:
+                case 110: {
+                    insertaPunto(); break;
+                }
+                case 8:   //si se pulsa la tecla borrar (backspace) borrar el ultimo digito
+                    document.forms["FCalculadora"].pantalla.value = document.forms["FCalculadora"].pantalla.value.substr(0, document.forms["FCalculadora"].pantalla.value.length - 1);
+                    break;
+                case 27:	//Tecla Esc
+                case 67: {
+                    borrar(); break;
+                }
+                case 76: {
+                    Funcion('log'); break;
+                }
+                case 83: {
+                    Funcion('sin'); break;
+                }
+                case 84: {
+                    Funcion('tag'); break;
+                }
+                case 88: {
+                    invertir(); break;
+                }
+            }
+
+            for (i = 0; i < 10 ; i++)  //Para el teclado numerico
+            {
+                if (keyChar == i) {
+                    if (document.forms["FCalculadora"].pantalla.value == "0" || control == 1) {
+                        document.forms["FCalculadora"].pantalla.value = i;
+                        control = 0;
+                    }
+                    else
+                        document.forms["FCalculadora"].pantalla.value = document.forms["FCalculadora"].pantalla.value + i;
+                }
+            }// fin del for
+        }
+        document.forms["FCalculadora"].pantalla.focus();
+    }
+
+    function invertir() {
+        var valor = eval("document.forms['FCalculadora'].pantalla.value");
+        valor = 1 / parseFloat(valor)
+        eval("document.forms['FCalculadora'].pantalla.value = valor");
+        document.forms["FCalculadora"].pantalla.focus();
+        control = 1;
+    }
+
+    function Funcion(nombre) {
+        var valor = eval("document.forms['FCalculadora'].pantalla.value");
+        valor = eval("Math." + nombre + "(document.forms['FCalculadora'].pantalla.value)");
+        eval("document.forms['FCalculadora'].pantalla.value = valor");
+        document.forms["FCalculadora"].pantalla.focus();
+        control = 1;
+    }
+
+</script>
+
+<style>
+    .tecla {
+        width: 73% !important;
+        height: 46px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: bold;
+        color: #FFF;
+    }
+
+    .display {
+        font: bold italic 14px Verdana, Arial, Helvetica, sans-serif;
+        text-align: right;
+        background-color: black;
+        color: lime;
+        width: 100%;
+        height: 22px;
+        border: 3px ridge blue;
+    }
+
+    .resultado {
+        height: 67px !important;
+        font-size: 44px !important;
+        text-align: right;
+        margin-bottom: 20px;
+        box-shadow: inset 3px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .botonazul {
+        box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #4D5BBE, 0 8px 8px 1px rgba(0,0,0,0.5) !important;
+        background-color: #4274D7 !important;
+        border: 1px !important;
+        font-size: 20px !important;
+    }
+
+        .botonazul:focus {
+            position: relative;
+            top: -6px;
+            border: 0;
+            -moz-outline-style: none;
+            outline: medium none;
+            transition: all 0.04s linear;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 2px;
+            margin-right: 2px;
+        }
+
+    .calculadora {
+        width: 65% !important;
+        border: transparent !important;
+        background-color: #f9f9f9 !important;
+        margin-left: 18%;
+    }
+
+    .botonesteclas {
+        text-align: center !important;
+        height: 69px !important;
+        border: none;
+        width: 32px !important;
+    }
+
+    .botonamarillo {
+        box-shadow: 0 0 0 1px #d79a47 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #D79A34, 0 8px 8px 1px rgba(0,0,0,0.5) !important;
+        background-color: #FEAF20 !important;
+        border: 1px !important;
+        font-size: 20px !important;
+    }
+
+
+    .botonverde {
+        box-shadow: 0 0 0 1px #31c300 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #5eb924, 0 8px 8px 1px rgba(0,0,0,0.5) !important;
+        background-color: #78d739;
+        border: 1px !important;
+        font-size: 20px !important;
+    }
+
+    .botonrojo {
+        box-shadow: 0 0 0 1px #b93802 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #AA0000, 0 8px 8px 1px rgba(0,0,0,0.5) !important;
+        background-color: #D73814;
+        border: 1px !important;
+        font-size: 20px !important;
+    }
+
+    .contentcalculadora {
+        width: 50% !important;
+        margin: 0 auto;
+        margin-top: 3%;
+        background-color: #F9F9F9;
+        padding: 2%;
+        text-align: center;
+        border: 1px solid #CCCACA;
+        border-radius: 37px;
+    }
+</style>

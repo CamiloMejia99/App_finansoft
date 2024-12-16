@@ -1,0 +1,1 @@
+29/11/2024 5:10:51 p. m. - The 'CARGO' property on 'Tercero' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Int32'.  ---_T GetValue(System.Data.Common.DbDataReader, Int32)

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.MCreditos.HistorialCreditos>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>vistaInteresCausado</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.pagare)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valorCosto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaProximoPago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.pagare)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valorCosto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaProximoPago)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>         
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

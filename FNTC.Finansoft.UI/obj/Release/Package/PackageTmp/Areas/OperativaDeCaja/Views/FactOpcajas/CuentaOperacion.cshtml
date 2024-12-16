@@ -1,0 +1,635 @@
+﻿
+
+@model FNTC.Finansoft.Accounting.DTO.OperativaDeCaja.CuadreCajaPorCajero
+
+
+@{
+    ViewBag.Title = "Crear Factura";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+<link href="~/Content/styleGeneral.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+<script src="~/Scripts/datatable.js"></script>
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<script src="~/Scripts/sweetalert.min.js"></script>
+
+@*<script src="~/Scripts/TimerSession/TimerSession.js"></script>*@
+<br />
+<br />
+<div class="alert alert-danger alert-dismissible" id="alertFallecido">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>El usuario seleccionado se encuentra registrado como fallecido</strong>
+</div>
+<div class="modal-dialog" id="la" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document" id="imprimir">
+        <div class="modal-content">
+
+            <h4 class="center">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N° TRN: @Session["Factura" + User.Identity.Name] Desembolso Crédito
+            </h4>
+            <h4 class="center">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha: @Session["fecha" + User.Identity.Name]
+            </h4>
+
+
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label id="numCuenta" />
+            </div>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Codigo caja:</b>&nbsp;&nbsp;@Session["cod_caja" + User.Identity.Name]&nbsp;&nbsp;@Session["nombre_caja" + User.Identity.Name]
+            </div>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Código Cajero:</b>&nbsp;&nbsp;@Session["nit" + User.Identity.Name]
+            </div>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Documento del Asociado:</b>&nbsp;&nbsp;<label id="idAsociado" />
+            </div>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>N° Cuenta:</b>&nbsp;&nbsp;<label id="ncuenta" />
+            </div>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label id="nombre" />
+            </div>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Pagaré:</b>&nbsp;&nbsp;&nbsp;&nbsp;<label id="pag" />
+            </div>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Valor Desembolsado:</b>&nbsp;&nbsp;&nbsp;&nbsp;<label id="valor" />
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;****POR VERIFIQUE QUE LA INFORMACION<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IMPRESA ES CORRECTA****
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VIGILADO SUPERINTENDENCIA DE ECONOMIA SOLIDARIA
+            </div>
+
+
+
+
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Regresar", "CuentaOperacion")
+        <input type="button" onclick="printDiv('imprimir')" value="Imprimir" />
+    </p>
+</div>
+
+<div class="col-md-12" style="background: rgb(248, 248, 248)">
+
+    @using (Html.BeginForm("CuentaOperacion", "FactOpcajas", FormMethod.Post, htmlAttributes: new { id = "FormContinuar", autocomplete = "off" }))
+    {
+        @Html.AntiForgeryToken()
+        <input id="lblcuenta" type="hidden">
+
+
+
+        <div class="form-group col-md-12" >
+            <div class="caja2">
+
+                <!--..................-->
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Registro Transacciones</h3></div>
+                        @*<div class="col-md-2">
+                            <a href="/OperativaDeCaja/FactOpcajas/CuentaOperacionEntidadDos" style="margin-top: 20px !important;" class="btn btn-inline btn-small btn-default">OTROS RECAUDOS</a>
+                         
+                        </div>*@
+                        
+                        
+                        <div class="col m-5">
+                            <a href="/OperativaDeCaja/FactOpcajas/CuentaOperacionEntidadDos" style="margin-left: 20px !important;" class="btn btn-default" data-toggle="modal">
+                                OTROS RECAUDOS
+                            </a>
+                            <a href="/OperativaDeCaja/FactOpcajas/CreateConsAporteEx" style="margin-left: 10px !important;" class="btn btn-default" data-toggle="modal">
+                                APORTE EXTRAORDINARIO
+                            </a>
+                        </div>
+                       
+                    </div>
+                </div>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row contenido">
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Fecha:</label>
+                        <label class="form-control" style="color:red">@Session["fecha" + User.Identity.Name]</label>
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">No Factura: </label>
+                        <label class="form-control" style="color:red">@Session["Factura" + User.Identity.Name]</label>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Cuenta:</label>
+                        @Html.DropDownList("ListaTerceros", null, "Selecione Asociado", new { @class = "chosen-select-single", @id = "CuentaAsociadoAporte" })
+                        <input type="text" id="EnviarCuentaAsociadoAporte" name="cuenta" hidden="hidden">
+                        <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada" + User.Identity.Name] autocomplete="off" required />-->
+                        <p style="color:red">@ViewBag.mensaje</p>
+                    </div>
+                </div>
+                <div class="row contenido">
+                    <hr />
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Código Caja:</label>
+                        <label class="form-control">@Session["cod_caja" + User.Identity.Name]</label>
+                        <h5 style="color:#274766">@Session["nombre_caja" + User.Identity.Name]</h5>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Nit Cajero:</label>
+                        <label class="form-control">@Session["nit" + User.Identity.Name]</label>
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <br />
+                        <h5 style="color:#274766">@Session["nombre" + User.Identity.Name]</h5>
+                    </div>
+                </div>
+                <div class="row contenido">
+                    
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Operación: </label>
+                        <select class="form-control" name="operacion" id="operacion">
+                            <option value="Cons">Consignación Aportes</option>
+                            <option value="Cons_Cre">Consignación Cuota Crédito</option>
+                            <option value="ConsAhorroC">Consignación Ahorro Contractual</option>
+                            <option value="Ret">Retiro en Efectivo</option>
+                            <option value="Ret_che">Retiro en Cheque</option>
+                            <option value="Des_Cre">Desembolso de Crédito</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3" id="itemCuenta">
+                        <label class="control-label">Cuenta/Pagaré </label>
+                        <select class="form-control" name="cuentaa" id="cuentaa">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="form-group col-md-2 col-xs-12">
+                        <a href="/OperativaDeCaja/FactOpcajas/facturasCuotasCreditos" class="btn btn-inline btn-small btn-primary">Facturas Cuotas Creditos</a>
+                    </div>
+
+                    <div class="form-group col-md-2 col-xs-12">
+                        <a href="/OperativaDeCaja/FactOpcajas/facturasDesembolso" class="btn btn-inline btn-small btn-primary">Facturas Desembolso</a>
+                    </div>
+
+                    <div class="form-group col-md-2 col-xs-12">
+                        <a href="/OperativaDeCaja/FactOpcajas/Index" class="btn btn-inline btn-small btn-primary">Registro de Operaciones</a>
+                    </div>
+                    <div class="form-group col-md-2 col-xs-12">
+                        <a href="/OperativaDeCaja/FactOpcajas/CuentaAportes" class="btn btn-inline btn-small btn-primary">Consulta cuentas de Aportes</a>
+                    </div>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div class="form-group col-md-2 col-xs-12">
+                            <a href="/OperativaDeCaja/FactOpcajas/ProcesosAdministrador" class="btn btn-inline btn-small btn-primary">Procesos De Administración</a>
+                        </div>
+                    }
+
+                </div>
+
+                <div class="modal-footer">
+                    <div class="form-group col-lg-offset-6 col-md-4">
+                        <a href="/OperativaDeCaja/FactOpcajas//Logopcaja" class="btn btn-inline btn-small btn-danger">Cancelar</a>
+                        <button type="submit" id="BtnFormulario" class="btn btn-inline btn-small btn-success">Continuar</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    }
+    <h3 style="color:#274766">Cuadre parcial de caja</h3>
+    <hr />
+    <div class="form-group">
+
+        <div class="row contenido">
+            <div class="col-md-4"><label class="control-label">Consignaciones en efectivo</label></div>
+            @Html.HiddenFor(model => model.consignacion_efectivo, new { id = "consignacion_efectivo" })
+            <div class="col-md-2"><label class="control-label">$ <label id="txtconsignacion_efectivo"></label></label></div>
+
+
+            <div class="col-md-3"><label class="control-label">Retiros por efectivo</label></div>
+            <div class="col-md-3"><label class="control-label">$ @Html.DisplayFor(model => model.retiros_efectivo)</label></div>
+        </div>
+        <div class="row contenido">
+            <div class="col-md-4"><label class="control-label">Consignaciones en Cheque</label></div>
+            <div class="col-md-2"><label class="control-label">$ @Html.DisplayFor(model => model.consignacion_cheque)</label></div>
+            <div class="col-md-3"><label class="control-label">Retiros por Cheque</label></div>
+            <div class="col-md-3"><label class="control-label">$ @Html.DisplayFor(model => model.retiros_cheque)</label></div>
+        </div>
+        <div class="row contenido">
+            <div class="col-md-4"><label class="control-label">Efectivo en Caja</label></div>
+            @Html.HiddenFor(model => model.tope, new { id = "tope" })
+            <div class="col-md-2"><label class="control-label">$ <label id="efectivoEnCajaSMiles"></label></label></div>
+        </div>
+    </div>
+    <div id="contenido"></div>
+</div>
+
+
+
+<script>
+    function printDiv(imprimir) {
+        var contenido = document.getElementById(imprimir).innerHTML;
+        var contenidoOriginal = document.body.innerHTML;
+
+        document.body.innerHTML = contenido;
+
+        window.print();
+
+        document.body.innerHTML = contenidoOriginal;
+    }</script>
+
+<!--..................-->
+<style>
+    body {
+        background-color: #DDD;
+    }
+</style>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (ViewBag.mensaje != null)
+    {
+        <script>
+
+
+			window.onload = function () {
+				swal('Error', '@ViewBag.mensaje', 'warning');
+			}
+        </script>
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            document.getElementById("operacion").disabled = true;
+            $("#la").hide();
+
+            var tope = $("#tope").val();
+            var consignacion_efectivo = $("#consignacion_efectivo").val();
+            $("#efectivoEnCajaSMiles").text(formatNumberMiles.new(tope));
+            $("#txtconsignacion_efectivo").text(formatNumberMiles.new(consignacion_efectivo));
+
+            $(".chosen-select-single").chosen();
+            $(".chosen-select-multiple").chosen();    //DESPUES DEL FINAL DEL DOCUMENTO AL PRINCIPIO DE LOS SCRIPTS
+
+            document.getElementById('alertFallecido').style.display = 'none';
+
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        $("#CuentaAsociadoAporte").change(function () {
+            var dato = $(this).val().toString();
+
+            if (dato == "0") {
+                //$("#lblcuenta").val(String(C));
+
+                document.getElementById("operacion").disabled = true;
+            } else {
+                $("#cuentaa").empty();
+                var tipo = $("#operacion").val();
+                var nit = $(this).val();
+                if (tipo != "0") {
+                    $.ajax({
+                        url: '/OperativaDeCaja/FactOpcajas/GetCuentasItem',
+                        datatype: "Json",
+                        data: {
+                            tipo: tipo,
+                            nit: nit
+                        },//solo para enviar datos
+                        type: 'post',
+                    }).done(function (data) {
+                        var select = document.getElementById("cuentaa");
+                        var option = document.createElement("option");
+                        option.value = "0";
+                        option.text = "Seleccione";
+                        select.appendChild(option);
+                        $.each(data, function (key, val) {
+                            var option = document.createElement("option");
+                            option.value = val[0];
+                            option.text = val[0];
+                            select.appendChild(option);
+                        });//fin foreach
+
+                    });//fin ajax
+                }
+                document.getElementById("operacion").disabled = false;
+            }
+
+        });
+
+        $("#cuentaa").change(function () {
+            var c = $(this).val();
+            if (c != "0") {
+                $("#lblcuenta").val(c);
+            } else {
+                $("#lblcuenta").val("");
+            }
+
+        });
+
+        $("#operacion").change(function () {
+            $("#cuentaa").empty();
+            var tipo = $(this).val();
+            var nit = $("#CuentaAsociadoAporte").val();
+
+            if (tipo != "0") {
+                $.ajax({
+                    url: '/OperativaDeCaja/FactOpcajas/GetCuentasItem',
+                    datatype: "Json",
+                    data: {
+                        tipo: tipo,
+                        nit: nit
+                    },//solo para enviar datos
+                    type: 'post',
+                }).done(function (data) {
+                    var select = document.getElementById("cuentaa");
+                    var option = document.createElement("option");
+                    option.value = "0";
+                    option.text = "Seleccione";
+                    select.appendChild(option);
+                    $.each(data, function (key, val) {
+                        var option = document.createElement("option");
+                        option.value = val[0];
+                        option.text = val[0];
+                        select.appendChild(option);
+                    });//fin foreach
+
+                });//fin ajax
+            }  
+        });
+
+        $("#BtnFormulario").on("click", function (e) {
+        $("#BtnFormulario").prop("disabled", true);
+        e.preventDefault();
+
+        var C = $("#operacion").val();
+        var Ncuenta = $("#cuentaa").val();
+
+        if (C == "Des_Cre") {
+
+            var url = "@Url.Action("GetInfoPagare", "FactOpcajas")";
+            var data = {
+                Ncuenta: Ncuenta
+            };
+            $.post(url, data).done(function (data) {
+                if (data != "NO") {
+
+                    var CuentaAsociadoAporte = $("#cuentaa").val();
+                    if (CuentaAsociadoAporte != "") {
+                        $("#EnviarCuentaAsociadoAporte").val($("#cuentaa").val());
+                        $("#FormContinuar").submit();
+                    } else {
+                        swal({
+                            title: "Error",
+                            text: "Seleccione un Asociado",
+                            type: 'warning',
+                            confirmButtonText: 'Aceptar'
+                        })
+                        $("#BtnFormulario").prop("disabled", false);
+                    }
+
+                    /*
+                    $("#BtnFormulario").prop("disabled", false);
+                    $("#ncuenta").text(String(Ncuenta));
+                    $("#idAsociado").text(String(data[0].ced));
+                    $("#nombre").text(String(data[0].nombre));
+                    $("#pag").text(String(data[0].pagare));
+                    $("#valor").text(String(formatNumberMiles.new(data[0].capital)));
+                    $("#la").show();
+                    */
+                } else {
+                    swal({
+                        title: "Alerta",
+                        type: "info",
+                        text: "EL ASOCIADO NO TIENE DESEMBOLSOS PENDIENTES",
+                    })
+                    $("#BtnFormulario").prop("disabled", false);
+                }
+            })
+
+        }
+        else if (C == "ConsAhorroC") {
+            var CuentaAsociadoAporte = $("#cuentaa").val();
+            if (CuentaAsociadoAporte != "") {
+                $("#EnviarCuentaAsociadoAporte").val($("#cuentaa").val());
+                $("#FormContinuar").submit();
+            } else {
+                swal({
+                    title: "Error",
+                    text: "Seleccione un Asociado",
+                    type: 'warning',
+                    confirmButtonText: 'Aceptar'
+                })
+                $("#BtnFormulario").prop("disabled", false);
+            }
+        } else if (C == "Cons") {
+            var CuentaAsociadoAporte = $("#cuentaa").val();
+            if (CuentaAsociadoAporte != "") {
+                $("#EnviarCuentaAsociadoAporte").val($("#cuentaa").val());
+                $("#FormContinuar").submit();
+            } else {
+                swal({
+                    title: "Error",
+                    text: "Seleccione un Asociado",
+                    type: 'warning',
+                    confirmButtonText: 'Aceptar'
+                })
+                $("#BtnFormulario").prop("disabled", false);
+            }
+        }
+        else if (C == "Cons_Cre") {
+            var CuentaAsociadoAporte = $("#CuentaAsociadoAporte").val();
+            if (CuentaAsociadoAporte != "") {
+
+                //verificamos si el asociado seleccionado tenga crédito o esté registrado en la cooperativa creditemprender
+                if (C == "Cons_Cre") {
+
+                    $.ajax({
+                        url: '/OperativaDeCaja/FactOpcajas/VerificaCreditoAsociado',
+                        datatype: "Json",
+                        data: { cuenta: CuentaAsociadoAporte },//solo para enviar datos
+                        type: 'post',
+                    }).done(function (data) {
+                        if (data.status == true) {
+
+                            $("#EnviarCuentaAsociadoAporte").val($("#cuentaa").val());
+                            if ($("#cuentaa").val() != "0") {
+                                $("#FormContinuar").submit();
+                            } else {
+                                swal({
+                                    title: "",
+                                    text: "Seleccione una cuenta",
+                                    type: 'warning',
+                                    confirmButtonText: 'Aceptar'
+                                })
+                                $("#BtnFormulario").prop("disabled", false);
+                            }
+                            
+                                        
+                        }
+                        else if (data.status == false) {
+                            var error = data.error;
+                            swal({
+                                title: "Alerta",
+                                type: "info",
+                                text: ""+error,
+                            })
+                            $("#BtnFormulario").prop("disabled", false);
+                        }
+
+                    });
+
+                } else {
+                    $("#EnviarCuentaAsociadoAporte").val($("#cuentaa").val());
+                    if ($("#cuentaa").val() != "0") {
+                        $("#FormContinuar").submit();
+                    } else {
+                        swal({
+                            title: "",
+                            text: "Seleccione una cuenta",
+                            type: 'warning',
+                            confirmButtonText: 'Aceptar'
+                        })
+                        $("#BtnFormulario").prop("disabled", false);
+                    }
+                    
+                }
+            } else {
+                swal({
+                    title: "Error",
+                    text: "Seleccione un Asociado",
+                    type: 'warning',
+                    confirmButtonText: 'Aceptar'
+                })
+                $("#BtnFormulario").prop("disabled", false);
+            }
+        }
+    });
+    </script>
+    <script>
+        //FORMATEAR UN NUMERO
+        var formatNumberMiles = {
+            separador: ".", // separador para los miles
+            sepDecimal: ',', // separador para los decimales
+            formatear: function (num) {
+                num += '';
+                var splitStr = num.split('.');
+                var splitLeft = splitStr[0];
+                var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+                var regx = /(\d+)(\d{3})/;
+                while (regx.test(splitLeft)) {
+                    splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+                }
+                return this.simbol + splitLeft + splitRight;
+            },
+            new: function (num, simbol) {
+                this.simbol = simbol || '';
+                return this.formatear(num);
+            }
+        }
+        //FIN FORMATEAR UN NUMERO
+        /*
+        * FUNCIONALIDAD DE LA 'FUNCION'
+        formatNumber.new(123456779.18, "$") // retorna "$123.456.779,18"
+        formatNumber.new(123456779.18) // retorna "123.456.779,18"
+        formatNumber.new(123456779) // retorna "$123.456.779"
+        */
+        //formatNumberMiles.new(realValor);//ACCESO A LA VARIABLE
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".chosen-select-single").chosen();
+            $(".chosen-select-multiple").chosen();    //DESPUES DEL FINAL DEL DOCUMENTO AL PRINCIPIO DE LOS SCRIPTS
+        });
+
+        $("#CuentaAsociadoAporte").chosen().change(function () { // comienzo
+
+            var Ncuenta = $("#CuentaAsociadoAporte").val();
+            $.ajax({
+                url: '/Terceros/TercerosFallecidos/VerificaFallecido2',
+                datatype: "Json",
+                data: { cuenta: Ncuenta },//solo para enviar datos
+                type: 'post',
+            }).done(function (data) {
+                if (data.status == true) {
+
+                    document.getElementById('alertFallecido').style.display = 'block';
+                }
+                else if (data.status == false) {
+                    document.getElementById('alertFallecido').style.display = 'none';
+                }
+
+            });
+            //$("#lblcuenta").val(String(C));
+
+
+        }); //fin
+
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setInterval(function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/TimerSession/ValidarSession/KeepActiveSession",
+                    data: {
+                        nit: @User.Identity.Name,
+                    },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: VerifySessionState,
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        //alert(textStatus + ": " + XMLHttpRequest.responseText);
+                    }
+                });
+
+            }, 300000);
+
+
+            var cantValidaciones = 0;
+
+            function VerifySessionState(result) {
+
+                //if (result.d) {
+                //    $("#EstadoSession").text("activo");
+                //}
+                //else
+                //    $("#EstadoSession").text("expiro");
+
+                //$("#cantValidaciones").text(cantValidaciones);
+                //cantValidaciones++;
+
+            }
+        })
+        
+    </script>
+
+
+
+}
+

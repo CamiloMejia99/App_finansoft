@@ -1,0 +1,593 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.ActivosFijos.BActivosFijos
+
+@{
+    Layout = "~/Views/Shared/_LayoutActivosFijos.cshtml";
+}
+
+@{
+    ViewBag.Title = "Activos Fijos";
+}
+
+<script src="~/Scripts/sweetalert2@9.js"></script>
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.id, new { id = "idActivoFijo" })
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Detalles Activo
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.numeroActivo, htmlAttributes: new { @class = "control-label col-md-4" })
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.numeroActivo, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                                            @Html.ValidationMessageFor(model => model.numeroActivo, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.numeroSerie, htmlAttributes: new { @class = "control-label col-md-4" })
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.numeroSerie, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.numeroSerie, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.nombreActivo, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.nombreActivo, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.nombreActivo, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.metodoDepreciacion, htmlAttributes: new { @class = "control-label col-md-4" })
+                                        <div class="col-md-8">
+                                            <input type="text" value="LINEAL (SL)" name="metodoDepreciacion" class="form-control" readonly>
+                                            @Html.ValidationMessageFor(model => model.metodoDepreciacion, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.descripcion, htmlAttributes: new { @class = "control-label col-md-1" })
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.grupoId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.DropDownList("grupoId", null, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.grupoId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ubicacionFisicaId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("ubicacionFisicaId", null, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ubicacionFisicaId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.centroCostosId, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("centroCostosId", null, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.centroCostosId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.claseActivoId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("claseActivoId", null, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.claseActivoId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-6" style="margin-left: 20px">
+                                <div class="row">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.responsableNIT, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-6">
+                                            @Html.DropDownList("responsableNIT", null, new { @class = "chosen-select-single" })
+                                            @Html.ValidationMessageFor(model => model.responsableNIT, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.fechaDeCompra, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-6">
+                                            @Html.DisplayFor(model => model.fechaDeCompra, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.fechaDeCompra, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.vecesDepreciarFiscal, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-6">
+                                            @Html.EditorFor(model => model.vecesDepreciarFiscal, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                                            @Html.ValidationMessageFor(model => model.vecesDepreciarFiscal, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.vecesDepreciarNIIF, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-6">
+                                            @Html.EditorFor(model => model.vecesDepreciarNIIF, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                                            @Html.ValidationMessageFor(model => model.vecesDepreciarNIIF, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="row">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.costoDeCompra, htmlAttributes: new { @class = "control-label col-md-4" })
+                                        <div class="col-md-6">
+                                            @Html.DisplayFor(model => model.costoDeCompra, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.costoDeCompra, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.valorSalvamentoFiscal, htmlAttributes: new { @class = "control-label col-md-4" })
+                                        <div class="col-md-6">
+                                            @Html.DisplayFor(model => model.valorSalvamentoFiscal, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.valorSalvamentoFiscal, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.valorRazonable, htmlAttributes: new { @class = "control-label col-md-4" })
+                                        <div class="col-md-6">
+                                            @Html.DisplayFor(model => model.valorRazonable, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.valorRazonable, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.depreciacionAnterior, htmlAttributes: new { @class = "control-label col-md-4" })
+                                        <div class="col-md-6">
+                                            @Html.DisplayFor(model => model.depreciacionAnterior, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.depreciacionAnterior, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.valorLibros, htmlAttributes: new { @class = "control-label col-md-4" })
+                                        <div class="col-md-6">
+                                            @Html.DisplayFor(model => model.valorLibros, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.valorLibros, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-3">
+                                    <h3 style="margin-left: 20px">Cuentas Configuradas</h3>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h2 style="color: red">@Html.ValidationSummary(true)</h2>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.codCuentaGasto, htmlAttributes: new { @class = "control-label col-md-4", @readonly = "true" })
+                                        <div class="col-md-6">
+                                            @Html.EditorFor(model => model.CuentaMayor1.NOMBRE, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                                            @Html.ValidationMessageFor(model => model.codCuentaGasto, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+
+                            <div class="col-lg-12">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.codCuentaActivo, htmlAttributes: new { @class = "control-label col-md-4", @readonly = "true" })
+                                        <div class="col-md-6">
+                                            @Html.EditorFor(model => model.CuentaMayor2.NOMBRE, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                                            @Html.ValidationMessageFor(model => model.codCuentaActivo, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+
+                            <div class="col-lg-12">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.codCuentaGastoDepreciacion, htmlAttributes: new { @class = "control-label col-md-4" })
+                                        <div class="col-md-6">
+                                            @Html.DropDownList("codCuentaGastoDepreciacion", null, new { @class = "chosen-select-single" })
+                                            @Html.ValidationMessageFor(model => model.codCuentaGastoDepreciacion, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+
+                            <div class="col-lg-12">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.codCuentaDepreciacion, htmlAttributes: new { @class = "control-label col-md-4" })
+                                        <div class="col-md-6">
+                                            @Html.DropDownList("codCuentaDepreciacion", null, new { @class = "chosen-select-single" })
+                                            @Html.ValidationMessageFor(model => model.codCuentaDepreciacion, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+
+                            <div class="col-lg-12">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.terceroMov, htmlAttributes: new { @class = "control-label col-md-4" })
+                                        <div class="col-md-6">
+                                            @Html.DropDownList("terceroMov", null, new { @class = "chosen-select-single" })
+                                            @Html.ValidationMessageFor(model => model.terceroMov, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+
+                            <div class="col-lg-12">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.tipoComprobanteMov, htmlAttributes: new { @class = "control-label col-md-4" })
+                                        <div class="col-md-6">
+                                            @Html.DropDownList("tipoComprobanteMov", null, new { @class = "chosen-select-single" })
+                                            @Html.ValidationMessageFor(model => model.tipoComprobanteMov, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <div class="col-lg-4">
+                                        <input type="button" @*onclick="DepreciacionAnual()"*@ value="Contabilizar Mejora" class="btn btn-primary" data-toggle="modal" data-target="#ModalMejora" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h3>HISTORICO</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-responsive table-bordered" border="1" cellpadding="0">
+                                    <thead id="headamorti" class="thead-inverse">
+                                        <tr>
+                                            <th>CONCEPTO</th>
+                                            <th>FECHA</th>
+                                            <th>VALOR MOVIMIENTO</th>
+                                            <th>TIPO COMPROBANTE</th>
+                                            <th>NUMERO COMPROBANTE</th>
+                                            <th>VALOR EN LIBROS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablaHistorico"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div id="ModalMejora" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Contabilizar Mejora</h3>
+            </div>
+            <div class="modal-body">
+                <div class="panel">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Cuenta Gasto</label>
+                            <div class="col-md-6">
+                                @Html.DropDownList("cuentaMejora", null, new { @class = "chosen-select-single", @id = "cuentaMejora" })
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Comprobante</label>
+                            <div class="col-md-6">
+                                @Html.DropDownList("comprobanteMejora", null, new { @class = "chosen-select-single", @id = "comprobanteMejora" })
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Tercero</label>
+                            <div class="col-md-6">
+                                @Html.DropDownList("terceroMejora", null, new { @class = "chosen-select-single", @id = "terceroMejora" })
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Valor Mejora</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" value="0" id="valorMejora" />
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Concepto</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="conceptoMejora" />
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <button id="btnContabilizar" class="btn btn-success">Contabilizar</button>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Regresar a la Lista", "Index")
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".chosen-select-single").chosen();
+        $(".chosen-select-multiple").chosen();
+
+        renderTabla();
+    });
+
+    function renderTabla() {
+        $("#tablaHistorico").empty();
+        var id = $("#idActivoFijo").val();
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("getHistorico", "ActivosFijos")",
+            datatype: "Json",
+            data: { id: id },//solo para enviar datos
+            success: function (data) {
+                data = JSON.parse(data);
+                $.each(data, function (key, val) {
+
+                    var tr = '<tr>';
+                    tr += '<td>' + val.concepto + '</td>';
+                    tr += '<td>' + val.fecha + '</td>';
+                    tr += '<td>' + formatNumberMiles.new(val.valorMovimiento) + '</td>';
+                    tr += '<td>' + val.tipoComprobante + '</td>';
+                    tr += '<td>' + val.numeroComprobante + '</td>';
+                    tr += '<td>' + formatNumberMiles.new(val.valorEnLibros) + '</td>';
+                    tr += '</tr>';
+                    $('#tablaHistorico').append(tr);
+                });
+            }
+        });
+    }
+
+    $("#btnContabilizar").click(function () {
+        var id = $("#idActivoFijo").val();
+        var cuentaMejora = $("#cuentaMejora").val();
+        var comprobanteMejora = $("#comprobanteMejora").val();
+        var terceroMejora = $("#terceroMejora").val();
+        var valorMejora = $("#valorMejora").val();
+        var conceptoMejora = $("#conceptoMejora").val();
+
+        if (cuentaMejora != "") {
+            if (comprobanteMejora != "") {
+                if (terceroMejora != "") {
+                    if (conceptoMejora != "") {
+                        if (valorMejora != "") {
+                            valorMejora = valorMejora.replace(".", "");
+                            valorMejora = valorMejora.replace(".", "");
+                            valorMejora = valorMejora.replace(".", "");
+                             $.ajax({
+                                type: "POST",
+                                url: "@Url.Action("contabilizarMejora", "ActivosFijos")",
+                                datatype: "Json",
+                                 data: { id: id, cuentaMejora: cuentaMejora, comprobanteMejora: comprobanteMejora, terceroMejora: terceroMejora, valorMejora: valorMejora, conceptoMejora: conceptoMejora  },
+                                 success: function (data) {
+                                     if (data == 1) {
+                                        Swal.fire({
+                                        title: 'Mejora Contabilizada',
+                                        icon: 'success',
+                                        confirmButtonColor: '#3085d6',
+                                        confirmButtonText: 'OK'
+                                        }).then((result) => {
+                                            if (result.value) {
+                                                location.reload();                                                           
+                                            };
+                                        });
+
+                                     } else if (data == 2) {
+                                         Swal.fire({
+                                             icon: 'error',
+                                             title: 'Conflicto de Cuentas ("Cuenta gasto" es igual a "Cuenta activo")'
+                                         })
+                                     } else {
+                                         Swal.fire({
+                                             icon: 'error',
+                                             title: 'Mejora no contabilizada'
+                                         })
+                                     }
+                                 }
+                             });
+
+                        } else {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'El campo "Valor Mejora" no puede estar vacío'
+                            })
+                        }
+                    } else {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'El campo "Concepto" no puede estar vacío'
+                        })
+                    }
+                } else {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Seleccione un Tercero'
+                    })
+                }
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Seleccione un Comprobante'
+                })
+            }
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Seleccione una cuenta en "Cuenta Gasto"'
+            })
+        }
+    });
+
+
+
+
+    /* SEPARADOR DE MILES POR KEY UP */
+    $(document).ready(function () {
+        $("#valorMejora").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                });
+            }
+        });
+    });
+    /*FIN SEPARADOR DE MILES POR KEY UP*/
+    //FORMATEAR UN NUMERO
+    var formatNumberMiles = {
+        separador: ".", // separador para los miles
+        sepDecimal: ',', // separador para los decimales
+        formatear: function (num) {
+            num += '';
+            var splitStr = num.split('.');
+            var splitLeft = splitStr[0];
+            var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+            var regx = /(\d+)(\d{3})/;
+            while (regx.test(splitLeft)) {
+                splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+            }
+            return this.simbol + splitLeft + splitRight;
+        },
+        new: function (num, simbol) {
+            this.simbol = simbol || '';
+            return this.formatear(num);
+        }
+    }
+</script>

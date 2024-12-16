@@ -1,0 +1,64 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.MCreditos.SubDestinos
+
+@{
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>SubDestinos</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subdestino_Codigo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Subdestino_Codigo)
+                @Html.ValidationMessageFor(model => model.Subdestino_Codigo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subdestino_Descripcion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Subdestino_Descripcion)
+                @Html.ValidationMessageFor(model => model.Subdestino_Descripcion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Destino_Id, "Destino_Id", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Destino_Id", String.Empty)
+                @Html.ValidationMessageFor(model => model.Destino_Id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subdestino_Activo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Subdestino_Activo)
+                @Html.ValidationMessageFor(model => model.Subdestino_Activo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Crear" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Regresar a la Lista", "Index")
+</div>

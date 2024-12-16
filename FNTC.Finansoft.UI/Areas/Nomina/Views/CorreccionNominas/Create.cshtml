@@ -1,0 +1,272 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Nomina.CorreccionNomina
+
+@{
+   
+    var action = (string)ViewBag.action;
+    var boton = (string)ViewBag.boton;
+    var Concep = @ViewBag.Concepto;
+    var Periodo = @ViewBag.PeriodoDed;
+}
+<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+<style>
+    .ui-autocomplete {
+        z-index: 5000;
+    }
+</style>
+<script src="~/Scripts/sweetalert.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<script src="~/Scripts/DinamismoCliente/formatMilesDec.js"></script>
+<script src="~/Scripts/DinamismoCliente/Dinamismos.js"></script>
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+
+<div class="col-md-12">
+    <div class="form-group">
+        <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 123%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Corrección - Descuentos De Nomina</h3></div>
+    </div>
+</div>
+
+<div class="container" style="margin-top:1%; background: rgb(248, 248, 248);">
+    @using (Html.BeginForm(action, "CorreccionNominas", new { area = "Nomina" }, FormMethod.Post, new { id = "theForm", autocomplete = "off" }))
+
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
+            @Html.HiddenFor(model => model.EMPRESA)
+         
+            <div class="form-group">
+
+                <label class="control-label col-md-2">Seleccionar Asociado:</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("IDASOCIADO", null, new { @class = "chosen-select-single", @id = "IDASOCIADO", @required = "required" })
+                    <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+
+                    <p style="color:red">@ViewBag.mensaje</p>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Empresa :</label>
+                <div class="col-md-5">
+                    <label class="form-control" id="Empresa" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Agencia :</label>
+                <div class="col-md-5">
+                    <label class="form-control" id="Agencia" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Periodo :</label>
+                <div class="col-md-5">
+                    <label class="form-control" id="Periodo" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Plano :</label>
+                <div class="col-md-5">
+                    <label class="form-control" id="idPlano" />
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-md-5">
+                  
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label class="control-label col-md-5"> Total Discriminación Nomina: </label>
+                                    <div class="col-md-5">
+                                        <label class="form-control" id="TotalN"></label>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label class="control-label col-md-5"> Ingrese Discriminación Nomina Individual: </label>
+                                    <div class="col-md-5">
+                                        <input type="text" class="form-control" id="TotalI" style="font-weight: bold;" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" value="Actualizar Datos" id="guardar" class="btn btn-default" onclick="Actualizar(); " />
+                </div>
+            </div>
+            <div>
+                <input type="button" value="Regresar" class="btn btn-primary" onclick="Regresar();" style=" margin-top: 1%; margin-left: 1%; margin-bottom: 1%;" />
+            </div>
+           
+        </div>
+    }
+</div>
+
+
+<script>
+
+
+    function Regresar() {
+        location.reload();
+    }
+    $(document).ready(function () {
+        $("#TotalI").prop("disabled", true);
+
+        /* SEPARADOR DE MILES POR KEY UP */
+        $("#TotalI").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, "");
+                });
+            }
+        });
+  
+    });
+
+    $(document.body).on('hidden.bs.modal', function () {
+        $('#centro').removeData('bs.modal');
+    });
+
+
+
+    $("#theForm").submit(function (event) {
+        var Empresa = $("#IDASOCIADO").val();
+        $("#EMPRESA").val(Empresa);
+        event.preventDefault();
+        var theForm = $(this);
+   
+        $.post('/Nomina/CorreccionNominas/Create', theForm.serialize())
+            .done(function (data) {
+       
+
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Correcto",
+                })
+
+                window.location.href = "/Nomina/CorreccionNominas/ExcelTerceros";
+
+            });
+    });
+
+</script>
+<script>
+                $("#IDASOCIADO").chosen().change(function () {
+
+
+
+                    $("#TotalI").prop("disabled", false);
+                    var Asociado = $("#IDASOCIADO").val();
+                    if (Asociado != "") {
+                        $('#mitabla tr').empty();
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("GetDatosAsociado", "CorreccionNominas")",
+                            datatype: "Json",
+                            data: { NIT: $('#IDASOCIADO').val() },
+                            success: function (data) {
+                                $("#Empresa").text(data[0]);
+                                $("#Agencia").text(data[1]);
+                                $("#Periodo").text(data[2]);
+                                $("#TotalN").text(data[3]);
+                                $("#idPlano").text(data[4]);
+                                $("#idEmpresa").text(data[5]);
+                                $("#TotalI").val("");
+
+                            }
+                        });
+                    }
+
+                    else {
+                        $('#IDASOCIADO').val("").trigger('chosen:updated');
+                        swal({
+                            title: "Alerta",
+                            type: "info",
+                            text: "Debe Seleccionar un Asociado",
+                        })
+                        $("#Empresa").text("");
+                        $("#Agencia").text("");
+                        $("#Periodo").text("");
+                        $("#TotalN").text("");
+                        $("#TotalI").text("");
+                             $("#TotalI").prop("disabled", true);
+
+                    }
+
+                });
+
+</script>
+<script>
+        function Actualizar() {
+
+            var Asociado = $("#IDASOCIADO").val();
+
+                    if (Asociado != "") {
+                        $('#mitabla tr').empty();
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("GetDatosActualizar", "CorreccionNominas")",
+                            datatype: "Json",
+                            data: { NIT: $('#IDASOCIADO').val(), TotalI: $("#TotalI").val()},
+                            success: function (data) {
+                                $("#TotalN").text(data[0]);
+                                $("#TotalI").val("");
+                            }
+                        });
+                    }
+
+                    else {
+                        $('#IDASOCIADO').val("").trigger('chosen:updated');
+                        swal({
+                            title: "Alerta",
+                            type: "info",
+                            text: "Debe Seleccionar un Asociado",
+                        })
+
+                    }
+
+
+
+        }
+</script>
+
+<script>
+    function Guardar() {
+        //hacer validaciones
+
+        var url = "/Nomina/CorreccionNominas/Exportar?idPlano=" + $('#idPlano').text() + "&idEmpresa=" + $('#idEmpresa').text(); // Establecer URL de la acción
+        document.location.href = url;
+        // $("#result").load(url);
+    }
+
+</script>

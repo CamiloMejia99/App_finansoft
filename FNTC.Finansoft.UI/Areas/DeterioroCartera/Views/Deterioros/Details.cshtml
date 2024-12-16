@@ -1,0 +1,51 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.DeterioroCartera.Deterioro
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Deterioro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeterioroPar.Rango)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeterioroPar.Rango)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Metodo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Metodo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorSuma)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorSuma)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaGenerada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaGenerada)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

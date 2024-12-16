@@ -1,0 +1,348 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Nomina.CorreccionNomina
+
+@{
+    /**/
+
+    //Layout = "~/Views/Shared/_Modal.cshtml";
+    var action = (string)ViewBag.action;
+    var boton = (string)ViewBag.boton;
+
+    var Concep = @ViewBag.Concepto;
+    //WebGrid grid = new WebGrid(Model);
+
+    var Periodo = @ViewBag.PeriodoDed;
+}
+<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+<style>
+    .ui-autocomplete {
+        z-index: 5000;
+    }
+</style>
+<script src="~/Scripts/sweetalert.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<script src="~/Scripts/DinamismoCliente/formatMilesDec.js"></script>
+<script src="~/Scripts/DinamismoCliente/Dinamismos.js"></script>
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+
+<div>
+    <input type="button" value="Regresar" class="btn btn-purple" onclick="Regresar();" style=" margin-top: 1%; margin-left: 1%; margin-bottom: 1%;" />
+</div>
+<div class="col-md-12">
+    <div class="form-group">
+        <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 123%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Corrección Nomina</h3></div>
+
+    </div>
+</div>
+
+<div class="modal-body">
+    @using (Html.BeginForm(action, "CorreccionNominas", new { area = "Nomina" }, FormMethod.Post, new { id = "theForm", autocomplete = "off" }))
+
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.EMPRESA)
+        @*
+        <div class="">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CEDULA, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="input-group col-lg-3">
+                    @Html.EditorFor(model => model.CEDULA, new { htmlAttributes = new { @class = "form-control", type = "text", placeholder = "Identificación" } })
+                    <span class="input-group-addon" id="nomPersona"></span>
+
+                </div>
+            </div>
+        </div>
+        *@
+        <div class="form-group">
+
+            <label class="control-label col-md-2">Seleccione un asociado:</label>
+            <div class="col-md-10">
+                @Html.DropDownList("IDASOCIADO", null, new { @class = "chosen-select-single", @id = "IDASOCIADO", @required = "required" })
+                <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+
+                <p style="color:red">@ViewBag.mensaje</p>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Empresa :</label>
+            <div class="col-md-5">
+                <label class="form-control" id="Empresa" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Agencia :</label>
+            <div class="col-md-5">
+                <label class="form-control" id="Agencia" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Periodo :</label>
+            <div class="col-md-5">
+                <label class="form-control" id="Periodo" />
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="control-label col-md-2">Plano :</label>
+            <div class="col-md-5">
+                <label class="form-control" id="idPlano" />
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="control-label col-md-2">Empresa :</label>
+            <div class="col-md-5">
+                <label class="form-control" id="idEmpresa" />
+            </div>
+        </div>
+
+
+
+
+        <!--
+    <div class="form-group">
+        @*Html.LabelFor(model => model.CONCEPTO, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-5">
+            @Html.DropDownListFor(model => model.CONCEPTO, new SelectList(Concep, "Value", "Text"), "Seleccione opción...", new { @class = "form-control", @required = "required" }) *@
+
+        </div>
+    </div>
+        -->
+        <div class="form-group">
+            <div class="col-md-5">
+                @*@grid.GetHtml();*@
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label class="control-label col-md-5"> Total Discriminación Nomina: </label>
+                                <div class="col-md-5">
+                                    <label class="form-control" id="TotalN"></label>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label class="control-label col-md-5"> Ingrese Discriminación Nomina Individual: </label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" id="TotalI" style="font-weight: bold;" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Actualizar Datos" id="guardar" class="btn btn-default" onclick="Actualizar(); " />
+            </div>
+        </div>
+        <!--
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Generar Discriminación" class="btn btn-default" />
+            </div>
+        </div>
+          -->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Generar Discriminación" class="btn btn-success" id="guardar" onclick="Guardar();" />
+            </div>
+        </div>
+
+
+    </div>
+    }
+</div>
+
+
+<script>
+
+
+    function Regresar() {
+        location.reload();
+    }
+    $(document).ready(function () {
+        $("#TotalI").prop("disabled", true);
+
+        /* SEPARADOR DE MILES POR KEY UP */
+        $("#TotalI").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, "");
+                });
+            }
+        });
+        /* FIN SEPARADOR DE MILES POR KEY UP */
+        //autocomplete Persona
+
+
+
+
+
+
+    });
+
+    $(document.body).on('hidden.bs.modal', function () {
+        $('#centro').removeData('bs.modal');
+    });
+
+/*
+    $("#theForm").submit(function (event) {
+        var Empresa = $("#IDASOCIADO").val(); 
+        $("#EMPRESA").val(Empresa);
+        swal({
+            title: "Alerta",
+            type: "info",
+            text: Empresa,
+        })
+        $("#theForm").attr('action', '/Nomina/CorreccionNominas/Create') 
+    });
+
+*/
+
+     $("#theForm").submit(function (event) {
+        var Empresa = $("#IDASOCIADO").val();
+        $("#EMPRESA").val(Empresa);
+        event.preventDefault();
+        var theForm = $(this);
+       // var theAction = theForm.attr("action");
+        //if (!theForm.valid()) {
+        //    return false;
+        //}
+        $.post('/Nomina/CorreccionNominas/Create', theForm.serialize())
+            .done(function (data) {
+               // window.location.href = "C:\\FInantec 09-01-2020\\FNTC.Finansoft.UI\\bin\\plan.xls";
+               // var direccion = "C:\\FInantec 09-01-2020\\FNTC.Finansoft.UI\\bin\\plan.xls";
+               // window.location = 'Download?file=' + direccion;
+
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Correcto",
+                })
+
+                //document.location.href = direccion;
+
+
+               // window.open(direccion);
+                window.location.href = "/Nomina/CorreccionNominas/ExcelTerceros";
+
+            });
+      });
+  
+</script>
+<script>
+                $("#IDASOCIADO").chosen().change(function () {
+
+
+
+                    $("#TotalI").prop("disabled", false);
+                    var Asociado = $("#IDASOCIADO").val();
+                    if (Asociado != "") {
+                        $('#mitabla tr').empty();
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("GetDatosAsociado", "CorreccionNominas")",
+                            datatype: "Json",
+                            data: { NIT: $('#IDASOCIADO').val() },
+                            success: function (data) {
+                                $("#Empresa").text(data[0]);
+                                $("#Agencia").text(data[1]);
+                                $("#Periodo").text(data[2]);
+                                $("#TotalN").text(data[3]);
+                                $("#idPlano").text(data[4]);
+                                $("#idEmpresa").text(data[5]);
+                                $("#TotalI").val("");
+
+                            }
+                        });
+                    }
+
+                    else {
+                        $('#IDASOCIADO').val("").trigger('chosen:updated');
+                        swal({
+                            title: "Alerta",
+                            type: "info",
+                            text: "Debe Seleccionar un Asociado",
+                        })
+                        $("#Empresa").text("");
+                        $("#Agencia").text("");
+                        $("#Periodo").text("");
+                        $("#TotalN").text("");
+                        $("#TotalI").text("");
+                             $("#TotalI").prop("disabled", true);
+
+                    }
+
+                });
+
+</script>
+<script>
+        function Actualizar() {
+
+            var Asociado = $("#IDASOCIADO").val();
+
+                    if (Asociado != "") {
+                        $('#mitabla tr').empty();
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("GetDatosActualizar", "CorreccionNominas")",
+                            datatype: "Json",
+                            data: { NIT: $('#IDASOCIADO').val(), TotalI: $("#TotalI").val()},
+                            success: function (data) {
+                                $("#TotalN").text(data[0]);
+                                $("#TotalI").val("");
+                            }
+                        });
+                    }
+
+                    else {
+                        $('#IDASOCIADO').val("").trigger('chosen:updated');
+                        swal({
+                            title: "Alerta",
+                            type: "info",
+                            text: "Debe Seleccionar un Asociado",
+                        })
+
+                    }
+
+
+
+        }
+</script>
+
+<script>
+    function Guardar() {
+        //hacer validaciones
+       
+        var url = "/Nomina/CorreccionNominas/Exportar?idPlano=" + $('#idPlano').text() + "&idEmpresa=" + $('#idEmpresa').text(); // Establecer URL de la acción        
+        document.location.href = url;
+       // $("#result").load(url);
+    }   
+ 
+</script>

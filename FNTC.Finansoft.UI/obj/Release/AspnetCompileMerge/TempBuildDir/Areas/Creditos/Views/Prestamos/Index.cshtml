@@ -1,0 +1,123 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.MCreditos.Prestamos>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="margin-top:4%; background: rgb(248, 248, 248);">
+    <!--
+    <div class="col-md-1" style="margin-top: 20px">
+        <a class="" href="/Aportes/Aportes/Index" title="Atras">
+            <i class="fa fa-arrow-circle-o-left fa-2x " aria-hidden="true">Volver</i>
+        </a>
+    </div>
+        -->
+    <ul class="col-md-offset-2 nav nav-tabs" style="margin-top:2%;border: none; margin-left: 2%;">
+        <li><a href="/Creditos/Creditos" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Creditos </a></li>
+        <li class="active"><a href="/Creditos/Prestamos" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Prestamos </a></li>
+        <li><a href="#" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Reportes </a></li>
+        <li><a href="/Creditos/Lineas" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Configuraciones </a></li>
+        <li><a href="/Creditos/Documentos" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Documentos </a></li>
+        <li><a href="/Creditos/solicitudCreditos" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Solicitud Creditos </a></li>
+    </ul>
+    <div class="tab-content contenedortabs">
+        <div id="menu1" class="tab-pane fade in active">
+            <div class="col-md-12"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Procesos - Prestamos</h3></div>
+            <div class="col-md-12">
+
+                <p>
+                    @Html.ActionLink("Crear Nuevo Prestamo", "Create", null, null, new { @class = "btn btn-primary btn-large" })
+
+                </p>
+
+                <table id="simple-table" class="table table-hover">
+
+                    <thead>
+                        <tr>
+                            <th>
+
+                                @Html.DisplayNameFor(model => model.Forma_Pago.Forma_Pago_Descripcion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Tipo_Periodo.Tipo_Periodo_Descripcion)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.Capital)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Interes)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Plazo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Fecha_Prestamo)
+                            </th>
+                            @*<th>
+                                    @Html.DisplayNameFor(model => model.Fecha_Primer_Pago)
+                                </th>*@
+                            @*<th>
+                                    @Html.DisplayNameFor(model => model.Valor_Garantia)
+                                </th>*@
+                            <th></th>
+                        </tr>
+
+                    </thead>
+
+
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Forma_Pago.Forma_Pago_Descripcion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tipo_Periodo.Tipo_Periodo_Descripcion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Capital)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Interes)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Plazo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Fecha_Prestamo)
+                                </td>
+                                @*<td>
+                                        @Html.DisplayFor(modelItem => item.Fecha_Primer_Pago)
+                                    </td>*@
+                                @*<td>
+                                        @Html.DisplayFor(modelItem => item.Valor_Garantia)
+                                    </td>*@
+
+                                <td>
+
+
+
+
+
+                                    @*@Html.ActionLink(".", "Edit", new { id = item.id }, new { @class = "btn btn-success btn-xs glyphicon glyphicon-pencil" })
+                                        @Html.ActionLink(".", "Details", new { id = item.id, id2 = item.Tipo_Periodo_Id }, new { @class = "btn btn-info btn-xs glyphicon glyphicon-eye-open" })
+                                        @Html.ActionLink(".", "Delete", new { id = item.id }, new { @class = "btn btn-danger btn-xs glyphicon glyphicon-trash" })*@
+
+
+
+                                </td>
+
+
+                            </tr>
+                        </tbody>
+                    }
+
+                </table>
+
+            </div>
+
+        </div><!--MENU-->
+    </div><!--CONTENEDOR TABS-->
+</div>

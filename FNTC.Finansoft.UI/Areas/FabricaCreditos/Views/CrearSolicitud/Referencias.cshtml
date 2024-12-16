@@ -1,0 +1,11 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.FabricaCreditos.ReferenciasCodeudorFC
+
+
+@{
+    ViewBag.Title = "Referencias";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var idAsociado = ViewBag.idAsociado;
+    var referencias = ViewBag.nReferencias;
+}
+
+<div class="alert alert-info"><p>Agrega Referencias Personales: @referencias[0] y Codeudores: @referencias[1]</p></div>

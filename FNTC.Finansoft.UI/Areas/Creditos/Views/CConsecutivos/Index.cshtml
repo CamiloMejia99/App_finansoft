@@ -1,0 +1,87 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.MCreditos.CConsecutivos>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="margin-top:1%; background: rgb(248, 248, 248);">
+    <div class="col-md-12"><h2 style="color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Configuracion</h2></div>
+    <ul class="col-md-offset-2 nav nav-tabs" style="margin-top:2%;border: none; margin-left: 2%;">
+
+        <li><a href="/Creditos/Lineas" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Lineas</a></li>
+        <li><a href="/Creditos/Destinos" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Destinos</a></li>
+        <li><a href="/Creditos/Subdestinos" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> SubDestinos</a></li>
+        <li><a href="/Creditos/Cuentas" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Cuentas</a></li>
+        <li><a href="/Creditos/Forma_Pago" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Forma Pago</a></li>
+        <li><a href="/Creditos/Clase_Garantias" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Clase Garantias</a></li>
+        <li><a href="/Creditos/Garantias" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Garantias</a></li>
+        <li><a href="/Creditos/Tipo_Costo" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Tipo Costo</a></li>
+        <li><a href="/Creditos/Tipo_Periodo" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Tipo Periodo</a></li>
+        <li><a href="/Creditos/Costos_Adicionales" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Costos Adici.</a></li>
+        <li><a href="/Creditos/Incrementa" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Incrementos </a></li>
+        <li class="active"><a href="/Creditos/CConsecutivos" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Pagare - Libranza </a></li>
+        <li><a href="/Creditos/ReporteSuper" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Reporte </a></li>
+        <li><a href="/Creditos/ProcesosAutomaticos/Edit/1" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Procesos Automaticos </a></li>
+        <li><a href="/Creditos/Creditos" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Procesos </a></li>
+
+    </ul>
+    <div class="tab-content contenedortabs">
+        <div id="menu1" class="tab-pane fade in active">
+            <div class="col-md-12"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Pagare y Consecutivos</h3></div>
+
+            <div class="col-md-12">
+
+                <p>
+                    @Html.ActionLink("Crear Nuevo", "Create", null, null, new { @class = "btn btn-primary btn-large" })
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.idAgencia)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tipoCodPagare)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.consecutivoPagareActual)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tipoCodLibranza)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.consecutivoLibranzaActual)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.idAgencia)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tipoCodPagare)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.consecutivoPagareActual)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tipoCodLibranza)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.consecutivoLibranzaActual)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Detalles", "Details", new { id = item.id }, new { @class = "btn btn-success btn-xs" })
+                                @Html.ActionLink("Editar", "Edit", new { id = item.id }, new { @class = "btn btn-info btn-xs" })
+                                @Html.ActionLink("Eliminar", "Delete", new { id = item.id }, new { @class = "btn btn-danger btn-xs" })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div><!--MENU-->
+    </div><!--CONTENEDOR TABS-->
+</div>

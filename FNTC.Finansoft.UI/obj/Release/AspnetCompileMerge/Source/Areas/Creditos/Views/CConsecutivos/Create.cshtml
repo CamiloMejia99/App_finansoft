@@ -1,0 +1,115 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.MCreditos.CConsecutivos
+
+@{
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+
+@{
+    ViewBag.Title = "Crear Nuevo";
+}
+
+<link href="~/Content/css/checkbox_radio.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.idAgencia, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("idAgencia", null, null, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.idAgencia, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.idLinea, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("idLinea", null, "Seleccione Una Linea", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.idLinea, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.idDestino, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("idDestino", new SelectList(string.Empty, "Value", "Text"), "Seleccione Un Destino", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.idDestino, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.tipoCodPagare, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.tipoCodPagare, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.tipoCodPagare, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.consecutivoPagareActual, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.consecutivoPagareActual, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.consecutivoPagareActual, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.tipoCodLibranza, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.tipoCodLibranza, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.tipoCodLibranza, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.consecutivoLibranzaActual, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.consecutivoLibranzaActual, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.consecutivoLibranzaActual, "", new { @class = "text-danger" })
+        </div>
+    </div>
+  
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.estado, new { @class = "control-label col-md-2" })
+            <div class="col-md-10 checkbox">
+                @Html.CheckBoxFor(model => model.estado, new { @id = "esactivo", @class = "checkbox" })
+                <label for="esactivo">Activo</label>
+                @Html.ValidationMessageFor(model => model.estado)
+            </div>
+        </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Crear" class="btn btn-primary large" />
+            @Html.ActionLink("Regresar a la Lista", "Index", null, null, new { @class = "btn btn-success btn-large" })
+        </div>
+    </div>
+</div>
+}
+
+<script>
+    $(document).ready(function () {
+            $('#idLinea').change(function () {
+                $('#idDestino').empty();
+                $.ajax({
+                    type: "POST",           
+                    url: "@Url.Action("GetStatesByCountryId", "Costos_Adicionales")",
+                    datatype: "Json",
+                    data: { countryId: $('#idLinea').val() },
+                    success: function (data) {
+                        $.each(data, function (index, value) {
+                            $('#idDestino').append('<option value="' + value.Value + '">' + value.Text + '</option>');
+                        });
+                    }
+                });       
+            });
+    });
+</script>

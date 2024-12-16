@@ -1,0 +1,234 @@
+﻿@model Ingenio.BO.Asociados_Vacaciones_Desc
+@{
+    ViewBag.Title = "Create";
+    //string m = ViewBag.Mensaje;
+    string cedula = ViewBag.cedula;
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+
+    <div class="form-horizontal panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Asociado Novedad</h3>
+        </div>
+        <div class="panel-body" id="General">
+
+
+            @*CEDULA ASOCIADO**************************************************@
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="Identificacion" class="col-md-4 control-label">Asociado</label>
+                    <div class="col-md-7">
+                        <input type="text" id="_Nit_CC" required class="form-control" value="@Model.Asociados_Aso.Personas_Fac.Nit_CC" onkeypress="return valida(event)" disabled>
+                        <input type="hidden" name="Id_Asociado" id="Id_Asociado" value="@Model.Id_Asociado" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="text" id="_nombre" required class="form-control" value="@ViewBag.Nombreaso" readonly disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="nombre" class="col-md-2 control-label">Empresa Afiliada:</label>
+                    <div class="col-md-10">
+                        <input type="text" id="empresa" class="form-control" value="@ViewBag.Empresa" readonly disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="nombre" class="col-md-2 control-label">Agencia:</label>
+                    <div class="col-md-10">
+                        <input type="text" id="agencia" class="form-control" value="@ViewBag.Agencia" readonly disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="nombre" class="col-md-2 control-label">Tipo Vacaciones</label>
+                    <div class="col-md-10">
+                        @Html.DropDownList("Id_TipoVacacion", new SelectList(ViewBag.TiposVacaciones, "Id", "Descripcion"), "Seleccione el tipo", new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="nombre" class="col-md-4 control-label">Fecha Liquidación</label>
+                    <div class="col-md-7">
+                        <input type="date" id="Fecha_Liquidacion" name="Fecha_Liquidacion" value=@Model.Fecha_Liquidacion.ToString("yyyy-MM-dd") class="form-control" required onblur="comparar()" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="nombre" class="col-md-4 control-label">Proxima Deducción</label>
+                    <div class="col-md-7">
+                        <input type="date" id="FechaProxDeduccion"  name="FechaProxDeduccion" value="@Model.FechaProxDeduccion.ToString("yyyy-MM-dd")" class="form-control" required onblur="comparar()" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="nombre" class="col-md-4 control-label">Fecha Salida Vacaciones</label>
+                    <div class="col-md-7">
+                        <input type="date" id="Fecha_Salida" name="Fecha_Salida" value="@Model.Fecha_Salida.ToString("yyyy-MM-dd")" class="form-control" required onblur="comparar2()" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="nombre" class="col-md-4 control-label">Regreso Vacaciones</label>
+                    <div class="col-md-7">
+                        <input type="date" id="FechaRegreso" name="FechaRegreso" value="@Model.FechaRegreso.ToString("yyyy-MM-dd")" class="form-control" required onblur="comparar2()" />
+                    </div>
+                </div>
+            </div>
+
+
+            @*//*************boton******************@
+            <div class="col-md-offset-2 col-md-10">
+                <div class="form-group">
+                    <button id="" type="submit" value="Create" class="btn btn-default">Guardar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+
+
+
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/Mascaras")
+
+
+@********************************JAVASCRIPT*******************************************@
+<script>
+
+
+    $(function () {
+        var tipov = @Model.Id_TipoVacacion;
+
+        $('#Id_TipoVacacion option:eq('+tipov+')').prop('selected', true);
+
+    })
+
+
+
+    ////Autocomplete
+    function renderItem(ul, item) {
+
+        return $("<li>")
+        .append("<span style='display:block'>" + item.value + "</span>")
+        .append("<span style='display:block'>" + item.label + "</apan>")
+        .appendTo(ul);
+    }
+
+    //AUTOCOMPLETE CEDULA ASOCIADO
+
+    $("#_Nit_CC").autocomplete({
+        source: "@Url.Action("GetCedula","AfiliacionApo")",
+        minLength: 3,
+        select: function (event, ui) {
+            $('#_nombre').val(ui.item.label);
+            $('#_Nit_CC').val(ui.item.value);
+            $('#Id_Asociado').val(ui.item.idaso);
+            $('#empresa').val(ui.item.empresa);
+            $('#agencia').val(ui.item.agencia);
+
+
+        },
+        change: function (event, ui) {
+            if (!ui.item) {
+                $(this).val("");
+                $('#_nombre').val("");
+                $('#_Nit_CC').val("");
+                $('#Id_Asociado').val(-1);
+                $('#empresa').val("");
+                $('#agencia').val("");
+            }
+        },
+        focus: function (event, ui) {
+            $('#Nit_CC').val(ui.item.value);
+            return false;
+        }
+    })
+
+
+    // SOLO NUMEROS
+    function valida(e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+
+        //Tecla de retroceso para borrar, siempre la permite
+        if (tecla == 8) {
+            return true;
+        }
+        // Patron de entrada, en este caso solo acepta numeros
+        patron = /[0-9]/;
+        tecla_final = String.fromCharCode(tecla);
+        return patron.test(tecla_final);
+    }
+
+
+
+
+    $("form").on("submit", function (e) {
+        e.preventDefault();
+        $("input[data-mask]").unmask();
+        var fd = new FormData(this);
+
+        $.ajax({
+            url: "@Url.Action("Create")",
+            type: "POST",
+            data: fd,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (res) {
+                if (res.estado) {
+                    window.location.href = "@Url.Action("Index")";
+                } else {
+                    swal("Error", response.mensaje, "error");
+                }
+            }
+        })
+    })
+
+
+    function comparar() {
+        var f1 = $("#Fecha_Liquidacion").val();
+        var f2 = $("#FechaProxDeduccion").val();
+
+        if (f2<=f1) {
+            sweetAlert("Oops...", "La fecha de la Proxima Deducción debe ser mayor a la Fecha de Liquidación!", "error"); 
+            $("#FechaProxDeduccion").val("");
+        }
+    }
+
+    function comparar2() {
+        var f1 = $("#Fecha_Salida").val();
+        var f2 = $("#FechaRegreso").val();
+        sweetAlert("Oops...", "La fecha de Salida de Regreso debe ser mayor a la Fecha de Salida!", "error");
+        $("#FechaRegreso").val("");
+
+    }
+</script>

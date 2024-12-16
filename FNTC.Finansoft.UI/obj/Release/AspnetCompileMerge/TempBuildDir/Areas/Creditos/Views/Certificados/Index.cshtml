@@ -1,0 +1,127 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+<script src="~/Scripts/sweetalert2@9.js"></script>
+
+@*<script src="~/Scripts/sweetalert.min.js"></script>
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />*@
+
+
+<script src="~/Scripts/certificados.js"></script>
+@section Styles{
+
+    @*Choosen*@
+    <link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+    @*fin choseen*@
+
+
+}
+
+
+<div class="container" style="margin-top:2%; background: rgb(248, 248, 248);">
+    <!--<div class="col-md-1">
+        <a class="" href="/Aportes/Aportes/Index" title="Atras">
+            <i class="fa fa-arrow-circle-o-left fa-2x " aria-hidden="true">Volver</i>
+        </a>
+    </div>-->
+
+    <ul class="col-md-offset-2 nav nav-tabs" style="margin-top:0%;border: none; margin-left: 2%;">
+        <li><a href="/Creditos/Creditos" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Creditos </a></li>
+        <li><a href="/Creditos/Prestamos" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Prestamos </a></li>
+        <li><a href="#" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Reportes </a></li>
+        <li><a href="/Creditos/Lineas" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Configuraciones </a></li>
+        <li><a href="/Creditos/Documentos" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Documentos </a></li>
+        <li><a href="/Creditos/solicitudCreditos" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Solicitud Creditos </a></li>
+        <li class="active"><a href="/Creditos/Certificados" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Certificados </a></li>
+    </ul>
+    <div class="tab-content contenedortabs">
+        <div id="menu1" class="tab-pane fade in active">
+            <div class="col-md-12"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Procesos - Certificados</h3></div>
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="col-lg-6">
+                        <button class="btn btn-warning" id="btnPYZ">Paz y Salvo</button>
+                    </div>
+                    <div class="col-lg-6">
+                        <button class="btn btn-warning" id="btnLiquidacion">Certificado Liquidación</button>
+                    </div>
+                </div>
+            </div>
+            <br />
+            
+            <div class="row">
+                <div id="viewPYZ" hidden>
+                    <hr />
+                    <div class="row" style="margin-left:20px">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-10">Seleccione</label>
+                                <div class="col-lg-12">
+                                    @Html.DropDownList("terceros", (IEnumerable<SelectListItem>)ViewBag.terceros, null, new { @class = "chosen-select-single", @id = "tercero" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <br />
+                            <div id="contenido"></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="viewLiquidacion" hidden>
+                    <hr />
+                    <div class="row" style="margin-left:20px">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-10">Seleccione</label>
+                                <div class="col-lg-12">
+                                    @Html.DropDownList("terceros2", (IEnumerable<SelectListItem>)ViewBag.terceros2, null, new { @class = "chosen-select-single", @id = "tercerol" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-10">Seleccione Línea de crédito</label>
+                                <div class="col-lg-12">
+                                    @Html.DropDownList("lineas", (IEnumerable<SelectListItem>)ViewBag.lineas, null, new { @class = "chosen-select-single", @id = "linea" })
+                                </div>
+                            </div>
+                        </div>
+                        
+                            <br />
+                            
+                                <a target="_blank" href="" class="tabsnota" id="btnLiquidacion2" hidden> <i class="fa fa-file-text"></i> Liquidacion </a>
+                            
+                        
+
+                    </div>
+                    <br />
+                    <div class="row" style="margin-left:50px">
+                        <button id="btnGenerar" class="btn btn-success" >Generar Certificado</button>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--MENU-->
+    </div><!--CONTENEDOR TABS-->
+
+</div>
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".chosen-select-single").chosen();
+            $(".chosen-select-multiple").chosen();    //DESPUES DEL FINAL DEL DOCUMENTO AL PRINCIPIO DE LOS SCRIPTS
+        });
+
+       
+
+    </script>
+
+
+}

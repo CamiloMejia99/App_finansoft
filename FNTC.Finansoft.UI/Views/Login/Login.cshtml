@@ -1,0 +1,192 @@
+﻿@model IdentitySample.Models.LoginUserViewModel
+
+@{
+
+    Layout = null;
+
+    string urlReturn = "";
+    if (ViewBag.urlReturn != null)
+    {
+        urlReturn = ViewBag.urlReturn;
+    }
+
+}
+<!DOCTYPE html>
+@*<script src="~/Scripts/VirtualKeyboard/keyboard.js" charset="UTF-8"></script>
+    <link href="~/Scripts/VirtualKeyboard/keyboard.css" rel="stylesheet" />*@
+
+
+<style type="text/css">
+
+
+    html, body {
+        background-image: url('../../Content/imagenes/estructura.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100%;
+        font-family: 'Numans', sans-serif;
+    }
+
+    .container {
+        height: 100%;
+        align-content: center;
+    }
+
+    .card {
+        height: 290px;
+        margin-top: auto;
+        margin-bottom: auto;
+        width: 400px;
+        background-color: rgba(0,0,0,0.5) !important;
+    }
+
+    .social_icon span {
+        font-size: 60px;
+        margin-left: 10px;
+        color: #FFC312;
+    }
+
+        .social_icon span:hover {
+            color: white;
+            cursor: pointer;
+        }
+
+    .card-header h3 {
+        color: white;
+    }
+
+    .social_icon {
+        position: absolute;
+        right: 20px;
+        top: -45px;
+    }
+
+    .input-group-prepend span {
+        width: 50px;
+        background-color: #001c57; /*#020637;*/ /*#FFC312;*/
+        color: white;
+        border: 0 !important;
+    }
+
+    input:focus {
+        outline: 0 0 0 0 !important;
+        box-shadow: 0 0 0 0 !important;
+    }
+
+    .remember {
+        color: white;
+    }
+
+        .remember input {
+            width: 20px;
+            height: 20px;
+            margin-left: 15px;
+            margin-right: 5px;
+        }
+
+    .login_btn {
+        color: white;
+        background-color: #020637;
+        /*#FFC312;*/
+        width: 100px;
+    }
+
+        .login_btn:hover {
+            color: black;
+            background-color: white;
+        }
+
+    .links {
+        color: white;
+    }
+
+        .links a {
+            margin-left: 4px;
+        }
+</style>
+<head>
+    <title>FINANTEC</title>
+    <!--Made with love by Mutiullah Samim -->
+    <!--Bootsrap 4 CDN-->
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">*@
+    @*<link href="~/Scripts/VirtualKeyboard/bootstrap.min.css" rel="stylesheet" />*@
+    <link href="~/Content/acc/bootstrap.min.css" rel="stylesheet" />
+    <!--Fontawesome CDN-->
+    @*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">*@
+
+    <script src="~/Scripts/all.js"></script>
+
+
+    <!--Custom styles-->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+
+                    <img src="~/Content/imagenes/logof.png" width="100" height="40" />
+                    @*<div style="color:azure;" class="float-right">
+                            <a href="/Login/Register" class="forgot-password-link">
+                                Registrate!!!
+                            </a>
+                        </div>*@
+
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Login", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", autocomplete = "nope" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @*class="form-vertical col-sm-5 col-sm-offset-3">*@
+                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                        if (ViewBag.Error > 0)
+                        {
+                            <h6 style="color:red;">Usuario o Contraseña Incorrectos, @ViewBag.Error de 4 Intentos.</h6>
+                        }
+                        else if (ViewBag.Error == null)
+                        {
+                            <h6 style="color:red;">Usuario o Contraseña Incorrectos.</h6>
+                        }
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                            @*<input type="text" class="form-control" placeholder="username">*@
+                            @*<input type="text" name="usuario" value="" class="form-control keyboardInput" placeholder="Usuario">*@
+
+                            @Html.TextBoxFor(m => m.UserName, new { placeholder = "Cédula", @class = "form-control " })
+                        </div>
+
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            @*<input type="password" class="form-control" placeholder="password">*@
+                            @*<input type="password" id="password" value="" class="form-control" placeholder="Contraseña" name="password">*@
+                            @Html.PasswordFor(m => m.Password, new { placeholder = "Contraseña", @class = "form-control keyboardInput", autocomplete = "current-password" })
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <input type="submit" value="Iniciar Sesión" class="btn btn-sm float-right login_btn">
+                        </div>
+
+                    }
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    $(window).load(function () { // can also try on document ready
+        $('input[autocomplete]').removeAttr('autocomplete');
+    });
+</script>
+
+

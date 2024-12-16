@@ -1,0 +1,81 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.GestionCartera.GCgestion
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>GCgestion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idAsociado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idAsociado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClaseGestion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClaseGestion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaGestion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaGestion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RespuestaGestion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RespuestaGestion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResOpcionalGestion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResOpcionalGestion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactoGestion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactoGestion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GestionVerificada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GestionVerificada)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

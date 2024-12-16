@@ -1,0 +1,28 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.ControlCartera.Curso
+@{
+    ViewBag.Title = "CARTERA";
+    Layout = "~/Views/Shared/_LayoutCR.cshtml";
+}
+
+<br />
+<h4>Gestión de Procesos</h4>
+<div class="alert alert-@ViewBag.alerta"> - - <b>@ViewBag.res</b> - - </div>
+<form action="/Curso/Eliminar" method="post">
+    <input type="hidden" id="id" name="id" value="@Model.id_cur" />
+    <table>
+        <tr>
+            <td style="padding: 10px"><b>Codigo:</b></td>
+            <td style="padding: 10px">@Model.id_cur</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px"><b>Proceso:</b></td>
+            <td style="padding: 10px">@Model.descripcion_cur</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px"></td>
+            <td style="padding: 10px">
+                <a class="btn btn-danger" href="~/Curso/Index"><span class="glyphicon glyphicon-backward"> Volver</span></a>
+            </td>
+        </tr>
+    </table>
+</form>

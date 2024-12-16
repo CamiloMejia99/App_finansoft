@@ -1,0 +1,67 @@
+﻿@model List<FNTC.Finansoft.Accounting.DTO.ControlCartera.Alumno>
+@{
+    ViewBag.Title = "CARTERA";
+    Layout = "~/Views/Shared/_LayoutCR.cshtml";
+}
+
+<br />
+<h4>Gestión de Creditos</h4>
+<div class="alert alert-@ViewBag.alerta"> - - <b>@ViewBag.res</b> - - </div>
+<form action="/Alumno/Index" method="post">
+    <table>
+        <tr>
+            <td style="padding: 10px">Pagare:</td>
+            <td style="padding: 10px"><input class="form-control" maxlength="8" type="text" name="dni" id="dni" required /></td>
+        </tr>
+        <tr>
+            <td style="padding: 10px">Nombre:</td>
+            <td style="padding: 10px"><input class="form-control" type="text" name="nom" id="nom" required /></td>
+        </tr>
+        <tr>
+            <td style="padding: 10px">Apellidos:</td>
+            <td style="padding: 10px"><input class="form-control" type="text" name="ape" id="ape" required /></td>
+        </tr>
+        <tr>
+            <td style="padding: 10px"></td>
+            <td style="padding: 10px">
+                <button class="btn btn-success" type="submit" name="btn1" id="btn1"><span class="glyphicon glyphicon-save"> Agregar</span></button>
+                <button class="btn btn-primary" type="reset" name="btn2" id="btn2"><span class="glyphicon glyphicon-remove"> Resetear</span></button>
+                <a class="btn btn-danger" href="~/Seccion/Index"><span class="glyphicon glyphicon-backward"> Regresar</span></a>
+            </td>
+        </tr>
+    </table>
+</form>
+<br />
+<br />
+<table id="tabla_alumnos" class="table table-bordered">
+    <thead style="background-color: black; color: white">
+        <tr>
+            <th>Codigo</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Pagare</th>
+            <th style="text-align: center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody style="background-color: white">
+        @foreach (var f in Model)
+        {
+            <tr>
+                <td>@f.id_alu</td>
+                <td>@f.nombre_alu</td>
+                <td>@f.apellidos_alu</td>
+                <td>@f.dni_alu</td>
+
+                <td style="text-align: center">
+                    <button class="btn btn-warning" type="button" id="btn_act" name="btn_act" onclick="location.href='../Alumno/Editar?id=@f.id_alu'"><span class="glyphicon glyphicon-edit"> Actualizar</span></button>
+                    <button class="btn btn-danger" type="button" id="btn_eli" name="btn_eli" onclick="location.href='../Alumno/Eliminar?id=@f.id_alu'"><span class="glyphicon glyphicon-trash"> Eliminar</span></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        $('#tabla_alumnos').DataTable();
+    });
+</script>

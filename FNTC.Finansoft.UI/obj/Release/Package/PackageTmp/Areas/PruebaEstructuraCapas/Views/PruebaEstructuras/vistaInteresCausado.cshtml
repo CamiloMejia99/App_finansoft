@@ -1,0 +1,125 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.MCreditos.interescausadoprestamos>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>vistaInteresCausado</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.pagare)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.intcorriente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.intmora)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechasistema)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.agenciaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioCauso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tasainteres)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.numeroCuota)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.comprabante)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.consecutivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.codcuentaingresosctes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.codcuentaingresosmora)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valorretencion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.porcentajeretencion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TasainteresMora)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.pagare)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.intcorriente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.intmora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechasistema)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.agenciaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuarioCauso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tasainteres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numeroCuota)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.comprabante)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.consecutivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.codcuentaingresosctes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.codcuentaingresosmora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valorretencion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.porcentajeretencion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TasainteresMora)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

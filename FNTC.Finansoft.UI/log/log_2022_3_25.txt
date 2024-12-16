@@ -1,0 +1,8 @@
+25/03/2022 10:20:10 a. m. - The 'NIVEL' property on 'Tercero' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Int32'.  ---_T GetValue(System.Data.Common.DbDataReader, Int32)
+25/03/2022 10:20:50 a. m. - El valor no puede ser nulo.
+Nombre del parámetro: source ---_TSource First[TSource](System.Collections.Generic.IEnumerable`1[TSource])
+25/03/2022 10:22:42 a. m. - El valor no puede ser nulo.
+Nombre del parámetro: source ---_TSource First[TSource](System.Collections.Generic.IEnumerable`1[TSource])
+25/03/2022 10:24:02 a. m. - El valor no puede ser nulo.
+Nombre del parámetro: source ---_TSource First[TSource](System.Collections.Generic.IEnumerable`1[TSource])
+25/03/2022 3:32:43 p. m. - Referencia a objeto no establecida como instancia de un objeto. ---_System.String Permiso(System.String)

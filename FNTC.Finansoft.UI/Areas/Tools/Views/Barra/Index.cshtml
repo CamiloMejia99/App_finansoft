@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "pruebas";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora</title>
+    
+    
+    <link href="~/Content/tools/SimpleCalculadorajQuery.css" rel="stylesheet" />
+    <script src="~/Content/tools/SimpleCalculadorajQuery.js"></script>
+    <link href="~/Content/stylemovimientos.css" rel="stylesheet" />
+    
+    
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+</head>
+
+<body onload="document.forms['FCalculadora'].pantalla.value='0';document.forms['FCalculadora'].pantalla.focus();">
+
+
+    <div class="col-md-3" style="position: absolute; right: 82px;">
+        <a href="/Accounting/CentroCosto/Create" class="centro  botoncentro" data-toggle="modal" title="Nuevo centro de costo" data-target="#centro"><i class="fa fa-money" aria-hidden="true"></i></a>
+        <a href="/Terceros/terceros/Create" class="centro   botontercero" title="Nuevo terrcero" data-toggle="modal" data-target="#tercero"><i class="fa fa-building" aria-hidden="true"></i></a>
+        <a href="/Accounting/plandecuentas/Create" class="centro  botoncuenta" title="Nueva cuenta" data-toggle="modal" data-target="#cuenta"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+        <a href="/Tools/Calculadora/calculadoramodal" class="centro  botoncalculadora" title="Calculadora" data-toggle="modal" data-target="#calculadora"><i class="fa fa-calculator" aria-hidden="true"></i></a>
+    </div>
+
+
+    <div class="col-md-12">
+        <div class="form-group">
+
+            <button class="js-refrescar" style="display:none"><i class="fa fa-refresh" aria-hidden="true"></i> Actualizar</button>
+        </div>
+    </div>
+
+    <div class="modal fade" data-backdrop="static" id="centro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @*<div class="modal-header modalheadergeneral">
+                        <button type="button" style="color:#FFF" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title  c_editar" id="myModalLabel"><i class="fa fa-file-text" aria-hidden="true"></i> Nuevo</h3>
+                    </div>*@
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" data-backdrop="static" id="tercero" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @*<div class="modal-header modalheadergeneral">
+                        <button type="button" style="color:#FFF" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title  c_editar" id="myModalLabel"><i class="fa fa-file-text" aria-hidden="true"></i> Nuevo</h3>
+                    </div>*@
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" data-backdrop="static" id="cuenta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @*<div class="modal-header modalheadergeneral">
+                        <button type="button" style="color:#FFF" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title  c_editar" id="myModalLabel"><i class="fa fa-file-text" aria-hidden="true"></i> Nuevo</h3>
+                    </div>*@
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" data-backdrop="static" id="calculadora" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @*<div class="modal-header modalheadergeneral">
+                        <button type="button" style="color:#FFF" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title  c_editar" id="myModalLabel"><i class="fa fa-file-text" aria-hidden="true"></i> Nuevo</h3>
+                    </div>*@
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+    //refrescar un div
+    $(".js-refrescar").click(function () {
+        var urlpartial = '@Url.Action("catalogos2", "Default", new { Area = "dashboard"})';
+        urlpartial += '?url=' + "Accounting/CentroCosto/index&menu" + "contabilidad";
+        //  $('#centro').removeData('bs.modal');
+    //    $("#mostrar").load(urlpartial);
+    });
+
+    //Ocultar el modal
+    $(document.body).on('hidden.bs.modal', function () {
+        $('#centro').removeData('bs.modal');
+        $(".js-refrescar").click();
+
+    });
+
+</script>

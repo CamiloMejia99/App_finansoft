@@ -1,0 +1,5 @@
+29/06/2022 9:01:20 a. m. - An error occurred while updating the entries. See the inner exception for details. ---_Void Throw()
+29/06/2022 9:07:42 a. m. - An error occurred while updating the entries. See the inner exception for details. ---_Void Throw()
+29/06/2022 11:10:37 a. m. - Colección modificada; puede que no se ejecute la operación de enumeración. ---_Void ThrowInvalidOperationException(System.ExceptionResource)
+29/06/2022 11:23:16 a. m. - Colección modificada; puede que no se ejecute la operación de enumeración. ---_Void ThrowInvalidOperationException(System.ExceptionResource)
+29/06/2022 11:27:41 a. m. - Colección modificada; puede que no se ejecute la operación de enumeración. ---_Void ThrowInvalidOperationException(System.ExceptionResource)

@@ -1,0 +1,103 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Nomina.PlanoEmpresa
+
+@if (ViewBag.guardado == "S")
+{
+    <script>
+        recargar();
+    </script>
+}
+else
+{
+    <div id="centro" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title">Plano Empresa</h4>
+                </div>
+                <div class="modal-body">
+                    <div class=" panel panel-body">
+
+
+                        @using (Ajax.BeginForm("Delete", "PlanoEmpresas", null, null, new { id = "theForm", autocomplete = "off" }))
+
+                        {
+                        <center>
+                            <div class="form-horizontal">
+                                <h3>Seguro desea eliminar este plano?</h3>
+                                @Html.AntiForgeryToken()
+
+                                @Html.HiddenFor(model => model.id)
+                                <div class="form-actions no-color">
+                                    <input type="submit" value="Eliminar" class="btn btn-default" /> |
+                                    <button type="button" id="close" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cancelar</button>
+
+                                </div>
+                               </div>
+                        </center>
+                        }
+                        @if (ViewBag.Error != null && ViewBag.Error != "")
+                        {
+                            <div class="text-danger">
+                                @ViewBag.Error
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+
+
+        $(document).ready(function () {
+
+            $('#centro').modal('show');
+
+        });
+        //Al Ocultar el modal
+        $(document.body).on('hidden.bs.modal', function () {
+            $('#centro').removeData('bs.modal');
+        });
+
+
+
+        $("#theForm").submit(function (event) {
+            event.preventDefault();
+            var theForm = $(this);
+            var theAction = theForm.attr("action");
+            //if (!theForm.valid()) {
+            //    return false;
+            //}
+            $.post('/Nomina/PlanoEmpresas/Delete', theForm.serialize())
+                .done(function (result) {
+                    event.preventDefault();
+                 
+                    swal({
+                        title: "",
+                        type: "success",
+                        text: "Datos Eliminados Correctamente..",
+                        confirmButtonText: "Ok!",
+                    }, function () {
+                        //$("#mostrar").html("");
+                        //location.reload();             
+                        //$("#centro").html("");
+                       // $("#centro").href("/Nomina/PlanoEmpresas/index");
+                        //window.location.replace('/Nomina/PlanoEmpresas/index'); 
+                        //$("#centro").load("/Nomina/PlanoEmpresas/index");
+                        recargar();
+                        $("#close").click();
+                    });
+
+                });
+
+        });
+    </script>
+
+}

@@ -1,0 +1,47 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Nomina.ClaseDePlano
+@if (ViewBag.guardado == "S")
+{
+    <script>
+        //Falta agregar id="contenidoJD" al index para que funcione el recargar, pero toca mirar como funciona eso.
+
+        recargar();
+    </script>
+}
+else
+{
+    <!-- <div id="centro" class="modal fade" role="dialog"> -->
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+
+            <h4 class="modal-title">ClaseDePlano</h4>
+        </div>
+        <div class="modal-body">
+            <center>
+                <h3>Seguro desea eliminar esta cuenta?</h3>
+            </center>
+            <div>
+
+
+                <dl class="dl-horizontal"></dl>
+
+
+                @using (Html.BeginForm("Delete", "ClaseDePlanos", new { area = "Nomina" }, FormMethod.Post, new { id = "theFormDelete", autocomplete = "off" }))
+
+                {
+                    <center>
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.ID)
+                        <div class="form-actions no-color">
+                            <input type="button" value="Eliminar" class="btn btn-danger" onclick="Delete();" />  |
+                            <button type="button" id="close" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+
+                        </div>
+                    </center>
+                }
+            </div>
+        </div>
+    </div>
+
+
+}

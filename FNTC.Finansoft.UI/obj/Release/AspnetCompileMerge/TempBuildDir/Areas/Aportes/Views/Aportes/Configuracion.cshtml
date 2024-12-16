@@ -1,0 +1,232 @@
+﻿@using FNTC.Finansoft.DTO.Respuestas
+@using FNTC.Finansoft.DTO.Aportes
+@model DTOConfiguracionAportes
+
+@{
+    ViewBag.Title = "Configuracion Aportes";
+    Layout = "~/Views/Shared/_Layoutahorros.cshtml";
+    var tiposCalculoCuotas = (List<DTOTiposCalculoCuota>)ViewBag.TiposCalculoCuota;
+    int? idTipoCuotaCalculo = 0;
+    if (Model != null)
+    {
+        idTipoCuotaCalculo = Model.idTipoCuotaCalculo;
+    };
+    DTORespuesta respuesta = ViewBag.respuesta;
+}
+
+@section Styles{
+    <link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+}
+
+<div class="container" style="margin-top:2%; background: rgb(248, 248, 248);">
+    <ul class="col-md-offset-2 nav nav-tabs" style="margin-top:2%;border: none; margin-left: 118px;">
+        <li class="active"><a data-toggle="tab" href="#menu1" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Configuracion</a></li>
+        <li><a href="/Aportes/Aportes/Index" class="tabsnota"><i class="fa fa-calculator" aria-hidden="true"></i> Fichas Aportes</a></li>
+    </ul>
+    <div class="tab-content contenedortabs">
+        <div id="menu1" class="tab-pane fade in active">
+            <div class="col-md-12"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Configuracion Aportes</h3></div>
+            <div class="col-md-12">
+                @using (Html.BeginForm("Configuracion", "Aportes", FormMethod.Post, htmlAttributes: new { id = "formConfiguracionAportes", autocomplete = "off" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.idCuenta)
+                            <div class="input-group">
+                                @Html.EditorFor(model => model.idCuenta, new { htmlAttributes = new { @class = "form-control", type = "text", placeholder = "Cuenta contable" } })
+                                <span class="input-group-addon" id="nomCuenta"></span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.idCuenta, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Nombre)
+                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", placeholder = "Abreviatura" } })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.multiplicador)
+                            @Html.EditorFor(model => model.multiplicador, new { htmlAttributes = new { @class = "form-control", placeholder = "Multiplicador" } })
+                            @Html.ValidationMessageFor(model => model.multiplicador, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.SaldoMinimo)
+                            @Html.EditorFor(model => model.SaldoMinimo, new { htmlAttributes = new { @class = "form-control", placeholder = "Saldo Minimo" } })
+                            @Html.ValidationMessageFor(model => model.SaldoMinimo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.idTipoCuotaCalculo)
+                            <select class="form-control" id="idTipoCuotaCalculo" name="idTipoCuotaCalculo">
+                                <option value="0">Selecciona...</option>
+                                @foreach (var tiposCuotas in tiposCalculoCuotas)
+                                {
+                                    <option value="@tiposCuotas.id">@tiposCuotas.nombre</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.valor)
+                            @Html.EditorFor(model => model.valor, new { htmlAttributes = new { @class = "form-control", placeholder = "Valor", @disabled = "true" } })
+                            @Html.ValidationMessageFor(model => model.valor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.porcentaje)
+                            <div class="input-group">
+                                @Html.EditorFor(model => model.porcentaje, new { htmlAttributes = new { @class = "form-control", type = "number", placeholder = "Porcentaje del valor", @disabled = "true" } })
+                                <span class="input-group-addon" id="porcentaje">%</span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.porcentaje, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.valorCuota)
+                            @Html.EditorFor(model => model.valorCuota, new { htmlAttributes = new { @class = "form-control", placeholder = "Valor de la cuota", @disabled = "true" } })
+                            @Html.ValidationMessageFor(model => model.valorCuota, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.porcentajeCuota)
+                            <div class="input-group">
+                                @Html.EditorFor(model => model.porcentajeCuota, new { htmlAttributes = new { @class = "form-control", placeholder = "Porcentaje de la cuota", @disabled = "true" } })
+                                <span class="input-group-addon" id="porcentaje">%</span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.porcentajeCuota, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="modal-footer">
+                            <button id="guardarConfiguracion" type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                }
+            </div><!--CONTENIDO TAB-->
+        </div><!--MENU-->
+    </div><!--CONTENEDOR TABS-->
+</div>
+
+
+
+
+
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/DinamismoCliente/formatMilesDec.js"></script>
+    <script src="~/Scripts/DinamismoCliente/Dinamismos.js"></script>
+
+    @if (ViewBag.configuracionGeneral == null)
+    {
+        <script>
+            swal({ title: "Sin Configuracion", text: "No se ha creado una configuracion General", type: "warning", confirmButtonText: "Aceptar" }, function (isConfirm) { if (isConfirm) { location.reload(true) } });
+        </script>
+    }
+    else
+    {
+
+        @*respuesta de cambios*@
+        if (respuesta != null)
+        {
+            if (respuesta.Mensaje != null)
+            {
+                var tipo = respuesta.Correcto ? "success" : "error";
+                var titulo = respuesta.Correcto ? "Correcto" : "Error";
+                <script>
+
+                swal({title: "@titulo", text: "@respuesta.Mensaje" , type: "@tipo"});
+                </script>
+            }
+        }
+        @*respuesta de cambios*@
+
+        @*//si existe una configuracion*@
+        if (idTipoCuotaCalculo != 0)
+        {
+            <script>
+                var idTipoCuotaCalculo = @idTipoCuotaCalculo;
+                $("#idTipoCuotaCalculo").val(idTipoCuotaCalculo);
+                $("#porcentaje").val("");
+                $("#porcentajeCuota").val("");
+                $("#valor").val("");
+                $("#valor").val("");
+                if (idTipoCuotaCalculo == "1" || idTipoCuotaCalculo == "2") {
+                    $("#porcentaje").removeProp("disabled");
+                    $("#porcentajeCuota").removeProp("disabled");
+                    $("#valor").prop("disabled", true);
+                    $("#valor").val("@Model.valor");
+                    $("#valor").val(formatearNumero($("#valor").val()))
+                    $("#porcentajeCuota").val("@Model.porcentajeCuota");
+                    $("#porcentaje").val("@Model.porcentaje");
+                } else {
+                    if (idTipoCuotaCalculo == "3") {
+                        $("#porcentaje").removeProp("disabled");
+                        $("#valor").removeProp("disabled");
+                        $("#porcentaje").val("@Model.porcentaje");
+                        $("#valor").val("@Model.valor");
+                    } else {
+                        if (idTipoCuotaCalculo == "4") {
+                            $("#porcentaje").prop("disabled", true);
+                            $("#valor").removeProp("disabled");
+                            $("#valor").val("@Model.valor");
+                        } else {
+                            $("#porcentaje").prop("disabled", true);
+                            $("#valor").prop("disabled", true);
+                        }
+                    }
+                }
+            </script>
+        }@*//si existe una configuracion*@
+
+        <script>
+    @*dinamismo del cliente*@
+        //tipo calculo
+        $("#idTipoCuotaCalculo").on("change", function () {
+            $("#porcentaje").val("");
+            $("#porcentajeCuota").val("");
+            $("#valor").val("");
+            $("#valorCuota").val("");
+            if ($(this).val() == "1" || $(this).val() == "2") {
+                $("#porcentajeCuota").removeProp("disabled");
+                $("#porcentaje").removeProp("disabled");
+                $("#valor").prop("disabled", true);
+            } else {
+                if ($(this).val() == "3") {
+                    $("#porcentaje").removeProp("disabled");
+                    $("#porcentajeCuota").prop("disabled", true);
+                    $("#valor").removeProp("disabled");
+                } else {
+                    if ($(this).val() == "4") {
+                        $("#porcentajeCuota").prop("disabled", true);
+                        $("#porcentaje").prop("disabled", true);
+                        $("#valor").removeProp("disabled");
+                    } else {
+                        $("#porcentajeCuota").prop("disabled", true);
+                        $("#porcentaje").prop("disabled", true);
+                        $("#valor").prop("disabled", true);
+                    }
+                }
+            }
+        });//tipo calculo
+        </script>
+        <script>    AportesConfiguracion();</script>
+        @*dinamismo del cliente*@
+    }
+}
+
+

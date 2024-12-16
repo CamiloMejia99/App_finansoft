@@ -1,0 +1,4 @@
+30/11/2021 6:25:49 p. m. - Se produjo una excepción en el destino de la invocación. ---_System.Object InvokeMethod(System.Object, System.Object[], System.Signature, Boolean)
+30/11/2021 6:45:51 p. m. - La secuencia contiene más de un elemento ---_TSource Single[TSource](System.Collections.Generic.IEnumerable`1[TSource])
+30/11/2021 6:46:09 p. m. - La secuencia contiene más de un elemento ---_TSource Single[TSource](System.Collections.Generic.IEnumerable`1[TSource])
+30/11/2021 6:46:39 p. m. - La secuencia contiene más de un elemento ---_TSource Single[TSource](System.Collections.Generic.IEnumerable`1[TSource])

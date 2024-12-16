@@ -1,0 +1,119 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<div class="container" style="margin-top:1%; background: rgb(248, 248, 248);">
+
+    <div class="col-md-12">
+        <center>   <h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">DESCUENTOS DE NOMINA</h3></center>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            @if (User.IsInRole("Admin"))
+            {
+                <div>
+                    <a href="/DescuentosNomina/GestionConfiguracion/OrdenDePrioridades" class="tile tileFlipText vertical group0  support3D" style="margin-top: 40px; margin-left: 10%; width: 300px; height: 145px; display: block;" data-pos="45-310-300">
+                        <div class="flipContainer">
+                            <div class="flipFront" style="background:#274766;">
+                                <h3>
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                    Gestión & Configuración
+                                </h3>
+                            </div>
+                            <div class="flipBack" style="background:#274766;">
+                                <h5>
+                                    DESCUENTOS DE NOMINA
+                                </h5>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <a href="/DescuentosNomina/ConfiguracionPlanos/EstructuraPlanos" class="tile tileFlipText vertical group0  support3D" style="margin-top: 40px; margin-left: 35%; width: 300px; height: 145px; display: block;" data-pos="45-310-300">
+                        <div class="flipContainer">
+                            <div class="flipFront" style="background:#274766;">
+                                <h3>
+                                    <i class="fa fa-cubes" aria-hidden="true"></i>
+                                    Configuración <br /> Planos
+                                </h3>
+                            </div>
+                            <div class="flipBack" style="background:#274766;">
+                                <h5>
+                                    DESCUENTOS DE NOMINA
+                                </h5>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <a href="/DescuentosNomina/GestionPlanos/ListaDeEmpresas" class="tile tileFlipText vertical group0  support3D" style="margin-top: 40px; margin-left: 60%; width: 300px; height: 145px; display: block;" data-pos="45-310-300">
+                        <div class="flipContainer">
+                            <div class="flipFront" style="background:#274766;">
+                                <h3>
+                                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                    Gestión <br /> Planos
+                                </h3>
+                            </div>
+                            <div class="flipBack" style="background:#274766;">
+                                
+                                <h5>
+                                    DESCUENTOS DE NOMINA
+                                </h5>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <a href="/DescuentosNomina/EjecucionContable/ListaDeEmpresasEC" class="tile tileFlipText vertical group0  support3D" style="margin-top: 200px; margin-left: 35%; width: 300px; height: 145px; display: block;" data-pos="45-310-300">
+                        <div class="flipContainer">
+                            <div class="flipFront" style="background:#274766;">
+                                <h3>
+                                    <i class="fa fa-line-chart" aria-hidden="true"></i>
+                                    EJECUCION CONTABLE
+                                </h3>
+                            </div>
+                            <div class="flipBack" style="background:#274766;">
+                                <h5>
+                                    DESCUENTOS DE NOMINA
+                                </h5>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div>
+                    <a href="../Dashboard/Default#&movimientos" class="tile tileFlipText vertical group0  support3D" style="margin-top: 40px; margin-left: 38%; width: 300px; height: 145px; display: block; " data-pos="45-310-300">
+                        <div class="flipContainer">
+                            <div class="flipFront" style="background: #274766;">
+                                <h3>
+                                    <i class="fa fa-tasks" aria-hidden="true"></i>
+                                    SIN ACCESO AL MODULO
+                                </h3>
+                            </div>
+                            <div class="flipBack" style="background: #274766;">
+                                <h5>
+                                    DESCUENTOS DE NOMINA
+                                </h5>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+
+            }
+
+
+        </div>
+    </div>
+</div>
+

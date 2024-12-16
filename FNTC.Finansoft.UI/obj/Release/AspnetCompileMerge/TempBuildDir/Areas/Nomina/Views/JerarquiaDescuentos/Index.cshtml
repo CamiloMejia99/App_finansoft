@@ -1,0 +1,162 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.Nomina.JerarquiaDescuento>
+
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+                //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<style>
+    .ui-autocomplete {
+        z-index: 5000;
+    }
+</style>
+<div>
+    <input type="button" value="Regresar" class="btn btn-purple" onclick="Regresar();" style=" margin-top: 1%; margin-left: 1%; margin-bottom: 1%;" />
+</div>
+<script>
+    function Regresar() {
+        location.reload();
+    }
+    function Guardar() {
+        var codigo_cuenta = $("#CODIGO").val();
+        if (codigo_cuenta == '') {
+            swal({
+                title: "Alerta",
+                type: "info",
+                text: "Debe especificar un codigo de cuenta",
+            })
+        }
+            else {
+                //$('#centro').modal('hide');
+                var formData = $('#FormularoDescuentos').serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Create", "JerarquiaDescuentos")",
+                    data: formData,
+                    success: function (partialViewResult) {
+
+                        // $('#divmodal').html(partialViewResult);
+                        $('#centro').html(partialViewResult);
+                        $('#centro').modal('hide');
+
+                    }
+                });
+
+            }
+    }
+
+    function Guardar1() {
+
+        var formData = $('#FormularioEdit').serialize();
+
+        $('#centro').modal('hide');
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("Edit", "JerarquiaDescuentos")",
+            data: formData,
+            success: function (partialViewResult) {
+
+
+                $('#divmodal').html(partialViewResult);
+
+            }
+        });
+    }
+
+
+     function Delete() {
+         //alert($('#CODIGO').val());  
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("DeleteConfirmed", "JerarquiaDescuentos")",
+            datatype: "Json",
+            data: { id: $('#CODIGO').val() },
+            success: function (partialViewResult) {
+                $('#centro').html(partialViewResult);
+                $('#centro').modal('hide');
+                //$('body').removeClass('modal-open');
+                //$('#centro').modal('show');
+                //location.reload();
+
+
+            }
+
+        });
+    }
+
+     
+
+    function recargar() {
+        $('#contenidoJD').load('@Url.Content("~/Nomina/JerarquiaDescuentos/_list")');
+        }
+
+    function inicializarFormulario() {
+        $("#CODIGO").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/accounting/plandecuentas/GetCuentasAA",
+                    //url: "/accounting/plandecuentas/GetCuentas4Selects",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        term: request.term
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.NOMBRE, value: item.CODIGO };
+                        }));
+                    }
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                $('#nomCuenta').text(ui.item.label);
+                return false;
+            }, change: function (event, ui) {
+                if (!ui.item) {
+                    $(this).val("");
+                    $('#nomCuenta').text("");
+                }
+            },
+            open: function () {
+                $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            },
+            focus: function (event, ui) {
+                $('#CODIGO').val(ui.item.value);
+                return false;
+            }
+        });
+    }
+
+    //$(document.body).on('hidden.bs.modal', function () {
+    //    $('#centro').removeData('bs.modal');
+    //    $(".js-refrescar").click();
+    //});
+
+</script>
+
+<div class="col-md-12">
+    <div class="form-group">
+        <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 123%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Jerarquia de Descuentos</h3></div>
+        <div class="col-md-2" style=" margin-top: 3%;">
+            <button class="AddUser btn btn-success btn-xs btnnuevo" onclick="$('#divmodal').load('@Url.Content("~/Nomina/JerarquiaDescuentos/Create")')">Nuevo</button>
+        </div>
+    </div>
+</div>
+<div class="table-responsive col-md-12" id="contenidoJD">
+    @Html.Partial("_list", Model)
+</div>
+<div id="divmodal"></div>
+
+

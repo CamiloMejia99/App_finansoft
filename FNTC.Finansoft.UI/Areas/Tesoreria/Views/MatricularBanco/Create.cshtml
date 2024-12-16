@@ -1,0 +1,280 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Tesoreria.TsorMatricularBanco
+
+@{
+    Layout = "~/Views/Shared/_LayoutTesoreria.cshtml";
+}
+@{
+    ViewBag.Title = "Matricular Banco";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.codigo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.codigo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.codigo, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-4">
+            <input type="text" id="Cuenta_Descripcion" class="form-control" readonly>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.NIT, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.NIT, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NIT, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-4">
+            <input type="text" id="nombre_tercero" class="form-control" readonly>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.numeroCuenta, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.numeroCuenta, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.numeroCuenta, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @{
+        List<SelectListItem> tipoCuentaList = new List<SelectListItem>();
+        tipoCuentaList.Add(new SelectListItem
+        {
+            Text = "Corriente",
+            Value = "54"
+        });
+        tipoCuentaList.Add(new SelectListItem
+        {
+            Text = "Ahorros",
+            Value = "53",
+        });
+    }
+
+    @{
+        List<SelectListItem> formatoImpresionList = new List<SelectListItem>();
+        formatoImpresionList.Add(new SelectListItem
+        {
+            Text = "Impresora Laser",
+            Value = "55"
+        });
+        formatoImpresionList.Add(new SelectListItem
+        {
+            Text = "Impresora de Punto",
+            Value = "56",
+        });
+    }
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.tipoCuenta, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.DropDownListFor(model => model.tipoCuenta, tipoCuentaList, "-- Seleccione Tipo De Cuenta --", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.tipoCuenta, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.codigoagencia, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.codigoagencia, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.codigoagencia, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-4">
+            <input type="text" id="nombre_agencia" class="form-control" readonly>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.formatoComprobante, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.formatoComprobante, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.formatoComprobante, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-4">
+            <input type="text" id="nombre_comprobante" class="form-control" readonly>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.formatoImpresion, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.DropDownListFor(model => model.formatoImpresion, formatoImpresionList, "-- Seleccione Tipo De Impresión --", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.formatoImpresion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Crear" class="btn btn-primary large" />
+            @Html.ActionLink("Regresar a la Lista", "Index", null, null, new { @class = "btn btn-success btn-large" })
+        </div>
+    </div>
+</div>
+}
+
+    <script>
+        //BUSQUEDA DE NIT
+        $("#NIT").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Terceros/Terceros/GetTercerosAutocompletar",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        term: request.term
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.NOMBRE, value: item.NIT };
+                        }));
+                    }
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                $('#nombre_tercero').val(ui.item.label);
+                return false;
+            }, change: function (event, ui) {
+                if (!ui.item) {
+                    $(this).val("");
+                    $('#nombre_tercero').val("");
+                }
+            },
+            open: function () {
+                $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            },
+            focus: function (event, ui) {
+                $('#NIT').val(ui.item.value);
+                return false;
+            }
+        });
+
+        //BUSQUEDA DE AGENCIA
+        $("#codigoagencia").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Tesoreria/Bancos/GetAgencias",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        term: request.term
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.nombreagencia, value: item.codigoagencia };
+                        }));
+                    }
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                $('#nombre_agencia').val(ui.item.label);
+                return false;
+            }, change: function (event, ui) {
+                if (!ui.item) {
+                    $(this).val("");
+                    $('#nombre_agencia').val("");
+                }
+            },
+            open: function () {
+                $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            },
+            focus: function (event, ui) {
+                $('#codigoagencia').val(ui.item.value);
+                return false;
+            }
+        });
+
+        //BUSQUEDA DE COMPROBANTE
+        $("#formatoComprobante").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Accounting/TiposComprobantes/GetTipoComprobantes",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        term: request.term
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.NOMBRE, value: item.CODIGO };
+                        }));
+                    }
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                $('#nombre_comprobante').val(ui.item.label);
+                return false;
+            }, change: function (event, ui) {
+                if (!ui.item) {
+                    $(this).val("");
+                    $('#nombre_comprobante').val("");
+                }
+            },
+            open: function () {
+                $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            },
+            focus: function (event, ui) {
+                $('#formatoComprobante').val(ui.item.value);
+                return false;
+            }
+        });
+
+    $("#codigo").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "/Tesoreria/Bancos/GetCuentasAA",
+                //url: "/accounting/plandecuentas/GetCuentas4Selects",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    term: request.term
+                },
+                success: function (data) {                   
+                    response($.map(data, function (item) {
+                        return { label: item.CuentaMayor.NOMBRE, value: item.codigo };
+                    }));
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            $('#Cuenta_Descripcion').val(ui.item.label);
+            return false;
+        }, change: function (event, ui) {
+            if (!ui.item) {
+                $(this).val("");
+                $('#Cuenta_Descripcion').val("");
+            }
+        },
+        open: function () {
+            $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+        },
+        close: function () {
+            $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+        },
+        focus: function (event, ui) {
+            $('#codigo').val(ui.item.value);
+            return false;
+        }
+    });
+    </script>

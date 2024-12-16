@@ -1,0 +1,82 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Tesoreria.TsorMatricularBanco
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>TsorMatricularBanco</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.codigo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.codigo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.NIT)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.NIT)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.numeroCuenta)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.numeroCuenta)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tipoCuenta)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tipoCuenta)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.codigoagencia)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.codigoagencia)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.formatoComprobante)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.formatoComprobante)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.formatoImpresion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.formatoImpresion)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

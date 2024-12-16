@@ -1,0 +1,12 @@
+﻿
+
+@model IEnumerable<FNTC.Finansoft.Accounting.DTO.FabricaCreditos.FCDependencias>
+
+
+<select class="form-control" id="idDependencia" name="idDependencia">
+    <option value="">Seleccionar</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.idDependencia">|Depen: @item.nombreDependencia |MontMin: @item.montoMinimo |MontMax: @item.montoMaximo |</option>
+    }
+</select>

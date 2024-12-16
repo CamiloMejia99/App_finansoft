@@ -1,0 +1,62 @@
+﻿
+@model FNTC.Finansoft.Accounting.DTO.OperativaDeCaja.configCajero
+@{
+	ViewBag.Title = "Login";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/styleGeneralCaja.css" rel="stylesheet" />
+
+<div class="col-md-12">
+    
+    <div class="col-md-12 form-horizontal">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="alert alert-success" role="alert">
+                    El primer inicio de sesión del día deberá hacerlo dos veces.
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        
+        <div class="txbox">
+            <h3 class="reg">Iniciar Sesión</h3>
+            <div class="centrar">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label id="icon" for="nit"><i class="fa fa-user"></i></label>
+                            <input class="inpt" type="text" name="nit" id="nit" placeholder="Nit Cajero" required autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <label id="icon" for="fecha"><i class="fa fa-calendar"></i></label>
+                            <input class="inpt" type="text" name="fecha1" value="@Session["fecha"+User.Identity.Name]" required readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="form-group footer">
+                        <input type="submit" value="Entrar" class="btn-login" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+	body {
+		background-color: #DDD;
+	}
+</style>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+	@if (ViewBag.mensaje != null)
+	{
+		<script>
+			window.onload = function () {
+				swal('Error', '@ViewBag.mensaje', 'warning');
+			}
+		</script>
+	}
+}
+

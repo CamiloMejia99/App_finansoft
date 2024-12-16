@@ -1,0 +1,82 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Nomina.ComparacionArchivo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>ComparacionArchivo</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.EMPRESA)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.EMPRESA)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PERDEDUCC)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PERDEDUCC)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PERIODO)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PERIODO)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CAMBIO)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CAMBIO)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ORDEND)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ORDEND)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PLANO)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PLANO)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.RUTA)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.RUTA)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

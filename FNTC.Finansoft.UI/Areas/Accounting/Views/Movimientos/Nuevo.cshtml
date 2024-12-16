@@ -1,0 +1,382 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.Accounting.TipoComprobanteDTO>
+
+@{
+    ViewBag.Title = "Nuevo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var menu = (string)TempData["menu"];
+}
+
+@*<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+@*<link href="~/Content/stylegeneral.css" rel="stylesheet" />*@
+
+
+<a href="../../Dashboard/Default#&movimientos">
+    <i id="arrowLeft" class="fa fa-arrow-circle-o-left fa-3x navArrows" aria-hidden="true" alt="left arrow" style="margin-left: -45px;
+opacity: 0.5; display: block; color: rgb(17, 82, 143); z-index: 5; "></i>
+</a>
+
+
+
+<div class="container" style="margin-top:2%; background: rgb(248, 248, 248);" >
+    <ul class="col-md-offset-2 nav nav-tabs" style="margin-top:2%;border: none; margin-left: 118px;">      
+        <li class="active"><a data-toggle="tab" href="#menu1" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Comprobante Egreso</a></li>
+        <li><a data-toggle="tab" href="#menu2" class="tabsnota"><i class="fa fa-calculator" aria-hidden="true"></i> Nota contabilidad</a></li>
+        <li><a data-toggle="tab" href="#menu3" class="tabsnota"><i class="fa fa-money" aria-hidden="true"></i> Recibo Caja</a></li>
+        <li><a data-toggle="tab" href="#menu4" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Documento Soporte</a></li>
+    </ul>
+    <form id="form1" method="post">
+        <div class="tab-content contenedortabs">
+            <div id="menu1" class="tab-pane fade in active">
+                <div class="col-md-12"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Elija un tipo de comprobante</h3></div>
+                <div class="col-md-12">
+                    <table class="table table-bordered table-hover table-responsive" style="background-color:#FFF">
+                        <tr>
+                            <th class="alinearcentro columnatablaazul">
+                                <label>Codigo</label>
+                            </th>
+
+                            <th class="alinearcentro columnatablaazul2">
+                                <label>Forma pago</label>
+                            </th>
+                            <th class="alinearcentro columnatablaazul">
+                                <label>Clase</label>
+                            </th>
+
+                            <th class="alinearcentro columnatablaazul2">
+                                <label>Nombre</label>
+                            </th>
+                            <th class="alinearcentro columnatablaazul">
+                                <label>Conse</label>
+                            </th>
+
+                            <th class="alinearcentro columnatablaazul2">
+                                <label>Owner</label>
+                            </th>
+
+                            <th class="alinearcentro columnatablaazul">
+                                <label>Opciones</label>
+                            </th>
+
+                        </tr>
+
+                        @foreach (var item in Model.Where(x => x.CLASEComprobante == "CE"))
+                        {
+                            <tr>
+
+                                <td class="alinearcentro">
+                                    @Html.DisplayFor(modelItem => item.CODIGO)
+                                </td>
+
+                                <td class="alinearcentro">
+                                    @Html.DisplayFor(modelItem => item.FormaPago.Nombre)
+                                </td>
+                                <td class="alinearcentro">
+                                    @Html.DisplayFor(modelItem => item.CLASEComprobante)
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                                </td>
+                                <td class="alinearcentro">
+                                    @Html.DisplayFor(modelItem => item.CONSECUTIVO)
+                                </td>
+
+                                <td class="alinearcentro">
+                                    @Html.DisplayFor(modelItem => item.Owner)
+                                </td>
+                                <td class="alinearcentro">
+
+                                    <input type="submit" name="tipo" value="@item.CODIGO" class="enviar" data-tipo="RC" />
+                                    @Html.Hidden("_tipo", @item.CODIGO)
+                                    @*@Html.ActionLink("Elegir", "Edit", new { id = item.CODIGO }) |*@
+                                </td>
+                            </tr>
+                        }
+
+
+                    </table>
+                </div>
+
+            </div>
+
+            <div id="menu2" class="tab-pane fade">
+                <div class="col-md-12"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Elija un tipo de comprobante</h3></div>
+                <div class="col-md-12">
+                    <table class="table table-bordered table-hover table-responsive">
+                        <tr>
+                            <th class="alinearcentro columnatablaazul">
+                                <label>Cod</label>
+                            </th>
+
+                            <th class="alinearcentro columnatablaazul2">
+                                <label>Forma pago</label>
+                            </th>
+                            <th class="alinearcentro columnatablaazul">
+                                <label>Clase</label>
+                            </th>
+
+                            <th class="alinearcentro columnatablaazul2">
+                                <label>Nombre</label>
+                            </th>
+                            <th class="alinearcentro columnatablaazul">
+                                <label>Consec</label>
+                            </th>
+
+                            <th class="alinearcentro columnatablaazul2">
+                                <label>Owner</label>
+                            </th>
+
+                            <th class="alinearcentro columnatablaazul">
+                                <label>Opciones</label>
+                            </th>
+
+
+                            @foreach (var item in Model.Where(x => x.CLASEComprobante == "NC"))
+                            {
+                            <tr>
+
+                                <td class="alinearcentro">
+                                    @Html.DisplayFor(modelItem => item.CODIGO)
+                                </td>
+
+                                <td class="alinearcentro">
+                                    @Html.DisplayFor(modelItem => item.FormaPago.Nombre)
+                                </td>
+                                <td class="alinearcentro">
+                                    @Html.DisplayFor(modelItem => item.CLASEComprobante)
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                                </td>
+                                <td class="alinearcentro">
+                                    @Html.DisplayFor(modelItem => item.CONSECUTIVO)
+                                </td>
+
+                                <td class="alinearcentro">
+                                    @Html.DisplayFor(modelItem => item.Owner)
+                                </td>
+                                <td class="alinearcentro">
+
+                                    <input type="submit" name="tipo" value="@item.CODIGO" class="enviar" data-tipo="RC" />
+                                    @Html.Hidden("_tipo", @item.CODIGO)
+                                    @*@Html.ActionLink("Elegir", "Edit", new { id = item.CODIGO }) |*@
+                                </td>
+                            </tr>
+                        }
+                        </table>
+                    </div>
+                </div>
+                <div id="menu3" class="tab-pane fade">
+                    <div class="col-md-12"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Elija un tipo de comprobante</h3></div>
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-hover table-responsive">
+                            <tr>
+                                <th class="alinearcentro columnatablaazul">
+                                    <label>Cod</label>
+                                </th>
+
+                                <th class="alinearcentro columnatablaazul2">
+                                    <label>Forma pago</label>
+                                </th>
+                                <th class="alinearcentro columnatablaazul">
+                                    <label>Clase</label>
+                                </th>
+
+                                <th class="alinearcentro columnatablaazul2">
+                                    <label>Nombre</label>
+                                </th>
+                                <th class="alinearcentro columnatablaazul">
+                                    <label>Conse</label>
+                                </th>
+
+                                <th class="alinearcentro columnatablaazul2">
+                                    <label>Owner</label>
+                                </th>
+
+                                <th class="alinearcentro columnatablaazul">
+                                    <label>Opciones</label>
+                                </th>
+
+
+                                @foreach (var item in Model.Where(x => x.CLASEComprobante == "RC"))
+                                {
+                                <tr>
+
+                                    <td class="alinearcentro">
+                                        @Html.DisplayFor(modelItem => item.CODIGO)
+                                    </td>
+
+                                    <td class="alinearcentro">
+                                        @Html.DisplayFor(modelItem => item.FormaPago.Nombre)
+                                    </td>
+                                    <td class="alinearcentro">
+                                        @Html.DisplayFor(modelItem => item.CLASEComprobante)
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NOMBRE)
+                                    </td>
+                                    <td class="alinearcentro">
+                                        @Html.DisplayFor(modelItem => item.CONSECUTIVO)
+                                    </td>
+
+                                    <td class="alinearcentro">
+                                        @Html.DisplayFor(modelItem => item.Owner)
+                                    </td>
+                                    <td class="alinearcentro">
+
+                                        <input type="submit" name="tipo" value="@item.CODIGO" class="enviar" data-tipo="RC" />
+                                        @Html.Hidden("_tipo", @item.CODIGO)
+                                        @*@Html.ActionLink("Elegir", "Edit", new { id = item.CODIGO }) |*@
+                                    </td>
+                                </tr>
+                            }
+                            </table>
+                        </div>
+                    </div>
+                    <div id="menu4" class="tab-pane fade">
+                        <div class="col-md-12"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Elija un tipo de comprobante</h3></div>
+                        <div class="col-md-12">
+                            <table class="table table-bordered table-hover table-responsive">
+                                <tr>
+                                    <th class="alinearcentro columnatablaazul">
+                                        <label>Cod</label>
+                                    </th>
+
+                                    <th class="alinearcentro columnatablaazul2">
+                                        <label>Forma pago</label>
+                                    </th>
+                                    <th class="alinearcentro columnatablaazul">
+                                        <label>Clase</label>
+                                    </th>
+
+                                    <th class="alinearcentro columnatablaazul2">
+                                        <label>Nombre</label>
+                                    </th>
+                                    <th class="alinearcentro columnatablaazul">
+                                        <label>Consec</label>
+                                    </th>
+
+                                    <th class="alinearcentro columnatablaazul2">
+                                        <label>Owner</label>
+                                    </th>
+
+                                    <th class="alinearcentro columnatablaazul">
+                                        <label>Opciones</label>
+                                    </th>
+
+
+                                    @foreach (var item in Model.Where(x => x.CLASEComprobante == "DS"))
+                                    {
+                                    <tr>
+
+                                        <td class="alinearcentro">
+                                            @Html.DisplayFor(modelItem => item.CODIGO)
+                                        </td>
+
+                                        <td class="alinearcentro">
+                                            @Html.DisplayFor(modelItem => item.FormaPago.Nombre)
+                                        </td>
+                                        <td class="alinearcentro">
+                                            @Html.DisplayFor(modelItem => item.CLASEComprobante)
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NOMBRE)
+                                        </td>
+                                        <td class="alinearcentro">
+                                            @Html.DisplayFor(modelItem => item.CONSECUTIVO)
+                                        </td>
+
+                                        <td class="alinearcentro">
+                                            @Html.DisplayFor(modelItem => item.Owner)
+                                        </td>
+                                        <td class="alinearcentro">
+
+                                            <input type="submit" name="tipo" value="@item.CODIGO" class="enviar" data-tipo="DS" />
+                                            @Html.Hidden("_tipo", @item.CODIGO)
+                                            @*@Html.ActionLink("Elegir", "Edit", new { id = item.CODIGO }) |*@
+                                        </td>
+                                    </tr>
+                                }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+</div>
+
+    <script>
+        $(".enviar").click(function ()
+        {
+
+            //$form = $("<form method='POST' class='formpeque'></form>");
+            //$form.append('<input name=tipo value=' + $(this).val() + '>');
+
+
+           // alert($(this).val());
+            //$("#form1").append(v);
+            //$form.submit();
+
+            
+            //var tipo = $(this).val();
+            
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/Accounting/Movimientos/Nuevo/",
+            //    data:{"tipo":tipo},
+            //    success: 
+            //        function (result) {
+            //            v//ar wo = window.open("", "NOMBRE", "width=500,height=800,scrollbars=YES");                       
+            //           // var w1 = $("#w1").html(result);
+            //         //   $(wo.document.body).html(w1);
+            //            //  $('#w').window('open');
+            //            /*$('#w').window({
+            //                collapsible: false,
+            //                minimizable: false,
+            //                maximizable: true,
+            //                tools: [{
+            //                    iconCls: 'icon-cancel',
+            //                    handler: function () {
+            //                        if (confirm('Are you sure to close the window?')) {
+            //                            closeDivSeguimientos();
+            //                        }
+            //                        else {
+
+            //                        }
+
+            //                    }
+            //                }]*/
+            //            //});
+            //          //  $('#w').window('open');
+
+            //            //$("#w").html(result);
+                       
+            //           // $('.panel window').show();
+            //    },
+            //    error: function (data) {
+            //        alert('Error');
+            //    }
+            //});
+
+        });
+        
+
+        function close() {
+            alert("se cerro");
+          
+        }
+           
+ </script>
+
+<div id="w1" >
+   
+</div>
+<script>
+  
+    $(".easyui-window").on('close', function () {
+        alert("se cerro el easywindows");
+    });
+    
+
+        </script>

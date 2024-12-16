@@ -1,0 +1,5 @@
+14/12/2024 11:30:44 a. m. - No se encuentra un método de acción público 'Details' en el controlador 'FNTC.Finansoft.UI.Areas.OperativaDeCaja.Controllers.FactOpcajasController'. ---_Void HandleUnknownAction(System.String)
+14/12/2024 11:31:02 a. m. - No se encuentra un método de acción público 'Details' en el controlador 'FNTC.Finansoft.UI.Areas.OperativaDeCaja.Controllers.FactOpcajasController'. ---_Void HandleUnknownAction(System.String)
+14/12/2024 11:31:05 a. m. - No se encuentra un método de acción público 'Details' en el controlador 'FNTC.Finansoft.UI.Areas.OperativaDeCaja.Controllers.FactOpcajasController'. ---_Void HandleUnknownAction(System.String)
+14/12/2024 11:31:37 a. m. - No se encuentra un método de acción público 'Details' en el controlador 'FNTC.Finansoft.UI.Areas.OperativaDeCaja.Controllers.FactOpcajasController'. ---_Void HandleUnknownAction(System.String)
+14/12/2024 12:05:19 p. m. - No se encuentra el controlador de la ruta de acceso '/TimerSession/ValidarSession/KeepActiveSession' o no implementa IController. ---_System.Web.Mvc.IController GetControllerInstance(System.Web.Routing.RequestContext, System.Type)

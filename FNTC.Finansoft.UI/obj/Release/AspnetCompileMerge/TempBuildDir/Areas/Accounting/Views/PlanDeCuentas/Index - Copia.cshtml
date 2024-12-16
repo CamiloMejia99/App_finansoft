@@ -1,0 +1,127 @@
+﻿@model string
+@{
+    ViewBag.Title = "pruebas";
+    var term = Model;
+    
+
+}
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="~/Content/easyuijs/easyui.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/easyuijs/icon.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/easyuijs/demo.css">
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="~/Content/easyuijs/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/easyuijs/jquery.easyui.min.js"></script>
+    <link href="~/Content/stylegeneral.css" rel="stylesheet" />
+    <script src="~/Scripts/jsGeneral.js"></script>
+    <script src="~/Content/js/jquery.min.js"></script>
+</head>
+<body>
+
+    <div class="form-group">
+        <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 121%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Plan de cuentas registradas</h3></div>
+        <div class="col-md-2" style=" margin-top: 3%;"><a href="/Accounting/PlanDeCuentas/Create" class="AddUser btn btn-success btn-xs btnnuevo">Nuevo</a></div>
+    </div>
+    
+    <div style="margin:20px 0;"></div>
+
+    <div class="col-md-5 form-group">
+        <div class="col-md-11"><input placeholder="Buscar cuenta...." type="text" class="form-control" style=" width: 112%;" id="buscar" /></div>
+        <div class="col-md-1"><button type="button" class="form-control botonadicionarforma"><i class="fa fa-search" aria-hidden="true"></i></button></div>
+    </div>
+
+    
+
+
+    <div class="clearfix"></div>
+    <div class="col-md-5" style="margin-top:2%">
+
+        <div id="tablaCuentas">
+        </div>
+
+        <script>
+            $(".botonadicionarforma").click(function () {
+                alert("Buscar clicked");
+
+                // alert(status);
+                $("#tablaCuentas").load('index/' + $("#buscar").val())
+            })
+
+
+
+
+        </script>
+
+        <table title="PLAN DE CUENTAS" class="easyui-treegrid" style="width:900px;height:450px"
+               data-options="
+                url: '../../../accounting/plandecuentas/GetCuentas4Tree?term='@term, method: 'get', rownumbers: false, idField: 'id', treeField: 'name'
+
+            ">
+            <thead>
+                <tr>
+                    <th data-options="field:'name'" width="350">Nombre</th>
+                    <th data-options="field:'CODIGO'" width="100" align="left">CODIGO</th>
+                </tr>
+            </thead>
+        </table>
+
+        <div class="easyui-panel" style="width:900px; text-align:center">
+            <div class="easyui-pagination" data-options="total:114"></div>
+        </div>
+    </div>
+
+
+
+</body>
+
+<div id="dialog"></div>
+<script>
+    $(document).ready(function ()
+    { $('.AddUser').on('click', function () {
+        alert('hola');
+        @Url.Action("Create", "PlanDeCuentas", new { Area = "Accounting" });
+    });
+    });
+    
+    function llamar_dialogo2(url, classicon, ancho, titulo) {
+        //  alert(url);
+        $("#dialog").html("");
+        $("#dialog").dialog({
+            classes: {
+                "ui-dialog-titlebar": "modalheadergeneral " + classicon
+            },
+            autoOpen: true,
+            position: { my: "center", at: "center", of: window },
+            width: ancho,
+            resizable: false,
+            modal: true,
+            title: " " + titulo,
+            dialogClass: 'no-close',
+            closeText: "",
+            draggable: true,
+            open: function () {
+         
+                $(this).load(url);
+            },
+
+        });
+        return false;
+    }
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+

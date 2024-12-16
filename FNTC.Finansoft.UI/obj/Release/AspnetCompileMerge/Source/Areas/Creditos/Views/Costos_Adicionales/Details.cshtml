@@ -1,0 +1,86 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.MCreditos.Costos_Adicionales
+
+@{
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Costos_Adicionales</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Lineas_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lineas_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cuenta_Cod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cuenta_Cod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo_Costo_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo_Costo_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Incrementa_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Incrementa_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CA_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CA_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CA_Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CA_Valor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CA_estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CA_estado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.CA_Id }) |
+    @Html.ActionLink("Regresar a la Lista", "Index")
+</p>

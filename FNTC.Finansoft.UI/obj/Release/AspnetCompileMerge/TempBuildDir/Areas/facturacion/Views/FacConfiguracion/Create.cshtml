@@ -1,0 +1,355 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Facturacion.FacConfiguracion
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<SelectListItem> itemComprobantes = (List<SelectListItem>)ViewBag.tiposComprobante;
+    List<SelectListItem> itemCuentas = (List<SelectListItem>)ViewBag.cuentas;
+
+}
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+<script src="~/Scripts/facturacion/CreateEditFacConfiguracion.js"></script>
+
+<style>
+    legend {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    fieldset, td {
+        padding-top: 0;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+</style>
+@using (Html.BeginForm("Create", "FacConfiguracion", new { area = "facturacion" }, FormMethod.Post, new { id = "theForm" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
+    <div id="accordion" role="tablist" aria-multiselectable="true" style="margin-top:2%">
+        <div class="row">
+            <a class="col-lg-offset-10" href="/facturacion/FacConfiguracion/Index" title="Atras" style="color:#000000;">
+                <i class="fa fa-arrow-circle-o-left fa-2x smaller" aria-hidden="true">Volver</i>
+            </a>
+        </div>
+        <div class="panel panel-default">
+
+            <div class="panel-heading" role="tab" id="headingOne" style="background-color:#274766">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color:white;">
+                        Datos del Producto
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" style="padding:1%">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="tab-content contenedortabs">
+                            <br />
+                            <div class="card" style="margin-left:10px;margin-right:10px;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 120%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">CONFIGURACIÓN CONTABLE DE FACTURACIÓN</h3></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin-left:10px;margin-right:10px;">
+                                    <div class="card-header" style="background-color:#274766;color:white;border-radius:5px;">
+                                        COMPROBANTES
+                                    </div>
+                                    <div class="card-body" style="background-color:white;">
+                                        <div style="margin-left:10px;margin-right:10px;">
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <b>@Html.DisplayNameFor(model => model.idTipoComprobante) </b>
+                                                            @Html.DropDownListFor(model => model.idTipoComprobante, itemComprobantes, new { @class = "chosen-select-single" })
+                                                            @Html.ValidationMessageFor(model => model.idTipoComprobante, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <br />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="card-header" style="background-color:#274766;color:white;border-radius:5px;">
+                                        FORMAS DE PAGO
+                                    </div>
+                                    <div class="card-body" style="background-color:white;">
+                                        <div style="margin-left:10px;margin-right:10px;">
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <b>@Html.DisplayNameFor(model => model.idFPEfectivo) </b>
+                                                            @Html.DropDownListFor(model => model.idFPEfectivo, itemCuentas, new { @class = "chosen-select-single" })
+                                                            @Html.ValidationMessageFor(model => model.idFPEfectivo, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <b>@Html.DisplayNameFor(model => model.idFPTarjetaC) </b>
+                                                            @Html.DropDownListFor(model => model.idFPTarjetaC, itemCuentas, new { @class = "chosen-select-single" })
+                                                            @Html.ValidationMessageFor(model => model.idFPTarjetaC, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <b>@Html.DisplayNameFor(model => model.idFPTarjetaD) </b>
+                                                            @Html.DropDownListFor(model => model.idFPTarjetaD, itemCuentas, new { @class = "chosen-select-single" })
+                                                            @Html.ValidationMessageFor(model => model.idFPTarjetaD, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <b>@Html.DisplayNameFor(model => model.idFPConsig) </b>
+                                                            @Html.DropDownListFor(model => model.idFPConsig, itemCuentas, new { @class = "chosen-select-single" })
+                                                            @Html.ValidationMessageFor(model => model.idFPConsig, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <b>@Html.DisplayNameFor(model => model.idFPtransf) </b>
+                                                            @Html.DropDownListFor(model => model.idFPtransf, itemCuentas, new { @class = "chosen-select-single" })
+                                                            @Html.ValidationMessageFor(model => model.idFPtransf, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="card-header" style="background-color:#274766;color:white;border-radius:5px;">
+                                        CONTABILIDAD
+                                    </div>
+                                    <div class="card-body" style="background-color:white;">
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONiva19) </b>
+                                                        @Html.DropDownListFor(model => model.idCONiva19, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONiva19, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONiva5) </b>
+                                                        @Html.DropDownListFor(model => model.idCONiva5, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONiva5, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONexcluidos) </b>
+                                                        @Html.DropDownListFor(model => model.idCONexcluidos, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONexcluidos, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONexcentos) </b>
+                                                        @Html.DropDownListFor(model => model.idCONexcentos, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONexcentos, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONventaIva19) </b>
+                                                        @Html.DropDownListFor(model => model.idCONventaIva19, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONventaIva19, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONventaIva5) </b>
+                                                        @Html.DropDownListFor(model => model.idCONventaIva5, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONventaIva5, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONventaExcluidos) </b>
+                                                        @Html.DropDownListFor(model => model.idCONventaExcluidos, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONventaExcluidos, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONventaExcentos) </b>
+                                                        @Html.DropDownListFor(model => model.idCONventaExcentos, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONventaExcentos, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONcostoIva19) </b>
+                                                        @Html.DropDownListFor(model => model.idCONcostoIva19, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONcostoIva19, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONcostoIva5) </b>
+                                                        @Html.DropDownListFor(model => model.idCONcostoIva5, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONcostoIva5, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONcostoExcluidos) </b>
+                                                        @Html.DropDownListFor(model => model.idCONcostoExcluidos, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONcostoExcluidos, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONcostoExcentos) </b>
+                                                        @Html.DropDownListFor(model => model.idCONcostoExcentos, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONcostoExcentos, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONinventarioIva19) </b>
+                                                        @Html.DropDownListFor(model => model.idCONinventarioIva19, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONinventarioIva19, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONinventarioIva5) </b>
+                                                        @Html.DropDownListFor(model => model.idCONinventarioIva5, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONinventarioIva5, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONinventarioExcluidos) </b>
+                                                        @Html.DropDownListFor(model => model.idCONinventarioExcluidos, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONinventarioExcluidos, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <b>@Html.DisplayNameFor(model => model.idCONinventarioExcentos) </b>
+                                                        @Html.DropDownListFor(model => model.idCONinventarioExcentos, itemCuentas, new { @class = "chosen-select-single" })
+                                                        @Html.ValidationMessageFor(model => model.idCONinventarioExcentos, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <br />
+                                    </div>
+                                    <br />
+                                </div>@*div cuerpo*@
+
+                            </div>
+                        </div>
+                        <hr />
+                        <button type="button" class="btn btn-success" id="btnGuardar"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button>
+                        <button type="button" class="btn btn-danger" id="btnCerrar"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br />
+        @*<button type="button" class="btn btn-primary">Save changes</button>*@
+
+    </div>
+</div>
+}
+
+@section Scripts{
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".chosen-select-single").chosen();
+            $(".chosen-select-multiple").chosen();
+
+        });
+    </script>
+}
+
+
+@*<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+
+
+

@@ -1,0 +1,158 @@
+﻿@model  List<FNTC.Finansoft.Accounting.DTO.MCreditos.ViewModelDesembolso>
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Desembolso</h4>
+            @*<a class="mostrar" name="mostrar">.</a>*@
+        </div>
+
+        <div class="modal-body">
+            <dl class="dl-horizontal"></dl>
+            <table class="table table-hover">
+                <tr>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.NIT)*@
+                        Numero de Cuenta
+                    </th>
+                    <th>
+                        Nombre de Cuenta
+                    </th>
+                    <th>
+                        NIT Asociado
+                    </th>
+                    <th>
+                        Nombre Asociado
+                    </th>
+                    <th>
+                        Debito
+                    </th>
+                    <th>
+                        Credito
+                    </th>
+                    <th>
+                        Documento
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.cuentaCreditoCod, new { @id = "NIT", @class = "form-control readonly", @readonly = true })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.cuentaCreditoDescripcion, new { @id = "NIT", @class = "form-control readonly", @readonly = true })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.NIT, new { @id = "NIT", @class = "form-control readonly", @readonly = true })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.NOMBRE, new { @id = "NOMBRE", @class = "form-control", @readonly = true })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Capital, new { @id = "Capital", @class = "form-control", @readonly = true })
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" readonly>
+                    </td>
+                </tr>
+                }
+
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.cuentaDebitoCod, new { @id = "NIT", @class = "form-control readonly", @readonly = true })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.cuentaDebitoDescripcion, new { @id = "NIT", @class = "form-control readonly", @readonly = true })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.NIT, new { @id = "NIT", @class = "form-control readonly", @readonly = true })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.NOMBRE, new { @id = "NOMBRE", @class = "form-control", @readonly = true })
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Capital, new { @id = "Capital", @class = "form-control", @readonly = true })
+                    </td>                    
+                    <td>
+                        <input type="text" id="documento" value="" name="documento" class="form-control">
+                    </td>
+                </tr>
+                }
+            </table>
+
+            @using (Html.BeginForm("RealizarDesembolso", "Creditos", new { area = "Creditos" }, FormMethod.Post, new { id = "theForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <!--Campos Ocultos HIDDEN hidden="hidden"-->
+                foreach (var item in Model)
+                {
+                    <input type="text" value="@item.id" name="id" hidden="hidden">
+                }
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <!--<label>Saldo Credito Desembolsado</label>-->
+                                <div class="col-md-10">
+                                    <input type="hidden" id="saldoCreditoDesembolsado" value="0" name="saldoCreditoDesembolsado" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <br />
+                    </div>
+
+                    <div class="col-md-12">
+                        <button type="button" id="realizardesembolso" class="btn btn-primary btn-block">Realizar Desembolso</button>
+                    </div>
+                </div>
+             }
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#realizardesembolso').click(function () {
+        swal({
+            title: "Realizar Desembolso?",
+            text: "Esta Seguro de Realizar el Desembolso?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#6FE88B",
+            confirmButtonText: "SI",
+            closeOnConfirm: false,
+            html: false
+        }, function () {
+            $("#theForm").submit();
+        });
+    })
+    $(document).ready(function () {
+        /* SEPARADOR DE MILES POR KEY UP */
+        $("#saldoCreditoDesembolsado").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{3})$/, '$1,$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+                });
+            }
+        });
+        /* FIN SEPARADOR DE MILES POR KEY UP */
+    });
+</script>

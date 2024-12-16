@@ -1,0 +1,192 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Facturacion.factura
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>factura</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.terceroNit)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.terceroNit)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.payCash)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.payCash)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.payCredit)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.payCredit)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.payTdebit)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.payTdebit)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.payTcredit)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.payTcredit)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.totalDiscount)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.totalDiscount)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.date)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.date)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.observation)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.observation)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.total)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.total)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tipo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tipo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.saldoCredito)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.saldoCredito)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.fechaPagoCredito)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fechaPagoCredito)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.codConsecutivo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.codConsecutivo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.numeroFactura)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.numeroFactura)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.valorTotalExcentos)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.valorTotalExcentos)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.valorTotalExcluidos)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.valorTotalExcluidos)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.baseIVA19)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.baseIVA19)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.baseIVA5)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.baseIVA5)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.valorIVA19)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.valorIVA19)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.valorIVA5)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.valorIVA5)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

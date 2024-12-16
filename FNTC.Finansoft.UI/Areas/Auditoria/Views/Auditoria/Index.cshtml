@@ -1,0 +1,135 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.Auditoria.Empresaa>
+
+@{
+    Layout = "~/Views/Shared/_Layoutahorros.cshtml";
+}
+<meta name="viewport" content="width=device-width">
+<script src="~/Scripts/jquery2-1-4.min.js"></script>
+<script src="~/Scripts/Auditoria/Empresa/IndexEmpresa.js"></script>
+<script src="~/Scripts/sweetalert2@9.js"></script>
+<div class="col-md-12" style="background: rgb(248, 248, 248); width:1250px;left: 100px;">
+    <br>
+    <ul class="col-md-offset-2 nav nav-tabs" style="margin-top:0%;border: none; margin-left: 2%;">
+        <li class="active"><a href="/Auditoria/Auditoria" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Registrar Empresa </a></li>
+        <li><a href="/Auditoria/Auditoria/IndexTipoEmpresa" class="tabsnota"><i class="fa fa-file-text" aria-hidden="true"></i> Tipos de Empresa </a></li>
+    </ul>
+    <div class="tab-content contenedortabs">
+        <div id="menu1" class="tab-pane fade in active">
+            <div class="form-group">
+                <div class="col-md-8"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 1180px; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Datos Empresa</h3></div>
+                <div class="col-md-2" style=" margin-top:35px;">
+                    <a class="" href="/Dashboard/Default" title="Atras">
+                        <i class="fa fa-arrow-circle-o-left fa-2x " aria-hidden="true">Volver</i>
+                    </a>
+
+                </div><div class="col-md-2" style=" margin-top:35px;">
+                    <a href="#" class="AddUser btn btn-success btn-small btnnuevo" id="registrarEmpresa">Registrar Empresa</a>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div style="width:1150px">
+                    <table id="myTable" class="table table-striped table-bordered dataTable no-border">
+                        <thead style="background-color:lightslategray">
+                            <tr>
+                                <th class="idEmpresa">
+                                    ID
+                                </th>
+                                <th>
+                                    NIT
+                                </th>
+                                <th>
+                                    NOMBRE EMPRESA
+                                </th>
+                                <th>
+                                    FECHA CREACIÓN
+                                </th>
+                                <th>
+                                    N° DE ASOCIADOS
+                                </th>
+                                <th>
+                                    CORREO
+                                </th>
+                                <th>
+                                    DIRECCIÓN
+                                </th>
+                                <th>
+                                    TELÉFONO
+                                </th>
+                                <th>
+                                    TIPO EMPRESA
+                                </th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr class="align-center medium">
+                                <td class="idEmpresa">
+                                    @Html.DisplayFor(modelItem => item.id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.nit)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.fechaCreacion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.numAsociados)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.correo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.direccion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.telefono)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tipoEmpresaFK.tipo)
+                                </td>
+                                <td class="align-center">
+                                    <a id="editar" class="btn btn-inline btn-xs btn-primary" href="/Auditoria/Auditoria/EditEmpresa?id=@item.id" title="Editar">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </a> &nbsp;&nbsp;
+                                    <button id="editar" class="btn btn-inline btn-xs btn-danger EditarEmpresa" title="Eliminar">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<link href="~/Content/css/jquery.dataTablesform.min.css" rel="stylesheet" />
+@section scripts
+{
+    <script src="~/Scripts/jquery.dataTablesform.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "language": {
+                    "url": "/Content/Spanish.json"
+                }
+            });
+        });
+
+
+    </script>
+}
+
+

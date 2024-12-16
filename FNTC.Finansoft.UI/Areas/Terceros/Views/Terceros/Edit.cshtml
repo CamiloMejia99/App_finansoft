@@ -1,0 +1,763 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Terceros.TerceroDTO
+
+@{
+
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Modal.cshtml";
+    var post2 = (string)ViewBag.Post2;
+    var action = (string)ViewBag.action;
+    var boton = (string)ViewBag.boton;
+    var estado_ter = (string)ViewBag.Estado_ter;
+    var valueNivel = ViewBag.Nivel;
+    var nit = ViewBag.nit; 
+    var NivelNombre = ViewBag.NivelNombre;
+
+
+
+}
+@using Mvc.CascadeDropDown
+@*<link href="~/Content/stylegeneral.css" rel="stylesheet" />*@
+@*@Scripts.Render("~/bundles/jquery")*@
+@*@Scripts.Render("~/bundles/jqueryval")*@
+@*<script src="~/Content/tools/direccion/Nomemclaturas.min.js"></script>*@
+@*<script src="~/Content/css/bootstrap-switch.js"></script>
+    <link href="~/Content/css/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+<div class="modal-body" id="modal_terceros">
+    <style>
+        legend {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        fieldset, td {
+            padding-top: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+    @using (Html.BeginForm(action, "Terceros", new { area = "Terceros" }, FormMethod.Post, new { id = "theForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+<div class="form-horizontal">
+
+
+    <div class="modalheadergeneral"><h4>Nuevo tercero  </h4></div>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+   
+    <div id="accordion" role="tablist" aria-multiselectable="true" style="margin-top:2%">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Datos Personales
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" style="padding:1%">
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h4>Tipo Persona</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-5" style="padding:0px; margin-top: 5%">
+                            <label class="checkbox-inline">
+                                @Html.DropDownListFor(model => model.ESASOCIADO, new SelectList(new[]
+                                      {
+                                          new {ID="1",Name="TERCERO"},
+                                          new{ID="2",Name="ASOCIADO"},
+                                          new{ID="3",Name="JURIDICA"},
+                                      }, "ID", "Name", 1), new { @Id = "Persona" })
+                            </label>
+                            @Html.HiddenFor(model => model.EsPERJURIDICA)
+                        </div>
+                        <div class="col-md-4" style="padding:0px; margin-top: 5%">
+                            @Html.DropDownListFor(model => model.REGIMEN, new SelectList(Model._regimen, "Value", "Text"), "Régimen de Ventas..", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.REGIMEN, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-header">
+                        <br /><h4>Documento</h4>
+                    </div>
+                    <div class="panel-body">
+                        <h5>TIPO</h5>
+                        <div class="col-md-4" style="padding:2px">
+                            @*<div class="col-md-12" style="padding:2px">*@
+                            @Html.DropDownListFor(model => model.CLASEID, new SelectList(Model._clasesID, "value", "Text"), "Tipo Documento..", new { @class = "form-control", required = "required" })
+                            @*@Html.ValidationMessageFor(model => model.CLASEID, "", new { @class = "text-danger" })*@
+                            @*</div>*@
+                        </div>
+
+                        <div class="col-md-4" style="padding:2px">
+                            @*<div class="col-md-12" style="padding:2px">*@
+                            @Html.TextBoxFor(model =>
+                        model.NIT, new { @placeholder = "No documento", @class = "form-control", required = "required", onkeypress = "return valida(event)" })
+                            @Html.ValidationMessageFor(model => model.NIT, "", new { @class = "text-danger" })
+                            @*</div>*@
+                        </div>
+
+                        <div class="col-md-4" style="padding:2px">
+                            @*<div class="col-md-12" style="padding:0px">*@
+                            @Html.TextBoxFor(model => model.DIGVER, new { @placeholder = "D.V", @class = "form-control", @readonly = true })
+                            @Html.ValidationMessageFor(model => model.DIGVER, "", new { @class = "text-danger" })
+                            @*</div>*@
+                        </div>
+                        <br />
+                        <br /><h5>LUGAR Y FECHA DE EXPEDICION</h5>
+                        <div class="col-md-4" style="padding:0px">
+                            <div class="col-md-12" style="padding:2px">
+                                @Html.DropDownListFor(model => model.PAISDOC, new SelectList(Model._paises, "Value", "Text"), "Pais...", new { @class = "form-control", required = true, id = "Paisdoc" })
+                                @Html.ValidationMessageFor(model => model.PAISDOC, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" style="padding:0px">
+                            <div class="col-md-12" style="padding:2px">
+                                @Html.CascadingDropDownListFor(
+                                   expression: m => m.DEPTODOC,
+                                   triggeredByPropertyWithId: "Paisdoc",
+                                   url: Url.Action("GetDepartamentosByPaisId2", "../tools/Geo/"),
+                                   ajaxActionParamName: "paisId",
+                                   optionLabel: "Departamento...",
+                                   disabledWhenParentNotSelected: true,
+                                   htmlAttributes: new { @class = "form-control", required = true, id = "Operator1" })
+
+                                @Html.ValidationMessageFor(model => model.DEPTODOC, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" style="padding:0px">
+                            <div class="col-md-12" style="padding:2px">
+                                @Html.CascadingDropDownListFor(
+                                   expression: m => m.LUGAREXP,
+                                   triggeredByPropertyWithId: "Operator1",
+                                   url: Url.Action("GetMunicipiosByDeptoId2", "../tools/Geo/"),
+                                   ajaxActionParamName: "deptoId",
+                                   optionLabel: "Municipio...",
+                                   disabledWhenParentNotSelected: true,
+                                   htmlAttributes: new { @class = "form-control", required = true })
+
+                                @Html.ValidationMessageFor(model => model.LUGAREXP, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="padding:0px">
+                            <div class="col-md-12" style="padding:2px">
+                                @Html.TextBoxFor(model => model.FECHAEXP, "{0:yyyy-MM-dd}", new { @type = "Date", @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.FECHAEXP, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h4>Persona</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-3 natural" style="padding:0px">
+                                <div class="col-md-12" style="padding:2px">
+                                    @Html.TextBoxFor(model => model.NOMBRE1, new { @placeholder = "NOMBRE1", @class = "form-control natural" })
+                                    @Html.ValidationMessageFor(model => model.NOMBRE1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 natural" style="padding:0px">
+                                <div class="col-md-12" style="padding:2px">
+                                    @Html.TextBoxFor(model => model.NOMBRE2, new { @class = "form-control natural", @placeholder = "NOMBRE2" })
+                                    @Html.ValidationMessageFor(model => model.NOMBRE2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 natural" style="padding:0px">
+                                <div class="col-md-12" style="padding:2px">
+                                    @Html.TextBoxFor(model => model.APELLIDO1, new { @placeholder = "APELLIDO1", @class = "form-control natural" })
+                                    @Html.ValidationMessageFor(model => model.APELLIDO1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 natural" style="padding:0px">
+                                <div class="col-md-12" style="padding:2px">
+                                    @Html.TextBoxFor(model => model.APELLIDO2, new { @placeholder = "APELLIDO2", @class = "form-control natural" })
+                                    @Html.ValidationMessageFor(model => model.APELLIDO2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-8 juridica" style="padding:0px">
+                                <div class="col-md-12" style="padding:2px">
+                                    @Html.TextBoxFor(model => model.NombreComercial, new { @class = "form-control", @placeholder = "Razón Social" })
+                                    @Html.ValidationMessageFor(model => model.NombreComercial, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="col-md-8" style="padding:0px">
+                                <div class="col-md-12" style="padding:2px">
+                                    @Html.DropDownListFor(model => model.ESTADOCIVIL, new SelectList(Model._estadocivil, "Value", "Text"), "Estado Civil...", new { @class = "form-control natural", required = true })
+                                    @Html.ValidationMessageFor(model => model.ESTADOCIVIL, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="padding:0px">
+                                <div class="col-md-12" style="padding:2px">
+                                    @Html.DropDownListFor(model => model.SEXO, new SelectList(Model._sexo, "Value", "Text"), "Sexo...", new { @class = "form-control natural", required = true })
+                                    @Html.ValidationMessageFor(model => model.SEXO, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <br /><h5 class="natural">LUGAR Y FECHA DE NACIMIENTO</h5>
+                            <div class="col-md-4" style="padding:0px">
+                                <div class="col-md-12" style="padding:2px">
+                                    @Html.DropDownListFor(model => model.PAISNAC, new SelectList(Model._paises, "Value", "Text"), "Pais...", new { @class = "form-control natural", required = true, Id = "Paisnac" })
+                                    @Html.ValidationMessageFor(model => model.PAISNAC, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" style="padding:0px">
+                                <div class="col-md-12" style="padding:2px">
+                                    @Html.CascadingDropDownListFor(
+                                   expression: m => m.DEPTONAC,
+                                   triggeredByPropertyWithId: "Paisnac",
+                                   url: Url.Action("GetDepartamentosByPaisId2", "../tools/Geo/"),
+                                   ajaxActionParamName: "paisId",
+                                   optionLabel: "Departamento...",
+                                   disabledWhenParentNotSelected: true,
+                                   htmlAttributes: new { @class = "form-control natural", required = true, id = "Operator2" })
+
+                                    @Html.ValidationMessageFor(model => model.DEPTONAC, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" style="padding:0px">
+                                <div class="col-md-12" style="padding:2px">
+                                    @Html.CascadingDropDownListFor(
+                                   expression: m => m.NACIO,
+                                   triggeredByPropertyWithId: "Operator2",
+                                   url: Url.Action("GetMunicipiosByDeptoId2", "../tools/Geo/"),
+                                   ajaxActionParamName: "deptoId",
+                                   optionLabel: "Municipio...",
+                                   disabledWhenParentNotSelected: true,
+                                   htmlAttributes: new { @class = "form-control natural", required = true })
+
+                                    @Html.ValidationMessageFor(model => model.NACIO, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="padding:0px">
+                                <div class="col-md-12" style="padding:2px">
+                                    @Html.TextBoxFor(model => model.FECHANAC, "{0:yyyy-MM-dd}", new { @type = "Date", @class = "form-control natural " })
+                                    @Html.ValidationMessageFor(model => model.FECHANAC, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        Contacto
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo" style="padding:1%">
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h4>Residencia</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-4" style="padding:0px">
+                            <div class="col-md-12" style="padding:2px">
+                                @Html.DropDownListFor(model => model.PAIS, new SelectList(Model._paises, "Value", "Text"), "Pais...", new { @class = "form-control", required = true, id = "Pais" })
+                                @Html.ValidationMessageFor(model => model.PAIS, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" style="padding:0px">
+                            <div class="col-md-12" style="padding:2px">
+                                @Html.CascadingDropDownListFor(
+                                   expression: m => m.DEPTO,
+                                   triggeredByPropertyWithId: "Pais",
+                                   url: Url.Action("GetDepartamentosByPaisId2", "../tools/Geo/"),
+                                   ajaxActionParamName: "paisId",
+                                   optionLabel: "Departamento...",
+                                   disabledWhenParentNotSelected: true,
+                                   htmlAttributes: new { @class = "form-control", required = true, id = "Operator" })
+
+                                @Html.ValidationMessageFor(model => model.DEPTO, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" style="padding:0px">
+                            <div class="col-md-12" style="padding:2px">
+                                @Html.CascadingDropDownListFor(
+                                   expression: m => m.MUNICIPIO,
+                                   triggeredByPropertyWithId: "Operator",
+                                   url: Url.Action("GetMunicipiosByDeptoId2", "../tools/Geo/"),
+                                   ajaxActionParamName: "deptoId",
+                                   optionLabel: "Municipio...",
+                                   disabledWhenParentNotSelected: true,
+                                   htmlAttributes: new { @class = "form-control", required = true })
+
+                                @Html.ValidationMessageFor(model => model.MUNICIPIO, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-8" style="padding:2px">
+                            @Html.TextBoxFor(model => model.DIR, new { @style = "margin-top: 10px;", @class = "form-control", required = "required", @placeholder = "Direccion. Ej CR 24 NO 18 64" })
+                            @Html.ValidationMessageFor(model => model.DIR, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4" style="padding:2px">
+                            @Html.TextBoxFor(model => model.BARRIO, new { @style = "margin-top: 10px;", @class = "form-control", required = "required", @placeholder = "Barrio" })
+                            @Html.ValidationMessageFor(model => model.BARRIO, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-header">
+                        <h4>Datos de contacto</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-6" style="padding:0px">
+                            <div class="col-md-12" style="padding:2px">
+                                @Html.TextBoxFor(model => model.TEL, new { @class = "form-control", placeholder = "Telefono " })
+                                @Html.ValidationMessageFor(model => model.TEL, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" style="padding:0px">
+                            <div class="col-md-12" style="padding:2px">
+                                @Html.TextBoxFor(model => model.TELMOVIL, new { @class = "form-control", placeholder = "Telefono Movil", required = true })
+                                @Html.ValidationMessageFor(model => model.TELMOVIL, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+
+                        <div class="col-md-12" style="padding:2px">
+                            @Html.TextBoxFor(model => model.EMAIL, new { @style = "margin-top: 10px;", @class = "form-control", placeholder = "Correo Electrónico" })
+                            @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default natural">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#headingThree" aria-expanded="true" aria-controls="collapseThree">
+                        Datos Adicionales
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree" style="padding:1%">
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <!--<h4>Datos Laborales</h4>-->
+                    </div>
+                    <div class="panel-body">
+                        <!--Datos Laborales-->
+                        <div class="col-md-7" style="padding:2px">
+                            @*<div class="col-md-12" style="padding:2px">*@
+                            <label class="control-label">Profesion: </label>
+                            <br />
+                            @Html.DropDownListFor(model => model.PROFESION, new SelectList(Model._profesiones, "value", "Text"), new { @class = "form-control chosen-select-single", required = "required" })
+                            @*@Html.ValidationMessageFor(model => model.CLASEID, "", new { @class = "text-danger" })*@
+                            @*</div>*@
+                        </div>
+
+                        <div class="col-md-5" style="padding:2px">
+                            <br />
+                            @*<div class="col-md-12" style="padding:2px">*@
+                            @Html.TextBoxFor(model => model.SALARIO, new { @placeholder = "Salario", @class = "form-control natural", required = "required" })
+                            @Html.ValidationMessageFor(model => model.SALARIO, "", new { @class = "text-danger" })
+                            @*</div>*@
+                        </div>
+
+                        <div class="col-md-7" style="padding:2px">
+                            @*<div class="col-md-12" style="padding:2px">*@
+                            <label class="control-label">Agencia: </label>
+                            <br />
+                            @Html.DropDownList("agenciasList", null, new { @class = "chosen-select-single", required = "required", @id = "listaDependencia" })
+                            @Html.HiddenFor(model => model.DEPENDENCIA, new { @id = "dependencia" })
+                            <br />
+                            @*@Html.ValidationMessageFor(model => model.CLASEID, "", new { @class = "text-danger" })*@
+                            @*</div>*@
+                        </div>
+
+                        <div class="col-md-5" style="padding:2px">
+                            <br />
+                            @Html.DropDownListFor(model => model.VIVIENDA, new SelectList(Model._tiposvivienda, "Value", "Text"), "Tipo Vivienda..", new { @class = "form-control natural", required = true })
+                            @Html.ValidationMessageFor(model => model.VIVIENDA, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-7" style="padding:2px">
+                            @*<div class="col-md-12" style="padding:2px">*@
+                            <label class="control-label">Cargo: </label>
+                            <br />
+
+                            @Html.Action("ListaCargosEditar", "Terceros", new { @class = "form-control chosen-select-single", nit = nit })
+                        
+                        </div> 
+                        <div class="col-md-7" style="padding:2px">
+                            @*<div class="col-md-12" style="padding:2px">*@
+                            <label class="control-label">Nivel </label>
+                            <br />
+                            <select class="form-control chosen-select-single" id="NIVEL" name="NIVEL">
+
+                                <option value=@valueNivel>@NivelNombre</option>
+                                <option value="1">Nivel 1</option>
+                                <option value="2">Nivel 2</option>
+                                <option value="3">Nivel 3</option>
+                                <option value="4">Nivel 4</option>
+                                <option value="5">Nivel 5</option>
+                                <option value="6">Nivel 6</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="modal-footer">
+            <button type="submit" value="@boton" class="btn btn-default botonguardar"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button>
+            <button type="button" id="close" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+            @*<button type="button" class="btn btn-primary">Save changes</button>*@
+        </div>
+    </div>
+</div>
+    }
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".chosen-select-single").chosen();
+            $(".chosen-select-multiple").chosen();
+
+        });
+    </script>
+    <script>
+
+
+    //refrescar un div
+    $(".js-refrescar").click(function () {
+
+        var tabla = $("")
+
+    });
+
+
+    //Al Ocultar el modal
+    $(document.body).on('hidden.bs.modal', function () {
+        $('#centro').removeData('bs.modal');
+    });
+
+       /* $(document).ready(function () {
+            var refrescarid = setInterval(function () {
+                $("#div1").load("url que quieres cargar")
+                    .error(function () { alert("Error"); });
+            }, 1000); // Tiempo
+            $.ajaxSetup({ cache: false });
+        });
+        --------------------
+         if (result) {
+            event.preventDefault();
+            swal({
+                title: "Alerta",
+                type: "info",
+                text: "Ya existe la cedula digitada",
+                confirmButtonText: "Ok!",
+            }, function () {
+                window.location.reload();
+            });
+            setTimeout(function () {
+                window.location.reload();
+            }, 3000);
+        }
+
+        */
+        $(document).ready(function () {
+            /* SEPARADOR DE MILES POR KEY UP */
+            $("#SALARIO").on({
+                "focus": function (event) {
+                    $(event.target).select();
+                },
+                "keyup": function (event) {
+                    $(event.target).val(function (index, value) {
+                        return value.replace(/\D/g, "")
+                            .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                    });
+                }
+            });
+        /* FIN SEPARADOR DE MILES POR KEY UP */
+            $("#theForm").submit(function (event) {
+                $("#dependencia").val($("#listaDependencia").val());
+            event.preventDefault();
+            var theForm = $(this);
+            var theAction = theForm.attr("action");
+            //alert(theAction);
+            //console.log(theAction);
+            if (!theForm.valid()) {
+                return false;
+            }
+            $.post('/terceros/terceros/@action', theForm.serialize())
+                .done(function (result) {
+                  //  alert("@estado_ter");
+                    console.log("@estado_ter");
+                  //  $('button[class=close]').trigger("click");
+                   /* $('#centro').removeData('bs.modal');
+                    $("#centro").hide();*/
+                    // alert("posted");
+                     // $("#mostrar").html(result);
+                    //------------------------------------
+                   // if ('@ViewBag.Estado_ter' == 'actualizar') {
+                    if (result == true) {
+                        event.preventDefault();
+                        swal({
+                            title: "Alerta",
+                            type: "info",
+                            text: "Datos Actalizados Correctamente",
+                            confirmButtonText: "Ok!",
+                        }, function () {
+                           // $('#centro').removeData('bs.modal');
+                           // window.location.reload();
+                            $("#close").click();
+                        });
+                    }
+                    //$("#close").click();
+                    //------------------------------------
+
+                });
+        });
+
+        @*
+        if ($('input[name="EsPERJURIDICA"]').prop('checked')) {
+            // alert("isChecked");
+            $(".natural").hide();
+            $(".juridica").show();
+            $("#EsPERJURIDICA").trigger("change");
+        }
+        else {
+            $(".natural").show();
+            $(".juridica").hide();
+            $("#NOMBRE1").attr("required", true);
+            $("#APELLIDO1").attr("required", true);
+            $("#EsPERJURIDICA").trigger("change");
+        }
+        document.getElementById('EsPERJURIDICA').value = false;
+        if (document.getElementById('EsPERJURIDICA').value == false && ) {
+            esTercero();
+        }
+        else {
+            esJuridica();
+        }
+        *@
+        if ($("#Persona :selected").val() == 3)  {
+            esJuridica();
+        } else {
+            esTercero();
+        }
+
+        $("#Persona").change(function () {
+            var persona = $("#Persona :selected").val();
+            if (persona == 3) {
+                esJuridica();
+            } else {
+                esTercero();
+            }
+        });
+
+
+        @*
+        $('input[name="EsPERJURIDICA"]').change(function () {
+            if (this.checked) {
+
+                $("#NOMBRE1").removeAttr("required");
+                $("#APELLIDO1").removeAttr("required");
+                $("#REGIMEN").val(2);
+                $("#CLASEID").val(31);
+
+
+                $(".natural").hide();
+                //campos requeridos para pJuridica
+                $(".juridica").show();
+                $("#NombreComercial").attr("required", "required");
+                $("#NombreComercial").data("val", "false");
+
+            }
+            else {
+                $(".natural").show();
+                $("#NOMBRE1").attr("required", true);
+                $("#APELLIDO1").attr("required", true);
+
+
+                $("#NombreComercial").removeAttr("required");
+                $(".juridica").hide();
+
+                $("#REGIMEN").val("");
+                $("#CLASEID").val(13);
+
+            }
+        });
+            *@
+        $('input[name="NIT"]').on("change", (function () {
+            var claseId = $('select[name="CLASEID"]').val();
+            //alert(claseId);
+            var nitid = $('input[name="NIT"]').val();
+            /**********************/
+            $.get("/terceros/terceros/GetTerceroByNIT/", { nit: $(this).val() }, function (response) {
+                if (response != false) {
+                    swal('Error', 'El docuemento ' + nitid + ' ya se encuentra registrado.', 'warning');
+                    $('input[name="NIT"]').val("");
+                   /* $('#modal_terceros').removeData('bs.modal');
+                    $("#modal_terceros").hide();
+                    $("#mostrar").html(result);*/
+                }
+            })
+
+            /********************/
+            if (claseId == 31) {
+                $.get("/tools/nits/GetDigitoVerificacion", { nit: $(this).val() }, function (response) {
+                    $("#DIGVER").val(response.DV);
+                    // alert(response.DV);
+                })
+            }
+
+            //  alert("blur claseid");
+        }));
+
+
+        $("#CLASEID").change(function () {
+            var claseId = $('select[name="CLASEID"]').val();
+            // alert("cambio clase id");
+            if (claseId != 31) {
+                $("#DIGVER").val("");
+
+            }
+            else {
+                $("#NIT").trigger('change');
+
+            }
+        });
+
+
+
+    });
+    @*
+
+    function CheckPersonaJuridica() {
+        if ($('input[name="EsPERJURIDICA"]').prop('checked')) {
+            // alert("isChecked");
+            $(".natural").hide();
+            $(".juridica").show();
+            $("#EsPERJURIDICA").trigger("change");
+        }
+        else {
+            $(".natural").show();
+            $(".juridica").hide();
+            $("#EsPERJURIDICA").trigger("change");
+        }
+
+    }*@
+
+    function esJuridica() {
+
+        $("#NOMBRE1").removeAttr("required");
+        $("#APELLIDO1").removeAttr("required");
+        $("#REGIMEN").val(2);
+        $("#CLASEID").val(31);
+        document.getElementById('EsPERJURIDICA').value = true;
+        $(".natural").hide();
+        //campos requeridos para pJuridica
+        $(".juridica").show();
+        $(".natural").removeAttr("required");
+        $("#NombreComercial").attr("required", "required");
+        $("#NombreComercial").data("val", "false");
+    }
+
+    function esTercero() {
+        $(".natural").show();
+        $("#NOMBRE1").attr("required", true);
+        $("#APELLIDO1").attr("required", true);
+        document.getElementById('EsPERJURIDICA').value = false;
+        $("#NombreComercial").removeAttr("required");
+        $(".juridica").hide();
+        $(".natural").attr("required", "required");
+        $("#REGIMEN").val("");
+        $("#CLASEID").val(13);
+    }
+
+    $("input[name=]").bind("keydown", function (event) {
+            if (event.keyCode === $.ui.keyCode.TAB &&
+                $(this).autocomplete("instance").menu.active) {
+                event.preventDefault();
+            }
+        })
+       .autocomplete({
+           minLength: 0,
+           source: function (request, response) {
+               // delegate back to autocomplete, but extract the last term
+               console.log(response);
+               response($.ui.autocomplete.filter(
+                 n, extractLast(request.term)));
+           },
+           focus: function () {
+               // prevent value inserted on focus
+               return false;
+           },
+           select: function (event, ui) {
+               var terms = split(this.value);
+               // remove the current input
+               terms.pop();
+               // add the selected item
+               terms.push(ui.item.value);
+               // add placeholder to get the comma-and-space at the end
+               terms.push("");
+               this.value = terms.join(" ");
+               return false;
+           }
+       });
+
+
+
+        // SOLO NUMEROS
+        function valida(e) {
+
+            tecla = (document.all) ? e.keyCode : e.which;
+
+            //Tecla de retroceso para borrar, siempre la permite
+            if (tecla == 8) {
+                return true;
+            }
+            // Patron de entrada, en este caso solo acepta numeros
+            patron = /[0-9]/;
+            tecla_final = String.fromCharCode(tecla);
+            return patron.test(tecla_final);
+        }
+
+
+    </script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <style>
+        body {
+            background-color: #DDDDDD !important;
+        }
+    </style>
+</div>

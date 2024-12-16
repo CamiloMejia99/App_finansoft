@@ -1,0 +1,231 @@
+﻿@model Ingenio.BO.AsociadosOtrosServicios_Ots
+@{
+    ViewBag.Title = "Create";
+    //string m = ViewBag.Mensaje;
+    string cedula = ViewBag.cedula;
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+
+    <div class="form-horizontal panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Asociado Servicios</h3>
+        </div>
+        <div class="panel-body" id="General">
+
+
+            @*CEDULA ASOCIADO**************************************************@
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="Identificacion" class="col-md-4 control-label">Identificación Asociado</label>
+                    <div class="col-md-7">
+                        <input type="text" id="_Nit_CC" required class="form-control" value="@Model.Asociados_Aso.Personas_Fac.Nit_CC" onkeypress="return valida(event)" disabled>
+                        <input type="hidden" name="Id_Asociado" id="Id_Asociado" value="@Model.Id_Asociado" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="text" id="_nombre" required class="form-control" value="@ViewBag.Nombreaso" readonly disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="nombre" class="col-md-2 control-label">Empresa Afiliada:</label>
+                    <div class="col-md-10">
+                        <input type="text" id="empresa" class="form-control" value="@ViewBag.Empresa" readonly disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="nombre" class="col-md-2 control-label">Agencia:</label>
+                    <div class="col-md-10">
+                        <input type="text" id="agencia" class="form-control" value="@ViewBag.Agencia" readonly disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="nombre" class="col-md-4 control-label">Servicio</label>
+                    <div class="col-md-7">
+                        <input type="text" id="_Id_Servicio" required class="form-control" value="@Model.OtrosServicios_Aso.Nombre" disabled>
+                        <input type="hidden" name="Id_Servicio" id="Id_Servicio" value="@Model.Id_Servicio" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="Identificacion" class="col-md-4 control-label">Fecha Inicio</label>
+                    <div class="col-md-7">
+                        <input type="date" id="FechaInicio" name="FechaInicio" value="@Model.FechaInicio.ToString("yyyy-MM-dd")" class="form-control" readonly required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="Identificacion" class="col-md-4 control-label">Valor</label>
+                    <div class="col-md-7">
+                        <input type="text" name="Valor" id="Valor" value="" required class="form-control" disabled onkeypress="return valida(event)" data-mask="#.##0" data-mask-reverse="true" />
+                    </div>
+                </div>
+            </div>
+
+            @*//*************boton******************@
+            <div class="col-md-offset-2 col-md-10">
+                <div class="form-group">
+                    <button id="" type="submit" value="Create" class="btn btn-default">Guardar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+
+
+
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/Mascaras")
+
+
+@********************************JAVASCRIPT*******************************************@
+<script>
+
+
+    $(function () {
+
+        var val = @ViewBag.Valor;
+        if (val != 0) {
+            $('#Valor').val(val);
+            $('#Valor').attr('disabled', false);    
+        }
+        else {
+            $('#Valor').val("");
+            $('#Valor').attr('disabled', true);    
+        }
+    })
+
+
+
+    ////Autocomplete
+    function renderItem(ul, item) {
+
+        return $("<li>")
+        .append("<span style='display:block'>" + item.value + "</span>")
+        .append("<span style='display:block'>" + item.label + "</apan>")
+        .appendTo(ul);
+    }
+
+    //AUTOCOMPLETE CEDULA ASOCIADO
+
+    $("#_Nit_CC").autocomplete({
+        source: "@Url.Action("GetCedula","AfiliacionApo")",
+        minLength: 3,
+        select: function (event, ui) {
+            $('#_nombre').val(ui.item.label);
+            $('#_Nit_CC').val(ui.item.value);
+            $('#Id_Asociado').val(ui.item.idaso);
+            $('#empresa').val(ui.item.empresa);
+            $('#agencia').val(ui.item.agencia);
+
+
+        },
+        change: function (event, ui) {
+            if (!ui.item) {
+                $(this).val("");
+                $('#_nombre').val("");
+                $('#_Nit_CC').val("");
+                $('#Id_Asociado').val(-1);
+                $('#empresa').val("");
+                $('#agencia').val("");
+            }
+        },
+        focus: function (event, ui) {
+            $('#Nit_CC').val(ui.item.value);
+            return false;
+        }
+    })
+
+
+
+        $("#_Id_Servicio").autocomplete({
+            source: "@Url.Action("GetServicio")",
+            minLength: 3,
+            select: function (event, ui) {
+                $('#_Id_Servicio').val(ui.item.label);
+                $('#Id_Servicio').val(ui.item.value);
+                var constante = ui.item.constante;
+
+                if (constante) {
+                    $('#Valor').attr('disabled', false);
+                }
+                else {
+                    $('#Valor').attr('disabled', true);
+                }
+                return false
+            },
+            change: function (event, ui) {
+                if (!ui.item) {
+                    $(this).val("");
+                    $('#Id_Servicio').val("");
+                }
+            },
+            focus: function (event, ui) {
+                $('#Id_Servicio').val(ui.item.value);
+                return false;
+            }
+        })
+
+        // SOLO NUMEROS
+        function valida(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+
+            //Tecla de retroceso para borrar, siempre la permite
+            if (tecla == 8) {
+                return true;
+            }
+            // Patron de entrada, en este caso solo acepta numeros
+            patron = /[0-9]/;
+            tecla_final = String.fromCharCode(tecla);
+            return patron.test(tecla_final);
+        }
+
+
+
+        $("form").on("submit", function (e) {
+            e.preventDefault();
+            $("input[data-mask]").unmask();
+            var fd = new FormData(this);
+
+            $.ajax({
+                url: "@Url.Action("Create")",
+                type: "POST",
+                data: fd,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    if (res.estado) {
+                        window.location.href = "@Url.Action("Index")";
+                    } else {
+                        swal("Error", response.mensaje, "error");
+                    }
+                }
+            })
+        })
+</script>

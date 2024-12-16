@@ -1,0 +1,3 @@
+26/05/2022 5:49:09 p. m. - Referencia a objeto no establecida como instancia de un objeto. ---_System.Web.Mvc.JsonResult GetCreditos(System.String)
+26/05/2022 5:58:03 p. m. - Referencia a objeto no establecida como instancia de un objeto. ---_System.Web.Mvc.JsonResult GetCreditos(System.String)
+26/05/2022 6:08:53 p. m. - Referencia a objeto no establecida como instancia de un objeto. ---_System.Web.Mvc.JsonResult GetCreditos(System.String)

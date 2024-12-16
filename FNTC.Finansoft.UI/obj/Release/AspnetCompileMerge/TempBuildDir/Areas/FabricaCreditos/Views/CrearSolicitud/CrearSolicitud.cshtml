@@ -1,0 +1,318 @@
+﻿@using Finantec.Financial.Loans.BO.FabricaCreditos
+
+@model BOSolicitudes
+
+@{
+    ViewBag.Title = "CrearSolicitud";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var fecha = DateTime.Now.ToString("yyyy-MM-dd");
+    var idAsociado = ViewBag.idAsociado;
+    var informacionSede = ViewBag.informacionSede;
+    var nomAsociado = ViewBag.nombreAsociado;
+}
+
+
+<!--modal tabla amortizaciones -->
+</div>
+
+
+
+
+<form class="form" method="post" id="formInformacionFinanciera" autocomplete="off">
+    <h3><span class="label label-primary">Informacion general</span></h3>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label class="control-label">identificacion del Asociado:</label>
+            <input type="text" name="idAsociado" id="idAsociado" class="form-control" value="@idAsociado" readonly />
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label">Asociado:</label>
+            <input type="text" name="nomAsociado" id="nomAsociado" class="form-control" value="@nomAsociado" readonly />
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label">Fecha de solicitud:</label>
+            <input type="date" name="fechaGeneracion" class="form-control" value="@fecha" readonly />
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label class="control-label">Ciudad:</label>
+            <input type="text" class="form-control" value="@informacionSede.ciudadSede" readonly />
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label">Agencia:</label>
+            <input type="text" class="form-control" value="@informacionSede.nombreSede" readonly />
+        </div>
+    </div>
+
+    <h3><span class="label label-primary">Informacion financiera</span></h3>
+    <div id="ingresoValores" class="row">
+        <div class="form-group col-md-3">
+            <h3><span class="label label-success">Ingresos mensuales</span></h3>
+            <label>Salario/Pension:</label>
+            <input type="text" name="txtIngresosMensuales" placeholder="Valor" class="form-control" />
+            <label>Arrendamientos:</label>
+            <input type="text" name="txtIngresosMensuales" placeholder="Valor" class="form-control" />
+            <label>Comisiones/Honorarios:</label>
+            <input type="text" name="txtIngresosMensuales" placeholder="Valor" class="form-control" />
+            <label>Otros Ingresos:</label>
+            <input type="text" name="txtIngresosMensuales" placeholder="Valor Ingreso" class="form-control" />
+            <label>Cuales?</label>
+            <input type="text" name="textos" placeholder="Otro Ingreso" class="form-control" />
+            <label>Total Ingresos:</label>
+            <input type="text" name="lblTotalIngresosMensuales" id="lblTotalIngresosMensuales" placeholder="Valor" class="form-control" readonly />
+        </div>
+        <div class="form-group col-md-3">
+            <h3><span class="label label-success">Egresos mensuales</span></h3>
+            <label>Gastos familiares:</label>
+            <input type="text" name="txtEgresosMensuales" placeholder="Valor" class="form-control" />
+            <label>Arrendamientos:</label>
+            <input type="text" name="txtEgresosMensuales" placeholder="Valor" class="form-control" />
+            <label>Otros creditos:</label>
+            <input type="text" name="txtEgresosMensuales" placeholder="Valor" class="form-control" />
+            <label>Otros egresos:</label>
+            <input type="text" name="txtEgresosMensuales" placeholder="Valor Otro" class="form-control" />
+            <label>Cuales?</label>
+            <input type="text" name="textos" placeholder="Otro Egreso" class="form-control" />
+            <label>Total Egresos:</label>
+            <input type="text" name="lblTotalEgresosMensuales" id="lblTotalEgresosMensuales" placeholder="Valor" class="form-control" readonly />
+        </div>
+        <div class="form-group col-md-3">
+            <h3><span class="label label-success">Activos</span></h3>
+            <label>Corrientes(ahorros/inversiones):</label>
+            <input type="text" name="txtActivos" placeholder="Valor" class="form-control" />
+            <label>Fijos(vehiculos/propiedades):</label>
+            <input type="text" name="txtActivos" placeholder="Valor" class="form-control" />
+            <label>Otros:</label>
+            <input type="text" name="txtActivos" placeholder="Valor Otro" class="form-control" />
+            <label>Cuales?</label>
+            <input type="text" name="textos" placeholder="Otro Activo" class="form-control" />
+            <label>Total Activos:</label>
+            <input type="text" name="lblTotalActivos" id="lblTotalActivos" placeholder="Valor" class="form-control" readonly />
+        </div>
+        <div class="form-group col-md-3">
+            <h3><span class="label label-success">Pasivos</span></h3>
+            <label>Financietos(deudas):</label>
+            <input type="text" name="txtPasivos" placeholder="Valor" class="form-control" />
+            <label>Corrientes(con terceros):</label>
+            <input type="text" name="txtPasivos" placeholder="Valor" class="form-control" />
+            <label>Otros:</label>
+            <input type="text" name="txtPasivos" placeholder="Valor Otro" class="form-control" />
+            <label>Cuales?</label>
+            <input type="text" placeholder="Otro pasivo" name="textos" class="form-control" />
+            <label>Total Pasivos</label>
+            <input type="text" name="lblTotalPasivos" id="lblTotalPasivos" placeholder="Valor" class="form-control" readonly />
+        </div>
+    </div>
+    <hr />
+    <div class="form-group">
+        <input type="button" id="btnCancelar" class="btn btn-danger" value="Cancelar" />
+        <input type="button" id="preAmorti" class="btn btn-primary" value="Simular PreAmortizacion" />
+        <input type="submit" class="btn btn-success" value="Continuar" />
+    </div>
+</form>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqPriceFormat")
+    @Scripts.Render("~/bundles/adminDataTables")
+
+    <script>
+            $(function () {
+                var table=null;
+                $("#preAmorti").on("click", function () {
+                    var grupo = $("#stgrupo").val();
+                    var monto = $("#txtValorSolicitado").unmask();
+                    var plazo = $("#txtPlazo").val();
+                    if (plazo != "" && monto !="") {
+                        var url = '@Url.Action("calculoAmortizacion", "Solicitudes")' + "?idGrupo=_id&monto=_monto&plazo=_plazo";
+                        url = url.replace("_id", grupo);
+                        url = url.replace("_monto", monto);
+                        url = url.replace("_plazo", plazo);
+                        $("#nuevaAmortizacion").modal("show");
+                        var botones = [{ extend: "print", text: "Imprimir" }, "excel", "pdf"];
+                        var columnas = [{ data: "mes" }, { data: "interes", render: function (data) { return formatoMiles(data); } }, { data: "amortizacion" }, { data: "cuota", render: function (data) { return formatoMiles(data); } }, { data: "saldo", render: function (data) { return formatoMiles(data); } }];
+                        agregarDataTable("#tablaAmortizaciones", columnas, url, botones, false, false,false);
+                    } else {
+                        swal({ title: "Revisa", text: "Ingresas los valores solicitados", confirmButtonText: "Aceptar", type: "warning" }, function () { $("#txtValorSolicitado").focus(); });
+                    }
+                });
+
+                $("#cancelarModAmortizacion").on("click", function () {
+                    var tabla = $("#tablaAmortizaciones").dataTable();
+                    tabla.fnDestroy();
+                });
+
+
+                //$('#nuevaAmortizacion').on('show.bs.modal', function () {
+                //    var height = $(window).height() - 200;
+                //    $(this).find(".modal-body").css("max-height", height);
+                //});
+
+                var limiteMonto = 0;
+                $("#txtValorSolicitado").priceFormat();
+
+                $("#txtValorSolicitado").on("blur", function () {
+                    var valor = $(this).unmask();
+                    if (valor > limiteMonto) {
+                        swal({ title: "Revisa", text: "EL valor solicitado es mayor que el permitido por el grupo", confirmButtonText: "Aceptar", type: "warning" }, function () { $("#txtValorSolicitado").focus(); });
+                    }
+                });
+
+                //linea grupo y subgrupo
+                //cargar Grupos
+                $("#stlinea").on("change", function () {
+                    $('#stgrupo').children().remove().end();
+                    $('#stsubGrupo').children().remove().end();
+                    $("#stgrupo").prop("disabled", "true");
+                    $("#stsubGrupo").prop("disabled", "true");
+                    if ($(this).val() != 0) {
+                        $("#stgrupo").removeProp("disabled");
+                        $("#stgrupo").append('<option value="0">Seleccione Un Grupo</option>');
+                        var idLinea = $(this).val();
+                        $.post('@Url.Action("obtenerGrupoPorIdLinea", "Solicitudes")', { id: idLinea }, function (dato) {
+                            for (var i = 0 ; i < dato.length ; i++) {
+                                $("#stgrupo").append('<option value="' + dato[i]["Id"] + '">' + dato[i]["Descripcion"] + '</option>');
+                            }
+                        }, "json");
+                    } else {
+                        $("#stgrupo").prop("disabled", "true");
+                        $("#stsubGrupo").prop("disabled", "true");
+                        $("#rangoMonto").html("Min: 0 - Max: 0").prop("hidden", true);
+                    }
+                });
+
+                //cargar subgrupos
+                $("#stgrupo").on("change", function () {
+                    $('#stsubGrupo').children().remove().end();
+                    $("#stsubGrupo").prop("disabled", "true");
+                    if ($(this).val() != 0) {
+                        $("#stsubGrupo").removeProp("disabled");
+                        $("#stsubGrupo").append('<option value="0">Seleccione Un SubGrupo</option>');
+                        var idGrupo = $(this).val();
+                        $.post('@Url.Action("obtenerSubGruposPorIdGrupo", "Solicitudes")', { id: idGrupo }, function (dato) {
+                            for (var i = 0 ; i < dato.length ; i++) {
+                                $("#stsubGrupo").append('<option value="' + dato[i]["Id"] + '">' + dato[i]["Descripcion"] + '</option>');
+                            }
+                        }, "json");
+                        $.post('@Url.Action("obtenerGrupoPorId", "Solicitudes")', { id: idGrupo }, function (dato) {
+                            var montoLimite = "Min: " + formatoMiles(dato.ValorMinimo.toString()) + " - Max: " + formatoMiles(dato.ValorMaximo.toString());
+                            limiteMonto = dato.ValorMaximo;
+                            $("#rangoMonto").html(montoLimite).prop("hidden", false);
+                        }, "json");
+                    } else {
+                        limiteMonto = 0;
+                        $("#txtValorSolicitado").prop("readonly", true);
+                        $("#txtValorSolicitado").val("");
+                        $("#rangoMonto").html("Min: 0 - Max: 0").prop("hidden", true);
+                        $("#stsubGrupo").prop("disabled", "true");
+                    }
+                });
+
+                //subgrupos
+                $("#stsubGrupo").on("change", function () {
+                    if ($(this).val() != 0) {
+                        $("#txtValorSolicitado").prop("readonly", false);
+                    } else {
+                        $("#txtValorSolicitado").prop("readonly", true);
+                    }
+                });
+
+                function formatoMiles(number) {
+                    number = number.replace(/\./g, ""); //quita todos los puntos de la cadena
+                    var result = "";
+                    while (number.length > 3) {
+                        result = ',' + number.substr(number.length - 3) + result;
+                        number = number.substring(0, number.length - 3);
+                    }
+                    result = number + result;
+                    return result;
+                }
+
+                $("#formInformacionFinanciera").submit(function (e) {
+                    e.preventDefault();
+
+                    var monto = $("#txtValorSolicitado").val();
+                    if (monto != null) {
+                        var idAsociado = $("#idAsociado").val();
+                        var datos = $(this).serialize();
+                        $.ajax({
+                            type: 'Post',
+                            data: datos,
+                            url: '@Url.Action("CrearSolicitud", "Solicitudes")',
+                            success: function (respuesta) {
+                                if (respuesta != "0") {
+                                    swal({ title: "Consulta centrales de riesgo", text: "Para continuar imprime el siguiente formato y verifica que se firme", type: "warning", showCancelButton: true, confirmButtonText: "Continuar", cancelButtonText: "Imprimir", closeOnConfirm: false, closeOnCancel: false },
+                                        function (isConfirm) {
+                                            if (isConfirm) {
+                                                var url = '@Url.Action("EvaluarViabilidad", "Solicitudes", new { ids="param-id"})';
+                                                url = url.replace("param-id", respuesta);
+                                                location.href = url;
+                                            } else {
+                                                window.open(generarUrl(respuesta), '_blank');
+                                            }
+                                        });
+                                } else {
+                                    swal({ title: "Error!", text: "Se ha producido un error, anota este codigo: CS214 e informa al administrador", type: "error", confirmButtonText: "Aceptar" }, function (isConfirm) { if (isConfirm) { location.reload(true); } });
+                                }
+                            }
+                        });
+                    } else {
+                        swal({ title: "Revisa", text: "Ingresas los valores solicitados", confirmButtonText: "Aceptar", type: "warning" }, function () { $("#txtValorSolicitado").focus(); });
+                    }
+                });
+
+                function generarUrl(id) {
+                    var url = '@Url.Action("ImprimirAutorizacion", "Solicitudes", new { id="param-id"})';
+                    url = url.replace("param-id", id);
+                    return url;
+                }
+
+                $("#ingresoValores").find("input").priceFormat();
+                $("#ingresoValores").find("input[name= 'textos']").unpriceFormat();
+
+                $("[name='txtIngresosMensuales'").on("keyup", function () {
+                    sumarTotales("txtIngresosMensuales", "#lblTotalIngresosMensuales");
+                });
+                $("[name='txtEgresosMensuales'").on("keyup", function () {
+                    sumarTotales("txtEgresosMensuales", "#lblTotalEgresosMensuales");
+                });
+                $("[name='txtActivos'").on("keyup", function () {
+                    sumarTotales("txtActivos", "#lblTotalActivos");
+                });
+                $("[name='txtPasivos'").on("keyup", function () {
+                    sumarTotales("txtPasivos", "#lblTotalPasivos");
+                });
+                function sumarTotales(txtName, lblTotal) {
+                    var totalInp = $('[name="' + txtName + '"]');
+                    var total = 0;
+                    totalInp.each(function () {
+                        var valor = $(this).unmask();
+                        if (valor == "") { valor = 0; };
+                        total += parseFloat(valor);
+                    });
+                    $(lblTotal).val(total).priceFormat();
+                }
+            });
+    </script>
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

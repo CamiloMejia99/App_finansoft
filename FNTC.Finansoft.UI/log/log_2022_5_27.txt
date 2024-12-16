@@ -1,0 +1,1 @@
+27/05/2022 3:44:04 p. m. - No se encuentra un método de acción público 'GetCajeroInfo' en el controlador 'FNTC.Finansoft.UI.Areas.OperativaDeCaja.Controllers.configCajeroesController'. ---_Void HandleUnknownAction(System.String)

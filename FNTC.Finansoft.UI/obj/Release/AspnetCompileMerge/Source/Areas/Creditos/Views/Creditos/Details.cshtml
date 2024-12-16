@@ -1,0 +1,122 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.MCreditos.BCreditos
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>BCreditos</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Creditos_Cedula)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Creditos_Cedula)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Lineas_Id)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Lineas_Id)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Destino_Id)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Destino_Id)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Garantias_Id)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Garantias_Id)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Capital)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Capital)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Creditos_Estado)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Creditos_Estado)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Creditos_Interes)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Creditos_Interes)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Creditos_Plazo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Creditos_Plazo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Creditos_Cuota)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Creditos_Cuota)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Creditos_Interes_Mora)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Creditos_Interes_Mora)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Creditos_Saldo_Capital)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Creditos_Saldo_Capital)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Codigo_Operador_Id)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Codigo_Operador_Id)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Creditos_Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

@@ -1,0 +1,174 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.MCreditos.Destinos
+
+@{
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Destinos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Lineas.Lineas_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lineas.Lineas_Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Valor_Maximo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Valor_Maximo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Valor_Minimo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Valor_Minimo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Tasa_Minima)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Tasa_Minima)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Tasa_Maxima)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Tasa_Maxima)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Tasa_Mora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Tasa_Mora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Periodo_Maximo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Periodo_Maximo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Periodo_Minimo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Periodo_Minimo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Financia_Interes_Corriente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Financia_Interes_Corriente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Interes_Abono_Extra_Dias)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Interes_Abono_Extra_Dias)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Interes_Igual_Plan_Pagos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Interes_Igual_Plan_Pagos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Causal_Interes_Anticipado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Causal_Interes_Anticipado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Dias_Periodo_Gracia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Dias_Periodo_Gracia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Pagare_Automatico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Pagare_Automatico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Fecha_Automatica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Fecha_Automatica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Cobra_Festivos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Cobra_Festivos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino_Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino_Activo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Destino_Id }) |
+    @Html.ActionLink("Regresar a la Lista", "Index")
+</p>

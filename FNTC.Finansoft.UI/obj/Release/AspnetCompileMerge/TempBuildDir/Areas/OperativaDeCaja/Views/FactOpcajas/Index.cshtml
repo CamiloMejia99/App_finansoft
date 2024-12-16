@@ -1,0 +1,189 @@
+﻿
+@model IEnumerable<FNTC.Finansoft.Accounting.DTO.OperativaDeCaja.FactOpcaja>
+@{
+    ViewBag.Title = "Facturas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+<link href="~/Content/datatables.boostrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/datatable.js"></script>
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+<script src="~/Content/tools/direccion/Nomemclaturas.min.js"></script>
+
+@ViewBag.alert
+<script type="text/javascript" class="init">
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+        });
+    });
+</script>
+
+<div class="row">
+    <div class="col-md-2 contenido">
+        <div class="form-group">
+            <label style="margin-left:30px">FECHA:</label>
+            <input type="date" style="margin-left:30px" class="form-control" id="fecha" />     
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group" style="margin-left:5%">
+            <label>ASOCIADO:</label>
+            @Html.DropDownList("terceros", (IEnumerable<SelectListItem>)ViewBag.terceros, null, new { @class = "chosen-select-single", @id = "listTerceros" })
+        </div>
+    </div>
+    <div class="col-md-1 contenido">
+        <button id="enviar" class="btn btn-success" style="margin-top:30%">Buscar</button>
+    </div>
+    <div class="col-md-9 contenido">
+    </div>
+</div>
+
+
+<div class="col-md-12">
+    <div class="form-group">
+        <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 123%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Lista de Facturas</h3></div>
+        <div class="col-md-2" style=" margin-top:35px;">
+            <a href="/OperativaDeCaja/FactOpcajas/CuentaOperacion" class="AddUser btn btn-success btn-small btnnuevo">Nueva Factura</a>
+        </div>
+    </div>
+
+    <div class="modal fade" data-backdrop="static" id="centro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive col-md-12">
+        <div class="col-md-12">
+            <table id="example" class="table table-striped table-bordered dataTable no-border" widcellspacing="0">
+                <thead>
+                    <tr>
+                        <th hidden>
+                            <label>ID</label>
+                        </th>
+                        <th class="medium columnatablaazul">
+                            <label>Fecha</label>
+                        </th>
+                        <th class="medium columnatablaazul">
+                            <label>N° Factura</label>
+                        </th>
+                        <th class="medium columnatablaazul2">
+                            <label>Código de Cajero</label>
+                        </th>
+
+                        <th class="medium columnatablaazul2">
+                            <label>Observación</label>
+                        </th>
+
+                        <th class="medium columnatablaazul2">
+                            <label>Nit Asociado</label>
+                        </th>
+                        <th class="medium columnatablaazul2">
+                            <label>Nombre Asociado</label>
+                        </th>
+                        <th class="medium columnatablaazul2">
+                            <label>Valor Total</label>
+                        </th>
+                        <th class="medium columnatablaazul2">
+                            <label>Saldo en Cuenta</label>
+                        </th>
+
+                        <th class="medium columnatablaazul2">&nbsp;Opciones&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="align-center medium">
+                            <td hidden>
+                                @Html.DisplayFor(modelItem => item.id)
+                            </td> 
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fecha)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.factura)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nit_cajero)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.observacion)
+                            </td>
+
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nit_propietario_cuenta)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombre_propietario_cuenta)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.total)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.saldo_total_cuenta)
+                            </td>
+
+                            <td class="align-center">
+
+                                <a class="btn btn-inline btn-xs btn-success" href="/OperativaDeCaja/FactOpcajas/Details?id=@item.id" data-toggle="modal" data-target="#centro" title="Detalles">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </a>
+                                @*	<a id="editar" class="btn btn-inline btn-xs btn-primary" href="/FactOpcajas/Edit?id=@item.id" title="Editar">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </a>
+                                    <a class="btn btn-inline btn-xs btn-danger" href="/FactOpcajas/Delete?id=@item.id" data-toggle="modal" data-target="#centro" title="Eliminar" value="Eliminar">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br /> <br />
+        </div>
+    </div>
+</div>
+<style>
+    body {
+        background-color: #DDD;
+    }
+</style>
+<script>
+
+    $(document).ready(function () {
+
+        $(".chosen-select-single").chosen();
+        $(".chosen-select-multiple").chosen();
+    });
+
+    $("#enviar").click(function () {
+        var fechaDesde = $("#fecha").val();
+        var nit = $("#listTerceros").val();
+        window.location.href = "/OperativaDeCaja/FactOpcajas/Index?fechaDesde=" + fechaDesde+"&nit="+nit;
+    });
+
+    //refrescar un div
+    $(".js-refrescar").click(function () {
+        $("#mostrar").html("");
+        $("#mostrar").load("/FactOpcajas/Index");
+    });
+
+
+    //Al Ocultar el modal
+    $(document.body).on('hidden.bs.modal', function () {
+        $('#centro').removeData('bs.modal');
+        $(".js-refrescar").click();
+    });
+</script>

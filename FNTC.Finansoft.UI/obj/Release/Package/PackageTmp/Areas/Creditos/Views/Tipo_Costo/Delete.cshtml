@@ -1,0 +1,37 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.MCreditos.Tipo_Costo
+
+@{
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+}
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>Eliminar</h2>
+
+<h4>Seguro desea eliminar este elemento?</h4>
+<div>
+    <h4>Tipo_Costo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo_Costo_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo_Costo_Descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            @Html.ActionLink("Regresar a la Lista", "Index")
+        </div>
+    }
+</div>

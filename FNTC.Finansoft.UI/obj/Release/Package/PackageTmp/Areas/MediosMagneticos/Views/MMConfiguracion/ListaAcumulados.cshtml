@@ -1,0 +1,10 @@
+﻿
+@model IEnumerable<FNTC.Finansoft.Accounting.DTO.MediosMagneticos.acumuladopor>
+
+<select class="form-control" id="idAcumulado" name="acumuladopor" required>
+    <option value="">Seleccionar</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.idAcumulado">@item.nombre</option>
+    }
+</select>

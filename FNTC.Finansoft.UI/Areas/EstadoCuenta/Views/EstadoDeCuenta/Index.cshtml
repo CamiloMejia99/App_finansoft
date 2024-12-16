@@ -1,0 +1,642 @@
+﻿
+@model FNTC.Finansoft.Accounting.DTO.OperativaDeCaja.CuadreCajaPorCajero
+
+@{
+    ViewBag.Title = "Crear Factura";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+<link href="~/Content/styleGeneral.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+<link href="~/Styles/Email/Email.css" rel="stylesheet" />
+<link href="https://tenor.com/view/loading-waiting-count-down-spinning-gif-14968344" />
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<script src="~/Scripts/Areas/EstadoDeCuenta/EstadoDeCuenta.js"></script>
+@* Arreglo de la estructura de la plantilla,
+    se adiciona una carpeta Style, en la cual se define un estilo particular de cada plantilla html
+    edit: Ing. Andres Teran *@
+
+<div class="container md-5">
+
+    <div class="alert alert-danger alert-dismissible" id="alertFallecido">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>El usuario seleccionado se encuentra registrado como fallecido</strong>
+    </div>
+
+    <div class="col-md-12" style="background: rgb(248, 248, 248)">
+
+        <div class="form-group col-md-11" style="margin-left:40px">
+            <div class="caja2" id="imprimirTodo">
+                <br />
+                <center>
+                    <h3>
+                        <b>ASOCIACIÓN MUTUAL PASCUALINA "ASOPASCUALINOS"</b>
+                    </h3>
+                    <h4 class="center">
+                        <b>NIT: 901738617-0</b>
+                    </h4>
+                </center>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 123%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Estado De Cuenta</h3></div>
+                </div>
+
+                <div class="row contenido">
+                    <div class="form-group col-md-3">
+                        <label class="control-label">NIT :</label>
+                        @Html.DropDownList("Terceros", null, "Seleccione Un Asociado", new { @class = "chosen-select-single", @id = "Tercero" })
+                        <input type="text" id="EnviarCuentaAsociadoAporte" name="cuenta" hidden="hidden">
+                        <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+
+                        <p style="color:red">@ViewBag.mensaje</p>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Nombre :</label>
+                        <label class="form-control" id="nombreTercero"></label>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label class="control-label">Forma de Pago: </label>
+                        <label class="form-control">MENSUAL</label>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label class="control-label">Salario : </label>
+                        <label class="form-control" id="salario"></label>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label class="control-label">Antiguedad : </label>
+                        <label class="form-control" id="antiguedad"></label>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label class="control-label">Agencia : </label>
+                        <label class="form-control" id="agencia"></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10"><h3 style="border-bottom: 2px solid black !important; width: 123%; color: black !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Aportes Sociales</h3></div>
+                </div>
+
+                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Cuenta</th>
+                            <th>Fecha Apertura</th>
+                            <th>Cuota</th>
+                            <th>Saldo Actual</th>
+                            <th>Saldo En Mora</th>
+                            <th>Intereses</th>
+                            <th>Saldo en Canje</th>
+                            <th>Estado</th>
+                            <th>Ver Cuotas Pagadas</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mitabla"></tbody>
+                </table>
+
+                @*APORTE EXTRAORDINARIO*@
+                <div id="divAporteExtra">
+                <div class="form-group">
+                    <div class="col-md-12"><h3 style="border-bottom: 2px solid black !important; width: 100%; color: black !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Aporte Extraordinario</h3></div>
+                </div>
+                <div class="table table-responsive">
+                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Cuenta</th>
+                                <th>Fecha Apertura</th>
+                                <th>Saldo Actual</th>
+                                <th>Estado</th>
+                                <th>Ver Cuotas Pagadas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaAporteExtra"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="divAhorroPermanente">
+                @*AHORRO PERMANENTE*@
+            <div class="form-group">
+                <div class="col-md-12"><h3 style="border-bottom: 2px solid black !important; width: 100%; color: black !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Ahorro permanente</h3></div>
+            </div>
+            <div class="table table-responsive">
+                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Cuenta</th>
+                            <th>Fecha Apertura</th>
+                            <th>Saldo Actual</th>
+                            <th>Rendimientos</th>
+                            <th>Estado</th>
+                            <th>Ver Cuotas Pagadas</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaAhorroPermanente"></tbody>
+                </table>
+            </div>
+            </div>
+
+            @*TABLA AHORRO CONTRACTUAL*@
+            <div id="divAhorroContractual">
+                <div class="form-group">
+                    <div class="col-md-12"><h3 style="border-bottom: 2px solid black !important; width: 100%; color: black !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Ahorro contractual</h3></div>
+                </div>
+                <div class="table table-responsive">
+                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Cuenta</th>
+                                <th>Tipo de Ahorro</th>
+                                <th>Plazo</th>
+                                <th>Fecha Apertura</th>
+                                <th>Fecha Vencimiento</th>
+                                <th>T.E.M</th>
+                                <th>Valor Cuota</th>
+                                <th>Total Ahorros</th>
+                                <th>Rendimientos</th>
+                                <th>Saldo Total</th>
+                                <th>Estado</th>
+                                <th>Ver Cuotas Pagadas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaAhorroContractual"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10"><h3 style="border-bottom: 2px solid black !important; width: 123%; color: black !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Creditos</h3></div>
+            </div>
+
+            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>Pagare</th>
+                        <th>Fecha Desembolso</th>
+                        <th>Cuota</th>
+                        <th>Saldo Capital</th>
+                        <th>Plazo</th>
+                        <th>Saldo en mora</th>
+                        <th>Saldo Total</th>
+                        <th>Ver</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaCreditos"></tbody>
+            </table>
+            <div class="form-group">
+                <div class="col-md-10"><h3 style="border-bottom: 2px solid black !important; width: 123%; color: black !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Codeudores</h3></div>
+            </div>
+
+            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>NIT</th>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaCodeudores"></tbody>
+            </table>
+            </div>
+            <div class="row">
+                <button type="button" id="BtnImprimir" class="btn btn-default">Imprimir </button>
+                <button type="button" id="BtnEnviarEmail" class="btn btn-default">Envíar por correo</button>
+                <button type="button" id="BtnEnviarEmailTodos" class="btn btn-default">Envíar a Todos</button>
+            </div>
+
+
+
+            @*data-toggle="modal" data-target="#modalCertificadoAporte"*@
+        </div>
+    </div>
+
+    <div id="modalVerCuotasCreditos" class="modal fade  " role="dialog">
+        <div class="modal-dialog ">
+            <!-- Contenido del modal -->
+            <div class="modal-content ">
+                <div class="modal-body" id="imprimirCreditos">
+                    <div class="center contenido" id="areaImprimir">
+                        <center>
+                            <h4>
+                                <b>ASOCIACIÓN MUTUAL PASCUALINA "ASOPASCUALINOS"</b>
+                            </h4>
+                            <h5 class="center">
+                                <b>NIT: 901738617-0</b>
+                            </h5>
+                        </center>
+                        <br />
+                        <h4 class="center">
+                            <b>CUOTAS PAGADAS</b>
+                        </h4>
+                        <br />
+                        <div class="row">
+                            <p class="col-md-4"><b>&nbsp;&nbsp;Asociado:</b>&nbsp;&nbsp;<label id="modelAportesNIT"></label></p>
+                            <p class="col-md-8">&nbsp;&nbsp;<label id="modelAportesNombre"></label></p>
+                        </div>
+                        <div class="row">
+                            <p class="col-md-6"><b>&nbsp;&nbsp;Agencia:</b>&nbsp;&nbsp;<label id="modelAportesAgencia"></label></p>
+                        </div>
+                        <div class="row">
+                            <p class="col-md-6"><b>&nbsp;&nbsp;Pagaré:</b>&nbsp;&nbsp;<label id="modelPagare"></label></p>
+                        </div>
+                        <div class="row">
+                            <p class="col-md-6"><b>&nbsp;&nbsp;Capital Inicial:</b>&nbsp;&nbsp;<label id="modelCapitalInicial"></label></p>
+                        </div>
+                        <div class="row">
+                            <div class="table table-responsive">
+                                <table class="table table-bordered col-md-10 table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th><b>Fecha</b></th>
+                                            <th><b>Hora</b></th>
+                                            <th><b>N° Factura</b></th>
+                                            <th><b>N° Cuota</b></th>
+                                            <th><b>Valor Consignado</b></th>
+                                            <th><b>Capital</b></th>
+                                            <th><b>Interés Corriente</b></th>
+                                            <th><b>Interés por Mora</b></th>
+                                            <th><b>Seguro</b></th>
+                                            <th><b>Administración</b></th>
+                                            <th><b>Saldo Capital</b></th>
+                                            <th><b>Comprobante</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="datosCreditos"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p class="col-md-6"><b>TOTALES</b></p>
+                        </div>
+                        <div class="row">
+                            <p class="col-md-6"><b>&nbsp;&nbsp;Total Pagado:</b>&nbsp;&nbsp;<label id="modelTotalPagado"></label></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnImprimirCreditos">Imprimir</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalcargar" class="modal fade" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <center>
+                    <h3>
+                        <b>Enviado el estado de cuenta de cada asociado!!</b>
+                        <p>Este proceso tardara unos minutos</p>
+                    </h3>
+                </center>
+                <div class="loader">
+                    <center>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalVerAportes" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Contenido del modal -->
+            <div class="modal-content">
+                <div class="modal-body" id="imprimirAportes">
+                    <div class="center contenido" id="areaImprimir">
+                        <center>
+                            <h4>
+                                <b>ASOCIACIÓN MUTUAL PASCUALINA "ASOPASCUALINOS"</b>
+                            </h4>
+                            <h5 class="center">
+                                <b>NIT: 901738617-0</b>
+                            </h5>
+                        </center>
+                        <br />
+                        <h4 class="center">
+                            <label id="lblTituloAporteYAhorro"></label>
+                        </h4>
+                        <br />
+                        <div class="row">
+                            <p class="col-md-4"><b>&nbsp;&nbsp;Asociado:</b>&nbsp;&nbsp;<label id="modelAportesNIT"></label></p>
+                            <p class="col-md-8">&nbsp;&nbsp;<label id="modelAportesNombre"></label></p>
+                        </div>
+                        <div class="row">
+                            <p class="col-md-6"><b>&nbsp;&nbsp;Agencia:</b>&nbsp;&nbsp;<label id="modelAportesAgencia"></label></p>
+                        </div>
+                        <div class="row">
+                            <p class="col-md-6"><b>&nbsp;&nbsp;Cuenta:</b>&nbsp;&nbsp;<label id="modelAportesCuenta"></label></p>
+                        </div>
+                        <div class="row">
+                            <table class="table table-bordered col-md-10">
+                                <thead>
+                                    <tr>
+                                        <th><b>N°</b></th>
+                                        <th><b>Fecha</b></th>
+                                        <th><b>Clase De Movimiento</b></th>
+                                        <th><b>Valor</b></th>
+                                        <th><b>Comprobante</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="datosAportes"></tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <p class="col-md-6"><b>TOTALES</b></p>
+                        </div>
+                        <div class="row">
+                            <p class="col-md-6"><b>&nbsp;&nbsp;Retiros:</b>&nbsp;&nbsp;<label id="modelAportesRetiros"></label></p>
+                        </div>
+                        <div class="row">
+                            <p class="col-md-6"><b>&nbsp;&nbsp;Consignaciones:</b>&nbsp;&nbsp;<label id="modelAportesConsignaciones"></label></p>
+                        </div>
+                        <div class="row">
+                            <p class="col-md-8"><b>&nbsp;&nbsp;Consignaciones - Retiros:</b>&nbsp;<label id="modelAportesCondig-Retiros"></label></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnImprimirAportes">Imprimir</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalCertificadoAporte" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Contenido del modal -->
+            <div class="modal-content">
+                <div class="modal-body" id="IMPCertificadoAportes">
+                    <div class="center contenido" id="areaImprimir">
+                        <center>
+                            <h4>
+                                <b>ASOCIACIÓN MUTUAL PASCUALINA</b>
+                            </h4>
+                            <h5 class="center">
+                                <b>NIT:901738617-0</b>
+                            </h5>
+                        </center>
+                        <br />
+                        <center>
+                            <h4>
+                                <b>CERTIFICA</b>
+                            </h4>
+                        </center>
+
+                        <br />
+
+                        <p>
+                            Que, <b><span id="nomCerApo"></span></b> identificado con n° de documento <b><span id="cedCerApo"></span>,</b> está afiliada
+                            <br />
+                            con nosotros desde <b><span id="fecCerApo"></span></b>, tiene un saldo de <b>$ <span id="salCerApo"></span></b>
+
+
+                        </p> @*FIN PARRAFO*@
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" id="btnImprimirCertificadoAporte">Imprimir</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#274766">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:white;"><b>Envío por correo</b></h5>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Asunto:</label>
+                            <input type="text" class="form-control" id="txtAsunto">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Mensaje:</label>
+                            <textarea class="form-control" id="txtMensaje"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btnEnviaCorreo">Envíar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+<script src="~/Scripts/Email/Email.js"></script>
+<script src="~/Scripts/datatable.js"></script>
+<script src="~/Scripts/sweetalert2@9.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (ViewBag.mensaje != null)
+    {
+        <script>
+
+			window.onload = function () {
+				swal('Error', '@ViewBag.mensaje', 'warning');
+			}
+        </script>
+    }
+
+    <script>
+        $(document).on('click', '.btnVerAportes', function () {
+            var miTr = $(this).parents('tr');
+            var count = $('td:nth-child(1)', miTr).text();
+            var producto = $(this).attr("data-producto");
+            var numero = 1;
+            $('#datosAportes tr').empty();
+            var sumaConsig = 0;
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetDatosAportes", "EstadoDeCuenta")",
+                    datatype: "Json",
+                data: {
+                    NIT: $('#Tercero').val(),
+                    cuenta: count,
+                    IdProducto: producto
+                },
+                    success: function (data) {
+                        $('#modelAportesNIT').text($('#Tercero').val());
+                        $('#modelAportesNombre').text($('#nombreTercero').text());
+                        $('#modelAportesAgencia').text($('#agencia').text());
+                        $('#modelAportesCuenta').text(count);
+                        $('#modelAportesRetiros').text("0");
+                        $('#lblTituloAporteYAhorro').text(data.nombreProducto);
+                        $.each(data.codigos, function (index, value) {
+                            var a = value[2];
+                            sumaConsig = sumaConsig + parseInt(a);
+                            $("#datosAportes").append("<tr><td>" + numero + "</td><td>" + value[0] + "</td><td>" + value[1] + "</td><td>" + formatNumberMiles.new(value[2]) + "</td><td>" + value[3]+"</td></tr>");
+                            numero++;
+                        });
+                        $('#modelAportesConsignaciones').text(data.consignaciones);
+                        $('#modelAportesRetiros').text(data.retiros);
+                        $('#modelAportesCondig-Retiros').text(data.total);
+                    }
+            });
+        });
+
+
+        $(document).on('click', '.btnVerCuotasPagadas', function () {
+
+            var miTr = $(this).parents('tr');
+            var pagareTabla = $('td:nth-child(1)', miTr).text();
+            var numero = 1;
+            $('#datosCreditos').empty();
+            var sumaConsig = 0;
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetDatosCuotasPagadas", "EstadoDeCuenta")",
+                    datatype: "Json",
+                    data: { pagare: pagareTabla },
+                    success: function (data) {
+                        $('#modelAportesNIT').text(data.Nit);
+                        $('#modelAportesNombre').text($('#nombreTercero').text());
+                        $('#modelAportesAgencia').text(data.Agencia);
+                        $('#modelPagare').text(pagareTabla);
+                        $('#modelCapitalInicial').text(data.CapitalInicial);
+
+                        $.each(data.cod, function (index, val) {
+                           
+                            var tr = "<tr>"; 
+                            tr += '<td>' + val[0] + '</td>';
+                            tr += '<td>' + val[1] + '</td>';
+                            tr += '<td>' + val[2] + '</td>';
+                            tr += '<td>' + val[3] + '</td>';
+                            tr += '<td>' + val[4] + '</td>';
+                            tr += '<td>' + val[5] + '</td>';
+                            tr += '<td>' + val[6] + '</td>';
+                            tr += '<td>' + val[7] + '</td>';
+                            tr += '<td>' + val[8] + '</td>';
+                            tr += '<td>' + val[9] + '</td>';
+                            tr += '<td>' + val[10] + '</td>';
+                            tr += '<td>' + val[11] + '</td>';
+                            tr += '</tr>';
+                            $('#datosCreditos').append(tr);//añadiendo toda la fila a la tabla
+                        });
+                        $('#modelTotalPagado').text(data.sumaConsig);
+                    }
+            });
+        });
+
+        $('#BtnImprimir').click(function () {
+            $('#imprimirTodo').printThis();
+        });
+
+        $('#btnImprimirAportes').click(function () {
+            $('#imprimirAportes').printThis();
+        });
+
+        $('#btnImprimirCreditos').click(function () {
+            $('#imprimirCreditos').printThis();
+        });
+
+    </script>
+
+    <script type="text/javascript">
+        
+
+        $(document).ready(function () {
+            var tope = $("#tope").val();
+            var consignacion_efectivo = $("#consignacion_efectivo").val();
+            $("#efectivoEnCajaSMiles").text(formatNumberMiles.new(tope));
+            $("#txtconsignacion_efectivo").text(formatNumberMiles.new(consignacion_efectivo));
+
+            $(".chosen-select-single").chosen();
+            $(".chosen-select-multiple").chosen();    //DESPUES DEL FINAL DEL DOCUMENTO AL PRINCIPIO DE LOS SCRIPTS
+
+            document.getElementById('alertFallecido').style.display = 'none';
+
+        });
+    </script>
+
+    <script>
+        $("#BtnFormulario").on("click", function (e) {
+            $("#BtnFormulario").prop("disabled", true);
+            e.preventDefault();
+            var CuentaAsociadoAporte = $("#CuentaAsociadoAporte").val();
+            if (CuentaAsociadoAporte != "") {
+                $("#EnviarCuentaAsociadoAporte").val($("#CuentaAsociadoAporte").val());
+                $("#FormContinuar").submit();
+            } else {
+                swal({
+                    title: "Error",
+                    text: "Seleccione un Asociado",
+                    type: 'warning',
+                    confirmButtonText: 'Aceptar'
+                })
+                $("#BtnFormulario").prop("disabled", false);
+            }
+        });
+    </script>
+    <script>
+        //FORMATEAR UN NUMERO
+        var formatNumberMiles = {
+            separador: ".", // separador para los miles
+            sepDecimal: ',', // separador para los decimales
+            formatear: function (num) {
+                num += '';
+                var splitStr = num.split('.');
+                var splitLeft = splitStr[0];
+                var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+                var regx = /(\d+)(\d{3})/;
+                while (regx.test(splitLeft)) {
+                    splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+                }
+                return this.simbol + splitLeft + splitRight;
+            },
+            new: function (num, simbol) {
+                this.simbol = simbol || '';
+                return this.formatear(num);
+            }
+        }
+                                                        //FIN FORMATEAR UN NUMERO
+        /*
+        * FUNCIONALIDAD DE LA 'FUNCION'
+        formatNumber.new(123456779.18, "$") // retorna "$123.456.779,18"
+        formatNumber.new(123456779.18) // retorna "123.456.779,18"
+        formatNumber.new(123456779) // retorna "$123.456.779"
+        */
+                                                        //formatNumberMiles.new(realValor);//ACCESO A LA VARIABLE
+    </script>
+    <script>
+        $("#datosAportes").on('click', '.comprobante', function (e) {
+            var tipo = $(this).attr('data-tipo');
+            var numero = $(this).attr('data-numero');
+            var win = window.open("/Comprobantes/GetComprobante?tipo=" + tipo + "&numero=" + numero + "", "Comprobante", "directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=no,height=600,width=800");
+            win.focus();
+        });
+        $("#datosCreditos").on('click', '.comprobante', function (e) {
+            var tipo = $(this).attr('data-tipo');
+            var numero = $(this).attr('data-numero');
+            var win = window.open("/Comprobantes/GetComprobante?tipo=" + tipo + "&numero=" + numero + "", "Comprobante", "directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=no,height=600,width=800");
+            win.focus();
+        });
+    </script>
+}
+
+
+
+

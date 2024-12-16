@@ -1,0 +1,96 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.Scoring.ScoringVariableAgencia>
+
+@{
+    Layout = "~/Views/Shared/_LayoutActivosFijos.cshtml";
+}
+
+@{
+    ViewBag.Title = "Variables";
+}
+
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Variables
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true)
+                        <p>
+                            @Html.ActionLink("Create New", "Create")
+                        </p>
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IdAgencia)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DescripcionAgencia)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PuntajeAgencia)
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdAgencia)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DescripcionAgencia)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PuntajeAgencia)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                        <br />
+                        @*HASTA AQUI*@
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+
+                                    <div class="col-md-2">
+                                        <input type="submit" value="Guardar Cambios" class="btn btn-success" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*HASTA AQUI*@
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Regresar a la Lista", "../Scoring/")
+</div>
+</body>
+</html>

@@ -1,0 +1,229 @@
+﻿@using System.Globalization;
+@{
+    ViewBag.Title = "PAGO AHORRO CONTRACTUAL";
+    Layout = "~/Views/Shared/_Layouthelper.cshtml";
+    NumberFormatInfo formato = new CultureInfo("es-CO").NumberFormat;
+
+    formato.CurrencyGroupSeparator = ".";
+    formato.NumberDecimalSeparator = ",";
+
+}
+
+
+
+@section Styles{
+    <link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+    @*Choosen*@
+    <link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+    @*fin choseen*@
+    <style>
+        .ui-autocomplete {
+            z-index: 3000;
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+            /* add padding to account for vertical scrollbar */
+            padding-right: 20px;
+        }
+
+        .alert .close {
+            right: 0px !important;
+        }
+
+        .mainContainer {
+            margin-left: 1%;
+            margin-right: 1%;
+        }
+
+        fieldset.scheduler-border {
+            border-radius: 5px;
+            border: 1px solid #ddd !important;
+            padding: 0 1.4em 1.4em 1.4em !important;
+            margin: 0 2% 0 0 !important;
+            -webkit-box-shadow: 0px 0px 0px 0px #000;
+            box-shadow: 0px 0px 0px 0px #000;
+        }
+
+        legend.scheduler-border {
+            width: inherit; /* Or auto */
+            padding: 0 10px; /* To give a bit of padding on the left and right */
+            border-bottom: none;
+            color: #808080;
+            font-size: 20px;
+        }
+
+        .redText {
+            color: red;
+        }
+
+        .centerItems {
+            display: flex;
+            justify-content: center;
+        }
+
+        .blueText {
+            color: #0021bd
+        }
+    </style>
+
+}
+
+<div class="col-md-12" style="background: rgb(248, 248, 248)">
+    <div class="form-group">
+        <div class="col-md-12"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 100%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Facturación ahorro contractual</h3></div>
+    </div>
+    <div class="container mainContainer">
+        <div class="row">
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Información general    </legend>
+                <div class="control-group">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-6">
+                            <div class="form-group">
+                                <label for="inpFecha">Fecha:</label>
+                                <input class="form-control redText" readonly type="text" name="inpFecha" value="@DateTime.Now.ToString("dd-MM-yyyy")" id="inpFecha" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-6">
+                            <div class="form-group">
+                                <label for="inpOperacion">Operación:</label>
+                                <input class="form-control redText" readonly type="text" name="inpOperacion" value="Consignación" id="inpOperacion" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <label>Código caja:</label>
+                                <div class="input-group">
+                                    <input class="form-control redText" readonly type="text" name="inpCodigoCaja" value="@ViewBag.ModelCajaAC.CodigoCaja" id="inpCodigoCaja" />
+                                    <label class="input-group-addon" id="lblNombreCaja">@ViewBag.ModelCajaAC.NombreCaja</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <label>Identificación cajero:</label>
+                                <div class="input-group">
+                                    <input class="form-control" readonly type="text" name="inpIdCajero" value="@ViewBag.ModelCajaAC.IdCajero" id="inpIdCajero" />
+                                    <label class="input-group-addon" id="lblNombreCajero">@ViewBag.ModelCajaAC.NombreCajero</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                    <label>Nombre usuario:</label>
+                    <input class="form-control" readonly type="text" name="inpNombreusuario" value="@ViewBag.ModelCajaAC.NombreUsuario" id="inpNombreUsuario" />
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                    <label>N° documento usuario:</label>
+                    <input class="form-control" readonly type="text" name="inpNombreusuario" value="@ViewBag.ModelCajaAC.IdUsuario" id="inpDocumentoUsuario" />
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                    <label>Número cuenta:</label>
+                    <input type="hidden" id="NumeroCuenta" value="@ViewBag.ModelCajaAC.NumeroCuenta" />
+                    <input class="form-control" readonly type="text" name="inpNumeroCuenta" value="@ViewBag.ModelCajaAC.NumeroCuenta" id="inpNumeroCuenta" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                    <label>Cuota pactada:</label>
+                    <input class="form-control blueText" readonly type="text" value="$ @ViewBag.ModelCajaAC.ValorCuota" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                    <label>Valor recibido:</label>
+                    <div class="input-group">
+                        <label class="input-group-addon">$</label>
+                        <input class="form-control miles calcular" type="text" name="inpValorRecibido" value="0" id="inpValorRecibido" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                    <label>Valor a consignar:</label>
+                    <div class="input-group">
+                        <label class="input-group-addon">$</label>
+                        <input class="form-control miles calcular" type="text" name="inpValorConsignar" value="@ViewBag.ModelCajaAC.ValorCuota" id="inpValorConsignar" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                    <label>Cambio:</label>
+                    <div class="input-group">
+                        <label class="input-group-addon">$</label>
+                        <input class="form-control" readonly type="text" name="inpCambio" value="0" id="inpCambio" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row centerItems">
+            <div class="col-sm-4 col-xs-12 centerCol">
+                <div class="form-group">
+                    <label>Saldo actual:</label>
+                    <div class="input-group">
+                        <label class="input-group-addon">$</label>
+                        <input class="form-control" readonly type="text" name="inpSaldoActual" value="@ViewBag.ModelCajaAC.SaldoActual" id="inpSaldoActual" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12 centerCol">
+                <div class="form-group">
+                    <label>Nuevo saldo:</label>
+                    <div class="input-group">
+                        <label class="input-group-addon">$</label>
+                        <input class="form-control" readonly type="text" name="inpNuevoSaldo" value="@((Convert.ToDecimal((ViewBag.ModelCajaAC.SaldoActual).Replace(".",""))+Convert.ToDecimal((ViewBag.ModelCajaAC.ValorCuota).Replace(".",""))).ToString("N0",formato))" id="inpNuevoSaldo" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row centerItems">
+            <div class="col-sm-6 col-xs-12 centerCol">
+                <div class="form-group">
+                    <label>Observación:</label>
+                    <input class="form-control" type="text" name="inpObservacion" value="" id="inpObservacion" />
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <button class="btn btn-danger" id="btnCancelar">Cancelar</button>
+            <button class="btn btn-primary" id="btnPagar">Registrar pago</button>
+        </div>
+    </div>
+    <br />
+</div>
+
+<style>
+    body {
+        background-color: #DDD;
+    }
+</style>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
+    <script src="~/Scripts/Areas/OperativaDeCaja/FactOpcajas/CreateConsAC.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+}

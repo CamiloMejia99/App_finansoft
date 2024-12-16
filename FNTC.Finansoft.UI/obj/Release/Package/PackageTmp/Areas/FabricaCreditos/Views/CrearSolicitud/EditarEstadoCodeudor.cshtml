@@ -1,0 +1,322 @@
+﻿
+
+@model FNTC.Finansoft.Accounting.DTO.FabricaCreditos.DataReferenciasCodeudorFC
+@using FNTC.Finansoft.Accounting.DTO.MCreditos;
+@using FNTC.Finansoft.Accounting.DTO.FabricaCreditos
+@using FNTC.Finansoft.Accounting.DTO.OperativaDeCaja
+
+@{
+    ViewBag.Title = "Estado";
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+    var nombrereferencia = ViewBag.NombreReferencia;
+    var IDSOLICITUD = ViewBag.idSolicitudA;
+
+}
+
+<h3 align="center"><span class="label label-info">VERIFICACIÓN TELEFÓNICA - Codeudor</span></h3>
+
+@using (Html.BeginForm("EditarEstadoCodeudor", "CrearSolicitud", new { area = "FabricaCreditos" }, FormMethod.Post, new { id = "theForm" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.IDREFCODE)
+
+    <div class="form-group col-md-4">
+        <label>+ Nombre De Codeudor:</label>
+        <input type="text" value="@nombrereferencia" class="form-control" autocomplete="off" readonly />
+
+    </div>
+
+    <br /><br /><br /><br />
+    <h4><span class="label label-info">Requisito</span></h4>
+    <input type="hidden" name="IDSOLICITUD" id="IDSOLICITUD" value="@IDSOLICITUD" readonly />
+    <div class="form">
+
+        <div class="form-group col-md-2">
+            <br />
+            <label>[<b> + Nombre Completo:</b> ]</label>
+
+
+        </div>
+        <div class="form-group col-md-1">
+            <br />
+            <select class="form-control" id="VNOMBRECOMPLETO" name="VNOMBRECOMPLETO">
+                <option value="no" @(Model.VNOMBRECOMPLETO == "no" ? "selected" : "")>NO</option>
+                <option value="si" @(Model.VNOMBRECOMPLETO == "si" ? "selected" : "")>SI</option>
+
+
+            </select>
+
+        </div>
+        <div class="form-group col-md-4">
+            <label>+ Observaciones:</label>
+
+            @Html.EditorFor(model => model.BNOMBRECOMPLETO, new { htmlAttributes = new { @class = "form-control", Style = "text-transform: none" } })
+
+
+        </div>
+        <br /><br /><br /><br />
+
+    </div>
+
+    <div class="form">
+
+        <div class="form-group col-md-2">
+            <br />
+            <label>[<b> + Telefono o Celular:</b> ]</label>
+
+
+        </div>
+        <div class="form-group col-md-1">
+            <br />
+            <select class="form-control" id="VTELEFONOOCELULAR" name="VTELEFONOOCELULAR">
+                <option value="no" @(Model.VTELEFONOOCELULAR == "no" ? "selected" : "")>NO</option>
+                <option value="si" @(Model.VTELEFONOOCELULAR == "si" ? "selected" : "")>SI</option>
+
+
+            </select>
+
+        </div>
+        <div class="form-group col-md-4">
+            <label>+ Observaciones:</label>
+
+            @Html.EditorFor(model => model.BTELEFONOOCELULAR, new { htmlAttributes = new { @class = "form-control", Style = "text-transform: none" } })
+
+
+        </div>
+        <br /><br /><br /><br />
+
+    </div>
+    <div class="form">
+
+        <div class="form-group col-md-2">
+            <br />
+            <label>[<b> + Direccion de Residencia:</b> ]</label>
+
+
+        </div>
+        <div class="form-group col-md-1">
+            <br />
+            <select class="form-control" id="VDIRECCIONRESIDENCIA" name="VDIRECCIONRESIDENCIA">
+                <option value="no" @(Model.VDIRECCIONRESIDENCIA == "no" ? "selected" : "")>NO</option>
+                <option value="si" @(Model.VDIRECCIONRESIDENCIA == "si" ? "selected" : "")>SI</option>
+
+
+            </select>
+
+        </div>
+        <div class="form-group col-md-4">
+            <label>+ Observaciones:</label>
+
+            @Html.EditorFor(model => model.BDIRECCIONRESIDENCIA, new { htmlAttributes = new { @class = "form-control", Style = "text-transform: none" } })
+
+
+        </div>
+        <br /><br /><br /><br />
+
+    </div>
+    <div class="form">
+
+        <div class="form-group col-md-2">
+            <br />
+            <label>[<b> + Actividad Economica:</b> ]</label>
+
+
+        </div>
+        <div class="form-group col-md-1">
+            <br />
+            <select class="form-control" id="VACTIVIDADECONOMICA" name="VACTIVIDADECONOMICA">
+                <option value="no" @(Model.VACTIVIDADECONOMICA == "no" ? "selected" : "")>NO</option>
+                <option value="si" @(Model.VACTIVIDADECONOMICA == "si" ? "selected" : "")>SI</option>
+
+
+            </select>
+
+        </div>
+        <div class="form-group col-md-4">
+            <label>+ Observaciones:</label>
+
+            @Html.EditorFor(model => model.BACTIVIDADECONOMICA, new { htmlAttributes = new { @class = "form-control", Style = "text-transform: none" } })
+
+
+        </div>
+        <br /><br /><br /><br />
+
+    </div>
+    <div class="form">
+
+        <div class="form-group col-md-2">
+            <br />
+            <label>[<b> + Parentesco:</b> ]</label>
+
+
+        </div>
+        <div class="form-group col-md-1">
+            <br />
+            <select class="form-control" id="VPARENTESCO" name="VPARENTESCO">
+                <option value="no" @(Model.VPARENTESCO == "no" ? "selected" : "")>NO</option>
+                <option value="si" @(Model.VPARENTESCO == "si" ? "selected" : "")>SI</option>
+
+
+            </select>
+
+        </div>
+        <div class="form-group col-md-4">
+            <label>+ Observaciones:</label>
+
+            @Html.EditorFor(model => model.BPARENTESCO, new { htmlAttributes = new { @class = "form-control", Style = "text-transform: none" } })
+
+
+        </div>
+        <br /><br /><br /><br />
+
+    </div>
+    <div class="form">
+
+        <div class="form-group col-md-2">
+            <br />
+            <label>[<b> + Tiempo de Conocerse:</b> ]</label>
+
+
+        </div>
+        <div class="form-group col-md-1">
+            <br />
+            <select class="form-control" id="VTIEMPODECONOCER" name="VTIEMPODECONOCER">
+                <option value="no" @(Model.VTIEMPODECONOCER == "no" ? "selected" : "")>NO</option>
+                <option value="si" @(Model.VTIEMPODECONOCER == "si" ? "selected" : "")>SI</option>
+
+
+            </select>
+
+        </div>
+        <div class="form-group col-md-4">
+            <label>+ Observaciones:</label>
+
+            @Html.EditorFor(model => model.BTIEMPODECONOCER, new { htmlAttributes = new { @class = "form-control", Style = "text-transform: none" } })
+
+
+        </div>
+        <br /><br /><br /><br />
+
+    </div>
+    <div class="form">
+
+        <div class="form-group col-md-2">
+            <br />
+            <label>[<b> + Correo:</b> ]</label>
+
+
+        </div>
+        <div class="form-group col-md-1">
+            <br />
+            <select class="form-control" id="VCORREO" name="VCORREO">
+                <option value="no" @(Model.VCORREO == "no" ? "selected" : "")>NO</option>
+                <option value="si" @(Model.VCORREO == "si" ? "selected" : "")>SI</option>
+
+
+            </select>
+
+        </div>
+        <div class="form-group col-md-4">
+            <label>+ Observaciones:</label>
+
+            @Html.EditorFor(model => model.CORREO, new { htmlAttributes = new { @class = "form-control", Style = "text-transform: none" } })
+
+
+        </div>
+        <br /><br /><br /><br />
+
+    </div>
+    <div class="form">
+
+        <div class="form-group col-md-2">
+            <br />
+            <label>[<b> + Ingresos Mensuales:</b> ]</label>
+
+
+        </div>
+        <div class="form-group col-md-1">
+            <br />
+            <select class="form-control" id="VINGRESOS" name="VINGRESOS">
+                <option value="no" @(Model.VINGRESOS == "no" ? "selected" : "")>NO</option>
+                <option value="si" @(Model.VINGRESOS == "si" ? "selected" : "")>SI</option>
+
+
+            </select>
+
+        </div>
+        <div class="form-group col-md-4">
+            <label>+ Observaciones:</label>
+
+            @Html.EditorFor(model => model.BINGRESOS, new { htmlAttributes = new { @class = "form-control", Style = "text-transform: none" } })
+
+
+        </div>
+        <br /><br /><br /><br />
+
+    </div>
+    <div class="form">
+
+        <div class="form-group col-md-2">
+            <br />
+            <label>[<b> + Egresos Mensuales:</b> ]</label>
+
+
+        </div>
+        <div class="form-group col-md-1">
+            <br />
+            <select class="form-control" id="VEGRESOS" name="VEGRESOS">
+                <option value="no" @(Model.VEGRESOS == "no" ? "selected" : "")>NO</option>
+                <option value="si" @(Model.VEGRESOS == "si" ? "selected" : "")>SI</option>
+
+
+            </select>
+
+        </div>
+        <div class="form-group col-md-4">
+            <label>+ Observaciones:</label>
+
+            @Html.EditorFor(model => model.VEGRESOS, new { htmlAttributes = new { @class = "form-control", Style = "text-transform: none" } })
+
+
+        </div>
+        <br /><br /><br /><br />
+
+    </div>
+    <div class="form">
+
+        <div class="form-group col-md-2">
+            <br />
+            <label><b> VERIFICACION:</b> </label>
+
+
+        </div>
+        <div class="form-group col-md-3">
+            <br />
+            <select class="form-control" id="VERIFICACION" name="VERIFICACION">
+                <option value="NoAprobada" @(Model.VERIFICACION == "NoAprobada" ? "selected" : "")>Referencia No Aprobada</option>
+                <option value="Aprobada" @(Model.VERIFICACION == "Aprobada  " ? "selected" : "")>Referencia Aprobada</option>
+
+
+            </select>
+
+        </div>
+
+        <br /><br /><br /><br />
+
+    </div>
+
+
+    <div class="form-group col-md-3">
+        <input type="submit" value="Guardar" class="btn btn-primary" />
+
+    </div>
+
+
+</div>
+
+}

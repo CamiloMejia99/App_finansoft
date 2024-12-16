@@ -1,0 +1,2 @@
+15/07/2022 8:15:15 a. m. - No se encuentra un método de acción público 'CertificadoRetenciones' en el controlador 'FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes.InformesController'. ---_Void HandleUnknownAction(System.String)
+15/07/2022 11:33:58 a. m. - La cadena de entrada no tiene el formato correcto. ---_Void StringToNumber(System.String, System.Globalization.NumberStyles, NumberBuffer ByRef, System.Globalization.NumberFormatInfo, Boolean)

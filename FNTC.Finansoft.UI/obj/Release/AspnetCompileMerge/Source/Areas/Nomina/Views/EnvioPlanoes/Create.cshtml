@@ -1,0 +1,176 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Nomina.EnvioPlano
+
+
+@{
+    /**/
+
+    //Layout = "~/Views/Shared/_Modal.cshtml";
+    var action = (string)ViewBag.action;
+    var boton = (string)ViewBag.boton;
+
+    var Periodo = @ViewBag.PeriodoDeduccion;
+}
+<div>
+    <input type="button" value="Regresar" class="btn btn-purple" onclick="Regresar();" style=" margin-top: 1%; margin-left: 1%; margin-bottom: 1%;" />
+</div>
+<div class="col-md-12">
+
+    <div class="form-group">
+        <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 123%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Envio de Planos</h3></div>
+
+    </div>
+</div>
+
+<div class="modal-body">
+    @using (Html.BeginForm(action, "EnvioPlanoes", new { area = "Nomina" }, FormMethod.Post, new { id = "theForm", autocomplete = "off" }))
+
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EMPRESA, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.EMPRESA, new SelectList(ViewBag.EMP, "CODIGOEMP", "NOMBREMP"), new { @class = "form-control" })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PERDEDUCC, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.EditorFor(model => model.PERDEDUCC, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PERDEDUCC, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ORDEND, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.ORDEND, new SelectList(ViewBag.AP, "ID", "CONCEPTO"), new { @class = "form-control" })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PERIODO, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PERIODO, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PERIODO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PLANO, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.PLANO, new SelectList(ViewBag.CP, "ID", "NOMBRE"), new { @class = "form-control" })
+
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RUTA, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.RUTA, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RUTA, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CONINC, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-offset-1">
+                    <table>
+                        <tr>
+                            <th>
+                                @Html.LabelFor(model => model.CREDITO, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </th>
+                            <th>
+                                @Html.CheckBoxFor(model => model.CREDITO, new { htmlAttributes = new { @class = "form-control" } })
+                            </th>
+                            <th>
+                                @Html.LabelFor(model => model.NOVEDADES, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </th>
+                            <th>
+                                @Html.CheckBoxFor(model => model.NOVEDADES, new { htmlAttributes = new { @class = "form-control" } })
+                            </th>
+
+                            <th>
+                                @Html.LabelFor(model => model.AHORROS, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </th>
+                            <th>
+                                @Html.CheckBoxFor(model => model.AHORROS, new { htmlAttributes = new { @class = "form-control" } })
+                            </th>
+                            <th>
+                                @Html.LabelFor(model => model.APORTES, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </th>
+                            <th>
+                                @Html.CheckBoxFor(model => model.APORTES, new { htmlAttributes = new { @class = "form-control" } })
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Exportar" class="btn btn-default" />
+                    <input type="submit" value="Limpiar" />
+                    <button type="button" id="close" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Salir</button>
+                </div>
+            </div>
+        </div>
+
+    }
+
+</div>
+<script>
+    function Regresar() {
+        location.reload();
+    }
+    $(document).ready(function () {
+        $('#centro').modal('show');
+
+    });
+    //Al Ocultar el modal
+    $(document.body).on('hidden.bs.modal', function () {
+        $('#centro').removeData('bs.modal');
+    });
+
+    $("#theForm").submit(function (event) {
+        event.preventDefault();
+        var theForm = $(this);
+        var theAction = theForm.attr("action");
+        //if (!theForm.valid()) {
+        //    return false;
+        //}
+        $.post('/Nomina/Discriminacions/Create', theForm.serialize())
+            .done(function (result) {
+                event.preventDefault();
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Datos Guardados Correctamente..",
+                    confirmButtonText: "Ok!",
+                }, function () {
+
+                    $("#close").click();
+                });
+
+            });
+    }   );
+
+
+</script>

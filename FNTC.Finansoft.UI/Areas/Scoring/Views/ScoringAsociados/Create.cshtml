@@ -1,0 +1,1450 @@
+﻿@*model FNTC.Finansoft.Accounting.DTO.Scoring.ScoringVariableCapacidadPago*@
+@model FNTC.Finansoft.Accounting.DTO.Scoring.ViewModelScoringAsociados
+@*model FNTC.Finansoft.Accounting.DTO.MCreditos.ViewModelPrestamosYGarantias*@
+
+@{
+    /**/
+
+    Layout = "~/Views/Shared/_LayoutActivosFijos.cshtml";
+}
+
+@{
+    ViewBag.Title = "Scoring Asociados";
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+<link href="~/Content/styleGeneral.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+<script src="~/Scripts/datatable.js"></script>
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<script src="~/Scripts/sweetalert.min.js"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+
+        <div class="col-lg-12">
+
+            <div class="form-group col-md-11" style="margin-left:40px">
+
+                <div class="form-group">
+                    <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 125%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Scoring Asociados</h3></div>
+                </div>
+
+                <div class="row contenido">
+
+                    <div class="form-group col-md-3">
+                        <label class="control-label">NIT :</label>
+                        @Html.DropDownList("Vinculaciones", null, "Seleccione Un Asociado", new { @class = "chosen-select-single", @id = "Vinculacion", onkeypress = "return valida(event)" })
+
+
+
+                        <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                        <p style="color:red">@ViewBag.mensaje</p>
+
+                    </div>
+
+                    <div class="form-group col-md-5">
+                        <label class="control-label">Nombre :</label>
+                        <label class="form-control" id="nombreTercero"></label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Sexo: </label>
+                                            <label class="form-control" id="sexo"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje: </label>
+                                            <label class="form-control" id="PuntajeSexo"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Estado Civil: </label>
+                                            <label class="form-control" id="estadocivil"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje: </label>
+                                            <label class="form-control" id="PuntajeEstadoCivil"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Edad:</label>
+                                            <label class="form-control" id="edad"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje: </label>
+                                            <label class="form-control" id="PuntajeEdad"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Tipo de Vivienda:</label>
+                                            <label class="form-control" id="vivienda"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje: </label>
+                                            <label class="form-control" id="PuntajeVivienda"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Estrato:</label>
+                                            <label class="form-control" id="Estrato"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje: </label>
+                                            <label class="form-control" id="PuntajeEstrato"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Ocupación:</label>
+                                            <label class="form-control" id="Ocupacion"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje: </label>
+                                            <label class="form-control" id="PuntajeOcupacion"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Antiguedad Laboral:</label>
+                                            <label class="form-control" id="AntiguedadL"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje: </label>
+                                            <label class="form-control" id="PuntajeAntiguedadL"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table">
+
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Total Ingresos Mensuales: </label>
+                                            <label class="form-control" id="salario"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje: </label>
+                                            <label class="form-control" id="PuntajeSalario"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Antiguedad en la Cooperativa: </label>
+                                            <label class="form-control" id="antiguedad"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje: </label>
+                                            <label class="form-control" id="PuntajeAntiguedadC"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Agencia : </label>
+                                            <label class="form-control" id="agencia"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje: </label>
+                                            <label class="form-control" id="PuntajeAgencia"></label>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Personas a cargo : </label>
+                                            <label class="form-control" id="PersonasCargo"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje: </label>
+                                            <label class="form-control" id="PuntajePersonasCargo"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Nivel Educativo : </label>
+                                            <label class="form-control" id="NivelEducativo"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje: </label>
+                                            <label class="form-control" id="PuntajeNivelEducativo"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Tipo de Contrato : </label>
+                                            <label class="form-control" id="TipoContrato"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje: </label>
+                                            <label class="form-control" id="PuntajeTipoContrato"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+                    <dixv class="row">
+                        <div class="col-md-6">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">CATEGORIA DE RIESGO:</label>
+                                            @Html.DropDownList("Categorias", null, "Seleccione una categoría", new { style = "width: 100%", @class = "chosen-select-single", @id = "Categoria" })
+                                            <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                            <p style="color:red">@ViewBag.mensaje</p>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje :</label>
+                                            <label class="form-control" id="PuntajeCategoria"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Forma de Pago:</label>
+                                            @Html.DropDownList("FormaPagos", null, new { style = "width: 100%", @class = "chosen-select-single", @id = "FormaPago" })
+                                            <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                            <p style="color:red">@ViewBag.mensaje</p>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje :</label>
+                                            <label class="form-control" id="PuntajeFormaPago"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Monto:</label>
+                                            @Html.DropDownList("Montos", null, new { style = "width: 100%", @class = "chosen-select-single", @id = "Monto" })
+
+                                            <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                            <p style="color:red">@ViewBag.mensaje</p>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje :</label>
+                                            <label class="form-control" id="PuntajeMonto"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">GARANTIAS:</label>
+                                            @Html.DropDownList("Garantias", null, new { style = "width: 100%", @class = "chosen-select-single", @id = "Garantia" })
+                                            <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                            <p style="color:red">@ViewBag.mensaje</p>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje :</label>
+                                            <label class="form-control" id="PuntajeGarantia"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Meses de Plazo:</label>
+                                            @Html.DropDownList("Plazos", null, new { style = "width: 100%", @class = "chosen-select-single", @id = "Plazo" })
+                                            <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                            <p style="color:red">@ViewBag.mensaje</p>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje :</label>
+                                            <label class="form-control" id="PuntajePlazo"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Reestructurado :</label>
+                                            @Html.DropDownList("Reestructurados", null, new { style = "width: 100%", @class = "chosen-select-single", @id = "Reestructurado" })
+                                            <!--<input type="text" class="form-control" name="cuenta" id="cuenta" value=@Session["Seleccionada"] autocomplete="off" required />-->
+                                            <p style="color:red">@ViewBag.mensaje</p>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Puntaje :</label>
+                                            <label class="form-control" id="PuntajeReestructurado"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+
+                            </table>
+                        </div>
+
+
+
+                    </dixv>
+
+
+                    <dixv class="row">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <tr>
+
+                                    <td>
+                                        <div class="form-group col-md-5">
+                                            <label class="control-label">CAPACIDAD DE PAGO (MENSUALIDAD): </label>
+                                            <label class="form-control" id="CapacidadPago"></label>
+
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-5">
+                                            <label class="control-label"> PORCENTAJE DE ENDEUDAMIENTO: </label>
+                                            <label class="form-control" id="Endeudamiento"></label>
+
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </dixv>
+                    <dixv class="row">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">PUNTAJE PARCIAL SCORING: </label>
+                                            <label class="form-control" id="PuntajeScoring"></label>
+
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">INGRESE PUNTAJE DATACRÉDITO: </label>
+                                            <input class="form-control" , id="datacredito" onkeyup="SumaDataCredito()" maxlength="3" style="font-weight: bold;">
+
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">PUNTAJE TOTAL SCORING: </label>
+                                            <label class="form-control" id="PuntajeTotalScoring"></label>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+                    </dixv>
+                </div>
+
+
+                @*HASTA AQUI*@
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <input type="button" value="Guardar Scoring" class="btn btn-success" id="guardar" />
+    </div>
+    <br />
+    <br />
+    <br />
+}
+
+<div>
+    @Html.ActionLink("Regresar a la Lista", "../Scoring/")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (ViewBag.mensaje != null)
+    {
+        <script>
+
+			window.onload = function () {
+				swal('Error', '@ViewBag.mensaje', 'warning');
+			}
+        </script>
+    }
+    <script>
+        /* SEPARADOR DE MILES POR KEY UP */
+        $(document).ready(function () {
+            $("#datacredito").on({
+                "focus": function (event) {
+                    $(event.target).select();
+                },
+                "keyup": function (event) {
+                    $(event.target).val(function (index, value) {
+                        return value.replace(/\D/g, "")
+                            .replace(/([0-9])([0-9]{3})$/, '$1$2')
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, "");
+                    });
+                }
+            });
+        });
+        /*FIN SEPARADOR DE MILES POR KEY UP*/
+    </script>
+
+    <script>
+    function SumaDataCredito() {
+        var datacredito = document.getElementById("datacredito");
+
+
+
+        var datacreditovalor = parseInt(datacredito.value);
+        //var PuntajeScoring2 = document.getElementById("PuntajeScoring");
+        var PuntajeScoring2 = $("#PuntajeScoring").text()
+        var PuntajeScoringvalor = parseInt(PuntajeScoring2);
+
+
+
+
+
+
+        $("#PuntajeTotalScoring").text(datacreditovalor + PuntajeScoringvalor);
+
+
+
+    }
+    $("#guardar").click(function () {
+
+
+        var Cedula1 = $("#Vinculacion").val();
+        var Categoria1 = $("#Categoria").val();
+        var Garantias1 = $("#Garantia").val();
+        var FormaPago1 = $("#FormaPago").val();
+        var MesesPlazo1 = $("#Plazo").val();
+        var Monto1 = $("#Monto").val();
+        var Reestructurado1 = $("#Reestructurado").val();
+        var datacredito2 = $("#datacredito").val();
+
+
+        if (Cedula1 == '') {
+            swal({
+                title: "Alerta",
+                type: "info",
+                text: "Debe Seleccionar un Asociado",
+            })
+        }
+        else
+
+        if (Categoria1 == '')
+            {
+            swal({
+                title: "Alerta",
+                type: "info",
+                text: "Debe Seleccionar una Categoria de Riesgo",
+            })
+        }
+        else
+        if (Garantias1 == '')
+        {
+            swal({
+                title: "Alerta",
+                type: "info",
+                text: "Debe Seleccionar una Garantia",
+            })
+        }
+        else
+            if (FormaPago1 == '')
+            {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Seleccionar una Forma de Pago",
+                })
+                    }
+        else
+        if (MesesPlazo1 == '')
+        {
+            swal({
+                title: "Alerta",
+                type: "info",
+                text: "Debe Seleccionar un Plazo",
+            })
+        }
+        else
+        if (Monto1 == '') {
+            swal({
+                title: "Alerta",
+                type: "info",
+                text: "Debe Seleccionar un Monto",
+            })
+            }
+        else
+        if (Reestructurado1 == '') {
+            swal({
+                title: "Alerta",
+                type: "info",
+                text: "Debe Seleccionar si el Credito a sido Reestructurado",
+            })
+        }
+        else
+        if (datacredito2 == '') {
+                swal({
+                    title: "Alerta",
+                    type: "info",
+                    text: "Debe Especificar un Puntaje Datacrédito",
+                })
+            }
+
+        else
+            {
+            if (datacredito2 == '0') {
+                swal({
+                    title: "El puntaje datacrédito está en 0, seguro de continuar?",
+                    text: "",
+                    type: "warning",
+                    showCancelButton: true,
+                    cancelButtonText: "CANCELAR",
+                    confirmButtonColor: "#0080FF",
+                    confirmButtonText: "GUARDAR",
+                    closeOnConfirm: false
+                },
+
+                    function () {
+
+
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("GetDatosAsociado", "ScoringAsociados")",
+                            datatype: "Json",
+                            data: { NIT: $('#Vinculacion').val(), NombreG: $("#nombreTercero").text(), PuntajeG: $("#PuntajeScoring").text(), PuntajeD: $("#datacredito").val(), PuntajeT: $("#PuntajeTotalScoring").text(), CapacidadPagoG: $("#CapacidadPago").text(), PorcentajeEndeudamientoG: $("#Endeudamiento").text() },
+
+                            success: function (data) {
+
+                                swal({
+                                    title: "Datos guardados correctamente",
+                                    text: "",
+                                    type: "success",
+                                    showCancelButton: false,
+                                    cancelButtonText: "",
+                                    confirmButtonColor: "#0080FF",
+                                    confirmButtonText: "OK",
+                                    closeOnConfirm: true
+                                },
+
+                                    function () {
+                                        //$("#Vinculacion").text();
+                                        window.location.reload();
+                                    });
+
+                            }
+
+                        });
+
+
+                    });
+            }
+            else {
+                   $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("GetDatosAsociado", "ScoringAsociados")",
+                            datatype: "Json",
+                            data: { NIT: $('#Vinculacion').val(), NombreG: $("#nombreTercero").text(), PuntajeG: $("#PuntajeScoring").text(), PuntajeD: $("#datacredito").val(), PuntajeT: $("#PuntajeTotalScoring").text(), CapacidadPagoG: $("#CapacidadPago").text(), PorcentajeEndeudamientoG: $("#Endeudamiento").text() },
+
+                            success: function (data) {
+
+                                swal({
+                                    title: "Datos guardados correctamente",
+                                    text: "",
+                                    type: "success",
+                                    showCancelButton: false,
+                                    cancelButtonText: "",
+                                    confirmButtonColor: "#0080FF",
+                                    confirmButtonText: "OK",
+                                    closeOnConfirm: true
+                                },
+
+                                    function () {
+                                        //$("#Vinculacion").text();
+                                        window.location.reload();
+                                    });
+                            }
+                        });
+            }
+
+
+        }
+
+    });
+
+    </script>
+
+    <script type="text/javascript">
+        $("#Vinculacion").chosen().change(function () {
+
+            var vinculacion = $("#Vinculacion").val();
+
+            if (vinculacion != "")
+            {
+                
+                $('#mitabla tr').empty();
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetDatosEstadoCuenta", "ScoringAsociados")",
+                    datatype: "Json",
+                data: { NIT: $('#Vinculacion').val() },
+                    success: function (data) {
+                        $("#nombreTercero").text(data[0]);
+                        $("#sexo").text(data[1]);
+                        $("#estadocivil").text(data[2]);
+                        $("#edad").text(data[3]);
+                        $("#vivienda").text(data[4]);
+                        $("#salario").text(formatNumberMiles.new(data[5]));
+                        $("#antiguedad").text(data[6]);
+                        $("#agencia").text(data[7]);
+                        $("#PuntajeSexo").text(data[8]);
+                        $("#PuntajeEstadoCivil").text(data[9]);
+                        $("#PuntajeEdad").text(data[10]);
+                        $("#PuntajeVivienda").text(data[11]);
+                        $("#PuntajeSalario").text(data[12]);
+                        $("#PuntajeAgencia").text(data[13]);
+                        $("#PuntajeAntiguedadC").text(data[14]);
+                        $("#PersonasCargo").text(data[15]);
+                        $("#PuntajePersonasCargo").text(data[16]);
+                        //capacidad pago y endeudamiento no es puntaje no se suba con las demas variables
+                        $("#CapacidadPago").text(data[17]);
+                        $("#Endeudamiento").text(data[18]);
+                        //Fin Capacidad Pago
+                        $("#Estrato").text(data[19]);
+                        $("#PuntajeEstrato").text(data[20]);
+                        $("#NivelEducativo").text(data[21]);
+                        $("#PuntajeNivelEducativo").text(data[22]);
+                        $("#TipoContrato").text(data[23]);
+                        $("#PuntajeTipoContrato").text(data[24]);
+                        $("#Ocupacion").text(data[25]);
+                        $("#PuntajeOcupacion").text(data[26]);
+                        $("#AntiguedadL").text(data[27]);
+                        $("#PuntajeAntiguedadL").text(data[28]);
+                        var sum_scoring1 = (data[8]);
+                        var sum_scoring2 = (data[9]);
+                        var sum_scoring3 = (data[10]);
+                        var sum_scoring4 = (data[11]);
+                        var sum_scoring5 = (data[12]);
+                        var sum_scoring6 = (data[13]);
+                        var sum_scoring7 = (data[14]);
+                        var sum_scoring8 = (data[16]);
+                        var sum_scoring9 = (data[20]);
+                        var sum_scoring10 = (data[22]);
+                        var sum_scoring11 = (data[24]);
+                        var sum_scoring12 = (data[26]);
+                        var sum_scoring13 = (data[28]);
+                        valor1 = parseInt(sum_scoring1);
+                        valor2 = parseInt(sum_scoring2);
+                        valor3 = parseInt(sum_scoring3);
+                        valor4 = parseInt(sum_scoring4);
+                        valor5 = parseInt(sum_scoring5);
+                        valor6 = parseInt(sum_scoring6);
+                        valor7 = parseInt(sum_scoring7);
+                        valor8 = parseInt(sum_scoring8);
+                        valor9 = parseInt(sum_scoring9);
+                        valor10 = parseInt(sum_scoring10);
+                        valor11 = parseInt(sum_scoring11);
+                        valor12 = parseInt(sum_scoring12);
+                        valor13 = parseInt(sum_scoring13);
+                        $("#PuntajeScoring").text("");
+                        $("#datacredito").val(0);
+                        sum1 = valor1 + valor2 + valor3 + valor4 + valor5 + valor6 + valor7 + valor8 + valor9 + valor10 + valor11 + valor12 + valor13;
+                        $("#PuntajeScoring").text(sum1);
+
+                        $("#PuntajeTotalScoring").text(sum1);
+
+                        $('#Categoria').val("").trigger('chosen:updated');
+                        $('#Garantia').val("").trigger('chosen:updated');
+                        //$('#TipoContrato').val("").trigger('chosen:updated');
+                        $('#Reestructurado').val("").trigger('chosen:updated');
+                        //$('#Ocupacion').val("").trigger('chosen:updated');
+                       // $('#AntiguedadL').val("").trigger('chosen:updated');
+                        $('#FormaPago').val("").trigger('chosen:updated');
+                        $('#Plazo').val("").trigger('chosen:updated');
+                        $('#Monto').val("").trigger('chosen:updated');
+                        $("#PuntajeGarantia").text("");
+                        $("#PuntajeCategoria").text("");
+                        //$("#PuntajeOcupacion").text("");
+                       // $("#PuntajeAntiguedadL").text("");
+                        $("#PuntajeReestructurado").text("");
+                       // $("#PuntajeTipoContrato").text("");
+                        $("#PuntajeFormaPago").text("");
+                        $("#PuntajePlazo").text("");
+                        $("#PuntajeMonto").text("");
+
+                    }
+                });
+            }
+
+
+
+        });
+
+
+    </script>
+
+
+
+    <script type="text/javascript">
+        $("#Categoria").chosen().change(function () {
+            valor1 = 0;
+            valor2 = 0;
+            valor3 = 0;
+            valor4 = 0;
+            valor5 = 0;
+            valor6 = 0;
+            valor7 = 0;
+            valor8 = 0;
+            valor9 = 0;
+            valor10 = 0;
+            valor11 = 0;
+            valor12 = 0;
+            valor13 = 0;
+            total = 0;
+            sum2 = 0;
+            sum3 = 0;
+            sum4 = 0;
+            sum5 = 0;
+            var categoria = $("#Categoria").val();
+            $("#PuntajeCategoria").text("");
+            $("#PuntajeScoring").text("");
+            $("#PuntajeTotalScoring").text("");
+            if (categoria != "") {
+                $('#mitabla tr').empty();
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetDatosCategorias", "ScoringAsociados")",
+                    datatype: "Json",
+                    data: { NombreCategoria: $('#Categoria').val() },
+                    success: function (data) {
+                        $("#PuntajeCategoria").text(data[0]);
+                        var PuntajeCat = (data[0]);
+                        valor_c1 = parseInt(PuntajeCat);
+                        valor1 = ($("#PuntajeSexo").text());
+                        valor11 = parseInt(valor1);
+                        valor2 = ($("#PuntajeEstadoCivil").text());
+                        valor21 = parseInt(valor2);
+                        valor3 = ($("#PuntajeEdad").text());
+                        valor31 = parseInt(valor3);
+                        valor4 = ($("#PuntajeVivienda").text());
+                        valor41 = parseInt(valor4);
+                        valor5 = ($("#PuntajeSalario").text());
+                        valor51 = parseInt(valor5);
+                        valor6 = ($("#PuntajeAgencia").text());
+                        valor61 = parseInt(valor6);
+                        valor7 = ($("#PuntajeAntiguedadC").text());
+                        valor71 = parseInt(valor7);
+                        valor8 = ($("#PuntajePersonasCargo").text());
+                        valor81 = parseInt(valor8);
+                        valor9 = ($("#PuntajeEstrato").text());
+                        valor91 = parseInt(valor9);
+                        valor10 = ($("#PuntajeNivelEducativo").text());
+                        valor101 = parseInt(valor10);
+                        valor11a = ($("#PuntajeTipoContrato").text());
+                        valor111a = parseInt(valor11a);
+                        valor12a = ($("#PuntajeOcupacion").text());
+                        valor121a = parseInt(valor12a);
+                        valor13a = ($("#PuntajeAntiguedadL").text());
+                        valor131a = parseInt(valor13a);
+
+                        PuntajeGar = ($("#PuntajeGarantia").text());
+                        valor_g1 = parseInt(PuntajeGar);
+                        if (PuntajeGar == "") {
+                            valor_g1 = 0;
+                        }
+
+                        PuntajeRE = ($("#PuntajeReestructurado").text());
+                        valor_RE1 = parseInt(PuntajeRE);
+                        if (PuntajeRE == "") {
+                            valor_RE1 = 0;
+                        }
+
+                        PuntajePA = ($("#PuntajeFormaPago").text());
+                        valor_PA1 = parseInt(PuntajePA);
+                        if (PuntajePA == "") {
+                            valor_PA1 = 0;
+                        }
+
+                        PuntajePL = ($("#PuntajePlazo").text());
+                        valor_PL1 = parseInt(PuntajePL);
+                        if (PuntajePL == "") {
+                            valor_PL1 = 0;
+                        }
+                        PuntajeMO = ($("#PuntajeMonto").text());
+                        valor_MO1 = parseInt(PuntajeMO);
+                        if (PuntajeMO == "") {
+                            valor_MO1 = 0;
+                        }
+
+                        sum2 = valor_c1 + valor11 + valor21 + valor31 + valor41 + valor51 + valor61 + valor71 + valor81 + valor91 + valor101 + valor111a + valor121a + valor131a + valor_g1 + valor_RE1 + valor_PA1 + valor_PL1 + valor_MO1;
+                        $("#PuntajeScoring").text(sum2);
+                        SumPuntajeDatacredito1 = ($("#datacredito").val());
+                        SumPuntajeDatacredito = parseInt(SumPuntajeDatacredito1);
+                        $("#PuntajeTotalScoring").text(sum2 + SumPuntajeDatacredito);
+
+                    }
+                });
+            }
+        });
+
+    </script>
+
+
+    <script type="text/javascript">
+        $("#Garantia").chosen().change(function () {
+            valor1 = 0;
+            valor2 = 0;
+            valor3 = 0;
+            valor4 = 0;
+            valor5 = 0;
+            valor6 = 0;
+            valor7 = 0;
+            valor8 = 0;
+            valor9 = 0;
+            valor10 = 0;
+            valor11 = 0;
+            valor12 = 0;
+            valor13 = 0;
+            total = 0;
+            sum2 = 0;
+            sum3 = 0;
+            sum4 = 0;
+            sum5 = 0;
+            var garantia = $("#Garantia").val();
+            $("#PuntajeGarantia").text("");
+            $("#PuntajeScoring").text("");
+            $("#PuntajeTotalScoring").text("");
+            if (garantia != "") {
+                  $('#mitabla tr').empty();
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetDatosGarantias", "ScoringAsociados")",
+                    datatype: "Json",
+                data: { NombreGarantia: $('#Garantia').val() },
+                    success: function (data) {
+                        $("#PuntajeGarantia").text(data[0]);
+                        var PuntajeGar = (data[0]);
+                        valor_g1 = parseInt(PuntajeGar);
+                        valor1 = ($("#PuntajeSexo").text());
+                        valor11 = parseInt(valor1);
+                        valor2 = ($("#PuntajeEstadoCivil").text());
+                        valor21 = parseInt(valor2);
+                        valor3 = ($("#PuntajeEdad").text());
+                        valor31 = parseInt(valor3);
+                        valor4 = ($("#PuntajeVivienda").text());
+                        valor41 = parseInt(valor4);
+                        valor5 = ($("#PuntajeSalario").text());
+                        valor51 = parseInt(valor5);
+                        valor6 = ($("#PuntajeAgencia").text());
+                        valor61 = parseInt(valor6);
+                        valor7 = ($("#PuntajeAntiguedadC").text());
+                        valor71 = parseInt(valor7);
+                        valor8 = ($("#PuntajePersonasCargo").text());
+                        valor81 = parseInt(valor8);
+                        valor9 = ($("#PuntajeEstrato").text());
+                        valor91 = parseInt(valor9);
+                        valor10 = ($("#PuntajeNivelEducativo").text());
+                        valor101 = parseInt(valor10);
+                        valor11a = ($("#PuntajeTipoContrato").text());
+                        valor111a = parseInt(valor11a);
+                        valor12a = ($("#PuntajeOcupacion").text());
+                        valor121a = parseInt(valor12a);
+                        valor13a = ($("#PuntajeAntiguedadL").text());
+                        valor131a = parseInt(valor13a);
+
+                        PuntajeCat = ($("#PuntajeCategoria").text());
+                        valor_c1 = parseInt(PuntajeCat);
+                        if (PuntajeCat == "") {
+                            valor_c1 = 0;
+                        }
+
+
+
+                        PuntajeRE = ($("#PuntajeReestructurado").text());
+                        valor_RE1 = parseInt(PuntajeRE);
+                        if (PuntajeRE == "") {
+                            valor_RE1 = 0;
+                        }
+
+                        PuntajePA = ($("#PuntajeFormaPago").text());
+                        valor_PA1 = parseInt(PuntajePA);
+                        if (PuntajePA == "") {
+                            valor_PA1 = 0;
+                        }
+
+                        PuntajePL = ($("#PuntajePlazo").text());
+                        valor_PL1 = parseInt(PuntajePL);
+                        if (PuntajePL == "") {
+                            valor_PL1 = 0;
+                        }
+                        PuntajeMO = ($("#PuntajeMonto").text());
+                        valor_MO1 = parseInt(PuntajeMO);
+                        if (PuntajeMO == "") {
+                            valor_MO1 = 0;
+                        }
+                        sum4 = valor11 + valor21 + valor31 + valor41 + valor51 + valor61 + valor71 + valor81 + valor91 + valor101 + valor111a + valor121a + valor131a + valor_c1 + valor_g1 + valor_RE1 + valor_PA1 + valor_PL1 + valor_MO1;
+                        $("#PuntajeScoring").text(sum4);
+
+                        SumPuntajeDatacredito1 = ($("#datacredito").val());
+                        SumPuntajeDatacredito = parseInt(SumPuntajeDatacredito1);
+                        $("#PuntajeTotalScoring").text(sum4 + SumPuntajeDatacredito);
+                    }
+                });
+            }
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        $("#Reestructurado").chosen().change(function () {
+            valor1 = 0;
+            valor2 = 0;
+            valor3 = 0;
+            valor4 = 0;
+            valor5 = 0;
+            valor6 = 0;
+            valor7 = 0;
+            valor8 = 0;
+            valor9 = 0;
+            valor10 = 0;
+            valor11 = 0;
+            valor12 = 0;
+            valor13 = 0;
+            total = 0;
+            sum2 = 0;
+            sum3 = 0;
+            sum4 = 0;
+            sum5 = 0;
+            sum6 = 0;
+            var reestructurado = $("#Reestructurado").val();
+            $("#PuntajeReestructurado").text("");
+            $("#PuntajeScoring").text("");
+            $("#PuntajeTotalScoring").text("");
+            if (reestructurado != "") {
+                  $('#mitabla tr').empty();
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetDatosReestructurado", "ScoringAsociados")",
+                    datatype: "Json",
+                data: { EstadoReestructurado: $('#Reestructurado').val() },
+                    success: function (data) {
+                        $("#PuntajeReestructurado").text(data[0]);
+                        var PuntajeRE = (data[0]);
+                        valor_RE1 = parseInt(PuntajeRE);
+                        valor1 = ($("#PuntajeSexo").text());
+                        valor11 = parseInt(valor1);
+                        valor2 = ($("#PuntajeEstadoCivil").text());
+                        valor21 = parseInt(valor2);
+                        valor3 = ($("#PuntajeEdad").text());
+                        valor31 = parseInt(valor3);
+                        valor4 = ($("#PuntajeVivienda").text());
+                        valor41 = parseInt(valor4);
+                        valor5 = ($("#PuntajeSalario").text());
+                        valor51 = parseInt(valor5);
+                        valor6 = ($("#PuntajeAgencia").text());
+                        valor61 = parseInt(valor6);
+                        valor7 = ($("#PuntajeAntiguedadC").text());
+                        valor71 = parseInt(valor7);
+                        valor8 = ($("#PuntajePersonasCargo").text());
+                        valor81 = parseInt(valor8);
+                        valor9 = ($("#PuntajeEstrato").text());
+                        valor91 = parseInt(valor9);
+                        valor10 = ($("#PuntajeNivelEducativo").text());
+                        valor101 = parseInt(valor10);
+                        valor11a = ($("#PuntajeTipoContrato").text());
+                        valor111a = parseInt(valor11a);
+                        valor12a = ($("#PuntajeOcupacion").text());
+                        valor121a = parseInt(valor12a);
+                        valor13a = ($("#PuntajeAntiguedadL").text());
+                        valor131a = parseInt(valor13a);
+
+                        PuntajeCat = ($("#PuntajeCategoria").text());
+                        valor_c1 = parseInt(PuntajeCat);
+                        if (PuntajeCat == "") {
+                            valor_c1 = 0;
+                        }
+
+                        PuntajeGar = ($("#PuntajeGarantia").text());
+                        valor_g1 = parseInt(PuntajeGar);
+                        if (PuntajeGar == "") {
+                            valor_g1 = 0;
+                        }
+
+
+                        PuntajePA = ($("#PuntajeFormaPago").text());
+                        valor_PA1 = parseInt(PuntajePA);
+                        if (PuntajePA == "") {
+                            valor_PA1 = 0;
+                        }
+                        PuntajePL = ($("#PuntajePlazo").text());
+                        valor_PL1 = parseInt(PuntajePL);
+                        if (PuntajePL == "") {
+                            valor_PL1 = 0;
+                        }
+                        PuntajeMO = ($("#PuntajeMonto").text());
+                        valor_MO1 = parseInt(PuntajeMO);
+                        if (PuntajeMO == "") {
+                            valor_MO1 = 0;
+                        }
+                        sum7 = valor11 + valor21 + valor31 + valor41 + valor51 + valor61 + valor71 + valor81 + valor91 + valor101 + valor111a + valor121a + valor131a + valor_c1 + valor_g1 + valor_RE1 + valor_PA1 + valor_PL1 + valor_MO1;
+                        $("#PuntajeScoring").text(sum7);
+                        SumPuntajeDatacredito1 = ($("#datacredito").val());
+                        SumPuntajeDatacredito = parseInt(SumPuntajeDatacredito1);
+                        $("#PuntajeTotalScoring").text(sum7 + SumPuntajeDatacredito);
+                    }
+                });
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        $("#FormaPago").chosen().change(function () {
+            valor1 = 0;
+            valor2 = 0;
+            valor3 = 0;
+            valor4 = 0;
+            valor5 = 0;
+            valor6 = 0;
+            valor7 = 0;
+            valor8 = 0;
+            valor9 = 0;
+            valor10 = 0;
+            valor11 = 0;
+            valor12 = 0;
+            valor13 = 0;
+            total = 0;
+            sum2 = 0;
+            sum3 = 0;
+            sum4 = 0;
+            sum5 = 0;
+            sum6 = 0;
+            sum7 = 0;
+            sum8 = 0;
+            var formapago = $("#FormaPago").val();
+            $("#PuntajeFormaPago").text("");
+            $("#PuntajeScoring").text("");
+            $("#PuntajeTotalScoring").text("");
+            if (formapago != "") {
+                  $('#mitabla tr').empty();
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetDatosFormaPago", "ScoringAsociados")",
+                    datatype: "Json",
+                data: { NombreFormaPago: $('#FormaPago').val() },
+                    success: function (data) {
+                        $("#PuntajeFormaPago").text(data[0]);
+                        var PuntajePA = (data[0]);
+                        valor_PA1 = parseInt(PuntajePA);
+                        valor1 = ($("#PuntajeSexo").text());
+                        valor11 = parseInt(valor1);
+                        valor2 = ($("#PuntajeEstadoCivil").text());
+                        valor21 = parseInt(valor2);
+                        valor3 = ($("#PuntajeEdad").text());
+                        valor31 = parseInt(valor3);
+                        valor4 = ($("#PuntajeVivienda").text());
+                        valor41 = parseInt(valor4);
+                        valor5 = ($("#PuntajeSalario").text());
+                        valor51 = parseInt(valor5);
+                        valor6 = ($("#PuntajeAgencia").text());
+                        valor61 = parseInt(valor6);
+                        valor7 = ($("#PuntajeAntiguedadC").text());
+                        valor71 = parseInt(valor7);
+                        valor8 = ($("#PuntajePersonasCargo").text());
+                        valor81 = parseInt(valor8);
+                        valor9 = ($("#PuntajeEstrato").text());
+                        valor91 = parseInt(valor9);
+                        valor10 = ($("#PuntajeNivelEducativo").text());
+                        valor101 = parseInt(valor10);
+                        valor11a = ($("#PuntajeTipoContrato").text());
+                        valor111a = parseInt(valor11a);
+                        valor12a = ($("#PuntajeOcupacion").text());
+                        valor121a = parseInt(valor12a);
+                        valor13a = ($("#PuntajeAntiguedadL").text());
+                        valor131a = parseInt(valor13a);
+
+
+                        PuntajeCat = ($("#PuntajeCategoria").text());
+                        valor_c1 = parseInt(PuntajeCat);
+                        if (PuntajeCat == "") {
+                            valor_c1 = 0;
+                        }
+
+                        PuntajeGar = ($("#PuntajeGarantia").text());
+                        valor_g1 = parseInt(PuntajeGar);
+                        if (PuntajeGar == "") {
+                            valor_g1 = 0;
+                        }
+
+                        PuntajeRE = ($("#PuntajeReestructurado").text());
+                        valor_RE1 = parseInt(PuntajeRE);
+                        if (PuntajeRE == "") {
+                            valor_RE1 = 0;
+                        }
+
+                        PuntajePL = ($("#PuntajePlazo").text());
+                        valor_PL1 = parseInt(PuntajePL);
+                        if (PuntajePL == "") {
+                            valor_PL1 = 0;
+                        }
+                        PuntajeMO = ($("#PuntajeMonto").text());
+                        valor_MO1 = parseInt(PuntajeMO);
+                        if (PuntajeMO == "") {
+                            valor_MO1 = 0;
+                        }
+                        sum8 = valor11 + valor21 + valor31 + valor41 + valor51 + valor61 + valor71 + valor81 + valor91 + valor101 + valor111a + valor121a + valor131a + valor_c1 + valor_g1 + valor_RE1 + valor_PA1 + valor_PL1 + valor_MO1;
+                        $("#PuntajeScoring").text(sum8);
+                        SumPuntajeDatacredito1 = ($("#datacredito").val());
+                        SumPuntajeDatacredito = parseInt(SumPuntajeDatacredito1);
+                        $("#PuntajeTotalScoring").text(sum8 + SumPuntajeDatacredito);
+                    }
+                });
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        $("#Plazo").chosen().change(function () {
+            valor1 = 0;
+            valor2 = 0;
+            valor3 = 0;
+            valor4 = 0;
+            valor5 = 0;
+            valor6 = 0;
+            valor7 = 0;
+            valor8 = 0;
+            valor9 = 0;
+            valor10 = 0;
+            valor11 = 0;
+            valor12 = 0;
+            valor13 = 0;
+            total = 0;
+            sum2 = 0;
+            sum3 = 0;
+            sum4 = 0;
+            sum5 = 0;
+            sum6 = 0;
+            sum7 = 0;
+            sum8 = 0;
+            var plazo = $("#Plazo").val();
+            $("#PuntajePlazo").text("");
+            $("#PuntajeScoring").text("");
+            $("#PuntajeTotalScoring").text("");
+            if (plazo != "") {
+                  $('#mitabla tr').empty();
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetDatosPlazo", "ScoringAsociados")",
+                    datatype: "Json",
+                data: { MesesPlazo: $('#Plazo').val() },
+                    success: function (data) {
+                        $("#PuntajePlazo").text(data[0]);
+                        var PuntajePL = (data[0]);
+                        valor_PL1 = parseInt(PuntajePL);
+                        valor1 = ($("#PuntajeSexo").text());
+                        valor11 = parseInt(valor1);
+                        valor2 = ($("#PuntajeEstadoCivil").text());
+                        valor21 = parseInt(valor2);
+                        valor3 = ($("#PuntajeEdad").text());
+                        valor31 = parseInt(valor3);
+                        valor4 = ($("#PuntajeVivienda").text());
+                        valor41 = parseInt(valor4);
+                        valor5 = ($("#PuntajeSalario").text());
+                        valor51 = parseInt(valor5);
+                        valor6 = ($("#PuntajeAgencia").text());
+                        valor61 = parseInt(valor6);
+                        valor7 = ($("#PuntajeAntiguedadC").text());
+                        valor71 = parseInt(valor7);
+                        valor8 = ($("#PuntajePersonasCargo").text());
+                        valor81 = parseInt(valor8);
+                        valor9 = ($("#PuntajeEstrato").text());
+                        valor91 = parseInt(valor9);
+                        valor10 = ($("#PuntajeNivelEducativo").text());
+                        valor101 = parseInt(valor10);
+                        valor11a = ($("#PuntajeTipoContrato").text());
+                        valor111a = parseInt(valor11a);
+                        PuntajeCat = ($("#PuntajeCategoria").text());
+                        valor_c1 = parseInt(PuntajeCat);
+                        valor12a = ($("#PuntajeOcupacion").text());
+                        valor121a = parseInt(valor12a);
+                        valor13a = ($("#PuntajeAntiguedadL").text());
+                        valor131a = parseInt(valor13a);
+
+                        if (PuntajeCat == "") {
+                            valor_c1 = 0;
+                        }
+
+                        PuntajeGar = ($("#PuntajeGarantia").text());
+                        valor_g1 = parseInt(PuntajeGar);
+                        if (PuntajeGar == "") {
+                            valor_g1 = 0;
+                        }
+
+
+                        PuntajeRE = ($("#PuntajeReestructurado").text());
+                        valor_RE1 = parseInt(PuntajeRE);
+                        if (PuntajeRE == "") {
+                            valor_RE1 = 0;
+                        }
+                        PuntajePA = ($("#PuntajeFormaPago").text());
+                        valor_PA1 = parseInt(PuntajePA);
+                        if (PuntajePA == "") {
+                            valor_PA1 = 0;
+                        }
+                        PuntajeMO = ($("#PuntajeMonto").text());
+                        valor_MO1 = parseInt(PuntajeMO);
+                        if (PuntajeMO == "") {
+                            valor_MO1 = 0;
+                        }
+
+                        sum9 = valor11 + valor21 + valor31 + valor41 + valor51 + valor61 + valor71 + valor81 + valor91 + valor101 + valor111a + valor121a + valor131a + valor_c1 + valor_g1  + valor_RE1 + valor_PA1 + valor_PL1 + valor_MO1;
+                        $("#PuntajeScoring").text(sum9);
+                        SumPuntajeDatacredito1 = ($("#datacredito").val());
+                        SumPuntajeDatacredito = parseInt(SumPuntajeDatacredito1);
+                        $("#PuntajeTotalScoring").text(sum9 + SumPuntajeDatacredito);
+                    }
+                });
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        $("#Monto").chosen().change(function () {
+            valor1 = 0;
+            valor2 = 0;
+            valor3 = 0;
+            valor4 = 0;
+            valor5 = 0;
+            valor6 = 0;
+            valor7 = 0;
+            valor8 = 0;
+            valor9 = 0;
+            valor10 = 0;
+            valor11 = 0;
+            valor12 = 0;
+            valor13 = 0;
+            total = 0;
+            sum2 = 0;
+            sum3 = 0;
+            sum4 = 0;
+            sum5 = 0;
+            sum6 = 0;
+            sum7 = 0;
+            sum8 = 0;
+            sum9 = 0;
+            var monto = $("#Monto").val();
+            $("#PuntajeMonto").text("");
+            $("#PuntajeScoring").text("");
+            $("#PuntajeTotalScoring").text("");
+            if (monto != "") {
+                  $('#mitabla tr').empty();
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetDatosMonto", "ScoringAsociados")",
+                    datatype: "Json",
+                data: { id: $('#Monto').val() },
+                    success: function (data) {
+                        $("#PuntajeMonto").text(data[0]);
+                        var PuntajeMO = (data[0]);
+                        valor_MO1 = parseInt(PuntajeMO);
+                        valor1 = ($("#PuntajeSexo").text());
+                        valor11 = parseInt(valor1);
+                        valor2 = ($("#PuntajeEstadoCivil").text());
+                        valor21 = parseInt(valor2);
+                        valor3 = ($("#PuntajeEdad").text());
+                        valor31 = parseInt(valor3);
+                        valor4 = ($("#PuntajeVivienda").text());
+                        valor41 = parseInt(valor4);
+                        valor5 = ($("#PuntajeSalario").text());
+                        valor51 = parseInt(valor5);
+                        valor6 = ($("#PuntajeAgencia").text());
+                        valor61 = parseInt(valor6);
+                        valor7 = ($("#PuntajeAntiguedadC").text());
+                        valor71 = parseInt(valor7);
+                        valor8 = ($("#PuntajePersonasCargo").text());
+                        valor81 = parseInt(valor8);
+                        valor9 = ($("#PuntajeEstrato").text());
+                        valor91 = parseInt(valor9);
+                        valor10 = ($("#PuntajeNivelEducativo").text());
+                        valor101 = parseInt(valor10);
+                        valor11a = ($("#PuntajeTipoContrato").text());
+                        valor111a = parseInt(valor11a);
+                        valor12a = ($("#PuntajeOcupacion").text());
+                        valor121a = parseInt(valor12a);
+                        valor13a = ($("#PuntajeAntiguedadL").text());
+                        valor131a = parseInt(valor13a);
+
+                        PuntajeCat = ($("#PuntajeCategoria").text());
+                        valor_c1 = parseInt(PuntajeCat);
+                        if (PuntajeCat == "") {
+                            valor_c1 = 0;
+                        }
+
+                        PuntajeGar = ($("#PuntajeGarantia").text());
+                        valor_g1 = parseInt(PuntajeGar);
+                        if (PuntajeGar == "") {
+                            valor_g1 = 0;
+                        }
+
+
+                        PuntajeRE = ($("#PuntajeReestructurado").text());
+                        valor_RE1 = parseInt(PuntajeRE);
+                        if (PuntajeRE == "") {
+                            valor_RE1 = 0;
+                        }
+                        PuntajePA = ($("#PuntajeFormaPago").text());
+                        valor_PA1 = parseInt(PuntajePA);
+                        if (PuntajePA == "") {
+                            valor_PA1 = 0;
+                        }
+                        PuntajePL = ($("#PuntajePlazo").text());
+                        valor_PL1 = parseInt(PuntajePL);
+                        if (PuntajePL == "") {
+                            valor_PL1 = 0;
+                        }
+                        sum10 = valor11 + valor21 + valor31 + valor41 + valor51 + valor61 + valor71 + valor81 + valor91 + valor101 + valor111a + valor121a + valor131a + valor_c1 + valor_g1 + valor_RE1 + valor_PA1 + valor_PL1 + valor_MO1;
+                        $("#PuntajeScoring").text(sum10);
+                        SumPuntajeDatacredito1 = ($("#datacredito").val());
+                        SumPuntajeDatacredito = parseInt(SumPuntajeDatacredito1);
+                        $("#PuntajeTotalScoring").text(sum10 + SumPuntajeDatacredito);
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+        //FORMATEAR UN NUMERO
+        var formatNumberMiles = {
+            separador: ".", // separador para los miles
+            sepDecimal: ',', // separador para los decimales
+            formatear: function (num) {
+                num += '';
+                var splitStr = num.split('.');
+                var splitLeft = splitStr[0];
+                var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+                var regx = /(\d+)(\d{3})/;
+                while (regx.test(splitLeft)) {
+                    splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+                }
+                return this.simbol + splitLeft + splitRight;
+            },
+            new: function (num, simbol) {
+                this.simbol = simbol || '';
+                return this.formatear(num);
+            }
+        }
+        //FIN FORMATEAR UN NUMERO
+        /*
+        * FUNCIONALIDAD DE LA 'FUNCION'
+        formatNumber.new(123456779.18, "$") // retorna "$123.456.779,18"
+        formatNumber.new(123456779.18) // retorna "123.456.779,18"
+        formatNumber.new(123456779) // retorna "$123.456.779"
+        */
+        //formatNumberMiles.new(realValor);//Aqui se pone la variable que se quiere formatear
+
+
+
+
+        $(document).ready(function () {
+            $('#Vinculacion2').change(function () {
+                /* Obtener el valor de tus dropdownlist */
+                var selectedId = $(this).val();
+                alert(selectedId);
+
+            });
+
+            $('#Vinculacion').on("change", (function () {
+
+                var nitid = $(this).val();
+                $.get("/terceros/TercerosAdicionales/GetTerceroADByNIT/", { nit: $(this).val() }, function (response) {
+                    if (response != true) {
+                        swal('Error', 'El docuemento ' + nitid + ' Necesita complentar su información adicional.', 'warning');
+                        $('#Vinculacion').val("");
+
+                    }
+                })
+
+                $.get("/terceros/InfoTerceroFinancieras/GetTerceroFinByNIT/", { nit: $(this).val() }, function (response2) {
+                    if (response2 != true) {
+                        swal('Error', 'El docuemento ' + nitid + ' Necesita complentar su información adicional financiera.', 'warning');
+                        $('#Vinculacion').val("");
+
+                    }
+                })
+
+            }));
+
+
+
+
+
+        });
+
+
+    </script>
+}
+

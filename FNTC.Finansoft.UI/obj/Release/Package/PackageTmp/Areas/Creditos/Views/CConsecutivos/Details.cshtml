@@ -1,0 +1,66 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.MCreditos.CConsecutivos
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>CConsecutivos</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.idAgencia)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.idAgencia)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tipoCodPagare)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tipoCodPagare)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.consecutivoPagareActual)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.consecutivoPagareActual)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tipoCodLibranza)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tipoCodLibranza)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.consecutivoLibranzaActual)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.consecutivoLibranzaActual)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

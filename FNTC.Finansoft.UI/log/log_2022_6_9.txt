@@ -1,0 +1,4 @@
+9/06/2022 4:55:58 p. m. - No se encuentra el controlador de la ruta de acceso '/hangfire' o no implementa IController. ---_System.Web.Mvc.IController GetControllerInstance(System.Web.Routing.RequestContext, System.Type)
+9/06/2022 4:56:19 p. m. - No se encuentra el controlador de la ruta de acceso '/hangfire' o no implementa IController. ---_System.Web.Mvc.IController GetControllerInstance(System.Web.Routing.RequestContext, System.Type)
+9/06/2022 4:56:36 p. m. - No se encuentra el controlador de la ruta de acceso '/hangfire' o no implementa IController. ---_System.Web.Mvc.IController GetControllerInstance(System.Web.Routing.RequestContext, System.Type)
+9/06/2022 4:56:37 p. m. - No se encuentra el controlador de la ruta de acceso '/hangfire' o no implementa IController. ---_System.Web.Mvc.IController GetControllerInstance(System.Web.Routing.RequestContext, System.Type)

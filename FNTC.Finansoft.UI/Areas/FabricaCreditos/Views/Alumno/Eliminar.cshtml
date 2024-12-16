@@ -1,0 +1,38 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.ControlCartera.Alumno
+@{
+    ViewBag.Title = "CARTERA";
+    Layout = "~/Views/Shared/_LayoutCR.cshtml";
+}
+
+<br />
+<h4>Gestión de Creditos</h4>
+<div class="alert alert-@ViewBag.alerta"> - - <b>@ViewBag.res</b> - - </div>
+<form action="/Alumno/Eliminar" method="post">
+    <input type="hidden" id="id" name="id" value="@Model.id_alu" />
+    <table>
+        <tr>
+            <td style="padding: 10px">Codigo:</td>
+            <td style="padding: 10px"><input value="@Model.id_alu" class="form-control" type="text" name="dni" id="dni" readonly required /></td>
+        </tr>
+        <tr>
+            <td style="padding: 10px">Pagare:</td>
+            <td style="padding: 10px"><input value="@Model.dni_alu" readonly class="form-control" maxlength="8" type="text" name="dni" id="dni" required /></td>
+        </tr>
+        <tr>
+            <td style="padding: 10px">Nombre:</td>
+            <td style="padding: 10px"><input value="@Model.nombre_alu" readonly class="form-control" type="text" name="nom" id="nom" required /></td>
+        </tr>
+        <tr>
+            <td style="padding: 10px">Apellidos:</td>
+            <td style="padding: 10px"><input value="@Model.apellidos_alu" readonly class="form-control" type="text" name="ape" id="ape" required /></td>
+        </tr>
+        <tr>
+            <td style="padding: 10px"></td>
+            <td style="padding: 10px">
+                <button class="btn btn-success" type="submit" name="btn1" id="btn1"><span class="glyphicon glyphicon-save"> Agregar</span></button>
+                <button class="btn btn-primary" type="reset" name="btn2" id="btn2"><span class="glyphicon glyphicon-remove"> Resetear</span></button>
+                <a class="btn btn-danger" href="~/Alumno/Index"><span class="glyphicon glyphicon-backward"> Regresar</span></a>
+            </td>
+        </tr>
+    </table>
+</form>

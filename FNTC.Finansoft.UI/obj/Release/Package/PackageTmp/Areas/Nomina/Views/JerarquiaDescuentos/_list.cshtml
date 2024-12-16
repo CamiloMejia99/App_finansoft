@@ -1,0 +1,55 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.Nomina.JerarquiaDescuento>
+
+<div class="modal-body">
+    <div class="col-md-2" style=" padding-bottom: 1%; margin-left: 83%;">
+
+        <button class="btn btn-success" onclick="$('#divmodal').load('@Url.Content("~/Nomina/JerarquiaDescuentos/Create")')">Crear - Nueva Prioridad</button>
+
+    </div>
+
+    <table class="table table-striped table-bordered dataTable no-footer" style="background-color: #FFF;">
+        <tr>
+            <th class="columnatablaazul2">
+                <label for="CodigoCuenta">CÓDIGO CUENTA</label>
+            </th>
+
+            <th class="columnatablaazul2">
+                <label for="NombreCuenta">NOMBRE CUENTA</label>
+            </th>
+
+            <th class="columnatablaazul2">
+                <label for="Orden">ORDEN</label>
+            </th>
+
+            <th>
+                <label for="Eliminar">Eliminar</label>
+            </th>
+
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CODIGO)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Cuenta.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ORDEN)
+                </td>
+
+
+                <td>
+                    <button class="eliminartablas" onclick=" $('#divmodal').load('@Url.Action("Delete","JerarquiaDescuentos",new { id=item.CODIGO})')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                </td>
+
+            </tr>
+        }
+
+    </table>
+
+</div>

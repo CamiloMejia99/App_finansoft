@@ -1,0 +1,291 @@
+﻿
+@model FNTC.Finansoft.Accounting.DTO.OperativaDeCaja.FactOpcaja
+<script src="~/Scripts/jquery-1.11.0.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
+<link href="~/Content/css/compressed2.css" rel="stylesheet" />
+<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.masknumber.js"></script>
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="modalheadergeneral" style="margin-top: 1%;"><h4><i class="fas fa-edit"></i>&nbsp;&nbsp;Detalles de Factura</h4></div>
+
+<div class="center contenido" id="areaImprimir">
+    @Html.HiddenFor(model => model.id)
+    <div style=" position: relative; top: 0px;  left: 100px;  background-color: white;  width: 450px;">
+        <div class="dl-horizontal">
+
+            <h4 class="center">
+                &nbsp;&nbsp;&nbsp;&nbsp;N° TRN: @Html.DisplayFor(model => model.factura)&nbsp;&nbsp; @Html.DisplayFor(model => model.operacion)
+            </h4>
+            <h4 class="center">
+                &nbsp;&nbsp;&nbsp;&nbsp;Fecha: @Html.DisplayFor(model => model.fecha)
+            </h4>
+            <div class="row">
+
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Código caja:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.codigo_caja)&nbsp;&nbsp;@Html.DisplayFor(model => model.Caja.Nombre_caja)</p>
+
+            </div>
+            <div class="row">
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Código Cajero:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.nit_cajero)</p>
+            </div>
+
+            <div class="row">
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Documento Del Asociado:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.nit_propietario_cuenta)</p>
+                @Html.HiddenFor(model => model.nit_propietario_cuenta, new { id = "nitAsociado" })
+            </div>
+            <div class="row">
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;N° Cuenta:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.numero_cuenta)</p>
+            </div>
+            <div class="row">
+                <p class="col-md-6">&nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.nombre_propietario_cuenta)</p>
+            </div>
+            <div class="row">
+                @Html.HiddenFor(model => model.valor_recibido, new { id = "valor_recibido" })
+                @Html.HiddenFor(model => model.valor_efectivo, new { id = "valor_efectivo" })
+                @Html.HiddenFor(model => model.vueltas, new { id = "vueltas" })
+                <p class="col-md-9"><b>&nbsp;&nbsp;&nbsp;&nbsp;Valor Consignado:</b>&nbsp;&nbsp;$<label id="txtvalor_efectivo"></label></p>
+            </div>
+            @if (ViewBag.movimientos != null)
+            {
+
+                foreach (var item in ViewBag.movimientos)
+                {
+                    <div class="row">
+                        <p style="margin-left:3%" class="col-md-9"><b>@item.cuentaFK.NOMBRE&nbsp;&nbsp;&nbsp;&nbsp;$@item.CREDITO.ToString("N0")</b></p>
+                    </div>
+                }
+            }
+
+
+            <div class="row">
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Cheques:</b>&nbsp;&nbsp;$@Html.DisplayFor(model => model.total_cheques)</p>
+            </div>
+            <div class="row">
+                <table class="col-md-6" style=" position: relative; top: 0px;  left: 30px;  background-color: white;  width: 350px;" border="1">
+
+                    <tr>
+                        <td><b>Código</b></td>
+                        <td><b>N° cheque</b></td>
+                        <td><b>Valor Discriminado</b></td>
+                    </tr>
+                    @if (Model.valor_cheque != 0)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(model => model.nit_consignacion)
+
+                            </td>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.numero_cheque)
+
+                            </td>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;&nbsp;$@Html.DisplayFor(model => model.valor_cheque)
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.valor_cheque1 != 0)
+                    {
+                        <tr>
+                            <td>
+
+                                @Html.DisplayFor(model => model.nit_consignacion1)
+                            </td>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.numero_cheque1)
+                            </td>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;&nbsp;$@Html.DisplayFor(model => model.valor_cheque1)
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.valor_cheque2 != 0)
+                    {
+                        <tr>
+                            <td>
+
+                                @Html.DisplayFor(model => model.nit_consignacion2)
+                            </td>
+                            <td>
+
+                                &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.numero_cheque2)
+                            </td>
+                            <td>
+
+                                &nbsp;&nbsp;&nbsp;&nbsp;$@Html.DisplayFor(model => model.valor_cheque2)
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.valor_cheque3 != 0)
+                    {
+                        <tr>
+                            <td>
+
+                                @Html.DisplayFor(model => model.nit_consignacion3)
+                            </td>
+                            <td>
+
+                                &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.numero_cheque3)
+                            </td>
+                            <td>
+
+                                &nbsp;&nbsp;&nbsp;&nbsp;$@Html.DisplayFor(model => model.valor_cheque3)
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.valor_cheque4 != 0)
+                    {
+
+                        <tr>
+                            <td>
+
+                                @Html.DisplayFor(model => model.nit_consignacion4)
+                            </td>
+                            <td>
+
+                                &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.numero_cheque4)
+                            </td>
+                            <td>
+
+                                &nbsp;&nbsp;&nbsp;&nbsp;$@Html.DisplayFor(model => model.valor_cheque4)
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.valor_cheque5 != 0)
+                    {
+                        <tr>
+                            <td>
+
+                                @Html.DisplayFor(model => model.nit_consignacion5)
+                            </td>
+                            <td>
+
+                                &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.numero_cheque5)
+                            </td>
+                            <td>
+
+                                &nbsp;&nbsp;&nbsp;&nbsp;$@Html.DisplayFor(model => model.valor_cheque5)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+
+            <div class="row">
+                <br />
+                @Html.HiddenFor(model => model.total, new { id = "total" })
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Valor Total Consignado</b>&nbsp;&nbsp;$<label id="txttotal"></label></p>
+            </div>
+            <div class="row">
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Observación:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.observacion)</p>
+                
+            </div>
+            <div class="row">
+                <p class="col-md-6">&nbsp;&nbsp;&nbsp;&nbsp;****POR FAVOR VERIFIQUE QUE LA INFORMACION IMPRESA ES CORRECTA****</p>
+            </div>
+
+            <div class="row">
+                <p class="col-md-6">&nbsp;&nbsp;&nbsp;&nbsp;VIGILADO SUPERINTENDENCIA DE ECONOMIA SOLIDARIA</p>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<p>
+    <button id="btnRegresar" class="btn btn-default">Regresar</button>
+    <input type="button" onclick="printDiv('areaImprimir')" value="Imprimir" />
+</p>
+
+<script>
+    //$("#aporteNumero").text("1");
+    //alert($("#nitAsociado").val());
+    $("#btnRegresar").click(function () {
+        document.getElementById("btnRegresar").disabled = true;
+        window.location.href = "/OperativaDeCaja/FactOpcajas/CuentaOperacion";
+    });
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("GetAporteNumero", "FactOpcajas")",
+            datatype: "Json",
+            data: {
+                nitAsociado: $('#nitAsociado').val(),
+                id: $('#id').val()
+            },
+            success: function (data) {
+                $("#aporteNumero").text(data);
+            }
+        });
+    });
+
+
+    $(document).ready(function () {
+
+        var valor_recibido = $("#valor_recibido").val();
+        var valor_efectivo = $("#valor_efectivo").val();
+        var vueltas = $("#vueltas").val();
+        var total = $("#total").val();
+        //$("#txtvalor_recibido").text(formatNumberMiles.new(valor_recibido));
+        $("#txtvalor_efectivo").text(formatNumberMiles.new(valor_efectivo));
+        //$("#txtvueltas").text(formatNumberMiles.new(vueltas));
+        $("#txttotal").text(formatNumberMiles.new(total));
+
+		/*despues probar*/
+		//$('[name=recibidotxt]').maskNumber({ integer: true });
+
+	});
+
+
+
+
+
+	function printDiv(areaImprimir) {
+		var contenido = document.getElementById(areaImprimir).innerHTML;
+		var contenidoOriginal = document.body.innerHTML;
+
+		document.body.innerHTML = contenido;
+
+		window.print();
+
+        document.body.innerHTML = contenidoOriginal;
+        window.location.reload();
+	}
+
+</script>
+
+<script>
+    //FORMATEAR UN NUMERO
+    var formatNumberMiles = {
+        separador: ".", // separador para los miles
+        sepDecimal: ',', // separador para los decimales
+        formatear: function (num) {
+            num += '';
+            var splitStr = num.split('.');
+            var splitLeft = splitStr[0];
+            var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+            var regx = /(\d+)(\d{3})/;
+            while (regx.test(splitLeft)) {
+                splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+            }
+            return this.simbol + splitLeft + splitRight;
+        },
+        new: function (num, simbol) {
+            this.simbol = simbol || '';
+            return this.formatear(num);
+        }
+    }
+        //FIN FORMATEAR UN NUMERO
+        /*
+        * FUNCIONALIDAD DE LA 'FUNCION'
+        formatNumber.new(123456779.18, "$") // retorna "$123.456.779,18"
+        formatNumber.new(123456779.18) // retorna "123.456.779,18"
+        formatNumber.new(123456779) // retorna "$123.456.779"
+        */
+        //formatNumberMiles.new(realValor);//ACCESO A LA VARIABLE
+</script>

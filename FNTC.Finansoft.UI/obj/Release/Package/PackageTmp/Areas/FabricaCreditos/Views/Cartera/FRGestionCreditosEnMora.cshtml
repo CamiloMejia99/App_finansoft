@@ -1,0 +1,155 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.ControlCartera.CRNotificacionesCartera>
+
+@using FNTC.Finansoft.Accounting.DTO.FabricaCreditos;
+@using FNTC.Finansoft.Accounting.DTO.MCreditos;
+
+@{
+    ViewBag.Title = "Detalles de Cartera";
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+    var NoIdentificacion = ViewBag.NoIdentificacion;
+    var NombreAsociado = ViewBag.NombreAsociado;
+    var Pagare = ViewBag.Pagare;
+    var VTDelPrestamo = ViewBag.VTDelPrestamo;
+    var Plazo = ViewBag.Plazo;
+    var CapitalTotal = ViewBag.CapitalTotal;
+    int CapitalTotalEnt = Decimal.ToInt32(CapitalTotal);
+    var SaldoCapital = ViewBag.SaldoCapital;
+    int SaldoCapitalEnt = Decimal.ToInt32(SaldoCapital);
+    var TotalInteCorrie = ViewBag.TotalInteCorrie;
+    int TotalInteCorrieEnt = Decimal.ToInt32(TotalInteCorrie);
+    var FechaProximoPago = ViewBag.FechaProximoPago;
+    var IntereMoraTotal = ViewBag.IntereMoraTotal;
+    int IntereMoraTotalEnt = Decimal.ToInt32(IntereMoraTotal);
+    var IntereMoraPendiente = ViewBag.IntereMoraPendiente;
+    int IntereMoraPendienteEnt = Decimal.ToInt32(IntereMoraPendiente);
+    var DiasMora = ViewBag.DiasMora;
+    var EstadoCre = ViewBag.EstadoCre;
+
+}
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+
+<div class="col-md-12">
+
+    <div style="width:100%; margin:0 auto" class="tablecontainer">
+
+        <div class="form"><h4><span class="label label-info">Informacion Del Asociado</span></h4></div>
+        <div class="row">
+
+            <div class="form-group col-md-4">
+                <label># No. Identificacion:</label>
+                <input type="text" value="@NoIdentificacion" class="form-control" autocomplete="off" readonly />
+
+            </div>
+
+            <div class="form-group col-md-4">
+                <label># Nombre del Asociado:</label>
+                <input type="text" id="Plazo" value="@NombreAsociado" class="form-control" autocomplete="off" readonly />
+
+            </div>
+            <div class="form-group col-md-4">
+                <label># Pagare:</label>
+                <input type="text" id="Plazo" value="@Pagare" class="form-control" autocomplete="off" readonly />
+
+            </div>
+
+        </div>
+
+        <div class="form"><h4><span class="label label-info">Datos del Credito</span></h4></div>
+        <div class="row">
+
+            <div class="form-group col-md-3">
+                <label># Valor Total Del Prestamo:</label>
+                <input type="text" value="@VTDelPrestamo" class="form-control" autocomplete="off" readonly />
+
+            </div>
+            <div class="form-group col-md-3">
+                <label># Numero de Cuotas:</label>
+                <input type="text" value="@Plazo" class="form-control" autocomplete="off" readonly />
+
+            </div>
+
+            <div class="form-group col-md-3">
+                <label># Capital Total:</label>
+                <input type="text" id="Plazo" value="@CapitalTotalEnt" class="form-control" autocomplete="off" readonly />
+
+            </div>
+            <div class="form-group col-md-3">
+                <label># Saldo Capital:</label>
+                <input type="text" id="Plazo" value="@SaldoCapitalEnt" class="form-control" autocomplete="off" readonly />
+
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="form-group col-md-2">
+                <label># Total Intereses Corrientes:</label>
+                <input type="text" value="@TotalInteCorrieEnt" class="form-control" autocomplete="off" readonly />
+
+            </div>
+
+            <div class="form-group col-md-2">
+                <label># Intereses Mora Total:</label>
+                <input type="text" id="Plazo" value="@IntereMoraTotalEnt" class="form-control" autocomplete="off" readonly />
+
+
+            </div>
+            <div class="form-group col-md-2">
+                <label># Intereses Mora Pendientes:</label>
+                <input type="text" id="Plazo" value="@IntereMoraPendienteEnt" class="form-control" autocomplete="off" readonly />
+
+
+            </div>
+            <div class="form-group col-md-2">
+                <label># Fecha del Proximo Pago:</label>
+                <input type="text" id="Plazo" value="@FechaProximoPago" class="form-control" autocomplete="off" readonly />
+
+
+            </div>
+            <div class="form-group col-md-2">
+                <label># Dias de Mora:</label>
+                <input type="text" id="Plazo" value="@DiasMora" class="form-control" autocomplete="off" readonly />
+
+
+            </div>
+            <div class="form-group col-md-2">
+                <label># Estado:</label>
+                <input type="text" id="Plazo" value="@EstadoCre" class="form-control" autocomplete="off" readonly />
+
+
+            </div>
+
+
+
+        </div>
+      
+
+        <div class="col-md-12">
+            <div class="col m-5">
+                <a href="/FabricaCreditos/Cartera/GestionCitas" class="btn btn-primary" data-toggle="modal">
+                    Regresar
+                </a>
+                <a id="Continuar" class="btn btn-success btnAction" data-toggle="modal">
+                    Crear Citacion
+                </a>
+                <a id="Continuar" class="btn btn-default btnAction" data-toggle="modal">
+                    Historial Citas
+                </a>
+            </div>
+
+            <hr />
+        </div>
+
+    </div>
+
+</div>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $("#Continuar").click(function () {
+        location.href = '@Url.Action("CrearNuevaCita", "Cartera", new { id = Pagare })';
+    });
+
+</script>

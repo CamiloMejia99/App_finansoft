@@ -1,0 +1,576 @@
+﻿@model Ingenio.BO.Personas_Fac
+
+@{
+    ViewBag.Title = "Create";
+    string m = ViewBag.mensaje;
+    string cedula = ViewBag.cedula;
+    int sum2 = 0;
+}
+@if (m != null) // falta este
+{
+    <script>
+        swal("Error al guardar", "@ViewBag.mensaje", "error");
+    </script>
+}
+
+
+    @**********************ACTUALIZAR PORCENTAJES**************************@
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Cambiar porcentaje</h4>
+                </div>
+                <div id="mensaje2" style="display:none" class="alert alert-danger">
+                    <strong>Error:</strong> La suma de porcentajes es mayor al 100%
+                </div>
+                <div class="modal-body">
+                    <label for="Identificacion" class="control-label">Identificación Beneficiario</label>
+                    <input type="text" id="cedula_beneficiario" name="cedula_beneficiario" required class="form-control" readonly>
+                    <label for="Nombre" class="control-label">Nombre Beneficiario</label>
+                    <input type="text" id="nombre_beneficiario" name="nombre_beneficiario" required class="form-control" readonly>
+                    <label for="Porcentaje" class="control-label">Porcentaje Beneficiario</label>
+                    <input type="number" min="1" max="100" id="porcentaje_beneficiario" name="porcentaje_beneficiario" required class="form-control" onkeypress="return valida(event)">
+                    <input type="hidden" id="porcentaje_beneficiarioOld" name="porcentaje_beneficiarioOld" required class="form-control">
+                    <input type="hidden" id="porcentajetotal_beneficiarios" name="porcentajetotal_beneficiarios" required class="form-control">
+
+                    <input type="hidden" id="id_beneficiario" name="id_beneficiario" required class="form-control" value="">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="Cambiar_Porcentaje" value="Porcentaje">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @************************************************************@
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true)
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Agregar beneficiario</h3>
+            </div>
+            <div class="panel-body" id="General">
+
+
+                @*CEDULA ASOCIADO**************************************************@
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="Identificacion" class="control-label">Identificación Asociado</label>
+                        <input type="text" id="_Nit_CC" required class="form-control" value="@cedula" onkeypress="return valida(event)" disabled>
+                        <input type="hidden" name="Id_Asociado" id="Id_Asociado" value="@ViewBag.id" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="nombre" class="control-label">Asociado:</label>
+                        <input type="text" id="_nombre" required class="form-control" value="@ViewBag.nombre" readonly>
+                        <input type="hidden" name="nombre" id="nombre" value="" />
+                    </div>
+                </div>
+
+                @*CEDULA BENEFICIARIO**********************************************************@
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="Identificacion" class="control-label">Identificación Beneficiario</label>
+                        <input type="text" id="_Nit_CC2" name="_Nit_CC2" required class="form-control" onkeypress="return valida(event)">
+                        <input type="hidden" name="Id_Beneficiario" id="Id_Beneficiario" value="">
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="TipoIdentificacion" class="control-label">Tipo Identificacion</label>
+                        @Html.DropDownList("Id_TipoIdentificacion", new SelectList(ViewBag.Tipoi, "Id", "Descripcion"), "Seleccione una identificacion", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="parentesco" class="control-label">Parentesco</label>
+                        <select id="Id_Parentesco" name="Id_Parentesco" class="form-control">
+                            <option value="1">CONYUGUE</option>
+                            <option value="2">HIJO(A)</option>
+                            <option value="3">PADRES</option>
+                            <option value="4">HERMANO(A)</option>
+                            <option value="5">ABUELO(A)</option>
+                            <option value="6">TIO(A)</option>
+                            <option value="7">SOBRINO(A)</option>
+                            <option value="8">PRIMO(A)</option>
+                            <option value="9">NIETO(A)</option>
+                            <option value="10">AMIGO(A)</option>
+                            <option value="11">OTRO</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="Primer_Nom" class=" control-label">Primer Nombre</label>
+                        <input type="text" id="Primer_Nom" name="Primer_Nom" required class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="Segundo_Nom" class=" control-label">Segundo Nombre</label>
+                        <input type="text" id="Segundo_Nom" name="Segundo_Nom" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="Primer_Ape" class=" control-label">Primer Apellido</label>
+                        <input type="text" id="Primer_Ape" name="Primer_Ape" required class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="Segundo_Ape" class=" control-label">Segundo Apellido</label>
+                        <input type="text" id="Segundo_Ape" name="Segundo_Ape" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="Genero" class="control-label ">Genero</label>
+                        <select name="Genero" id="Genero" class="form-control">
+                            <option value=true>Masculino</option>
+                            <option value=false>Femenino</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="FechaN" class="control-label ">Fecha de Nacimiento</label>
+                        <input type="date" min="1900-01-01" max=@DateTime.Now.ToString("yyyy-MM-dd") name="Fecha_Nacimiento" id="FechaN" value=" " required class="form-control" />
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="Pais" class="control-label">Pais Residencia</label>
+                        @Html.DropDownList("PaisResidencia", new SelectList(ViewBag.pais, "Id", "Descripcion"), "Seleccione un Pais", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="Departamento" class="control-label">Depto Residencia</label>
+                        <select id="DeptoResidencia" name="DeptoResidencia" class="form-control">
+                            <option value="-1">Seleccione un Departamento</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="Ciudad" class="control-label">Ciudad Residencia</label>
+                        <select id="CiudadResidencia" name="Id_Residencia" class="form-control">
+                            <option value="-1">Seleccione una Ciudad</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="Estado" class=" control-label">Porcentaje</label>
+                        <input type="number" class="form-control" min="1" max="100" id="Porcentaje" name="Porcentaje" value=0 onkeypress="return valida(event)">
+                    </div>
+                </div>
+
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group">
+                        <button id="" type="submit" value="Create" class="btn btn-default">Guardar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    }
+
+
+    @*/////////////////////////////////////////////////LISTA DE PERSONAS DE BENEFICIARIOS*@
+    <div class="panel panel-green">
+        <div class="panel-heading">
+            <h3 class="panel-title">LISTA DE BENEFICIARIOS</h3>
+        </div>
+        <div class="panel-body">
+            @*display compact table-striped table-bordered table-responsive*@
+            <div class="table-responsive">
+
+
+                <table id="personas" class="compact table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tipo Id</th>
+                            <th>Identificación</th>
+                            <th>Nombre</th>
+                            <th>Genero</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Fecha de Ingreso</th>
+                            <th>Parentesco</th>
+                            <th>Porcentaje</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (ViewBag.res != null)
+                        {
+                            string clase = "";
+                            string deshabilitado = "";
+                            foreach (var item in ViewBag.res)
+                            {
+
+                                clase = item.activo == false ? "danger" : "";
+                                deshabilitado = item.activo == false ? "disabled" : "";
+
+                                <tr class="@clase" data-numero="@item.idbeneficiario">
+
+                                    <td>@item.tipoId</td>
+                                    <td>@item.identificacion</td>
+                                    <td>@item.nombre</td>
+                                    <td>@item.genero</td>
+                                    <td>@item.fechaN</td>
+                                    <td>@item.fechaI</td>
+                                    <td>@item.parentesco</td>
+                                    <td id="@("porcentaje-" + item.idbeneficiario)" name="porcentaje">@item.porcentaje</td>
+
+                                    <td class="input-group-btn"><button class="btn btn-success" type="button" name="editar" id='@("boton_editar"+item.idbeneficiario)' data-toggle="modal" data-target="#myModal" onclick="editar(event)" @deshabilitado>...</button></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="form-group">
+                <label class="control-label">Total porcentaje</label>
+                <div class="col col-md-1">
+                    <input class="form-control" type="text" id="total" name="total" value="@ViewBag.total" readonly />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    @********************************JAVASCRIPT*******************************************@
+    <script>
+        var porcentaje = 0;
+        $("[type=checkbox]").bootstrapSwitch();
+        ////Autocomplete
+        function renderItem(ul, item) {
+
+            return $("<li>")
+            .append("<span style='display:block'>" + item.value + "</span>")
+            .append("<span style='display:block'>" + item.label + "</apan>")
+            .appendTo(ul);
+        }
+
+        //AUTOCOMPLETE CEDULA ASOCIADO
+
+        $("#_Nit_CC").autocomplete({
+            source: '@Url.Action("GetCedula")',
+            minLength: 3,
+            select: function (event, ui) {
+                $('#_nombre').val(ui.item.label);
+                $('#_Nit_CC').val(ui.item.value);
+                $('#Id_Asociado').val(ui.item.idaso);
+                var url = '/Beneficiario/PersonasACargo/' + $("#Id_Asociado").val();
+                $("#_Nit_CC2").autocomplete("option", "source", url);
+                //OBTENER LISTA DE BENEFICIARIOS
+                $.post("@Url.Action("GetBeneficiario")", { id: ui.item.idaso }, function (res) {
+                    $("#personas tbody").html("");
+                    var sum = 0;
+                    $.each(res, function (index, item) {
+                        var tmp = item.porcentaje;
+                        tmp = tmp.substring(0, tmp.length - 1);
+                        sum += parseInt(tmp);
+
+                        $("#personas tbody")
+
+                            .append($("<tr>", { "data-numero": item.idbeneficiario + "" })
+                                .append($("<td>", { html: item.tipoId }))
+                                .append($("<td>", { html: item.identificacion }))
+                                .append($("<td>", { html: item.nombre }))
+                                .append($("<td>", { html: item.genero }))
+                                .append($("<td>", { html: item.fechaN }))
+                                .append($("<td>", { html: item.fechaI }))
+                                .append($("<td>", { html: item.parentesco }))
+                                .append($("<td>", { id: "porcentaje-" + item.idbeneficiario, name: "porcentaje", html: item.porcentaje }))
+                                .append('<span class="input-group-btn"><button class="btn btn-success" type="button" name="editar" id="boton_editar' + item.idbeneficiario + '" data-toggle="modal" data-target="#myModal" onclick="editar(event)">...</button></span>')
+                            )
+
+                    })
+                    $("#total").val(sum);
+                })
+                return false;
+            },
+            focus: function (event, ui) {
+                $('#Nit_CC').val(ui.item.value);
+                return false;
+            }
+        })
+
+        //AUTOCOMPLETE CEDULA PERSONAS A CARGO
+
+        $("#_Nit_CC2").autocomplete({
+            source: '/Beneficiario/PersonasACargo/@ViewBag.id',
+            minLength: 3,
+            select: function (event, ui) {
+                $('#_Nit_CC2').val(ui.item.value);
+                $("#Id_TipoIdentificacion").prop('selectedIndex', ui.item.tipoidentificacion);
+                $('#Primer_Ape').val(ui.item.apellido1);
+                $('#Segundo_Ape').val(ui.item.apellido2);
+                $('#Primer_Nom').val(ui.item.nombre1);
+                $('#Segundo_Nom').val(ui.item.nombre2);
+                $("#Genero option[value=" + ui.item.genero + "]").attr('selected', true);
+                $("#Id_Parentesco option[value=" + ui.item.parentesco + "]").attr('selected', true);
+                $('#Activo').prop('checked', ui.item.estado);
+                $("#PaisResidencia").html("<option value='" + ui.item.idPais + "'>" + ui.item.pais + "</option>");// estos de aqui
+                $("#DeptoResidencia").html("<option>" + ui.item.departamento + "</option>");
+                $("#CiudadResidencia").html("<option>" + ui.item.ciudad + "</option>");
+                $("#FechaN").val(ui.item.fechanac);
+                $('#General input:not(#Porcentaje, #_Nit_CC, #_Nit_CC2),select').attr({
+                    "disabled": true
+                });
+                $('input[type="checkbox"]').bootstrapSwitch('toggleReadonly', true, true);
+
+                return false;
+            },//VACIAR FORMULARIO
+            change: function (event, ui) {
+                if (!ui.item) {
+                    $('#General input:not(#_nombre, #_Nit_CC2, #_Nit_CC, #Id_Asociado),select').attr({
+                        readonly: false,
+                        disabled: false
+                    });
+                    $("#PaisResidencia").trigger("change");   // estos de aqui
+                    $('#General input:not(#_nombre, #_Nit_CC2, #_Nit_CC, #Id_Asociado)').val("");
+                }
+            },
+            focus: function (event, ui) {
+                $('#Id_Beneficiario').val(ui.item.idpc);
+                return false;
+            }
+        })
+
+        // SOLO NUMEROS
+        function valida(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+
+            //Tecla de retroceso para borrar, siempre la permite
+            if (tecla == 8) {
+                return true;
+            }
+            // Patron de entrada, en este caso solo acepta numeros
+            patron = /[0-9]/;
+            tecla_final = String.fromCharCode(tecla);
+            return patron.test(tecla_final);
+        }
+
+        // DROPDOWN PAISES
+
+        $('#PaisResidencia').on('change', function () {
+            var idPais = '#PaisResidencia',
+                idDep = "#DeptoResidencia";
+            departamentos(idPais, idDep);
+        });
+
+
+        function departamentos(idPais, idDep) {
+            var id = parseInt($(idPais).val());
+
+            if (!isNaN(id)) {
+                var departamento = $(idDep);
+
+                departamento.append($("<option>", { html: "Seleccione un elemento" }));
+
+                $.post("@Url.Action("Dep_Pais")", { id: id }, function (data) {
+                    departamento.html("");
+                    $.each(data, function (index, value) {
+                        departamento.append($("<option>", { html: value.label, value: value.value }));
+                    }); DeptoResidencia
+                })
+            }
+        }
+
+        //DROPDOWN DEPTOS
+
+        $('#DeptoResidencia').on('change', function () {
+            var idCiu = "#CiudadResidencia",
+                idDep = "#DeptoResidencia";
+            ciudades(idDep, idCiu);
+        });
+
+        function ciudades(idDep, idCiu) {
+            var id = parseInt($(idDep).val());
+
+            if (!isNaN(id)) {
+                var ciudad = $(idCiu);
+                ciudad.html("");
+                ciudad.append($("<option>", { html: "Seleccione un elemento", value: -1 }));
+
+                $.post("@Url.Action("Ciu_Dep")", { id: id }, function (data) {
+                    $.each(data, function (index, value) {
+                        ciudad.append($("<option>", { html: value.label, value: value.value }));
+                    });
+                })
+            }
+        }
+        //VALIDAR PORCENTAJES
+
+
+        $("form").on("submit", function (e) {
+
+            e.preventDefault();
+
+            var fd = new FormData(this);
+
+            $.ajax({
+                url: "@Url.Action("Create")",
+                type: "POST",
+                data: fd,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.estado) {
+                        var idaso = parseInt($("#Id_Asociado").val());
+                        window.location.href = "@Url.Action("Details","Asociado")/" + idaso + "";
+                    } else {
+                        swal("Error", response.mensaje, "error");
+                    }
+                }
+            })
+        
+        })
+
+        //////    EDITAR PORCENTAJE BENEFICIARIO
+
+        function editar(event) {
+
+            n = (event.target.id).toString();
+            n = n.replace("boton_editar", "");
+            var cedula = $('tr[data-numero=' + n + ']').children().next().html();
+            var nombre = $('tr[data-numero=' + n + ']').children().next().next().html();
+            var porcentaje = $('tr[data-numero=' + n + ']').children().next().next().next().next().next().next().next().html();
+            var porcentajetotal = $("#total").val();
+            porcentajetotal = parseInt(porcentajetotal);
+            porcentaje = porcentaje.replace("%", "");
+            porcentaje = parseInt(porcentaje);
+            var idben = n;
+
+            $("#cedula_beneficiario").val(cedula);
+            $("#nombre_beneficiario").val(nombre);
+            $("#porcentaje_beneficiario").val(porcentaje);
+            $("#porcentaje_beneficiarioOld").val(porcentaje);
+            $("#porcentajetotal_beneficiarios").val(porcentajetotal);
+            $("#id_beneficiario").val(idben);
+        }
+
+        ///CAMBIAR PORCENTAJE
+        $("#Cambiar_Porcentaje").on("click", function () {
+            var id = $("#id_beneficiario").val();
+            var por = $("#porcentaje_beneficiario").val();
+            porcentajeTotal = 0;
+            var porcentajetotalactual = parseInt($("#porcentajetotal_beneficiarios").val());
+            var porcentajeActual = parseInt($("#porcentaje_beneficiarioOld").val());
+            var porcentajeNuevo = parseInt($("#porcentaje_beneficiario").val());
+            var porcentajeTotal = (porcentajetotalactual - porcentajeActual) + porcentajeNuevo;
+
+
+
+            if (porcentajeTotal > 100) {
+                swal("error", "La suma de porcentajes es mayor al 100%", "error");
+                return false;
+            }
+
+
+            $.ajax({
+                url: "@Url.Action("Porcentaje")",
+                type: "POST",
+                data: { "id": id, "porcentaje": por },
+                cache: false,
+                datatype: "json",
+                success: function () {
+                    $("#porcentaje-" + id).html(por + "%");
+                    $("#myModal").modal("toggle");
+                    $("#total").val(porcentajeTotal);
+
+                }
+
+            });
+
+
+        })
+
+
+
+
+        var ban = false;
+        //$("form").on("submit", function (e) {
+        //    if (!ban) {
+        //        e.preventDefault();
+
+        //        swal({
+        //            title: "No se puede guardar como Beneficiario",
+        //            type: "info",
+        //            text: "Ya existe la cedula digitada!",
+        //            confirmButtonText: "Ok!",
+        //        }, function () {
+        //            window.location.reload();
+        //        });
+        //        setTimeout(function () {
+        //            window.location.reload();
+        //        }, 3000);
+
+        //    } else {
+        //        $("input,select").attr("disabled", false)
+        //    }
+        //})
+
+
+        $("#_Nit_CC2").blur(function () {
+            var texto = $(this).val();
+            var asociado = $(Id_Asociado).val();
+            $.post("@Url.Action("CedulaValida")", { id: texto, asociado: asociado }, function (res) {
+                if (!res) {
+                    ban = false;
+                    //swal("Error al guardar", "", "info");
+                    swal("No se puede guardar como Beneficiario","Ya existe la cedula digitada!","info");
+                      
+                    $('#General input:not(#_nombre, #_Nit_CC2, #_Nit_CC, #Id_Asociado),select').attr({
+                        readonly: false,
+                        disabled: false
+                    });
+                    $("#_Nit_CC2").val("");
+                    $("#PaisResidencia").trigger("change");   // estos de aqui
+                    $('#General input:not(#_nombre, #_Nit_CC2, #_Nit_CC, #Id_Asociado)').val("");
+                    
+
+                } else {
+                    ban = true;
+                }
+            });
+
+        });
+
+
+    </script>

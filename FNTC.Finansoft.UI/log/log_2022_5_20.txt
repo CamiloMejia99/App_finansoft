@@ -1,0 +1,1 @@
+20/05/2022 8:52:02 a. m. - No se encuentra el controlador de la ruta de acceso '/TimerSession/ValidarSession/KeepActiveSession' o no implementa IController. ---_System.Web.Mvc.IController GetControllerInstance(System.Web.Routing.RequestContext, System.Type)

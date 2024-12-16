@@ -1,0 +1,90 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.FabricaCreditos.FCSolicitudes
+@using FNTC.Finansoft.Accounting.DTO.MCreditos;
+@using FNTC.Finansoft.Accounting.DTO.FabricaCreditos
+@using FNTC.Finansoft.Accounting.DTO.OperativaDeCaja
+
+@{
+    ViewBag.Title = "Editar Prestamo";
+    Layout = "~/Views/Shared/_Layoutcreditos.cshtml";
+
+    var idSolicitud = ViewBag.idSolicitud;
+
+
+}
+
+<h3 align="center"><span class="label label-info">Detalles del Prestamo</span></h3>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.idSolicitud)
+
+        <div class="row">
+
+            <div class="form-group col-md-6">
+                <label>+ Prioridad:</label>
+
+                @Html.Action("ListaPrioridad", "CrearSolicitud")
+                @Html.ValidationMessageFor(model => model.idPrioridad, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group col-md-6">
+                <label>+ Actividad Economica:</label>
+                @Html.Action("ListaActividad", "CrearSolicitud")
+                @Html.ValidationMessageFor(model => model.idActividad, "", new { @class = "text-danger" })
+
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="form-group col-md-6">
+                <label>+ Dependencia:</label>
+                @Html.Action("ListaDependencia", "CrearSolicitud")
+                @Html.ValidationMessageFor(model => model.idDependencia, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group col-md-6">
+                <label>+ Sede:</label>
+                @Html.Action("ListaSedes", "CrearSolicitud")
+                @Html.ValidationMessageFor(model => model.idSede, "", new { @class = "text-danger" })
+
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="form-group col-md-6">
+                <label>+ Central de Riesgo:</label>
+
+                @Html.Action("ListaCentral", "CrearSolicitud")
+                @Html.ValidationMessageFor(model => model.idCentralDeRiesgo, "", new { @class = "text-danger" })
+
+            </div>
+            
+
+        </div>
+        <div class="form-group col-md-3">
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+
+        </div>
+
+
+    </div>
+
+}
+
+<script>
+
+    $("#idActividad").val("@Model.idActividad");
+    $("#idDependencia").val("@Model.idDependencia");
+    $("#idSede").val("@Model.idSede");
+    $("#idCentralDeRiesgo").val("@Model.idCentralDeRiesgo");
+    $("#idPrioridad").val("@Model.idPrioridad");
+
+</script>
+

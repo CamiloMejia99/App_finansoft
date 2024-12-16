@@ -1,0 +1,75 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Terceros.InfoTerceroAdicional
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>InfoTerceroAdicional</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Contrato.TipoContrato)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contrato.TipoContrato)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estrato.Estrato)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estrato.Estrato)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NivelEstudio.Nestudio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NivelEstudio.Nestudio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tercero.DIGVER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tercero.DIGVER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonasCargo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonasCargo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ocupacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ocupacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Detalle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Detalle)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

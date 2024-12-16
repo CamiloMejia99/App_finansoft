@@ -1,0 +1,415 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.OperativaDeCaja.CuadreCajaPorCajero
+
+
+@{
+    ViewBag.Title = "Crear Factura";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+<link href="~/Content/styleGeneral.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+<script src="~/Scripts/datatable.js"></script>
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<script src="~/Scripts/sweetalert.min.js"></script>
+
+<style>
+    .OtroFormControl {
+        display: block;
+        width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
+</style>
+
+<br />
+<br />
+
+<div class="modal-dialog" id="la" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document" id="imprimir">
+        <div class="modal-content">
+            <h4 class="center">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N° TRN: @Session["Factura" + User.Identity.Name] Desembolso Crédito
+            </h4>
+            <h4 class="center">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha: @Session["fecha" + User.Identity.Name]
+            </h4>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label id="numCuenta" />
+            </div>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Codigo caja:</b>&nbsp;&nbsp;@Session["cod_caja" + User.Identity.Name]&nbsp;&nbsp;@Session["nombre_caja" + User.Identity.Name]
+            </div>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Código Cajero:</b>&nbsp;&nbsp;@Session["nit" + User.Identity.Name]
+            </div>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Documento del Asociado:</b>&nbsp;&nbsp;<label id="idAsociado" />
+            </div>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>N° Cuenta:</b>&nbsp;&nbsp;<label id="ncuenta" />
+            </div>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label id="nombre" />
+            </div>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Pagaré:</b>&nbsp;&nbsp;&nbsp;&nbsp;<label id="pag" />
+            </div>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Valor Desembolsado:</b>&nbsp;&nbsp;&nbsp;&nbsp;<label id="valor" />
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;****POR VERIFIQUE QUE LA INFORMACION<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IMPRESA ES CORRECTA****
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VIGILADO SUPERINTENDENCIA DE ECONOMIA SOLIDARIA
+            </div>
+
+
+
+
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Regresar", "CuentaOperacion")
+        <input type="button" onclick="printDiv('imprimir')" value="Imprimir" />
+    </p>
+</div>
+
+<div class="col-md-12" style="background: rgb(248, 248, 248)">
+
+    @using (Html.BeginForm("CuentaOperacionEntidadDos", "FactOpcajas", FormMethod.Post, htmlAttributes: new { id = "FormContinuar", autocomplete = "off" }))
+    {
+        @Html.AntiForgeryToken()
+        <input id="lblcuenta" type="hidden">
+
+
+
+        <div class="form-group col-md-11" style="margin-left:40px">
+            <div class="caja2">
+
+                <!--..................-->
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 123%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Registro Transacciones</h3></div>
+                        <div class="col-md-2">
+                            <a href="/OperativaDeCaja/FactOpcajas/CuentaOperacion" style="margin-top: 20px !important;" class="btn btn-inline btn-small btn-default">COOMISOL</a>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Nombre:</label>
+                            <input class="form-control" type="text" id="nombreAso" name="nombreAso">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Cedula:</label>
+                            <input class="form-control" type="text" id="cedulaAso" name="cedulaAso">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Cuota:</label>
+                            <input class="form-control" type="text" id="cuota" name="cuota">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <button class="btn btn-success" id="agregarTercero" style="margin-top:25px" type="button">AGREGAR TERCERO</button>
+                        </div>
+                    </div>
+                    <div class="row"><br /></div>
+
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Fecha:</label>
+                        <label class="form-control" style="color:red">@Session["fecha" + User.Identity.Name]</label>
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">No Factura: </label>
+                        <label class="form-control" style="color:red">@Session["Factura" + User.Identity.Name]</label>
+                    </div>
+                    
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Seleccione Tercero:</label>
+                        <div class="otroFormControl">
+                            @Html.DropDownList("ListaTercerosEntidadDos", null, "Selecione Tercero", new { @class = "chosen-select-single", @id = "nitTerceroDropList" })
+                            <input type="text" id="EnviarTercero" name="cuenta" hidden="hidden">
+                        </div>
+                    </div>
+                </div>
+                <div class="row contenido">
+                    <hr />
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Código Caja:</label>
+                        <label class="form-control">@Session["cod_caja" + User.Identity.Name]</label>
+                        <h5 style="color:#274766">@Session["nombre_caja" + User.Identity.Name]</h5>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Nit Cajero:</label>
+                        <label class="form-control">@Session["nit" + User.Identity.Name]</label>
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <br />
+                        <h5 style="color:#274766">@Session["nombre" + User.Identity.Name]</h5>
+                    </div>
+                </div>
+                <div class="row contenido">
+                    <div class="form-group col-md-3">
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Operación: </label>
+                        <select class="form-control" name="operacion" id="operacion">
+                            <option value="Cons">Consignación Cuota Credito</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <div class="form-group col-md-3">
+                        <a href="/OperativaDeCaja/FactOpcajas/facturasCuotasCreditosEntidadDos" class="btn btn-inline btn-small btn-primary">Registro de Operaciones</a>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="form-group col-md-8">
+
+                    </div>
+                    <div class="form-group col-md-4">
+
+                        <a href="/OperativaDeCaja/FactOpcajas//Logopcaja" class="btn btn-inline btn-small btn-danger">Cancelar</a>
+                        <button type="submit" id="BtnFormulario" class="btn btn-inline btn-small btn-success">Continuar</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    }
+    <h3 style="color:#274766">Cuadre parcial de caja</h3>
+    <hr />
+    <div class="form-group">
+
+        <div class="row contenido">
+            <div class="col-md-4"><label class="control-label">Consignaciones en efectivo</label></div>
+            @Html.HiddenFor(model => model.consignacion_efectivo, new { id = "consignacion_efectivo" })
+            <div class="col-md-2"><label class="control-label">$ <label id="txtconsignacion_efectivo"></label></label></div>
+
+            <div class="col-md-3"><label class="control-label">Retiros por efectivo</label></div>
+            <div class="col-md-3"><label class="control-label">$ @Html.DisplayFor(model => model.retiros_efectivo)</label></div>
+        </div>
+        <div class="row contenido">
+            <div class="col-md-4"><label class="control-label">Consignaciones en Cheque</label></div>
+            <div class="col-md-2"><label class="control-label">$ @Html.DisplayFor(model => model.consignacion_cheque)</label></div>
+            <div class="col-md-3"><label class="control-label">Retiros por Cheque</label></div>
+            <div class="col-md-3"><label class="control-label">$ @Html.DisplayFor(model => model.retiros_cheque)</label></div>
+        </div>
+        <div class="row contenido">
+            <div class="col-md-4"><label class="control-label">Efectivo en Caja</label></div>
+            @Html.HiddenFor(model => model.tope, new { id = "tope" })
+            <div class="col-md-2"><label class="control-label">$ <label id="efectivoEnCajaSMiles"></label></label></div>
+        </div>
+    </div>
+    <div id="contenido"></div>
+</div>
+
+
+
+<script>
+    function printDiv(imprimir) {
+        var contenido = document.getElementById(imprimir).innerHTML;
+        var contenidoOriginal = document.body.innerHTML;
+
+        document.body.innerHTML = contenido;
+
+        window.print();
+
+        document.body.innerHTML = contenidoOriginal;
+    }</script>
+
+<!--..................-->
+<style>
+    body {
+        background-color: #DDD;
+    }
+</style>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (ViewBag.mensaje != null)
+    {
+        <script>
+
+
+			window.onload = function () {
+				swal('Error', '@ViewBag.mensaje', 'warning');
+			}
+        </script>
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#la").hide();
+
+            var tope = $("#tope").val();
+            var consignacion_efectivo = $("#consignacion_efectivo").val();
+            $("#efectivoEnCajaSMiles").text(formatNumberMiles.new(tope));
+            $("#txtconsignacion_efectivo").text(formatNumberMiles.new(consignacion_efectivo));
+
+            $(".chosen-select-single").chosen();
+            $(".chosen-select-multiple").chosen();    //DESPUES DEL FINAL DEL DOCUMENTO AL PRINCIPIO DE LOS SCRIPTS
+        });
+    </script>
+
+    <script type="text/javascript">
+                $("#BtnFormulario").on("click", function (e) {
+                    $("#BtnFormulario").prop("disabled", true);
+                    e.preventDefault();
+
+                    var nitTercero = $("#nitTerceroDropList").val();
+                    if (nitTercero != "") {
+                        $("#EnviarTercero").val(nitTercero);
+                        $("#FormContinuar").submit();
+                    } else {
+                        swal({
+                            title: "Error",
+                            text: "Seleccione un Tercero",
+                            type: 'warning',
+                            confirmButtonText: 'Aceptar'
+                        })
+                        $("#BtnFormulario").prop("disabled", false);
+                    }                                                        
+                });
+    </script>
+    <script>
+        //FORMATEAR UN NUMERO
+        var formatNumberMiles = {
+            separador: ".", // separador para los miles
+            sepDecimal: ',', // separador para los decimales
+            formatear: function (num) {
+                num += '';
+                var splitStr = num.split('.');
+                var splitLeft = splitStr[0];
+                var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+                var regx = /(\d+)(\d{3})/;
+                while (regx.test(splitLeft)) {
+                    splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+                }
+                return this.simbol + splitLeft + splitRight;
+            },
+            new: function (num, simbol) {
+                this.simbol = simbol || '';
+                return this.formatear(num);
+            }
+        }
+        //FIN FORMATEAR UN NUMERO
+        /*
+        * FUNCIONALIDAD DE LA 'FUNCION'
+        formatNumber.new(123456779.18, "$") // retorna "$123.456.779,18"
+        formatNumber.new(123456779.18) // retorna "123.456.779,18"
+        formatNumber.new(123456779) // retorna "$123.456.779"
+        */
+        //formatNumberMiles.new(realValor);//ACCESO A LA VARIABLE
+    </script>
+
+    <script type="text/javascript">
+        /* SEPARADOR DE MILES POR KEY UP */
+        $(document).ready(function () {
+            $("#cuota").on({
+                "focus": function (event) {
+                    $(event.target).select();
+                },
+                "keyup": function (event) {
+                    $(event.target).val(function (index, value) {
+                        return value.replace(/\D/g, "")
+                            .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                    });
+                }
+            });
+        });
+            /*FIN SEPARADOR DE MILES POR KEY UP*/
+
+        $(document).ready(function () {
+            $(".chosen-select-single").chosen();
+            $(".chosen-select-multiple").chosen();    //DESPUES DEL FINAL DEL DOCUMENTO AL PRINCIPIO DE LOS SCRIPTS
+        });
+
+        $("#agregarTercero").click(function () {
+            var nombreAso = $("#nombreAso").val();
+            var cedulaAso = $("#cedulaAso").val();
+            var cuota = $("#cuota").val();
+
+            cuota = cuota.replace(".", "");
+            cuota = cuota.replace(".", "");
+            cuota = cuota.replace(".", "");
+
+            if (nombreAso == "" || cedulaAso == "" || cuota == "") {
+                swal({
+                    title: "Error",
+                    text: "Los campos Nombre, Cedula y Cuota son obligatorios",
+                    type: 'warning',
+                    confirmButtonText: 'Aceptar'
+                })
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("AddTerceroEntidadDos", "FactOpcajas")",
+                    datatype: "Json",
+                    data: { nombreAso: nombreAso, cedulaAso:cedulaAso, cuota:cuota},
+                    success: function (data) {
+                        if (data == true) {
+                            location.reload(true);
+                        } else {
+                            swal({
+                                title: "Error",
+                                text: "El Tercero ya existe",
+                                type: 'warning',
+                                confirmButtonText: 'Aceptar'
+                            })
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+
+
+
+}
+

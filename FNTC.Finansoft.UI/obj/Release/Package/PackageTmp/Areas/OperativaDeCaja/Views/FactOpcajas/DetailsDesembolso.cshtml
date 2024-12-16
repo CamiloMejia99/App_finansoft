@@ -1,0 +1,112 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.OperativaDeCaja.factOpCajaDesembolsos
+<script src="~/Scripts/jquery-1.11.0.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
+<link href="~/Content/css/compressed2.css" rel="stylesheet" />
+<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.masknumber.js"></script>
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="modalheadergeneral" style="margin-top: 1%;"><h4><i class="fas fa-edit"></i>&nbsp;&nbsp;Detalles de Factura</h4></div>
+
+<div class="center contenido" id="areaImprimir">
+
+    <div style=" position: relative; top: 0px;  left: 100px;  background-color: white;  width: 450px;">
+        <div class="dl-horizontal">
+
+            <h4 class="center">
+                &nbsp;&nbsp;&nbsp;&nbsp;N° TRN: @Html.DisplayFor(model => model.factura)&nbsp;&nbsp; Desembolso Crédito
+            </h4>
+            <h4 class="center">
+                &nbsp;&nbsp;&nbsp;&nbsp;Fecha: @Html.DisplayFor(model => model.fecha)
+            </h4>
+            <div class="row">
+
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Código caja:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.codigoCaja)</p>
+
+            </div>
+            <div class="row">
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Código Cajero:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.nitCajero)</p>
+            </div>
+
+            <div class="row">
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Documento Del Asociado:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.NIT)</p>
+            </div>
+            <div class="row">
+                <p class="col-md-6">&nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.Terceros.NOMBRE1)&nbsp;@Html.DisplayFor(model => model.Terceros.NOMBRE2)&nbsp;@Html.DisplayFor(model => model.Terceros.APELLIDO1)&nbsp;@Html.DisplayFor(model => model.Terceros.APELLIDO2)</p>
+            </div>
+            <div class="row">
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Pagaré:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.pagare)</p>
+            </div>
+            <div class="row">
+                <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Valor Desembolsado:</b>&nbsp;&nbsp;<label id="valorDesembolsado">@Html.DisplayFor(model => model.valorDesembolsado)</label></p>
+            </div>
+            <div class="row">
+                <p class="col-md-6">&nbsp;&nbsp;&nbsp;&nbsp;****POR FAVOR VERIFIQUE QUE LA INFORMACION IMPRESA ES CORRECTA****</p>
+            </div>
+
+            <div class="row">
+                <p class="col-md-6">&nbsp;&nbsp;&nbsp;&nbsp;VIGILADO SUPERINTENDENCIA DE ECONOMIA SOLIDARIA</p>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Regresar", "CuentaOperacion")&nbsp;&nbsp;&nbsp;
+    <input type="button" onclick="printDiv('areaImprimir')" value="Imprimir" />
+</p>
+
+<script>
+
+    $(document).ready(function () {
+        var valorDesembolsado = formatNumberMiles.new($("#valorDesembolsado").text());
+        $("#valorDesembolsado").text(valorDesembolsado);
+    });
+
+	function printDiv(areaImprimir) {
+		var contenido = document.getElementById(areaImprimir).innerHTML;
+		var contenidoOriginal = document.body.innerHTML;
+
+		document.body.innerHTML = contenido;
+
+		window.print();
+
+		document.body.innerHTML = contenidoOriginal;
+	}
+
+</script>
+
+<script>
+    //FORMATEAR UN NUMERO
+    var formatNumberMiles = {
+        separador: ".", // separador para los miles
+        sepDecimal: ',', // separador para los decimales
+        formatear: function (num) {
+            num += '';
+            var splitStr = num.split('.');
+            var splitLeft = splitStr[0];
+            var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+            var regx = /(\d+)(\d{3})/;
+            while (regx.test(splitLeft)) {
+                splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+            }
+            return this.simbol + splitLeft + splitRight;
+        },
+        new: function (num, simbol) {
+            this.simbol = simbol || '';
+            return this.formatear(num);
+        }
+    }
+        //FIN FORMATEAR UN NUMERO
+        /*
+        * FUNCIONALIDAD DE LA 'FUNCION'
+        formatNumber.new(123456779.18, "$") // retorna "$123.456.779,18"
+        formatNumber.new(123456779.18) // retorna "123.456.779,18"
+        formatNumber.new(123456779) // retorna "$123.456.779"
+        */
+        //formatNumberMiles.new(realValor);//ACCESO A LA VARIABLE
+</script>

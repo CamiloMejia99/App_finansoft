@@ -1,0 +1,173 @@
+﻿@using FNTC.Finansoft.Accounting.DTO.Result
+@model IEnumerable<FNTC.Finansoft.Accounting.DTO.Accounting.TipoComprobanteDTO>
+
+@{
+    ViewBag.Title = "Index";
+    var result =(Result) ViewBag.result;
+    
+    
+    if(Model == null)
+    {
+        Response.Redirect(Url.Action("Index","CentroCosto"));
+    }
+
+    var menu = (string)TempData["menu"];
+}
+
+@*<link href="~/Content/stylegeneral.css" rel="stylesheet" />*@
+
+
+<div class="col-md-12">
+    <div class="form-group">
+        <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 123%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Tipos de Comprobante Registrados</h3></div>
+        <div class="col-md-2" style=" margin-top: 3%;">
+            <a href="/Accounting/TiposComprobantes/create" class="AddUser btn btn-success btn-xs btnnuevo" data-toggle="modal" data-target="#centro">Nuevo</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="form-group">
+
+        <button class="js-refrescar"><i class="fa fa-refresh" aria-hidden="true"></i> Actualizar</button>
+    </div>
+</div>
+
+
+
+<div class="modal fade" data-backdrop="static" id="centro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="table-responsive col-md-12">
+    <table class="table table-bordered table-hover table-responsive" style="background-color: #FFF;">
+        <tr>
+            <th class="columnatablaazul">
+                <label>Cod</label>
+            </th>
+            <th class="columnatablaazul2">
+                <label>Clase</label>
+            </th>
+            <th class="columnatablaazul">
+                <label>Forma pago</label>
+            </th>
+            <th class="columnatablaazul2">
+                <label>Nombre</label>
+            </th>
+            <th class="columnatablaazul">
+                <label>Cons</label>
+            </th>
+            <th class="columnatablaazul2">
+                <label>Inactivo</label>
+            </th>
+
+            <th class="columnatablaazul">Opciones</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CODIGO)
+                </td>
+                <td class="alinearcentro">
+                    @Html.DisplayFor(modelItem => item.CLASEComprobante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormaPago.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                </td>
+                <td class="alinearcentro">
+                    @Html.DisplayFor(modelItem => item.CONSECUTIVO)
+                </td>
+                <td style="text-align: center;">
+                    @Html.DisplayFor(modelItem => item.INACTIVO)
+                </td>
+                <td style="text-align:center">
+                    
+                    <a id="editar" class="editartablas" href="/Accounting/TiposComprobantes/Edit?CODIGO=@item.CODIGO" data-toggle="modal" data-target="#centro">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </a>|
+
+                    @*<a class="detalletablas" href="/Accounting/Comprobantes/Details" title="Detalles" style="padding: 5%;">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        </a>|*@
+
+                    <a class="eliminartablas" data-id="@item.CODIGO" title="Eliminar" style="padding: 5%;">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<div class="clearfix"></div>
+
+<script>
+    //refrescar un div
+    $(".js-refrescar").click(function () {
+        $("#mostrar").html("");
+        $("#mostrar").load("/Accounting/TiposComprobantes/index");
+    });
+
+    //Ocultar el modal
+    $(document.body).on('hidden.bs.modal', function () {
+        $('#centro').removeData('bs.modal');
+        $(".js-refrescar").click();
+
+    });
+
+
+    $().ready(function () {
+        var href = "";
+        var data = "";
+        $(".eliminartablas").click(function (event) {
+            if (confirm("Solo se eliminirá si no presenta movimientos") == true) {
+              //  href = $(this).prev().attr('href');
+                // data = href.split("/")[4];
+                data = $(this).data('id');
+             //   alert(data);
+                //event.preventDefault();
+
+                $.ajax({
+                    type: "POST",
+                    url: '/Accounting/TiposComprobantes/Delete',
+                    data: { id: data },
+                    success: function () {
+
+                        @*var urlpartial = '@Url.Action("catalogos2", "Default", new { Area = "dashboard"})';
+                        urlpartial += '?url=' + "Accounting/TiposComprobantes/index&menu" + "contabilidad";
+                        //    alert(urlpartial);
+                        //                        $("#mostrar").html("");
+                        $("#mostrar").load(urlpartial);
+                        //  window.location ="/Dashboard/Default/catalogos2?url=Accounting/CentroCosto/index&menu=contabilidad";*@
+                        $(".js-refrescar").click();
+                        alert("eliminado");
+                    },
+                    error: function () {
+                        alert("Error al eliminar el Tipo Comprobante");
+                    }
+
+                });
+            }
+            //post a 
+        });
+    })
+</script>
+
+
+

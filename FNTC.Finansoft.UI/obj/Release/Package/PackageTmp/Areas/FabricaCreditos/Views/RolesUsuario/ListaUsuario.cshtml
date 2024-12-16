@@ -1,0 +1,10 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.Email.AspNetUsers>
+
+
+<select class="form-control" id="NIT_Usuario" name="NIT_Usuario">
+    <option value="">Seleccionar</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.Id"> @item.Nombres</option>
+    }
+</select>

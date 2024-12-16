@@ -1,0 +1,97 @@
+﻿@model FNTC.Finansoft.Accounting.DTO.Nomina.DisNomina
+
+@{
+    Layout = "~/Views/Shared/_Modal.cshtml";
+    var action = (string)ViewBag.action;
+    var boton = (string)ViewBag.boton;
+
+    var TipoCuenta = @ViewBag.TipoCuenta;
+
+}
+
+
+
+@if (ViewBag.guardado == "S")
+{
+    <script>
+        recargar();
+    </script>
+}
+else
+{
+    <div id="centro" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    <h4 align="center" class="modal-title"> <b>Crear - Nueva Discriminacion</b></h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class=" panel panel-body">
+                        @using (Html.BeginForm("Create", "Discriminacions", new { area = "Nomina" }, FormMethod.Post, new { id = "CrearDiscrimiacion", autocomplete = "off" }))
+
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapseOne">
+                                                Paramentros - Archivo Plano
+                                            </a>
+                                        </h4>
+                                    </div>
+
+                                    <br /><h5>EMPRESA</h5>
+                                          <div class="col-md-4" style="padding:0px">
+                                              <div class="col-md-12" style="padding:2px">
+                                                  @Html.DropDownListFor(model => model.EMPRESA, new SelectList(Model._empresas, "Value", "Text"), "Seleccione la Empresa", new { @class = "form-control", required = true, id = "Empresa" })
+                                                  @Html.ValidationMessageFor(model => model.EMPRESA, "", new { @class = "text-danger" })
+                                              </div>
+                                          </div>
+                                </div>
+
+
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="button" value="Guardar" class="btn btn-default" onclick="Guardar();" />
+                                            <button type="button" id="close" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                        }
+                        @if (ViewBag.Error != null && ViewBag.Error != "")
+                        {
+                            <div class="text-danger">
+                                @ViewBag.Error
+                            </div>}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    /**/
+    <script>
+        $(document).ready(function () {
+            inicializarFormulario();
+            $('#centro').modal('show');
+        });
+    </script>
+
+
+ 
+
+}

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<FNTC.Finansoft.Accounting.DTO.GestionCartera.GCgestion>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idAsociado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClaseGestion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaGestion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RespuestaGestion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResOpcionalGestion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactoGestion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GestionVerificada)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.idAsociado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClaseGestion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaGestion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RespuestaGestion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResOpcionalGestion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactoGestion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GestionVerificada)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
