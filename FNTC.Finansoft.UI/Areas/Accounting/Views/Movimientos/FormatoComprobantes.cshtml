@@ -96,7 +96,7 @@
                 <!--    #region comandos -->
                 <div id="comandos" style="margin-top:40px; margin-bottom:5px;">
                     <div>
-                        <button type="button" class="btn botonagregar addmore" aria-label="Left Align">
+                        <button type="button" class="btn botonagregar addmore" aria-label="Left Align" onclick="refrescarPagina()">
                             <i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar cuenta
                         </button>
 
@@ -383,6 +383,11 @@
 <!-- #endregion -->
 <!-- #region combosCuentas -->
 <script>
+
+    function refrescarPagina() {
+        location.reload();
+    }
+
 
     //function format(input) {
     //    var num = input.value.replace(/\./g, '');

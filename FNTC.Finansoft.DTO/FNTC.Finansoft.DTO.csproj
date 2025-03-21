@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FNTC.Finansoft.Accounting.DTO</RootNamespace>
     <AssemblyName>FNTC.Finansoft.Accounting.DTO</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -38,6 +38,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=5.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
@@ -165,6 +168,7 @@
     <Compile Include="ControlCartera\CRGestionContacto.cs" />
     <Compile Include="ControlCartera\CRGestionRespuesta.cs" />
     <Compile Include="ControlCartera\CRNotificacionesCartera.cs" />
+    <Compile Include="ControlErrores\Log.cs" />
     <Compile Include="DescuentosNomina\CamposRelacionDis.cs" />
     <Compile Include="DescuentosNomina\ConformacionDeLosPlanos.cs" />
     <Compile Include="DescuentosNomina\ContraPartida.cs" />
@@ -248,10 +252,14 @@
     <Compile Include="Geo\Municipio.cs" />
     <Compile Include="Geo\Pais.cs" />
     <Compile Include="GestionDocumental\GDClass1.cs" />
+    <Compile Include="Informes\BalanceComprobacionActualizado.cs" />
+    <Compile Include="Informes\MovimientoAuxilia.cs" />
     <Compile Include="Informes\MovimientoAuxiliar.cs" />
     <Compile Include="Informes\MovimientoAuxiliar2.cs" />
+    <Compile Include="Informes\SpAuxiliarPorTercero.cs" />
     <Compile Include="Informes\spBalanceComprobacionL5.cs" />
     <Compile Include="Informes\sp_reporte17.cs" />
+    <Compile Include="Informes\TotalSaldoCuenta.cs" />
     <Compile Include="Interfaces\GenericRepository.cs" />
     <Compile Include="Interfaces\IGenericRepository.cs" />
     <Compile Include="LiquidacionesDefinitivas\LiquidacionDefinitivaAso.cs" />

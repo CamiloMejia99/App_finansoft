@@ -2,8 +2,10 @@ namespace FNTC.Finansoft.Accounting.DTO.Contabilidad
 {
     using FNTC.Finansoft.Accounting.DTO.Terceros;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
 
     [Table("acc.Movimientos")]
     public partial class Movimiento
@@ -49,14 +51,15 @@ namespace FNTC.Finansoft.Accounting.DTO.Contabilidad
 
         public DateTime FECHAMOVIMIENTO { get; set; }
 
-        public bool ANULADO { get; set; }
+        public bool ? ANULADO { get; set; }
+        public bool ESTADOPAGO { get; set; }
 
         //Cpalacios
         //Agregar nuevo campo
-        [StringLength(4)]
+        [StringLength(25)]
         public string DOCUMENTO { get; set; }
         //[StringLength(3)]
-        //public string SCCOSTO { get; set; }
+        //public string SCCOSTO { get; set; } 
 
         //[StringLength(3)]
         //public string DOCRELA { get; set; }

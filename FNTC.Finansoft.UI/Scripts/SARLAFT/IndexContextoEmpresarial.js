@@ -13,7 +13,7 @@
                 Swal.fire({
                     icon: 'warning',
                     title: 'Aviso',
-                    text: 'El contexto de la empresa ya ha sido registrado.'
+                    html: ` <label class="fuenteSweetAlert">El contexto de la empresa ya ha sido registrado.</label>`,
                 })
                 
             }

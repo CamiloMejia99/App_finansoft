@@ -79,155 +79,93 @@ $(".verify").on('click', function () {
 
         success: function (data) {
             if (data.IsOk) {
-                $.ajax({
-                    cache:false,
-                    url: 'Asentar',
-                    datatype: "Json",
-                    type: 'GET',
-                    async: true
-                }).done(function (data) {
-                    if (!data) {
-                        $("#centro").modal('hide');
-                        swal({
-                            title: "Alerta",
-                            type: "info",
-                            text: "Por favor, verifique el comprobante e intente nuevamente.",
-                            confirmButtonText: "OK",
-                        })
-                    } else if (!data) {
-                        $("#centro").modal('hide');
-                        swal({
-                            title: "Alerta 1",
-                            type: "info",
-                            text: "Error al Verificar",
-                            confirmButtonText: "OK",
-                        })
-                    }
-                    else if (!data) {
-                        $("#centro").modal('hide');
-                        swal({
-                            title: "Alerta 2",
-                            type: "info",
-                            text: "El Movimiento no es nuevo",
-                            confirmButtonText: "OK",
-                        })
-                    }
-                    else if (!data) {
-                        $("#centro").modal('hide');
-                        swal({
-                            title: "Alerta 3",
-                            type: "info",
-                            text: "Ya existe el consecutivo",
-                            confirmButtonText: "OK",
-                        })
-                    }
-                    else if (!data) {
-                        $("#centro").modal('hide');
-                        swal({
-                            title: "Alerta 4",
-                            type: "info",
-                            text: "No existe Cuenta Auxiliar",
-                            confirmButtonText: "OK",
-                        })
-                    }
-                    else if (!data) {
-                        $("#centro").modal('hide');
-                        swal({
-                            title: "Alerta 6",
-                            type: "info",
-                            text: "(6)",
-                            confirmButtonText: "OK",
-                        })
-                    } else if (!data) {
-                        $("#centro").modal('hide');
-                        swal({
-                            title: "Alerta 1",
-                            type: "info",
-                            text: "(1)",
-                            confirmButtonText: "OK",
-                        })
-                    }
-                    else {
-                        window.location.replace("/Accounting/Movimientos/Index");
-                    }
 
-                }).fail(function (response) {
-                    alert("ERROR");
-                });
-
-                //$.get("Asentar")
-                //    .done(function (data) {
-                //        //  $.get("/Accounting/Movimientos/index");
-                //        if (!data)
-                //        {
-                //            $("#centro").modal('hide');
-                //            swal({
-                //                title: "Alerta 5",
-                //                type: "info",
-                //                text: "Saldo en Aportes insuficiente o revisa tu comprobante",
-                //                confirmButtonText: "OK",
-                //            })
-                //        } else if (!data) {
-                //            $("#centro").modal('hide');
-                //            swal({
-                //                title: "Alerta 1",
-                //                type: "info",
-                //                text: "Error al Verificar",
-                //                confirmButtonText: "OK",
-                //            })
-                //        }
-                //        else if (!data) {
-                //            $("#centro").modal('hide');
-                //            swal({
-                //                title: "Alerta 2",
-                //                type: "info",
-                //                text: "El Movimiento no es nuevo",
-                //                confirmButtonText: "OK",
-                //            })
-                //        }
-                //        else if (!data) {
-                //            $("#centro").modal('hide');
-                //            swal({
-                //                title: "Alerta 3",
-                //                type: "info",
-                //                text: "Ya existe el consecutivo",
-                //                confirmButtonText: "OK",
-                //            })
-                //        }
-                //        else if (!data) {
-                //            $("#centro").modal('hide');
-                //            swal({
-                //                title: "Alerta 4",
-                //                type: "info",
-                //                text: "No existe Cuenta Auxiliar",
-                //                confirmButtonText: "OK",
-                //            })
-                //        }
-                //        else if (!data) {
-                //            $("#centro").modal('hide');
-                //            swal({
-                //                title: "Alerta 6",
-                //                type: "info",
-                //                text: "(6)",
-                //                confirmButtonText: "OK",
-                //            })
-                //        } else if (!data) {
-                //            $("#centro").modal('hide');
-                //            swal({
-                //                title: "Alerta 1",
-                //                type: "info",
-                //                text: "(1)",
-                //                confirmButtonText: "OK",
-                //            })
-                //        }
-                //        else {
-                //            window.location.replace("/Accounting/Movimientos/Index");
-                //        }                        
-                //        //prueba incluye open
-                //        // alert("OK");
-                //    }).fail(function (response) {
-                //        alert("ERROR");
-                //    })
+                $.get("Asentar")
+                    .done(function (data) {
+                        //  $.get("/Accounting/Movimientos/index");
+                        if (!data)
+                        {
+                            $("#centro").modal('hide');
+                            Swal.fire({
+                                title: 'Importante!',
+                                text: "No hemos detectado actividad en el sistema, por seguridad recargaremos la página!",
+                                icon: 'info',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Aceptar'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "/Accounting/Movimientos/Nuevo?titulo=nuevo&menu=movimientos";
+                                }
+                            })
+                            //swal({
+                            //    title: "Alerta 5",
+                            //    type: "info",
+                            //    text: "Saldo en Aportes insuficiente o revisa tu comprobante",
+                            //    confirmButtonText: "OK",
+                            //})
+                        } else if (!data) {
+                            $("#centro").modal('hide');
+                            Swal.fire({
+                                title: "Alerta 1",
+                                icon: "info",
+                                text: "Error al Verificar",
+                                confirmButtonText: "OK",
+                            })
+                        }
+                        else if (!data) {
+                            $("#centro").modal('hide');
+                            Swal.fire({
+                                title: "Alerta 2",
+                                icon: "info",
+                                text: "El Movimiento no es nuevo",
+                                confirmButtonText: "OK",
+                            })
+                        }
+                        else if (!data) {
+                            $("#centro").modal('hide');
+                            Swal.fire({
+                                title: "Alerta 3",
+                                icon: "info",
+                                text: "Ya existe el consecutivo",
+                                confirmButtonText: "OK",
+                            })
+                        }
+                        else if (!data) {
+                            $("#centro").modal('hide');
+                            Swal.fire({
+                                title: "Alerta 4",
+                                icon: "info",
+                                text: "No existe Cuenta Auxiliar",
+                                confirmButtonText: "OK",
+                            })
+                        }
+                        else if (!data) {
+                            $("#centro").modal('hide');
+                            Swal.fire({
+                                title: "Alerta 6",
+                                icon: "info",
+                                text: "(6)",
+                                confirmButtonText: "OK",
+                            })
+                        } else if (!data) {
+                            $("#centro").modal('hide');
+                            Swal.fire({
+                                title: "Alerta 1",
+                                icon: "info",
+                                text: "(1)",
+                                confirmButtonText: "OK",
+                            })
+                        }
+                        else {
+                            window.location.replace("/Accounting/Movimientos/Index");
+                        }                        
+                        //prueba incluye open
+                        // alert("OK");
+                    }).fail(function (response) {
+                        alert("ERROR");
+                    })
             }
 
             if (data.Issues.Errors.length > 0) { $('#mensajes-error').show(); }
@@ -264,7 +202,7 @@ function addNewRow(consecutivo) {
     //el detalle
     //porngo la descripcion de 
     var detalleComprobante = $("#Detalle").val();
-    newTR.append('<td class="nc-oculto" ><input type="text" id="detalle_' + i2 + '" value="' + detalleComprobante + '" class="form-control"></td>');
+    newTR.append('<td class="nc-oculto" ><input type="text" disabled id="detalle_' + i2 + '" value="' + detalleComprobante + '" class="form-control"></td>');
     //el select para terceros
     var tdS2 = $('<td class="nc-oculto">').appendTo(newTR);
     tdS2.append('<select id="terceros_' + i2 + '" data-type="terceros"  class="select2-container.input-mini JACZ" ></select>');
@@ -410,11 +348,11 @@ $(document).on('change', '.ctas', function () {
 });
 
 
-//esta funcion trae las cuentas de los asociados cuando se selecciona la cuenta configurada para cada uno de los productos del sistema
+//esta funcion trae las fichas de aportes de los asociados cuando se selecciona la cuenta configurada para fichas de aportes
 $(document).on('change', '.JACZ', function () {
 
-    var url = "/Accounting/Movimientos/GetProductosAsociadoAsync";
-    var NIT = $(this).val();
+    var url = "/Aportes/Aportes/GetFichasByTercero";
+    var NIT = $(".JACZ").val();
 
     var fila = "";
     fila = $(this).parents('tr');
@@ -433,13 +371,15 @@ $(document).on('change', '.JACZ', function () {
             NIT: NIT,
             cuenta: cuentaContable
         },
-        success: function (data) {             
-            $.each(data.result, function (key, val) {
+        success: function (data) {
+            if (data.status) {
+                $.each(data.result, function (key, val) {
 
-                $(".cuenPag_" + i).append('<option value="' + val[0] + '">' + val[0] + '=>' + val[1] + '</option>');
+                    $(".cuenPag_" + i).append('<option value="' + val[0] + '">' + val[0] + '=>' + val[1] + '</option>');
 
-                $(".cuenPag_" + i).select2('destroy');
-            });
+                    $(".cuenPag_" + i).select2('destroy');
+                });
+            }
         }
 
     });
@@ -793,10 +733,10 @@ $(document).ready(function () {
     });
 
 
-    //var fPagoid = $("#FPago").val();
-    //$.get("/accounting/formaspago/GetFormasPagoById", { id: fPagoid })
-    //    .done(function (data) {
-    //        $("#cta_1").val(data.CodigoCuenta).trigger("change");
-    //    })
+    var fPagoid = $("#FPago").val();
+    $.get("/accounting/formaspago/GetFormasPagoById", { id: fPagoid })
+        .done(function (data) {
+            $("#cta_1").val(data.CodigoCuenta).trigger("change");
+        })
 
 });

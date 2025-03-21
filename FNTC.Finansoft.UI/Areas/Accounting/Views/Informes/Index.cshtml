@@ -2,6 +2,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script src="~/Scripts/Areas/Informes/ValidacionFechas.js"></script>
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<script src="~/Scripts/sweetalert2@9.js"></script>
+
 @section Styles{
 
     <link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
@@ -45,68 +49,55 @@
                 <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="7"><i class="fa fa-list-alt" aria-hidden="true"></i> Libro Mayor</a></li>
                 <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="4"><i class="fa fa-list-alt" aria-hidden="true"></i> Balance General </a></li>
                 <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="2"><i class="fa fa-list-alt" aria-hidden="true"></i> Auxiliar Por Cuenta</a></li>
-                @*<li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="1"><i class="fa fa-list-alt" aria-hidden="true"></i> Balance Detallado</a></li>*@
+                @*<li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="1"><i class="fa fa-list-alt" aria-hidden="true"></i> Movimientos</a></li>*@
                 <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="22"><i class="fa fa-list-alt" aria-hidden="true"></i> Auxiliar por Terceros</a></li>
                 @*<li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="42"><i class="fa fa-list-alt" aria-hidden="true"></i> Auxiliar por Terceros Detallado</a></li>*@
-                <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="37"><i class="fa fa-list-alt" aria-hidden="true"></i> Balance de Comprobación</a></li>
+                <li><a id="balance" href="#" data-toggle="modal" data-target="#librosaux" data-informe="37"><i class="fa fa-list-alt" aria-hidden="true"></i> Balance de Comprobación</a></li>
                 @*<li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="5"><i class="fa fa-list-alt" aria-hidden="true"></i> Flujo de Caja</a></li>*@
                 <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="3"><i class="fa fa-list-alt" aria-hidden="true"></i> Estado de Resultados</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="40"><i class="fa fa-list-alt" aria-hidden="true"></i> Afiliaciones por Asesor</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="41"><i class="fa fa-list-alt" aria-hidden="true"></i> Afiliaciones por Agencia</a></li>
+                @*@<li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="40"><i class="fa fa-list-alt" aria-hidden="true"></i> Afiliaciones por Asesor</a></li>*@
+                @*@<li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="41"><i class="fa fa-list-alt" aria-hidden="true"></i> Afiliaciones por Agencia</a></li>*@
 
             </ul>
         </div>
     </div>
     <div class="col-md-4">
         <div class="row">
-            <div id="menu" class="col-md-12" style="margin-top: 0%; ">
-                <div class="col-md-12 tituloinformes">INFORMES NIIF</div>
-                <ul>
-                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="8"><i class="fa fa-list-alt" aria-hidden="true"></i> Estado de Situacion Financiera</a></li>
-                    @*<li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="9"><i class="fa fa-list-alt" aria-hidden="true"></i> Balance Detallado NIIF</a></li>*@
-                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="10"><i class="fa fa-list-alt" aria-hidden="true"></i> Auxiliar NIIF</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="11"><i class="fa fa-list-alt" aria-hidden="true"></i> Estado de Flujos de efectivo</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="12"><i class="fa fa-list-alt" aria-hidden="true"></i> Estado de Situación Financiera Comparativo</a></li>
-                    @*<li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="13"><i class="fa fa-list-alt" aria-hidden="true"></i> Estado de Cambios En el Patrimonio</a></li>*@
-                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="14"><i class="fa fa-list-alt" aria-hidden="true"></i> Estado de Resultados Integral</a></li>
-
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div id="menu" class="col-md-12" style="margin-top:1.5%; ">
-                <div class="col-md-12 tituloinformes">OTROS REPORTES </div>
-                <ul>
-                    @*<li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="43"><i class="fa fa-list-alt" aria-hidden="true"></i> Estracto de Créditos </a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="44"><i class="fa fa-list-alt" aria-hidden="true"></i> ESTRACTO DE AHORROS</a></li>*@
-                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="45"><i class="fa fa-list-alt" aria-hidden="true"></i> REPORTE UIAF </a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="48"><i class="fa fa-list-alt" aria-hidden="true"></i> INFORMACIÓN EXÓGENA</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="row">
             <div id="menu" class="col-md-12" style="margin-top:0%; ">
-                <div class="col-md-12 tituloinformes">REPORTES DE PRODUCTOS SICSES V. 9.20</div>    <ul>
+                <div class="col-md-12 tituloinformes">REPORTES DE PRODUCTOS V. 9.20</div>    <ul>
                     <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="30">Asociados, Empleados y Deudores</a></li>
                     <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="39">Saldo Aportes a la Fecha</a></li>
                     <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="31">Individual de Aportes</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="33">Individual de Captaciones</a></li>
+                    @*@<li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="33">Individual de Captaciones</a></li>*@
                     <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="36"><i class="fa fa-list-alt" aria-hidden="true"></i> Créditos</a></li>
                     <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="46"><i class="fa fa-list-alt" aria-hidden="true"></i> INFORME INDIVIDUAL DE CARTERA DE CRÉDITO</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="35"><i class="fa fa-list-alt" aria-hidden="true"></i> Deudores Patronales</a></li>
+                    @*@<li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="35"><i class="fa fa-list-alt" aria-hidden="true"></i> Deudores Patronales</a></li>*@
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div id="menu" class="col-md-12" style="margin-top:1.5%; ">
+                <div class="col-md-12 tituloinformes">OTROS REPORTES </div>    <ul>
+                    @*@<li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="47">CATALOGO DE CUENTAS</a></li>*@
+                    @*@<li><a href="/Informes/ExcelAportes">ESTADISTICO</a></li>*@
+                    @*@<li><a href="/Informes/ExcelAhorros">AGENCIAS Y SUCURSALES</a></li>*@
+                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="32">Creditos</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="17"><i class="fa fa-list-alt" aria-hidden="true"></i> MOROSIDAD DE APORTES</a></li>
                 </ul>
             </div>
         </div>
         <div class="row">
             <div id="menu" class="col-md-12" style="margin-top:1.5%; ">
-                <div class="col-md-12 tituloinformes">OTROS REPORTES SICSES</div>    <ul>
-                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="47">CATALOGO DE CUENTAS</a></li>
-                    <li><a href="/Informes/ExcelAportes">ESTADISTICO</a></li>
-                    <li><a href="/Informes/ExcelAhorros">AGENCIAS Y SUCURSALES</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="32">Creditos</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="17"><i class="fa fa-list-alt" aria-hidden="true"></i> MOROSIDAD DE APORTES</a></li>
+                <div class="col-md-12 tituloinformes">TRIBUTARIOS </div>
+                <ul>
+                    @*<li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="43"><i class="fa fa-list-alt" aria-hidden="true"></i> Estracto de Créditos </a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="44"><i class="fa fa-list-alt" aria-hidden="true"></i> ESTRACTO DE AHORROS</a></li>*@
+                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="1"><i class="fa fa-list-alt" aria-hidden="true"></i> Impuestos </a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="45"><i class="fa fa-list-alt" aria-hidden="true"></i> REPORTE UIAF </a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#librosaux" data-informe="48"><i class="fa fa-list-alt" aria-hidden="true"></i> INFORMACIÓN EXÓGENA</a></li>
                 </ul>
             </div>
         </div>
@@ -122,9 +113,10 @@
 
 
 
-@using (Html.BeginForm("ExcelSaldos", "Informes"))
+@using (Html.BeginForm("ExcelSaldos", "Informes", FormMethod.Post, new { id = "theForm" }))
 {
     @Html.ValidationSummary(false)
+
     <div class="modal fade" data-backdrop="static" id="librosaux" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -178,10 +170,10 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <input type="date" id="fechaDesde" name="fechaDesde" class="form-control" />
+                                        <input type="date" id="fechaDesde" name="fechaDesde" class="form-control" max="@DateTime.Now.ToString("yyyy-MM-dd")" />
                                     </td>
                                     <td>
-                                        <input type="date" class="form-control" id="fechaHasta" name="fechaHasta" />
+                                        <input type="date" class="form-control" id="fechaHasta" name="fechaHasta" max="@DateTime.Now.ToString("yyyy-MM-dd")" />
                                     </td>
 
                                 </tr>
@@ -247,7 +239,7 @@
                                         <h5> Configura las cuentas contables y relaciona los conceptos a cada uno de los formatos para la generación del reporte</h5>
 
                                         <div>
-                                            <a href="/MediosMagneticos/MMconfiguracion/Index" class="btn btn-primary btn-lg">Configuración de formatos</a>
+                                            <a href="/../MediosMagneticos/MMconfiguracion/Index" class="btn btn-primary btn-lg">Configuración de formatos</a>
                                         </div>
                                     </th>
                                 </tr>
@@ -258,12 +250,28 @@
                                     <th colspan="3">
                                         <h3>Paso 2 </h3>
                                         <h5>Genera y valida cada uno de los formatos a reportar </h5>
-                                        <a href="/MediosMagneticos/MMConfiguracion/ListaRegistros" class="btn btn-primary btn-lg">Generar formatos</a>
+                                        <a href="/../MediosMagneticos/MMConfiguracion/ListaRegistros" class="btn btn-primary btn-lg">Generar formatos</a>
                                     </th>
                                 </tr>
                             </tbody>
                         </table>
                         <!--medios magneticos-->
+                        <table class="table" id="table7">
+                            <thead>
+                                <tr><th colspan="3"><h5>PERIODOS A REPORTAR</h5></th></tr>
+                                <tr><th>Desde</th><th>Hasta</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="date" id="fechaDesdeBC" name="fechaDesdeBC" class="form-control" max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                    </td>
+                                    <td>
+                                        <input type="date" class="form-control" id="fechaHastaBC" name="fechaHastaBC" max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <div id="chkTodos" style="margin-top:5px">
                             <label class="col-md-2 letrasinformes">Todos</label>
                             <div class="col-md-3" style="width:150px;">
@@ -302,6 +310,14 @@
                                 @Html.DropDownList("CuentaB", (IEnumerable<SelectListItem>)ViewBag.cuentas, null, new { @class = "chosen-select-single", @id = "CuentaB", @name = "Cuenta" })
                             </div>
                         </div>
+                        <div class="clearfix" style="margin-top: 5px; display: block;"></div>
+                        <div id="chkFiltroTipo" style="justify-content: space-between; align-items: center;">
+                            <label class="col-md-4">Filtro por Tipo</label>
+                            <div class="col-md-4">
+                                <input class="form-control" style="width:25px;height:25px" type="checkbox" name="chkFiltroTipo" id="chkFiltroTipo" />
+                            </div>
+                        </div>
+
 
                         <div class="clearfix"></div>
                         <div id="tipoInforme" style="margin-top:5px">
@@ -321,10 +337,9 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-4">
-                                <div class="clearfix"></div>
+                            <div class="col-lg-6">
                                 <div id="Nivel" style="margin-top:5px">
-
+                                    <label class="col-md-3">Nivel</label>
                                     <div class="col-md-3" style="width:150px;">
                                         @Html.DropDownList("nivel", (IEnumerable<SelectListItem>)ViewBag.nivel, null, new { @class = "form-control", @id = "nivel", @name = "nivel" })
                                     </div>
@@ -333,8 +348,8 @@
                             <div class="col-lg-6">
                                 <div class="clearfix"></div>
                                 <div id="chkTerceros">
-                                    <label class="col-md-3">Terceros</label>
-                                    <div class="col-md-3">
+                                    <label class="col-md-4">Terceros</label>
+                                    <div class="col-md-4">
                                         <input class="form-control" style="width:25px;height:25px" type="checkbox" name="chkTercero" id="chkTercero" />
                                     </div>
                                 </div>
@@ -362,7 +377,7 @@
                         <div class="clearfix"></div>
                         <div id="tercero" style="margin-top:5px">
                             <label class="col-md-2 letrasinformes">Tercero</label>
-                            @*<div class="col-md-3" style="width:150px;"><input type="text" name="Tercero" id="Tercero" class="form-control" /></div>*@
+                            <div class="col-md-3" style="width:150px;"><input type="text" name="Tercero" id="Tercero" class="form-control" /></div>
                             <div class="col-md-3" style="width:150px;">@Html.DropDownList("Tercero", (IEnumerable<SelectListItem>)ViewBag.terceros, null, new { @class = "chosen-select-single", @id = "Tercero", @name = "Tercero" })</div>
                         </div>
                     </div>
@@ -370,7 +385,7 @@
                     <div class="clearfix"></div>
                     <div class="modal-footer">
                         <a href="#" title="Imprimir"><i class="fa fa-print imprimirinforme" aria-hidden="true"></i></a>|
-                        <button type="submit" style="background:none; padding:0px; border:none">
+                        <button id="descargar" type="button" style="background:none; padding:0px; border:none">
                             <i class="fa fa-file-excel-o excelinforme"></i>
                         </button>  |
                         @*<a href='@Url.Action("ExcelSaldos", "Informes")' title="Excel" onsubmit=""><i class="fa fa-file-excel-o excelinforme" aria-hidden="true"></i></a>|*@
@@ -446,8 +461,6 @@
                 }
 
 
-
-
                 modal.find("#informe").val(informe);
 
                 $("#cuenta").hide();
@@ -462,6 +475,7 @@
                 $("#table4").hide();
                 $("#table5").hide();
                 $("#table6").hide();
+                $("#table7").hide();
                 $("#tercero").hide();
                 $("#chkTerceros").hide();
                 $("#Nivel").hide();
@@ -469,6 +483,7 @@
                 $("#costos").hide();
                 $("#tipoInforme").hide();
                 $("#selectPersonalDIV").hide();
+                $("#chkFiltroTipo").hide();
 
                 if (informe == 2) {
                     $("#title").html(" AUXILIAR POR CUENTA");
@@ -476,7 +491,7 @@
                     $("#cuentaA").show();
                     $("#cuentaB").show();
                     $("#table2").show();
-
+                    $("#chkFiltroTipo").show();
 
                 }
                 else {
@@ -487,9 +502,12 @@
 
 
                     } else if (informe == 1) {
-                        $("#title").html(" BALANCE DETALLADO");
+                        $("#title").html(" Impuetos");
                         $("#cuenta").show();
-                        $("#table1").show();
+                        $("#cuentaA").show();
+                        $("#cuentaB").show();
+                        $("#tercero").show();
+                        $("#table2").show();
 
 
                     } else if (informe == 5) {
@@ -528,10 +546,9 @@
 
                     } else if (informe == 37) {
                         $("#title").html("BALANCE DE COMPROBACIÓN");
-                        $("#table2").show();
+                        $("#table7").show();
                         $("#Nivel").show();
                         $("#costos").show();
-
 
                     } else if (informe == 8) {
                         $("#title").html(" ESTADO DE SITUACION FINANCIERA");
@@ -642,11 +659,11 @@
         });
 
 
-
         $("#librosaux").on('show.bs.modal', function (e) {
             $("#Cuenta").val('');
             $("#Tercero").val('');
         });
+
 
         $("#Cuent").autocomplete({
             source: function (request, response) {

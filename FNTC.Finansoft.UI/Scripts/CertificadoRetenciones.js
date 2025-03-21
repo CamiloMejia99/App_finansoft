@@ -25,7 +25,7 @@
             })
         } else {
             $.ajax({
-                url: '/Accounting/Informes/GetCertificadoRetencion',
+                url: '/Accounting/Informes2/GetCertificadoRetencion',
                 datatype: "Json",
                 data: {
                     tercero: tercero,

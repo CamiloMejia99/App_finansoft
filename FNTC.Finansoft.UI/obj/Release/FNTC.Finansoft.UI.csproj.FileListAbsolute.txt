@@ -421,3 +421,725 @@ D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.UI\bin\System.Drawing.Common
 D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.UI\bin\System.IO.Packaging.dll
 D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.UI\bin\SpreadsheetLight.xml
 D:\JORGE\TRABAJO\Ferajunap\Ferajunap\FNTC.Finansoft.UI\bin\System.IO.Packaging.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FNTC.Finansoft.UI.dll.config
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FNTC.Finansoft.UI.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FNTC.Finansoft.UI.pdb
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Antlr3.Runtime.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\AutoMapper.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\ClosedXML.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\DocumentFormat.OpenXml.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\EntityFramework.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\EntityFramework.SqlServer.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\EPPlus.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\ExcelLibrary.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\ExcelNumberFormat.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FastMember.Signed.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.BLL.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DAL.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DTO.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FNTC.Framework.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\IronPdf.Assets.Rendering.Windows.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\IronPdf.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Lib.Web.Mvc.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Html.Abstractions.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Mvc.Abstractions.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.Runtime.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Routing.Abstractions.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.Net.Http.Headers.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.Owin.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Mvc.CascadeDropDown.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Newtonsoft.Json.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Owin.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Rotativa.Core.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Rotativa.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Rotativa.MVC.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\SpreadsheetLight.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Buffers.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Drawing.Common.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.IO.Packaging.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Memory.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Net.Http.Formatting.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Numerics.Vectors.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Text.Encodings.Web.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.ValueTuple.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.Helpers.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.Http.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.Http.WebHost.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.Mvc.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.Optimization.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.Razor.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.WebPages.Deployment.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.WebPages.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.WebPages.Razor.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\WebGrease.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.BLL.pdb
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.BLL.dll.config
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DAL.pdb
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DAL.dll.config
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DTO.pdb
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DTO.dll.config
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FNTC.Framework.pdb
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\FNTC.Framework.dll.config
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\AutoMapper.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\ClosedXML.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\DocumentFormat.OpenXml.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\EntityFramework.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\EntityFramework.SqlServer.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\EPPlus.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\ExcelNumberFormat.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\IronPdf.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Lib.Web.Mvc.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Html.Abstractions.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Mvc.Abstractions.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.Runtime.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Routing.Abstractions.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.Net.Http.Headers.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.Owin.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Newtonsoft.Json.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\SpreadsheetLight.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Buffers.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.IO.Packaging.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Memory.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Net.Http.Formatting.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Numerics.Vectors.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Text.Encodings.Web.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.ValueTuple.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.Helpers.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.Http.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.Http.WebHost.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.Mvc.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.Razor.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.WebPages.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.WebPages.Deployment.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.WebPages.Razor.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\System.Web.Optimization.xml
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\Antlr3.Runtime.pdb
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\es\System.Web.Helpers.resources.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\es\System.Web.Mvc.resources.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\es\System.Web.Razor.resources.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\es\System.Web.WebPages.resources.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\es\System.Web.WebPages.Deployment.resources.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\bin\es\System.Web.Optimization.resources.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.csproj.AssemblyReference.cache
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.Migrations.InitialMigration.resources
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.Migrations.fechaadicional.resources
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.csproj.GenerateResource.cache
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.csproj.CoreCompileInputs.cache
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\obj\Release\FNTC.Fin.EEC27CC1.Up2Date
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.dll
+C:\Users\camil\source\repos\Ferajunap20241203\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.pdb
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FNTC.Finansoft.UI.dll.config
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FNTC.Finansoft.UI.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FNTC.Finansoft.UI.pdb
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Antlr3.Runtime.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\AutoMapper.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\ClosedXML.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\DocumentFormat.OpenXml.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\EntityFramework.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\EntityFramework.SqlServer.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\EPPlus.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\ExcelLibrary.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\ExcelNumberFormat.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FastMember.Signed.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.BLL.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DAL.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DTO.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FNTC.Framework.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\IronPdf.Assets.Rendering.Windows.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\IronPdf.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Lib.Web.Mvc.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Html.Abstractions.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Mvc.Abstractions.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.Runtime.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Routing.Abstractions.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.Net.Http.Headers.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.Owin.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Mvc.CascadeDropDown.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Newtonsoft.Json.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Owin.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Rotativa.Core.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Rotativa.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Rotativa.MVC.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\SpreadsheetLight.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Buffers.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Drawing.Common.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.IO.Packaging.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Memory.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Net.Http.Formatting.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Numerics.Vectors.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Text.Encodings.Web.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.ValueTuple.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.Helpers.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.Http.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.Http.WebHost.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.Mvc.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.Optimization.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.Razor.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.WebPages.Deployment.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.WebPages.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.WebPages.Razor.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\WebGrease.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.BLL.pdb
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.BLL.dll.config
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DAL.pdb
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DAL.dll.config
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DTO.pdb
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DTO.dll.config
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FNTC.Framework.pdb
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\FNTC.Framework.dll.config
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\AutoMapper.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\ClosedXML.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\DocumentFormat.OpenXml.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\EntityFramework.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\EntityFramework.SqlServer.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\EPPlus.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\ExcelNumberFormat.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\IronPdf.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Lib.Web.Mvc.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Html.Abstractions.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Mvc.Abstractions.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.Runtime.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Routing.Abstractions.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.Net.Http.Headers.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.Owin.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Newtonsoft.Json.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\SpreadsheetLight.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Buffers.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.IO.Packaging.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Memory.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Net.Http.Formatting.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Numerics.Vectors.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Text.Encodings.Web.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.ValueTuple.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.Helpers.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.Http.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.Http.WebHost.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.Mvc.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.Razor.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.WebPages.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.WebPages.Deployment.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.WebPages.Razor.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\System.Web.Optimization.xml
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\Antlr3.Runtime.pdb
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\es\System.Web.Helpers.resources.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\es\System.Web.Mvc.resources.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\es\System.Web.Razor.resources.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\es\System.Web.WebPages.resources.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\es\System.Web.WebPages.Deployment.resources.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\bin\es\System.Web.Optimization.resources.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.csproj.AssemblyReference.cache
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.Migrations.InitialMigration.resources
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.Migrations.fechaadicional.resources
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.csproj.GenerateResource.cache
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.csproj.CoreCompileInputs.cache
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\obj\Release\FNTC.Fin.EEC27CC1.Up2Date
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.dll
+C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.pdb
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FNTC.Finansoft.UI.dll.config
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FNTC.Finansoft.UI.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FNTC.Finansoft.UI.pdb
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Antlr3.Runtime.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\AutoMapper.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\ClosedXML.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\DocumentFormat.OpenXml.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\EntityFramework.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\EntityFramework.SqlServer.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\EPPlus.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\ExcelLibrary.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\ExcelNumberFormat.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FastMember.Signed.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.BLL.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DAL.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DTO.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FNTC.Framework.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\IronPdf.Assets.Rendering.Windows.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\IronPdf.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Lib.Web.Mvc.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Html.Abstractions.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Mvc.Abstractions.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.Runtime.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Routing.Abstractions.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Net.Http.Headers.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Owin.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Mvc.CascadeDropDown.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Newtonsoft.Json.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Owin.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Rotativa.Core.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Rotativa.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Rotativa.MVC.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\SpreadsheetLight.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Buffers.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Drawing.Common.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.IO.Packaging.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Memory.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Net.Http.Formatting.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Numerics.Vectors.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Text.Encodings.Web.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.ValueTuple.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.Helpers.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.Http.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.Http.WebHost.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.Mvc.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.Optimization.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.Razor.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.WebPages.Deployment.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.WebPages.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.WebPages.Razor.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\WebGrease.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.BLL.pdb
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.BLL.dll.config
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DAL.pdb
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DAL.dll.config
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DTO.pdb
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DTO.dll.config
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FNTC.Framework.pdb
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\FNTC.Framework.dll.config
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\AutoMapper.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\ClosedXML.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\DocumentFormat.OpenXml.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\EntityFramework.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\EntityFramework.SqlServer.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\EPPlus.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\ExcelNumberFormat.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\IronPdf.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Lib.Web.Mvc.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Html.Abstractions.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Mvc.Abstractions.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.Runtime.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Routing.Abstractions.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Net.Http.Headers.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Owin.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Newtonsoft.Json.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\SpreadsheetLight.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Buffers.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.IO.Packaging.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Memory.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Net.Http.Formatting.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Numerics.Vectors.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Text.Encodings.Web.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.ValueTuple.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.Helpers.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.Http.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.Http.WebHost.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.Mvc.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.Razor.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.WebPages.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.WebPages.Deployment.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.WebPages.Razor.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Web.Optimization.xml
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Antlr3.Runtime.pdb
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\es\System.Web.Helpers.resources.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\es\System.Web.Mvc.resources.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\es\System.Web.Razor.resources.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\es\System.Web.WebPages.resources.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\es\System.Web.WebPages.Deployment.resources.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\es\System.Web.Optimization.resources.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.csproj.AssemblyReference.cache
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.Migrations.InitialMigration.resources
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.Migrations.fechaadicional.resources
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.csproj.GenerateResource.cache
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.csproj.CoreCompileInputs.cache
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\obj\Release\FNTC.Fin.EEC27CC1.Up2Date
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.pdb
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\Microsoft.Win32.Primitives.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\netstandard.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.AppContext.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Collections.Concurrent.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Collections.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Collections.NonGeneric.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Collections.Specialized.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.ComponentModel.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.ComponentModel.EventBasedAsync.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.ComponentModel.Primitives.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.ComponentModel.TypeConverter.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Console.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Data.Common.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Diagnostics.Contracts.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Diagnostics.Debug.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Diagnostics.FileVersionInfo.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Diagnostics.Process.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Diagnostics.StackTrace.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Diagnostics.TextWriterTraceListener.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Diagnostics.Tools.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Diagnostics.TraceSource.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Diagnostics.Tracing.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Drawing.Primitives.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Dynamic.Runtime.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Globalization.Calendars.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Globalization.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Globalization.Extensions.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.IO.Compression.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.IO.Compression.ZipFile.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.IO.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.IO.FileSystem.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.IO.FileSystem.DriveInfo.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.IO.FileSystem.Primitives.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.IO.FileSystem.Watcher.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.IO.IsolatedStorage.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.IO.MemoryMappedFiles.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.IO.Pipes.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.IO.UnmanagedMemoryStream.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Linq.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Linq.Expressions.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Linq.Parallel.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Linq.Queryable.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Net.Http.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Net.NameResolution.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Net.NetworkInformation.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Net.Ping.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Net.Primitives.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Net.Requests.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Net.Security.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Net.Sockets.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Net.WebHeaderCollection.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Net.WebSockets.Client.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Net.WebSockets.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.ObjectModel.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Reflection.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Reflection.Extensions.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Reflection.Primitives.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Resources.Reader.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Resources.ResourceManager.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Resources.Writer.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Runtime.CompilerServices.VisualC.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Runtime.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Runtime.Extensions.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Runtime.Handles.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Runtime.InteropServices.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Runtime.Numerics.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Runtime.Serialization.Formatters.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Runtime.Serialization.Json.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Runtime.Serialization.Primitives.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Runtime.Serialization.Xml.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Security.Claims.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Security.Cryptography.Algorithms.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Security.Cryptography.Csp.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Security.Cryptography.Encoding.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Security.Cryptography.Primitives.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Security.Cryptography.X509Certificates.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Security.Principal.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Security.SecureString.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Text.Encoding.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Text.Encoding.Extensions.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Text.RegularExpressions.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Threading.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Threading.Overlapped.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Threading.Tasks.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Threading.Tasks.Parallel.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Threading.Thread.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Threading.ThreadPool.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Threading.Timer.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Xml.ReaderWriter.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Xml.XDocument.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Xml.XmlDocument.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Xml.XmlSerializer.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Xml.XPath.dll
+C:\Users\camil\source\repos\Proyecto20250109 - copia\FNTC.Finansoft.UI\bin\System.Xml.XPath.XDocument.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FNTC.Finansoft.UI.dll.config
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FNTC.Finansoft.UI.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FNTC.Finansoft.UI.pdb
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Win32.Primitives.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\netstandard.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.AppContext.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Collections.Concurrent.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Collections.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Collections.NonGeneric.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Collections.Specialized.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.ComponentModel.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.ComponentModel.EventBasedAsync.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.ComponentModel.Primitives.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.ComponentModel.TypeConverter.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Console.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Data.Common.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Diagnostics.Contracts.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Diagnostics.Debug.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Diagnostics.FileVersionInfo.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Diagnostics.Process.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Diagnostics.StackTrace.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Diagnostics.TextWriterTraceListener.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Diagnostics.Tools.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Diagnostics.TraceSource.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Diagnostics.Tracing.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Drawing.Primitives.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Dynamic.Runtime.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Globalization.Calendars.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Globalization.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Globalization.Extensions.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.IO.Compression.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.IO.Compression.ZipFile.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.IO.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.IO.FileSystem.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.IO.FileSystem.DriveInfo.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.IO.FileSystem.Primitives.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.IO.FileSystem.Watcher.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.IO.IsolatedStorage.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.IO.MemoryMappedFiles.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.IO.Pipes.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.IO.UnmanagedMemoryStream.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Linq.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Linq.Expressions.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Linq.Parallel.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Linq.Queryable.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Net.Http.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Net.NameResolution.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Net.NetworkInformation.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Net.Ping.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Net.Primitives.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Net.Requests.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Net.Security.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Net.Sockets.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Net.WebHeaderCollection.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Net.WebSockets.Client.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Net.WebSockets.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.ObjectModel.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Reflection.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Reflection.Extensions.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Reflection.Primitives.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Resources.Reader.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Resources.ResourceManager.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Resources.Writer.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Runtime.CompilerServices.VisualC.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Runtime.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Runtime.Extensions.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Runtime.Handles.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Runtime.InteropServices.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Runtime.Numerics.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Runtime.Serialization.Formatters.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Runtime.Serialization.Json.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Runtime.Serialization.Primitives.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Runtime.Serialization.Xml.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Security.Claims.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Security.Cryptography.Algorithms.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Security.Cryptography.Csp.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Security.Cryptography.Encoding.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Security.Cryptography.Primitives.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Security.Cryptography.X509Certificates.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Security.Principal.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Security.SecureString.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Text.Encoding.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Text.Encoding.Extensions.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Text.RegularExpressions.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Threading.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Threading.Overlapped.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Threading.Tasks.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Threading.Tasks.Parallel.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Threading.Thread.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Threading.ThreadPool.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Threading.Timer.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Xml.ReaderWriter.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Xml.XDocument.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Xml.XmlDocument.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Xml.XmlSerializer.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Xml.XPath.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Xml.XPath.XDocument.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Antlr3.Runtime.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\AutoMapper.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\ClosedXML.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\DocumentFormat.OpenXml.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\EntityFramework.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\EntityFramework.SqlServer.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\EPPlus.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\ExcelLibrary.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\ExcelNumberFormat.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FastMember.Signed.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.BLL.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DAL.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DTO.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FNTC.Framework.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\IronPdf.Assets.Rendering.Windows.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\IronPdf.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Lib.Web.Mvc.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Html.Abstractions.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Mvc.Abstractions.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.Runtime.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Routing.Abstractions.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Net.Http.Headers.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Owin.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Mvc.CascadeDropDown.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Newtonsoft.Json.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Owin.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Rotativa.Core.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Rotativa.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Rotativa.MVC.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\SpreadsheetLight.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Buffers.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Drawing.Common.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.IO.Packaging.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Memory.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Net.Http.Formatting.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Numerics.Vectors.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Text.Encodings.Web.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.ValueTuple.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.Helpers.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.Http.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.Http.WebHost.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.Mvc.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.Optimization.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.Razor.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.WebPages.Deployment.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.WebPages.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.WebPages.Razor.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\WebGrease.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.BLL.pdb
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.BLL.dll.config
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DAL.pdb
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DAL.dll.config
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DTO.pdb
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FNTC.Finansoft.Accounting.DTO.dll.config
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FNTC.Framework.pdb
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\FNTC.Framework.dll.config
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\AutoMapper.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\ClosedXML.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\DocumentFormat.OpenXml.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\EntityFramework.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\EntityFramework.SqlServer.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\EPPlus.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\ExcelNumberFormat.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\IronPdf.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Lib.Web.Mvc.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Html.Abstractions.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Mvc.Abstractions.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Razor.Runtime.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.AspNetCore.Routing.Abstractions.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Net.Http.Headers.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Owin.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Newtonsoft.Json.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\SpreadsheetLight.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Buffers.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.IO.Packaging.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Memory.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Net.Http.Formatting.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Numerics.Vectors.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Text.Encodings.Web.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.ValueTuple.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.Helpers.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.Http.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.Http.WebHost.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.Mvc.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.Razor.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.WebPages.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.WebPages.Deployment.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.WebPages.Razor.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\System.Web.Optimization.xml
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\Antlr3.Runtime.pdb
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\es\System.Web.Helpers.resources.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\es\System.Web.Mvc.resources.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\es\System.Web.Razor.resources.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\es\System.Web.WebPages.resources.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\es\System.Web.WebPages.Deployment.resources.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\bin\es\System.Web.Optimization.resources.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.csproj.AssemblyReference.cache
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.Migrations.InitialMigration.resources
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.Migrations.fechaadicional.resources
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.csproj.GenerateResource.cache
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.csproj.CoreCompileInputs.cache
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\obj\Release\FNTC.Fin.EEC27CC1.Up2Date
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.dll
+C:\Users\camil\source\repos\SW_MUTUALES_18_03_2025\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.pdb

@@ -1,5 +1,11 @@
-﻿using System;
+﻿using FNTC.Finansoft.Accounting.DTO.Terceros;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace FNTC.Finansoft.Accounting.DTO.Informes
 {
@@ -8,7 +14,7 @@ namespace FNTC.Finansoft.Accounting.DTO.Informes
         [Key]
         public string NumeroCuenta { get; set; }
 
-
+        
         public string idPersona { get; set; }
         public string nombre { get; set; }
 
@@ -23,7 +29,7 @@ namespace FNTC.Finansoft.Accounting.DTO.Informes
         public string nombreagencia { get; set; }
         public int Npagos { get; set; }
 
-
+        
 
     }
 }

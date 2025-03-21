@@ -1,4 +1,4 @@
-﻿$(document).everyTime(3000, function () {
+﻿$(document).everyTime(10000, function () {
 
         $.ajax({
             type: "POST",

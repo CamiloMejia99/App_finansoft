@@ -1,4 +1,5 @@
-﻿using FNTC.Finansoft.Accounting.DTO;
+﻿using FNTC.Finansoft.Accounting.BLL.PlanCuentas;
+using FNTC.Finansoft.Accounting.DTO;
 using FNTC.Finansoft.Accounting.DTO.Contabilidad;
 using FNTC.Finansoft.Accounting.DTO.Informes;
 using FNTC.Finansoft.Accounting.DTO.MCreditos;
@@ -17,7 +18,7 @@ using System.Web.Mvc;
 
 namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
 {
-
+    //comentario prueba
     public class InformesController : Controller
     {
 
@@ -44,7 +45,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
 
             //selec list para niveles de cuentas
             List<SelectListItem> niveles = new List<SelectListItem>();
-            niveles.Add(new SelectListItem { Text = "Nivel", Value = "" });
+            // niveles.Add(new SelectListItem { Text = "Nivel", Value = "" });
             niveles.Add(new SelectListItem { Text = "1", Value = "1" });
             niveles.Add(new SelectListItem { Text = "2", Value = "2" });
             niveles.Add(new SelectListItem { Text = "3", Value = "3" });
@@ -365,8 +366,10 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
             formato.CurrencyGroupSeparator = ".";
             formato.NumberDecimalSeparator = ",";
 
-            var fechaDesde = coll["fechaDesde"]; 
-            var fechaHasta = coll["fechaHasta"]; 
+            var fechaDesde = coll["fechaDesde"];
+            var fechaHasta = coll["fechaHasta"];
+            var fechaDesdeBC = coll["fechaDesdeBC"];
+            var fechaHastaBC = coll["fechaHastaBC"];
             var chktodos = coll["chkTodos"];
             var chkfechaDesembolso = coll["chkFechaDesembolso"];
             var desdeSaldo = Int32.Parse(coll["monthini"]);
@@ -381,9 +384,12 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
             //
             var nombre = datosEmpresa.Select(x => x.nombre).FirstOrDefault();
             var nit = datosEmpresa.Select(x => x.nit).FirstOrDefault();
+            if (nit == null)
+                nit = "";
             DateTime fechaAct = Fecha.GetFechaColombia();
             string filtro = "";
             //
+
             var ctx = new AccountingContext();
             if (informe == 37) archivo = "attachment;filename=balanceComprobacion.xlsx";
             else if (informe == 1) archivo = "attachment;filename=balanceDetallado.xlsx";
@@ -433,735 +439,894 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                 switch (informe)
                 {
                     case 2:
-                        #region informe2
+                        #region AUXILIAR POR CUENTAS ACTUALIZADO
+                        var desdFAC = DateTime.Now;
+                        var hastFAC = DateTime.Now;
+                        var opAPC = 0;
+                        var filtroCuentas2 = "";
 
-                        List<MovimientoAuxiliar2> Movimientos = new List<MovimientoAuxiliar2>();
-                        //string periodos2 = "";
+                        List<SpAuxiliarPorTercero> datosAuxC = new List<SpAuxiliarPorTercero>();
 
+                        #region FILTRO PARA BUSQUEDA DE DATOS 
                         if (fechaDesde != "" && fechaHasta != "")
                         {
-                            DateTime fh = Convert.ToDateTime(fechaHasta);
-                            DateTime fd = Convert.ToDateTime(fechaDesde);
-                            DateTime fechHasta = new DateTime(fh.Year, fh.Month, fh.Day, 23, 59, 59);
-                            DateTime fechDesde = new DateTime(fd.Year, fd.Month, fd.Day, 0, 0, 0);
-                            Movimientos = db.Database.SqlQuery<MovimientoAuxiliar2>(
-                                "dbo.sp_Movimientos @fechaDesde,@fechaHasta,@opcion",
-                                new SqlParameter("@fechaDesde", fechDesde),
-                                new SqlParameter("@fechaHasta", fechHasta),
-                                new SqlParameter("@opcion", 1)
-                                ).ToList();
+                            desdFAC = Convert.ToDateTime(fechaDesde);
+                            hastFAC = Convert.ToDateTime(fechaHasta);
+                            filtro = desdFAC.ToShortDateString() + " - " + hastFAC.ToShortDateString();
 
-                            filtro = fd.ToShortDateString() + " - " + fh.ToShortDateString();
-                        }
-                        else if (fechaDesde != "" && fechaHasta == "")
-                        {
-                            DateTime fd = Convert.ToDateTime(fechaDesde);
-                            DateTime fechDesde = new DateTime(fd.Year, fd.Month, fd.Day, 0, 0, 0);
-                            Movimientos = db.Database.SqlQuery<MovimientoAuxiliar2>(
-                                "dbo.sp_Movimientos @fechaDesde,@fechaHasta,@opcion",
-                                new SqlParameter("@fechaDesde", fechDesde),
-                                new SqlParameter("@fechaHasta", fechDesde),
-                                new SqlParameter("@opcion", 2)
-                                ).ToList();
+                            if (cuenta != "" && cuentaA == "" && cuentaB == "")
+                            {
+                                filtroCuentas2 = "Filtro por cuenta: " + cuenta;
+                                opAPC = 1;//filtro por fecha desde, fecha hasta y cuenta
+                            }
+                            else if (cuentaA != "" && cuentaB != "")
+                            {
+                                filtroCuentas2 = "Filtro desde la cuenta: " + cuentaA + " Hasta la cuenta " + cuentaB;
+                                opAPC = 2;//filtro por fecha desde, fecha hasta, cuenta desde, cuenta hasta 
+                            }
 
-                            filtro = fd.ToShortDateString();
+                            else if (cuentaA != "" && cuentaB == "")
+                            {
+                                filtroCuentas2 = "Filtro desde la cuenta: " + cuentaA;
+                                opAPC = 3;//filtro por fecha desde, fecha hasta, cuenta desde
+                            }
+                            else if (cuentaA == "" && cuentaB != "")
+                            {
+                                filtroCuentas2 = "Filtro hasta la cuenta: " + cuentaB;
+                                opAPC = 4;//filtro por fecha desde, fecha hasta, cuenta hasta 
+                            }
+                            else if (cuenta == "" && cuentaA == "" && cuentaB == "")
+                            {
+                                opAPC = 5;// filtro por fecha desde y fecha hasta trae todo
+                            }
                         }
-                        else if (fechaDesde == "" && fechaHasta != "")
-                        {
-                            DateTime fh = Convert.ToDateTime(fechaHasta);
-                            DateTime fechHasta = new DateTime(fh.Year, fh.Month, fh.Day, 23, 59, 59);
-                            Movimientos = db.Database.SqlQuery<MovimientoAuxiliar2>(
-                                "dbo.sp_Movimientos @fechaDesde,@fechaHasta,@opcion",
-                                new SqlParameter("@fechaDesde", fechHasta),
-                                new SqlParameter("@fechaHasta", fechHasta),
-                                new SqlParameter("@opcion", 3)
-                                ).ToList();
-                            filtro = fh.ToShortDateString();
-                        }
-                        #region Cuentas AB
-                        if (cuentaA == "")
-                        {
-                            cuentaA = "0";
-                        }
-                        var cuentaMin = cuentaA;
 
-                        var cuentalongmin = Convert.ToInt64(cuentaMin);
-                        if (cuentaB == "")
-                        {
-                            cuentaB = "0";
-                        }
-                        var cuentaMax = cuentaB;
+                        DateTime fechDesdAC = new DateTime(desdFAC.Year, desdFAC.Month, desdFAC.Day, 0, 0, 0);
+                        DateTime fechHastAC = new DateTime(hastFAC.Year, hastFAC.Month, hastFAC.Day, 23, 59, 59);
 
-                        var cuentalongmax = Convert.ToInt64(cuentaMax);
                         #endregion
 
-                        #region CodigoFiltro
-                        //List<string> SelectMov = movimiento.Select(p => p.CUENTA).ToList();
-                        //long[] arregloMovie = SelectMov.Select(x => Convert.ToInt64(x)).ToArray();
-                        //var ArregloMov = arregloMovie.Where(n => n >= cuentalongmin && n <= cuentalongmax);
-                        //List<string> ArregloString = ArregloMov.Select(x => Convert.ToString(x)).ToList();
+                        datosAuxC = db.Database.SqlQuery<SpAuxiliarPorTercero>(
+                            "dbo.sp_AuxiliarPorCuentas  @cuenta, @cuentaA,@cuentaB,@FechaDesde, @FechaHasta, @opcion",
+                            new SqlParameter("@cuenta", cuenta),
+                            new SqlParameter("@cuentaA", cuentaA),
+                            new SqlParameter("@cuentaB", cuentaB),
+                            new SqlParameter("@FechaDesde", fechDesdAC),
+                            new SqlParameter("@FechaHasta", fechHastAC),
+                            new SqlParameter("@opcion", opAPC)
+                            ).ToList();
 
-                        // movimiento = (from movimientos in movimiento
-                        //                  select movimientos).ToList();
+                        ws = pack.Workbook.Worksheets.Add("AuxiliarCuentas");
+
+                        #region encabezado excel
+                        ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5,A6:I6"].Merge = true;
+                        ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Bold = true;
+                        ws.Cells["A2:I2"].Style.Font.Name = "Arial";
+                        ws.Cells["A2:I2"].Style.Font.Size = 14;
+                        ws.Cells["A" + 2].Value = "AUXILIAR POR CUENTAS   " + filtro;
+                        ws.Cells["A" + 3].Value = filtroCuentas2;
+                        ws.Cells[1, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        ws.Cells[1, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                        ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A6:I6"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                        ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7,A5:I5"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7,A5:I5"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
+                        ws.Cells["A4:I4,A5:I5"].Style.Font.Size = 12;
+                        ws.Cells["A3:I3"].Style.Font.Size = 13;
+                        ws.Cells["A6:I6"].Style.Font.Size = 10;
+                        ws.Cells["A" + 4].Value = nombre;
+                        ws.Cells["A" + 5].Value = nit;
+                        ws.Cells["A" + 6].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
+                        ws.Cells["A7:I7"].Merge = true;
+                        ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
+                        ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                        ws.Cells[8, 1, 8, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                        ws.Cells["A8:J8"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                        ws.Cells["A8:I8"].Style.Font.Bold = true;
+                        ws.Cells[8, 1, 8, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        ws.Cells[8, 1, 8, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
                         #endregion
-                        if (cuentaA != "0" && cuentaB != "0")
+
+                        ws.Cells["A" + 8].Value = "CÓDIGO";
+                        ws.Cells["B" + 8].Value = "NOMBRE";
+                        ws.Cells["C" + 8].Value = "COMPROBANTE";
+                        ws.Cells["D" + 8].Value = "FECHA";
+                        ws.Cells["E" + 8].Value = "TERCERO";
+                        ws.Cells["F" + 8].Value = "NOMBRE TERCERO";
+                        ws.Cells["G" + 8].Value = "DÉBITO";
+                        ws.Cells["H" + 8].Value = "CRÉDITO";
+                        ws.Cells["I" + 8].Value = "SALDO";
+
+                        var cuentasEnlistaAC = (from a in datosAuxC
+                                                orderby a.CUENTA
+                                                select new { a.CUENTA, a.NOMBRECUENTA, a.NATURALEZA }).Distinct().ToList();
+                        i = 9;
+                        saldo = 0;
+                        decimal totalSaldoAC = 0;
+                        foreach (var item in cuentasEnlistaAC)
                         {
-                            #region Filtros
-                            //var movimientoInt = (from Arreg in ArregloString
-                            //                     join Mov in movimiento on Arreg equals Mov.CUENTA into sm
-                            //                     from a in sm
-                            //                     orderby a.CUENTA ascending
-                            //                     select new
-                            //                     {
-                            //                         CUENTA = Convert.ToInt64(a.CUENTA),
-                            //                         a.NATURALEZA,
-                            //                         a.NOMBRECUENTA,
-                            //                         a.FECHAMOVIMIENTO,
-                            //                         a.DEBITO,
-                            //                         a.CREDITO,
-                            //                         a.TIPO,
-                            //                         a.TERCERO,
-                            //                         a.NOMBRE,
-                            //                         a.NUMERO
-                            //                     }).Distinct().ToList();
-                            #endregion
-                            var MovimientoTemp = (from a in Movimientos
-                                                  select new
-                                                  {
-                                                      CUENTA = Convert.ToInt64(a.CUENTA),
-                                                      a.NATURALEZA,
-                                                      a.NOMBRECUENTA,
-                                                      a.FECHAMOVIMIENTO,
-                                                      a.DEBITO,
-                                                      a.CREDITO,
-                                                      a.TIPO,
-                                                      a.TERCERO,
-                                                      a.NOMBRE,
-                                                      a.NUMERO
-                                                  }).Distinct().ToList();
-
-                            var MovimientosFiltro = (from a in MovimientoTemp
-                                                     where a.CUENTA >= cuentalongmin && a.CUENTA <= cuentalongmax
-                                                     select new
-                                                     {
-                                                         CUENTA = Convert.ToInt64(a.CUENTA),
-                                                         a.NATURALEZA,
-                                                         a.NOMBRECUENTA,
-                                                         a.FECHAMOVIMIENTO,
-                                                         a.DEBITO,
-                                                         a.CREDITO,
-                                                         a.TIPO,
-                                                         a.TERCERO,
-                                                         a.NOMBRE,
-                                                         a.NUMERO
-                                                     }).Distinct().ToList();
-
-                            var AuxMovimiento = MovimientosFiltro;
-
-                            ws = pack.Workbook.Worksheets.Add("AuxiliarCuentas");
-
-                            // encabezado
-                            ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
-                            ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
-                            ws.Cells["A2:I2"].Style.Font.Name = "Arial";
-                            ws.Cells["A2:I2"].Style.Font.Size = 14;
-                            ws.Cells["A" + 2].Value = "AUXILIAR POR CUENTAS   " + filtro;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
-                            ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
-                            ws.Cells["A5:I5"].Style.Font.Size = 10;
-                            ws.Cells["A" + 3].Value = nombre;
-                            ws.Cells["A" + 4].Value = nit;
-                            ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
-                            ws.Cells["A6,I6"].Merge = true;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
-                            ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
-                            ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
-                            ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
-                            ws.Cells["A7:I7"].Style.Font.Bold = true;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
-                            //fin encabezado
-
-                            ws.Cells["A" + 7].Value = "CÓDIGO";
-                            ws.Cells["B" + 7].Value = "NOMBRE";
-                            ws.Cells["C" + 7].Value = "COMPROBANTE";
-                            ws.Cells["D" + 7].Value = "FECHA";
-                            ws.Cells["E" + 7].Value = "TERCERO";
-                            ws.Cells["F" + 7].Value = "NOMBRE TERCERO";
-                            ws.Cells["G" + 7].Value = "DÉBITO";
-                            ws.Cells["H" + 7].Value = "CRÉDITO";
-                            ws.Cells["I" + 7].Value = "SALDO";
-
-                            var mov = (from m in AuxMovimiento
-                                       orderby m.CUENTA
-                                       select new { m.CUENTA, m.NATURALEZA, m.NOMBRECUENTA }).Distinct().ToList();
-                            i = 8;
-                            decimal saldoT = 0, saldoTotal = 0;
-                            foreach (var item in mov)
+                            var dataMov = datosAuxC.Where(x => x.CUENTA == item.CUENTA).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
+                            debito = dataMov.Select(x => x.DEBITO).Sum();
+                            credito = dataMov.Select(x => x.CREDITO).Sum();
+                            ws.Cells["A" + i].Value = item.CUENTA;
+                            ws.Cells["B" + i].Value = item.NOMBRECUENTA;
+                            string naturaleza = item.NATURALEZA;
+                            i++;
+                            foreach (var item2 in dataMov)
                             {
-                                var dataMov = AuxMovimiento.Where(x => x.CUENTA == item.CUENTA).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
-                                debito = dataMov.Select(x => x.DEBITO).Sum();
-                                credito = dataMov.Select(x => x.CREDITO).Sum();
-                                ws.Cells["A" + i].Value = item.CUENTA;
-                                ws.Cells["B" + i].Value = item.NOMBRECUENTA;
-                                string naturaleza = item.NATURALEZA;
-                                i++;
-                                foreach (var item2 in dataMov)
-                                {
-                                    if (naturaleza == "D")
-                                    {
-                                        saldoT = item2.DEBITO - item2.CREDITO;
-                                    }
-                                    else
-                                    {
-                                        saldoT = item2.CREDITO - item2.DEBITO;
-                                    }
-
-                                    ws.Cells["C" + i].Value = item2.TIPO + " " + item2.NUMERO;
-                                    ws.Cells["D" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
-                                    ws.Cells["E" + i].Value = item2.TERCERO;
-                                    if (item2.TERCERO != null)
-                                    {
-                                        ws.Cells["F" + i].Value = item2.NOMBRE;
-                                    }
-                                    else { ws.Cells["F" + i].Value = ""; }
-
-                                    ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
-                                    ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
-                                    ws.Cells["I" + i].Value = saldoT.ToString("N0", formato);
-                                    i++;
-                                }
                                 if (naturaleza == "D")
                                 {
-                                    saldoTotal = debito - credito;
+                                    saldo = item2.DEBITO - item2.CREDITO;
                                 }
                                 else
                                 {
-                                    saldoTotal = credito - debito;
+                                    saldo = item2.CREDITO - item2.DEBITO;
                                 }
-                                ws.Cells["F" + i].Value = "TOTAL";
-                                ws.Cells["G" + i].Value = debito.ToString("N0", formato);
-                                ws.Cells["H" + i].Value = credito.ToString("N0", formato);
-                                ws.Cells["I" + i].Value = saldoTotal.ToString("N0", formato);
-                                i += 2;
-                            }
-                            AuxMovimiento = null;
 
-                        }
+                                ws.Cells["C" + i].Value = item2.COMPROBANTE;
+                                ws.Cells["D" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
+                                ws.Cells["E" + i].Value = item2.TERCERO;
+                                if (item2.TERCERO != null)
+                                {
+                                    ws.Cells["F" + i].Value = item2.NOMBRE;
+                                }
+                                else { ws.Cells["F" + i].Value = ""; }
 
-
-                        else if (cuentaA == "0" && cuentaB == "0" && cuenta == "")
-                        {
-
-                            var AuxMovimiento = Movimientos;
-
-                            ws = pack.Workbook.Worksheets.Add("AuxiliarCuentas");
-
-                            // encabezado
-                            ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
-                            ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
-                            ws.Cells["A2:I2"].Style.Font.Name = "Arial";
-                            ws.Cells["A2:I2"].Style.Font.Size = 14;
-                            ws.Cells["A" + 2].Value = "AUXILIAR POR CUENTAS   " + filtro;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
-                            ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
-                            ws.Cells["A5:I5"].Style.Font.Size = 10;
-                            ws.Cells["A" + 3].Value = nombre;
-                            ws.Cells["A" + 4].Value = nit;
-                            ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
-                            ws.Cells["A6,I6"].Merge = true;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
-                            ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
-                            ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
-                            ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
-                            ws.Cells["A7:I7"].Style.Font.Bold = true;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
-                            //fin encabezado
-
-                            ws.Cells["A" + 7].Value = "CÓDIGO";
-                            ws.Cells["B" + 7].Value = "NOMBRE";
-                            ws.Cells["C" + 7].Value = "COMPROBANTE";
-                            ws.Cells["D" + 7].Value = "FECHA";
-                            ws.Cells["E" + 7].Value = "TERCERO";
-                            ws.Cells["F" + 7].Value = "NOMBRE TERCERO";
-                            ws.Cells["G" + 7].Value = "DÉBITO";
-                            ws.Cells["H" + 7].Value = "CRÉDITO";
-                            ws.Cells["I" + 7].Value = "SALDO";
-
-                            var mov = (from m in AuxMovimiento
-                                       orderby m.CUENTA
-                                       select new { m.CUENTA, m.NATURALEZA, m.NOMBRECUENTA }).Distinct().ToList();
-                            i = 8;
-                            decimal saldoT = 0, saldoTotal = 0;
-                            foreach (var item in mov)
-                            {
-                                var dataMov = AuxMovimiento.Where(x => x.CUENTA == item.CUENTA).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
-                                debito = dataMov.Select(x => x.DEBITO).Sum();
-                                credito = dataMov.Select(x => x.CREDITO).Sum();
-                                ws.Cells["A" + i].Value = item.CUENTA;
-                                ws.Cells["B" + i].Value = item.NOMBRECUENTA;
-                                string naturaleza = item.NATURALEZA;
+                                ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
+                                ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
+                                ws.Cells["I" + i].Value = saldo.ToString("N0", formato);
                                 i++;
-                                foreach (var item2 in dataMov)
-                                {
-                                    if (naturaleza == "D")
-                                    {
-                                        saldoT = item2.DEBITO - item2.CREDITO;
-                                    }
-                                    else
-                                    {
-                                        saldoT = item2.CREDITO - item2.DEBITO;
-                                    }
-
-                                    ws.Cells["C" + i].Value = item2.TIPO + " " + item2.NUMERO;
-                                    ws.Cells["D" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
-                                    ws.Cells["E" + i].Value = item2.TERCERO;
-                                    if (item2.TERCERO != null)
-                                    {
-                                        ws.Cells["F" + i].Value = item2.NOMBRE;
-                                    }
-                                    else { ws.Cells["F" + i].Value = ""; }
-
-                                    ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
-                                    ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
-                                    ws.Cells["I" + i].Value = saldoT.ToString("N0", formato);
-                                    i++;
-                                }
-                                if (naturaleza == "D")
-                                {
-                                    saldoTotal = debito - credito;
-                                }
-                                else
-                                {
-                                    saldoTotal = credito - debito;
-                                }
-                                ws.Cells["F" + i].Value = "TOTAL";
-                                ws.Cells["G" + i].Value = debito.ToString("N0", formato);
-                                ws.Cells["H" + i].Value = credito.ToString("N0", formato);
-                                ws.Cells["I" + i].Value = saldoTotal.ToString("N0", formato);
-                                i += 2;
                             }
-                            AuxMovimiento = null;
-                        }
-
-                        else if (cuentaA == "0" && cuentaB == "0" && cuenta != "")
-                        {
-                            Movimientos = Movimientos.Where(x => x.CUENTA == cuenta).ToList();
-
-                            var AuxMovimiento = Movimientos;
-
-                            ws = pack.Workbook.Worksheets.Add("AuxiliarCuentas");
-
-                            // encabezado
-                            ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
-                            ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
-                            ws.Cells["A2:I2"].Style.Font.Name = "Arial";
-                            ws.Cells["A2:I2"].Style.Font.Size = 14;
-                            ws.Cells["A" + 2].Value = "AUXILIAR POR CUENTAS   " + filtro;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
-                            ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
-                            ws.Cells["A5:I5"].Style.Font.Size = 10;
-                            ws.Cells["A" + 3].Value = nombre;
-                            ws.Cells["A" + 4].Value = nit;
-                            ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
-                            ws.Cells["A6,I6"].Merge = true;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
-                            ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
-                            ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
-                            ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
-                            ws.Cells["A7:I7"].Style.Font.Bold = true;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
-                            //fin encabezado
-
-                            ws.Cells["A" + 7].Value = "CÓDIGO";
-                            ws.Cells["B" + 7].Value = "NOMBRE";
-                            ws.Cells["C" + 7].Value = "COMPROBANTE";
-                            ws.Cells["D" + 7].Value = "FECHA";
-                            ws.Cells["E" + 7].Value = "TERCERO";
-                            ws.Cells["F" + 7].Value = "NOMBRE TERCERO";
-                            ws.Cells["G" + 7].Value = "DÉBITO";
-                            ws.Cells["H" + 7].Value = "CRÉDITO";
-                            ws.Cells["I" + 7].Value = "SALDO";
-
-                            var mov = (from m in AuxMovimiento
-                                       orderby m.CUENTA
-                                       select new { m.CUENTA, m.NATURALEZA, m.NOMBRECUENTA }).Distinct().ToList();
-                            i = 8;
-                            decimal saldoT = 0, saldoTotal = 0;
-                            foreach (var item in mov)
+                            if (naturaleza == "D")
                             {
-                                var dataMov = AuxMovimiento.Where(x => x.CUENTA == item.CUENTA).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
-                                debito = dataMov.Select(x => x.DEBITO).Sum();
-                                credito = dataMov.Select(x => x.CREDITO).Sum();
-                                ws.Cells["A" + i].Value = item.CUENTA;
-                                ws.Cells["B" + i].Value = item.NOMBRECUENTA;
-                                string naturaleza = item.NATURALEZA;
-                                i++;
-                                foreach (var item2 in dataMov)
-                                {
-                                    if (naturaleza == "D")
-                                    {
-                                        saldoT = item2.DEBITO - item2.CREDITO;
-                                    }
-                                    else
-                                    {
-                                        saldoT = item2.CREDITO - item2.DEBITO;
-                                    }
-
-                                    ws.Cells["C" + i].Value = item2.TIPO + " " + item2.NUMERO;
-                                    ws.Cells["D" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
-                                    ws.Cells["E" + i].Value = item2.TERCERO;
-                                    if (item2.TERCERO != null)
-                                    {
-                                        ws.Cells["F" + i].Value = item2.NOMBRE;
-                                    }
-                                    else { ws.Cells["F" + i].Value = ""; }
-
-                                    ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
-                                    ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
-                                    ws.Cells["I" + i].Value = saldoT.ToString("N0", formato);
-                                    i++;
-                                }
-                                if (naturaleza == "D")
-                                {
-                                    saldoTotal = debito - credito;
-                                }
-                                else
-                                {
-                                    saldoTotal = credito - debito;
-                                }
-                                ws.Cells["F" + i].Value = "TOTAL";
-                                ws.Cells["G" + i].Value = debito.ToString("N0", formato);
-                                ws.Cells["H" + i].Value = credito.ToString("N0", formato);
-                                ws.Cells["I" + i].Value = saldoTotal.ToString("N0", formato);
-                                i += 2;
+                                totalSaldoAC = debito - credito;
                             }
-                            AuxMovimiento = null;
-                        }
-                        else if (cuentaA != "0" && cuentaB == "0" && cuenta == "")
-                        {
-                            #region Filtros
-                            //var movimientoInt = (from Arreg in ArregloString
-                            //                     join Mov in movimiento on Arreg equals Mov.CUENTA into sm
-                            //                     from a in sm
-                            //                     orderby a.CUENTA ascending
-                            //                     select new
-                            //                     {
-                            //                         CUENTA = Convert.ToInt64(a.CUENTA),
-                            //                         a.NATURALEZA,
-                            //                         a.NOMBRECUENTA,
-                            //                         a.FECHAMOVIMIENTO,
-                            //                         a.DEBITO,
-                            //                         a.CREDITO,
-                            //                         a.TIPO,
-                            //                         a.TERCERO,
-                            //                         a.NOMBRE,
-                            //                         a.NUMERO
-                            //                     }).Distinct().ToList();
-                            #endregion
-                            var MovimientoTemp = (from a in Movimientos
-                                                  select new
-                                                  {
-                                                      CUENTA = Convert.ToInt64(a.CUENTA),
-                                                      a.NATURALEZA,
-                                                      a.NOMBRECUENTA,
-                                                      a.FECHAMOVIMIENTO,
-                                                      a.DEBITO,
-                                                      a.CREDITO,
-                                                      a.TIPO,
-                                                      a.TERCERO,
-                                                      a.NOMBRE,
-                                                      a.NUMERO
-                                                  }).Distinct().ToList();
-
-                            var MovimientosFiltro = (from a in MovimientoTemp
-                                                     where a.CUENTA >= cuentalongmin
-                                                     select new
-                                                     {
-                                                         CUENTA = Convert.ToInt64(a.CUENTA),
-                                                         a.NATURALEZA,
-                                                         a.NOMBRECUENTA,
-                                                         a.FECHAMOVIMIENTO,
-                                                         a.DEBITO,
-                                                         a.CREDITO,
-                                                         a.TIPO,
-                                                         a.TERCERO,
-                                                         a.NOMBRE,
-                                                         a.NUMERO
-                                                     }).Distinct().ToList();
-
-                            var AuxMovimiento = MovimientosFiltro;
-
-                            ws = pack.Workbook.Worksheets.Add("AuxiliarCuentas");
-
-                            // encabezado
-                            ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
-                            ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
-                            ws.Cells["A2:I2"].Style.Font.Name = "Arial";
-                            ws.Cells["A2:I2"].Style.Font.Size = 14;
-                            ws.Cells["A" + 2].Value = "AUXILIAR POR CUENTAS   " + filtro;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
-                            ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
-                            ws.Cells["A5:I5"].Style.Font.Size = 10;
-                            ws.Cells["A" + 3].Value = nombre;
-                            ws.Cells["A" + 4].Value = nit;
-                            ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
-                            ws.Cells["A6,I6"].Merge = true;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
-                            ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
-                            ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
-                            ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
-                            ws.Cells["A7:I7"].Style.Font.Bold = true;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
-                            //fin encabezado
-
-                            ws.Cells["A" + 7].Value = "CÓDIGO";
-                            ws.Cells["B" + 7].Value = "NOMBRE";
-                            ws.Cells["C" + 7].Value = "COMPROBANTE";
-                            ws.Cells["D" + 7].Value = "FECHA";
-                            ws.Cells["E" + 7].Value = "TERCERO";
-                            ws.Cells["F" + 7].Value = "NOMBRE TERCERO";
-                            ws.Cells["G" + 7].Value = "DÉBITO";
-                            ws.Cells["H" + 7].Value = "CRÉDITO";
-                            ws.Cells["I" + 7].Value = "SALDO";
-
-                            var mov = (from m in AuxMovimiento
-                                       orderby m.CUENTA
-                                       select new { m.CUENTA, m.NATURALEZA, m.NOMBRECUENTA }).Distinct().ToList();
-                            i = 8;
-                            decimal saldoT = 0, saldoTotal = 0;
-                            foreach (var item in mov)
+                            else
                             {
-                                var dataMov = AuxMovimiento.Where(x => x.CUENTA == item.CUENTA).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
-                                debito = dataMov.Select(x => x.DEBITO).Sum();
-                                credito = dataMov.Select(x => x.CREDITO).Sum();
-                                ws.Cells["A" + i].Value = item.CUENTA;
-                                ws.Cells["B" + i].Value = item.NOMBRECUENTA;
-                                string naturaleza = item.NATURALEZA;
-                                i++;
-                                foreach (var item2 in dataMov)
-                                {
-                                    if (naturaleza == "D")
-                                    {
-                                        saldoT = item2.DEBITO - item2.CREDITO;
-                                    }
-                                    else
-                                    {
-                                        saldoT = item2.CREDITO - item2.DEBITO;
-                                    }
-
-                                    ws.Cells["C" + i].Value = item2.TIPO + " " + item2.NUMERO;
-                                    ws.Cells["D" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
-                                    ws.Cells["E" + i].Value = item2.TERCERO;
-                                    if (item2.TERCERO != null)
-                                    {
-                                        ws.Cells["F" + i].Value = item2.NOMBRE;
-                                    }
-                                    else { ws.Cells["F" + i].Value = ""; }
-
-                                    ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
-                                    ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
-                                    ws.Cells["I" + i].Value = saldoT.ToString("N0", formato);
-                                    i++;
-                                }
-                                if (naturaleza == "D")
-                                {
-                                    saldoTotal = debito - credito;
-                                }
-                                else
-                                {
-                                    saldoTotal = credito - debito;
-                                }
-                                ws.Cells["F" + i].Value = "TOTAL";
-                                ws.Cells["G" + i].Value = debito.ToString("N0", formato);
-                                ws.Cells["H" + i].Value = credito.ToString("N0", formato);
-                                ws.Cells["I" + i].Value = saldoTotal.ToString("N0", formato);
-                                i += 2;
+                                totalSaldoAC = credito - debito;
                             }
-                            AuxMovimiento = null;
+                            ws.Cells["F" + i].Style.Font.Bold = true;
+                            ws.Cells["F" + i].Value = "TOTAL";
+                            ws.Cells["G" + i].Value = debito.ToString("N0", formato);
+                            ws.Cells["H" + i].Value = credito.ToString("N0", formato);
+                            ws.Cells["I" + i].Value = totalSaldoAC.ToString("N0", formato);
+                            i += 2;
+
                         }
-                        else if (cuentaA == "0" && cuentaB != "0" && cuenta == "")
-                        {
-                            #region Filtros
-                            //var movimientoInt = (from Arreg in ArregloString
-                            //                     join Mov in movimiento on Arreg equals Mov.CUENTA into sm
-                            //                     from a in sm
-                            //                     orderby a.CUENTA ascending
-                            //                     select new
-                            //                     {
-                            //                         CUENTA = Convert.ToInt64(a.CUENTA),
-                            //                         a.NATURALEZA,
-                            //                         a.NOMBRECUENTA,
-                            //                         a.FECHAMOVIMIENTO,
-                            //                         a.DEBITO,
-                            //                         a.CREDITO,
-                            //                         a.TIPO,
-                            //                         a.TERCERO,
-                            //                         a.NOMBRE,
-                            //                         a.NUMERO
-                            //                     }).Distinct().ToList();
-                            #endregion
-                            var MovimientoTemp = (from a in Movimientos
-                                                  select new
-                                                  {
-                                                      CUENTA = Convert.ToInt64(a.CUENTA),
-                                                      a.NATURALEZA,
-                                                      a.NOMBRECUENTA,
-                                                      a.FECHAMOVIMIENTO,
-                                                      a.DEBITO,
-                                                      a.CREDITO,
-                                                      a.TIPO,
-                                                      a.TERCERO,
-                                                      a.NOMBRE,
-                                                      a.NUMERO
-                                                  }).Distinct().ToList();
 
-                            var MovimientosFiltro = (from a in MovimientoTemp
-                                                     where a.CUENTA <= cuentalongmax
-                                                     select new
-                                                     {
-                                                         CUENTA = Convert.ToInt64(a.CUENTA),
-                                                         a.NATURALEZA,
-                                                         a.NOMBRECUENTA,
-                                                         a.FECHAMOVIMIENTO,
-                                                         a.DEBITO,
-                                                         a.CREDITO,
-                                                         a.TIPO,
-                                                         a.TERCERO,
-                                                         a.NOMBRE,
-                                                         a.NUMERO
-                                                     }).Distinct().ToList();
+                        #endregion
+                        break;
+                    case 1:
+                        #region informe2 AuxiliarCuentas
 
-                            var AuxMovimiento = MovimientosFiltro;
+                        //List<MovimientoAuxiliar2> Movimientos = new List<MovimientoAuxiliar2>();
+                        ////string periodos2 = "";
 
-                            ws = pack.Workbook.Worksheets.Add("AuxiliarCuentas");
+                        //if (fechaDesde != "" && fechaHasta != "")
+                        //{
+                        //    DateTime fh = Convert.ToDateTime(fechaHasta);
+                        //    DateTime fd = Convert.ToDateTime(fechaDesde);
+                        //    DateTime fechHasta = new DateTime(fh.Year, fh.Month, fh.Day, 23, 59, 59);
+                        //    DateTime fechDesde = new DateTime(fd.Year, fd.Month, fd.Day, 0, 0, 0);
+                        //    Movimientos = db.Database.SqlQuery<MovimientoAuxiliar2>(
+                        //        "dbo.sp_Movimientos @fechaDesde,@fechaHasta,@opcion",
+                        //        new SqlParameter("@fechaDesde", fechDesde),
+                        //        new SqlParameter("@fechaHasta", fechHasta),
+                        //        new SqlParameter("@opcion", 1)
+                        //        ).ToList();
 
-                            // encabezado
-                            ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
-                            ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
-                            ws.Cells["A2:I2"].Style.Font.Name = "Arial";
-                            ws.Cells["A2:I2"].Style.Font.Size = 14;
-                            ws.Cells["A" + 2].Value = "AUXILIAR POR CUENTAS   " + filtro;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
-                            ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
-                            ws.Cells["A5:I5"].Style.Font.Size = 10;
-                            ws.Cells["A" + 3].Value = nombre;
-                            ws.Cells["A" + 4].Value = nit;
-                            ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
-                            ws.Cells["A6,I6"].Merge = true;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
-                            ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
-                            ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
-                            ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
-                            ws.Cells["A7:I7"].Style.Font.Bold = true;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
-                            //fin encabezado
+                        //    filtro = fd.ToShortDateString() + " - " + fh.ToShortDateString();
+                        //}
+                        //else if (fechaDesde != "" && fechaHasta == "")
+                        //{
+                        //    DateTime fd = Convert.ToDateTime(fechaDesde);
+                        //    DateTime fechDesde = new DateTime(fd.Year, fd.Month, fd.Day, 0, 0, 0);
+                        //    Movimientos = db.Database.SqlQuery<MovimientoAuxiliar2>(
+                        //        "dbo.sp_Movimientos @fechaDesde,@fechaHasta,@opcion",
+                        //        new SqlParameter("@fechaDesde", fechDesde),
+                        //        new SqlParameter("@fechaHasta", fechDesde),
+                        //        new SqlParameter("@opcion", 2)
+                        //        ).ToList();
 
-                            ws.Cells["A" + 7].Value = "CÓDIGO";
-                            ws.Cells["B" + 7].Value = "NOMBRE";
-                            ws.Cells["C" + 7].Value = "COMPROBANTE";
-                            ws.Cells["D" + 7].Value = "FECHA";
-                            ws.Cells["E" + 7].Value = "TERCERO";
-                            ws.Cells["F" + 7].Value = "NOMBRE TERCERO";
-                            ws.Cells["G" + 7].Value = "DÉBITO";
-                            ws.Cells["H" + 7].Value = "CRÉDITO";
-                            ws.Cells["I" + 7].Value = "SALDO";
+                        //    filtro = fd.ToShortDateString();
+                        //}
+                        //else if (fechaDesde == "" && fechaHasta != "")
+                        //{
+                        //    DateTime fh = Convert.ToDateTime(fechaHasta);
+                        //    DateTime fechHasta = new DateTime(fh.Year, fh.Month, fh.Day, 23, 59, 59);
+                        //    Movimientos = db.Database.SqlQuery<MovimientoAuxiliar2>(
+                        //        "dbo.sp_Movimientos @fechaDesde,@fechaHasta,@opcion",
+                        //        new SqlParameter("@fechaDesde", fechHasta),
+                        //        new SqlParameter("@fechaHasta", fechHasta),
+                        //        new SqlParameter("@opcion", 3)
+                        //        ).ToList();
+                        //    filtro = fh.ToShortDateString();
+                        //}
+                        //#region Cuentas AB
+                        //if (cuentaA == "")
+                        //{
+                        //    cuentaA = "0";
+                        //}
+                        //var cuentaMin = cuentaA;
 
-                            var mov = (from m in AuxMovimiento
-                                       orderby m.CUENTA
-                                       select new { m.CUENTA, m.NATURALEZA, m.NOMBRECUENTA }).Distinct().ToList();
-                            i = 8;
-                            decimal saldoT = 0, saldoTotal = 0;
-                            foreach (var item in mov)
-                            {
-                                var dataMov = AuxMovimiento.Where(x => x.CUENTA == item.CUENTA).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
-                                debito = dataMov.Select(x => x.DEBITO).Sum();
-                                credito = dataMov.Select(x => x.CREDITO).Sum();
-                                ws.Cells["A" + i].Value = item.CUENTA;
-                                ws.Cells["B" + i].Value = item.NOMBRECUENTA;
-                                string naturaleza = item.NATURALEZA;
-                                i++;
-                                foreach (var item2 in dataMov)
-                                {
-                                    if (naturaleza == "D")
-                                    {
-                                        saldoT = item2.DEBITO - item2.CREDITO;
-                                    }
-                                    else
-                                    {
-                                        saldoT = item2.CREDITO - item2.DEBITO;
-                                    }
+                        //var cuentalongmin = Convert.ToInt64(cuentaMin);
+                        //if (cuentaB == "")
+                        //{
+                        //    cuentaB = "0";
+                        //}
+                        //var cuentaMax = cuentaB;
 
-                                    ws.Cells["C" + i].Value = item2.TIPO + " " + item2.NUMERO;
-                                    ws.Cells["D" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
-                                    ws.Cells["E" + i].Value = item2.TERCERO;
-                                    if (item2.TERCERO != null)
-                                    {
-                                        ws.Cells["F" + i].Value = item2.NOMBRE;
-                                    }
-                                    else { ws.Cells["F" + i].Value = ""; }
+                        //var cuentalongmax = Convert.ToInt64(cuentaMax);
+                        //#endregion
 
-                                    ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
-                                    ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
-                                    ws.Cells["I" + i].Value = saldoT.ToString("N0", formato);
-                                    i++;
-                                }
-                                if (naturaleza == "D")
-                                {
-                                    saldoTotal = debito - credito;
-                                }
-                                else
-                                {
-                                    saldoTotal = credito - debito;
-                                }
-                                ws.Cells["F" + i].Value = "TOTAL";
-                                ws.Cells["G" + i].Value = debito.ToString("N0", formato);
-                                ws.Cells["H" + i].Value = credito.ToString("N0", formato);
-                                ws.Cells["I" + i].Value = saldoTotal.ToString("N0", formato);
-                                i += 2;
-                            }
-                            AuxMovimiento = null;
-                        }
+                        //#region CodigoFiltro
+                        ////List<string> SelectMov = movimiento.Select(p => p.CUENTA).ToList();
+                        ////long[] arregloMovie = SelectMov.Select(x => Convert.ToInt64(x)).ToArray();
+                        ////var ArregloMov = arregloMovie.Where(n => n >= cuentalongmin && n <= cuentalongmax);
+                        ////List<string> ArregloString = ArregloMov.Select(x => Convert.ToString(x)).ToList();
+
+                        //// movimiento = (from movimientos in movimiento
+                        ////                  select movimientos).ToList();
+                        //#endregion
+                        //if (cuentaA != "0" && cuentaB != "0")
+                        //{
+                        //    #region Filtros
+                        //    //var movimientoInt = (from Arreg in ArregloString
+                        //    //                     join Mov in movimiento on Arreg equals Mov.CUENTA into sm
+                        //    //                     from a in sm
+                        //    //                     orderby a.CUENTA ascending
+                        //    //                     select new
+                        //    //                     {
+                        //    //                         CUENTA = Convert.ToInt64(a.CUENTA),
+                        //    //                         a.NATURALEZA,
+                        //    //                         a.NOMBRECUENTA,
+                        //    //                         a.FECHAMOVIMIENTO,
+                        //    //                         a.DEBITO,
+                        //    //                         a.CREDITO,
+                        //    //                         a.TIPO,
+                        //    //                         a.TERCERO,
+                        //    //                         a.NOMBRE,
+                        //    //                         a.NUMERO
+                        //    //                     }).Distinct().ToList();
+                        //    #endregion
+                        //    var MovimientoTemp = (from a in Movimientos
+                        //                          select new
+                        //                          {
+                        //                              CUENTA = Convert.ToInt64(a.CUENTA),
+                        //                              a.NATURALEZA,
+                        //                              a.NOMBRECUENTA,
+                        //                              a.FECHAMOVIMIENTO,
+                        //                              a.DEBITO,
+                        //                              a.CREDITO,
+                        //                              a.TIPO,
+                        //                              a.TERCERO,
+                        //                              a.NOMBRE,
+                        //                              a.NUMERO
+                        //                          }).Distinct().ToList();
+
+                        //    var MovimientosFiltro = (from a in MovimientoTemp
+                        //                             where a.CUENTA >= cuentalongmin && a.CUENTA <= cuentalongmax
+                        //                             select new
+                        //                             {
+                        //                                 CUENTA = Convert.ToInt64(a.CUENTA),
+                        //                                 a.NATURALEZA,
+                        //                                 a.NOMBRECUENTA,
+                        //                                 a.FECHAMOVIMIENTO,
+                        //                                 a.DEBITO,
+                        //                                 a.CREDITO,
+                        //                                 a.TIPO,
+                        //                                 a.TERCERO,
+                        //                                 a.NOMBRE,
+                        //                                 a.NUMERO
+                        //                             }).Distinct().ToList();
+
+                        //    var AuxMovimiento = MovimientosFiltro;
+
+                        //    ws = pack.Workbook.Worksheets.Add("AuxiliarCuentas");
+
+                        //    // encabezado
+                        //    ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
+                        //    ws.Cells["A2:I2"].Style.Font.Name = "Arial";
+                        //    ws.Cells["A2:I2"].Style.Font.Size = 14;
+                        //    ws.Cells["A" + 2].Value = "AUXILIAR POR CUENTAS   " + filtro;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
+                        //    ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
+                        //    ws.Cells["A5:I5"].Style.Font.Size = 10;
+                        //    ws.Cells["A" + 3].Value = nombre;
+                        //    ws.Cells["A" + 4].Value = nit;
+                        //    ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
+                        //    ws.Cells["A6,I6"].Merge = true;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                        //    ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                        //    ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                        //    ws.Cells["A7:I7"].Style.Font.Bold = true;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                        //    //fin encabezado
+
+                        //    ws.Cells["A" + 7].Value = "CÓDIGO";
+                        //    ws.Cells["B" + 7].Value = "NOMBRE";
+                        //    ws.Cells["C" + 7].Value = "COMPROBANTE";
+                        //    ws.Cells["D" + 7].Value = "FECHA";
+                        //    ws.Cells["E" + 7].Value = "TERCERO";
+                        //    ws.Cells["F" + 7].Value = "NOMBRE TERCERO";
+                        //    ws.Cells["G" + 7].Value = "DÉBITO";
+                        //    ws.Cells["H" + 7].Value = "CRÉDITO";
+                        //    ws.Cells["I" + 7].Value = "SALDO";
+
+                        //    var mov = (from m in AuxMovimiento
+                        //               orderby m.CUENTA
+                        //               select new { m.CUENTA, m.NATURALEZA, m.NOMBRECUENTA }).Distinct().ToList();
+                        //    i = 8;
+                        //    decimal saldoT = 0, saldoTotal = 0;
+                        //    foreach (var item in mov)
+                        //    {
+                        //        var dataMov = AuxMovimiento.Where(x => x.CUENTA == item.CUENTA).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
+                        //        debito = dataMov.Select(x => x.DEBITO).Sum();
+                        //        credito = dataMov.Select(x => x.CREDITO).Sum();
+                        //        ws.Cells["A" + i].Value = item.CUENTA;
+                        //        ws.Cells["B" + i].Value = item.NOMBRECUENTA;
+                        //        string naturaleza = item.NATURALEZA;
+                        //        i++;
+                        //        foreach (var item2 in dataMov)
+                        //        {
+                        //            if (naturaleza == "D")
+                        //            {
+                        //                saldoT = item2.DEBITO - item2.CREDITO;
+                        //            }
+                        //            else
+                        //            {
+                        //                saldoT = item2.CREDITO - item2.DEBITO;
+                        //            }
+
+                        //            ws.Cells["C" + i].Value = item2.TIPO + " " + item2.NUMERO;
+                        //            ws.Cells["D" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
+                        //            ws.Cells["E" + i].Value = item2.TERCERO;
+                        //            if (item2.TERCERO != null)
+                        //            {
+                        //                ws.Cells["F" + i].Value = item2.NOMBRE;
+                        //            }
+                        //            else { ws.Cells["F" + i].Value = ""; }
+
+                        //            ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
+                        //            ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
+                        //            ws.Cells["I" + i].Value = saldoT.ToString("N0", formato);
+                        //            i++;
+                        //        }
+                        //        if (naturaleza == "D")
+                        //        {
+                        //            saldoTotal = debito - credito;
+                        //        }
+                        //        else
+                        //        {
+                        //            saldoTotal = credito - debito;
+                        //        }
+                        //        ws.Cells["F" + i].Value = "TOTAL";
+                        //        ws.Cells["G" + i].Value = debito.ToString("N0", formato);
+                        //        ws.Cells["H" + i].Value = credito.ToString("N0", formato);
+                        //        ws.Cells["I" + i].Value = saldoTotal.ToString("N0", formato);
+                        //        i += 2;
+                        //    }
+                        //    AuxMovimiento = null;
+
+                        //}
+
+
+                        //else if (cuentaA == "0" && cuentaB == "0" && cuenta == "")
+                        //{
+
+                        //    var AuxMovimiento = Movimientos;
+
+                        //    ws = pack.Workbook.Worksheets.Add("AuxiliarCuentas");
+
+                        //    // encabezado
+                        //    ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
+                        //    ws.Cells["A2:I2"].Style.Font.Name = "Arial";
+                        //    ws.Cells["A2:I2"].Style.Font.Size = 14;
+                        //    ws.Cells["A" + 2].Value = "AUXILIAR POR CUENTAS   " + filtro;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
+                        //    ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
+                        //    ws.Cells["A5:I5"].Style.Font.Size = 10;
+                        //    ws.Cells["A" + 3].Value = nombre;
+                        //    ws.Cells["A" + 4].Value = nit;
+                        //    ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
+                        //    ws.Cells["A6,I6"].Merge = true;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                        //    ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                        //    ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                        //    ws.Cells["A7:I7"].Style.Font.Bold = true;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                        //    //fin encabezado
+
+                        //    ws.Cells["A" + 7].Value = "CÓDIGO";
+                        //    ws.Cells["B" + 7].Value = "NOMBRE";
+                        //    ws.Cells["C" + 7].Value = "COMPROBANTE";
+                        //    ws.Cells["D" + 7].Value = "FECHA";
+                        //    ws.Cells["E" + 7].Value = "TERCERO";
+                        //    ws.Cells["F" + 7].Value = "NOMBRE TERCERO";
+                        //    ws.Cells["G" + 7].Value = "DÉBITO";
+                        //    ws.Cells["H" + 7].Value = "CRÉDITO";
+                        //    ws.Cells["I" + 7].Value = "SALDO";
+
+                        //    var mov = (from m in AuxMovimiento
+                        //               orderby m.CUENTA
+                        //               select new { m.CUENTA, m.NATURALEZA, m.NOMBRECUENTA }).Distinct().ToList();
+                        //    i = 8;
+                        //    decimal saldoT = 0, saldoTotal = 0;
+                        //    foreach (var item in mov)
+                        //    {
+                        //        var dataMov = AuxMovimiento.Where(x => x.CUENTA == item.CUENTA).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
+                        //        debito = dataMov.Select(x => x.DEBITO).Sum();
+                        //        credito = dataMov.Select(x => x.CREDITO).Sum();
+                        //        ws.Cells["A" + i].Value = item.CUENTA;
+                        //        ws.Cells["B" + i].Value = item.NOMBRECUENTA;
+                        //        string naturaleza = item.NATURALEZA;
+                        //        i++;
+                        //        foreach (var item2 in dataMov)
+                        //        {
+                        //            if (naturaleza == "D")
+                        //            {
+                        //                saldoT = item2.DEBITO - item2.CREDITO;
+                        //            }
+                        //            else
+                        //            {
+                        //                saldoT = item2.CREDITO - item2.DEBITO;
+                        //            }
+
+                        //            ws.Cells["C" + i].Value = item2.TIPO + " " + item2.NUMERO;
+                        //            ws.Cells["D" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
+                        //            ws.Cells["E" + i].Value = item2.TERCERO;
+                        //            if (item2.TERCERO != null)
+                        //            {
+                        //                ws.Cells["F" + i].Value = item2.NOMBRE;
+                        //            }
+                        //            else { ws.Cells["F" + i].Value = ""; }
+
+                        //            ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
+                        //            ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
+                        //            ws.Cells["I" + i].Value = saldoT.ToString("N0", formato);
+                        //            i++;
+                        //        }
+                        //        if (naturaleza == "D")
+                        //        {
+                        //            saldoTotal = debito - credito;
+                        //        }
+                        //        else
+                        //        {
+                        //            saldoTotal = credito - debito;
+                        //        }
+                        //        ws.Cells["F" + i].Value = "TOTAL";
+                        //        ws.Cells["G" + i].Value = debito.ToString("N0", formato);
+                        //        ws.Cells["H" + i].Value = credito.ToString("N0", formato);
+                        //        ws.Cells["I" + i].Value = saldoTotal.ToString("N0", formato);
+                        //        i += 2;
+                        //    }
+                        //    AuxMovimiento = null;
+                        //}
+
+                        //else if (cuentaA == "0" && cuentaB == "0" && cuenta != "")
+                        //{
+                        //    Movimientos = Movimientos.Where(x => x.CUENTA == cuenta).ToList();
+
+                        //    var AuxMovimiento = Movimientos;
+
+                        //    ws = pack.Workbook.Worksheets.Add("AuxiliarCuentas");
+
+                        //    // encabezado
+                        //    ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
+                        //    ws.Cells["A2:I2"].Style.Font.Name = "Arial";
+                        //    ws.Cells["A2:I2"].Style.Font.Size = 14;
+                        //    ws.Cells["A" + 2].Value = "AUXILIAR POR CUENTAS   " + filtro;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
+                        //    ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
+                        //    ws.Cells["A5:I5"].Style.Font.Size = 10;
+                        //    ws.Cells["A" + 3].Value = nombre;
+                        //    ws.Cells["A" + 4].Value = nit;
+                        //    ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
+                        //    ws.Cells["A6,I6"].Merge = true;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                        //    ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                        //    ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                        //    ws.Cells["A7:I7"].Style.Font.Bold = true;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                        //    //fin encabezado
+
+                        //    ws.Cells["A" + 7].Value = "CÓDIGO";
+                        //    ws.Cells["B" + 7].Value = "NOMBRE";
+                        //    ws.Cells["C" + 7].Value = "COMPROBANTE";
+                        //    ws.Cells["D" + 7].Value = "FECHA";
+                        //    ws.Cells["E" + 7].Value = "TERCERO";
+                        //    ws.Cells["F" + 7].Value = "NOMBRE TERCERO";
+                        //    ws.Cells["G" + 7].Value = "DÉBITO";
+                        //    ws.Cells["H" + 7].Value = "CRÉDITO";
+                        //    ws.Cells["I" + 7].Value = "SALDO";
+
+                        //    var mov = (from m in AuxMovimiento
+                        //               orderby m.CUENTA
+                        //               select new { m.CUENTA, m.NATURALEZA, m.NOMBRECUENTA }).Distinct().ToList();
+                        //    i = 8;
+                        //    decimal saldoT = 0, saldoTotal = 0;
+                        //    foreach (var item in mov)
+                        //    {
+                        //        var dataMov = AuxMovimiento.Where(x => x.CUENTA == item.CUENTA).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
+                        //        debito = dataMov.Select(x => x.DEBITO).Sum();
+                        //        credito = dataMov.Select(x => x.CREDITO).Sum();
+                        //        ws.Cells["A" + i].Value = item.CUENTA;
+                        //        ws.Cells["B" + i].Value = item.NOMBRECUENTA;
+                        //        string naturaleza = item.NATURALEZA;
+                        //        i++;
+                        //        foreach (var item2 in dataMov)
+                        //        {
+                        //            if (naturaleza == "D")
+                        //            {
+                        //                saldoT = item2.DEBITO - item2.CREDITO;
+                        //            }
+                        //            else
+                        //            {
+                        //                saldoT = item2.CREDITO - item2.DEBITO;
+                        //            }
+
+                        //            ws.Cells["C" + i].Value = item2.TIPO + " " + item2.NUMERO;
+                        //            ws.Cells["D" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
+                        //            ws.Cells["E" + i].Value = item2.TERCERO;
+                        //            if (item2.TERCERO != null)
+                        //            {
+                        //                ws.Cells["F" + i].Value = item2.NOMBRE;
+                        //            }
+                        //            else { ws.Cells["F" + i].Value = ""; }
+
+                        //            ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
+                        //            ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
+                        //            ws.Cells["I" + i].Value = saldoT.ToString("N0", formato);
+                        //            i++;
+                        //        }
+                        //        if (naturaleza == "D")
+                        //        {
+                        //            saldoTotal = debito - credito;
+                        //        }
+                        //        else
+                        //        {
+                        //            saldoTotal = credito - debito;
+                        //        }
+                        //        ws.Cells["F" + i].Value = "TOTAL";
+                        //        ws.Cells["G" + i].Value = debito.ToString("N0", formato);
+                        //        ws.Cells["H" + i].Value = credito.ToString("N0", formato);
+                        //        ws.Cells["I" + i].Value = saldoTotal.ToString("N0", formato);
+                        //        i += 2;
+                        //    }
+                        //    AuxMovimiento = null;
+                        //}
+                        //else if (cuentaA != "0" && cuentaB == "0" && cuenta == "")
+                        //{
+                        //    #region Filtros
+                        //    //var movimientoInt = (from Arreg in ArregloString
+                        //    //                     join Mov in movimiento on Arreg equals Mov.CUENTA into sm
+                        //    //                     from a in sm
+                        //    //                     orderby a.CUENTA ascending
+                        //    //                     select new
+                        //    //                     {
+                        //    //                         CUENTA = Convert.ToInt64(a.CUENTA),
+                        //    //                         a.NATURALEZA,
+                        //    //                         a.NOMBRECUENTA,
+                        //    //                         a.FECHAMOVIMIENTO,
+                        //    //                         a.DEBITO,
+                        //    //                         a.CREDITO,
+                        //    //                         a.TIPO,
+                        //    //                         a.TERCERO,
+                        //    //                         a.NOMBRE,
+                        //    //                         a.NUMERO
+                        //    //                     }).Distinct().ToList();
+                        //    #endregion
+                        //    var MovimientoTemp = (from a in Movimientos
+                        //                          select new
+                        //                          {
+                        //                              CUENTA = Convert.ToInt64(a.CUENTA),
+                        //                              a.NATURALEZA,
+                        //                              a.NOMBRECUENTA,
+                        //                              a.FECHAMOVIMIENTO,
+                        //                              a.DEBITO,
+                        //                              a.CREDITO,
+                        //                              a.TIPO,
+                        //                              a.TERCERO,
+                        //                              a.NOMBRE,
+                        //                              a.NUMERO
+                        //                          }).Distinct().ToList();
+
+                        //    var MovimientosFiltro = (from a in MovimientoTemp
+                        //                             where a.CUENTA >= cuentalongmin
+                        //                             select new
+                        //                             {
+                        //                                 CUENTA = Convert.ToInt64(a.CUENTA),
+                        //                                 a.NATURALEZA,
+                        //                                 a.NOMBRECUENTA,
+                        //                                 a.FECHAMOVIMIENTO,
+                        //                                 a.DEBITO,
+                        //                                 a.CREDITO,
+                        //                                 a.TIPO,
+                        //                                 a.TERCERO,
+                        //                                 a.NOMBRE,
+                        //                                 a.NUMERO
+                        //                             }).Distinct().ToList();
+
+                        //    var AuxMovimiento = MovimientosFiltro;
+
+                        //    ws = pack.Workbook.Worksheets.Add("AuxiliarCuentas");
+
+                        //    // encabezado
+                        //    ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
+                        //    ws.Cells["A2:I2"].Style.Font.Name = "Arial";
+                        //    ws.Cells["A2:I2"].Style.Font.Size = 14;
+                        //    ws.Cells["A" + 2].Value = "AUXILIAR POR CUENTAS   " + filtro;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
+                        //    ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
+                        //    ws.Cells["A5:I5"].Style.Font.Size = 10;
+                        //    ws.Cells["A" + 3].Value = nombre;
+                        //    ws.Cells["A" + 4].Value = nit;
+                        //    ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
+                        //    ws.Cells["A6,I6"].Merge = true;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                        //    ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                        //    ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                        //    ws.Cells["A7:I7"].Style.Font.Bold = true;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                        //    //fin encabezado
+
+                        //    ws.Cells["A" + 7].Value = "CÓDIGO";
+                        //    ws.Cells["B" + 7].Value = "NOMBRE";
+                        //    ws.Cells["C" + 7].Value = "COMPROBANTE";
+                        //    ws.Cells["D" + 7].Value = "FECHA";
+                        //    ws.Cells["E" + 7].Value = "TERCERO";
+                        //    ws.Cells["F" + 7].Value = "NOMBRE TERCERO";
+                        //    ws.Cells["G" + 7].Value = "DÉBITO";
+                        //    ws.Cells["H" + 7].Value = "CRÉDITO";
+                        //    ws.Cells["I" + 7].Value = "SALDO";
+
+                        //    var mov = (from m in AuxMovimiento
+                        //               orderby m.CUENTA
+                        //               select new { m.CUENTA, m.NATURALEZA, m.NOMBRECUENTA }).Distinct().ToList();
+                        //    i = 8;
+                        //    decimal saldoT = 0, saldoTotal = 0;
+                        //    foreach (var item in mov)
+                        //    {
+                        //        var dataMov = AuxMovimiento.Where(x => x.CUENTA == item.CUENTA).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
+                        //        debito = dataMov.Select(x => x.DEBITO).Sum();
+                        //        credito = dataMov.Select(x => x.CREDITO).Sum();
+                        //        ws.Cells["A" + i].Value = item.CUENTA;
+                        //        ws.Cells["B" + i].Value = item.NOMBRECUENTA;
+                        //        string naturaleza = item.NATURALEZA;
+                        //        i++;
+                        //        foreach (var item2 in dataMov)
+                        //        {
+                        //            if (naturaleza == "D")
+                        //            {
+                        //                saldoT = item2.DEBITO - item2.CREDITO;
+                        //            }
+                        //            else
+                        //            {
+                        //                saldoT = item2.CREDITO - item2.DEBITO;
+                        //            }
+
+                        //            ws.Cells["C" + i].Value = item2.TIPO + " " + item2.NUMERO;
+                        //            ws.Cells["D" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
+                        //            ws.Cells["E" + i].Value = item2.TERCERO;
+                        //            if (item2.TERCERO != null)
+                        //            {
+                        //                ws.Cells["F" + i].Value = item2.NOMBRE;
+                        //            }
+                        //            else { ws.Cells["F" + i].Value = ""; }
+
+                        //            ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
+                        //            ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
+                        //            ws.Cells["I" + i].Value = saldoT.ToString("N0", formato);
+                        //            i++;
+                        //        }
+                        //        if (naturaleza == "D")
+                        //        {
+                        //            saldoTotal = debito - credito;
+                        //        }
+                        //        else
+                        //        {
+                        //            saldoTotal = credito - debito;
+                        //        }
+                        //        ws.Cells["F" + i].Value = "TOTAL";
+                        //        ws.Cells["G" + i].Value = debito.ToString("N0", formato);
+                        //        ws.Cells["H" + i].Value = credito.ToString("N0", formato);
+                        //        ws.Cells["I" + i].Value = saldoTotal.ToString("N0", formato);
+                        //        i += 2;
+                        //    }
+                        //    AuxMovimiento = null;
+                        //}
+                        //else if (cuentaA == "0" && cuentaB != "0" && cuenta == "")
+                        //{
+                        //    #region Filtros
+                        //    //var movimientoInt = (from Arreg in ArregloString
+                        //    //                     join Mov in movimiento on Arreg equals Mov.CUENTA into sm
+                        //    //                     from a in sm
+                        //    //                     orderby a.CUENTA ascending
+                        //    //                     select new
+                        //    //                     {
+                        //    //                         CUENTA = Convert.ToInt64(a.CUENTA),
+                        //    //                         a.NATURALEZA,
+                        //    //                         a.NOMBRECUENTA,
+                        //    //                         a.FECHAMOVIMIENTO,
+                        //    //                         a.DEBITO,
+                        //    //                         a.CREDITO,
+                        //    //                         a.TIPO,
+                        //    //                         a.TERCERO,
+                        //    //                         a.NOMBRE,
+                        //    //                         a.NUMERO
+                        //    //                     }).Distinct().ToList();
+                        //    #endregion
+                        //    var MovimientoTemp = (from a in Movimientos
+                        //                          select new
+                        //                          {
+                        //                              CUENTA = Convert.ToInt64(a.CUENTA),
+                        //                              a.NATURALEZA,
+                        //                              a.NOMBRECUENTA,
+                        //                              a.FECHAMOVIMIENTO,
+                        //                              a.DEBITO,
+                        //                              a.CREDITO,
+                        //                              a.TIPO,
+                        //                              a.TERCERO,
+                        //                              a.NOMBRE,
+                        //                              a.NUMERO
+                        //                          }).Distinct().ToList();
+
+                        //    var MovimientosFiltro = (from a in MovimientoTemp
+                        //                             where a.CUENTA <= cuentalongmax
+                        //                             select new
+                        //                             {
+                        //                                 CUENTA = Convert.ToInt64(a.CUENTA),
+                        //                                 a.NATURALEZA,
+                        //                                 a.NOMBRECUENTA,
+                        //                                 a.FECHAMOVIMIENTO,
+                        //                                 a.DEBITO,
+                        //                                 a.CREDITO,
+                        //                                 a.TIPO,
+                        //                                 a.TERCERO,
+                        //                                 a.NOMBRE,
+                        //                                 a.NUMERO
+                        //                             }).Distinct().ToList();
+
+                        //    var AuxMovimiento = MovimientosFiltro;
+
+                        //    ws = pack.Workbook.Worksheets.Add("AuxiliarCuentas");
+
+                        //    // encabezado
+                        //    ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
+                        //    ws.Cells["A2:I2"].Style.Font.Name = "Arial";
+                        //    ws.Cells["A2:I2"].Style.Font.Size = 14;
+                        //    ws.Cells["A" + 2].Value = "AUXILIAR POR CUENTAS   " + filtro;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
+                        //    ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
+                        //    ws.Cells["A5:I5"].Style.Font.Size = 10;
+                        //    ws.Cells["A" + 3].Value = nombre;
+                        //    ws.Cells["A" + 4].Value = nit;
+                        //    ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
+                        //    ws.Cells["A6,I6"].Merge = true;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                        //    ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                        //    ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                        //    ws.Cells["A7:I7"].Style.Font.Bold = true;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                        //    //fin encabezado
+
+                        //    ws.Cells["A" + 7].Value = "CÓDIGO";
+                        //    ws.Cells["B" + 7].Value = "NOMBRE";
+                        //    ws.Cells["C" + 7].Value = "COMPROBANTE";
+                        //    ws.Cells["D" + 7].Value = "FECHA";
+                        //    ws.Cells["E" + 7].Value = "TERCERO";
+                        //    ws.Cells["F" + 7].Value = "NOMBRE TERCERO";
+                        //    ws.Cells["G" + 7].Value = "DÉBITO";
+                        //    ws.Cells["H" + 7].Value = "CRÉDITO";
+                        //    ws.Cells["I" + 7].Value = "SALDO";
+
+                        //    var mov = (from m in AuxMovimiento
+                        //               orderby m.CUENTA
+                        //               select new { m.CUENTA, m.NATURALEZA, m.NOMBRECUENTA }).Distinct().ToList();
+                        //    i = 8;
+                        //    decimal saldoT = 0, saldoTotal = 0;
+                        //    foreach (var item in mov)
+                        //    {
+                        //        var dataMov = AuxMovimiento.Where(x => x.CUENTA == item.CUENTA).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
+                        //        debito = dataMov.Select(x => x.DEBITO).Sum();
+                        //        credito = dataMov.Select(x => x.CREDITO).Sum();
+                        //        ws.Cells["A" + i].Value = item.CUENTA;
+                        //        ws.Cells["B" + i].Value = item.NOMBRECUENTA;
+                        //        string naturaleza = item.NATURALEZA;
+                        //        i++;
+                        //        foreach (var item2 in dataMov)
+                        //        {
+                        //            if (naturaleza == "D")
+                        //            {
+                        //                saldoT = item2.DEBITO - item2.CREDITO;
+                        //            }
+                        //            else
+                        //            {
+                        //                saldoT = item2.CREDITO - item2.DEBITO;
+                        //            }
+
+                        //            ws.Cells["C" + i].Value = item2.TIPO + " " + item2.NUMERO;
+                        //            ws.Cells["D" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
+                        //            ws.Cells["E" + i].Value = item2.TERCERO;
+                        //            if (item2.TERCERO != null)
+                        //            {
+                        //                ws.Cells["F" + i].Value = item2.NOMBRE;
+                        //            }
+                        //            else { ws.Cells["F" + i].Value = ""; }
+
+                        //            ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
+                        //            ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
+                        //            ws.Cells["I" + i].Value = saldoT.ToString("N0", formato);
+                        //            i++;
+                        //        }
+                        //        if (naturaleza == "D")
+                        //        {
+                        //            saldoTotal = debito - credito;
+                        //        }
+                        //        else
+                        //        {
+                        //            saldoTotal = credito - debito;
+                        //        }
+                        //        ws.Cells["F" + i].Value = "TOTAL";
+                        //        ws.Cells["G" + i].Value = debito.ToString("N0", formato);
+                        //        ws.Cells["H" + i].Value = credito.ToString("N0", formato);
+                        //        ws.Cells["I" + i].Value = saldoTotal.ToString("N0", formato);
+                        //        i += 2;
+                        //    }
+                        //    AuxMovimiento = null;
+                        //}
                         #endregion
                         break;
                     case 3:
                         #region informe Estado de resultados
                         List<Movimiento> movtosER = new List<Movimiento>();
-                       
+
                         var fDesde = coll["fechaDesde"];
                         var fHasta = coll["fechaHasta"];
 
@@ -1172,7 +1337,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                             DateTime fechHasta = new DateTime(fh.Year, fh.Month, fh.Day, 23, 59, 59);
                             DateTime fechDesde = new DateTime(fd.Year, fd.Month, fd.Day, 0, 0, 0);
                             movtosER = db.Movimientos.Where(x => (x.FECHAMOVIMIENTO >= fechDesde && x.FECHAMOVIMIENTO <= fechHasta) && x.Comprobante.ANULADO == false).ToList();
-                            filtro = fd.ToShortDateString() + " - " + fh.ToShortDateString(); 
+                            filtro = fd.ToShortDateString() + " - " + fh.ToShortDateString();
                         }
                         else if (fDesde != "" && fHasta == "")
                         {
@@ -1208,7 +1373,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         ws.Cells["A" + 4].Value = nit;
                         ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
                         ws.Cells["A6:D6"].Merge = true;
-                       
+
                         //fin encabezado
 
 
@@ -1325,11 +1490,13 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         }
                         #endregion
                         break;
+
+
                     case 4:
                         #region informe4 Balance General
                         List<Movimiento> saldosCuentas = new List<Movimiento>();
                         var PlanCuentas = db.PlanCuentas.ToList();
-                       // string per = "";
+                        // string per = "";
                         if (desdeSaldoAno != 0 && desdeSaldo != 0 && hastaSaldo != 0)
                             filtro = desdeSaldoAno + " : " + GetMes(desdeSaldo) + " - " + GetMes(hastaSaldo);
                         else if (desdeSaldoAno != 0 && desdeSaldo != 0 && hastaSaldo == 0)
@@ -1338,6 +1505,8 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                             filtro = desdeSaldoAno + " : " + GetMes(hastaSaldo);
                         else
                             filtro = desdeSaldoAno.ToString();
+
+                      
 
                         ws = pack.Workbook.Worksheets.Add("Balance General");
                         // encabezado
@@ -1358,9 +1527,10 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         ws.Cells["A" + 4].Value = nit;
                         ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
                         ws.Cells["A6:I6"].Merge = true;
-                       
+
                         //fin encabezado
 
+                        
 
                         int J = 7, G = 7; decimal totalActivo = 0, totalPasivo = 0;
                         int numSC = db.SaldosCuentas.Count();
@@ -1372,15 +1542,16 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                             {
                                 DateTime fechDesde = new DateTime(desdeSaldoAno, desdeSaldo, 1, 0, 0, 0);
                                 int days = DateTime.DaysInMonth(desdeSaldoAno, hastaSaldo);
-                                DateTime fechHasta = new DateTime(desdeSaldoAno, hastaSaldo, days, 23, 59, 59);
-                                saldosCuentas = db.Movimientos.Where(x => (x.FECHAMOVIMIENTO >= fechDesde && x.FECHAMOVIMIENTO <= fechHasta) && x.Comprobante.ANULADO == false).ToList();
+                                DateTime fechHasta = new DateTime(desdeSaldoAno, hastaSaldo, days, 0, 0, 0).AddDays(1);
+                                saldosCuentas = db.Movimientos.Where(x => (x.FECHAMOVIMIENTO >= fechDesde && x.FECHAMOVIMIENTO < fechHasta) && x.ANULADO == false).ToList();
 
                             }
                             else if (desdeSaldo == 0 && hastaSaldo != 0 && desdeSaldoAno != 0)
                             {
                                 int days = DateTime.DaysInMonth(desdeSaldoAno, hastaSaldo);
-                                DateTime fechHasta = new DateTime(desdeSaldoAno, hastaSaldo, days, 23, 59, 59);
-                                saldosCuentas = db.Movimientos.Where(x => x.FECHAMOVIMIENTO <= fechHasta && x.Comprobante.ANULADO == false).ToList();
+                                DateTime fechHasta = new DateTime(desdeSaldoAno, hastaSaldo, days, 0, 0, 0).AddDays(1);
+                                saldosCuentas = db.Movimientos.Where(x => x.FECHAMOVIMIENTO < fechHasta && x.ANULADO == false).ToList();
+
                                 //saldosCuentas = saldosCuentas.Where(x => (x.ANO >= iniAnio && x.ANO < desdeSaldoAno && x.MES <= 12) || (x.ANO == desdeSaldoAno && x.MES <= hastaSaldo)).ToList();
                                 //saldosCuentas = saldosCuentas.Where(x => (x.ANO >= iniAnio && x.ANO <= desdeSaldoAno && x.MES <= 12)).ToList();
                             }
@@ -1402,9 +1573,9 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
 
 
                                 ws.Cells["A" + G].Value = item.CUENTA;
-                                ws.Cells["B" + G].Value = item.cuentaFK.NOMBRE;
+                                ws.Cells["B" + G].Value = (item.cuentaFK == null) ? " " : item.cuentaFK.NOMBRE;
                                 ws.Cells["C" + G].Value = saldo;
-                                ws.Cells["D" + G].Value = item.cuentaFK.NATURALEZA;
+                                ws.Cells["D" + G].Value = (item.cuentaFK == null) ? " " : item.cuentaFK.NATURALEZA;
 
                                 G++;
                             }
@@ -1429,8 +1600,8 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                                     ws.Cells["H" + J].Value = saldo;
 
                                     ws.Cells["F" + J].Value = item.CUENTA;
-                                    ws.Cells["G" + J].Value = item.cuentaFK.NOMBRE;
-                                    ws.Cells["I" + J].Value = item.cuentaFK.NATURALEZA;
+                                    ws.Cells["G" + J].Value = (item.cuentaFK == null) ? " " : item.cuentaFK.NOMBRE;
+                                    ws.Cells["I" + J].Value = (item.cuentaFK == null) ? " " : item.cuentaFK.NATURALEZA;
 
                                     J++;
                                 }
@@ -1452,13 +1623,24 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                             ws.Cells["G" + J].Value = "EXCEDENTES DEL EJERCICIO";
                             ws.Cells["I" + J].Value = "C";
 
-
-
                             G++;
-                            ws.Cells["B" + G].Value = "ACTIVO";
-                            ws.Cells["C" + G].Value = totalActivo;
-                            ws.Cells["G" + G].Value = "PASIVO+PATRIMONIO";
-                            ws.Cells["H" + G].Value = totalPasivo;
+                            if (G > J)
+                            {
+                                G++;
+                                ws.Cells["B" + G].Value = "ACTIVO";
+                                ws.Cells["C" + G].Value = totalActivo;
+                                ws.Cells["G" + G].Value = "PASIVO+PATRIMONIO";
+                                ws.Cells["H" + G].Value = totalPasivo;
+                            }
+                            else
+                            {
+                                J += 3;
+                                ws.Cells["B" + J].Value = "ACTIVO";
+                                ws.Cells["C" + J].Value = totalActivo;
+                                ws.Cells["G" + J].Value = "PASIVO+PATRIMONIO";
+                                ws.Cells["H" + J].Value = totalPasivo;
+                            }
+
 
                         }
 
@@ -1470,7 +1652,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         #region Informe6 Libro Diario
 
                         List<MovimientoAuxiliar2> movtos = new List<MovimientoAuxiliar2>();
-                       // string fechas = ""; 
+                        // string fechas = ""; 
 
                         if (fechaDesde != "" && fechaHasta != "")
                         {
@@ -1484,7 +1666,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                                 new SqlParameter("@fechaHasta", fechHasta),
                                 new SqlParameter("@opcion", 1)
                                 ).ToList();
-                            filtro = fd.ToShortDateString()+" - "+fh.ToShortDateString();
+                            filtro = fd.ToShortDateString() + " - " + fh.ToShortDateString();
                         }
                         else if (fechaDesde != "" && fechaHasta == "")
                         {
@@ -1503,7 +1685,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                             DateTime fh = Convert.ToDateTime(fechaHasta);
                             DateTime fechHasta = new DateTime(fh.Year, fh.Month, fh.Day, 23, 59, 59);
                             movtos = db.Database.SqlQuery<MovimientoAuxiliar2>(
-                                "dbo.sp_Movimientos",
+                                "dbo.sp_Movimientos @fechaDesde,@fechaHasta,@opcion",
                                 new SqlParameter("@fechaDesde", fechHasta),
                                 new SqlParameter("@fechaHasta", fechHasta),
                                 new SqlParameter("@opcion", 3)
@@ -1517,7 +1699,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         ws.Cells["A2:K2,A3:K3,A4:K4"].Style.Font.Bold = true;
                         ws.Cells["A2:K2"].Style.Font.Name = "Arial";
                         ws.Cells["A2:K2"].Style.Font.Size = 14;
-                        ws.Cells["A" + 2].Value = "LIBRO DIARIO   "+filtro;
+                        ws.Cells["A" + 2].Value = "LIBRO DIARIO   " + filtro;
                         ws.Cells[1, 1, 5, 11].Style.Fill.PatternType = ExcelFillStyle.Solid;
                         ws.Cells[1, 1, 5, 11].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
                         ws.Cells["A2:k2,A3:K3,A4:K4,A5:K5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
@@ -1526,9 +1708,9 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         ws.Cells["A2:k2,A3:K3,A4:K4,A5:K5"].Style.WrapText = true;
                         ws.Cells["A3:K3,A4:K4"].Style.Font.Size = 12;
                         ws.Cells["A5:K5"].Style.Font.Size = 10;
-                        ws.Cells["A" + 3].Value = nombre; 
-                        ws.Cells["A" + 4].Value = nit; 
-                        ws.Cells["A" + 5].Value = "Fecha generado el reporte: "+fechaAct.ToShortDateString(); 
+                        ws.Cells["A" + 3].Value = nombre;
+                        ws.Cells["A" + 4].Value = nit;
+                        ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
                         ws.Cells["A6,K6"].Merge = true;
                         ws.Cells[6, 1, 6, 11].Style.Fill.PatternType = ExcelFillStyle.Solid;
                         ws.Cells[6, 1, 6, 11].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
@@ -1602,7 +1784,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         #region Informe7 Libro mayor y balances
                         movtos = new List<MovimientoAuxiliar2>();
                         var movtos2 = new List<MovimientoAuxiliar2>();
-                       // string periodo = "";
+                        // string periodo = "";
                         if (fechaDesde != "" && fechaHasta != "")
                         {
                             DateTime fh = Convert.ToDateTime(fechaHasta);
@@ -1622,7 +1804,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                                 new SqlParameter("@opcion", 4)
                                 ).ToList();
 
-                            filtro = fd.ToShortDateString()+" - "+fh.ToShortDateString();
+                            filtro = fd.ToShortDateString() + " - " + fh.ToShortDateString();
 
                         }
                         else if (fechaDesde != "" && fechaHasta == "")
@@ -1648,7 +1830,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                             DateTime fh = Convert.ToDateTime(fechaHasta);
                             DateTime fechHasta = new DateTime(fh.Year, fh.Month, fh.Day, 23, 59, 59);
                             movtos = db.Database.SqlQuery<MovimientoAuxiliar2>(
-                                "dbo.sp_Movimientos",
+                                "dbo.sp_Movimientos @fechaDesde,@fechaHasta,@opcion",
                                 new SqlParameter("@fechaDesde", fechHasta),
                                 new SqlParameter("@fechaHasta", fechHasta),
                                 new SqlParameter("@opcion", 3)
@@ -1746,7 +1928,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         var fecha = coll["fechaHasta5"];
                         var costo = coll["costo"];
 
-                        if(fecha != "")
+                        if (fecha != "")
                         {
                             DateTime f = Convert.ToDateTime(fecha);
                             filtro = f.ToShortDateString();
@@ -1772,7 +1954,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         ws.Cells["A" + 4].Value = nit;
                         ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
                         ws.Cells["A6:E6"].Merge = true;
-                        
+
                         //fin encabezado
 
                         if (fecha != "")
@@ -2020,7 +2202,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         ws.Cells["A" + 4].Value = nit;
                         ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
                         ws.Cells["A6:F6"].Merge = true;
-                        
+
                         //fin encabezado
 
                         fDesde = coll["fechaDesde"];
@@ -2273,8 +2455,9 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         movtos = null;
                         #endregion
                         break;
-                    case 17: 
-                        #region informe17
+
+                    case 17:
+                        #region informe17 Morosidad de aportes
                         var agencia = coll["agencia"];
                         var morosidad2 = db.Database.SqlQuery<sp_reporte17>("dbo.sp_reporte17").ToList();
                         //var morosidad2 = db.FichasAportes.Where(x => x.activa == true).ToList();
@@ -2299,14 +2482,14 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                                 DateTime fech5 = Convert.ToDateTime(fechaHasta);
                                 DateTime fech6 = new DateTime(fech5.Year, fech5.Month, fech5.Day, 23, 59, 59);
                                 morosidad2 = morosidad2.Where(x => x.FechaApertura >= fechDesde3 && x.FechaApertura <= fech6).ToList();
-                                filtro = fechDesde3.ToShortDateString()+" - "+fech5.ToShortDateString();
+                                filtro = fechDesde3.ToShortDateString() + " - " + fech5.ToShortDateString();
                             }
 
                         }
 
                         morosidad2 = morosidad2.OrderBy(m => m.FechaApertura).ToList();
 
-                      
+
 
 
                         ws = pack.Workbook.Worksheets.Add("Morosidad de aportes");
@@ -2438,528 +2621,712 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         #endregion
                         break;
                     case 22:
-                        #region Auxiliar por terceros
-                        #region Cuentas AB
-                        string desdeF = "";
-                        string hastaF = "";
+                        #region Informe AUXILIAR POR TERCERO ACTUALIZADO
 
-                        if (cuentaA == "")
+                        var desdF = DateTime.Now;
+                        var hastF = DateTime.Now;
+                        var opAC = 0;
+                        var filtroCuentas = "";
+
+                        List<SpAuxiliarPorTercero> datosAuxT = new List<SpAuxiliarPorTercero>();
+
+                        #region FILTRO PARA BUSQUEDA DE DATOS 
+                        if (fechaDesde != "" && fechaHasta != "")
                         {
-                            cuentaA = "0";
-                        }
-                        var cuentaMinT = cuentaA;
+                            desdF = Convert.ToDateTime(fechaDesde);
+                            hastF = Convert.ToDateTime(fechaHasta);
+                            filtro = desdF.ToShortDateString() + " - " + hastF.ToShortDateString();
 
-                        var cuentalongminT = Convert.ToInt64(cuentaMinT);
-                        if (cuentaB == "")
-                        {
-                            cuentaB = "0";
+                            if (cuentaA != "" && cuentaB != "" && documento != "")
+                            {
+                                filtroCuentas = "Filtro desde cuenta: " + cuentaA + "  Hasta cuenta: " + cuentaB + " e Identificación: " + documento;
+                                opAC = 1;// filtro por fecha desde, fecha hasta, cuenta desde, cuenta hasta y tercero
+                            }
+                            else if (cuenta != "" && cuentaA == "" && cuentaB == "" && documento != "")
+                            {
+                                filtroCuentas = "Filtro por Cuenta: " + cuenta + " e Identificación: " + documento;
+                                opAC = 2;// filtro por fecha desde, fecha hasta, cuenta y tercero
+                            }
+                            else if (cuenta != "" && cuentaA == "" && cuentaB == "")
+                            {
+                                filtroCuentas = "Filtro por cuenta: " + cuenta;
+                                opAC = 3;//filtro por fecha desde, fecha hasta y cuenta
+                            }
+                            else if (cuentaA != "" && cuentaB != "")
+                            {
+                                filtroCuentas = "Filtro desde la cuenta: " + cuentaA + " Hasta la cuenta " + cuentaB;
+                                opAC = 4;//filtro por fecha desde, fecha hasta, cuenta desde, cuenta hasta 
+                            }
+                            else if (cuenta == "" && cuentaA == "" && cuentaB == "" && documento != "")
+                            {
+                                filtroCuentas = "Filtro por identificación: " + documento;
+                                opAC = 5;//filtro por fecha desde, fecha hasta y tercero
+                            }
+                            else if (cuentaA != "" && cuentaB == "" && documento != "")
+                            {
+                                filtroCuentas = "Filtro desde cuenta" + cuentaA + " e identificacion" + documento;
+                                opAC = 6;//filtro por fecha desde, fecha hasta, cuenta desde y tercero
+                            }
+                            else if (cuentaA != "" && cuentaB == "" && documento == "")
+                            {
+                                filtroCuentas = "Filtro desde la cuenta: " + cuentaA;
+                                opAC = 7;//filtro por fecha desde, fecha hasta, cuenta desde
+                            }
+                            else if (cuentaA == "" && cuentaB != "" && documento != "")
+                            {
+                                filtroCuentas = "Filtro hasta la cuenta: " + cuentaB + " e identificación: " + documento;
+                                opAC = 8;//filtro por fecha desde, fecha hasta, cuenta hasta y tercero
+                            }
+                            else if (cuentaA == "" && cuentaB != "" && documento == "")
+                            {
+                                filtroCuentas = "Filtro hasta la cuenta: " + cuentaB;
+                                opAC = 9;//filtro por fecha desde, fecha hasta, cuenta hasta y tercero
+                            }
+                            else if (cuenta == "" && cuentaA == "" && cuentaB == "" && documento == "")
+                            {
+                                opAC = 10;// filtro por fecha desde y fecha hasta trae todo
+                            }
                         }
-                        var cuentaMaxT = cuentaB;
 
-                        var cuentalongmaxT = Convert.ToInt64(cuentaMaxT);
+                        DateTime fechDesd = new DateTime(desdF.Year, desdF.Month, desdF.Day, 0, 0, 0);
+                        DateTime fechHast = new DateTime(hastF.Year, hastF.Month, hastF.Day, 23, 59, 59);
+
                         #endregion
 
-                        var movimiento22T = db.Movimientos.Where(x => x.Comprobante.ANULADO == false).ToList();
+                        datosAuxT = db.Database.SqlQuery<SpAuxiliarPorTercero>(
+                            "dbo.sp_AuxiliarPorTerceros @documento, @cuenta, @cuentaA,@cuentaB,@FechaDesde, @FechaHasta, @opcion",
+                            new SqlParameter("@documento", documento),
+                            new SqlParameter("@cuenta", cuenta),
+                            new SqlParameter("@cuentaA", cuentaA),
+                            new SqlParameter("@cuentaB", cuentaB),
+                            new SqlParameter("@FechaDesde", fechDesd),
+                            new SqlParameter("@FechaHasta", fechHast),
+                            new SqlParameter("@opcion", opAC)
+                            ).ToList();
 
-                        if (cuenta != "" && cuentaA == "0" && cuentaB == "0")
-                        {
-                            movimiento22T = movimiento22T.Where(x => x.CUENTA == cuenta).ToList();
-                        }
-                        if (documento != "")
-                        {
-                            movimiento22T = movimiento22T.Where(x => x.TERCERO == documento).ToList();
-                        }
-                        if (fechaDesde != "")
-                        {
-                            DateTime auxfd = Convert.ToDateTime(fechaDesde);
-                            DateTime fd = new DateTime(auxfd.Year, auxfd.Month, auxfd.Day, 0, 0, 0);
-                            movimiento22T = movimiento22T.Where(X => X.FECHAMOVIMIENTO >= fd).ToList();
-                            desdeF = auxfd.ToShortDateString();
-                        }
-                        if (fechaHasta != "")
-                        {
-                            DateTime auxfh = Convert.ToDateTime(fechaHasta);
-                            DateTime fh = new DateTime(auxfh.Year, auxfh.Month, auxfh.Day, 23, 59, 59);
-                            movimiento22T = movimiento22T.Where(X => X.FECHAMOVIMIENTO <= fh).ToList();
-                            hastaF = auxfh.ToShortDateString();
-                        }
-                        if (fechaDesde == "" && fechaHasta == "")
-                        {
-                            movimiento22T = movimiento22T.Where(x => x.Comprobante.ANULADO == false).ToList();
-                        }
-                        if (fechaDesde != "" && fechaHasta != "")
-                            filtro = desdeF + " - " + hastaF;
-                        else if (fechaDesde != "" && fechaHasta == "")
-                            filtro = desdeF;
-                        else if (fechaDesde == "" && fechaHasta != "")
-                            filtro = hastaF;
+                        ws = pack.Workbook.Worksheets.Add("AuxiliarPorTerceros");
 
-                        if (cuentaA == "0" && cuentaB == "0")
+                        #region encabezado excel
+                        ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5,A6:I6"].Merge = true;
+                        ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Bold = true;
+                        ws.Cells["A2:I2"].Style.Font.Name = "Arial";
+                        ws.Cells["A2:I2"].Style.Font.Size = 14;
+                        ws.Cells["A" + 2].Value = "AUXILIAR POR TERCEROS   " + filtro;
+                        ws.Cells["A" + 3].Value = filtroCuentas;
+                        ws.Cells[1, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        ws.Cells[1, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                        ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A6:I6"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                        ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7,A5:I5"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7,A5:I5"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
+                        ws.Cells["A4:I4,A5:I5"].Style.Font.Size = 12;
+                        ws.Cells["A3:I3"].Style.Font.Size = 13;
+                        ws.Cells["A6:I6"].Style.Font.Size = 10;
+                        ws.Cells["A" + 4].Value = nombre;
+                        ws.Cells["A" + 5].Value = nit;
+                        ws.Cells["A" + 6].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
+                        ws.Cells["A7:I7"].Merge = true;
+                        ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
+                        ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                        ws.Cells[8, 1, 8, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                        ws.Cells["A8:J8"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                        ws.Cells["A8:I8"].Style.Font.Bold = true;
+                        ws.Cells[8, 1, 8, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        ws.Cells[8, 1, 8, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                        #endregion
+
+                        ws.Cells["A" + 8].Value = "CÓDIGO";
+                        ws.Cells["B" + 8].Value = "NOMBRE";
+                        ws.Cells["C" + 8].Value = "TERCERO";
+                        ws.Cells["D" + 8].Value = "NOMBRE TERCERO";
+                        ws.Cells["E" + 8].Value = "COMPROBANTE";
+                        ws.Cells["F" + 8].Value = "FECHA";
+                        ws.Cells["G" + 8].Value = "DÉBITO";
+                        ws.Cells["H" + 8].Value = "CRÉDITO";
+                        ws.Cells["I" + 8].Value = "SALDO";
+
+                        var cuentasEnlista = (from a in datosAuxT
+                                              orderby a.CUENTA
+                                              orderby a.TERCERO
+                                              select new { a.CUENTA, a.TERCERO, a.NOMBRECUENTA, a.NOMBRE, a.NATURALEZA }).Distinct().ToList();
+                        i = 9;
+                        saldo = 0;
+                        decimal totalSaldo = 0;
+
+                        foreach (var item in cuentasEnlista)
                         {
-                            var movimiento22 = movimiento22T;
-
-                            ws = pack.Workbook.Worksheets.Add("AuxiliarPorTerceros");
-
-                            // encabezado
-                            ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
-                            ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
-                            ws.Cells["A2:I2"].Style.Font.Name = "Arial";
-                            ws.Cells["A2:I2"].Style.Font.Size = 14;
-                            ws.Cells["A" + 2].Value = "AUXILIAR POR TERCEROS   " +filtro;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
-                            ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
-                            ws.Cells["A5:I5"].Style.Font.Size = 10;
-                            ws.Cells["A" + 3].Value = nombre;
-                            ws.Cells["A" + 4].Value = nit;
-                            ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
-                            ws.Cells["A6:I6"].Merge = true;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
-                            ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
-                            ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
-                            ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
-                            ws.Cells["A7:I7"].Style.Font.Bold = true;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
-                            //fin encabezado
-
-                            ws.Cells["A" + 7].Value = "CÓDIGO";
-                            ws.Cells["B" + 7].Value = "NOMBRE";
-                            ws.Cells["C" + 7].Value = "TERCERO";
-                            ws.Cells["D" + 7].Value = "NOMBRE TERCERO";
-                            ws.Cells["E" + 7].Value = "COMPROBANTE";
-                            ws.Cells["F" + 7].Value = "FECHA";
-                            ws.Cells["G" + 7].Value = "DÉBITO";
-                            ws.Cells["H" + 7].Value = "CRÉDITO";
-                            ws.Cells["I" + 7].Value = "SALDO";
-
-                            var mov22 = (from m in movimiento22
-                                         orderby m.CUENTA
-                                         orderby m.TERCERO
-                                         select new { m.CUENTA, m.TERCERO, m.cuentaFK, m.terceroFK }).Distinct().ToList();
-                            i = 8;
-                            saldo = 0;
-                            decimal saldoTotal22 = 0;
-                            foreach (var item in mov22)
+                            var dataMov = datosAuxT.Where(x => x.CUENTA == item.CUENTA && x.TERCERO == item.TERCERO).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
+                            debito = dataMov.Select(x => x.DEBITO).Sum();
+                            credito = dataMov.Select(x => x.CREDITO).Sum();
+                            ws.Cells["A" + i].Value = item.CUENTA;
+                            ws.Cells["B" + i].Value = item.NOMBRECUENTA;
+                            ws.Cells["C" + i].Value = item.TERCERO;
+                            ws.Cells["D" + i].Value = item.NOMBRE;
+                            i++;
+                            foreach (var item2 in dataMov)
                             {
-                                var dataMov = movimiento22.Where(x => x.CUENTA == item.CUENTA && x.TERCERO == item.TERCERO).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
-                                debito = dataMov.Select(x => x.DEBITO).Sum();
-                                credito = dataMov.Select(x => x.CREDITO).Sum();
-                                ws.Cells["A" + i].Value = item.CUENTA;
-                                ws.Cells["B" + i].Value = item.cuentaFK.NOMBRE;
-                                ws.Cells["C" + i].Value = item.TERCERO;
-                                ws.Cells["D" + i].Value = item.terceroFK.NOMBRE1 + " " + item.terceroFK.NOMBRE2 + " " + item.terceroFK.APELLIDO1 + " " + item.terceroFK.APELLIDO2; ;
-                                string naturaleza = item.cuentaFK.NATURALEZA;
-                                i++;
-                                foreach (var item2 in dataMov)
+                                if (item.NATURALEZA == "D")
                                 {
-                                    if (naturaleza == "D")
-                                    {
-                                        saldo = item2.DEBITO - item2.CREDITO;
-                                    }
-                                    else
-                                    {
-                                        saldo = item2.CREDITO - item2.DEBITO;
-                                    }
-
-                                    ws.Cells["E" + i].Value = item2.TIPO + " " + item2.NUMERO;
-                                    ws.Cells["F" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
-                                    ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
-                                    ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
-                                    ws.Cells["I" + i].Value = saldo.ToString("N0", formato);
-                                    i++;
-                                }
-                                if (naturaleza == "D")
-                                {
-                                    saldoTotal22 = debito - credito;
+                                    saldo = item2.DEBITO - item2.CREDITO;
                                 }
                                 else
                                 {
-                                    saldoTotal22 = credito - debito;
+                                    saldo = item2.CREDITO - item2.DEBITO;
                                 }
-                                ws.Cells["F" + i].Value = "TOTAL";
-                                ws.Cells["G" + i].Value = debito.ToString("N0", formato);
-                                ws.Cells["H" + i].Value = credito.ToString("N0", formato);
-                                ws.Cells["I" + i].Value = saldoTotal22.ToString("N0", formato);
-                                i += 2;
-                            }
-                            movimiento22 = null;
-                        }
 
-                        if (cuentaA != "0" && cuentaB == "0")
-                        {
-                            var MovimientoTemp = (from a in movimiento22T
-                                                  select new
-                                                  {
-                                                      CUENTA = Convert.ToInt64(a.CUENTA),
-                                                      a.cuentaFK,
-                                                      a.terceroFK,
-                                                      a.FECHAMOVIMIENTO,
-                                                      a.DEBITO,
-                                                      a.CREDITO,
-                                                      a.TIPO,
-                                                      a.TERCERO,
-                                                      a.NUMERO
-                                                  }).Distinct().ToList();
-
-                            var MovimientosFiltro = (from a in MovimientoTemp
-                                                     where a.CUENTA >= cuentalongminT
-                                                     select new
-                                                     {
-                                                         CUENTA = Convert.ToInt64(a.CUENTA),
-                                                         a.cuentaFK,
-                                                         a.terceroFK,
-                                                         a.FECHAMOVIMIENTO,
-                                                         a.DEBITO,
-                                                         a.CREDITO,
-                                                         a.TIPO,
-                                                         a.TERCERO,
-                                                         a.NUMERO
-                                                     }).Distinct().ToList();
-
-                            var movimiento22 = MovimientosFiltro;
-
-                            ws = pack.Workbook.Worksheets.Add("AuxiliarPorTerceros");
-                            // encabezado
-                            ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
-                            ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
-                            ws.Cells["A2:I2"].Style.Font.Name = "Arial";
-                            ws.Cells["A2:I2"].Style.Font.Size = 14;
-                            ws.Cells["A" + 2].Value = "AUXILIAR POR TERCEROS   " + filtro;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
-                            ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
-                            ws.Cells["A5:I5"].Style.Font.Size = 10;
-                            ws.Cells["A" + 3].Value = nombre;
-                            ws.Cells["A" + 4].Value = nit;
-                            ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
-                            ws.Cells["A6:I6"].Merge = true;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
-                            ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
-                            ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
-                            ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
-                            ws.Cells["A7:I7"].Style.Font.Bold = true;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
-                            //fin encabezado
-                            ws.Cells["A" + 7].Value = "CÓDIGO";
-                            ws.Cells["B" + 7].Value = "NOMBRE";
-                            ws.Cells["C" + 7].Value = "TERCERO";
-                            ws.Cells["D" + 7].Value = "NOMBRE TERCERO";
-                            ws.Cells["E" + 7].Value = "COMPROBANTE";
-                            ws.Cells["F" + 7].Value = "FECHA";
-                            ws.Cells["G" + 7].Value = "DÉBITO";
-                            ws.Cells["H" + 7].Value = "CRÉDITO";
-                            ws.Cells["I" + 7].Value = "SALDO";
-
-                            var mov22 = (from m in movimiento22
-                                         orderby m.CUENTA
-                                         orderby m.TERCERO
-                                         select new { m.CUENTA, m.TERCERO, m.cuentaFK, m.terceroFK }).Distinct().ToList();
-                            i = 8;
-                            saldo = 0;
-                            decimal saldoTotal22 = 0;
-                            foreach (var item in mov22)
-                            {
-                                var dataMov = movimiento22.Where(x => x.CUENTA == item.CUENTA && x.TERCERO == item.TERCERO).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
-                                debito = dataMov.Select(x => x.DEBITO).Sum();
-                                credito = dataMov.Select(x => x.CREDITO).Sum();
-                                ws.Cells["A" + i].Value = item.CUENTA;
-                                ws.Cells["B" + i].Value = item.cuentaFK.NOMBRE;
-                                ws.Cells["C" + i].Value = item.TERCERO;
-                                ws.Cells["D" + i].Value = item.terceroFK.NOMBRE1 + " " + item.terceroFK.NOMBRE2 + " " + item.terceroFK.APELLIDO1 + " " + item.terceroFK.APELLIDO2; ;
-                                string naturaleza = item.cuentaFK.NATURALEZA;
+                                ws.Cells["E" + i].Value = item2.COMPROBANTE;
+                                ws.Cells["F" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
+                                ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
+                                ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
+                                ws.Cells["I" + i].Value = saldo.ToString("N0", formato);
                                 i++;
-                                foreach (var item2 in dataMov)
-                                {
-                                    if (naturaleza == "D")
-                                    {
-                                        saldo = item2.DEBITO - item2.CREDITO;
-                                    }
-                                    else
-                                    {
-                                        saldo = item2.CREDITO - item2.DEBITO;
-                                    }
-
-                                    ws.Cells["E" + i].Value = item2.TIPO + " " + item2.NUMERO;
-                                    ws.Cells["F" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
-                                    ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
-                                    ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
-                                    ws.Cells["I" + i].Value = saldo.ToString("N0", formato);
-                                    i++;
-                                }
-                                if (naturaleza == "D")
-                                {
-                                    saldoTotal22 = debito - credito;
-                                }
-                                else
-                                {
-                                    saldoTotal22 = credito - debito;
-                                }
-                                ws.Cells["F" + i].Value = "TOTAL";
-                                ws.Cells["G" + i].Value = debito.ToString("N0", formato);
-                                ws.Cells["H" + i].Value = credito.ToString("N0", formato);
-                                ws.Cells["I" + i].Value = saldoTotal22.ToString("N0", formato);
-                                i += 2;
                             }
-                            movimiento22 = null;
-                        }
-                        if (cuentaA == "0" && cuentaB != "0")
-                        {
-                            var MovimientoTemp = (from a in movimiento22T
-                                                  select new
-                                                  {
-                                                      CUENTA = Convert.ToInt64(a.CUENTA),
-                                                      a.cuentaFK,
-                                                      a.terceroFK,
-                                                      a.FECHAMOVIMIENTO,
-                                                      a.DEBITO,
-                                                      a.CREDITO,
-                                                      a.TIPO,
-                                                      a.TERCERO,
-                                                      a.NUMERO
-                                                  }).Distinct().ToList();
-
-                            var MovimientosFiltro = (from a in MovimientoTemp
-                                                     where a.CUENTA <= cuentalongmaxT
-                                                     select new
-                                                     {
-                                                         CUENTA = Convert.ToInt64(a.CUENTA),
-                                                         a.cuentaFK,
-                                                         a.terceroFK,
-                                                         a.FECHAMOVIMIENTO,
-                                                         a.DEBITO,
-                                                         a.CREDITO,
-                                                         a.TIPO,
-                                                         a.TERCERO,
-                                                         a.NUMERO
-                                                     }).Distinct().ToList();
-
-                            var movimiento22 = MovimientosFiltro;
-
-                            ws = pack.Workbook.Worksheets.Add("AuxiliarPorTerceros");
-                            // encabezado
-                            ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
-                            ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
-                            ws.Cells["A2:I2"].Style.Font.Name = "Arial";
-                            ws.Cells["A2:I2"].Style.Font.Size = 14;
-                            ws.Cells["A" + 2].Value = "AUXILIAR POR TERCEROS   " + filtro;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
-                            ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
-                            ws.Cells["A5:I5"].Style.Font.Size = 10;
-                            ws.Cells["A" + 3].Value = nombre;
-                            ws.Cells["A" + 4].Value = nit;
-                            ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
-                            ws.Cells["A6:I6"].Merge = true;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
-                            ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
-                            ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
-                            ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
-                            ws.Cells["A7:I7"].Style.Font.Bold = true;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
-                            //fin encabezado
-                            ws.Cells["A" + 7].Value = "CÓDIGO";
-                            ws.Cells["B" + 7].Value = "NOMBRE";
-                            ws.Cells["C" + 7].Value = "TERCERO";
-                            ws.Cells["D" + 7].Value = "NOMBRE TERCERO";
-                            ws.Cells["E" + 7].Value = "COMPROBANTE";
-                            ws.Cells["F" + 7].Value = "FECHA";
-                            ws.Cells["G" + 7].Value = "DÉBITO";
-                            ws.Cells["H" + 7].Value = "CRÉDITO";
-                            ws.Cells["I" + 7].Value = "SALDO";
-
-                            var mov22 = (from m in movimiento22
-                                         orderby m.CUENTA
-                                         orderby m.TERCERO
-                                         select new { m.CUENTA, m.TERCERO, m.cuentaFK, m.terceroFK }).Distinct().ToList();
-                            i = 8;
-                            saldo = 0;
-                            decimal saldoTotal22 = 0;
-                            foreach (var item in mov22)
+                            if (item.NATURALEZA == "D")
                             {
-                                var dataMov = movimiento22.Where(x => x.CUENTA == item.CUENTA && x.TERCERO == item.TERCERO).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
-                                debito = dataMov.Select(x => x.DEBITO).Sum();
-                                credito = dataMov.Select(x => x.CREDITO).Sum();
-                                ws.Cells["A" + i].Value = item.CUENTA;
-                                ws.Cells["B" + i].Value = item.cuentaFK.NOMBRE;
-                                ws.Cells["C" + i].Value = item.TERCERO;
-                                ws.Cells["D" + i].Value = item.terceroFK.NOMBRE1 + " " + item.terceroFK.NOMBRE2 + " " + item.terceroFK.APELLIDO1 + " " + item.terceroFK.APELLIDO2; ;
-                                string naturaleza = item.cuentaFK.NATURALEZA;
-                                i++;
-                                foreach (var item2 in dataMov)
-                                {
-                                    if (naturaleza == "D")
-                                    {
-                                        saldo = item2.DEBITO - item2.CREDITO;
-                                    }
-                                    else
-                                    {
-                                        saldo = item2.CREDITO - item2.DEBITO;
-                                    }
-
-                                    ws.Cells["E" + i].Value = item2.TIPO + " " + item2.NUMERO;
-                                    ws.Cells["F" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
-                                    ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
-                                    ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
-                                    ws.Cells["I" + i].Value = saldo.ToString("N0", formato);
-                                    i++;
-                                }
-                                if (naturaleza == "D")
-                                {
-                                    saldoTotal22 = debito - credito;
-                                }
-                                else
-                                {
-                                    saldoTotal22 = credito - debito;
-                                }
-                                ws.Cells["F" + i].Value = "TOTAL";
-                                ws.Cells["G" + i].Value = debito.ToString("N0", formato);
-                                ws.Cells["H" + i].Value = credito.ToString("N0", formato);
-                                ws.Cells["I" + i].Value = saldoTotal22.ToString("N0", formato);
-                                i += 2;
+                                totalSaldo = debito - credito;
                             }
-                            movimiento22 = null;
-                        }
-                        if (cuentaA != "0" && cuentaB != "0")
-                        {
-                            var MovimientoTemp = (from a in movimiento22T
-                                                  select new
-                                                  {
-                                                      CUENTA = Convert.ToInt64(a.CUENTA),
-                                                      a.cuentaFK,
-                                                      a.terceroFK,
-                                                      a.FECHAMOVIMIENTO,
-                                                      a.DEBITO,
-                                                      a.CREDITO,
-                                                      a.TIPO,
-                                                      a.TERCERO,
-                                                      a.NUMERO
-                                                  }).Distinct().ToList();
-
-                            var MovimientosFiltro = (from a in MovimientoTemp
-                                                     where a.CUENTA >= cuentalongminT && a.CUENTA <= cuentalongmaxT
-                                                     select new
-                                                     {
-                                                         CUENTA = Convert.ToInt64(a.CUENTA),
-                                                         a.cuentaFK,
-                                                         a.terceroFK,
-                                                         a.FECHAMOVIMIENTO,
-                                                         a.DEBITO,
-                                                         a.CREDITO,
-                                                         a.TIPO,
-                                                         a.TERCERO,
-                                                         a.NUMERO
-                                                     }).Distinct().ToList();
-
-                            var movimiento22 = MovimientosFiltro;
-
-                            ws = pack.Workbook.Worksheets.Add("AuxiliarPorTerceros");
-                            // encabezado
-                            ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
-                            ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
-                            ws.Cells["A2:I2"].Style.Font.Name = "Arial";
-                            ws.Cells["A2:I2"].Style.Font.Size = 14;
-                            ws.Cells["A" + 2].Value = "AUXILIAR POR TERCEROS   " + filtro;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                            ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
-                            ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
-                            ws.Cells["A5:I5"].Style.Font.Size = 10;
-                            ws.Cells["A" + 3].Value = nombre;
-                            ws.Cells["A" + 4].Value = nit;
-                            ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
-                            ws.Cells["A6:I6"].Merge = true;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
-                            ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
-                            ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
-                            ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
-                            ws.Cells["A7:I7"].Style.Font.Bold = true;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
-                            //fin encabezado
-                            ws.Cells["A" + 7].Value = "CÓDIGO";
-                            ws.Cells["B" + 7].Value = "NOMBRE";
-                            ws.Cells["C" + 7].Value = "TERCERO";
-                            ws.Cells["D" + 7].Value = "NOMBRE TERCERO";
-                            ws.Cells["E" + 7].Value = "COMPROBANTE";
-                            ws.Cells["F" + 7].Value = "FECHA";
-                            ws.Cells["G" + 7].Value = "DÉBITO";
-                            ws.Cells["H" + 7].Value = "CRÉDITO";
-                            ws.Cells["I" + 7].Value = "SALDO";
-
-                            var mov22 = (from m in movimiento22
-                                         orderby m.CUENTA
-                                         orderby m.TERCERO
-                                         select new { m.CUENTA, m.TERCERO, m.cuentaFK, m.terceroFK }).Distinct().ToList();
-                            i = 8;
-                            saldo = 0;
-                            decimal saldoTotal22 = 0;
-                            foreach (var item in mov22)
+                            else
                             {
-                                var dataMov = movimiento22.Where(x => x.CUENTA == item.CUENTA && x.TERCERO == item.TERCERO).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
-                                debito = dataMov.Select(x => x.DEBITO).Sum();
-                                credito = dataMov.Select(x => x.CREDITO).Sum();
-                                ws.Cells["A" + i].Value = item.CUENTA;
-                                ws.Cells["B" + i].Value = item.cuentaFK.NOMBRE;
-                                ws.Cells["C" + i].Value = item.TERCERO;
-                                ws.Cells["D" + i].Value = item.terceroFK.NOMBRE1 + " " + item.terceroFK.NOMBRE2 + " " + item.terceroFK.APELLIDO1 + " " + item.terceroFK.APELLIDO2; ;
-                                string naturaleza = item.cuentaFK.NATURALEZA;
-                                i++;
-                                foreach (var item2 in dataMov)
-                                {
-                                    if (naturaleza == "D")
-                                    {
-                                        saldo = item2.DEBITO - item2.CREDITO;
-                                    }
-                                    else
-                                    {
-                                        saldo = item2.CREDITO - item2.DEBITO;
-                                    }
-
-                                    ws.Cells["E" + i].Value = item2.TIPO + " " + item2.NUMERO;
-                                    ws.Cells["F" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
-                                    ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
-                                    ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
-                                    ws.Cells["I" + i].Value = saldo.ToString("N0", formato);
-                                    i++;
-                                }
-                                if (naturaleza == "D")
-                                {
-                                    saldoTotal22 = debito - credito;
-                                }
-                                else
-                                {
-                                    saldoTotal22 = credito - debito;
-                                }
-                                ws.Cells["F" + i].Value = "TOTAL";
-                                ws.Cells["G" + i].Value = debito.ToString("N0", formato);
-                                ws.Cells["H" + i].Value = credito.ToString("N0", formato);
-                                ws.Cells["I" + i].Value = saldoTotal22.ToString("N0", formato);
-                                i += 2;
+                                totalSaldo = credito - debito;
                             }
-                            movimiento22 = null;
+                            ws.Cells["F" + i].Style.Font.Bold = true;
+                            ws.Cells["F" + i].Value = "TOTAL";
+                            ws.Cells["G" + i].Value = debito.ToString("N0", formato);
+                            ws.Cells["H" + i].Value = credito.ToString("N0", formato);
+                            ws.Cells["I" + i].Value = totalSaldo.ToString("N0", formato);
+                            i += 2;
                         }
+
+                        #endregion
+                        break;
+                    case 18:
+                        #region Auxiliar por terceros CORREGIR REPORTE
+                        //#region Cuentas AB
+                        //string desdeF = "";
+                        //string hastaF = "";
+
+                        //if (cuentaA == "")
+                        //{
+                        //    cuentaA = "0";
+                        //}
+                        //var cuentaMinT = cuentaA;
+
+                        //var cuentalongminT = Convert.ToInt64(cuentaMinT);
+                        //if (cuentaB == "")
+                        //{
+                        //    cuentaB = "0";
+                        //}
+                        //var cuentaMaxT = cuentaB;
+
+                        //var cuentalongmaxT = Convert.ToInt64(cuentaMaxT);
+                        //#endregion
+
+                        //var movimiento22T = db.Movimientos.Where(x => x.Comprobante.ANULADO == false).ToList();
+
+                        //if (cuenta != "" && cuentaA == "0" && cuentaB == "0")
+                        //{
+                        //    movimiento22T = movimiento22T.Where(x => x.CUENTA == cuenta).ToList();
+                        //}
+                        //if (documento != "")
+                        //{
+                        //    movimiento22T = movimiento22T.Where(x => x.TERCERO == documento).ToList();
+                        //}
+                        //if (fechaDesde != "")
+                        //{
+                        //    DateTime auxfd = Convert.ToDateTime(fechaDesde);
+                        //    DateTime fd = new DateTime(auxfd.Year, auxfd.Month, auxfd.Day, 0, 0, 0);
+                        //    movimiento22T = movimiento22T.Where(X => X.FECHAMOVIMIENTO >= fd).ToList();
+                        //    desdeF = auxfd.ToShortDateString();
+                        //}
+                        //if (fechaHasta != "")
+                        //{
+                        //    DateTime auxfh = Convert.ToDateTime(fechaHasta);
+                        //    DateTime fh = new DateTime(auxfh.Year, auxfh.Month, auxfh.Day, 23, 59, 59);
+                        //    movimiento22T = movimiento22T.Where(X => X.FECHAMOVIMIENTO <= fh).ToList();
+                        //    hastaF = auxfh.ToShortDateString();
+                        //}
+                        //if (fechaDesde == "" && fechaHasta == "")
+                        //{
+                        //    //error cuando no se manda fechas
+                        //    movimiento22T = movimiento22T.Where(x => x.Comprobante.ANULADO == false).ToList();
+                        //}
+                        //if (fechaDesde != "" && fechaHasta != "")
+                        //    filtro = desdeF + " - " + hastaF;
+                        //else if (fechaDesde != "" && fechaHasta == "")
+                        //    filtro = desdeF;
+                        //else if (fechaDesde == "" && fechaHasta != "")
+                        //    filtro = hastaF;
+
+                        //if (cuentaA == "0" && cuentaB == "0")
+                        //{
+                        //    var movimiento22 = movimiento22T;
+
+                        //    ws = pack.Workbook.Worksheets.Add("AuxiliarPorTerceros");
+
+                        //    // encabezado
+                        //    ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
+                        //    ws.Cells["A2:I2"].Style.Font.Name = "Arial";
+                        //    ws.Cells["A2:I2"].Style.Font.Size = 14;
+                        //    ws.Cells["A" + 2].Value = "AUXILIAR POR TERCEROS   " + filtro;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
+                        //    ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
+                        //    ws.Cells["A5:I5"].Style.Font.Size = 10;
+                        //    ws.Cells["A" + 3].Value = nombre;
+                        //    ws.Cells["A" + 4].Value = nit;
+                        //    ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
+                        //    ws.Cells["A6:I6"].Merge = true;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                        //    ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                        //    ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                        //    ws.Cells["A7:I7"].Style.Font.Bold = true;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                        //    //fin encabezado
+
+                        //    ws.Cells["A" + 7].Value = "CÓDIGO";
+                        //    ws.Cells["B" + 7].Value = "NOMBRE";
+                        //    ws.Cells["C" + 7].Value = "TERCERO";
+                        //    ws.Cells["D" + 7].Value = "NOMBRE TERCERO";
+                        //    ws.Cells["E" + 7].Value = "COMPROBANTE";
+                        //    ws.Cells["F" + 7].Value = "FECHA";
+                        //    ws.Cells["G" + 7].Value = "DÉBITO";
+                        //    ws.Cells["H" + 7].Value = "CRÉDITO";
+                        //    ws.Cells["I" + 7].Value = "SALDO";
+
+                        //    var mov22 = (from m in movimiento22
+                        //                 orderby m.CUENTA
+                        //                 orderby m.TERCERO
+                        //                 select new { m.CUENTA, m.TERCERO, m.cuentaFK, m.terceroFK }).Distinct().ToList();
+                        //    i = 8;
+                        //    saldo = 0;
+                        //    decimal saldoTotal22 = 0;
+                        //    foreach (var item in mov22)
+                        //    {
+                        //        var dataMov = movimiento22.Where(x => x.CUENTA == item.CUENTA && x.TERCERO == item.TERCERO).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
+                        //        debito = dataMov.Select(x => x.DEBITO).Sum();
+                        //        credito = dataMov.Select(x => x.CREDITO).Sum();
+                        //        ws.Cells["A" + i].Value = item.CUENTA;
+                        //        ws.Cells["B" + i].Value = item.cuentaFK.NOMBRE;
+                        //        ws.Cells["C" + i].Value = item.TERCERO;
+                        //        if (item.terceroFK != null)
+                        //            ws.Cells["D" + i].Value = item.terceroFK.NOMBRE1;// + " " + item.terceroFK.NOMBRE2 + " " + item.terceroFK.APELLIDO1 + " " + item.terceroFK.APELLIDO2; 
+                        //        else
+                        //            ws.Cells["D" + i].Value = "";
+                        //        string naturaleza = item.cuentaFK.NATURALEZA;
+                        //        i++;
+                        //        foreach (var item2 in dataMov)
+                        //        {
+                        //            if (naturaleza == "D")
+                        //            {
+                        //                saldo = item2.DEBITO - item2.CREDITO;
+                        //            }
+                        //            else
+                        //            {
+                        //                saldo = item2.CREDITO - item2.DEBITO;
+                        //            }
+
+                        //            ws.Cells["E" + i].Value = item2.TIPO + " " + item2.NUMERO;
+                        //            ws.Cells["F" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
+                        //            ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
+                        //            ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
+                        //            ws.Cells["I" + i].Value = saldo.ToString("N0", formato);
+                        //            i++;
+                        //        }
+                        //        if (naturaleza == "D")
+                        //        {
+                        //            saldoTotal22 = debito - credito;
+                        //        }
+                        //        else
+                        //        {
+                        //            saldoTotal22 = credito - debito;
+                        //        }
+                        //        ws.Cells["F" + i].Value = "TOTAL";
+                        //        ws.Cells["G" + i].Value = debito.ToString("N0", formato);
+                        //        ws.Cells["H" + i].Value = credito.ToString("N0", formato);
+                        //        ws.Cells["I" + i].Value = saldoTotal22.ToString("N0", formato);
+                        //        i += 2;
+                        //    }
+                        //    movimiento22 = null;
+                        //}
+
+                        //if (cuentaA != "0" && cuentaB == "0")
+                        //{
+                        //    var MovimientoTemp = (from a in movimiento22T
+                        //                          select new
+                        //                          {
+                        //                              CUENTA = Convert.ToInt64(a.CUENTA),
+                        //                              a.cuentaFK,
+                        //                              a.terceroFK,
+                        //                              a.FECHAMOVIMIENTO,
+                        //                              a.DEBITO,
+                        //                              a.CREDITO,
+                        //                              a.TIPO,
+                        //                              a.TERCERO,
+                        //                              a.NUMERO
+                        //                          }).Distinct().ToList();
+
+                        //    var MovimientosFiltro = (from a in MovimientoTemp
+                        //                             where a.CUENTA >= cuentalongminT
+                        //                             select new
+                        //                             {
+                        //                                 CUENTA = Convert.ToInt64(a.CUENTA),
+                        //                                 a.cuentaFK,
+                        //                                 a.terceroFK,
+                        //                                 a.FECHAMOVIMIENTO,
+                        //                                 a.DEBITO,
+                        //                                 a.CREDITO,
+                        //                                 a.TIPO,
+                        //                                 a.TERCERO,
+                        //                                 a.NUMERO
+                        //                             }).Distinct().ToList();
+
+                        //    var movimiento22 = MovimientosFiltro;
+
+                        //    ws = pack.Workbook.Worksheets.Add("AuxiliarPorTerceros");
+                        //    // encabezado
+                        //    ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
+                        //    ws.Cells["A2:I2"].Style.Font.Name = "Arial";
+                        //    ws.Cells["A2:I2"].Style.Font.Size = 14;
+                        //    ws.Cells["A" + 2].Value = "AUXILIAR POR TERCEROS   " + filtro;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
+                        //    ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
+                        //    ws.Cells["A5:I5"].Style.Font.Size = 10;
+                        //    ws.Cells["A" + 3].Value = nombre;
+                        //    ws.Cells["A" + 4].Value = nit;
+                        //    ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
+                        //    ws.Cells["A6:I6"].Merge = true;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                        //    ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                        //    ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                        //    ws.Cells["A7:I7"].Style.Font.Bold = true;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                        //    //fin encabezado
+                        //    ws.Cells["A" + 7].Value = "CÓDIGO";
+                        //    ws.Cells["B" + 7].Value = "NOMBRE";
+                        //    ws.Cells["C" + 7].Value = "TERCERO";
+                        //    ws.Cells["D" + 7].Value = "NOMBRE TERCERO";
+                        //    ws.Cells["E" + 7].Value = "COMPROBANTE";
+                        //    ws.Cells["F" + 7].Value = "FECHA";
+                        //    ws.Cells["G" + 7].Value = "DÉBITO";
+                        //    ws.Cells["H" + 7].Value = "CRÉDITO";
+                        //    ws.Cells["I" + 7].Value = "SALDO";
+
+                        //    var mov22 = (from m in movimiento22
+                        //                 orderby m.CUENTA
+                        //                 orderby m.TERCERO
+                        //                 select new { m.CUENTA, m.TERCERO, m.cuentaFK, m.terceroFK }).Distinct().ToList();
+                        //    i = 8;
+                        //    saldo = 0;
+                        //    decimal saldoTotal22 = 0;
+                        //    foreach (var item in mov22)
+                        //    {
+                        //        var dataMov = movimiento22.Where(x => x.CUENTA == item.CUENTA && x.TERCERO == item.TERCERO).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
+                        //        debito = dataMov.Select(x => x.DEBITO).Sum();
+                        //        credito = dataMov.Select(x => x.CREDITO).Sum();
+                        //        ws.Cells["A" + i].Value = item.CUENTA;
+                        //        ws.Cells["B" + i].Value = item.cuentaFK.NOMBRE;
+                        //        ws.Cells["C" + i].Value = item.TERCERO;
+                        //        ws.Cells["D" + i].Value = item.terceroFK.NOMBRE1 + " " + item.terceroFK.NOMBRE2 + " " + item.terceroFK.APELLIDO1 + " " + item.terceroFK.APELLIDO2; ;
+                        //        string naturaleza = item.cuentaFK.NATURALEZA;
+                        //        i++;
+                        //        foreach (var item2 in dataMov)
+                        //        {
+                        //            if (naturaleza == "D")
+                        //            {
+                        //                saldo = item2.DEBITO - item2.CREDITO;
+                        //            }
+                        //            else
+                        //            {
+                        //                saldo = item2.CREDITO - item2.DEBITO;
+                        //            }
+
+                        //            ws.Cells["E" + i].Value = item2.TIPO + " " + item2.NUMERO;
+                        //            ws.Cells["F" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
+                        //            ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
+                        //            ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
+                        //            ws.Cells["I" + i].Value = saldo.ToString("N0", formato);
+                        //            i++;
+                        //        }
+                        //        if (naturaleza == "D")
+                        //        {
+                        //            saldoTotal22 = debito - credito;
+                        //        }
+                        //        else
+                        //        {
+                        //            saldoTotal22 = credito - debito;
+                        //        }
+                        //        ws.Cells["F" + i].Value = "TOTAL";
+                        //        ws.Cells["G" + i].Value = debito.ToString("N0", formato);
+                        //        ws.Cells["H" + i].Value = credito.ToString("N0", formato);
+                        //        ws.Cells["I" + i].Value = saldoTotal22.ToString("N0", formato);
+                        //        i += 2;
+                        //    }
+                        //    movimiento22 = null;
+                        //}
+                        //if (cuentaA == "0" && cuentaB != "0")
+                        //{
+                        //    var MovimientoTemp = (from a in movimiento22T
+                        //                          select new
+                        //                          {
+                        //                              CUENTA = Convert.ToInt64(a.CUENTA),
+                        //                              a.cuentaFK,
+                        //                              a.terceroFK,
+                        //                              a.FECHAMOVIMIENTO,
+                        //                              a.DEBITO,
+                        //                              a.CREDITO,
+                        //                              a.TIPO,
+                        //                              a.TERCERO,
+                        //                              a.NUMERO
+                        //                          }).Distinct().ToList();
+
+                        //    var MovimientosFiltro = (from a in MovimientoTemp
+                        //                             where a.CUENTA <= cuentalongmaxT
+                        //                             select new
+                        //                             {
+                        //                                 CUENTA = Convert.ToInt64(a.CUENTA),
+                        //                                 a.cuentaFK,
+                        //                                 a.terceroFK,
+                        //                                 a.FECHAMOVIMIENTO,
+                        //                                 a.DEBITO,
+                        //                                 a.CREDITO,
+                        //                                 a.TIPO,
+                        //                                 a.TERCERO,
+                        //                                 a.NUMERO
+                        //                             }).Distinct().ToList();
+
+                        //    var movimiento22 = MovimientosFiltro;
+
+                        //    ws = pack.Workbook.Worksheets.Add("AuxiliarPorTerceros");
+                        //    // encabezado
+                        //    ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
+                        //    ws.Cells["A2:I2"].Style.Font.Name = "Arial";
+                        //    ws.Cells["A2:I2"].Style.Font.Size = 14;
+                        //    ws.Cells["A" + 2].Value = "AUXILIAR POR TERCEROS   " + filtro;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
+                        //    ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
+                        //    ws.Cells["A5:I5"].Style.Font.Size = 10;
+                        //    ws.Cells["A" + 3].Value = nombre;
+                        //    ws.Cells["A" + 4].Value = nit;
+                        //    ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
+                        //    ws.Cells["A6:I6"].Merge = true;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                        //    ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                        //    ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                        //    ws.Cells["A7:I7"].Style.Font.Bold = true;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                        //    //fin encabezado
+                        //    ws.Cells["A" + 7].Value = "CÓDIGO";
+                        //    ws.Cells["B" + 7].Value = "NOMBRE";
+                        //    ws.Cells["C" + 7].Value = "TERCERO";
+                        //    ws.Cells["D" + 7].Value = "NOMBRE TERCERO";
+                        //    ws.Cells["E" + 7].Value = "COMPROBANTE";
+                        //    ws.Cells["F" + 7].Value = "FECHA";
+                        //    ws.Cells["G" + 7].Value = "DÉBITO";
+                        //    ws.Cells["H" + 7].Value = "CRÉDITO";
+                        //    ws.Cells["I" + 7].Value = "SALDO";
+
+                        //    var mov22 = (from m in movimiento22
+                        //                 orderby m.CUENTA
+                        //                 orderby m.TERCERO
+                        //                 select new { m.CUENTA, m.TERCERO, m.cuentaFK, m.terceroFK }).Distinct().ToList();
+                        //    i = 8;
+                        //    saldo = 0;
+                        //    decimal saldoTotal22 = 0;
+                        //    foreach (var item in mov22)
+                        //    {
+                        //        var dataMov = movimiento22.Where(x => x.CUENTA == item.CUENTA && x.TERCERO == item.TERCERO).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
+                        //        debito = dataMov.Select(x => x.DEBITO).Sum();
+                        //        credito = dataMov.Select(x => x.CREDITO).Sum();
+                        //        ws.Cells["A" + i].Value = item.CUENTA;
+                        //        ws.Cells["B" + i].Value = item.cuentaFK.NOMBRE;
+                        //        ws.Cells["C" + i].Value = item.TERCERO;
+                        //        ws.Cells["D" + i].Value = item.terceroFK.NOMBRE1 + " " + item.terceroFK.NOMBRE2 + " " + item.terceroFK.APELLIDO1 + " " + item.terceroFK.APELLIDO2; ;
+                        //        string naturaleza = item.cuentaFK.NATURALEZA;
+                        //        i++;
+                        //        foreach (var item2 in dataMov)
+                        //        {
+                        //            if (naturaleza == "D")
+                        //            {
+                        //                saldo = item2.DEBITO - item2.CREDITO;
+                        //            }
+                        //            else
+                        //            {
+                        //                saldo = item2.CREDITO - item2.DEBITO;
+                        //            }
+
+                        //            ws.Cells["E" + i].Value = item2.TIPO + " " + item2.NUMERO;
+                        //            ws.Cells["F" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
+                        //            ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
+                        //            ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
+                        //            ws.Cells["I" + i].Value = saldo.ToString("N0", formato);
+                        //            i++;
+                        //        }
+                        //        if (naturaleza == "D")
+                        //        {
+                        //            saldoTotal22 = debito - credito;
+                        //        }
+                        //        else
+                        //        {
+                        //            saldoTotal22 = credito - debito;
+                        //        }
+                        //        ws.Cells["F" + i].Value = "TOTAL";
+                        //        ws.Cells["G" + i].Value = debito.ToString("N0", formato);
+                        //        ws.Cells["H" + i].Value = credito.ToString("N0", formato);
+                        //        ws.Cells["I" + i].Value = saldoTotal22.ToString("N0", formato);
+                        //        i += 2;
+                        //    }
+                        //    movimiento22 = null;
+                        //}
+                        //if (cuentaA != "0" && cuentaB != "0")
+                        //{
+                        //    var MovimientoTemp = (from a in movimiento22T
+                        //                          select new
+                        //                          {
+                        //                              CUENTA = Convert.ToInt64(a.CUENTA),
+                        //                              a.cuentaFK,
+                        //                              a.terceroFK,
+                        //                              a.FECHAMOVIMIENTO,
+                        //                              a.DEBITO,
+                        //                              a.CREDITO,
+                        //                              a.TIPO,
+                        //                              a.TERCERO,
+                        //                              a.NUMERO
+                        //                          }).Distinct().ToList();
+
+                        //    var MovimientosFiltro = (from a in MovimientoTemp
+                        //                             where a.CUENTA >= cuentalongminT && a.CUENTA <= cuentalongmaxT
+                        //                             select new
+                        //                             {
+                        //                                 CUENTA = Convert.ToInt64(a.CUENTA),
+                        //                                 a.cuentaFK,
+                        //                                 a.terceroFK,
+                        //                                 a.FECHAMOVIMIENTO,
+                        //                                 a.DEBITO,
+                        //                                 a.CREDITO,
+                        //                                 a.TIPO,
+                        //                                 a.TERCERO,
+                        //                                 a.NUMERO
+                        //                             }).Distinct().ToList();
+
+                        //    var movimiento22 = MovimientosFiltro;
+
+                        //    ws = pack.Workbook.Worksheets.Add("AuxiliarPorTerceros");
+                        //    // encabezado
+                        //    ws.Cells["A1:I1,A2:I2,A3:I3,A4:I4,A5:I5"].Merge = true;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4"].Style.Font.Bold = true;
+                        //    ws.Cells["A2:I2"].Style.Font.Name = "Arial";
+                        //    ws.Cells["A2:I2"].Style.Font.Size = 14;
+                        //    ws.Cells["A" + 2].Value = "AUXILIAR POR TERCEROS   " + filtro;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[1, 1, 5, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5,A7:I7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        //    ws.Cells["A2:I2,A3:I3,A4:I4,A5:I5"].Style.WrapText = true;
+                        //    ws.Cells["A3:I3,A4:I4"].Style.Font.Size = 12;
+                        //    ws.Cells["A5:I5"].Style.Font.Size = 10;
+                        //    ws.Cells["A" + 3].Value = nombre;
+                        //    ws.Cells["A" + 4].Value = nit;
+                        //    ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
+                        //    ws.Cells["A6:I6"].Merge = true;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[6, 1, 6, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
+                        //    ws.Cells[6, 1, 6, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                        //    ws.Cells[7, 1, 7, 9].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                        //    ws.Cells["A7:J7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                        //    ws.Cells["A7:I7"].Style.Font.Bold = true;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        //    ws.Cells[7, 1, 7, 9].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                        //    //fin encabezado
+                        //    ws.Cells["A" + 7].Value = "CÓDIGO";
+                        //    ws.Cells["B" + 7].Value = "NOMBRE";
+                        //    ws.Cells["C" + 7].Value = "TERCERO";
+                        //    ws.Cells["D" + 7].Value = "NOMBRE TERCERO";
+                        //    ws.Cells["E" + 7].Value = "COMPROBANTE";
+                        //    ws.Cells["F" + 7].Value = "FECHA";
+                        //    ws.Cells["G" + 7].Value = "DÉBITO";
+                        //    ws.Cells["H" + 7].Value = "CRÉDITO";
+                        //    ws.Cells["I" + 7].Value = "SALDO";
+
+                        //    var mov22 = (from m in movimiento22
+                        //                 orderby m.CUENTA
+                        //                 orderby m.TERCERO
+                        //                 select new { m.CUENTA, m.TERCERO, m.cuentaFK, m.terceroFK }).Distinct().ToList();
+                        //    i = 8;
+                        //    saldo = 0;
+                        //    decimal saldoTotal22 = 0;
+                        //    foreach (var item in mov22)
+                        //    {
+                        //        var dataMov = movimiento22.Where(x => x.CUENTA == item.CUENTA && x.TERCERO == item.TERCERO).OrderBy(x => x.FECHAMOVIMIENTO).ToList();
+                        //        debito = dataMov.Select(x => x.DEBITO).Sum();
+                        //        credito = dataMov.Select(x => x.CREDITO).Sum();
+                        //        ws.Cells["A" + i].Value = item.CUENTA;
+                        //        ws.Cells["B" + i].Value = item.cuentaFK.NOMBRE;
+                        //        ws.Cells["C" + i].Value = item.TERCERO;
+                        //        ws.Cells["D" + i].Value = item.terceroFK.NOMBRE1 + " " + item.terceroFK.NOMBRE2 + " " + item.terceroFK.APELLIDO1 + " " + item.terceroFK.APELLIDO2; ;
+                        //        string naturaleza = item.cuentaFK.NATURALEZA;
+                        //        i++;
+                        //        foreach (var item2 in dataMov)
+                        //        {
+                        //            if (naturaleza == "D")
+                        //            {
+                        //                saldo = item2.DEBITO - item2.CREDITO;
+                        //            }
+                        //            else
+                        //            {
+                        //                saldo = item2.CREDITO - item2.DEBITO;
+                        //            }
+
+                        //            ws.Cells["E" + i].Value = item2.TIPO + " " + item2.NUMERO;
+                        //            ws.Cells["F" + i].Value = item2.FECHAMOVIMIENTO.ToString("yyyy-MM-dd");
+                        //            ws.Cells["G" + i].Value = item2.DEBITO.ToString("N0", formato);
+                        //            ws.Cells["H" + i].Value = item2.CREDITO.ToString("N0", formato);
+                        //            ws.Cells["I" + i].Value = saldo.ToString("N0", formato);
+                        //            i++;
+                        //        }
+                        //        if (naturaleza == "D")
+                        //        {
+                        //            saldoTotal22 = debito - credito;
+                        //        }
+                        //        else
+                        //        {
+                        //            saldoTotal22 = credito - debito;
+                        //        }
+                        //        ws.Cells["F" + i].Value = "TOTAL";
+                        //        ws.Cells["G" + i].Value = debito.ToString("N0", formato);
+                        //        ws.Cells["H" + i].Value = credito.ToString("N0", formato);
+                        //        ws.Cells["I" + i].Value = saldoTotal22.ToString("N0", formato);
+                        //        i += 2;
+                        //    }
+                        //    movimiento22 = null;
+                        //}
                         #endregion
                         break;
                     case 30:
@@ -2969,16 +3336,16 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
 
                         if (opcion == 1)
                             filtro = "- SOLO ASOCIADOS";
-                        else if(opcion == 2)
-                                filtro = "- TODOS LOS REGISTROS";
-                            
+                        else if (opcion == 2)
+                            filtro = "- TODOS LOS REGISTROS";
+
                         ws = pack.Workbook.Worksheets.Add("TERCEROS");
                         // encabezado
                         ws.Cells["A1:X1,A2:X2,A3:X3,A4:X4,A5:X5"].Merge = true;
                         ws.Cells["A2:X2,A3:X3,A4:X4,A7:X7"].Style.Font.Bold = true;
                         ws.Cells["A2:X2,A3:X3,A4:X4,A5:X5"].Style.Font.Name = "Arial";
                         ws.Cells["A2:X2"].Style.Font.Size = 14;
-                        ws.Cells["A" + 2].Value = "ASOCIADOS, EMPLEADOS Y DEUDORES " + filtro; 
+                        ws.Cells["A" + 2].Value = "ASOCIADOS, EMPLEADOS Y DEUDORES " + filtro;
                         ws.Cells[1, 1, 5, 24].Style.Fill.PatternType = ExcelFillStyle.Solid;
                         ws.Cells[1, 1, 5, 24].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
                         ws.Cells["A:X2,A3:X3,A4:X4,A5:X5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
@@ -3148,7 +3515,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         #endregion
                         break;
                     case 36:
-                        #region informe36
+                        #region informe36 creditos
                         var datosPrestamos = db.Prestamos.ToList(); //datos de la tabla prestamos 
                         var datosCredito = db.Creditos.ToList(); //datos de la tabla Bcreditos
 
@@ -3197,7 +3564,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                             ws.Cells["A2:X2,A3:X3,A4:X4,A5:X5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
                             ws.Cells["A2:X2,A3:X3,A4:X4,A7:X7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                             ws.Cells["A2:X2,A3:X3,A4:X4,A7:X7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                           // ws.Cells["A2:X2,A3:X3,A4:X4,A5:X5"].Style.WrapText = true;
+                            // ws.Cells["A2:X2,A3:X3,A4:X4,A5:X5"].Style.WrapText = true;
                             ws.Cells["A3:X3,A4:X4"].Style.Font.Size = 12;
                             ws.Cells["A5:X5"].Style.Font.Size = 10;
                             ws.Cells["A" + 3].Value = nombre;
@@ -3632,10 +3999,303 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         break;
 
                     case 37:
-                        #region informe37
-
+                        #region NUEVO BALANCE COMPROBACION 
                         var chkTercero = coll["chkTercero"];
                         var nivel = coll["nivel"];
+                        costo = coll["costo"];
+                        var fhD = DateTime.Now;
+                        var fhH = DateTime.Now;
+                        var opcionPro = 0;
+                        decimal saldoIni = 0, debitoAct = 0, creditoAct = 0;
+                        debitoAnterior = 0; creditoAnterior = 0;
+                        saldo = 0;
+
+                        List<BalanceComprobacionActualizado> datoMovimiento = new List<BalanceComprobacionActualizado>();
+                        #region Validaciones tipos de busqueda
+                        if (fechaDesdeBC != "" && fechaHastaBC != "" && costo != "" && chkTercero == "on" && nivel != "")
+                        {
+                            fhD = Convert.ToDateTime(fechaDesdeBC);
+                            fhH = Convert.ToDateTime(fechaHastaBC);
+                            filtro = fhD.ToShortDateString() + " - " + fhH.ToShortDateString();
+                            opcionPro = 1;
+
+                        }
+                        else if (fechaDesdeBC != "" && fechaHastaBC != "" && costo != "" && nivel != "")
+                        {
+                            fhD = Convert.ToDateTime(fechaDesdeBC);
+                            fhH = Convert.ToDateTime(fechaHastaBC);
+                            filtro = fhD.ToShortDateString() + " - " + fhH.ToShortDateString();
+                            opcionPro = 2;
+                        }
+                        else if (fechaDesdeBC != "" && fechaHastaBC != "" && chkTercero == "on" && nivel != "")
+                        {
+                            fhD = Convert.ToDateTime(fechaDesdeBC);
+                            fhH = Convert.ToDateTime(fechaHastaBC);
+                            filtro = fhD.ToShortDateString() + " - " + fhH.ToShortDateString();
+                            opcionPro = 3;
+
+                        }
+                        else if (fechaDesdeBC != "" && fechaHastaBC != "" && nivel != "")
+                        {
+                            fhD = Convert.ToDateTime(fechaDesdeBC);
+                            fhH = Convert.ToDateTime(fechaHastaBC);
+                            filtro = fhD.ToShortDateString() + " - " + fhH.ToShortDateString();
+                            opcionPro = 4;
+                        }
+
+                        DateTime fechDes = new DateTime(fhD.Year, fhD.Month, fhD.Day, 0, 0, 0);
+                        DateTime fechHas = new DateTime(fhH.Year, fhH.Month, fhH.Day, 23, 59, 59);
+                        DateTime fechDesAux = new DateTime(fechDes.Year, 1, 1, 0, 0, 0);
+
+                        #endregion
+
+                        datoMovimiento = db.Database.SqlQuery<BalanceComprobacionActualizado>(
+                             "dbo.sp_BalanceComprobacion2 @ccosto, @fechaDesde, @fechaDesdeAux,@fechaHasta, @opcion",
+                             new SqlParameter("@ccosto", costo),
+                             new SqlParameter("@fechaDesde", fechDes),
+                             new SqlParameter("@fechaDesdeAux", fechDesAux),
+                             new SqlParameter("@fechaHasta", fechHas),
+                             new SqlParameter("@opcion", opcionPro)
+                             ).ToList();
+
+                        ws = pack.Workbook.Worksheets.Add("Balance De Comprobación");
+                        #region ENCABEZADO EXCEL
+                        // encabezado
+                        ws.Cells["A1:H1,A2:H2,A3:H3,A4:H4,A5:H5"].Merge = true;
+                        ws.Cells["A2:H2,A3:H3,A4:H4"].Style.Font.Bold = true;
+                        ws.Cells["A2:H2"].Style.Font.Name = "Arial";
+                        ws.Cells["A2:H2"].Style.Font.Size = 14;
+                        ws.Cells["A" + 2].Value = "BALANCE DE COMPROBACIÓN   " + filtro;
+                        ws.Cells[1, 1, 5, 8].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        ws.Cells[1, 1, 5, 8].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                        ws.Cells["A2:H2,A3:H3,A4:H4,A5:H5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                        ws.Cells["A2:H2,A3:H3,A4:H4,A7:H7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        ws.Cells["A2:H2,A3:H3,A4:H4,A7:H7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        ws.Cells["A2:H2,A3:H3,A4:H4,A5:H5"].Style.WrapText = true;
+                        ws.Cells["A3:H3,A4:H4"].Style.Font.Size = 12;
+                        ws.Cells["A5:H5"].Style.Font.Size = 10;
+                        ws.Cells["A" + 3].Value = nombre;
+                        ws.Cells["A" + 4].Value = nit;
+                        ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
+                        ws.Cells["A6:H6"].Merge = true;
+                        //fin encabezado
+                        #endregion
+
+                        if (opcionPro == 2 || opcionPro == 4)
+                        {
+                            #region  Informacion SOLO CUENTAS sin o con  CENTRO DE COSTO
+                            ws.Cells[6, 1, 6, 6].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                            ws.Cells[7, 1, 7, 6].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                            ws.Cells["A7:G7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                            ws.Cells["A7:H7"].Style.Font.Bold = true;
+                            ws.Cells[7, 1, 7, 6].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            ws.Cells[7, 1, 7, 6].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                            ws.Cells["A" + 7].Value = "CUENTA";
+                            ws.Cells["B" + 7].Value = "NOMBRE CUENTA";
+                            ws.Cells["C" + 7].Value = "SALDO INICIAL";
+                            ws.Cells["D" + 7].Value = "DÉBITO";
+                            ws.Cells["E" + 7].Value = "CRÉDITO";
+                            ws.Cells["F" + 7].Value = "SALDO";
+
+                            j = 8;
+                            var cuentaPorNivel = new PlanCuentasBLL().GetCuentasPorNiveles(nivel);
+
+                            if (cuentaPorNivel.Count() > 0 && datoMovimiento.Count() > 0)
+                            {
+                                foreach (var item in cuentaPorNivel)
+                                {
+                                    var hayCuentas = datoMovimiento.Where(x => x.CUENTA.StartsWith(item.CODIGO)).Count();
+
+                                    if (hayCuentas > 0)
+                                    {
+                                        if (item.CODIGO.StartsWith("4") || item.CODIGO.StartsWith("5") || item.CODIGO.StartsWith("6") || item.CODIGO.StartsWith("7"))
+                                        {
+                                            debitoAnterior = datoMovimiento.Where(x => x.CUENTA.StartsWith(item.CODIGO)).Select(x => x.DebitoAntAux).Sum();
+                                            creditoAnterior = datoMovimiento.Where(x => x.CUENTA.StartsWith(item.CODIGO)).Select(x => x.CreditoAntAux).Sum();
+                                        }
+                                        else
+                                        {
+                                            debitoAnterior = datoMovimiento.Where(x => x.CUENTA.StartsWith(item.CODIGO)).Select(x => x.DebitoAnterior).Sum();
+                                            creditoAnterior = datoMovimiento.Where(x => x.CUENTA.StartsWith(item.CODIGO)).Select(x => x.CreditoAnterior).Sum();
+                                        }
+
+                                        debitoAct = datoMovimiento.Where(x => x.CUENTA.StartsWith(item.CODIGO)).Select(x => x.DebitoActual).Sum();
+                                        creditoAct = datoMovimiento.Where(x => x.CUENTA.StartsWith(item.CODIGO)).Select(x => x.CreditoActual).Sum();
+
+                                        if (item.NATURALEZA == "D")
+                                        {
+                                            saldoIni = debitoAnterior - creditoAnterior;
+                                            saldo = (debitoAct - creditoAct) + saldoIni;
+                                        }
+                                        else
+                                        {
+                                            saldoIni = creditoAnterior - debitoAnterior;
+                                            saldo = (creditoAct - debitoAct) + saldoIni;
+                                        }
+                                        ws.Cells["A" + j].Value = item.CODIGO;
+                                        ws.Cells["B" + j].Value = item.NOMBRE;
+                                        ws.Cells["C" + j].Value = saldoIni.ToString("N0", formato);
+                                        ws.Cells["D" + j].Value = debitoAct.ToString("N0", formato);
+                                        ws.Cells["E" + j].Value = creditoAct.ToString("N0", formato);
+                                        ws.Cells["F" + j].Value = saldo.ToString("N0", formato);
+                                        j++;
+
+                                    }
+                                }
+                            }
+                            #endregion
+                        }
+                        else if (opcionPro == 1 || opcionPro == 3)
+                        {
+                            #region Informacion con datos de TERCEROS sin o con CENTRO DE COSTOS
+                            ws.Cells[6, 1, 6, 8].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                            ws.Cells[7, 1, 7, 8].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                            ws.Cells["A7:I7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                            ws.Cells["A7:H7"].Style.Font.Bold = true;
+                            ws.Cells[7, 1, 7, 8].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            ws.Cells[7, 1, 7, 8].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                            ws.Cells["A" + 7].Value = "CUENTA";
+                            ws.Cells["B" + 7].Value = "NOMBRE CUENTA";
+                            ws.Cells["C" + 7].Value = "DOCUMENTO TERCERO";
+                            ws.Cells["D" + 7].Value = "NOMBRE TERCERO";
+                            ws.Cells["E" + 7].Value = "SALDO INICIAL";
+                            ws.Cells["F" + 7].Value = "DÉBITO";
+                            ws.Cells["G" + 7].Value = "CRÉDITO";
+                            ws.Cells["H" + 7].Value = "SALDO";
+
+                            j = 8;
+                            var cuentaPorNivel = new PlanCuentasBLL().GetCuentasPorNiveles(nivel);
+
+                            if (cuentaPorNivel.Count() > 0 && datoMovimiento.Count() > 0)
+                            {
+                                foreach (var item in cuentaPorNivel)
+                                {
+                                    var hayCuentas = datoMovimiento.Where(x => x.CUENTA.StartsWith(item.CODIGO)).Count();
+
+                                    if (hayCuentas > 0)
+                                    {
+                                        #region validación para cuentas menores a 9 digitos
+
+                                        if (item.CODIGO.Length != 9)
+                                        {
+                                            if (item.CODIGO.StartsWith("4") || item.CODIGO.StartsWith("5") || item.CODIGO.StartsWith("6") || item.CODIGO.StartsWith("7"))
+                                            {
+                                                debitoAnterior = datoMovimiento.Where(x => x.CUENTA.StartsWith(item.CODIGO)).Select(x => x.DebitoAntAux).Sum();
+                                                creditoAnterior = datoMovimiento.Where(x => x.CUENTA.StartsWith(item.CODIGO)).Select(x => x.CreditoAntAux).Sum();
+                                            }
+                                            else
+                                            {
+                                                debitoAnterior = datoMovimiento.Where(x => x.CUENTA.StartsWith(item.CODIGO)).Select(x => x.DebitoAnterior).Sum();
+                                                creditoAnterior = datoMovimiento.Where(x => x.CUENTA.StartsWith(item.CODIGO)).Select(x => x.CreditoAnterior).Sum();
+                                            }
+
+                                            debitoAct = datoMovimiento.Where(x => x.CUENTA.StartsWith(item.CODIGO)).Select(x => x.DebitoActual).Sum();
+                                            creditoAct = datoMovimiento.Where(x => x.CUENTA.StartsWith(item.CODIGO)).Select(x => x.CreditoActual).Sum();
+
+                                            if (item.NATURALEZA == "D")
+                                            {
+                                                saldoIni = debitoAnterior - creditoAnterior;
+                                                saldo = (debitoAct - creditoAct) + saldoIni;
+                                            }
+                                            else
+                                            {
+                                                saldoIni = creditoAnterior - debitoAnterior;
+                                                saldo = (creditoAct - debitoAct) + saldoIni;
+                                            }
+
+                                            ws.Cells["A" + j].Value = item.CODIGO;
+                                            ws.Cells["B" + j].Value = item.NOMBRE;
+                                            ws.Cells["E" + j].Value = saldoIni.ToString("N0", formato);
+                                            ws.Cells["F" + j].Value = debitoAct.ToString("N0", formato);
+                                            ws.Cells["G" + j].Value = creditoAct.ToString("N0", formato);
+                                            ws.Cells["H" + j].Value = saldo.ToString("N0", formato);
+                                            j++;
+
+                                        }
+                                        #endregion
+                                        #region Validacion cuando la cuenta es igual a 9 digitos
+                                        else
+                                        {
+                                            var info = datoMovimiento.Where(x => x.CUENTA == item.CODIGO).OrderBy(x => x.CUENTA).Distinct().ToList();
+
+                                            foreach (var item2 in info)
+                                            {
+
+                                                if (item.CODIGO.StartsWith("4") || item.CODIGO.StartsWith("5") || item.CODIGO.StartsWith("6") || item.CODIGO.StartsWith("7"))
+                                                {
+                                                    debitoAct = datoMovimiento.Where(x => x.CUENTA == item.CODIGO && x.TERCERO == item2.TERCERO).Select(x => x.DebitoActual).FirstOrDefault();
+                                                    creditoAct = datoMovimiento.Where(x => x.CUENTA == item.CODIGO && x.TERCERO == item2.TERCERO).Select(x => x.CreditoActual).FirstOrDefault();
+                                                    debitoAnterior = datoMovimiento.Where(x => x.CUENTA == item.CODIGO && x.TERCERO == item2.TERCERO).Select(x => x.DebitoAntAux).FirstOrDefault();
+                                                    creditoAnterior = datoMovimiento.Where(x => x.CUENTA == item.CODIGO && x.TERCERO == item2.TERCERO).Select(x => x.CreditoAntAux).FirstOrDefault();
+
+                                                    if (item.NATURALEZA == "D")
+                                                    {
+                                                        saldoIni = debitoAnterior - creditoAnterior;
+                                                        saldo = (debitoAct - creditoAct) + saldoIni;
+                                                    }
+                                                    else
+                                                    {
+                                                        saldoIni = creditoAnterior - debitoAnterior;
+                                                        saldo = (creditoAct - debitoAct) + saldoIni;
+                                                    }
+
+                                                    ws.Cells["A" + j].Value = item.CODIGO;
+                                                    ws.Cells["B" + j].Value = item.NOMBRE;
+                                                    ws.Cells["C" + j].Value = item2.TERCERO;
+                                                    ws.Cells["D" + j].Value = item2.NOMBRE;
+                                                    ws.Cells["E" + j].Value = saldoIni.ToString("N0", formato);
+                                                    ws.Cells["F" + j].Value = debitoAct.ToString("N0", formato);
+                                                    ws.Cells["G" + j].Value = creditoAct.ToString("N0", formato);
+                                                    ws.Cells["H" + j].Value = saldo.ToString("N0", formato);
+                                                    j++;
+
+                                                }
+                                                else
+                                                {
+                                                    debitoAct = datoMovimiento.Where(x => x.CUENTA == item.CODIGO && x.TERCERO == item2.TERCERO).Select(x => x.DebitoActual).FirstOrDefault();
+                                                    creditoAct = datoMovimiento.Where(x => x.CUENTA == item.CODIGO && x.TERCERO == item2.TERCERO).Select(x => x.CreditoActual).FirstOrDefault();
+                                                    debitoAnterior = datoMovimiento.Where(x => x.CUENTA == item.CODIGO && x.TERCERO == item2.TERCERO).Select(x => x.DebitoAnterior).FirstOrDefault();
+                                                    creditoAnterior = datoMovimiento.Where(x => x.CUENTA == item.CODIGO && x.TERCERO == item2.TERCERO).Select(x => x.CreditoAnterior).FirstOrDefault();
+
+                                                    if (item.NATURALEZA == "D")
+                                                    {
+                                                        saldoIni = debitoAnterior - creditoAnterior;
+                                                        saldo = (debitoAct - creditoAct) + saldoIni;
+                                                    }
+                                                    else
+                                                    {
+                                                        saldoIni = creditoAnterior - debitoAnterior;
+                                                        saldo = (creditoAct - debitoAct) + saldoIni;
+                                                    }
+
+                                                    ws.Cells["A" + j].Value = item.CODIGO;
+                                                    ws.Cells["B" + j].Value = item.NOMBRE;
+                                                    ws.Cells["C" + j].Value = item2.TERCERO;
+                                                    ws.Cells["D" + j].Value = item2.NOMBRE;
+                                                    ws.Cells["E" + j].Value = saldoIni.ToString("N0", formato);
+                                                    ws.Cells["F" + j].Value = debitoAct.ToString("N0", formato);
+                                                    ws.Cells["G" + j].Value = creditoAct.ToString("N0", formato);
+                                                    ws.Cells["H" + j].Value = saldo.ToString("N0", formato);
+                                                    j++;
+                                                }
+                                            }
+                                        }//fin else != 9
+                                    }
+                                    #endregion
+                                }//fin for
+                            }
+                        }
+                        #endregion
+                        ws.Cells[ws.Dimension.Address].AutoFitColumns();//siempre al final de todo. le da tamaño ajustado a cada columna
+
+                        #endregion
+                        break;
+
+                    case 38:
+                        #region informe37 Balance de Comprobacion VERIFICAR DATOS DE ESTE REPORTE SE USAN EN CATALOGO DE CUENTAS
+
+                        chkTercero = coll["chkTercero"];
+                        nivel = coll["nivel"];
                         costo = coll["costo"];
 
                         if (fechaDesde != "" && fechaHasta != "")
@@ -3659,44 +4319,6 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         if (chkTercero == "on")
                         {
                             // encabezado
-                            ws.Cells["A1:J1,A2:J2,A3:J3,A4:J4,A5:J5"].Merge = true;
-                            ws.Cells["A2:J2,A3:J3,A4:J4"].Style.Font.Bold = true;
-                            ws.Cells["A2:J2"].Style.Font.Name = "Arial";
-                            ws.Cells["A2:J2"].Style.Font.Size = 14;
-                            ws.Cells["A" + 2].Value = "BALANCE DE COMPROBACIÓN   " + filtro;
-                            ws.Cells[1, 1, 5, 10].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[1, 1, 5, 10].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
-                            ws.Cells["A2:J2,A3:J3,A4:J4,A5:J5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
-                            ws.Cells["A2:J2,A3:J3,A4:J4,A7:J7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                            ws.Cells["A2:J2,A3:J3,A4:J4,A7:J7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                            ws.Cells["A2:J2,A3:J3,A4:J4,A5:J5"].Style.WrapText = true;
-                            ws.Cells["A3:J3,A4:J4"].Style.Font.Size = 12;
-                            ws.Cells["A5:J5"].Style.Font.Size = 10;
-                            ws.Cells["A" + 3].Value = nombre;
-                            ws.Cells["A" + 4].Value = nit;
-                            ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
-                            ws.Cells["A6:J6"].Merge = true;
-                            ws.Cells[6, 2, 6, 10].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
-                            ws.Cells[7, 2, 7, 10].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
-                            ws.Cells["C7:D7"].Merge = true;
-                            ws.Cells["A7:K7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
-                            ws.Cells["A7:J7"].Style.Font.Bold = true;
-                            ws.Cells[7, 2, 7, 10].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[7, 2, 7, 10].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
-                            //fin encabezado
-
-                            ws.Cells["B" + 7].Value = "CUENTA";
-                            ws.Cells["C" + 7].Value = "NOMBRE CUENTA";
-                            ws.Cells["E" + 7].Value = "DOCUMENTO TERCERO";
-                            ws.Cells["F" + 7].Value = "NOMBRE TERCERO";
-                            ws.Cells["G" + 7].Value = "SALDO INICIAL";
-                            ws.Cells["H" + 7].Value = "DÉBITO";
-                            ws.Cells["I" + 7].Value = "CRÉDITO";
-                            ws.Cells["J" + 7].Value = "SALDO";
-                        }
-                        else
-                        {
-                            // encabezado
                             ws.Cells["A1:H1,A2:H2,A3:H3,A4:H4,A5:H5"].Merge = true;
                             ws.Cells["A2:H2,A3:H3,A4:H4"].Style.Font.Bold = true;
                             ws.Cells["A2:H2"].Style.Font.Name = "Arial";
@@ -3714,21 +4336,57 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                             ws.Cells["A" + 4].Value = nit;
                             ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
                             ws.Cells["A6:H6"].Merge = true;
-                            ws.Cells[6, 2, 6, 8].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
-                            ws.Cells[7, 2, 7, 8].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                            ws.Cells[6, 1, 6, 8].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                            ws.Cells[7, 1, 7, 8].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
                             ws.Cells["A7:I7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
-                            ws.Cells["C7:D7"].Merge = true;
                             ws.Cells["A7:H7"].Style.Font.Bold = true;
-                            ws.Cells[7, 2, 7, 8].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                            ws.Cells[7, 2, 7, 8].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                            ws.Cells[7, 1, 7, 8].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            ws.Cells[7, 1, 7, 8].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
                             //fin encabezado
 
-                            ws.Cells["B" + 7].Value = "CUENTA";
-                            ws.Cells["C" + 7].Value = "NOMBRE CUENTA";
+                            ws.Cells["A" + 7].Value = "CUENTA";
+                            ws.Cells["B" + 7].Value = "NOMBRE CUENTA";
+                            ws.Cells["C" + 7].Value = "DOCUMENTO TERCERO";
+                            ws.Cells["D" + 7].Value = "NOMBRE TERCERO";
                             ws.Cells["E" + 7].Value = "SALDO INICIAL";
                             ws.Cells["F" + 7].Value = "DÉBITO";
                             ws.Cells["G" + 7].Value = "CRÉDITO";
                             ws.Cells["H" + 7].Value = "SALDO";
+                        }
+                        else
+                        {
+                            // encabezado
+                            ws.Cells["A1:F1,A2:F2,A3:F3,A4:F4,A5:F5"].Merge = true;
+                            ws.Cells["A2:F2,A3:F3,A4:F4"].Style.Font.Bold = true;
+                            ws.Cells["A2:F2"].Style.Font.Name = "Arial";
+                            ws.Cells["A2:F2"].Style.Font.Size = 14;
+                            ws.Cells["A" + 2].Value = "BALANCE DE COMPROBACIÓN   " + filtro;
+                            ws.Cells[1, 1, 5, 6].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            ws.Cells[1, 1, 5, 6].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                            ws.Cells["A2:F2,A3:F3,A4:F4,A5:F5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                            ws.Cells["A2:F2,A3:F3,A4:F4,A7:F7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                            ws.Cells["A2:F2,A3:F3,A4:F4,A7:F7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                            ws.Cells["A2:F2,A3:F3,A4:F4,A5:F5"].Style.WrapText = true;
+                            ws.Cells["A3:F3,A4:H4"].Style.Font.Size = 12;
+                            ws.Cells["A5:F5"].Style.Font.Size = 10;
+                            ws.Cells["A" + 3].Value = nombre;
+                            ws.Cells["A" + 4].Value = nit;
+                            ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
+                            ws.Cells["A6:H6"].Merge = true;
+                            ws.Cells[6, 1, 6, 6].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                            ws.Cells[7, 1, 7, 6].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                            ws.Cells["A7:G7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                            ws.Cells["A7:H7"].Style.Font.Bold = true;
+                            ws.Cells[7, 1, 7, 6].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            ws.Cells[7, 1, 7, 6].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                            //fin encabezado
+
+                            ws.Cells["A" + 7].Value = "CUENTA";
+                            ws.Cells["B" + 7].Value = "NOMBRE CUENTA";
+                            ws.Cells["C" + 7].Value = "SALDO INICIAL";
+                            ws.Cells["D" + 7].Value = "DÉBITO";
+                            ws.Cells["E" + 7].Value = "CRÉDITO";
+                            ws.Cells["F" + 7].Value = "SALDO";
                         }
 
                         j = 8;
@@ -3812,7 +4470,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         DateTime fdAuxilar = Convert.ToDateTime(fechaDesde);
                         DateTime fDesdeAuxiliar = new DateTime(fdAuxilar.Year, 1, 1, 0, 0, 0);
 
-                        
+
                         if (auxiliar.Count > 0)
                         {
 
@@ -3858,11 +4516,6 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                                             saldoInicial = creditoAnterior - debitoAnterior;
                                             saldo = (creditoActual - debitoActual) + saldoInicial;
                                         }
-
-                                        //ws.Cells["E" + j].Value = saldoInicial.ToString("N0", formato);
-                                        //ws.Cells["F" + j].Value = debitoActual.ToString("N0", formato);
-                                        //ws.Cells["G" + j].Value = creditoActual.ToString("N0", formato);
-                                        //ws.Cells["H" + j].Value = saldo.ToString("N0", formato);
 
                                         var objeto = new spBalanceComprobacionL5()
                                         {
@@ -3975,24 +4628,6 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                                                         saldo = (creditoActual - debitoActual) + saldoInicial;
                                                     }
 
-                                                    //ws.Cells["B" + j].Value = item2.CODIGO;
-                                                    //ws.Cells["C" + j].Value = item2.NOMBRE;
-                                                    //ws.Cells["E" + j].Value = item3.TERCERO;
-
-                                                    //string nombreTercero = "";
-                                                    //if (item3.TERCERO != null)
-                                                    //{
-                                                    //    //ws.Cells["F" + j].Value = item3.terceroFK.NOMBRE1 + " " + item3.terceroFK.NOMBRE2 + " " + item3.terceroFK.APELLIDO1 + " " + item3.terceroFK.APELLIDO2;
-                                                    //    nombreTercero = item3.terceroFK.NOMBRE1 + " " + item3.terceroFK.NOMBRE2 + " " + item3.terceroFK.APELLIDO1 + " " + item3.terceroFK.APELLIDO2;
-                                                    //}
-                                                    //else
-                                                    //{
-                                                    //    ws.Cells["F" + j].Value = "";
-                                                    //}
-                                                    //ws.Cells["G" + j].Value = saldoInicial.ToString("N0", formato);
-                                                    //ws.Cells["H" + j].Value = debitoActual.ToString("N0", formato);
-                                                    //ws.Cells["I" + j].Value = creditoActual.ToString("N0", formato);
-                                                    //ws.Cells["J" + j].Value = saldo.ToString("N0", formato);
 
                                                     var objeto = new spBalanceComprobacionL5()
                                                     {
@@ -4094,12 +4729,12 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         {
                             foreach (var ob in slPC)
                             {
-                                ws.Cells["B" + j].Value = ob.codigo;
-                                ws.Cells["C" + j].Value = ob.nombre;
-                                ws.Cells["E" + j].Value = ob.SaldoInicial;
-                                ws.Cells["F" + j].Value = ob.Debito;
-                                ws.Cells["G" + j].Value = ob.Credito;
-                                ws.Cells["H" + j].Value = ob.Saldo;
+                                ws.Cells["A" + j].Value = ob.codigo;
+                                ws.Cells["B" + j].Value = ob.nombre;
+                                ws.Cells["C" + j].Value = ob.SaldoInicial;
+                                ws.Cells["D" + j].Value = ob.Debito;
+                                ws.Cells["E" + j].Value = ob.Credito;
+                                ws.Cells["F" + j].Value = ob.Saldo;
                                 j++;
                             }
                         }
@@ -4107,14 +4742,14 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         {
                             foreach (var ob in slPC)
                             {
-                                ws.Cells["B" + j].Value = ob.codigo;
-                                ws.Cells["C" + j].Value = ob.nombre;
-                                ws.Cells["E" + j].Value = ob.DocumentoTercero;
-                                ws.Cells["F" + j].Value = ob.NombreTercero;
-                                ws.Cells["G" + j].Value = ob.SaldoInicial;
-                                ws.Cells["H" + j].Value = ob.Debito;
-                                ws.Cells["I" + j].Value = ob.Credito;
-                                ws.Cells["J" + j].Value = ob.Saldo;
+                                ws.Cells["A" + j].Value = ob.codigo;
+                                ws.Cells["B" + j].Value = ob.nombre;
+                                ws.Cells["C" + j].Value = ob.DocumentoTercero;
+                                ws.Cells["D" + j].Value = ob.NombreTercero;
+                                ws.Cells["E" + j].Value = ob.SaldoInicial;
+                                ws.Cells["F" + j].Value = ob.Debito;
+                                ws.Cells["G" + j].Value = ob.Credito;
+                                ws.Cells["H" + j].Value = ob.Saldo;
                                 j++;
                             }
                         }
@@ -4123,20 +4758,67 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         movtosActuales = null;
                         movtosSaldos = null;
                         auxiliar = null;
+
+
+
+
+
                         #endregion
 
                         break;
                     case 39:
-                        #region informe39
+                        #region informe39 Saldo aportes
 
-
+                        if (fechaDesde != "" && fechaHasta != "")
+                        {
+                            DateTime df = Convert.ToDateTime(fechaDesde);
+                            DateTime dh = Convert.ToDateTime(fechaHasta);
+                            filtro = df.ToShortDateString() + " - " + dh.ToShortDateString();
+                        }
+                        else if (fechaDesde != "" && fechaHasta == "")
+                        {
+                            DateTime df = Convert.ToDateTime(fechaDesde);
+                            filtro = df.ToShortDateString();
+                        }
+                        else if (fechaDesde == "" && fechaHasta != "")
+                        {
+                            DateTime dh = Convert.ToDateTime(fechaHasta);
+                            filtro = dh.ToShortDateString();
+                        }
                         ws = pack.Workbook.Worksheets.Add("SaldoAportes");
-                        ws.Cells["A" + 1].Value = "NIT";
-                        ws.Cells["B" + 1].Value = "NOMBRES Y APELLIDOS";
-                        ws.Cells["C" + 1].Value = "FECHA DE INICIO";
-                        ws.Cells["D" + 1].Value = "SALDO DE APORTES";
+                        // encabezado
+                        ws.Cells["A1:D1,A2:D2,A3:D3,A4:D4,A5:D5"].Merge = true;
+                        ws.Cells["A2:D2,A3:D3,A4:D4"].Style.Font.Bold = true;
+                        ws.Cells["A2:D2"].Style.Font.Name = "Arial";
+                        ws.Cells["A2:D2"].Style.Font.Size = 14;
+                        ws.Cells["A" + 2].Value = "SALDO APORTES   " + filtro;
+                        ws.Cells[1, 1, 5, 4].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        ws.Cells[1, 1, 5, 4].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                        ws.Cells["A2:D2,A3:D3,A4:D4,A5:D5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                        ws.Cells["A2:D2,A3:D3,A4:D4,A7:D7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        ws.Cells["A2:D2,A3:D3,A4:D4,A7:D7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        ws.Cells["A2:D2,A3:D3,A4:D4,A5:D5"].Style.WrapText = true;
+                        ws.Cells["A3:D3,A4:D4"].Style.Font.Size = 12;
+                        ws.Cells["A5:D5"].Style.Font.Size = 10;
+                        ws.Cells["A" + 3].Value = nombre;
+                        ws.Cells["A" + 4].Value = nit;
+                        ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
+                        ws.Cells["A6:D6"].Merge = true;
+                        ws.Cells[6, 1, 6, 4].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                        ws.Cells[7, 1, 7, 4].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                        ws.Cells["A7:E7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                        ws.Cells["A7:D7"].Style.Font.Bold = true;
+                        ws.Cells[7, 1, 7, 4].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        ws.Cells[7, 1, 7, 4].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                        //fin encabezado
 
-                        j = 2;
+
+                        ws.Cells["A" + 7].Value = "NIT";
+                        ws.Cells["B" + 7].Value = "NOMBRES Y APELLIDOS";
+                        ws.Cells["C" + 7].Value = "FECHA DE INICIO";
+                        ws.Cells["D" + 7].Value = "SALDO DE APORTES";
+
+                        j = 8;
 
 
                         if (fechaDesde != "")
@@ -4202,10 +4884,10 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         #endregion
                         break;
                     case 40:
-                        #region informe40
+                        #region informe40 afiliaciones por asesor
                         var fichasAportes = db.FichasAportes.ToList();
 
-                        if(fechaDesde!="" && fechaHasta != "")
+                        if (fechaDesde != "" && fechaHasta != "")
                         {
                             DateTime fd = Convert.ToDateTime(fechaDesde);
                             DateTime fh = Convert.ToDateTime(fechaHasta);
@@ -4308,7 +4990,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         #endregion
                         break;
                     case 41:
-                        #region informe41
+                        #region informe41 afiliaciones por agencia
                         fichasAportes = db.FichasAportes.ToList();
 
                         if (fechaDesde != "" && fechaHasta != "")
@@ -4414,10 +5096,10 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         fichasAportes = null;
                         #endregion
                         break;
-                    case 45: 
+                    case 45:
                         #region informe45 Reporte UIAF
 
-                     
+
                         var anioF = Convert.ToInt32(coll["year2"]);
                         var periodoF = Convert.ToInt32(coll["periodoTrimestral"]);
                         DateTime fi;
@@ -4433,18 +5115,18 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                                     filtro = fi.ToShortDateString() + " - " + ff.ToShortDateString();
                                     break;
                                 case 2:
-                                     fi = new DateTime(anioF, 04, 01, 0, 0, 0);
-                                     ff = new DateTime(anioF, 06, 30, 23, 59, 59);
+                                    fi = new DateTime(anioF, 04, 01, 0, 0, 0);
+                                    ff = new DateTime(anioF, 06, 30, 23, 59, 59);
                                     filtro = fi.ToShortDateString() + " - " + ff.ToShortDateString();
                                     break;
                                 case 3:
-                                     fi = new DateTime(anioF, 07, 01, 0, 0, 0);
-                                     ff = new DateTime(anioF, 09, 30, 23, 59, 59);
+                                    fi = new DateTime(anioF, 07, 01, 0, 0, 0);
+                                    ff = new DateTime(anioF, 09, 30, 23, 59, 59);
                                     filtro = fi.ToShortDateString() + " - " + ff.ToShortDateString();
                                     break;
                                 case 4:
-                                     fi = new DateTime(anioF, 10, 01, 0, 0, 0);
-                                     ff = new DateTime(anioF, 12, 31, 23, 59, 59);
+                                    fi = new DateTime(anioF, 10, 01, 0, 0, 0);
+                                    ff = new DateTime(anioF, 12, 31, 23, 59, 59);
                                     filtro = fi.ToShortDateString() + " - " + ff.ToShortDateString();
                                     break;
                             }
@@ -4455,75 +5137,63 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         ws = pack.Workbook.Worksheets.Add("ReporteUIAF");
 
                         // encabezado
-                        ws.Cells["A1:Y1,A2:Y2,A3:Y3,A4:Y4,A5:Y5,A6:Y6"].Merge = true;
-                        ws.Cells["A2:Y2,A3:Y3,A4:Y4,A5:Y5"].Style.Font.Bold = true;
-                        ws.Cells["A2:Y2"].Style.Font.Name = "Arial";
-                        ws.Cells["A2:Y2"].Style.Font.Size = 14;
+                        ws.Cells["A1:X1,A2:X2,A3:X3,A4:X4,A5:X5,A6:X6"].Merge = true;
+                        ws.Cells["A2:X2,A3:X3,A4:X4,A5:X5"].Style.Font.Bold = true;
+                        ws.Cells["A2:X2"].Style.Font.Name = "Arial";
+                        ws.Cells["A2:X2"].Style.Font.Size = 14;
                         ws.Cells["A" + 2].Value = "REPORTE UIAF   " + filtro;
-                        ws.Cells[1, 1, 6, 25].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                        ws.Cells[1, 1, 6, 25].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
-                        ws.Cells["A2:Y2,A3:Y3,A4:Y4,A5:Y5,A6:Y6"].Style.Font.Color.SetColor(System.Drawing.Color.White);
-                        ws.Cells["A2:Y2,A3:Y3,A4:Y4,A5:Y5,A8:Y8"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                        ws.Cells["A2:Y2,A3:Y3,A4:Y4,A5:Y5,A8:Y8"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        ws.Cells[1, 1, 6, 24].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        ws.Cells[1, 1, 6, 24].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                        ws.Cells["A2:X2,A3:X3,A4:X4,A5:X5,A6:X6"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                        ws.Cells["A2:X2,A3:X3,A4:X4,A5:X5,A8:X8"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        ws.Cells["A2:X2,A3:X3,A4:X4,A5:X5,A8:X8"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                         ws.Cells["A3:F3,A4:F4,A5:Y5"].Style.Font.Size = 12;
                         ws.Cells["A6:F6"].Style.Font.Size = 10;
                         ws.Cells["A" + 3].Value = nombre;
                         ws.Cells["A" + 4].Value = nit;
                         ws.Cells["A" + 5].Value = "REPORTE TRANSACCIONES EN EFECTIVO - C.E. 014 DE 2018 PARA ORGANIZACIONES DE LA ECONOMÍA SOLIDARIA QUE NO EJERCEN ACTIVIDAD FINANCIERA DEL COPERATIVISMO";
                         ws.Cells["A" + 6].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
-                        ws.Cells["A7:Y7"].Merge = true;
-                        ws.Cells[7, 2, 7, 25].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
-                        ws.Cells[8, 2, 8, 25].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
-                        ws.Cells["A8:Z8"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
-                        ws.Cells["A8:Y8"].Style.Font.Bold = true;
-                        ws.Cells[8, 2, 8, 25].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                        ws.Cells[8, 2, 8, 25].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
-                        ws.Cells["A8:Y8"].Style.WrapText = true;
+                        ws.Cells["A7:X7"].Merge = true;
+                        ws.Cells[7, 1, 7, 24].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                        ws.Cells[8, 1, 8, 24].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                        ws.Cells["A8:Y8"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                        ws.Cells["A8:X8"].Style.Font.Bold = true;
+                        ws.Cells[8, 1, 8, 24].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        ws.Cells[8, 1, 8, 24].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                        ws.Cells["A8:X8"].Style.WrapText = true;
                         //fin encabezado
 
-
-
-
-                        //ws.Cells["A" + 2].Value = "FONDO DE EMPLEADOS DE LA RAMA JUDICIAL DE NARIÑO Y PUTUMAYO (FERAJUNAP)";
-                        //ws.Cells["A" + 3].Value = "REPORTE TRANSACCIONES EN EFECTIVO - C.E. 014 DE 2018 PARA ORGANIZACIONES DE LA ECONOMÍA SOLIDARIA QUE NO EJERCEN ACTIVIDAD FINANCIERA DEL COPERATIVISMO";
-                        //ws.Cells["A" + 4].Value = "";
-
-
-                        //ws.Cells["A2:X2"].Merge = true;//une columnas en una fila
-                        //ws.Cells["A3:X3"].Merge = true;//une columnas en una fila
-                        //ws.Cells["A4:X4"].Merge = true;//une columnas en una fila
-
-                        ws.Cells["B" + 8].Value = "CONSECUTIVO";
-                        ws.Cells["C" + 8].Value = "FECHA TRANSACCIÓN";
-                        ws.Cells["D" + 8].Value = "VALOR TRANSACCIÓN";
-                        ws.Cells["E" + 8].Value = "TIPO MONEDA";
-                        ws.Cells["F" + 8].Value = "CÓDIGO OFICINA";
-                        ws.Cells["G" + 8].Value = "CÓDIGO DPTO/MPIO";
-                        ws.Cells["H" + 8].Value = "TIPO PRODUCTO";
-                        ws.Cells["I" + 8].Value = "TIPO TRANSACCIÓN";
-                        ws.Cells["J" + 8].Value = "Nro CUENTA O PRODUCTO";
-                        ws.Cells["K" + 8].Value = "TIPO IDENTIFICACIÓN DEL TITULAR";
-                        ws.Cells["L" + 8].Value = "Nro IDENTIFICACIÓN DEL TITULAR";
-                        ws.Cells["M" + 8].Value = "1er. APELLIDO DEL TITULAR";
-                        ws.Cells["N" + 8].Value = "2do. APELLIDO DEL TITULAR";
-                        ws.Cells["O" + 8].Value = "1er. NOMBRE DEL TITULAR";
-                        ws.Cells["P" + 8].Value = "OTROS NOMBRES DEL TITULAR";
-                        ws.Cells["Q" + 8].Value = "RAZÓN SOCIAL DEL TITULAR";
-                        ws.Cells["R" + 8].Value = "ACTIVIDAD ECONÓMICA DEL TITULAR";
-                        ws.Cells["S" + 8].Value = "INGRESO MENSUAL DEL TITULAR";
-                        ws.Cells["T" + 8].Value = "TIPO IDENTIFICACIÓN PERSONA QUE REALIZA LA TRANSACCIÓN INDIVIDUAL";
-                        ws.Cells["U" + 8].Value = "Nro IDENTIFICACIÓN PERSONA QUE REALIZA LA TRANSACCIÓN INDIVIDUAL";
-                        ws.Cells["V" + 8].Value = "1er. APELLIDO PERSONA QUE REALIZA LA TRANSACCIÓN INDIVIDUAL";
-                        ws.Cells["W" + 8].Value = "2do. APELLIDO PERSONA QUE REALIZA LA TRANSACCIÓN INDIVIDUAL";
-                        ws.Cells["X" + 8].Value = "1er. NOMBRE PERSONA QUE REALIZA LA TRANSACCIÓN INDIVIDUAL";
-                        ws.Cells["Y" + 8].Value = "OTROS NOMBRES PERSONA QUE REALIZA LA TRANSACCIÓN INDIVIDUAL";
+                        ws.Cells["A" + 8].Value = "CONSECUTIVO";
+                        ws.Cells["B" + 8].Value = "FECHA TRANSACCIÓN";
+                        ws.Cells["C" + 8].Value = "VALOR TRANSACCIÓN";
+                        ws.Cells["D" + 8].Value = "TIPO MONEDA";
+                        ws.Cells["E" + 8].Value = "CÓDIGO OFICINA";
+                        ws.Cells["F" + 8].Value = "CÓDIGO DPTO/MPIO";
+                        ws.Cells["G" + 8].Value = "TIPO PRODUCTO";
+                        ws.Cells["H" + 8].Value = "TIPO TRANSACCIÓN";
+                        ws.Cells["I" + 8].Value = "Nro CUENTA O PRODUCTO";
+                        ws.Cells["J" + 8].Value = "TIPO IDENTIFICACIÓN DEL TITULAR";
+                        ws.Cells["K" + 8].Value = "Nro IDENTIFICACIÓN DEL TITULAR";
+                        ws.Cells["L" + 8].Value = "1er. APELLIDO DEL TITULAR";
+                        ws.Cells["M" + 8].Value = "2do. APELLIDO DEL TITULAR";
+                        ws.Cells["N" + 8].Value = "1er. NOMBRE DEL TITULAR";
+                        ws.Cells["O" + 8].Value = "OTROS NOMBRES DEL TITULAR";
+                        ws.Cells["P" + 8].Value = "RAZÓN SOCIAL DEL TITULAR";
+                        ws.Cells["Q" + 8].Value = "ACTIVIDAD ECONÓMICA DEL TITULAR";
+                        ws.Cells["R" + 8].Value = "INGRESO MENSUAL DEL TITULAR";
+                        ws.Cells["S" + 8].Value = "TIPO IDENTIFICACIÓN PERSONA QUE REALIZA LA TRANSACCIÓN INDIVIDUAL";
+                        ws.Cells["T" + 8].Value = "Nro IDENTIFICACIÓN PERSONA QUE REALIZA LA TRANSACCIÓN INDIVIDUAL";
+                        ws.Cells["U" + 8].Value = "1er. APELLIDO PERSONA QUE REALIZA LA TRANSACCIÓN INDIVIDUAL";
+                        ws.Cells["V" + 8].Value = "2do. APELLIDO PERSONA QUE REALIZA LA TRANSACCIÓN INDIVIDUAL";
+                        ws.Cells["W" + 8].Value = "1er. NOMBRE PERSONA QUE REALIZA LA TRANSACCIÓN INDIVIDUAL";
+                        ws.Cells["X" + 8].Value = "OTROS NOMBRES PERSONA QUE REALIZA LA TRANSACCIÓN INDIVIDUAL";
 
                         var periodoUIAF = Convert.ToInt32(coll["periodoTrimestral"]);
                         var desdeAnio = Convert.ToInt32(coll["year2"]);
                         if (periodoUIAF != 0 && desdeSaldoAno != 0)
                         {
                             DateTime fechaActual = DateTime.Now;
-                           // ws.Cells["A" + 4].Value = fechaActual.ToString("yyyy-MMMM");
+                            // ws.Cells["A" + 4].Value = fechaActual.ToString("yyyy-MMMM");
                             List<FactOpcaja> facturas = new List<FactOpcaja>();
                             if (periodoUIAF == 1)
                             {
@@ -4556,30 +5226,30 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                             j = 9;
                             foreach (var item in facturas)
                             {
-                                ws.Cells["B" + j].Value = i.ToString();
-                                ws.Cells["C" + j].Value = item.fecha.ToString();
-                                ws.Cells["D" + j].Value = item.total.ToString("N0", formato);
-                                ws.Cells["E" + j].Value = "1";
-                                ws.Cells["F" + j].Value = item.Caja.agencia;
-                                ws.Cells["G" + j].Value = item.Caja.agencias.codciudad;
-                                ws.Cells["H" + j].Value = 13.ToString();
-                                ws.Cells["I" + j].Value = 2.ToString();
-                                ws.Cells["J" + j].Value = item.numero_cuenta;
-                                ws.Cells["K" + j].Value = 13.ToString();
-                                ws.Cells["L" + j].Value = item.nit_propietario_cuenta;
-                                ws.Cells["M" + j].Value = item.terceroFK.APELLIDO1;
-                                ws.Cells["N" + j].Value = item.terceroFK.APELLIDO2;
-                                ws.Cells["O" + j].Value = item.terceroFK.NOMBRE1;
+                                ws.Cells["A" + j].Value = i.ToString();
+                                ws.Cells["B" + j].Value = item.fecha.ToString();
+                                ws.Cells["C" + j].Value = item.total.ToString("N0", formato);
+                                ws.Cells["D" + j].Value = "1";
+                                ws.Cells["E" + j].Value = item.Caja.agencia;
+                                ws.Cells["F" + j].Value = item.Caja.agencias.codciudad;
+                                ws.Cells["G" + j].Value = 13.ToString();
+                                ws.Cells["H" + j].Value = 2.ToString();
+                                ws.Cells["I" + j].Value = item.numero_cuenta;
+                                ws.Cells["J" + j].Value = 13.ToString();
+                                ws.Cells["K" + j].Value = item.nit_propietario_cuenta;
+                                ws.Cells["L" + j].Value = item.terceroFK.APELLIDO1;
+                                ws.Cells["M" + j].Value = item.terceroFK.APELLIDO2;
+                                ws.Cells["N" + j].Value = item.terceroFK.NOMBRE1;
+                                ws.Cells["O" + j].Value = "";
                                 ws.Cells["P" + j].Value = "";
-                                ws.Cells["Q" + j].Value = "";
-                                ws.Cells["R" + j].Value = item.terceroFK.profesionFK.Nom_prof;
-                                ws.Cells["S" + j].Value = Convert.ToInt32(item.terceroFK.SALARIO).ToString("N0", formato);
-                                ws.Cells["T" + j].Value = 13.ToString();
-                                ws.Cells["U" + j].Value = item.nit_propietario_cuenta;
+                                ws.Cells["Q" + j].Value = item.terceroFK.profesionFK.Nom_prof;
+                                ws.Cells["R" + j].Value = Convert.ToInt32(item.terceroFK.SALARIO).ToString("N0", formato);
+                                ws.Cells["S" + j].Value = 13.ToString();
+                                ws.Cells["T" + j].Value = item.nit_propietario_cuenta;
+                                ws.Cells["U" + j].Value = "";
                                 ws.Cells["V" + j].Value = "";
                                 ws.Cells["W" + j].Value = "";
                                 ws.Cells["X" + j].Value = "";
-                                ws.Cells["Y" + j].Value = "";
 
                                 i++;
                                 j++;
@@ -4593,44 +5263,59 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                     case 47:
                         #region Catálogo de cuentas
 
-
                         var nivelCC = coll["nivel2"];
                         costo = coll["costo"];
 
-                        ws = pack.Workbook.Worksheets.Add("Hoja 1");
+                        if (fechaDesde != "" && fechaHasta != "")
+                        {
+                            DateTime df = Convert.ToDateTime(fechaDesde);
+                            DateTime dh = Convert.ToDateTime(fechaHasta);
+                            filtro = df.ToShortDateString() + " - " + dh.ToShortDateString();
+                        }
+                        else if (fechaDesde != "" && fechaHasta == "")
+                        {
+                            DateTime df = Convert.ToDateTime(fechaDesde);
+                            filtro = df.ToShortDateString();
+                        }
+                        else if (fechaDesde == "" && fechaHasta != "")
+                        {
+                            DateTime dh = Convert.ToDateTime(fechaHasta);
+                            filtro = dh.ToShortDateString();
+                        }
 
-                        ws.Cells["A" + 2].Value = "FONDO DE EMPLEADOS DE LA RAMA JUDICIAL DE NARIÑO Y PUTUMAYO (FERAJUNAP)";
-                        ws.Cells["A" + 3].Value = "CATÁLOGO DE CUENTAS";
+                        ws = pack.Workbook.Worksheets.Add("Cátalogo_Cuentas");
 
-                        ws.Cells["A2:D2"].Merge = true;//une columnas en una fila
-                        ws.Cells["A2:D2"].Style.Font.Bold = true;
+                        // encabezado
+                        ws.Cells["A1:D1,A2:D2,A3:D3,A4:D4,A5:D5"].Merge = true;
+                        ws.Cells["A2:D2,A3:D3,A4:D4"].Style.Font.Bold = true;
+                        ws.Cells["A2:D2"].Style.Font.Name = "Arial";
                         ws.Cells["A2:D2"].Style.Font.Size = 14;
-                        ws.Cells["A2:D2"].Style.HorizontalAlignment = ExcelHorizontalAlignment.CenterContinuous;
-                        ws.Cells["A3:D3"].Merge = true;
-                        ws.Cells["A3:D3"].Style.Font.Bold = true;
-                        ws.Cells["A3:D3"].Style.Font.Size = 14;
-                        ws.Cells["A3:D3"].Style.HorizontalAlignment = ExcelHorizontalAlignment.CenterContinuous;
+                        ws.Cells["A" + 2].Value = "CATÁLOGO DE CUENTAS   " + filtro;
+                        ws.Cells[1, 1, 5, 4].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        ws.Cells[1, 1, 5, 4].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#08AED6"));
+                        ws.Cells["A2:D2,A3:D3,A4:D4,A5:D5"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                        ws.Cells["A2:D2,A3:D3,A4:D4,A7:D7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        ws.Cells["A2:D2,A3:D3,A4:D4,A7:D7"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        ws.Cells["A2:D2,A3:D3,A4:D4,A5:D5"].Style.WrapText = true;
+                        ws.Cells["A3:D3,A4:D4"].Style.Font.Size = 12;
+                        ws.Cells["A5:D5"].Style.Font.Size = 10;
+                        ws.Cells["A" + 3].Value = nombre;
+                        ws.Cells["A" + 4].Value = nit;
+                        ws.Cells["A" + 5].Value = "Fecha generado el reporte: " + fechaAct.ToShortDateString();
+                        ws.Cells["A6:D6"].Merge = true;
+                        ws.Cells[6, 2, 6, 4].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde superior
+                        ws.Cells[7, 2, 7, 4].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;//borde inferior
+                        ws.Cells["A7:E7"].Style.Border.Left.Style = ExcelBorderStyle.Thin;//bordes laterales
+                        ws.Cells["A7:D7"].Style.Font.Bold = true;
+                        ws.Cells[7, 2, 7, 4].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        ws.Cells[7, 2, 7, 4].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#D3DFE1"));
+                        //fin encabezado
 
+                        ws.Cells["B" + 7].Value = "CUENTA";
+                        ws.Cells["C" + 7].Value = "NOMBRE CUENTA";
+                        ws.Cells["D" + 7].Value = "SALDO";
 
-                        ws.Cells["B5"].Value = "CUENTA";
-                        ws.Cells["B5"].Style.HorizontalAlignment = ExcelHorizontalAlignment.CenterContinuous;
-                        ws.Cells["B5"].Style.Font.Bold = true;
-                        ws.Cells["B6"].Style.Font.Size = 10;
-
-                        ws.Cells["C5"].Value = "NOMBRE CUENTA";
-                        ws.Cells["C5"].Style.HorizontalAlignment = ExcelHorizontalAlignment.CenterContinuous;
-                        ws.Cells["C5"].Style.Font.Bold = true;
-                        ws.Cells["C6"].Style.Font.Size = 10;
-
-                        ws.Cells["D5"].Value = "SALDO";
-                        ws.Cells["D5"].Style.HorizontalAlignment = ExcelHorizontalAlignment.CenterContinuous;
-                        ws.Cells["D5"].Style.Font.Bold = true;
-                        ws.Cells["D6"].Style.Font.Size = 10;
-
-
-
-
-                        j = 7;
+                        j = 8;
                         movtosSaldos = new List<MovimientoAuxiliar>();
                         movtosActuales = new List<MovimientoAuxiliar>();
                         movtosAuxiliarActual = new List<MovimientoAuxiliar>();//sirve para cuando se escoge con terceros
@@ -4889,6 +5574,9 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                 return RedirectToAction("../Informes/Index");
             }
         }
+
+
+
     }
 
 

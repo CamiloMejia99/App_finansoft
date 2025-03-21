@@ -109,14 +109,14 @@
     });
 
     $("#IdConfiguracion").change(function () {
-
         var Id = $(this).val()
         GetPlazoAndTasa(Id);
-
         if (Id == "" || Id == null)
             $("#NumeroCuenta").val("");
-        else
+        else {
             VerificaTerceroByFichaAC();
+        }
+            
     });
 
     $("#AuxTasaEfectiva").change(function () {//Función que verifica si el valor de tasa ingresado cumple el rango registrado en la configuración escogida
@@ -240,11 +240,11 @@
 
     }
 
-    function ResetInfoAsociado() {
-        $(".reset").each(function () {
-            $(this).val("");
-        });
-    }
+    //function ResetInfoAsociado() {
+    //    $(".reset").each(function () {
+    //        $(this).val("");
+    //    });
+    //}
 
     function ResetValores() {
         $(".resetValue").each(function () {

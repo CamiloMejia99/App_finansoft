@@ -186,7 +186,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
 
         public bool sendEmail(string para, string nit)
         {
-            string subject = "Estado de cuenta cooperativa de aporte y crédito coomisol";
+            string subject = "Estado de cuenta cooperativa de aporte y crédito ASOPASCUALINOS";
             string message = "";
             var Estado = "1";
             var query = db.ConfiguracionCorreo.Where(x => x.estado == "1").ToList();
@@ -263,7 +263,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
         {
 
 
-            string subject = "Estado de cuenta cooperativa de aporte y crédito coomisol";
+            string subject = "Estado de cuenta cooperativa de aporte y crédito ASOPASCUALINOS";
             string message = "";
             var Estado = "1";
             var query = db.ConfiguracionCorreo.Where(x => x.estado == "1").ToList();

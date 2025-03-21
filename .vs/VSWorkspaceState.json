@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\FNTC.Finansoft.BLL",
-    "\\FNTC.Finansoft.BLL\\Ahorros"
+    "\\FNTC.Finansoft.DAL",
+    "\\FNTC.Finansoft.DAL\\Caja",
+    "\\FNTC.Finansoft.UI",
+    "\\FNTC.Finansoft.UI\\Identity"
   ],
-  "SelectedNode": "\\FNTC.Finansoft.BLL\\Ahorros\\BLLAhorros.cs",
-  "PreviewInSolutionExplorer": false
+  "SelectedNode": "\\FNTC.Finansoft.DAL\\Caja\\OperacionesCaja.cs",
+  "PreviewInSolutionExplorer": true
 }

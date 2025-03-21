@@ -892,7 +892,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                     ExcelWorksheet ws = pack.Workbook.Worksheets.Add("Balance De Comprobación");
                     if (chkTercero == "on")
                     {
-                        ws.Cells["A" + 2].Value = "COOPERATIVA DE APORTE Y CRÉDITO COOMISOL";
+                        ws.Cells["A" + 2].Value = "COOPERATIVA DE APORTE Y CRÉDITO ASOPASCUALINOS";
                         ws.Cells["A" + 3].Value = "BALANCE DE COMPROBACIÓN";
 
                         ws.Cells["A2:J2"].Merge = true;//une columnas en una fila
@@ -909,7 +909,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                     }
                     else
                     {
-                        ws.Cells["A" + 2].Value = "COOPERATIVA DE APORTE Y CRÉDITO COOMISOL";
+                        ws.Cells["A" + 2].Value = "COOPERATIVA DE APORTE Y CRÉDITO ASOPASCUALINOS";
                         ws.Cells["A" + 3].Value = "BALANCE DE COMPROBACIÓN";
 
                         ws.Cells["A2:H2"].Merge = true;//une columnas en una fila
@@ -1472,7 +1472,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                     var costo = coll["costo"];
 
                     ExcelWorksheet ws = pack.Workbook.Worksheets.Add("Estado de Situación Financiera");
-                    ws.Cells["A" + 2].Value = "COOPERATIVA DE APORTE Y CRÉDITO COOMISOL";
+                    ws.Cells["A" + 2].Value = "COOPERATIVA DE APORTE Y CRÉDITO ASOPASCUALINOS";
                     ws.Cells["A" + 3].Value = "ESTADO DE SITUACIÓN FINANCIERA";
                     ws.Cells["A" + 4].Value = "(En miles de pesos colombianos)";
 
@@ -1954,7 +1954,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                 {
                     List<Movimiento> movtos = new List<Movimiento>();
                     ExcelWorksheet ws = pack.Workbook.Worksheets.Add("Estado de Resultados Integral");
-                    ws.Cells["A" + 2].Value = "COOPERATIVA DE APORTE Y CRÉDITO COOMISOL";
+                    ws.Cells["A" + 2].Value = "COOPERATIVA DE APORTE Y CRÉDITO ASOPASCUALINOS";
                     ws.Cells["A" + 3].Value = "ESTADO DE RESULTADOS INTEGRAL";
 
                     ws.Cells["A2:C2"].Merge = true;//une columnas en una fila
@@ -2380,7 +2380,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
 
                     List<Movimiento> movtos = new List<Movimiento>();
                     ExcelWorksheet ws = pack.Workbook.Worksheets.Add("Estado de Resultados");
-                    ws.Cells["A" + 2].Value = "COOPERATIVA DE APORTE Y CRÉDITO COOMISOL";
+                    ws.Cells["A" + 2].Value = "COOPERATIVA DE APORTE Y CRÉDITO ASOPASCUALINOS";
                     ws.Cells["A" + 3].Value = "ESTADO DE RESULTADOS";
 
                     ws.Cells["A2:C2"].Merge = true;//une columnas en una fila
@@ -3781,7 +3781,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                     ExcelWorksheet ws = pack.Workbook.Worksheets.Add("Balance General");
                     ws.Cells["A" + 1].Value = "BALANCE";
                     ws.Cells["B" + 1].Value = "GENERAL";
-                    ws.Cells["C" + 1].Value = "COOMISOL";
+                    ws.Cells["C" + 1].Value = "ASOPASCUALINOS";
 
                     int J = 3; decimal totalActivo = 0, totalPasivo = 0;
                     int num = db.SaldosCuentas.Count();
@@ -4169,7 +4169,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                 else if (informe == 45)
                 {
                     ExcelWorksheet ws = pack.Workbook.Worksheets.Add("ReporteUIAF");
-                    ws.Cells["A" + 2].Value = "COOPERATIVA DE APORTE Y CRÉDITO COOMISOL";
+                    ws.Cells["A" + 2].Value = "COOPERATIVA DE APORTE Y CRÉDITO ASOPASCUALINOS";
                     ws.Cells["A" + 3].Value = "REPORTE TRANSACCIONES EN EFECTIVO - C.E. 014 DE 2018 PARA ORGANIZACIONES DE LA ECONOMÍA SOLIDARIA QUE NO EJERCEN ACTIVIDAD FINANCIERA DEL COPERATIVISMO";
                     ws.Cells["A" + 4].Value = "";
 
@@ -4288,7 +4288,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                     var agencia = coll["agencia"];
 
                     ExcelWorksheet ws = pack.Workbook.Worksheets.Add("Informe Individual de Cartera de Crédito");
-                    ws.Cells["A" + 2].Value = "COOPERATIVA DE APORTE Y CRÉDITO COOMISOL";
+                    ws.Cells["A" + 2].Value = "COOPERATIVA DE APORTE Y CRÉDITO ASOPASCUALINOS";
                     ws.Cells["A" + 3].Value = "INFORME INDIVIDUAL DE CARTERA DE CRÉDITO";
                     ws.Cells["A" + 4].Value = "";
 
@@ -4487,7 +4487,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                     ExcelWorksheet ws = pack.Workbook.Worksheets.Add("balanceGeneral");
                     ws.Cells["A" + 1].Value = "BALANCE";
                     ws.Cells["B" + 1].Value = "GENERAL";
-                    ws.Cells["C" + 1].Value = "COOMISOL";
+                    ws.Cells["C" + 1].Value = "ASOPASCUALINOS";
                     ws.Cells["A" + 3].Value = "CUENTA_ACT";
                     ws.Cells["B" + 3].Value = "NOM_ACT";
                     ws.Cells["C" + 3].Value = "VAL_ACT";
@@ -4802,16 +4802,17 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                 Response.Cache.SetCacheability(HttpCacheability.NoCache);
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
                 Response.AddHeader("content-disposition", "attachment;filename=CatalogCuentas.xlsx");
-                var saldo = (from mov in ctx.Movimientos
-                             join cuen in ctx.PlanCuentas on mov.CUENTA equals cuen.CODIGO
-                             select new { mov, cuen }).ToList();
-                var PUC = ctx.PlanCuentas.Select(j => new
-                {
-                    c = j.CODIGO,
-                    N = j.NOMBRE,
-                    s = j.Saldo,
+                //var saldo = (from mov in ctx.Movimientos
+                //             join cuen in ctx.PlanCuentas on mov.CUENTA equals cuen.CODIGO
+                //             select new { mov, cuen }).ToList();
+                //var PUC = ctx.PlanCuentas.Select(j => new
+                //{
+                //    c = j.CODIGO,
+                //    N = j.NOMBRE,
+                //    s = j.Saldo,
 
-                });
+                //});
+                var PUC = ctx.PlanCuentas.ToList();
 
 
                 using (ExcelPackage pack = new ExcelPackage())
@@ -4826,9 +4827,9 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                     foreach (var item in PUC)
                     {
 
-                        ws.Cells["A" + j].Value = item.c;
-                        ws.Cells["B" + j].Value = item.N;
-                        ws.Cells["c" + j].Value = item.s;
+                        ws.Cells["A" + j].Value = item.CODIGO;
+                        ws.Cells["B" + j].Value = item.NOMBRE;
+                        ws.Cells["c" + j].Value = item.Saldo;
 
 
                         j++;
@@ -4840,6 +4841,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                 }
                 //Response.Flush();
                 Response.End();
+                PUC = null;
                 return RedirectToAction("../Informes/Index");
             }
         }

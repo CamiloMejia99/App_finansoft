@@ -12,7 +12,6 @@
    */
 using FNTC.Finansoft.Accounting.BLL;
 using FNTC.Finansoft.Accounting.BLL.Comprobantes;
-using FNTC.Finansoft.Accounting.BLL.Movimientos;
 using FNTC.Finansoft.Accounting.DTO;
 using FNTC.Finansoft.Accounting.DTO.Documentos;
 using Rotativa;
@@ -22,13 +21,11 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 
 namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
 {
-    [Authorize]
     public class MovimientosController : Controller
     {
         public ActionResult EditComprobante(string tipo, string numero)
@@ -47,28 +44,28 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
             //Si es CE o RC actualizo los debitos creditos de la FP
             if (comprobante.Clase != "NC" || comprobante.Clase != "SI")
             {
-                //if (comprobante.Clase == "RC")
-                //{
-                //    var fpOld = comprobante.Entries.Where(x => x.Index == 1).First();
-                //    comprobante.Entries.RemoveAt(0);
-                //    fpOld.Debito = comprobante.Credito - comprobante.Debito; //suma de todos los creditos
-                //    comprobante.Entries.Insert(0, fpOld);
-                //}
+                if (comprobante.Clase == "RC")
+                {
+                    var fpOld = comprobante.Entries.Where(x => x.Index == 1).First();
+                    comprobante.Entries.RemoveAt(0);
+                    fpOld.Debito = comprobante.Credito - comprobante.Debito; //suma de todos los creditos
+                    comprobante.Entries.Insert(0, fpOld);
+                }
 
-                //if (comprobante.Clase == "CE")
-                //{
-                //    var fpOld = comprobante.Entries.Where(x => x.Index == 1).First();
-                //    comprobante.Entries.RemoveAt(0);
-                //    fpOld.Credito = comprobante.Debito - comprobante.Credito; //suma de todos los creditos
-                //    comprobante.Entries.Insert(0, fpOld);
-                //}
+                if (comprobante.Clase == "CE")
+                {
+                    var fpOld = comprobante.Entries.Where(x => x.Index == 1).First();
+                    comprobante.Entries.RemoveAt(0);
+                    fpOld.Credito = comprobante.Debito - comprobante.Credito; //suma de todos los creditos
+                    comprobante.Entries.Insert(0, fpOld);
+                }
             }
         }
 
 
         #region Comprobantes
 
-        public async Task<JsonResult> Asentar()
+        public ActionResult Asentar()
         {
             var result = false;
 
@@ -88,7 +85,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
                 //grabo el comprobante
                 if (comprobante.IsOK)
                 {
-                    result = await comprobante.Asentar();
+                    result = comprobante.Asentar();
                     if (result)
                     {
                         this.SetComprobanteToSession(null, "ComprobanteNuevo");
@@ -104,7 +101,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
             {
                 //estoy editando
                 var result2 = false;
-                result2 = await EditarComprobante(comprobante);
+                result2 = EditarComprobante(comprobante);
                 return Json(result2, JsonRequestBehavior.AllowGet);
             }
         }
@@ -113,7 +110,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
 
 
 
-        private async Task<bool> EditarComprobante(ComprobanteBO bo)
+        private bool EditarComprobante(ComprobanteBO bo)
         {
             var result = false;
             var comprobante = bo._comprobante;
@@ -121,7 +118,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
             if (bo.IsOK)
             {
                 var eliminarSaldos = anularMovimientoEdicion(comprobante.TIPO, comprobante.NUMERO);
-                result = await bo.Editar();
+                result = bo.Editar();
                 if (result)
                 {
                     this.SetComprobanteToSession(null, "ComprobanteNuevo");
@@ -156,9 +153,9 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
                         {
                             //plancuentas.Saldo += item.DEBITO;
                             if (saldosccs != null) { saldosccs.MCREDITO += item.DEBITO; }
-                            if(saldoscuentas!=null){saldoscuentas.MCREDITO += item.DEBITO;}
+                            if (saldoscuentas != null) { saldoscuentas.MCREDITO += item.DEBITO; }
                             if (saldosterceros != null) { saldosterceros.MCREDITO += item.DEBITO; }
-                            
+
                         }
                         else
                         {
@@ -166,7 +163,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
                             if (saldosccs != null) { saldosccs.MCREDITO -= item.CREDITO; }
                             if (saldoscuentas != null) { saldoscuentas.MCREDITO -= item.CREDITO; }
                             if (saldosterceros != null) { saldosterceros.MCREDITO -= item.CREDITO; }
-                            
+
                         }
                     }
                     else
@@ -177,7 +174,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
                             if (saldosccs != null) { saldosccs.MDEBITO += item.CREDITO; }
                             if (saldoscuentas != null) { saldoscuentas.MDEBITO += item.CREDITO; }
                             if (saldosterceros != null) { saldosterceros.MDEBITO += item.CREDITO; }
-                            
+
                         }
                         else
                         {
@@ -185,15 +182,15 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
                             if (saldosccs != null) { saldosccs.MDEBITO -= item.DEBITO; }
                             if (saldoscuentas != null) { saldoscuentas.MDEBITO -= item.DEBITO; }
                             if (saldosterceros != null) { saldosterceros.MDEBITO -= item.DEBITO; }
-                            
+
                         }
                     }
                     if (saldosccs != null) { saldosccs.SALDO = saldosccs.MDEBITO - saldosccs.MCREDITO; }
                     if (saldoscuentas != null) { saldoscuentas.SALDO = saldoscuentas.MDEBITO - saldoscuentas.MCREDITO; }
                     if (saldosterceros != null) { saldosterceros.SALDO = saldosterceros.MDEBITO - saldosterceros.MCREDITO; }
-                    
-                    
-                    
+
+
+
                 }
 
                 ctx.SaveChanges();
@@ -204,73 +201,77 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
 
         public ActionResult anularMovimientos(string tipo, string numero)
         {
-            using (var ctx = new AccountingContext())
+            try
             {
-                var comprobante = ctx.Comprobantes.Where(x => x.TIPO == tipo && x.NUMERO == numero).SingleOrDefault();
-
-                var movimientos = ctx.Movimientos.Where(x => x.TIPO == tipo && x.NUMERO == numero).ToList();
-
-                //try
-                //{
-                foreach (var item in movimientos)
+                using (var ctx = new AccountingContext())
                 {
-                    var tipocuenta = ctx.PlanCuentas.Where(c => c.CODIGO == item.CUENTA).Single().NATURALEZA;
+                    var comprobante = ctx.Comprobantes.Where(x => x.TIPO == tipo && x.NUMERO == numero).SingleOrDefault();
 
-                    var plancuentas = ctx.PlanCuentas.Where(p => p.CODIGO == item.CUENTA).Single();
-                    var saldosccs = ctx.SaldosCCs.Where(p => p.CUENTA == item.CUENTA && p.MES == item.FECHAMOVIMIENTO.Month && p.ANO == item.FECHAMOVIMIENTO.Year && p.CCOSTO == item.CCOSTO).Single();
-                    var saldoscuentas = ctx.SaldosCuentas.Where(p => p.CODIGO == item.CUENTA && p.MES == item.FECHAMOVIMIENTO.Month && p.ANO == item.FECHAMOVIMIENTO.Year).Single();
-                    var saldosterceros = ctx.SaldosTerceros.Where(p => p.CODIGO == item.CUENTA && p.TERCERO == item.TERCERO && p.MES == item.FECHAMOVIMIENTO.Month && p.ANO == item.FECHAMOVIMIENTO.Year).Single();
+                    var movimientos = ctx.Movimientos.Where(x => x.TIPO == tipo && x.NUMERO == numero).ToList();
 
-                    if (tipocuenta == "C")
+                    //try
+                    //{
+                    foreach (var item in movimientos)
                     {
-                        if (item.CREDITO == 0)
+                        var tipocuenta = ctx.PlanCuentas.Where(c => c.CODIGO == item.CUENTA).Single().NATURALEZA;
+
+                        var plancuentas = ctx.PlanCuentas.Where(p => p.CODIGO == item.CUENTA).Single();
+                        var saldosccs = ctx.SaldosCCs.Where(p => p.CUENTA == item.CUENTA && p.MES == item.FECHAMOVIMIENTO.Month && p.ANO == item.FECHAMOVIMIENTO.Year && p.CCOSTO == item.CCOSTO).Single();
+                        var saldoscuentas = ctx.SaldosCuentas.Where(p => p.CODIGO == item.CUENTA && p.MES == item.FECHAMOVIMIENTO.Month && p.ANO == item.FECHAMOVIMIENTO.Year).Single();
+                        var saldosterceros = ctx.SaldosTerceros.Where(p => p.CODIGO == item.CUENTA && p.TERCERO == item.TERCERO && p.MES == item.FECHAMOVIMIENTO.Month && p.ANO == item.FECHAMOVIMIENTO.Year).Single();
+
+                        if (tipocuenta == "C")
                         {
-                            //plancuentas.Saldo += item.DEBITO;
-                            saldosccs.MCREDITO += item.DEBITO;
-                            saldoscuentas.MCREDITO += item.DEBITO;
-                            saldosterceros.MCREDITO += item.DEBITO;
+                            if (item.CREDITO == 0)
+                            {
+                                //plancuentas.Saldo += item.DEBITO;
+                                saldosccs.MCREDITO += item.DEBITO;
+                                saldoscuentas.MCREDITO += item.DEBITO;
+                                saldosterceros.MCREDITO += item.DEBITO;
+                            }
+                            else
+                            {
+                                //plancuentas.Saldo -= item.CREDITO;
+                                saldosccs.MCREDITO -= item.CREDITO;
+                                saldoscuentas.MCREDITO -= item.CREDITO;
+                                saldosterceros.MCREDITO -= item.CREDITO;
+                            }
                         }
                         else
                         {
-                            //plancuentas.Saldo -= item.CREDITO;
-                            saldosccs.MCREDITO -= item.CREDITO;
-                            saldoscuentas.MCREDITO -= item.CREDITO;
-                            saldosterceros.MCREDITO -= item.CREDITO;
+                            if (item.DEBITO == 0)
+                            {
+                                //plancuentas.Saldo += item.CREDITO;
+                                saldosccs.MDEBITO += item.CREDITO;
+                                saldoscuentas.MDEBITO += item.CREDITO;
+                                saldosterceros.MDEBITO += item.CREDITO;
+                            }
+                            else
+                            {
+                                //plancuentas.Saldo -= item.DEBITO;
+                                saldosccs.MDEBITO -= item.DEBITO;
+                                saldoscuentas.MDEBITO -= item.DEBITO;
+                                saldosterceros.MDEBITO -= item.DEBITO;
+                            }
                         }
+                        saldosccs.SALDO = saldosccs.MDEBITO - saldosccs.MCREDITO;
+                        saldoscuentas.SALDO = saldoscuentas.MDEBITO - saldoscuentas.MCREDITO;
+                        saldosterceros.SALDO = saldosterceros.MDEBITO - saldosterceros.MCREDITO;
                     }
-                    else
-                    {
-                        if (item.DEBITO == 0)
-                        {
-                            //plancuentas.Saldo += item.CREDITO;
-                            saldosccs.MDEBITO += item.CREDITO;
-                            saldoscuentas.MDEBITO += item.CREDITO;
-                            saldosterceros.MDEBITO += item.CREDITO;
-                        }
-                        else
-                        {
-                            //plancuentas.Saldo -= item.DEBITO;
-                            saldosccs.MDEBITO -= item.DEBITO;
-                            saldoscuentas.MDEBITO -= item.DEBITO;
-                            saldosterceros.MDEBITO -= item.DEBITO;
-                        }
-                    }
-                    saldosccs.SALDO = saldosccs.MDEBITO - saldosccs.MCREDITO;
-                    saldoscuentas.SALDO = saldoscuentas.MDEBITO - saldoscuentas.MCREDITO;
-                    saldosterceros.SALDO = saldosterceros.MDEBITO - saldosterceros.MCREDITO;
+
+                    comprobante.ANULADO = true;
+
+                    ctx.SaveChanges();
+                    TempData["exito"] = "El comprobante ha sido anulado con éxito.";
+                    return RedirectToAction("Index", new { Controller = "Movimientos", Area = "Accounting" });
                 }
-
-                comprobante.ANULADO = true;
-
-                ctx.SaveChanges();
-
-                return RedirectToAction("Index", new { Controller = "Movimientos", Area = "Accounting" });
-                /*}
-                catch(Exception e)
-                {
-                    return View();
-                }*/
             }
+            catch (Exception ex)
+            {
+                TempData["error"] = "Ha ocurrido un error al eliminar el comprobante";
+                return RedirectToAction("Index", new { Controller = "Movimientos", Area = "Accounting" });
+            }
+
         }
 
         public ActionResult Dismiss()
@@ -323,7 +324,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
                     return Json(new { error = "No existe el comprobante" }, JsonRequestBehavior.AllowGet);
                 }
             }
-            var entry = new Anotacion("", 0, 0, 0, "", "", "","");
+            var entry = new Anotacion("", 0, 0, 0, "", "", "", "");
             entry.Index = this.GetEntryConsecutive();
             //entry.Index = index;
             comprobante.Entries.Add(entry);
@@ -496,9 +497,6 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
                 Debito = comprobante.Debito,
                 Balance = comprobante.Balance
             };
-
-
-
             var clase = comprobante.Clase;
             //if ((clase != "NC" || clase != "SI") )
             //{
@@ -585,7 +583,6 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
             var tipos = new FNTC.Finansoft.Accounting.DAL.Comprobantes.ComprobantesDAL().GetAllTiposComprobantes();
             ViewBag.Tipos = tipos.Select(t => new SelectListItem() { Text = t.CODIGO + " - " + t.NOMBRE, Value = t.CODIGO });
             return View();
-
         }
 
         public ActionResult IndexMovimientosEditados()
@@ -698,9 +695,9 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
         [HttpPost]
         public ActionResult Nuevo(string tipo, FormCollection col)
         {
-            
+
             //si ya exixte uno en sesion
-            
+
             comprobante = this.GetComprobanteFromSession("ComprobanteNuevo");
             if (comprobante != null)
             {
@@ -710,7 +707,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
                 ViewBag.FP = fpago2;
                 return PartialView("FormatoComprobantes", comprobante);
             }
-         
+
             if (tipo == "")
             {
                 tipo = col[0];
@@ -744,91 +741,98 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
                     //  break;
             }
         }
-        
+
         public ActionResult Pruebas(string output = "pdf")
         {
-            ComprobanteBO cBO;
-            cBO = GetComprobanteFromSession("pruebas");
-
-            if (cBO == null)
+            using (var db = new AccountingContext())
             {
-                cBO = (ComprobanteBO)TempData["pruebas"];
-            }
+                ComprobanteBO cBO;
+                cBO = GetComprobanteFromSession("pruebas");
 
-            if (cBO == null) //si esta nulo entonces cre uno nuevo
-            {
+                if (cBO == null)
+                {
+                    cBO = (ComprobanteBO)TempData["pruebas"];
+                }
 
-                #region OLD
-                //cBO = this.CreateNuevoComprobante("CE7");
-                //#region Creo el bo
-                //var fpago2 = new FNTC.Finansoft.Accounting.BLL.Comprobantes.FormasPagoBLL().GetFormaDePagoByClaseComprobante(comprobante.Clase);
-                //ViewBag.FP = fpago2;
-
-
-                //cBO.Detalle = "Comprobante egreso pruebas";
-                //cBO.FechaComprobante = DateTime.Now;
-                //cBO.NumeroExterno = "111";
-                ////var entradas = new 
-
-                //cBO.Entries.First(x => x.Index == 1).Tercero = "13256456";
-
-                ////cBO.(new Anotacion("111", 0, 2000, 0, "01", "forma de pago", "108502545"));
-                ////cBO.Entries.Add(new Anotacion("222", 2000, 0, 0,"01", "forma de pago", "108502545"));
-                //cBO.AddEntry(new Anotacion("13256456", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
-                //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
-                //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
-                //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
-                //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
-                //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
-                //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
-                //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
-                //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
-                ////cBO.AddEntry(new Anotacion("2000", 3000M, 0M, 0, "01", "algun campo", ""));
-                //cBO.AddEntry(new Anotacion("2000", 4000M, 0M, 0, "01", "algun campo", ""));
-                //#endregion
-
-                //this.SetComprobanteToSession(cBO, "pruebas"); 
-                #endregion
-
-                cBO = new FNTC.Finansoft.Accounting.BLL.Comprobantes.ComprobantesBLL().GetComprobante("RC1", "101");
-                SetComprobanteToSession(cBO, "pruebas");
-            }
-
-            comprobante = cBO;
-            var valor = cBO.Entries.First(e => e.Index == 1);
-
-            ViewBag.SumaLetras = FNTC.Framework.Converters.Numbers.NumerosALetras.Convertir((valor.Debito == 0 ? valor.Credito : valor.Debito).ToString(), true);
-
-            if (cBO.Clase != "SI" || cBO.Clase == "NC")
-            {
-                string nit = "";
-                ViewBag.Nit = nit = cBO.Tercero == null ? cBO.Entries.First(x => x.Index == 1).Tercero : cBO.Tercero;
-                var tercero = new FNTC.Finansoft.Accounting.BLL.Terceros.TercerosBLL().GetTerceroByNit(nit);
-                ViewBag.Nombre = tercero.NOMBRE == null ? "" : tercero.NOMBRE;
-                ViewBag.Direccion = tercero.DIR == null ? "" : tercero.DIR;
-                ViewBag.Telefono = tercero.TEL + " - " + tercero.TELMOVIL;
-            }
-
-            ViewBag.Anulado = cBO._comprobante.ANULADO;
-
-            //"asdasd";
-            if (output == "pdf")
-            {
-                return new ViewAsPdf("Pruebas", cBO)
+                if (cBO == null) //si esta nulo entonces cre uno nuevo
                 {
 
-                    PageSize = Size.Letter,
-                    PageOrientation = Orientation.Portrait,
-                    PageMargins = { Left = 0, Right = 0 },
-                    IsLowQuality = true
-                }; ;
+                    #region OLD
+                    //cBO = this.CreateNuevoComprobante("CE7");
+                    //#region Creo el bo
+                    //var fpago2 = new FNTC.Finansoft.Accounting.BLL.Comprobantes.FormasPagoBLL().GetFormaDePagoByClaseComprobante(comprobante.Clase);
+                    //ViewBag.FP = fpago2;
+
+
+                    //cBO.Detalle = "Comprobante egreso pruebas";
+                    //cBO.FechaComprobante = DateTime.Now;
+                    //cBO.NumeroExterno = "111";
+                    ////var entradas = new 
+
+                    //cBO.Entries.First(x => x.Index == 1).Tercero = "13256456";
+
+                    ////cBO.(new Anotacion("111", 0, 2000, 0, "01", "forma de pago", "108502545"));
+                    ////cBO.Entries.Add(new Anotacion("222", 2000, 0, 0,"01", "forma de pago", "108502545"));
+                    //cBO.AddEntry(new Anotacion("13256456", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
+                    //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
+                    //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
+                    //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
+                    //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
+                    //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
+                    //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
+                    //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
+                    //cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545"));
+                    ////cBO.AddEntry(new Anotacion("2000", 3000M, 0M, 0, "01", "algun campo", ""));
+                    //cBO.AddEntry(new Anotacion("2000", 4000M, 0M, 0, "01", "algun campo", ""));
+                    //#endregion
+
+                    //this.SetComprobanteToSession(cBO, "pruebas"); 
+                    #endregion
+
+                    cBO = new FNTC.Finansoft.Accounting.BLL.Comprobantes.ComprobantesBLL().GetComprobante("RC1", "101");
+                    SetComprobanteToSession(cBO, "pruebas");
+                }
+
+                comprobante = cBO;
+                var valor = cBO.Entries.First(e => e.Index == 1);
+
+                ViewBag.SumaLetras = FNTC.Framework.Converters.Numbers.NumerosALetras.Convertir((cBO.Debito).ToString(), true);
+
+                if (cBO.Clase != "SI" || cBO.Clase == "NC")
+                {
+                    string nit = "";
+                    ViewBag.Nit = nit = cBO.Tercero == null ? cBO.Entries.First(x => x.Index == 1).Tercero : cBO.Tercero;
+                    var tercero = new FNTC.Finansoft.Accounting.BLL.Terceros.TercerosBLL().GetTerceroByNit(nit);
+                    ViewBag.Nombre = tercero.NOMBRE == null ? "" : tercero.NOMBRE;
+                    ViewBag.Direccion = tercero.DIR == null ? "" : tercero.DIR;
+                    ViewBag.Telefono = tercero.TEL + " - " + tercero.TELMOVIL;
+                }
+
+                ViewBag.Anulado = cBO._comprobante.ANULADO;
+
+                var comp = db.Comprobantes.Where(x => x.TIPO == cBO._comprobante.TIPO && x.NUMERO == cBO._comprobante.NUMERO).FirstOrDefault();
+                ViewBag.observacion = comp.Observacion;
+
+                //"asdasd";
+                if (output == "pdf")
+                {
+                    return new ViewAsPdf("Pruebas", cBO)
+                    {
+
+                        PageSize = Size.Letter,
+                        PageOrientation = Orientation.Portrait,
+                        PageMargins = { Left = 0, Right = 0 },
+                        IsLowQuality = true
+                    };
+                }
+
+
+                //datos comprobante
+
+
+                return View("Pruebas", cBO);
             }
 
-
-            //datos comprobante
-
-
-            return View("Pruebas", cBO);
         }
 
         public ActionResult GetDocumentoSoporte(string output = "pdf")
@@ -870,7 +874,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
             AccountingContext db = new AccountingContext();
             ConfigDocumentoSoporte configDS = new ConfigDocumentoSoporte();
             var dataConfig = db.ConfigDocumentoSoporte.Where(x => x.tipoComprobante == cBO.TipoComprobante).FirstOrDefault();
-            if(dataConfig!=null)
+            if (dataConfig != null)
             {
                 configDS = dataConfig;
             }
@@ -881,12 +885,12 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
             {
                 return new ViewAsPdf("DocumentoSoporte", cBO)
                 {
-                    FileName = "Documento_Soporte_"+cBO.TipoComprobante+"_"+cBO.Consecutivo,
+                    //FileName = "Documento_Soporte_"+cBO.TipoComprobante+"_"+cBO.Consecutivo,
                     PageSize = Size.Letter,
                     PageOrientation = Orientation.Portrait,
                     PageMargins = { Left = 0, Right = 0 },
                     IsLowQuality = true
-                }; ;
+                };
             }
 
 
@@ -912,9 +916,9 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
 
             cBO.Detalle = "Comprobante egreso pruebas";
             cBO.FechaComprobante = DateTime.Now;
-            cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545",""));
-            cBO.AddEntry(new Anotacion("2000", 3000M, 0M, 0, "01", "algun campo", "",""));
-            cBO.AddEntry(new Anotacion("2000", 4000M, 0M, 0, "01", "algun campo", "",""));
+            cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545", ""));
+            cBO.AddEntry(new Anotacion("2000", 3000M, 0M, 0, "01", "algun campo", "", ""));
+            cBO.AddEntry(new Anotacion("2000", 4000M, 0M, 0, "01", "algun campo", "", ""));
 
 
 
@@ -950,9 +954,9 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
 
             cBO.Detalle = "Recibo de Caja";
             cBO.FechaComprobante = DateTime.Now;
-            cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545",""));
-            cBO.AddEntry(new Anotacion("2000", 3000M, 0M, 0, "01", "algun campo", "",""));
-            cBO.AddEntry(new Anotacion("2000", 4000M, 0M, 0, "01", "algun campo", "",""));
+            cBO.AddEntry(new Anotacion("1234", 100000000.01M, 0, 0, "01", "forma de pago", "108502545", ""));
+            cBO.AddEntry(new Anotacion("2000", 3000M, 0M, 0, "01", "algun campo", "", ""));
+            cBO.AddEntry(new Anotacion("2000", 4000M, 0M, 0, "01", "algun campo", "", ""));
 
             if (output == "pdf")
             {
@@ -982,12 +986,6 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos
         public ActionResult indexNuevo()
         {
             return View();
-        }
-
-        
-        public async Task<JsonResult> GetProductosAsociadoAsync(string NIT, string cuenta)
-        {
-            return await new MovimientosBLL().GetProductosAsociadoAsync(NIT, cuenta);
         }
 
     }

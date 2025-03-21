@@ -5682,7 +5682,8 @@ S2.define('jquery.select2',[
             );
           }
 
-          ret = instance[options].apply(instance, args);
+            ret = instance[options].apply(instance, args);
+            
         });
 
         // Check if we should be returning `this`

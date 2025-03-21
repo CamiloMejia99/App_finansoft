@@ -106,14 +106,14 @@
                 Swal.fire({
                     icon: 'warning',
                     title: 'Advertencia!',
-                    text: 'La clasificación debe ser igual a la línea'
+                    html: ` <label class="fuenteSweetAlert">La clasificación debe ser igual a la línea</label>`,
                 })
             }
         } else {
             Swal.fire({
                 icon: 'warning',
                 title: 'Advertencia!',
-                text: 'Por favor seleccione fecha de corte'
+                html: ` <label class="fuenteSweetAlert">Por favor seleccione fecha de corte</label>`,
             })
         }
 

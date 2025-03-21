@@ -174,11 +174,7 @@ namespace FNTC.Finansoft.Accounting.BLL.PlanCuentas
             return cuentasTree;
         }
 
-        public List<CuentaMayor> GetCuentasAuxiliares()
-        {
-            var respuesta = new PlanDeCuentasDAL().GetCuentasAuxliares();
-            return respuesta;   
-        }
+
 
         public class CuentasTree
         {
@@ -194,6 +190,17 @@ namespace FNTC.Finansoft.Accounting.BLL.PlanCuentas
             }
         }
 
+        public List<CuentaMayor> GetCuentasPorNiveles(string nivel)
+        {
+            var result = new PlanDeCuentasDAL().GetCuentasPorNivel(nivel);
+            return result;
+        }
+
+        public List<CuentaMayor> GetCuentasAuxiliares()
+        {
+            var respuesta = new PlanDeCuentasDAL().GetCuentasAuxliares();
+            return respuesta;
+        }
     }
 
 

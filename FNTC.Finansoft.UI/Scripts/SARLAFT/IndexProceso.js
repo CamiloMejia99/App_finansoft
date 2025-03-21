@@ -1,4 +1,7 @@
 ﻿$(document).ready(function () {
+    var aceptar = ` <label class="fuenteSweetAlert">Aceptar</label>`
+    var cancelar = ` <label class="fuenteSweetAlert">Cancelar</label>`
+
     $(".btnDetails").click(function (eve) {
         //$("#modal-content").load("/SIAR/Sarlaft/DetailsContexto/" + $(this).data("id"));
         var id = $(this).data("id");
@@ -34,8 +37,8 @@
             text: "",
             icon: 'question',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#8ED813',
+            cancelButtonColor: '#FF2929',
             confirmButtonText: 'Si,' + info + '!',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
@@ -54,12 +57,13 @@
 
                             Swal.fire({
                                 title: 'Hecho!',
-                                text: "Se ha cambiado el estado",
+                                html: ` <label class="fuenteSweetAlert">Se ha cambiado el estado!</label>`,
                                 icon: 'success',
                                 showCancelButton: false,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Continuar'
+                                confirmButtonColor: '#8ED813',
+                                cancelButtonColor: '#FF2929',
+                                confirmButtonText: aceptar,
+                                cancelButtonText: cancelar
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     window.location.reload();

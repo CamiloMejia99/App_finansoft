@@ -39,7 +39,7 @@ namespace FNTC.Finansoft.UI
                 Exception ex = Server.GetLastError();
                 HttpException httpexception = ex as HttpException;
                 String accion = "";
-                //string path1 = @"h:\root\home\gerentefinantec-001\www\pruebascoomisol\log";
+                //string path1 = @"h:\root\home\gerentefinantec-001\www\pruebasASOPASCUALINOS\log";
                 //string path1 = @"log";
                 
                 // 4. Obtener el directorio base del programa 

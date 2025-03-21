@@ -4,12 +4,13 @@
         var id = $(this).val();
 
         Swal.fire({
-            title: 'Eliminar Registro?',
+            title: '¿Seguro desea eliminar este registro?',
             icon: 'question',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'SI'
+            confirmButtonColor: '#8ED813',
+            cancelButtonColor: '#FF2929',
+            cancelButtonText: 'CANCELAR',
+            confirmButtonText: 'ACEPTAR'
         }).then((result) => {
             if (result.value) {
 

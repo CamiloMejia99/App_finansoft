@@ -36,7 +36,7 @@
                 if (data.respuesta) {
                     $('#Cuenta> option[value=""]').attr('selected', 'selected');
                     Swal.fire(
-                        'Cuenta resitrada',
+                        'Cuenta regitrada',
                         'Esta cuenta ya se ha configurado.',
                         'info'
                     );
@@ -48,8 +48,15 @@
 
     $("#btnRegistrar").click(function () {
         var porcentaje = $("#AuxPorcentaje").val();
-        CalcularPorcentaje(porcentaje);
-        document.getElementById("btnRegistrar").disabled = true;
+        if (porcentaje != "") {
+            CalcularPorcentaje(porcentaje);
+        }
+        else {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Por favor, Ingrese un valor en porcentaje',
+            });
+        }
     });
 
 
@@ -64,11 +71,10 @@
                 if (data.respuesta) {
                     $("#theForm").submit();
                 } else {
-                    document.getElementById("btnRegistrar").disabled = false;
                     Swal.fire({
                         icon: 'warning',
                         title: 'No se puede establecer este porcentaje',
-                        text: ''+data.mensaje
+                        text: '' + data.mensaje
                     });
                 }
             });

@@ -55,6 +55,7 @@ namespace FNTC.Finansoft.Accounting.DTO.Contabilidad
         [StringLength(255)]
         public string NUMEXTERNO { get; set; }
 
+        [Required(ErrorMessage = "El campo es requerido.")]
         public decimal VRTOTAL { get; set; }
 
 
@@ -86,6 +87,8 @@ namespace FNTC.Finansoft.Accounting.DTO.Contabilidad
 
         [StringLength(255)]
         public string USUARIO { get; set; }
+
+        public string Observacion { get; set; }
 
 
         #region NO

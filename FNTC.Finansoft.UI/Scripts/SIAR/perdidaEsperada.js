@@ -102,7 +102,7 @@
             Swal.fire({
                 icon: 'warning',
                 title: 'Advertencia!',
-                text: 'Por favor seleccione fecha de corte'
+                html: ` <label class="fuenteSweetAlert">Por favor seleccione fecha de corte!</label>`,
             })
         }//fin if fechaCorte != ""
 

@@ -204,6 +204,7 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
             r.ResultCode = ResultCode.Error;
             return r;
         }
+
         public Result CreateCuentaMayor(CuentaMayor DataCM, string TipoCuenta)
         {
 
@@ -226,7 +227,7 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
             else
             if (TipoCuenta == null)
             {
-                r.ErrorsWithKey.Add("CODIGO", "Para Continuar debe de Seleccionar un Tipo de Cuenta: Obligatorio");
+                r.ErrorsWithKey.Add("CODIGO", "Para continuar debe de seleccionar un tipo de Cuenta: Obligatorio");
                 r.ResultCode = ResultCode.Error;
             }
             else
@@ -237,7 +238,7 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
                 {
                     if (DataCM.CODIGO.Length != 2)
                     {
-                        r.ErrorsWithKey.Add("CODIGO", "Un GRUPO solo puede contener dos (2) numeros \n Siendo el Primero, el numero de la CLASE (Cuenta Mayor)");
+                        r.ErrorsWithKey.Add("CODIGO", "Un GRUPO solo puede contener dos (2) números \n siendo el primero el número de la CLASE (Cuenta Mayor)");
                         r.ResultCode = ResultCode.Error;
                     }
 
@@ -299,14 +300,14 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
                     else
                     {
                         r.ResultCode = ResultCode.Error;
-                        r.ErrorsWithKey.Add("CODIGO", "CODIGO -El codigo no es correcto: el codigo debe ser numerico");
+                        r.ErrorsWithKey.Add("CODIGO", "CODIGO -El codigo no es correcto: el codigo debe ser numérico");
                     }
                 }
                 if (TipoCuenta == "CUENTA")
                 {
                     if (DataCM.CODIGO.Length != 4)
                     {
-                        r.ErrorsWithKey.Add("CODIGO", "Una CUENTA solo puede contener cuatro (4) numeros \n Siendo los primeros 2, los numeros del GRUPO");
+                        r.ErrorsWithKey.Add("CODIGO", "Una CUENTA solo puede contener cuatro (4) números \n siendo los primeros 2 los números del GRUPO");
                         r.ResultCode = ResultCode.Error;
                     }
                     if (esNumerico)
@@ -370,7 +371,7 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
                                         else
                                         {
                                             r.ResultCode = ResultCode.Duplicated;
-                                            r.ErrorsWithKey.Add("CODIGO", "No Existe el GRUPO " + "(" + GrupoC + ") " + ": Para crear una CUENTA debe estar ligada a un GRUPO");
+                                            r.ErrorsWithKey.Add("CODIGO", "No existe el GRUPO " + "(" + GrupoC + ") " + ": Para crear una CUENTA debe estar ligada a un GRUPO");
                                             return r;
                                         }
 
@@ -389,7 +390,7 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
                     else
                     {
                         r.ResultCode = ResultCode.Error;
-                        r.ErrorsWithKey.Add("CODIGO", "CODIGO -El codigo no es correcto: el codigo debe ser numerico");
+                        r.ErrorsWithKey.Add("CODIGO", "CODIGO -El codigo no es correcto: el codigo debe ser numérico");
                     }
 
                 }
@@ -398,7 +399,7 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
                 {
                     if (DataCM.CODIGO.Length != 6)
                     {
-                        r.ErrorsWithKey.Add("CODIGO", "Una SUBCUENTA solo puede contener seis (6) numeros \n Siendo los primeros 4, los numeros de la cuenta a la que esta ligada");
+                        r.ErrorsWithKey.Add("CODIGO", "Una SUBCUENTA solo puede contener seis (6) números \n siendo los primeros 4, los números de la cuenta a la que esta ligada");
                         r.ResultCode = ResultCode.Error;
                     }
                     if (esNumerico)
@@ -464,7 +465,7 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
                                         else
                                         {
                                             r.ResultCode = ResultCode.Duplicated;
-                                            r.ErrorsWithKey.Add("CODIGO", "No Existe la Cuenta " + "(" + GrupoE + ") " + ": Para crear una SUBCUENTA esta debe estar ligada a un Cuenta");
+                                            r.ErrorsWithKey.Add("CODIGO", "No Existe la Cuenta " + "(" + GrupoE + ") " + ": Para crear una SUBCUENTA esta debe estar ligada a una cuenta");
                                             return r;
                                         }
 
@@ -474,7 +475,7 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
 
                                 }
                                 else
-                                    r.ErrorsWithKey.Add("CODIGO", "Ya existe una cuenta con ese mismo CODIGO : " + DataCM.CODIGO);
+                                    r.ErrorsWithKey.Add("CODIGO", "Ya existe una cuenta con ese mismo CÓDIGO : " + DataCM.CODIGO);
                             }
                         }
 
@@ -482,7 +483,7 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
                     else
                     {
                         r.ResultCode = ResultCode.Error;
-                        r.ErrorsWithKey.Add("CODIGO", "CODIGO -El codigo no es correcto: el codigo debe ser numerico");
+                        r.ErrorsWithKey.Add("CODIGO", "CODIGO -El código no es correcto: el código debe ser numérico");
                     }
 
                 }
@@ -542,19 +543,19 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
 
                         }
                         else
-                            r.ErrorsWithKey.Add("CODIGO", "Ya existe una cuenta con ese mismo CODIGO : " + nuevaCuenta.CODIGO);
+                            r.ErrorsWithKey.Add("CODIGO", "Ya existe una cuenta con ese mismo CÓDIGO : " + nuevaCuenta.CODIGO);
                     }
                 }
                 else//numero de digitos
                 {
-                    r.ErrorsWithKey.Add("CODIGO", "CODIGO- El codigo no es correcto: + de 6 digitos");
+                    r.ErrorsWithKey.Add("CODIGO", "CÓDIGO- El código no es correcto: + de 6 digitos");
                     r.ResultCode = ResultCode.Error;
                 }
             }
             else //codigo no es numerico            
             {
                 r.ResultCode = ResultCode.Error;
-                r.ErrorsWithKey.Add("CODIGO", "CODIGO -El codigo no es correcto: el codigo debe ser numerico");
+                r.ErrorsWithKey.Add("CODIGO", "CÓDIGO -El código no es correcto: el código debe ser numérico");
             }
             r.ResultCode = ResultCode.Error;
             return r;
@@ -572,7 +573,7 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
             }
             if (String.IsNullOrEmpty(nuevaCuenta.CODIGO))
             {
-                r.ErrorsWithKey.Add("CODIGO", "CODIGO no puede estar vacio");
+                r.ErrorsWithKey.Add("CODIGO", "CÓDIGO no puede estar vacio");
                 r.ResultCode = ResultCode.Error;
             }
 
@@ -625,14 +626,14 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
                 }
                 else//numero de digitos
                 {
-                    r.ErrorsWithKey.Add("CODIGO", "CODIGO- El codigo no es correcto: + de 6 digitos");
+                    r.ErrorsWithKey.Add("CODIGO", "CÓDIGO- El código no es correcto: + de 6 digitos");
                     r.ResultCode = ResultCode.Error;
                 }
             }
             else //codigo no es numerico            
             {
                 r.ResultCode = ResultCode.Error;
-                r.ErrorsWithKey.Add("CODIGO", "CODIGO -El codigo no es correcto: el codigo debe ser numerico");
+                r.ErrorsWithKey.Add("CODIGO", "CÓDIGO -El código no es correcto: el código debe ser numérico");
             }
             r.ResultCode = ResultCode.Error;
             return r;
@@ -714,7 +715,7 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
 
         public List<CuentaMayor> GetCuentasAuxliares()
         {
-            var list = new List<CuentaMayor>(); 
+            var list = new List<CuentaMayor>();
             try
             {
                 using (var ctx = new AccountingContext())
@@ -729,24 +730,6 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
 
             return list;
         }
-
-        public CuentaMayor GetInfoCuenta(string cuenta)
-        {
-            var data = new CuentaMayor();
-            try
-            {
-                using (var ctx = new AccountingContext())
-                {
-                    data = ctx.PlanCuentas.Find(cuenta);
-                }
-            }
-            catch (Exception ex)
-            {
-                
-            }
-            return data;
-        }
-
         #endregion
 
         #region methods
@@ -881,6 +864,36 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
             return cuentas;
         }
 
+        // metodo que retorna una lista de cuentas depeniendo del numero de caracteres que contenga el codigo de la cuenta
+        public List<CuentaMayor> GetCuentasPorNivel(string nivel)
+        {
+            var cuentasFiltradas = new List<CuentaMayor>();
+            using (var ctx = new AccountingContext())
+            {
+                var cuentas = ctx.PlanCuentas.ToList();
+
+                switch (nivel)
+                {
+                    case "1":
+                        cuentasFiltradas = cuentas.Where(x => x.CODIGO.Length == 1).ToList();
+                        break;
+                    case "2":
+                        cuentasFiltradas = cuentas.Where(x => x.CODIGO.Length == 1 || x.CODIGO.Length == 2).ToList();
+                        break;
+                    case "3":
+                        cuentasFiltradas = cuentas.Where(x => x.CODIGO.Length == 1 || x.CODIGO.Length == 2 || x.CODIGO.Length == 4).ToList();
+                        break;
+                    case "4":
+                        cuentasFiltradas = cuentas.Where(x => x.CODIGO.Length == 1 || x.CODIGO.Length == 2 || x.CODIGO.Length == 4 || x.CODIGO.Length == 6).ToList();
+                        break;
+                    case "5":
+                        cuentasFiltradas = cuentas.Where(x => x.CODIGO.Length == 1 || x.CODIGO.Length == 2 || x.CODIGO.Length == 4 || x.CODIGO.Length == 6 || x.CODIGO.Length == 9).ToList();
+                        break;
+                }
+            }
+            return cuentasFiltradas;
+        }
+
         public CuentaMayor GetCuenta(string term)
         {
             using (var ctx = new AccountingContext())
@@ -955,15 +968,15 @@ namespace FNTC.Finansoft.Accounting.DAL.PlanDeCuentas
                 {
                     case 1:
                         cuentas =
-               ctx.PlanCuentas.Where(pc => pc.CODIGO.Substring(0, term.Length).Contains(term) || pc.NOMBRE.Contains(term))
-               .OrderBy(o => o.CODIGO).ToList(); break;
+                   ctx.PlanCuentas.Where(pc => pc.CODIGO.Substring(0, term.Length).Contains(term) || pc.NOMBRE.Contains(term))
+                   .OrderBy(o => o.CODIGO).ToList(); break;
                     // case 2: var auxs =
                     //ctx.PlanCuentas.Where(pc => pc.CODIGO.Substring(0, term.Length).Contains(term) || pc.NOMBRE.Contains(term))
                     //.OrderBy(o => o.CODIGO).ToList().Where(x =>  typeof; break;
                     case 3:
                         var imps =
-               ctx.CuentasImpuestos.Where(pc => pc.CODIGO.Substring(0, term.Length).Contains(term) || pc.NOMBRE.Contains(term))
-               .OrderBy(o => o.CODIGO).ToList().Select(x => (CuentaMayor)x); break;
+                   ctx.CuentasImpuestos.Where(pc => pc.CODIGO.Substring(0, term.Length).Contains(term) || pc.NOMBRE.Contains(term))
+                   .OrderBy(o => o.CODIGO).ToList().Select(x => (CuentaMayor)x); break;
                     default:
                         break;
                 }

@@ -9,24 +9,24 @@
  */
 
 #region using
-using FNTC.Finansoft.Accounting.DAL;
-using FNTC.Finansoft.Accounting.DAL.Creditos;
-using FNTC.Finansoft.Accounting.DAL.PlanDeCuentas;
 using FNTC.Finansoft.Accounting.DTO;
 using FNTC.Finansoft.Accounting.DTO.Contabilidad;
-using FNTC.Finansoft.Accounting.DTO.MCreditos;
-using FNTC.Finansoft.Accounting.DTO.OperativaDeCaja;
 using FNTC.Finansoft.BLL.Aportes;
-using FNTC.Finansoft.UI.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
+
+
+using System.Data;
+
+using System.Net;
+using System.Web;
+using FNTC.Finansoft.Accounting.DTO.OperativaDeCaja;
+using FNTC.Finansoft.UI.Areas.ControlErrores.Controllers;
 
 
 #endregion
@@ -68,6 +68,8 @@ namespace FNTC.Finansoft.Accounting.BLL
         public decimal Debito { get { return Entries.Debito; } }
 
         public bool Anulado { get { return _comprobante.ANULADO; } set { _comprobante.ANULADO = value; } }
+
+        public string Observacion { get { return _comprobante.Observacion; } set { _comprobante.Observacion = value; } }
 
         public bool IsNew { get; private set; }
         public bool IsDeleted { get; private set; }
@@ -115,7 +117,6 @@ namespace FNTC.Finansoft.Accounting.BLL
             if (clase == "RC" || clase == "CE")
             {
                 var codigo = "";
-                var infoCuenta = new CuentaMayor();
                 //obtengo la cuenta de la fpago
                 try
                 {
@@ -126,8 +127,6 @@ namespace FNTC.Finansoft.Accounting.BLL
 
                         var fp = new AccountingContext().FormasPago.Find(_tc.FormaPagoID);
                         codigo = fp.CodigoCuenta;
-                        infoCuenta = new PlanDeCuentasDAL().GetInfoCuenta(codigo);
-
 
                         //_comprobante.FPAGO = fp.ID.ToString();
                     }
@@ -142,7 +141,7 @@ namespace FNTC.Finansoft.Accounting.BLL
                         Index = 1,
                         Credito = 0,
                         Debito = 0,
-                        Descripcion = infoCuenta != null ? infoCuenta.NOMBRE : ""
+                        Descripcion = "Forma de Pago"
                     };
                     Entries.Add(entryFPAgo);
                 }
@@ -311,7 +310,7 @@ namespace FNTC.Finansoft.Accounting.BLL
         #endregion
 
         #region SETTLE
-        public async Task<bool> Asentar()
+        public bool Asentar()
         {
             //LISTA DE ERRORES
             //1. ERROR EN Verify()
@@ -321,8 +320,6 @@ namespace FNTC.Finansoft.Accounting.BLL
             //5. SALDO INSUFICIENTE EN APORTES
             //6. NO ENTRA EN EL IF NI EN EL ELSE LO CUAL ES IMPOSIBLE :V
             //0. TODO OK
-
-            List<Movimiento> listRemoverMomientos = new List<Movimiento>();    
             using (var ctx = new AccountingContext())
             {
                 /*Construyto el commprobante*/
@@ -363,10 +360,15 @@ namespace FNTC.Finansoft.Accounting.BLL
                     _comprobante.NUMEXTERNO = this.NumeroExterno;
                     _comprobante.CCOSTO = Entries.First(e => e.Index == primerIndex.Index).CentroDeCosto;
                     _comprobante.TERCERO = Entries.First(e => e.Index == primerIndex.Index).Tercero;
-                    _comprobante.FECHARealiz = Fecha.GetFechaColombia(); //?? fecha contabler y fecha de asiento
+                    _comprobante.FECHARealiz = DateTime.Now; //?? fecha contabler y fecha de asiento
 
                     //agrego los movimientos
                     //obtengo las sumas de credito 
+
+                    //lineas para pago de aportes por movimientos
+                    var MovCuotaAdmon = new Movimiento();
+                    bool BanderaAporte = false;
+                    //---------------------------------
 
                     var entries = Entries.Select(x => x.GetMovimiento()).ToList();
 
@@ -383,97 +385,76 @@ namespace FNTC.Finansoft.Accounting.BLL
                         }
 
 
-                        #region PAGOS POR MOVIMIENTOS
-                        if (item.CREDITO > 0 && item.cuentaPagare != null && item.cuentaPagare != "")
+                        //si es cuenta de aporte realizamos el retiro o consignación de aporte
+                        string cuentaAporte = item.CUENTA;
+                        var configAporte = ctx.Configuracion1.Where(x => x.idCuenta == cuentaAporte && x.activo == true).FirstOrDefault();
+                        if (configAporte != null)
                         {
-                            //Se verifica que la cuenta esté configurada en algún producto
-                            var respuesta = await new MovimientosDAL().GetProductoByCuentaAsync(item.CUENTA);
-                            if (respuesta.Correcto)
+                            var fichaAporte = ctx.FichasAportes.Where(x => x.numeroCuenta == item.cuentaPagare).FirstOrDefault();
+                            if (fichaAporte != null)
                             {
-                                switch (respuesta.IdProducto)
+                                long val = Convert.ToInt64(fichaAporte.totalAportes);
+                                long valorRecibido = 0;
+                                string operation = "";
+                                if (item.DEBITO > 0)
                                 {
-                                    case 1://caso si es cuenta de aporte ordinario
-                                        #region PAGO APORTE ORDINARIO
-                                        var pagoAporteOrdinario = await new MovimientosDAL().PagarAporteByMovimientosAsync(item.cuentaPagare, item.CREDITO, _comprobante.FECHARealiz, _comprobante.TIPO, _comprobante.NUMERO, _comprobante.CCOSTO);
-                                        if (pagoAporteOrdinario.Correcto)
-                                        {
-                                            ctx.Entry(pagoAporteOrdinario.FichaAporte).State = System.Data.Entity.EntityState.Modified;
-                                            ctx.Movimientos.Add(pagoAporteOrdinario.Movimiento);
-                                            ctx.FactOpcaja.Add(pagoAporteOrdinario.Factura);
-                                            listRemoverMomientos.Add(item);
-                                        }
-                                        else { return false; }
-                                        #endregion
-                                        break;
-                                    case 2://caso si es cuenta de aporte extraordinario
-                                        #region APORTE EXTRAORDINARIO
-                                        var pagoAporteExtra = await new MovimientosDAL().PagarAporteExtraByMovimientosAsync(item.cuentaPagare, item.CREDITO, _comprobante.FECHARealiz, _comprobante.TIPO, _comprobante.NUMERO, _comprobante.CCOSTO);
-                                        if (pagoAporteExtra.Correcto)
-                                        {
-                                            ctx.Entry(pagoAporteExtra.FichaAporteExtra).State = System.Data.Entity.EntityState.Modified;
-                                            ctx.Movimientos.Add(pagoAporteExtra.Movimiento);
-                                            ctx.FactOpcaja.Add(pagoAporteExtra.Factura);
-                                            listRemoverMomientos.Add(item);
-                                        }
-                                        else { return false; }
-                                        #endregion
-                                        break;
-                                    case 3://si es cuenta de ahorro permanente
-                                        #region PAGO AHORRO PERMANENTE
-                                        var pagoAhorro = await new MovimientosDAL().PagarAhorroByMovimientosAsync(item.cuentaPagare, item.CREDITO, _comprobante.FECHARealiz, _comprobante.TIPO, _comprobante.NUMERO, _comprobante.CCOSTO);
-                                        if (pagoAhorro.Correcto)
-                                        {
-                                            ctx.Entry(pagoAhorro.FichaAhorro).State = System.Data.Entity.EntityState.Modified;
-                                            ctx.Movimientos.Add(pagoAhorro.Movimiento);
-                                            ctx.FactOpcaja.Add(pagoAhorro.Factura);
-                                            listRemoverMomientos.Add(item);
-                                        }
-                                        else { return false; }
-                                        #endregion
-                                        break;
-                                    case 4://si es cuenta de ahorro contractual
-                                        #region PAGO AHORRO CONTRACTUAL
-                                        var pagoAhorroC = await new MovimientosDAL().PagarAhorroCByMovimientosAsync(item.cuentaPagare, item.CREDITO, _comprobante.FECHARealiz, _comprobante.TIPO, _comprobante.NUMERO, _comprobante.CCOSTO);
-                                        if (pagoAhorroC.Correcto)
-                                        {
-                                            ctx.Entry(pagoAhorroC.FichaAhorroC).State = System.Data.Entity.EntityState.Modified;
-                                            ctx.Movimientos.Add(pagoAhorroC.Movimiento);
-                                            ctx.FactOpcaja.Add(pagoAhorroC.Factura);
-                                            listRemoverMomientos.Add(item);
-                                        }
-                                        else { return false; }
-                                        #endregion
-                                        break;
-                                    case 5://si es cuenta de créditos
-                                        #region PAGO CRÉDITO
-                                        var pagoCredito = await new ProcesosCrediticiosDAL().PagoCreditoByMovimiento(item.cuentaPagare, item.CREDITO, _comprobante.FECHARealiz, _comprobante.TIPO, _comprobante.NUMERO, _comprobante.CCOSTO);
-                                        if (pagoCredito.correcto)
-                                        {
-                                            ctx.Entry(pagoCredito.TotalesCreditos).State = System.Data.Entity.EntityState.Modified;
-                                            foreach (var itemControl in pagoCredito.ControlCreditos)
-                                            {
-                                                ctx.Entry(itemControl).State = System.Data.Entity.EntityState.Modified;
-                                            }
-                                            ctx.factOpCajaConsCuotaCredito.Add(pagoCredito.Factura);
-                                            ctx.Movimientos.AddRange(pagoCredito.Movimientos);
-                                            foreach (var deleteCC in pagoCredito.ControlCreditoRemove)
-                                            {
-                                                ctx.Entry(deleteCC).State = System.Data.Entity.EntityState.Deleted;
-                                            }
-                                            listRemoverMomientos.Add(item);
-                                        }
-                                        else { return false; }
-                                        #endregion
-                                        break;
-                                    default:
-                                        break;
+
+                                    valorRecibido = Convert.ToInt64(entries.Select(x => x.DEBITO).Sum());
+                                    if (valorRecibido > val)
+                                    {
+                                        return false;
+                                    }
+                                    val -= valorRecibido;
+                                    operation = "Retiro Movimiento";
                                 }
+                                else
+                                {
+                                    val += Convert.ToInt64(item.CREDITO);
+                                    valorRecibido = Convert.ToInt64(item.CREDITO);
+                                    operation = "Consignacion Movimiento";
+
+                                    item.CREDITO -= 10000;//disminuimos el valor de administración
+
+                                    MovCuotaAdmon = new Movimiento()
+                                    {
+                                        TIPO = _comprobante.TIPO,
+                                        NUMERO = _comprobante.NUMERO,
+                                        CUENTA = "416540001",
+                                        TERCERO = item.TERCERO,
+                                        DETALLE = "CUOTAS DE ADMINISTRACION",
+                                        DEBITO = 0,
+                                        CREDITO = 10000,
+                                        BASE = 0,
+                                        CCOSTO = item.CCOSTO,
+                                        FECHAMOVIMIENTO = new DateTime(ano, mes, dia)
+                                    };
+                                    BanderaAporte = true;
+                                }
+                                fichaAporte.totalAportes = val.ToString();
+                                ctx.Entry(fichaAporte).State = System.Data.Entity.EntityState.Modified;
+
+                                var caja = new FactOpcaja()
+                                {
+                                    fecha = DateTime.Now,
+                                    factura = _comprobante.TIPO + "-" + _comprobante.NUMERO,
+                                    codigo_caja = "52005",
+                                    nit_cajero = "1",
+                                    numero_cuenta = item.cuentaPagare,
+                                    nit_propietario_cuenta = item.TERCERO,
+                                    valor_recibido = valorRecibido,
+                                    valor_efectivo = valorRecibido,
+                                    saldo_total_cuenta = val,
+                                    total = valorRecibido,
+                                    operacion = operation
+
+                                };
+
+                                ctx.FactOpcaja.Add(caja);
+
+
+
                             }
                         }
-                        
-
-                        #endregion
-
 
                         //............................................
 
@@ -498,10 +479,10 @@ namespace FNTC.Finansoft.Accounting.BLL
                         //obtengo la naturaleza
                         var naturaleza = auxiliar.NATURALEZA;
 
-                        var saldoAuxiliar = await ctx.SaldosCuentas
+                        var saldoAuxiliar = ctx.SaldosCuentas
                          .Where(st => st.CODIGO == item.CUENTA
                          && st.MES == mes && st.ANO == ano)
-                         .FirstOrDefaultAsync();
+                         .FirstOrDefault();
 
                         //si no existe para ese mes 
                         if (saldoAuxiliar == null)
@@ -517,7 +498,7 @@ namespace FNTC.Finansoft.Accounting.BLL
                                 //  SALDO = debito - credito,
                                 //  NAT = naturaleza
                             };
-                            
+#warning Revisar
                             //    saldoAuxiliar.Auxiliar = ctx.PlanCuentas.Find(item.CUENTA) as CuentaAuxiliar;
 
                             ctx.Entry(saldoAuxiliar).State = System.Data.Entity.EntityState.Added;
@@ -546,10 +527,10 @@ namespace FNTC.Finansoft.Accounting.BLL
                         #region SaldosTerceros
                         //si no  existe en SaldosTerceros lo debo crear
                         //item requiere tercero?
-                        var saldoTercero =await ctx.SaldosTerceros
+                        var saldoTercero = ctx.SaldosTerceros
                             .Where(st => st.TERCERO == item.TERCERO
                             && st.MES == mes && st.ANO == ano && st.CODIGO == item.CUENTA)
-                            .FirstOrDefaultAsync();
+                            .FirstOrDefault();
 
                         if (null == saldoTercero)
                         {
@@ -586,10 +567,10 @@ namespace FNTC.Finansoft.Accounting.BLL
                         if (!item.CCOSTO.Equals(""))
                         {
 
-                            var saldoCC =await ctx.SaldosCCs
+                            var saldoCC = ctx.SaldosCCs
                                 .Where(st => st.CCOSTO == item.CCOSTO
                                 && st.MES == mes && st.ANO == ano && st.CUENTA == item.CUENTA)
-                                .FirstOrDefaultAsync();
+                                .FirstOrDefault();
 
                             if (null == saldoCC)
                             {
@@ -625,35 +606,62 @@ namespace FNTC.Finansoft.Accounting.BLL
                         }
 
                         //////////////////////////////////////////////
-                       
+                        //var configuracion = new BLLAportes().ObtenerConfiguracion();
+                        //int CuentaInt = Int32.Parse(item.CUENTA);
+                        //if (CuentaInt == configuracion.idCuenta)
+                        //{
+                        //    var fichamod = ctx.FichasAportes.Where(st => st.idPersona == item.TERCERO).FirstOrDefault();
+                        //    var totalaporte = Int32.Parse(fichamod.totalAportes);
+                        //    if (item.DEBITO == 0)
+                        //    {
+                        //        int aporte = Decimal.ToInt32(item.CREDITO);
+                        //        int suma = totalaporte + aporte;
+                        //        string myString = suma.ToString();
+                        //        fichamod.totalAportes = myString;
+                        //    }
+                        //    else if (item.CREDITO == 0)
+                        //    {
+                        //        int aporte = Decimal.ToInt32(item.DEBITO);
+                        //        if (totalaporte < aporte)
+                        //        {
+                        //            return false;
+                        //        }
+                        //        else
+                        //        {
+                        //            int suma = totalaporte - aporte;
+                        //            string myString = suma.ToString();
+                        //            fichamod.totalAportes = myString;
+                        //        }
+                        //    }
+
+                        //    ctx.Entry(fichamod).State = System.Data.Entity.EntityState.Modified;
+
+                        //}
 
                     }
-                    foreach (var item in listRemoverMomientos)
-                    { 
-                        entries.Remove(item);
-                    }
+
+                    if (BanderaAporte) { entries.Add(MovCuotaAdmon); }
                     ctx.Movimientos.AddRange(entries); //entradas
                     ctx.Comprobantes.Add(_comprobante); //comprobante
 
                     try
                     {
-                        
-                        int rowsAffected = await ctx.SaveChangesAsync();
-                        if (rowsAffected>0)
+                        int rowsAffected = ctx.SaveChanges();
+                        if (rowsAffected > 0)
                         {
                             //si no  hubo problmeas actulizo consecutivois y saldos
                             //actualizo consecutivo -- esto debe ir en caso de success
-                            var _tipoComprobante = await ctx.TiposComprobantes.FindAsync(_comprobante.TIPO);
+                            var _tipoComprobante = ctx.TiposComprobantes.Find(_comprobante.TIPO);
 
                             _tipoComprobante.CONSECUTIVO = _comprobante.NUMERO;
 
                             ctx.Entry(_tipoComprobante).State = System.Data.Entity.EntityState.Modified;
-                            int rowsActualizaSaldos = await ctx.SaveChangesAsync();
+                            int rowsActualizaSaldos = ctx.SaveChanges();
                             //Actualizo los saldos
                             #region SaldoGeneralEnPlanDecuentas
 
                             this.Mayorizar(ctx, entries);
-                            await ctx.SaveChangesAsync();
+                            ctx.SaveChanges();
                             //agrupar del auxiliar hasta la subcuenta
                             //de la subcuenta hasta la cuenta
                             //de la cuenta al auxiliar
@@ -676,7 +684,10 @@ namespace FNTC.Finansoft.Accounting.BLL
                     catch (DbEntityValidationException dbE)
                     {
                         Console.WriteLine(dbE.Message);
-
+                        string path1 = System.AppDomain.CurrentDomain.BaseDirectory + "log";
+                        Log oLog = new Log(path1);
+                        string men = dbE.Message + " ---_" + dbE.TargetSite;
+                        oLog.Add(men);
                     }
 
                 }
@@ -1779,9 +1790,8 @@ namespace FNTC.Finansoft.Accounting.BLL
 
         }
 
-        public async Task<bool> Editar()
+        public bool Editar()
         {
-            List<Movimiento> listRemoverMomientos = new List<Movimiento>();
             using (var ctx = new AccountingContext())
             {
                 /*Construyto el commprobante*/
@@ -1809,7 +1819,6 @@ namespace FNTC.Finansoft.Accounting.BLL
 
                     }
                     */
-                    var fechaActual = Fecha.GetFechaColombia();
                     var ano = _comprobante.FECHARealiz.Year;
                     var mes = _comprobante.FECHARealiz.Month;
                     var dia = _comprobante.FECHARealiz.Day;
@@ -1826,12 +1835,12 @@ namespace FNTC.Finansoft.Accounting.BLL
                     _comprobante.NUMEXTERNO = this.NumeroExterno;
                     _comprobante.CCOSTO = Entries.First(e => e.Index == primerIndex.Index).CentroDeCosto;
                     _comprobante.TERCERO = Entries.First(e => e.Index == primerIndex.Index).Tercero;
-                    _comprobante.FECHARealiz = new DateTime(ano,mes,dia,fechaActual.Hour,fechaActual.Minute,fechaActual.Second); //?? fecha contabler y fecha de asiento
+                    _comprobante.FECHARealiz = DateTime.Now; //?? fecha contabler y fecha de asiento
 
                     //agrego los movimientos
                     //obtengo las sumas de credito 
 
-                    var LastRegister = await (from pc in ctx.ComprobantesEditadosAC where pc.NUMERO == _comprobante.NUMERO && pc.TIPO == _comprobante.TIPO select pc).CountAsync();
+                    var LastRegister = (from pc in ctx.ComprobantesEditadosAC where pc.NUMERO == _comprobante.NUMERO && pc.TIPO == _comprobante.TIPO select pc).Count();
 
                     string consecutivoNumeroEditado = "1";
                     if (LastRegister == 0)
@@ -1843,7 +1852,7 @@ namespace FNTC.Finansoft.Accounting.BLL
                         var suma = LastRegister + 1;
                         consecutivoNumeroEditado = suma.ToString();
                     }
-                    var ComprobanteAnterior = await (from pc in ctx.Comprobantes where pc.NUMERO == _comprobante.NUMERO && pc.TIPO == _comprobante.TIPO select pc).SingleAsync();
+                    var ComprobanteAnterior = (from pc in ctx.Comprobantes where pc.NUMERO == _comprobante.NUMERO && pc.TIPO == _comprobante.TIPO select pc).Single();
 
                     var NewComprobante = new ComprobantesEditados()
                     {
@@ -1875,12 +1884,12 @@ namespace FNTC.Finansoft.Accounting.BLL
                     };
 
                     ctx.ComprobantesEditadosAC.Add(NewComprobante);
-                    var ComprobanteActual =await (from pc in ctx.Comprobantes where pc.NUMERO == _comprobante.NUMERO && pc.TIPO == _comprobante.TIPO select pc).FirstOrDefaultAsync();
+                    var ComprobanteAEliminar = (from pc in ctx.Comprobantes where pc.NUMERO == _comprobante.NUMERO && pc.TIPO == _comprobante.TIPO select pc).Single();
 
 
                     var entries = Entries.Select(x => x.GetMovimiento()).ToList();
 
-                    List<Movimiento> MovimientosAnteriores =await (from pc in ctx.Movimientos where pc.NUMERO == _comprobante.NUMERO && pc.TIPO == _comprobante.TIPO select pc).ToListAsync();
+                    List<Movimiento> MovimientosAnteriores = (from pc in ctx.Movimientos where pc.NUMERO == _comprobante.NUMERO && pc.TIPO == _comprobante.TIPO select pc).ToList();
                     List<MovimientosEditados> MovimientosEditar = new List<MovimientosEditados>();
                     foreach (var mov in MovimientosAnteriores)
                     {
@@ -1906,123 +1915,24 @@ namespace FNTC.Finansoft.Accounting.BLL
                     ctx.MovimientosEditadosAC.AddRange(MovimientosEditar);
                     foreach (var mov2 in MovimientosAnteriores)
                     {
-                        //ctx.Movimientos.Remove(mov2);
-                        ctx.Entry(mov2).State = System.Data.Entity.EntityState.Deleted;
+                        ctx.Movimientos.Remove(mov2);
                     }
-                    #region modifcar comprobante
-                    ComprobanteActual.ANO = _comprobante.ANO;
-                    ComprobanteActual.MES = _comprobante.MES;
-                    ComprobanteActual.DIA = _comprobante.DIA;
-                    ComprobanteActual.CCOSTO = _comprobante.CCOSTO;
-                    ComprobanteActual.DETALLE = _comprobante.DETALLE;
-                    ComprobanteActual.TERCERO = _comprobante.TERCERO; 
-                    ComprobanteActual.FPAGO= _comprobante.FPAGO;
-                    ComprobanteActual.VRTOTAL = _comprobante.VRTOTAL;
-                    ComprobanteActual.FECHARealiz = _comprobante.FECHARealiz;
-                    #endregion
-                    //ctx.Entry(ComprobanteAEliminar).State = System.Data.Entity.EntityState.Deleted;
-                    //await ctx.SaveChangesAsync();
+
+                    ctx.Comprobantes.Remove(ComprobanteAEliminar);
+                    ctx.SaveChanges();
 
 
 
                     //pbtengo la cuenta de SCuentas y actualizo
                     foreach (var item in entries)
                     {
-                        var auxiliar = await ctx.PlanCuentas.FindAsync(item.CUENTA);
+                        var auxiliar = ctx.PlanCuentas.Find(item.CUENTA);
                         if (null == auxiliar)
                         {
                             //no he creado el auxiliar -esto no deberia pasar NUNCA!!!
                             return false;
                             throw new InvalidOperationException("No existe el auxiliar");
                         }
-
-                        #region PAGOS POR MOVIMIENTOS
-                        if (item.CREDITO > 0 && item.cuentaPagare!= null && item.cuentaPagare!="" ) {
-                            //Se verifica que la cuenta esté configurada en algún producto
-                            var respuesta = await new MovimientosDAL().GetProductoByCuentaAsync(item.CUENTA);
-                            if (respuesta.Correcto)
-                            {
-                                switch (respuesta.IdProducto)
-                                {
-                                    case 1://caso si es cuenta de aporte ordinario
-                                        #region PAGO APORTE ORDINARIO
-                                        var pagoAporteOrdinario = await new MovimientosDAL().PagarAporteByMovimientosAsync(item.cuentaPagare, item.CREDITO, _comprobante.FECHARealiz, _comprobante.TIPO, _comprobante.NUMERO, _comprobante.CCOSTO);
-                                        if (pagoAporteOrdinario.Correcto)
-                                        {
-                                            ctx.Entry(pagoAporteOrdinario.FichaAporte).State = System.Data.Entity.EntityState.Modified;
-                                            ctx.Movimientos.Add(pagoAporteOrdinario.Movimiento);
-                                            ctx.FactOpcaja.Add(pagoAporteOrdinario.Factura);
-                                            listRemoverMomientos.Add(item);
-                                        }
-                                        else { return false; }
-                                        #endregion
-                                        break;
-                                    case 2://caso si es cuenta de aporte extraordinario
-                                        #region APORTE EXTRAORDINARIO
-                                        var pagoAporteExtra = await new MovimientosDAL().PagarAporteExtraByMovimientosAsync(item.cuentaPagare, item.CREDITO, _comprobante.FECHARealiz, _comprobante.TIPO, _comprobante.NUMERO, _comprobante.CCOSTO);
-                                        if (pagoAporteExtra.Correcto)
-                                        {
-                                            ctx.Entry(pagoAporteExtra.FichaAporteExtra).State = System.Data.Entity.EntityState.Modified;
-                                            ctx.Movimientos.Add(pagoAporteExtra.Movimiento);
-                                            ctx.FactOpcaja.Add(pagoAporteExtra.Factura);
-                                            listRemoverMomientos.Add(item);
-                                        }
-                                        else { return false; }
-                                        #endregion
-                                        break;
-                                    case 3://si es cuenta de ahorro permanente
-                                        #region PAGO AHORRO PERMANENTE
-                                        var pagoAhorro = await new MovimientosDAL().PagarAhorroByMovimientosAsync(item.cuentaPagare, item.CREDITO, _comprobante.FECHARealiz, _comprobante.TIPO, _comprobante.NUMERO, _comprobante.CCOSTO);
-                                        if (pagoAhorro.Correcto)
-                                        {
-                                            ctx.Entry(pagoAhorro.FichaAhorro).State = System.Data.Entity.EntityState.Modified;
-                                            ctx.Movimientos.Add(pagoAhorro.Movimiento);
-                                            ctx.FactOpcaja.Add(pagoAhorro.Factura);
-                                            listRemoverMomientos.Add(item);
-                                        }
-                                        else { return false; }
-                                        #endregion
-                                        break;
-                                    case 4://si es cuenta de ahorro contractual
-                                        #region PAGO AHORRO CONTRACTUAL
-                                        var pagoAhorroC = await new MovimientosDAL().PagarAhorroCByMovimientosAsync(item.cuentaPagare, item.CREDITO, _comprobante.FECHARealiz, _comprobante.TIPO, _comprobante.NUMERO, _comprobante.CCOSTO);
-                                        if (pagoAhorroC.Correcto)
-                                        {
-                                            ctx.Entry(pagoAhorroC.FichaAhorroC).State = System.Data.Entity.EntityState.Modified;
-                                            ctx.Movimientos.Add(pagoAhorroC.Movimiento);
-                                            ctx.FactOpcaja.Add(pagoAhorroC.Factura);
-                                            listRemoverMomientos.Add(item);
-                                        }
-                                        else { return false; }
-                                        #endregion
-                                        break;
-                                    case 5://si es cuenta de créditos
-                                        #region PAGO CRÉDITO
-                                        var pagoCredito = await new ProcesosCrediticiosDAL().PagoCreditoByMovimiento(item.cuentaPagare, item.CREDITO, _comprobante.FECHARealiz, _comprobante.TIPO, _comprobante.NUMERO, _comprobante.CCOSTO);
-                                        if (pagoCredito.correcto)
-                                        {
-                                            ctx.Entry(pagoCredito.TotalesCreditos).State = System.Data.Entity.EntityState.Modified;
-                                            foreach (var itemControl in pagoCredito.ControlCreditos)
-                                            {
-                                                ctx.Entry(itemControl).State = System.Data.Entity.EntityState.Modified;
-                                            }
-                                            ctx.factOpCajaConsCuotaCredito.Add(pagoCredito.Factura);
-                                            ctx.Movimientos.AddRange(pagoCredito.Movimientos);
-                                            foreach (var deleteCC in pagoCredito.ControlCreditoRemove)
-                                            {
-                                                ctx.Entry(deleteCC).State = System.Data.Entity.EntityState.Deleted;
-                                            }
-                                            listRemoverMomientos.Add(item);
-                                        }
-                                        else { return false; }
-                                        #endregion
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-                        }
-                        #endregion
 
                         //generales
                         item.TIPO = _comprobante.TIPO;
@@ -2045,10 +1955,10 @@ namespace FNTC.Finansoft.Accounting.BLL
                         //obtengo la naturaleza
                         var naturaleza = auxiliar.NATURALEZA;
 
-                        var saldoAuxiliar =await ctx.SaldosCuentas
+                        var saldoAuxiliar = ctx.SaldosCuentas
                          .Where(st => st.CODIGO == item.CUENTA
                          && st.MES == mes && st.ANO == ano)
-                         .FirstOrDefaultAsync();
+                         .FirstOrDefault();
 
                         //si no existe para ese mes 
                         if (saldoAuxiliar == null)
@@ -2093,10 +2003,10 @@ namespace FNTC.Finansoft.Accounting.BLL
                         #region SaldosTerceros
                         //si no  existe en SaldosTerceros lo debo crear
                         //item requiere tercero?
-                        var saldoTercero = await ctx.SaldosTerceros
+                        var saldoTercero = ctx.SaldosTerceros
                             .Where(st => st.TERCERO == item.TERCERO
                             && st.MES == mes && st.ANO == ano && st.CODIGO == item.CUENTA)
-                            .FirstOrDefaultAsync();
+                            .FirstOrDefault();
 
                         if (null == saldoTercero)
                         {
@@ -2133,10 +2043,10 @@ namespace FNTC.Finansoft.Accounting.BLL
                         if (!item.CCOSTO.Equals(""))
                         {
 
-                            var saldoCC = await ctx.SaldosCCs
+                            var saldoCC = ctx.SaldosCCs
                                 .Where(st => st.CCOSTO == item.CCOSTO
                                 && st.MES == mes && st.ANO == ano && st.CUENTA == item.CUENTA)
-                                .FirstOrDefaultAsync();
+                                .FirstOrDefault();
 
                             if (null == saldoCC)
                             {
@@ -2172,36 +2082,61 @@ namespace FNTC.Finansoft.Accounting.BLL
                         }
 
                         //////////////////////////////////////////////
-                        
+                        var configuracion = new BLLAportes().ObtenerConfiguracion();
+                        int CuentaInt = Int32.Parse(item.CUENTA);
+                        if (CuentaInt == configuracion.idCuenta)
+                        {
+                            var fichamod = ctx.FichasAportes.Where(st => st.idPersona == item.TERCERO).FirstOrDefault();
+                            var totalaporte = Int32.Parse(fichamod.totalAportes);
+                            if (item.DEBITO == 0)
+                            {
+                                int aporte = Decimal.ToInt32(item.CREDITO);
+                                int suma = totalaporte + aporte;
+                                string myString = suma.ToString();
+                                fichamod.totalAportes = myString;
+                            }
+                            else if (item.CREDITO == 0)
+                            {
+                                int aporte = Decimal.ToInt32(item.DEBITO);
+                                if (totalaporte < aporte)
+                                {
+                                    return false;
+                                }
+                                else
+                                {
+                                    int suma = totalaporte - aporte;
+                                    string myString = suma.ToString();
+                                    fichamod.totalAportes = myString;
+                                }
+                            }
+
+                            ctx.Entry(fichamod).State = System.Data.Entity.EntityState.Modified;
+
+                        }
 
                     }
 
-                    foreach (var item in listRemoverMomientos)
-                    {
-                        entries.Remove(item);
-                    }
                     ctx.Movimientos.AddRange(entries); //entradas
-                    ctx.Entry(ComprobanteActual).State = System.Data.Entity.EntityState.Modified;//comprobante
-                    //ctx.Comprobantes.Add(_comprobante); //comprobante
+                    ctx.Comprobantes.Add(_comprobante); //comprobante
 
                     try
                     {
-                        int rowsAffected = await ctx.SaveChangesAsync();
+                        int rowsAffected = ctx.SaveChanges();
                         if (rowsAffected > 0)
                         {
                             //si no  hubo problmeas actulizo consecutivois y saldos
                             //actualizo consecutivo -- esto debe ir en caso de success
-                            var _tipoComprobante = await ctx.TiposComprobantes.FindAsync(_comprobante.TIPO);
+                            var _tipoComprobante = ctx.TiposComprobantes.Find(_comprobante.TIPO);
 
                             _tipoComprobante.CONSECUTIVO = _comprobante.NUMERO;
 
                             ctx.Entry(_tipoComprobante).State = System.Data.Entity.EntityState.Modified;
-                            int rowsActualizaSaldos = await ctx.SaveChangesAsync();
+                            int rowsActualizaSaldos = ctx.SaveChanges();
                             //Actualizo los saldos
                             #region SaldoGeneralEnPlanDecuentas
 
                             this.Mayorizar(ctx, entries);
-                            await ctx.SaveChangesAsync();
+                            ctx.SaveChanges();
                             //agrupar del auxiliar hasta la subcuenta
                             //de la subcuenta hasta la cuenta
                             //de la cuenta al auxiliar
@@ -2223,8 +2158,8 @@ namespace FNTC.Finansoft.Accounting.BLL
                     }
                     catch (DbEntityValidationException dbE)
                     {
-                        //Console.WriteLine(dbE.Message);
-                        return false;
+                        Console.WriteLine(dbE.Message);
+
                     }
 
                 }

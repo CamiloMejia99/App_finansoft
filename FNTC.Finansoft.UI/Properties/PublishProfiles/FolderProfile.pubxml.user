@@ -4,12 +4,49 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>D:\PUBLICADOS</_PublishTargetUrl>
-    <History>True|2022-07-19T13:19:44.7893480Z;True|2022-07-15T07:54:07.2092555-05:00;True|2022-07-11T09:28:11.0920679-05:00;True|2022-07-07T08:36:57.3110482-05:00;False|2022-07-05T09:09:53.4599742-05:00;True|2022-06-17T09:59:56.7060006-05:00;True|2022-04-27T14:03:58.6380324-05:00;</History>
+    <_PublishTargetUrl>D:\PUBLICADOS_PRUEBA</_PublishTargetUrl>
+    <History>True|2025-03-03T19:12:34.0970520Z||;True|2025-03-03T14:06:15.4325875-05:00||;True|2025-02-28T17:14:19.1411110-05:00||;False|2025-02-28T09:41:32.1085615-05:00||;False|2025-02-28T09:41:08.0120455-05:00||;True|2022-07-19T08:19:44.7893480-05:00||;True|2022-07-15T07:54:07.2092555-05:00||;True|2022-07-11T09:28:11.0920679-05:00||;True|2022-07-07T08:36:57.3110482-05:00||;False|2022-07-05T09:09:53.4599742-05:00||;True|2022-06-17T09:59:56.7060006-05:00||;True|2022-04-27T14:03:58.6380324-05:00||;</History>
+    <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Browsers/qt.browser">
       <publishTime>01/26/2021 10:36:00</publishTime>
+    </File>
+    <File Include="Areas/Accounting/AccountingAreaRegistration.cs">
+      <publishTime>01/12/2021 16:04:00</publishTime>
+    </File>
+    <File Include="Areas/Accounting/Controllers/Api/MovimientosController.cs">
+      <publishTime>11/23/2021 10:41:06</publishTime>
+    </File>
+    <File Include="Areas/Accounting/Controllers/CentrosCosto/CentroCostoController.cs">
+      <publishTime>01/12/2021 16:04:00</publishTime>
+    </File>
+    <File Include="Areas/Accounting/Controllers/Informes/Informes2Controller.cs">
+      <publishTime>02/13/2025 17:48:47</publishTime>
+    </File>
+    <File Include="Areas/Accounting/Controllers/Informes/InformesCarteraController.cs">
+      <publishTime>09/27/2021 09:19:34</publishTime>
+    </File>
+    <File Include="Areas/Accounting/Controllers/Informes/InformesController.cs">
+      <publishTime>02/27/2025 18:17:09</publishTime>
+    </File>
+    <File Include="Areas/Accounting/Controllers/Movimientos/ComprobantesController.cs">
+      <publishTime>05/31/2022 15:17:44</publishTime>
+    </File>
+    <File Include="Areas/Accounting/Controllers/Movimientos/MovimientosController.cs">
+      <publishTime>02/10/2025 11:42:55</publishTime>
+    </File>
+    <File Include="Areas/Accounting/Controllers/PlandeCuentas/PlanDeCuentasController.cs">
+      <publishTime>05/20/2022 09:51:45</publishTime>
+    </File>
+    <File Include="Areas/Accounting/Controllers/SessionController.cs">
+      <publishTime>01/12/2021 16:04:00</publishTime>
+    </File>
+    <File Include="Areas/Accounting/Controllers/TiposComprobantes/FormasPagoController.cs">
+      <publishTime>01/12/2021 16:04:00</publishTime>
+    </File>
+    <File Include="Areas/Accounting/Controllers/TiposComprobantes/TiposComprobantesController.cs">
+      <publishTime>01/12/2021 16:04:00</publishTime>
     </File>
     <File Include="Areas/Accounting/Views/CentroCosto/CentroCostoForm.cshtml">
       <publishTime>01/12/2021 16:04:00</publishTime>
@@ -36,13 +73,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/12/2021 16:04:00</publishTime>
     </File>
     <File Include="Areas/Accounting/Views/Informes/CertificadoRetenciones.cshtml">
-      <publishTime>06/15/2021 17:14:45</publishTime>
+      <publishTime>09/14/2023 07:05:00</publishTime>
     </File>
     <File Include="Areas/Accounting/Views/Informes/Index.cshtml">
-      <publishTime>04/19/2022 15:24:21</publishTime>
+      <publishTime>02/13/2025 17:31:51</publishTime>
     </File>
     <File Include="Areas/Accounting/Views/Informes/Test.cshtml">
-      <publishTime>01/12/2021 16:04:00</publishTime>
+      <publishTime>09/14/2023 07:05:00</publishTime>
     </File>
     <File Include="Areas/Accounting/Views/Informes2/Index.cshtml">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -54,7 +91,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/15/2021 17:17:46</publishTime>
     </File>
     <File Include="Areas/Accounting/Views/Movimientos/FormatoComprobantes.cshtml">
-      <publishTime>07/15/2022 11:39:50</publishTime>
+      <publishTime>02/22/2025 09:05:53</publishTime>
     </File>
     <File Include="Areas/Accounting/Views/Movimientos/Index.cshtml">
       <publishTime>05/31/2022 15:17:44</publishTime>
@@ -72,7 +109,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/12/2021 16:04:00</publishTime>
     </File>
     <File Include="Areas/Accounting/Views/Movimientos/Pruebas.cshtml">
-      <publishTime>04/18/2022 09:05:54</publishTime>
+      <publishTime>12/02/2024 15:02:40</publishTime>
     </File>
     <File Include="Areas/Accounting/Views/PlanDeCuentas/Auxiliares.cshtml">
       <publishTime>01/12/2021 16:04:00</publishTime>
@@ -216,7 +253,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/10/2021 11:42:11</publishTime>
     </File>
     <File Include="Areas/Aportes/Views/Aportes/Index.cshtml">
-      <publishTime>05/31/2022 15:19:18</publishTime>
+      <publishTime>02/10/2025 10:57:57</publishTime>
     </File>
     <File Include="Areas/Aportes/Views/Aportes/OtrasCuentas.cshtml">
       <publishTime>12/10/2021 11:42:11</publishTime>
@@ -378,7 +415,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/12/2021 16:04:00</publishTime>
     </File>
     <File Include="Areas/Creditos/Views/Creditos/ImprimirAmortizacion.cshtml">
-      <publishTime>06/16/2022 11:02:53</publishTime>
+      <publishTime>12/02/2024 15:01:55</publishTime>
     </File>
     <File Include="Areas/Creditos/Views/Creditos/Index.cshtml">
       <publishTime>04/19/2022 15:24:21</publishTime>
@@ -576,7 +613,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/12/2021 16:04:00</publishTime>
     </File>
     <File Include="Areas/Creditos/Views/ProcesosCrediticios/ModificarValoresCredito.cshtml">
-      <publishTime>07/14/2022 11:44:26</publishTime>
+      <publishTime>07/29/2022 15:08:27</publishTime>
     </File>
     <File Include="Areas/Creditos/Views/Real/Create.cshtml">
       <publishTime>01/12/2021 16:04:00</publishTime>
@@ -891,7 +928,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/28/2021 14:50:49</publishTime>
     </File>
     <File Include="Areas/EstadoCuenta/Views/EstadoDeCuenta/Index.cshtml">
-      <publishTime>06/13/2022 15:21:57</publishTime>
+      <publishTime>12/02/2024 14:25:33</publishTime>
     </File>
     <File Include="Areas/EstadoCuenta/Views/EstadoDeCuenta/Index2.cshtml">
       <publishTime>06/15/2021 17:06:42</publishTime>
@@ -1056,7 +1093,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/07/2021 17:21:35</publishTime>
     </File>
     <File Include="Areas/FabricaCreditos/Views/Cartera/GestionSubRespuesta.cshtml">
-      <publishTime>08/17/2021 08:34:35</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Areas/FabricaCreditos/Views/Cartera/HistorialCartera.cshtml">
       <publishTime>10/02/2021 11:19:06</publishTime>
@@ -1524,7 +1561,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/18/2022 09:05:54</publishTime>
     </File>
     <File Include="Areas/formularioVinculacion/Imagenes/LOGOCOOMISOL.png">
-      <publishTime>12/01/2021 16:04:00</publishTime>
+      <publishTime>01/12/2021 16:04:00</publishTime>
     </File>
     <File Include="Areas/formularioVinculacion/Views/formatoVinculacions/Create.cshtml">
       <publishTime>06/16/2021 16:46:24</publishTime>
@@ -1593,13 +1630,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/19/2022 15:24:21</publishTime>
     </File>
     <File Include="Areas/MediosMagneticos/Views/Shared/_Layout.cshtml">
-      <publishTime>04/05/2022 09:39:02</publishTime>
+      <publishTime>05/04/2022 09:39:02</publishTime>
     </File>
     <File Include="Areas/MediosMagneticos/Views/web.config">
       <publishTime>04/19/2022 15:24:21</publishTime>
     </File>
     <File Include="Areas/MediosMagneticos/Views/_ViewStart.cshtml">
-      <publishTime>04/05/2022 09:39:02</publishTime>
+      <publishTime>05/04/2022 09:39:02</publishTime>
     </File>
     <File Include="Areas/Nomina/Views/ArchivoPlanos/Create.cshtml">
       <publishTime>01/12/2021 16:04:00</publishTime>
@@ -1710,7 +1747,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/12/2021 16:04:00</publishTime>
     </File>
     <File Include="Areas/Nomina/Views/EnvioPlanoes/Index.cshtml">
-      <publishTime>01/12/2021 16:04:00</publishTime>
+      <publishTime>12/01/2021 16:04:00</publishTime>
     </File>
     <File Include="Areas/Nomina/Views/EnvioPlanoes/VistaEnvioPlanos.cshtml">
       <publishTime>03/25/2022 10:03:56</publishTime>
@@ -1824,7 +1861,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/07/2021 16:17:46</publishTime>
     </File>
     <File Include="Areas/OperativaDeCaja/Views/FactOpcajas/CreateCons.cshtml">
-      <publishTime>03/14/2022 15:16:06</publishTime>
+      <publishTime>12/11/2024 11:14:20</publishTime>
     </File>
     <File Include="Areas/OperativaDeCaja/Views/FactOpcajas/CreateConsAC.cshtml">
       <publishTime>05/20/2022 09:54:09</publishTime>
@@ -1860,7 +1897,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/12/2021 16:04:00</publishTime>
     </File>
     <File Include="Areas/OperativaDeCaja/Views/FactOpcajas/Details.cshtml">
-      <publishTime>06/03/2022 21:25:39</publishTime>
+      <publishTime>12/13/2024 15:55:14</publishTime>
     </File>
     <File Include="Areas/OperativaDeCaja/Views/FactOpcajas/DetailsConsAbonoCredito.cshtml">
       <publishTime>06/06/2022 09:00:00</publishTime>
@@ -2382,13 +2419,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/22/2013 08:43:40</publishTime>
     </File>
     <File Include="bin/App_Browsers.dll">
-      <publishTime>09/06/2021 14:49:08</publishTime>
+      <publishTime>06/09/2021 14:49:08</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>09/06/2021 14:49:08</publishTime>
+      <publishTime>06/09/2021 14:49:08</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>09/06/2021 14:49:08</publishTime>
+      <publishTime>06/09/2021 14:49:08</publishTime>
     </File>
     <File Include="bin/AutoMapper.dll">
       <publishTime>07/07/2016 18:53:02</publishTime>
@@ -2439,46 +2476,46 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/06/2018 05:28:04</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.BLL.dll">
-      <publishTime>07/15/2022 07:53:28</publishTime>
+      <publishTime>02/28/2025 14:28:14</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.BLL.dll.config">
-      <publishTime>06/13/2022 15:20:18</publishTime>
+      <publishTime>02/28/2025 14:24:20</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.BLL.pdb">
-      <publishTime>07/15/2022 07:53:28</publishTime>
+      <publishTime>02/28/2025 14:28:14</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.DAL.dll">
-      <publishTime>07/15/2022 07:53:26</publishTime>
+      <publishTime>02/28/2025 14:28:12</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.DAL.dll.config">
-      <publishTime>06/13/2022 15:20:18</publishTime>
+      <publishTime>02/28/2025 09:48:28</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.DAL.pdb">
-      <publishTime>07/15/2022 07:53:26</publishTime>
+      <publishTime>02/28/2025 14:28:12</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.DTO.dll">
-      <publishTime>07/15/2022 07:53:22</publishTime>
+      <publishTime>02/28/2025 14:28:10</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.DTO.dll.config">
-      <publishTime>06/13/2022 15:20:18</publishTime>
+      <publishTime>02/28/2025 09:48:36</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.DTO.pdb">
-      <publishTime>07/15/2022 07:53:22</publishTime>
+      <publishTime>02/28/2025 14:28:10</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.UI.dll">
-      <publishTime>07/19/2022 08:19:09</publishTime>
+      <publishTime>02/28/2025 14:28:19</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.UI.pdb">
-      <publishTime>07/19/2022 08:19:09</publishTime>
+      <publishTime>02/28/2025 14:28:19</publishTime>
     </File>
     <File Include="bin/FNTC.Framework.dll">
-      <publishTime>04/27/2022 14:03:04</publishTime>
+      <publishTime>02/28/2025 14:28:10</publishTime>
     </File>
     <File Include="bin/FNTC.Framework.dll.config">
-      <publishTime>04/19/2022 15:24:21</publishTime>
+      <publishTime>02/28/2025 09:48:51</publishTime>
     </File>
     <File Include="bin/FNTC.Framework.pdb">
-      <publishTime>04/27/2022 14:03:04</publishTime>
+      <publishTime>02/28/2025 14:28:10</publishTime>
     </File>
     <File Include="bin/IronPdf.Assets.Rendering.Windows.dll">
       <publishTime>12/03/2020 02:42:44</publishTime>
@@ -2544,13 +2581,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/25/2012 11:48:56</publishTime>
     </File>
     <File Include="bin/Microsoft.Win32.Primitives.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/Mvc.CascadeDropDown.dll">
       <publishTime>06/23/2016 13:49:48</publishTime>
     </File>
     <File Include="bin/netstandard.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>06/13/2016 23:06:14</publishTime>
@@ -2571,289 +2608,289 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/14/2020 00:43:14</publishTime>
     </File>
     <File Include="bin/System.AppContext.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Buffers.dll">
       <publishTime>05/15/2018 08:29:34</publishTime>
     </File>
     <File Include="bin/System.Collections.Concurrent.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Collections.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Collections.NonGeneric.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Collections.Specialized.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.ComponentModel.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.ComponentModel.EventBasedAsync.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.ComponentModel.Primitives.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.ComponentModel.TypeConverter.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Console.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Data.Common.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Diagnostics.Contracts.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Diagnostics.Debug.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Diagnostics.FileVersionInfo.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Diagnostics.Process.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Diagnostics.StackTrace.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Diagnostics.TextWriterTraceListener.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Diagnostics.Tools.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Diagnostics.TraceSource.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Diagnostics.Tracing.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Drawing.Common.dll">
       <publishTime>09/18/2018 14:38:14</publishTime>
     </File>
     <File Include="bin/System.Drawing.Primitives.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Dynamic.Runtime.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Globalization.Calendars.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Globalization.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Globalization.Extensions.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.IO.Compression.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.IO.Compression.ZipFile.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.IO.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.IO.FileSystem.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.IO.FileSystem.DriveInfo.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.IO.FileSystem.Primitives.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.IO.FileSystem.Watcher.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.IO.IsolatedStorage.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.IO.MemoryMappedFiles.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.IO.Packaging.dll">
       <publishTime>11/15/2019 03:56:30</publishTime>
     </File>
     <File Include="bin/System.IO.Pipes.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.IO.UnmanagedMemoryStream.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Linq.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Linq.Expressions.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Linq.Parallel.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Linq.Queryable.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Memory.dll">
       <publishTime>06/06/2018 08:29:04</publishTime>
     </File>
     <File Include="bin/System.Net.Http.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>01/28/2015 04:02:42</publishTime>
     </File>
     <File Include="bin/System.Net.NameResolution.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Net.NetworkInformation.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Net.Ping.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Net.Primitives.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Net.Requests.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Net.Security.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Net.Sockets.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Net.WebHeaderCollection.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Net.WebSockets.Client.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Net.WebSockets.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Numerics.Vectors.dll">
       <publishTime>07/19/2017 05:01:36</publishTime>
     </File>
     <File Include="bin/System.ObjectModel.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Reflection.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Reflection.Extensions.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Reflection.Primitives.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Resources.Reader.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Resources.ResourceManager.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Resources.Writer.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
       <publishTime>06/06/2018 08:29:04</publishTime>
     </File>
     <File Include="bin/System.Runtime.CompilerServices.VisualC.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Runtime.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Runtime.Extensions.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Runtime.Handles.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Runtime.InteropServices.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Runtime.InteropServices.RuntimeInformation.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Runtime.Numerics.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Runtime.Serialization.Formatters.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Runtime.Serialization.Json.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Runtime.Serialization.Primitives.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Runtime.Serialization.Xml.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Security.Claims.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Security.Cryptography.Algorithms.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Security.Cryptography.Csp.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Security.Cryptography.Encoding.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Security.Cryptography.Primitives.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Security.Cryptography.X509Certificates.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Security.Principal.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Security.SecureString.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Text.Encoding.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Text.Encoding.Extensions.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Text.Encodings.Web.dll">
       <publishTime>03/14/2022 14:38:27</publishTime>
     </File>
     <File Include="bin/System.Text.RegularExpressions.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Threading.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Threading.Overlapped.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Threading.Tasks.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Threading.Tasks.Parallel.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Threading.Thread.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Threading.ThreadPool.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Threading.Timer.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.ValueTuple.dll">
       <publishTime>05/15/2018 13:29:52</publishTime>
@@ -2886,28 +2923,28 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/28/2018 13:04:24</publishTime>
     </File>
     <File Include="bin/System.Xml.ReaderWriter.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Xml.XDocument.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Xml.XmlDocument.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Xml.XmlSerializer.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Xml.XPath.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/System.Xml.XPath.XDocument.dll">
-      <publishTime>12/15/2021 22:39:28</publishTime>
+      <publishTime>12/25/2024 20:19:56</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>07/17/2013 17:03:52</publishTime>
     </File>
     <File Include="bin/__browserCapabilitiesCompiler.compiled">
-      <publishTime>09/06/2021 14:49:09</publishTime>
+      <publishTime>06/09/2021 14:49:09</publishTime>
     </File>
     <File Include="Content/acc/bootstrap.min.css">
       <publishTime>02/24/2021 08:40:42</publishTime>
@@ -3966,7 +4003,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/12/2021 16:04:02</publishTime>
     </File>
     <File Include="Content/assets/js/jqGrid/i18n/grid.locale-gl.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>10/21/2023 09:34:31</publishTime>
     </File>
     <File Include="Content/assets/js/jqGrid/i18n/grid.locale-he.js">
       <publishTime>01/12/2021 16:04:02</publishTime>
@@ -5331,28 +5368,28 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/12/2021 16:04:04</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>02/10/2025 11:04:25</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/12/2022 08:50:20</publishTime>
+      <publishTime>02/28/2025 09:48:45</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>09/06/2021 14:48:49</publishTime>
+      <publishTime>06/09/2021 14:48:49</publishTime>
     </File>
     <File Include="Rotativa/wkhtmltopdf.exe">
       <publishTime>01/28/2021 14:50:51</publishTime>
     </File>
     <File Include="Scripts/acc/ajax - Copia.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/acc/ajax.js">
-      <publishTime>07/08/2022 11:26:25</publishTime>
+      <publishTime>02/16/2024 11:11:00</publishTime>
     </File>
     <File Include="Scripts/acc/autoNumeric-min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/acc/EdisonDev.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/ai.1.0.20-build00666.js">
       <publishTime>12/10/2021 11:42:11</publishTime>
@@ -5361,208 +5398,208 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/10/2021 11:42:11</publishTime>
     </File>
     <File Include="Scripts/Aportes/OtrasCuentas/Create.js">
-      <publishTime>12/10/2021 11:42:11</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Aportes/OtrasCuentas/Index.js">
-      <publishTime>12/10/2021 11:42:11</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Aportes/Validaciones.js">
-      <publishTime>05/28/2022 10:00:38</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Areas/Ahorros/AhorrosContractual.js">
-      <publishTime>05/14/2022 09:27:38</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Areas/Ahorros/FichasAhorroContractual.js">
-      <publishTime>05/14/2022 09:27:38</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Areas/EstadoDeCuenta/EstadoDeCuenta.js">
-      <publishTime>06/13/2022 15:21:57</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Areas/OperativaDeCaja/FactOpcajas/CreateConsAC.js">
-      <publishTime>05/20/2022 09:54:09</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Auditoria/Auditoria.zip">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Auditoria/Empresa/CreateEmpresa.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Auditoria/Empresa/EditEmpresa.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Auditoria/Empresa/IndexEmpresa.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Auditoria/TipoEmpresa/CreateTipoEmpresa.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Auditoria/TipoEmpresa/EditTipoEmpresa.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Auditoria/TipoEmpresa/IndexTipoEmpresa.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/autoNumeric-min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/bootstrap-datetimepicker.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/bootstrap-datetimepicker.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/bootstrap-dialog.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/bootstrap-dropdown.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/buttons.flash.min.js">
-      <publishTime>04/05/2021 16:16:24</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/buttons.html5.min.js">
-      <publishTime>04/05/2021 16:16:24</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/buttons.print.min.js">
-      <publishTime>04/05/2021 16:16:24</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/CertificadoRetenciones.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/certificados.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/chosen.jquery.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Comprobantes/BuscarComprobante.js">
       <publishTime>05/31/2022 15:17:44</publishTime>
     </File>
     <File Include="Scripts/Creditos/BusquedaFormularios.js">
-      <publishTime>04/19/2022 15:24:21</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Creditos/ModificarValoresCreditos.js">
-      <publishTime>07/14/2022 11:44:26</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Creditos/PagoCredito.js">
-      <publishTime>10/02/2021 11:19:07</publishTime>
+      <publishTime>06/05/2024 21:46:00</publishTime>
     </File>
     <File Include="Scripts/Creditos/ValidacionesAgregarCuenta.js">
-      <publishTime>05/20/2022 09:51:45</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Creditos/ValidacionesCrear.js">
-      <publishTime>04/18/2022 09:05:54</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Creditos/verifcarTercero.js">
-      <publishTime>04/19/2022 15:24:21</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/datatable.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.bootstrap.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.bootstrap.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.bootstrap4.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.bootstrap4.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.dataTables.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.dataTables.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.foundation.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.foundation.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.jqueryui.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.jqueryui.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.material.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.material.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.semanticui.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.semanticui.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.uikit.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/dataTables.uikit.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/jquery.dataTables.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/jquery.dataTables.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DataTable/js/jquery.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/dataTables.buttons.min.js">
-      <publishTime>04/05/2021 16:16:24</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/datatables.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DinamismoCliente/Dinamismos.js">
-      <publishTime>05/31/2022 15:19:18</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/DinamismoCliente/formatMilesDec.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Documentos/DocumentoSoporte/CreateConfiguracion.js">
-      <publishTime>05/05/2021 09:02:09</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Documentos/DocumentoSoporte/Index.js">
-      <publishTime>05/09/2021 22:10:33</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Documentos/DocumentoSoporte/IndexConfiguracion.js">
-      <publishTime>05/09/2021 22:10:33</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Email/Email.js">
-      <publishTime>03/10/2021 09:32:40</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/espanol.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/facturacion/Create.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/facturacion/CreateEditFacConfiguracion.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/facturacion/DeleteProducto.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/facturacion/Edit.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/facturacion/IndexFacConfiguracion.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/FormatoMiles.js">
       <publishTime>08/08/2021 17:03:49</publishTime>
@@ -5574,16 +5611,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/20/2022 09:51:45</publishTime>
     </File>
     <File Include="Scripts/FormularioRetiro.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/FormularioVinculacion/Create.js">
-      <publishTime>05/05/2021 09:02:09</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/FormularioVinculacion/Details.js">
-      <publishTime>05/05/2021 09:02:09</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/FormularioVinculacion/Edit.js">
-      <publishTime>05/05/2021 09:02:09</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/FormularioVinculacion/filtrosBusqueda.js">
       <publishTime>04/19/2022 15:24:21</publishTime>
@@ -5592,892 +5629,895 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/19/2022 15:24:21</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ar.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ar.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ar.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-bg.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-bg.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-bg.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ca.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ca.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ca.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-cn.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-cn.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-cn.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-cs.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-cs.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-cs.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-da.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-da.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-da.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-de.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-de.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-de.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-el.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-el.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-el.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-en.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-en.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-en.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-es.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-es.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-es.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-fa.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-fa.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-fa.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-fi.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-fi.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-fi.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-fr.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-fr.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-fr.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-gl.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-gl.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-gl.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-he.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-he.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-he.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-hr.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-hr.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-hr.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-hu.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-hu.min.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-hu.min.map">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-id.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-id.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-id.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-is.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-is.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-is.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-it.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-it.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-it.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ja.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ja.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ja.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-kr.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-kr.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-kr.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-lt.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-lt.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-lt.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-me.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-me.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-me.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-nl.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-nl.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-nl.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-no.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-no.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-no.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-pl.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-pl.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-pl.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-pt-br.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-pt-br.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-pt-br.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-pt.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-pt.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-pt.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ro.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ro.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ro.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ru.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ru.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ru.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-sk.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-sk.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-sk.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-sr.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-sr.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-sr.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-sv.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-sv.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-sv.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-th.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-th.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-th.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-tr.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-tr.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-tr.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-tw.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-tw.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-tw.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ua.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ua.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-ua.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-vi.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-vi.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/i18n/grid.locale-vi.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/jquery.jqgrid.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/jquery.jqgrid.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/jquery.jqgrid.src.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/grid.base.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/grid.celledit.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/grid.common.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/grid.custom.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/grid.filter.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/grid.formedit.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/grid.grouping.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/grid.import.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/grid.inlinedit.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/grid.jqueryui.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/grid.pivot.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/grid.subgrid.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/grid.tbltogrid.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/grid.treegrid.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/jqdnr.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/jqmodal.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/jquery.fmatter.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/jsonxml.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.base.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.base.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.celledit.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.celledit.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.common.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.common.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.custom.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.custom.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.filter.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.filter.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.formedit.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.formedit.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.grouping.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.grouping.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.import.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.import.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.inlinedit.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.inlinedit.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.jqueryui.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.jqueryui.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.pivot.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.pivot.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.subgrid.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.subgrid.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.tbltogrid.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.tbltogrid.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.treegrid.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/grid.treegrid.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/jqdnr.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/jqdnr.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/jqmodal.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/jqmodal.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/jquery.fmatter.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/jquery.fmatter.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/jsonxml.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/modules/min/jsonxml.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/grid.odata.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/grid.odata.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/grid.odata.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/jquery.contextmenu-ui.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/jquery.contextmenu-ui.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/jquery.contextmenu-ui.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/jquery.contextmenu.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/jquery.contextmenu.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/jquery.contextmenu.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/jquery.createcontexmenufromnavigatorbuttons.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/jquery.createcontexmenufromnavigatorbuttons.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/jquery.createcontexmenufromnavigatorbuttons.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/jquery.jqgrid.showhidecolumnmenu.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/jquery.jqgrid.showhidecolumnmenu.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/jquery.jqgrid.showhidecolumnmenu.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/ui.multiselect.css">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/ui.multiselect.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/ui.multiselect.min.css">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/ui.multiselect.min.css.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/ui.multiselect.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/free-jqGrid/plugins/ui.multiselect.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/ar.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/az.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/bg.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/ca.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/cs.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/da.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/de.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/el.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/en.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/es.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/et.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/eu.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/fa.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/fi.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/fr.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/gl.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/he.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/hi.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/hr.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/hu.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/id.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/is.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/it.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/ja.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/km.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/ko.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/lt.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/lv.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/mk.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/ms.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/nb.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/nl.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/pl.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/pt-BR.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/pt.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/ro.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/ru.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/sk.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/sr-Cyrl.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/sr.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/sv.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/th.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/tr.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/uk.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/vi.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/zh-CN.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/i18n/zh-TW.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/jinqjs.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery-1.11.0.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery-1.11.0.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery-1.11.0.min.map">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery-ui-1.12.0.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery-ui-1.12.0.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery-ui.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery.dataTables.min.js">
-      <publishTime>04/05/2021 16:16:24</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery.dataTablesform.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery.masknumber.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery.price.format2.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery.tabletojson.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery.timer.js">
-      <publishTime>04/07/2021 16:17:46</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jquery2-1-4.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jsgeneral.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/jszip.min.js">
-      <publishTime>04/05/2021 16:16:24</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Main.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/messages_es.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/metisMenu.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/modalform.js">
       <publishTime>12/10/2021 11:42:11</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/moment.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/moment.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/mustache.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/NumberFormat.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/pdfmake.min.js">
-      <publishTime>04/05/2021 16:16:24</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/printThis.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/respond.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/respond.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/SARLAFT/CreateCargoResponsable.js">
-      <publishTime>04/20/2021 22:08:07</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/SARLAFT/CreateContextoEmpresarial.js">
-      <publishTime>04/15/2021 09:53:11</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/SARLAFT/CreateMacroproceso.js">
-      <publishTime>04/20/2021 22:08:07</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/SARLAFT/CreateProceso.js">
-      <publishTime>04/23/2021 14:39:22</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/SARLAFT/IndexCargoResponsable.js">
-      <publishTime>04/20/2021 22:08:07</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/SARLAFT/IndexContextoEmpresarial.js">
-      <publishTime>04/15/2021 09:53:11</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/SARLAFT/IndexMacroprocesos.js">
-      <publishTime>04/20/2021 22:08:07</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/SARLAFT/IndexProceso.js">
-      <publishTime>04/23/2021 14:39:22</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/select2.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>01/27/2025 08:43:49</publishTime>
     </File>
     <File Include="Scripts/select2.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/SIAR/analisisCredito.js">
-      <publishTime>04/05/2021 16:16:24</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/SIAR/lineas.js">
-      <publishTime>04/05/2021 16:16:24</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/SIAR/perdidaEsperada.js">
-      <publishTime>04/05/2021 16:16:24</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/sweetalert.min.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/sweetalert2%4010.js">
-      <publishTime>04/15/2021 09:53:11</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/sweetalert2%409.js">
-      <publishTime>01/12/2021 16:04:03</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/Terceros/CreateAsociadosFallecidos.js">
-      <publishTime>01/15/2021 11:32:10</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/Terceros/DeleteTercerosFallecidos.js">
-      <publishTime>01/15/2021 11:32:10</publishTime>
+      <publishTime>09/14/2023 07:09:00</publishTime>
     </File>
     <File Include="Scripts/TimerSession/TimerSession.js">
-      <publishTime>04/22/2021 08:27:11</publishTime>
+      <publishTime>03/10/2024 10:35:00</publishTime>
+    </File>
+    <File Include="Scripts/ValidacionFechas.js">
+      <publishTime>01/09/2025 11:48:06</publishTime>
     </File>
     <File Include="Scripts/vfs_fonts.js">
-      <publishTime>04/05/2021 16:16:24</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>01/12/2021 16:04:02</publishTime>
+      <publishTime>09/14/2023 07:08:00</publishTime>
     </File>
     <File Include="Styles/Email/Email.css">
       <publishTime>02/22/2021 15:06:37</publishTime>
@@ -6600,7 +6640,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/12/2021 16:04:04</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/15/2022 07:53:33</publishTime>
+      <publishTime>02/28/2025 17:14:04</publishTime>
     </File>
   </ItemGroup>
 </Project>

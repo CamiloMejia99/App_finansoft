@@ -64,7 +64,7 @@ function agregarDataTable2(tabla, columnas, urlDatos, botones, scroll, buscador,
         select: seleccion,
         language: TraduccionDatatable
     });
-    dtTable.buttons().container().appendTo('.col-sm-6:eq(0)');    
+    dtTable.buttons().container().appendTo('.col-sm-6:eq(0)');
 }
 
 function agregarDataTable(tabla, columnas, urlDatos, botones, scroll, buscador, seleccion) {
@@ -77,7 +77,7 @@ function agregarDataTable(tabla, columnas, urlDatos, botones, scroll, buscador, 
             type: "POST",
             url: urlDatos,
             contentType: 'application/json; charset=utf-8',
-            data: function (data) { return  data = JSON.stringify(data);  }
+            data: function (data) { return data = JSON.stringify(data); }
         },
         searching: buscador,
         lengthChange: false,
@@ -85,7 +85,7 @@ function agregarDataTable(tabla, columnas, urlDatos, botones, scroll, buscador, 
         scrollX: scroll,
         columns: columnas,
         buttons: botones,
-        deferRender: true,        
+        deferRender: true,
         select: seleccion,
         language: TraduccionDatatable
     });
@@ -95,30 +95,29 @@ function agregarDataTable(tabla, columnas, urlDatos, botones, scroll, buscador, 
 //formato fecha
 function FormatoFecha(Jsonfecha) {
     var value = new Date
-    (
-         parseInt(Jsonfecha.replace(/(^.*\()|([+-].*$)/g, ''))
-    );
-    var dat =  value.getDate() +
-                           "/" +
-        (value.getMonth() + 1) +                                            
-                           "/" +
-           value.getFullYear() +
-                           " " +
-              value.getHours() +
-                           ":" +
-            value.getMinutes() +
-                           ":" +
-           value.getSeconds();
+        (
+            parseInt(Jsonfecha.replace(/(^.*\()|([+-].*$)/g, ''))
+        );
+    var dat = value.getDate() +
+        "/" +
+        (value.getMonth() + 1) +
+        "/" +
+        value.getFullYear() +
+        " " +
+        value.getHours() +
+        ":" +
+        value.getMinutes() +
+        ":" +
+        value.getSeconds();
     return dat;
 }//formato fecha
 
-function AportesIndex()
-{
+function AportesIndex() {
     //DATATABLES
     var columnas = [
         { data: "numeroCuenta" },
         { data: "idPersona" },
-        { data: "nombres" },         
+        { data: "nombres" },
         { data: "tipoPago" },
         { data: "porcentaje" },
         { data: "valor", render: function (data) { return formatearNumero(data); } },
@@ -127,7 +126,7 @@ function AportesIndex()
         { data: "fechaApertura", render: function (data) { return FormatoFecha(data); } },
         { data: "empresa" },
         { data: "dependencia" },
-        { data: "activa", render: function (data) {return data ? "Si" : "No" } }
+        { data: "activa", render: function (data) { return data ? "Si" : "No" } }
     ];
 
     var botones = [
@@ -135,7 +134,7 @@ function AportesIndex()
             text: "Nueva Afiliacion",
             action: function () {
                 $("#AfiliarAporte").modal("show");
-                
+
             }
         },
         {
@@ -144,7 +143,7 @@ function AportesIndex()
                 if (table.rows({ selected: true }).count() == 1) {
                     $("#AfiliarAporte").modal("show");
                     $("#formAfiliacion").attr("action", "/Aportes/Aportes/EditarFichaAporte");
-                    $("#idPersona").val(table.rows({ selected: true }).data()[0]["nit"]).prop("readonly",true);
+                    $("#idPersona").val(table.rows({ selected: true }).data()[0]["nit"]).prop("readonly", true);
                     $("#nomPersona").text(table.rows({ selected: true }).data()[0]["nombres"]);
                     $("#empresa").val(table.rows({ selected: true }).data()[0]["empresa"]);
                     $("#agencia").val(table.rows({ selected: true }).data()[0]["oficina"]);
@@ -171,7 +170,7 @@ function AportesIndex()
         {
             text: "Ver Detalles",
             action: function () {
-                if (table.rows({ selected: true }).count() == 1) {                    
+                if (table.rows({ selected: true }).count() == 1) {
                     var numeroFicha = table.rows({ selected: true }).data()[0]["numeroCuenta"];
                     var totalAportes = table.rows({ selected: true }).data()[0]["totalAportes"] == null ? "0" : table.rows({ selected: true }).data()[0]["totalAportes"] == null;
                     var columnas =
@@ -220,7 +219,7 @@ function AportesIndex()
 
                     $("#tablaADetallesAportes").dataTable().fnDestroy();
                     agregarDataTable2("#tablaADetallesAportes", columnas, "/Aportes/Aportes/ObtenerDetallesFichasAportes?numeroFicha=" + numeroFicha, botones, false, true, false);
-                    $("#total").text("$"+totalAportes);
+                    $("#total").text("$" + totalAportes);
                     $("#detallesFichas").show();
                     $('html,body').animate({
                         scrollTop: $("#tablaADetallesAportes").offset().top
@@ -265,9 +264,9 @@ function AportesIndex()
     //FIN DATATABLES
 
     //mascara valor
-    
+
     //$("#valor").val(formatearNumero($("#valor").val()));
-    
+
     //mascaras valor
 
     //autocomplete Persona
@@ -315,22 +314,21 @@ function AportesIndex()
     //});//autocomplete Persona
 }
 
-function AportesConfiguracion()
-{
+function AportesConfiguracion() {
     //mascaras valor
-    $("#SaldoMinimo").val(formatearNumero($("#SaldoMinimo").val()));        
+    $("#SaldoMinimo").val(formatearNumero($("#SaldoMinimo").val()));
     //$("#valor").val(formatearNumero($("#valor").val()));    
     $("#valorCuota").val(formatearNumero($("#valorCuota").val()));
     //mascaras valor
-    
+
     //calculo cuota 
     $("#valor").on("keyup", function () {
-        if ($("#idTipoCuotaCalculo").val() == 3) {            
+        if ($("#idTipoCuotaCalculo").val() == 3) {
             var cuota = parseFloat(quitarFormato($(this).val())) * parseFloat($("#porcentaje").val()) / 100;
-            $("#valorCuota").val(cuota);            
+            $("#valorCuota").val(cuota);
         }
         if ($("#idTipoCuotaCalculo").val() == 4) {
-            $("#valorCuota").val($("#valor").val());            
+            $("#valorCuota").val($("#valor").val());
         }
         $("#valorCuota").val(formatearNumero($("#valorCuota").val()));
     });
@@ -352,7 +350,7 @@ function AportesConfiguracion()
                 type: "POST",
                 dataType: "json",
                 data: {
-                    term: request.term                    
+                    term: request.term
                 },
                 success: function (data) {
                     response($.map(data, function (item) {
@@ -363,12 +361,12 @@ function AportesConfiguracion()
         },
         minLength: 1,
         select: function (event, ui) {
-            $('#nomCuenta').text(ui.item.label);            
+            $('#nomCuenta').text(ui.item.label);
             return false;
         }, change: function (event, ui) {
             if (!ui.item) {
                 $(this).val("");
-                $('#nomCuenta').text("");                
+                $('#nomCuenta').text("");
             }
         },
         open: function () {
@@ -384,8 +382,7 @@ function AportesConfiguracion()
     });//autocomplete cuenta Contable
 
     //validacion antes del submit
-    $("#guardarConfiguracion").on("click", function (e) 
-    {
+    $("#guardarConfiguracion").on("click", function (e) {
         e.preventDefault();
         if ($("#idTipoCuotaCalculo").val() == 0) {
             Swal.fire({
@@ -395,12 +392,11 @@ function AportesConfiguracion()
             });
             /*swal({ title: "Revisa", text: "Todos los campos son obligatorios", type: "warning" });*/
         }
-        else 
-        {
+        else {
             if (!$("#valor").prop("disabled")) {
                 if (parseFloat(quitarFormato($("#valorCuota").val())) < parseFloat(quitarFormato($("#SaldoMinimo").val()))) {
                     Swal.fire({ title: "Revisa", text: "El valor de la cuota debe ser mayor al saldo minimo", type: "warning" });
-                } else {                    
+                } else {
                     //swal({ title: "Estas Seguro?", text: "Las fichas de aportes se modificaran, esta seguro de continuar con la operacion?", type: "warning", showCancelButton: true, confirmButtonColor: "#DD6B55", confirmButtonText: "Si, Continuar", cancelButtonText: "No, Cancelar", closeOnConfirm: true, closeOnCancel: true }, function (isConfirm) {
                     //    if (isConfirm) {
                     //        $("#formConfiguracionAportes").submit();
@@ -422,8 +418,7 @@ function AportesConfiguracion()
                     });
                 }
             }
-            else
-            {
+            else {
                 var texto = "Las fichas de aportes se modificaran, esta seguro de continuar con la operacion?";
                 if ($("#idTipoCuotaCalculo").val() == 1 || $("#idTipoCuotaCalculo").val() == 2) texto = "Las fichas de ahorros y aportes se modificaran, esta seguro de continuar con la operacion?";
                 //swal({ title: "Estas Seguro?", text: texto, type: "warning", showCancelButton: true, confirmButtonColor: "#DD6B55", confirmButtonText: "Si, Continuar", cancelButtonText: "No, Cancelar", closeOnConfirm: true, closeOnCancel: true }, function (isConfirm) {
@@ -433,7 +428,7 @@ function AportesConfiguracion()
                 //});
                 Swal.fire({
                     title: 'Estas seguro?',
-                    text: texto+"",
+                    text: texto + "",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -465,8 +460,8 @@ function AhorrosPermanentes() {
         //{ data: "empresa" },
         //{ data: "dependencia" },
         { data: "activo", render: function (data) { return data ? "Si" : "No" } },
-        { data: "Tasa_interes" },  
-         { data: "Plazo_meses" },
+        { data: "Tasa_interes" },
+        { data: "Plazo_meses" },
         { data: "Fecha_Vencimiento", render: function (data) { return data != null ? FormatoFecha(data) : ""; } }
     ];
 
@@ -476,8 +471,8 @@ function AhorrosPermanentes() {
             action: function () {
                 $("#AfiliarAhorros").modal("show");
             }
-		},
-		
+        },
+
         {
             text: "Editar",
             action: function () {
@@ -501,7 +496,7 @@ function AhorrosPermanentes() {
                     $("#EditPlazo_meses").val(table.rows({ selected: true }).data()[0]["Plazo_meses"].toString());
                     var fecha = table.rows({ selected: true }).data()[0]["Fecha_Vencimiento"].toString();
                     var fechaformat = FormatoFecha(fecha);
-                    
+
                     $(".fecha").val(fechaformat);
                 } else {
                     Swal.fire({ title: "Recuerda", text: "Primero selecciona un registro", confirmButtonText: "Lo recordare" });
@@ -514,67 +509,67 @@ function AhorrosPermanentes() {
                 location.href = "/Ahorros/Ahorros/ConfiguracionFAP"
             }
         },
-        {
-            text: "Ver Detalles",
-            action: function () {
-                if (table.rows({ selected: true }).count() == 1) {
-                    var numeroFicha = table.rows({ selected: true }).data()[0]["numeroCuenta"];
-                    var totalAhorros = table.rows({ selected: true }).data()[0]["totalAhorros"] == null ? "0" : table.rows({ selected: true }).data()[0]["totalAhorros"];
-                    var columnas =
-                        [
-                            { data: "numeroFicha" },
-                            { data: "valorPagado", render: function (data) { return formatearNumero(data); } },
-                            { data: "fechaPago", render: function (data) { return FormatoFecha(data); } }
-                        ];
-                    var botones =
-                        [
-                            {
-                                extend: 'collection',
-                                text: 'Exportar A',
-                                autoClose: true,
-                                buttons: [
-                                    {
-                                        extend: 'excel',
-                                        text: "Excel",
-                                        exportOptions: {
-                                            columns: ':visible'
-                                        }
-                                    },
-                                    {
-                                        extend: 'pdf',
-                                        text: "PDF",
-                                        exportOptions: {
-                                            columns: ':visible'
-                                        }
-                                    },
-                                    {
-                                        extend: 'print',
-                                        text: "Imprimir",
-                                        exportOptions: {
-                                            columns: ':visible'
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                text: "Ocultar",
-                                action: function () {
-                                    $("#detallesFichas").hide();
-                                }
-                            }
-                        ];
-                    $("#tablaADetallesAhorros").dataTable().fnDestroy();
-                    agregarDataTable2("#tablaADetallesAhorros", columnas, "/Aportes/Aportes/ObtenerDetallesFichasAportes?numeroFicha=" + numeroFicha, botones, false, true, false);
-                    $("#total").text(formatearNumero(totalAhorros));
-                    $("#detallesFichas").show();
-                    $('html,body').animate({
-                        scrollTop: $("#tablaADetallesAhorros").offset().top
-                    }, 1000);
-                } else {
-                    Swal.fire({ title: "Recuerda", text: "Primero selecciona un registro", confirmButtonText: "Lo recordare" });
-                }
-            }
-        },
+        //{
+        //   // text: "Ver Detalles",
+        //    //action: function () {
+        //    //    if (table.rows({ selected: true }).count() == 1) {
+        //    //        var numeroFicha = table.rows({ selected: true }).data()[0]["numeroCuenta"];
+        //    //        var totalAhorros = table.rows({ selected: true }).data()[0]["totalAhorros"] == null ? "0" : table.rows({ selected: true }).data()[0]["totalAhorros"];
+        //    //        var columnas =
+        //    //            [
+        //    //                { data: "numeroFicha" },
+        //    //                { data: "valorPagado", render: function (data) { return formatearNumero(data); } },
+        //    //                { data: "fechaPago", render: function (data) { return FormatoFecha(data); } }
+        //    //            ];
+        //    //        var botones =
+        //    //            [
+        //    //                {
+        //    //                    extend: 'collection',
+        //    //                    text: 'Exportar A',
+        //    //                    autoClose: true,
+        //    //                    buttons: [
+        //    //                        {
+        //    //                            extend: 'excel',
+        //    //                            text: "Excel",
+        //    //                            exportOptions: {
+        //    //                                columns: ':visible'
+        //    //                            }
+        //    //                        },
+        //    //                        {
+        //    //                            extend: 'pdf',
+        //    //                            text: "PDF",
+        //    //                            exportOptions: {
+        //    //                                columns: ':visible'
+        //    //                            }
+        //    //                        },
+        //    //                        {
+        //    //                            extend: 'print',
+        //    //                            text: "Imprimir",
+        //    //                            exportOptions: {
+        //    //                                columns: ':visible'
+        //    //                            }
+        //    //                        }
+        //    //                    ]
+        //    //                },
+        //    //                {
+        //    //                    text: "Ocultar",
+        //    //                    action: function () {
+        //    //                        $("#detallesFichas").hide();
+        //    //                    }
+        //    //                }
+        //    //            ];
+        //    //        $("#tablaADetallesAhorros").dataTable().fnDestroy();
+        //    //        agregarDataTable2("#tablaADetallesAhorros", columnas, "/Aportes/Aportes/ObtenerDetallesFichasAportes?numeroFicha=" + numeroFicha, botones, false, true, false);
+        //    //        $("#total").text(formatearNumero(totalAhorros));
+        //    //        $("#detallesFichas").show();
+        //    //        $('html,body').animate({
+        //    //            scrollTop: $("#tablaADetallesAhorros").offset().top
+        //    //        }, 1000);
+        //    //    } else {
+        //    //        Swal.fire({ title: "Recuerda", text: "Primero selecciona un registro", icon:"warning", confirmButtonText: "Lo recordare" });
+        //    //    }
+        //    //}
+        //},
         {
             extend: 'collection',
             text: 'Exportar A',
@@ -610,7 +605,7 @@ function AhorrosPermanentes() {
     //FIN DATATABLES
 
     //mascaras jqPrice        
-    $("#valorCuota").val(formatearNumero($("#valorCuota").val()));    
+    $("#valorCuota").val(formatearNumero($("#valorCuota").val()));
     //mascaras jqPrice
 
     //autocomplete Persona

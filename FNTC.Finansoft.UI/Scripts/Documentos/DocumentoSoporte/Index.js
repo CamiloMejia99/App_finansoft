@@ -20,10 +20,10 @@
                 Swal.fire({
                     icon: 'warning',
                     title: 'Aviso',
-                    text: 'No existe una configuración para este tipo de documento soporte.'
+                    html: "<label class='fuenteSweetAlert'>No existe una configuración para este tipo de documento soporte.</label>"
                 })
             }
         });
 
     });
-});
+}); 

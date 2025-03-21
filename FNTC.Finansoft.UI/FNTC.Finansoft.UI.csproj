@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FNTC.Finansoft.UI</RootNamespace>
     <AssemblyName>FNTC.Finansoft.UI</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -680,6 +680,7 @@
     <Content Include="Scripts\FormularioVinculacion\filtrosBusqueda.js" />
     <Content Include="Scripts\FormularioVinculacion\NuevaSolicitud.js" />
     <Content Include="Scripts\Creditos\ValidacionesCrear.js" />
+    <Content Include="Scripts\ValidacionFechas.js" />
     <Content Include="Scripts\modalform.js" />
     <Content Include="Scripts\Creditos\ModificarValoresCreditos.js" />
     <Content Include="Scripts\Creditos\PagoCredito.js" />
@@ -1967,6 +1968,7 @@
     <Content Include="Areas\DescuentosNomina\Views\GestionPlanos\GenerarDatosPlano.cshtml" />
     <Content Include="Areas\DescuentosNomina\Views\GestionPlanos\EditarDetallesAsociados.cshtml" />
     <Content Include="Areas\DescuentosNomina\Views\GestionPlanos\DetallesInfo.cshtml" />
+    <Content Include="Areas\Creditos\Views\Causacion\Index.cshtml" />
     <None Include="Content\js\prueba.json" />
     <Content Include="Content\styleMenu.css" />
     <Content Include="Content\font-awesome.css" />
@@ -2297,7 +2299,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\Spanish.json" />
-    <None Include="Properties\PublishProfiles\coomisol - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Ferajunap.Contabilidad.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -2653,6 +2654,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

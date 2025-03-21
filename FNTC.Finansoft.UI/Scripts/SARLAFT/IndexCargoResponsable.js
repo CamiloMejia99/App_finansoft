@@ -20,20 +20,22 @@
 
     $(".btnDisable").click(function (eve) {
 
+        var aceptar = ` <label class="fuenteSweetAlert">Sí, </label>`
+        var cancelar = ` <label class="fuenteSweetAlert">Cancelar</label>`
         var info = "";
         var id = $(this).data("id");
         var value = $(this).data("value");
         if (value == 1) { info = "Deshabilitar"; } else { info = "Habilitar"; }
 
         Swal.fire({
-            title: '' + info + ' Macroproceso?',
+            title: '¿' + info + ' Macroproceso?',
             text: "",
             icon: 'question',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si,' + info + '!',
-            cancelButtonText: 'Cancelar'
+            confirmButtonColor: '#8ED813',
+            cancelButtonColor: '#FF2929',
+            confirmButtonText: aceptar + " " + info,
+            cancelButtonText: cancelar
         }).then((result) => {
             if (result.isConfirmed) {
 
@@ -50,12 +52,11 @@
 
                             Swal.fire({
                                 title: 'Hecho!',
-                                text: "Se ha cambiado el estado",
+                                html: ` <label class="fuenteSweetAlert">Se ha cambiado el estado!</label>`,
                                 icon: 'success',
                                 showCancelButton: false,
                                 confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Continuar'
+                                confirmButtonText: 'OK!'
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     window.location.reload();
