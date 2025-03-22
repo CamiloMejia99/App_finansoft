@@ -158,42 +158,53 @@ namespace FNTC.Finansoft.UI.Areas.OperativaDeCaja.Controllers
 
         }
 
-        class program
+        private void EnviarCorreo(string destinatario, string asunto, string cuerpoHtml)
         {
-            static void main(string[] args)
+            try
             {
                 MailMessage ms = new MailMessage();
                 SmtpClient smtp = new SmtpClient();
 
                 ms.From = new MailAddress("loantech99@gmail.com");
-                ms.To.Add(new MailAddress("camilomp@hotmail.com"));
+                ms.To.Add(new MailAddress(destinatario));
 
-                ms.Subject = "FACTURA ASOPASCUALINOS - DETALLES";
+                ms.Subject = asunto;
 
-                string html = " <!DOCTYPE html> <html> <head> </head> <body> <div style=\"width: 100%;\"> <div style=\"margin: auto; width: 50%; background-color: black;\"> <h1 style=\"color: white;\"> DETALLES DE FACTURA</h1> <LABEl style=\"color: white;\"> FACTURA ASOPASCUALINOS C# </LABEl> </div> </div> </body> </html> ";
-
-                AlternateView htmlView = AlternateView.CreateAlternateViewFromString(html, Encoding.UTF8, MediaTypeNames.Text.Html);
+                AlternateView htmlView = AlternateView.CreateAlternateViewFromString(cuerpoHtml, Encoding.UTF8, MediaTypeNames.Text.Html);
                 ms.AlternateViews.Add(htmlView);
 
-                smtp.Host = "smtp.gmail.com"; //gmail
-                //smtp.Host = "smtp.live.com"; //hotmail
-                //smtp.Host = "smtp-mail.outlook.com; //hotmail";
-                //smtp.Port = 995; //gmail
-                smtp.Port = 587; //hotmail
-
-                smtp.Credentials = new NetworkCredential("loantech99@gmail.com", "ofzn oigl idqe gmpz");
+                smtp.Host = "smtp.gmail.com"; // Servidor SMTP
+                smtp.Port = 587;
+                smtp.Credentials = new NetworkCredential("loantech99@gmail.com", "Facil1234*");
                 smtp.EnableSsl = true;
 
-                try
-                {
-                    smtp.Send(ms);
-                    Console.WriteLine("Envio correcto de email");
-                }catch(Exception ex)
-                {
-                    Console.WriteLine("Error de envio de email" + ex.Message);
-                }
-            }   
+                smtp.Send(ms);
+                Console.WriteLine("Correo enviado con éxito.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al enviar el correo: " + ex.Message);
+            }
         }
+        public ActionResult CreateFactura(FactOpcaja factOpcaja)
+        {
+            if (ModelState.IsValid)
+            {
+                db.FactOpcaja.Add(factOpcaja);
+                db.SaveChanges();
+
+                // Enviar correo de confirmación
+                string destinatario = "camilomp100@gmail.com"; // Puedes obtenerlo de la base de datos
+                string asunto = "Factura Generada";
+                string cuerpoHtml = $"<h1>Detalles de Factura</h1><p>Factura N°: {factOpcaja.id}</p>";
+
+                EnviarCorreo(destinatario, asunto, cuerpoHtml);
+
+                return RedirectToAction("Details", new { id = factOpcaja.id });
+            }
+            return View(factOpcaja);
+        }
+
 
         public ActionResult DetalleFacturaAhorroContractual(int? id)
         {
