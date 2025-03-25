@@ -15,23 +15,78 @@ using FNTC.Framework.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.IO;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.tool.xml;
 
 namespace FNTC.Finansoft.UI.Areas.OperativaDeCaja.Controllers
 {
     
     [Authorize]
+
+    public class EmailService
+    {
+        public async Task SendInvoiceEmail(string toEmail, string subject, string body, byte[] pdfAttachment)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress("loantech99@gmail.com");
+                mail.To.Add(toEmail);
+                mail.Subject = subject;
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+
+                //Adjuntar el PDF si existe
+                if (pdfAttachment != null)
+                {
+                    mail.Attachments.Add(new Attachment(new MemoryStream(pdfAttachment), "Factura.pdf"));
+                }
+
+                SmtpClient smtp = new SmtpClient("loantech99@gmail.com", 587);
+                smtp.Credentials = new NetworkCredential("loantech99@gmail.com", "g o w o v q r v t y t y x y n i");
+                smtp.EnableSsl = true;
+
+                await smtp.SendMailAsync(mail);
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine("Error al enviar correo: " + ex.Message);
+            }
+        }
+
+        public byte[] GenerateInvoicePdf(string contenidoHtml)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Document document = new Document(PageSize.A4);
+                PdfWriter writer = PdfWriter.GetInstance(document, ms);
+                document.Open();
+
+                using (StringReader sr = new StringReader(contenidoHtml))
+                {
+                    XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, sr);
+                }
+                document.Close();
+                return ms.ToArray();
+            }
+        }
+
+    }
     public class FactOpcajasController : Controller
     {
         private AccountingContext db = new AccountingContext();
@@ -153,57 +208,10 @@ namespace FNTC.Finansoft.UI.Areas.OperativaDeCaja.Controllers
             //movimientos.RemoveRange(1, 1);//se elimina las cuentas de cuenta de caja y la de aportes y se deja las demás
             ViewBag.movimientos = movimientos;
             return View(factOpcaja);
-
-
-
         }
 
-        private void EnviarCorreo(string destinatario, string asunto, string cuerpoHtml)
-        {
-            try
-            {
-                MailMessage ms = new MailMessage();
-                SmtpClient smtp = new SmtpClient();
-
-                ms.From = new MailAddress("loantech99@gmail.com");
-                ms.To.Add(new MailAddress(destinatario));
-
-                ms.Subject = asunto;
-
-                AlternateView htmlView = AlternateView.CreateAlternateViewFromString(cuerpoHtml, Encoding.UTF8, MediaTypeNames.Text.Html);
-                ms.AlternateViews.Add(htmlView);
-
-                smtp.Host = "smtp.gmail.com"; // Servidor SMTP
-                smtp.Port = 587;
-                smtp.Credentials = new NetworkCredential("loantech99@gmail.com", "Facil1234*");
-                smtp.EnableSsl = true;
-
-                smtp.Send(ms);
-                Console.WriteLine("Correo enviado con éxito.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al enviar el correo: " + ex.Message);
-            }
-        }
-        public ActionResult CreateFactura(FactOpcaja factOpcaja)
-        {
-            if (ModelState.IsValid)
-            {
-                db.FactOpcaja.Add(factOpcaja);
-                db.SaveChanges();
-
-                // Enviar correo de confirmación
-                string destinatario = "camilomp100@gmail.com"; // Puedes obtenerlo de la base de datos
-                string asunto = "Factura Generada";
-                string cuerpoHtml = $"<h1>Detalles de Factura</h1><p>Factura N°: {factOpcaja.id}</p>";
-
-                EnviarCorreo(destinatario, asunto, cuerpoHtml);
-
-                return RedirectToAction("Details", new { id = factOpcaja.id });
-            }
-            return View(factOpcaja);
-        }
+       
+        
 
 
         public ActionResult DetalleFacturaAhorroContractual(int? id)
