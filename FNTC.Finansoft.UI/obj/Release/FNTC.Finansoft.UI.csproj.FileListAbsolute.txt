@@ -1371,3 +1371,8 @@ C:\Users\camil\source\repos\App_finansoft\FNTC.Finansoft.UI\obj\Release\FNTC.Fin
 C:\Users\camil\source\repos\App_finansoft\FNTC.Finansoft.UI\obj\Release\FNTC.Fin.EEC27CC1.Up2Date
 C:\Users\camil\source\repos\App_finansoft\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.dll
 C:\Users\camil\source\repos\App_finansoft\FNTC.Finansoft.UI\obj\Release\FNTC.Finansoft.UI.pdb
+C:\Users\camil\source\repos\App_finansoft\FNTC.Finansoft.UI\bin\BouncyCastle.Cryptography.dll
+C:\Users\camil\source\repos\App_finansoft\FNTC.Finansoft.UI\bin\itextsharp.dll
+C:\Users\camil\source\repos\App_finansoft\FNTC.Finansoft.UI\bin\itextsharp.xmlworker.dll
+C:\Users\camil\source\repos\App_finansoft\FNTC.Finansoft.UI\bin\BouncyCastle.Cryptography.xml
+C:\Users\camil\source\repos\App_finansoft\FNTC.Finansoft.UI\bin\itextsharp.xml

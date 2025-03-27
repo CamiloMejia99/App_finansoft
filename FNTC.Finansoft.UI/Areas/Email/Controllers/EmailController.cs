@@ -186,7 +186,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
 
         public bool sendEmail(string para, string nit)
         {
-            string subject = "Estado de cuenta cooperativa de aporte y crédito ASOPASCUALINOS";
+            string subject = "Estado de Cuenta Asociacion Mutual 'Asopascualina' " ;
             string message = "";
             var Estado = "1";
             var query = db.ConfiguracionCorreo.Where(x => x.estado == "1").ToList();
@@ -263,7 +263,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
         {
 
 
-            string subject = "Estado de cuenta cooperativa de aporte y crédito ASOPASCUALINOS";
+            string subject = "Estado de Cuenta Asociacion Mutual 'Asopascualina'";
             string message = "";
             var Estado = "1";
             var query = db.ConfiguracionCorreo.Where(x => x.estado == "1").ToList();
@@ -310,7 +310,9 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
                      * smtp.UseDefaultCredentials = false;
                      */
 
-                    SmtpClient smtp = new SmtpClient("domain-com.mail.protection.outlook.com");
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = smtpClient;
+
                     smtp.Host = smtpClient;
                     smtp.Port = puertoSmtp;
                     smtp.EnableSsl = true;
@@ -319,7 +321,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
                     smtp.DeliveryMethod = SmtpDeliveryMethod.Network;//
                     smtp.UseDefaultCredentials = false;
                     string cuentaCorreo = email;
-                    string passwordCorreo = "Finant123*";
+                    string passwordCorreo = pass;
                     smtp.Credentials = new NetworkCredential(cuentaCorreo, passwordCorreo);
                     correo.BodyEncoding = UTF8Encoding.UTF8;//
                     correo.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;//

@@ -1,4 +1,16 @@
 ﻿@model FNTC.Finansoft.Accounting.DTO.OperativaDeCaja.FactOpcaja
+
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+<link href="~/Content/styleGeneral.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+<link href="~/Styles/Email/Email.css" rel="stylesheet" />
+<link href="https://tenor.com/view/loading-waiting-count-down-spinning-gif-14968344" />
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<script src="~/Scripts/Areas/EstadoDeCuenta/EstadoDeCuenta.js"></script>
 <script src="~/Scripts/jquery-1.11.0.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
 <link href="~/Content/css/compressed2.css" rel="stylesheet" />
@@ -8,59 +20,59 @@
     ViewBag.Title = "Details";
 }
 
-<div class="modalheadergeneral"><h4><i class="fas fa-edit"></i>&nbsp;&nbsp;Detalles de Factura</h4></div>
+<br><div class="modalheadergeneral"><h4><i class="fas fa-edit"></i>&nbsp;&nbsp;Detalles de Factura</h4></div>
 
-<div class="center contenido" id="areaImprimir">
-    @Html.HiddenFor(model => model.id)
-    <div class="row" style="display:flex;justify-content:center;">
-        <h4>
-            N° TRN: @Html.DisplayFor(model => model.factura)&nbsp; @Html.DisplayFor(model => model.operacion)
-        </h4>
-    </div>
-    <div class="row" style="display:flex;justify-content:center;margin-top:-15px">
-        <h4>
-            Fecha: @Html.DisplayFor(model => model.fecha)
-        </h4>
-    </div>
-    <br />
-    <div class="row" style="margin-left:2%">
-        <p class="col-md-12"><b>Código caja:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.codigo_caja)&nbsp;&nbsp;@Html.DisplayFor(model => model.Caja.Nombre_caja)</p>
-        <p class="col-md-12"><b>Código Cajero:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.nit_cajero)</p>
-        <p class="col-md-12"><b>Documento Del Asociado:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.nit_propietario_cuenta)</p>
-        @Html.HiddenFor(model => model.nit_propietario_cuenta, new { id = "nitAsociado" })
-        <p class="col-md-12"><b>N° Cuenta:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.numero_cuenta)</p>
-        <p class="col-md-12">@Html.DisplayFor(model => model.terceroFK.NombreComercial)@Html.DisplayFor(model => model.terceroFK.NOMBRE1)&nbsp;@Html.DisplayFor(model => model.terceroFK.NOMBRE2)&nbsp;@Html.DisplayFor(model => model.terceroFK.APELLIDO1)&nbsp;@Html.DisplayFor(model => model.terceroFK.APELLIDO2)</p>
+    <div class="center contenido" id="areaImprimir">
+        @Html.HiddenFor(model => model.id)
+        <div class="row" style="display:flex;justify-content:center;">
+            <h4>
+                N° TRN: @Html.DisplayFor(model => model.factura)&nbsp; @Html.DisplayFor(model => model.operacion)
+            </h4>
+        </div>
+        <div class="row" style="display:flex;justify-content:center;margin-top:-15px">
+            <h4>
+                Fecha: @Html.DisplayFor(model => model.fecha)
+            </h4>
+        </div>
         <br />
-        @Html.HiddenFor(model => model.valor_recibido, new { id = "valor_recibido" })
-        @Html.HiddenFor(model => model.valor_efectivo, new { id = "valor_efectivo" })
-        @Html.HiddenFor(model => model.vueltas, new { id = "vueltas" })
-        <p class="col-md-12"><b>Valor Efectivo Recibido:</b>&nbsp;&nbsp; $<label id="txtvalor_recibido"></label><b><br />Valor Efectivo Consignar:</b>&nbsp;&nbsp;$<label id="txtvalor_efectivo"></label><br /><b>Cambio:</b>&nbsp;&nbsp;$<label id="txtvueltas"></label></p>
-        @if (ViewBag.movimientos != null && Model.IdProducto == 1)
-        {
+        <div class="row" style="margin-left:2%">
+            <p class="col-md-12"><b>Código caja:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.codigo_caja)&nbsp;&nbsp;@Html.DisplayFor(model => model.Caja.Nombre_caja)</p>
+            <p class="col-md-12"><b>Código Cajero:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.nit_cajero)</p>
+            <p class="col-md-12"><b>Documento Del Asociado:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.nit_propietario_cuenta)</p>
+            @Html.HiddenFor(model => model.nit_propietario_cuenta, new { id = "Tercero" })
+            <p class="col-md-12"><b>N° Cuenta:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.numero_cuenta)</p>
+            <p class="col-md-12"><b>Nombre Del Asociado:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.terceroFK.NombreComercial)@Html.DisplayFor(model => model.terceroFK.NOMBRE1)&nbsp;@Html.DisplayFor(model => model.terceroFK.NOMBRE2)&nbsp;@Html.DisplayFor(model => model.terceroFK.APELLIDO1)&nbsp;@Html.DisplayFor(model => model.terceroFK.APELLIDO2)</p>
             <br />
-            foreach (var item in ViewBag.movimientos)
+            @Html.HiddenFor(model => model.valor_recibido, new { id = "valor_recibido" })
+            @Html.HiddenFor(model => model.valor_efectivo, new { id = "valor_efectivo" })
+            @Html.HiddenFor(model => model.vueltas, new { id = "vueltas" })
+            <p class="col-md-12"><b>Valor Efectivo Recibido:</b>&nbsp;&nbsp; $<label id="txtvalor_recibido"></label><b><br />Valor Efectivo Consignar:</b>&nbsp;&nbsp;$<label id="txtvalor_efectivo"></label><br /><b>Cambio:</b>&nbsp;&nbsp;$<label id="txtvueltas"></label></p>
+            @if (ViewBag.movimientos != null && Model.IdProducto == 1)
             {
-                <p class="col-md-12"><b>@item.cuentaFK.NOMBRE&nbsp;&nbsp;&nbsp;&nbsp;$@item.CREDITO.ToString("N0")</b></p>
+                <br />
+                foreach (var item in ViewBag.movimientos)
+                {
+                    <p class="col-md-12"><b>@item.cuentaFK.NOMBRE&nbsp;&nbsp;&nbsp;&nbsp;$@item.CREDITO.ToString("N0")</b></p>
 
+                }
             }
-        }
-        <p class="col-md-12"><b>Cheques:</b>&nbsp;&nbsp;$@Html.DisplayFor(model => model.total_cheques)</p>
-        <br />
-        @Html.HiddenFor(model => model.total, new { id = "total" })
-        <p class="col-md-12"><b>Valor Total Consignado</b>&nbsp;&nbsp;$<label id="txttotal"></label></p>
-        <br />
+            <p class="col-md-12"><b>Cheques:</b>&nbsp;&nbsp;$@Html.DisplayFor(model => model.total_cheques)</p>
+            <br />
+            @Html.HiddenFor(model => model.total, new { id = "total" })
+            <p class="col-md-12"><b>Valor Total Consignado</b>&nbsp;&nbsp;$<label id="txttotal"></label></p>
+            <br />
 
-    </div>
-    <div class="row" style="display:flex;justify-content:center;">
-        <p class="col-md-10 align-center" style="font-size:10px;">****POR FAVOR VERIFIQUE QUE LA INFORMACION IMPRESA ES CORRECTA****</p>
-    </div>
-    <div class="row" style="display:flex;justify-content:center;">
-        <p class="col-md-10 align-center" style="font-size:10px;">VIGILADO SUPERINTENDENCIA DE ECONOMIA SOLIDARIA</p>
-    </div>
-    <div style=" position: relative; top: 0px;  left: 100px;  background-color: white;  width: 450px;">
-        <div class="dl-horizontal">
+        </div>
+        <div class="row" style="display:flex;justify-content:center;">
+            <p class="col-md-10 align-center" style="font-size:10px;">****POR FAVOR VERIFIQUE QUE LA INFORMACION IMPRESA ES CORRECTA****</p>
+        </div>
+        <div class="row" style="display:flex;justify-content:center;">
+            <p class="col-md-10 align-center" style="font-size:10px;">VIGILADO SUPERINTENDENCIA DE ECONOMIA SOLIDARIA</p>
+        </div>
+        <div style=" position: relative; top: 0px;  left: 100px;  background-color: white;  width: 450px;">
+            <div class="dl-horizontal">
 
-            @*<div class="row">
+                @*<div class="row">
                     <table class="col-md-6" style=" position: relative; top: 0px;  left: 30px;  background-color: white;  width: 350px;" border="1">
 
                         <tr>
@@ -172,25 +184,97 @@
                     </table>
                 </div>*@
 
-            <div class="row">
+                <div class="row">
 
-            </div>
-            @*<div class="row">
+                </div>
+                @*<div class="row">
                     <p class="col-md-6"><b>&nbsp;&nbsp;&nbsp;&nbsp;Cuota Numero:</b>&nbsp;&nbsp;<label id="aporteNumero"></label></p>
                 </div>*@
-            <div class="row">
+                <div class="row">
+
+                </div>
+
 
             </div>
-
-
         </div>
+
+
+        @* ENVIAR FACTURA POR CORREO *@
+
+        <div id="modalcargar" class="modal fade" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <center>
+                        <h3>
+                            <b>Enviado el estado de cuenta de cada asociado!!</b>
+                            <p>Este proceso tardara unos minutos</p>
+                        </h3>
+                    </center>
+                    <div class="loader">
+                        <center>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:#274766">
+                        <h5 class="modal-title" id="exampleModalLabel" style="color:white;"><b>Envío por correo</b></h5>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Asunto:</label>
+                                <input type="text" class="form-control" id="txtAsunto">
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Mensaje:</label>
+                                <textarea class="form-control" id="txtMensaje"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="btnEnviaCorreo">Envíar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
     </div>
-</div>
+
 
 <p>
     <button id="btnRegresar" class="btn btn-default">Regresar</button>
     <input type="button" onclick="printDiv('areaImprimir')" value="Imprimir" />
+    <button type="button" id="BtnEnviarEmail" class="btn btn-default">Enviar por correo</button>
 </p>
+
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+<script src="~/Scripts/Email/Email.js"></script>
+<script src="~/Scripts/datatable.js"></script>
+<script src="~/Scripts/sweetalert2@9.js"></script>
+
+
+@Scripts.Render("~/bundles/jqueryval")
+@if (ViewBag.mensaje != null)
+{
+    <script>
+
+		window.onload = function () {
+			swal('Error', '@ViewBag.mensaje', 'warning');
+		}
+    </script>
+}
 
 <script>
     //$("#aporteNumero").text("1");
@@ -271,12 +355,12 @@
             return this.formatear(num);
         }
     }
-        //FIN FORMATEAR UN NUMERO
-        /*
-        * FUNCIONALIDAD DE LA 'FUNCION'
-        formatNumber.new(123456779.18, "$") // retorna "$123.456.779,18"
-        formatNumber.new(123456779.18) // retorna "123.456.779,18"
-        formatNumber.new(123456779) // retorna "$123.456.779"
-        */
-        //formatNumberMiles.new(realValor);//ACCESO A LA VARIABLE
+    //FIN FORMATEAR UN NUMERO
+    /*
+    * FUNCIONALIDAD DE LA 'FUNCION'
+    formatNumber.new(123456779.18, "$") // retorna "$123.456.779,18"
+    formatNumber.new(123456779.18) // retorna "123.456.779,18"
+    formatNumber.new(123456779) // retorna "$123.456.779"
+    */
+    //formatNumberMiles.new(realValor);//ACCESO A LA VARIABLE
 </script>
