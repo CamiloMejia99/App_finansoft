@@ -206,7 +206,7 @@
                 <div class="modal-content">
                     <center>
                         <h3>
-                            <b>Enviado el estado de cuenta de cada asociado!!</b>
+                            <b>Enviado factura de Aportes!!</b>
                             <p>Este proceso tardara unos minutos</p>
                         </h3>
                     </center>
@@ -230,17 +230,18 @@
                         <form>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Asunto:</label>
-                                <input type="text" class="form-control" id="txtAsunto">
+                                <input type="text" class="form-control" id="txtAsunto" placeholder="FACTURA APORTES ASOPASCUALINA" value="FACTURA APORTES ASOPASCUALINA" readonly >
                             </div>
                             <div class="form-group">
                                 <label for="message-text" class="col-form-label">Mensaje:</label>
-                                <textarea class="form-control" id="txtMensaje"></textarea>
+                                <textarea class="form-control" id="txtMensaje" readonly >Señor(a) usuario, la asociacion mutual "Asopascualina" le comparte su factura de Aportes.
+                                </textarea>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" id="btnEnviaCorreo">Envíar</button>
+                        <button type="button" class="btn btn-primary" id="btnEnviaCorreoAportes">Envíar</button>
                     </div>
                 </div>
             </div>
@@ -255,12 +256,12 @@
 <p>
     <button id="btnRegresar" class="btn btn-default">Regresar</button>
     <input type="button" class="btn btn-default" onclick="printDiv('areaImprimir')" value="Imprimir" />
-    <button type="button" id="BtnEnviarEmail" class="btn btn-default">Enviar por correo</button>
+    <button type="button" id="BtnEnviarEmailAportes" class="btn btn-default">Enviar por correo</button>
 </p>
 
 
 <script src="~/Scripts/sweetalert.min.js"></script>
-<script src="~/Scripts/Email/Email.js"></script>
+<script src="~/Scripts/Email/EmailAportes.js"></script>
 <script src="~/Scripts/datatable.js"></script>
 <script src="~/Scripts/sweetalert2@9.js"></script>
 

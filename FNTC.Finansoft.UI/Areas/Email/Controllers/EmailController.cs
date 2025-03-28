@@ -345,6 +345,92 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
 
         }
 
+        public JsonResult EnviarCorreoAportes (string asunto, string mensaje, string para, string nit)
+        {
+
+
+            string subject = "FACTURA APORTES ASOPASCUALINA";
+            string message = "Señor(a) usuario, la asociacion mutual \"Asopascualina\" le comparte su factura de Aportes.";
+            var Estado = "1";
+            var query = db.ConfiguracionCorreo.Where(x => x.estado == "1").ToList();
+
+            if (query != null)
+            {
+                var email = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.email).Single();
+                var pass = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.password).Single();
+                var smtpClient = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.smtp).Single();
+                var puertoSmtp = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.puerto).Single();
+
+                if (asunto != "")
+                {
+                    subject = asunto;
+                }
+                if (mensaje != "")
+                {
+                    message = mensaje;
+                }
+
+                try
+                {
+                    MailMessage correo = new MailMessage();
+                    correo.From = new MailAddress(email);
+                    correo.To.Add(para);
+                    correo.Subject = subject;
+                    correo.Body = message;
+                    correo.IsBodyHtml = true;
+                    correo.Priority = MailPriority.Normal;
+
+                    var actionPDF = new ActionAsPdf("EstadoDeCuentaPDF", new { nit })
+                    {
+                        FileName = nit + ".pdf",
+                        PageOrientation = Rotativa.Options.Orientation.Portrait,
+                        PageMargins = { Left = 1, Right = 1 }
+                    };
+
+                    byte[] applicationPDFData = actionPDF.BuildPdf(this.ControllerContext);
+                    MemoryStream pdfStream = new MemoryStream(applicationPDFData);
+                    Attachment pdf = new Attachment(pdfStream, nit + ".pdf");
+
+                    //STMP HOTMAIL
+                    /* las credencial
+                     * smtp.UseDefaultCredentials = false;
+                     */
+
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = smtpClient;
+
+                    smtp.Host = smtpClient;
+                    smtp.Port = puertoSmtp;
+                    smtp.EnableSsl = true;
+                    smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+                    smtp.Timeout = 10000;//
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;//
+                    smtp.UseDefaultCredentials = false;
+                    string cuentaCorreo = email;
+                    string passwordCorreo = pass;
+                    smtp.Credentials = new NetworkCredential(cuentaCorreo, passwordCorreo);
+                    correo.BodyEncoding = UTF8Encoding.UTF8;//
+                    correo.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;//
+                    correo.Attachments.Add(pdf);
+                    smtp.Send(correo);
+                    return new JsonResult { Data = new { status = true } };
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    return new JsonResult { Data = new { status = false } };
+                }
+
+            }
+            else
+            {
+                return new JsonResult { Data = new { status = false } };
+            }
+
+        }
+
 
         public ActionResult EstadoDeCuentaPDF(string nit)
         {
