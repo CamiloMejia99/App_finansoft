@@ -1,4 +1,8 @@
-﻿using FNTC.Finansoft.Accounting.DTO;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Spreadsheet;
+using FNTC.Finansoft.Accounting.DTO;
+using FNTC.Finansoft.Accounting.DTO.OperativaDeCaja;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using Rotativa;
 using System;
 using System.Collections.Generic;
@@ -256,7 +260,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
             
            
         }
-
+        //------------------------------------- ESTADO DE CUENTAS --------------------------------------
 
         [HttpPost]
         public JsonResult EnviarCorreo(string asunto,string mensaje,string para,string nit)
@@ -294,7 +298,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
                     correo.IsBodyHtml = true;
                     correo.Priority = MailPriority.Normal;
 
-                    var actionPDF = new ActionAsPdf("EstadoDeCuentaPDF", new { nit })
+                    var actionPDF = new ActionAsPdf("87716112", new { nit })
                     {
                         FileName = nit + ".pdf",
                         PageOrientation = Rotativa.Options.Orientation.Portrait,
@@ -344,7 +348,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
             }
 
         }
-
+        //------------------------------------- FACTURA APORTES --------------------------------------
         public JsonResult EnviarCorreoAportes (string asunto, string mensaje, string para, string nit)
         {
 
@@ -380,7 +384,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
                     correo.IsBodyHtml = true;
                     correo.Priority = MailPriority.Normal;
 
-                    var actionPDF = new ActionAsPdf("EstadoDeCuentaPDF", new { nit })
+                    var actionPDF = new ActionAsPdf("../../Areas/OperativaDeCaja/FactOpcajas/Details.cshtml", new { nit })                    
                     {
                         FileName = nit + ".pdf",
                         PageOrientation = Rotativa.Options.Orientation.Portrait,
@@ -592,7 +596,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
             string nit = "36994839";
 
             string filePath = Server.MapPath("~/Temporal/"+nit+".pdf");
-            var actionPDF = new ActionAsPdf("EstadoDeCuentaPDF", new {nit})
+            var actionPDF = new ActionAsPdf("../../Areas/OperativaDeCaja/FactOpcajas/Details.cshtml", new {nit})
             {
                 FileName = nit+".pdf",
                 PageOrientation = Rotativa.Options.Orientation.Portrait,
