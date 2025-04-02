@@ -1979,7 +1979,7 @@
     <Content Include="Areas\DescuentosNomina\Views\GestionPlanos\EditarDetallesAsociados.cshtml" />
     <Content Include="Areas\DescuentosNomina\Views\GestionPlanos\DetallesInfo.cshtml" />
     <Content Include="Areas\Creditos\Views\Causacion\Index.cshtml" />
-    <Content Include="Areas\Email\Views\Email\AportesPDF.cshtml" />
+    <Content Include="Areas\Email\Views\Email\Details.cshtml" />
     <None Include="Content\js\prueba.json" />
     <Content Include="Content\styleMenu.css" />
     <Content Include="Content\font-awesome.css" />

@@ -10,7 +10,7 @@ using FNTC.Finansoft.Accounting.DTO.OperativaDeCaja;
 using FNTC.Finansoft.Accounting.DTO.Terceros;
 using FNTC.Finansoft.Accounting.DTO.TercerosOtrasEntidades;
 using FNTC.Finansoft.Areas.Aportes.Controllers;
-using FNTC.Finansoft.UI.Areas.Terceros.Controllers;
+using FNTC.Finansoft.UI.Areas.Terceros.Controllers; 
 using FNTC.Framework.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -3000,7 +3000,7 @@ namespace FNTC.Finansoft.UI.Areas.OperativaDeCaja.Controllers
             
             return Json(cuentas, JsonRequestBehavior.AllowGet);
         }
-
+         
         #region PROCESOS DE ADMINISTRADOR
 
         [Authorize(Roles = "Admin")]

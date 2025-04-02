@@ -1,7 +1,17 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Spreadsheet;
+﻿using FNTC.Finansoft.Accounting.BLL;
+using FNTC.Finansoft.Accounting.BLL.Caja;
+using FNTC.Finansoft.Accounting.BLL.ProcesosCrediticios;
 using FNTC.Finansoft.Accounting.DTO;
+using FNTC.Finansoft.Accounting.DTO.Contabilidad;
+using FNTC.Finansoft.Accounting.DTO.Fichas;
+using FNTC.Finansoft.Accounting.DTO.MCreditos;
 using FNTC.Finansoft.Accounting.DTO.OperativaDeCaja;
+using FNTC.Finansoft.Accounting.DTO.Terceros;
+using FNTC.Finansoft.Accounting.DTO.TercerosOtrasEntidades;
+using FNTC.Finansoft.Areas.Aportes.Controllers;
+using FNTC.Finansoft.UI.Areas.Terceros.Controllers;
+using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Spreadsheet;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using Rotativa;
 using System;
@@ -16,6 +26,16 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using FNTC.Framework.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.Data;
+using System.Data.Entity;
+using System.Net.Mime;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.tool.xml;
 
 namespace FNTC.Finansoft.UI.Areas.Email.Controllers
 {
@@ -350,8 +370,11 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
 
         }
 
+       
+
+
         //---------------------------------------------------------- FACTURA APORTES -----------------------------------------------------------------------------
-        public JsonResult EnviarCorreoAportes(string asunto, string mensaje, string para, string nit)
+        public JsonResult EnviarCorreoAportes(string asunto, string mensaje, string para, string nit, int? id)
         {
 
 
@@ -386,8 +409,8 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
                     correo.IsBodyHtml = true;
                     correo.Priority = MailPriority.Normal;
 
-                    //  Cambiar por DetailsPDF             ↓↓↓↓↓
-                    var actionPDF = new ActionAsPdf("EstadoDeCuentaPDF", new { nit })
+                    //  Cambiar por     n             ↓↓↓↓↓
+                    var actionPDF = new ActionAsPdf("Details", new { nit })
                     {
                         FileName = nit + ".pdf",
                         PageOrientation = Rotativa.Options.Orientation.Portrait,
@@ -438,6 +461,38 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
 
         }
         //---------------------------------------------------------- FIN FACTURA APORTES -----------------------------------------------------------------------------
+
+        //-------------------------------------------------------------------- CONTROLADORES PARA FactOpCaja  ----------------------------------------------
+
+
+
+
+
+
+
+
+
+        public ActionResult Details(string nit, string fecha1)
+        {
+            //nit = "36994839";
+            #region datosTerceros
+            var tercero = (from pc in db.Terceros where pc.NIT == nit select pc).FirstOrDefault();
+            if (tercero != null)
+            {
+                var dataAgencia = (from pc in db.agencias where pc.codigoagencia == tercero.DEPENDENCIA select pc.nombreagencia).FirstOrDefault();
+
+            }
+            #endregion
+
+            return View();
+
+        }
+
+
+
+
+        //-------------------------------------------------------------------- FIN CONTROLADORES PARA FactOpCaja  ----------------------------------------------
+
 
         public ActionResult EstadoDeCuentaPDF(string nit)
         {

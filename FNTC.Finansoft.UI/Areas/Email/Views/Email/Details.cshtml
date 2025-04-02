@@ -1,18 +1,26 @@
-﻿
-@{
-    ViewBag.Title = "FACTURA APORTES";
-    Layout = null;
-}
+﻿@model FNTC.Finansoft.Accounting.DTO.OperativaDeCaja.FactOpcaja
 
-@model FNTC.Finansoft.Accounting.DTO.OperativaDeCaja.FactOpcaja
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+<link href="~/Content/styleGeneral.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+<link href="~/Styles/Email/Email.css" rel="stylesheet" />
+<link href="https://tenor.com/view/loading-waiting-count-down-spinning-gif-14968344" />
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/css/sweetalert.css" rel="stylesheet" />
+<script src="~/Scripts/Areas/EstadoDeCuenta/EstadoDeCuenta.js"></script>
 <script src="~/Scripts/jquery-1.11.0.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
 <link href="~/Content/css/compressed2.css" rel="stylesheet" />
 <link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
 <script src="~/Scripts/jquery.masknumber.js"></script>
+@{
+    ViewBag.Title = "Details";
+}
 
-
-<div class="modalheadergeneral"><h4><i class="fas fa-edit"></i>&nbsp;&nbsp;Detalles de Factura</h4></div>
+<br><div class="modalheadergeneral"><h4><i class="fas fa-edit"></i>&nbsp;&nbsp;Detalles de Factura</h4></div>
 
 <div class="center contenido" id="areaImprimir">
     @Html.HiddenFor(model => model.id)
@@ -31,9 +39,9 @@
         <p class="col-md-12"><b>Código caja:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.codigo_caja)&nbsp;&nbsp;@Html.DisplayFor(model => model.Caja.Nombre_caja)</p>
         <p class="col-md-12"><b>Código Cajero:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.nit_cajero)</p>
         <p class="col-md-12"><b>Documento Del Asociado:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.nit_propietario_cuenta)</p>
-        @Html.HiddenFor(model => model.nit_propietario_cuenta, new { id = "nitAsociado" })
+        @Html.HiddenFor(model => model.nit_propietario_cuenta, new { id = "Tercero" })
         <p class="col-md-12"><b>N° Cuenta:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.numero_cuenta)</p>
-        <p class="col-md-12">@Html.DisplayFor(model => model.terceroFK.NombreComercial)@Html.DisplayFor(model => model.terceroFK.NOMBRE1)&nbsp;@Html.DisplayFor(model => model.terceroFK.NOMBRE2)&nbsp;@Html.DisplayFor(model => model.terceroFK.APELLIDO1)&nbsp;@Html.DisplayFor(model => model.terceroFK.APELLIDO2)</p>
+        <p class="col-md-12"><b>Nombre Del Asociado:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.terceroFK.NombreComercial)@Html.DisplayFor(model => model.terceroFK.NOMBRE1)&nbsp;@Html.DisplayFor(model => model.terceroFK.NOMBRE2)&nbsp;@Html.DisplayFor(model => model.terceroFK.APELLIDO1)&nbsp;@Html.DisplayFor(model => model.terceroFK.APELLIDO2)</p>
         <br />
         @Html.HiddenFor(model => model.valor_recibido, new { id = "valor_recibido" })
         @Html.HiddenFor(model => model.valor_efectivo, new { id = "valor_efectivo" })
@@ -189,9 +197,77 @@
 
         </div>
     </div>
+
+
+    @* ENVIAR FACTURA POR CORREO *@
+
+    <div id="modalcargar" class="modal fade" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <center>
+                    <h3>
+                        <b>Enviando factura de Aportes!!</b>
+                        <p>Por favor espere...</p>
+                    </h3>
+                </center>
+                <div class="loader">
+                    <center>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#274766">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:white;"><b>Envío por correo</b></h5>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Asunto:</label>
+                            <input type="text" class="form-control" id="txtAsunto" placeholder="FACTURA APORTES ASOPASCUALINA" value="FACTURA APORTES ASOPASCUALINA" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Mensaje:</label>
+                            <textarea class="form-control" id="txtMensaje" readonly>Señor(a) usuario, la asociacion mutual "Asopascualina" le comparte su factura de Aportes.
+                                </textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btnEnviaCorreoAportes">Envíar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 </div>
 
+<script src="~/Scripts/sweetalert.min.js"></script>
+<script src="~/Scripts/Email/EmailAportes.js"></script>
+<script src="~/Scripts/datatable.js"></script>
+<script src="~/Scripts/sweetalert2@9.js"></script>
 
+
+@Scripts.Render("~/bundles/jqueryval")
+@if (ViewBag.mensaje != null)
+{
+    <script>
+
+		window.onload = function () {
+			swal('Error', '@ViewBag.mensaje', 'warning');
+		}
+    </script>
+}
 
 <script>
     //$("#aporteNumero").text("1");
@@ -281,17 +357,3 @@
     */
     //formatNumberMiles.new(realValor);//ACCESO A LA VARIABLE
 </script>
-
-<style>
-    body {
-        background-color: white;
-    }
-</style>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
-}
-
-
-
-
