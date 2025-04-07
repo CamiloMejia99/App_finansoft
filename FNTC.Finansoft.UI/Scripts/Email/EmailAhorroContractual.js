@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
     var correo = "";
 
-    // ---------------------------------- Enviar correo aportes --------------------------------------------
+    // ---------------------------------- Enviar correo Ahorro contractual --------------------------------------------
 
-    $("#BtnEnviarEmailAportes").click(function () {
+    $("#BtnEnviarEmailAhorroContractual").click(function () {
 
         var nit = $("#Tercero").val();
         //var nit = $("#nitAsociado").val();
@@ -34,7 +34,7 @@
 
     });
 
-    $("#btnEnviaCorreoAportes").click(function () {
+    $("#btnEnviaCorreoAhorroContractual").click(function () {
         $('#modalEmail').modal('hide');
         var asunto = $("#txtAsunto").val();
         var mensaje = $("#txtMensaje").val();
@@ -45,7 +45,7 @@
                 $('#modalcargar').modal({ backdrop: 'static', keyboard: false })
 
             },
-            url: '/Email/Email/EnviarCorreoAportes',
+            url: '/Email/Email/EnviarCorreoAhorroContractual',
             datatype: "Json",
             data: {
                 asunto: asunto,
@@ -77,6 +77,6 @@
         });//fin ajax enviarCorreo
 
 
-    });//fin btnEnviaCorreoAportes
+    });//fin 
 })
 

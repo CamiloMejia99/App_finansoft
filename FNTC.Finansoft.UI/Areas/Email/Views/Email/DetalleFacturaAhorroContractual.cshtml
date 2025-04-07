@@ -29,7 +29,6 @@
     <div style=" position: relative; top: 0px;  left: 100px;  background-color: white;  width: 1000px;">
 
         <p class="col-md-12"><b>Id:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.id)</p>
-        @Html.HiddenFor(model => model.id, new { id = "idRecibo" })
 
 
         <br>
@@ -266,11 +265,6 @@
 </div>
 <br>
 
-<p>
-    <button id="btnRegresar" class="btn btn-default">Regresar</button>
-    <input type="button" class="btn btn-default" onclick="printDiv('areaImprimir')" value="Imprimir" />
-    <button type="button" id="BtnEnviarEmailAhorroContractual" class="btn btn-default">Enviar por correo</button>
-</p>
 
 
 <script src="~/Scripts/sweetalert.min.js"></script>

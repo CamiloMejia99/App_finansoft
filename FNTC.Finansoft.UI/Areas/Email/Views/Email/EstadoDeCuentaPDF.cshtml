@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 @{
     ViewBag.Title = "ESTADO DE CUENTA";
     Layout = null;
@@ -155,191 +155,34 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="form-group">
-                <div class="col-md-10"><h3 style="border-bottom: 2px solid black !important; width: 123%; color: black !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Codeudores</h3></div>
-            </div>
 
-        </div>
-
-    </div>
-</div>
-
-
-
-
-<style>
-    body {
-        background-color: white;
-    }
-</style>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
-}
-
-
-
-
-
-@{
-    ViewBag.Title = "ESTADO DE CUENTA";
-    Layout = null;
-}
-
-<link href="~/Content/css/chosen.css" rel="stylesheet" />
-
-<link href="~/Content/styleGeneral.css" rel="stylesheet" />
-<link href="~/Content/bootstrap.css" rel="stylesheet" />
-<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-<script src="~/Scripts/datatable.js"></script>
-<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-
-<style>
-    .modal-dialog {
-        width: 1100px;
-    }
-</style>
-<br />
-<br />
-
-<div class="col-md-12" style="background-color:white;">
-
-
-    <div class="form-group col-md-11" style="margin-left:40px">
-        <div class="caja2" id="imprimirTodo">
-            <br />
-            <center>
-                <h3>
-                    <b>Estado de Cuenta Asociacion Mutual 'Asopascualina' </b>
-                </h3>
-                <h4 class="center">
-                    <b>NIT: 9017386017-0</b>
-                </h4>
-            </center>
-            <br />
-            <div class="form-group">
-                <div class="col-md-10"><h3 style="border-bottom: 5px solid #2B7785 !important; width: 123%; color: #2B7785 !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Estado De Cuenta</h3></div>
-            </div>
-
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="row">
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Documento :</label>
-                            <label class="form-control" id="documentoTercero">@ViewBag.documento</label>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Nombre :</label>
-                            <label class="form-control" id="nombreTercero">@ViewBag.nombreasociado</label>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-2">
-                            <label class="control-label">Forma de Pago: </label>
-                            <label class="form-control">MENSUAL</label>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label class="control-label">Salario : </label>
-                            <label class="form-control" id="salario">@ViewBag.salario</label>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label class="control-label">Antiguedad : </label>
-                            <label class="form-control" id="antiguedad">@ViewBag.antiguedad</label>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label class="control-label">Agencia : </label>
-                            <label class="form-control" id="agencia">@ViewBag.agencia</label>
-                        </div>
-                    </div>
-
-
+            @*TABLA AHORRO CONTRACTUAL*@
+            <div id="divAhorroContractual">
+                <div class="form-group">
+                    <div class="col-md-12"><h3 style="border-bottom: 2px solid black !important; width: 100%; color: black !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Ahorro contractual</h3></div>
                 </div>
-
-
+                <div class="table table-responsive">
+                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Cuenta</th>
+                                <th>Tipo de Ahorro</th>
+                                <th>Plazo</th>
+                                <th>Fecha Apertura</th>
+                                <th>Fecha Vencimiento</th>
+                                <th>T.E.M</th>
+                                <th>Valor Cuota</th>
+                                <th>Total Ahorros</th>
+                                <th>Rendimientos</th>
+                                <th>Saldo Total</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaAhorroContractual"></tbody>
+                    </table>
+                </div>
             </div>
 
-            <div class="form-group">
-                <div class="col-md-10"><h3 style="border-bottom: 2px solid black !important; width: 123%; color: black !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Aportes Sociales Y Ahorros</h3></div>
-            </div>
-
-            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
-                <thead>
-                    <tr>
-                        <th>Cuenta</th>
-                        <th>Fecha Apertura</th>
-                        <th>Cuota</th>
-                        <th>Saldo Actual</th>
-                        <th>Saldo En Mora</th>
-                        <th>Intereses</th>
-                        <th>Saldo en Canje</th>
-                    </tr>
-                </thead>
-                <tbody id="mitabla">
-                    @foreach (var item in ViewBag.aportes)
-                    {
-                        <tr>
-
-                            <th>@item[0]</th>
-                            <th>@item[1]</th>
-                            <th>@item[2]</th>
-                            <th>@item[3]</th>
-                            <th>@item[4]</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    }
-
-                </tbody>
-            </table>
-
-            <div class="form-group">
-                <div class="col-md-10"><h3 style="border-bottom: 2px solid black !important; width: 123%; color: black !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Creditos</h3></div>
-            </div>
-
-            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed">
-                <thead>
-                    <tr>
-                        <th>Pagare</th>
-                        <th>Fecha Desembolso</th>
-                        <th>Cuota</th>
-                        <th>Saldo Capital</th>
-                        <th>Plazo</th>
-                        <th>Saldo en mora</th>
-                        <th>Saldo Total</th>
-                    </tr>
-                </thead>
-                <tbody id="tablaCreditos">
-                    @foreach (var item in ViewBag.prestamos)
-                    {
-                        <tr>
-
-                            <th>@item[0]</th>
-                            <th>@item[1]</th>
-                            <th>@item[2]</th>
-                            <th>@item[3]</th>
-                            <th>@item[4]</th>
-                            <th>@item[5]</th>
-                            <th>@item[6]</th>
-                        </tr>
-                    }
-                    <tr>
-
-                        <th></th>
-                        <th><b>Total Saldo Capital</b></th>
-                        <th></th>
-                        <th><b>@ViewBag.totalCapital</b></th>
-                        <th></th>
-                        <th><b>@ViewBag.totalMora</b></th>
-                        <th><b>@ViewBag.totalGeneral</b></th>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="form-group">
-                <div class="col-md-10"><h3 style="border-bottom: 2px solid black !important; width: 123%; color: black !important; padding: 9px 20px 15px 0px !important;margin-bottom: 31px !important;">Codeudores</h3></div>
-            </div>
 
         </div>
 
@@ -358,7 +201,4 @@
     @Scripts.Render("~/bundles/jqueryval")
 
 }
-
-
-
 

@@ -7,20 +7,8 @@
       "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\email\\controllers\\emailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|C:\\Users\\camil\\source\\repos\\App_finansoft\\fntc.finansoft.ui\\areas\\operativadecaja\\controllers\\factopcajascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|c:\\users\\camil\\source\\repos\\app_finansoft\\fntc.finansoft.ui\\areas\\operativadecaja\\controllers\\factopcajascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\operativadecaja\\controllers\\factopcajascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6505B3EE-90A5-46E7-BF9F-EDE35DF7831A}|FNTC.Finansoft.DTO\\FNTC.Finansoft.DTO.csproj|C:\\Users\\camil\\source\\repos\\App_finansoft\\fntc.finansoft.dto\\operativadecaja\\factopcaja.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6505B3EE-90A5-46E7-BF9F-EDE35DF7831A}|FNTC.Finansoft.DTO\\FNTC.Finansoft.DTO.csproj|solutionrelative:fntc.finansoft.dto\\operativadecaja\\factopcaja.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|C:\\Users\\camil\\source\\repos\\App_finansoft\\fntc.finansoft.ui\\areas\\email\\views\\email\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\email\\views\\email\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|C:\\Users\\camil\\source\\repos\\App_finansoft\\fntc.finansoft.ui\\areas\\email\\views\\email\\estadodecuentapdf.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\email\\views\\email\\estadodecuentapdf.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,23 +18,25 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EmailController.cs",
+              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Email\\Controllers\\EmailController.cs",
+              "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Email\\Controllers\\EmailController.cs",
+              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Email\\Controllers\\EmailController.cs",
+              "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Email\\Controllers\\EmailController.cs",
+              "ViewState": "AgIAAEcCAAAAAAAAAADwv1sCAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-26T13:22:09.875Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FactOpcaja.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.DTO\\OperativaDeCaja\\FactOpcaja.cs",
-              "RelativeDocumentMoniker": "FNTC.Finansoft.DTO\\OperativaDeCaja\\FactOpcaja.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.DTO\\OperativaDeCaja\\FactOpcaja.cs",
-              "RelativeToolTip": "FNTC.Finansoft.DTO\\OperativaDeCaja\\FactOpcaja.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-01T16:48:32.165Z"
             },
             {
               "$type": "Document",
@@ -56,46 +46,10 @@
               "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\OperativaDeCaja\\Controllers\\FactOpcajasController.cs",
               "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\OperativaDeCaja\\Controllers\\FactOpcajasController.cs",
               "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\OperativaDeCaja\\Controllers\\FactOpcajasController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUDAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAIkAAAAAAAAAAIAwwJAAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-31T20:44:34.38Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "EmailController.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Email\\Controllers\\EmailController.cs",
-              "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Email\\Controllers\\EmailController.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Email\\Controllers\\EmailController.cs",
-              "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Email\\Controllers\\EmailController.cs",
-              "ViewState": "AgIAAOUAAAAAAAAAAAAowPMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T13:22:09.875Z",
+              "WhenOpened": "2025-04-05T23:11:27.945Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EstadoDeCuentaPDF.cshtml",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Email\\Views\\Email\\EstadoDeCuentaPDF.cshtml",
-              "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Email\\Views\\Email\\EstadoDeCuentaPDF.cshtml",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Email\\Views\\Email\\EstadoDeCuentaPDF.cshtml",
-              "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Email\\Views\\Email\\EstadoDeCuentaPDF.cshtml",
-              "ViewState": "AgIAAAkBAAAAAAAAAAAcwEYBAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-26T13:30:53.911Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Email\\Views\\Email\\Details.cshtml",
-              "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Email\\Views\\Email\\Details.cshtml",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Email\\Views\\Email\\Details.cshtml",
-              "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Email\\Views\\Email\\Details.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAC4AAABRAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-28T16:40:32.04Z"
             }
           ]
         }
