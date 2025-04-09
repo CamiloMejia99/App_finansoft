@@ -483,6 +483,7 @@
     <Compile Include="Areas\Unions\UnionsAreaRegistration.cs" />
     <Compile Include="Controllers\UploadFilesController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
+    <Compile Include="Enums\EnumsProgram.cs" />
     <Compile Include="Filters\AllowAttribute.cs" />
     <Compile Include="Functions\Encriptacion.cs" />
     <Compile Include="Global.asax.cs">

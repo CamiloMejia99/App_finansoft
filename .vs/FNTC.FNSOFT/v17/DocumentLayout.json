@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\camil\\source\\repos\\App_finansoft\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|c:\\users\\camil\\source\\repos\\app_finansoft\\fntc.finansoft.ui\\areas\\email\\controllers\\emailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\email\\controllers\\emailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|C:\\Users\\camil\\source\\repos\\App_finansoft\\fntc.finansoft.ui\\areas\\creditos\\views\\creditos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\creditos\\views\\creditos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|C:\\Users\\camil\\source\\repos\\App_finansoft\\fntc.finansoft.ui\\areas\\operativadecaja\\controllers\\factopcajascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\operativadecaja\\controllers\\factopcajascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6505B3EE-90A5-46E7-BF9F-EDE35DF7831A}|FNTC.Finansoft.DTO\\FNTC.Finansoft.DTO.csproj|c:\\users\\camil\\source\\repos\\app_finansoft\\fntc.finansoft.dto\\mcreditos\\controlcreditos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6505B3EE-90A5-46E7-BF9F-EDE35DF7831A}|FNTC.Finansoft.DTO\\FNTC.Finansoft.DTO.csproj|solutionrelative:fntc.finansoft.dto\\mcreditos\\controlcreditos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6505B3EE-90A5-46E7-BF9F-EDE35DF7831A}|FNTC.Finansoft.DTO\\FNTC.Finansoft.DTO.csproj|c:\\users\\camil\\source\\repos\\app_finansoft\\fntc.finansoft.dto\\mcreditos\\prestamos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6505B3EE-90A5-46E7-BF9F-EDE35DF7831A}|FNTC.Finansoft.DTO\\FNTC.Finansoft.DTO.csproj|solutionrelative:fntc.finansoft.dto\\mcreditos\\prestamos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6505B3EE-90A5-46E7-BF9F-EDE35DF7831A}|FNTC.Finansoft.DTO\\FNTC.Finansoft.DTO.csproj|c:\\users\\camil\\source\\repos\\app_finansoft\\fntc.finansoft.dto\\mcreditos\\viewmodelcreditos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6505B3EE-90A5-46E7-BF9F-EDE35DF7831A}|FNTC.Finansoft.DTO\\FNTC.Finansoft.DTO.csproj|solutionrelative:fntc.finansoft.dto\\mcreditos\\viewmodelcreditos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|c:\\users\\camil\\source\\repos\\app_finansoft\\fntc.finansoft.ui\\areas\\creditos\\views\\creditos\\_amortizacionorig.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\creditos\\views\\creditos\\_amortizacionorig.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|c:\\users\\camil\\source\\repos\\app_finansoft\\fntc.finansoft.ui\\areas\\creditos\\views\\creditos\\_amortizacion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\creditos\\views\\creditos\\_amortizacion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|c:\\users\\camil\\source\\repos\\app_finansoft\\fntc.finansoft.ui\\areas\\creditos\\controllers\\creditoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\creditos\\controllers\\creditoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,37 +38,102 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 7,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "EmailController.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Email\\Controllers\\EmailController.cs",
-              "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Email\\Controllers\\EmailController.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Email\\Controllers\\EmailController.cs",
-              "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Email\\Controllers\\EmailController.cs",
-              "ViewState": "AgIAAH8CAAAAAAAAAAAIwFsCAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T13:22:09.875Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FactOpcajasController.cs",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\OperativaDeCaja\\Controllers\\FactOpcajasController.cs",
-              "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\OperativaDeCaja\\Controllers\\FactOpcajasController.cs",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\OperativaDeCaja\\Controllers\\FactOpcajasController.cs",
-              "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\OperativaDeCaja\\Controllers\\FactOpcajasController.cs",
-              "ViewState": "AgIAAIkAAAAAAAAAAIAwwJAAAAAbAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "ViewModelCreditos.cs",
+              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.DTO\\MCreditos\\ViewModelCreditos.cs",
+              "RelativeDocumentMoniker": "FNTC.Finansoft.DTO\\MCreditos\\ViewModelCreditos.cs",
+              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.DTO\\MCreditos\\ViewModelCreditos.cs",
+              "RelativeToolTip": "FNTC.Finansoft.DTO\\MCreditos\\ViewModelCreditos.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAA8wDYAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-05T23:11:27.945Z"
+              "WhenOpened": "2025-04-09T19:48:04.26Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ControlCreditos.cs",
+              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.DTO\\MCreditos\\ControlCreditos.cs",
+              "RelativeDocumentMoniker": "FNTC.Finansoft.DTO\\MCreditos\\ControlCreditos.cs",
+              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.DTO\\MCreditos\\ControlCreditos.cs",
+              "RelativeToolTip": "FNTC.Finansoft.DTO\\MCreditos\\ControlCreditos.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAA9wB4AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T19:45:05.461Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Prestamos.cs",
+              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.DTO\\MCreditos\\Prestamos.cs",
+              "RelativeDocumentMoniker": "FNTC.Finansoft.DTO\\MCreditos\\Prestamos.cs",
+              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.DTO\\MCreditos\\Prestamos.cs",
+              "RelativeToolTip": "FNTC.Finansoft.DTO\\MCreditos\\Prestamos.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAFsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T19:35:49.141Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_AmortizacionOrig.cshtml",
+              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\_AmortizacionOrig.cshtml",
+              "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\_AmortizacionOrig.cshtml",
+              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\_AmortizacionOrig.cshtml",
+              "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\_AmortizacionOrig.cshtml",
+              "ViewState": "AgIAAA8BAAAAAAAAAAAIwC4BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-09T19:39:50.942Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_Amortizacion.cshtml",
+              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\_Amortizacion.cshtml",
+              "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\_Amortizacion.cshtml",
+              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\_Amortizacion.cshtml",
+              "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\_Amortizacion.cshtml",
+              "ViewState": "AgIAAAEBAAAAAAAAAAAIwFgBAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-09T19:39:47.634Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CreditosController.cs",
+              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Creditos\\Controllers\\CreditosController.cs",
+              "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Creditos\\Controllers\\CreditosController.cs",
+              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Creditos\\Controllers\\CreditosController.cs",
+              "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Creditos\\Controllers\\CreditosController.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAYwFIAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T19:26:10.032Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\Index.cshtml",
+              "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\Index.cshtml",
+              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\Index.cshtml",
+              "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\Index.cshtml",
+              "ViewState": "AgIAAAcBAAAAAAAAAAAqwCQBAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-07T23:12:25.83Z",
+              "EditorCaption": ""
             }
           ]
         }
