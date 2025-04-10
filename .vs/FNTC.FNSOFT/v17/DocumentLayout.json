@@ -1,21 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\camil\\source\\repos\\SW_MUTUALES_18_03_2025\\",
+  "WorkspaceRootPath": "C:\\Users\\camil\\OneDrive\\Desktop\\repositorio eliminar\\App_finansoft\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|c:\\users\\camil\\source\\repos\\sw_mutuales_18_03_2025\\fntc.finansoft.ui\\areas\\operativadecaja\\views\\factopcajas\\cuentaoperacion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|c:\\users\\camil\\onedrive\\desktop\\repositorio eliminar\\app_finansoft\\fntc.finansoft.ui\\areas\\operativadecaja\\views\\factopcajas\\cuentaoperacion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\operativadecaja\\views\\factopcajas\\cuentaoperacion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|c:\\users\\camil\\source\\repos\\sw_mutuales_18_03_2025\\fntc.finansoft.ui\\areas\\creditos\\views\\creditos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|C:\\Users\\camil\\OneDrive\\Desktop\\repositorio eliminar\\App_finansoft\\fntc.finansoft.ui\\areas\\creditos\\views\\creditos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\creditos\\views\\creditos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|C:\\Users\\camil\\source\\repos\\SW_MUTUALES_18_03_2025\\fntc.finansoft.ui\\areas\\creditos\\views\\formulariosolicitudmicrocredito\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|C:\\Users\\camil\\OneDrive\\Desktop\\repositorio eliminar\\App_finansoft\\fntc.finansoft.ui\\areas\\creditos\\views\\formulariosolicitudmicrocredito\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\creditos\\views\\formulariosolicitudmicrocredito\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|C:\\Users\\camil\\source\\repos\\SW_MUTUALES_18_03_2025\\fntc.finansoft.ui\\areas\\creditos\\views\\causacion\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|C:\\Users\\camil\\OneDrive\\Desktop\\repositorio eliminar\\App_finansoft\\fntc.finansoft.ui\\areas\\creditos\\views\\causacion\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\creditos\\views\\causacion\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
@@ -36,11 +36,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "CuentaOperacion.cshtml",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\SW_MUTUALES_18_03_2025\\FNTC.Finansoft.UI\\Areas\\OperativaDeCaja\\Views\\FactOpcajas\\CuentaOperacion.cshtml",
+              "DocumentMoniker": "C:\\Users\\camil\\OneDrive\\Desktop\\repositorio eliminar\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\OperativaDeCaja\\Views\\FactOpcajas\\CuentaOperacion.cshtml",
               "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\OperativaDeCaja\\Views\\FactOpcajas\\CuentaOperacion.cshtml",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\SW_MUTUALES_18_03_2025\\FNTC.Finansoft.UI\\Areas\\OperativaDeCaja\\Views\\FactOpcajas\\CuentaOperacion.cshtml",
+              "ToolTip": "C:\\Users\\camil\\OneDrive\\Desktop\\repositorio eliminar\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\OperativaDeCaja\\Views\\FactOpcajas\\CuentaOperacion.cshtml",
               "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\OperativaDeCaja\\Views\\FactOpcajas\\CuentaOperacion.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMwAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAAALEAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-21T13:44:21.505Z",
               "EditorCaption": ""
@@ -49,22 +49,21 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\SW_MUTUALES_18_03_2025\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\camil\\OneDrive\\Desktop\\repositorio eliminar\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\Index.cshtml",
               "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\Index.cshtml",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\SW_MUTUALES_18_03_2025\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\Index.cshtml",
+              "ToolTip": "C:\\Users\\camil\\OneDrive\\Desktop\\repositorio eliminar\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\Index.cshtml",
               "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Creditos\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-20T22:33:44.389Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T22:33:44.389Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\SW_MUTUALES_18_03_2025\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\FormularioSolicitudMicrocredito\\Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\camil\\OneDrive\\Desktop\\repositorio eliminar\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\FormularioSolicitudMicrocredito\\Index.cshtml",
               "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\FormularioSolicitudMicrocredito\\Index.cshtml",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\SW_MUTUALES_18_03_2025\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\FormularioSolicitudMicrocredito\\Index.cshtml",
+              "ToolTip": "C:\\Users\\camil\\OneDrive\\Desktop\\repositorio eliminar\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\FormularioSolicitudMicrocredito\\Index.cshtml",
               "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\FormularioSolicitudMicrocredito\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -74,9 +73,9 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\SW_MUTUALES_18_03_2025\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Causacion\\Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\camil\\OneDrive\\Desktop\\repositorio eliminar\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Causacion\\Index.cshtml",
               "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Causacion\\Index.cshtml",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\SW_MUTUALES_18_03_2025\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Causacion\\Index.cshtml",
+              "ToolTip": "C:\\Users\\camil\\OneDrive\\Desktop\\repositorio eliminar\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Causacion\\Index.cshtml",
               "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Creditos\\Views\\Causacion\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
