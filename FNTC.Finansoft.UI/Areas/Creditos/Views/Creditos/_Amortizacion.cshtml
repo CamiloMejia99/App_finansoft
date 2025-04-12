@@ -20,7 +20,7 @@
     @Html.TextBoxFor(model => item.ValorPorcentajeCostoAnticipado, new { @id = "ValorPorcentajeCostoAnticipado", @style = "display: none;" })
     @Html.TextBoxFor(model => item.ValorPorcentajeCostoEnCadaCuota, new { @id = "ValorPorcentajeCostoEnCadaCuota", @style = "display: none;" })
 
-    @Html.HiddenFor(model => item.destino,new { @id = "Destino_Id" })
+    @Html.HiddenFor(model => item.destino, new { @id = "Destino_Id" })
 }
 
 
@@ -368,7 +368,7 @@
             return this.formatear(num);
         }
     }
-        //FIN FORMATEAR UN NUMERO
+    //FIN FORMATEAR UN NUMERO
     /*
      * FUNCIONALIDAD DE LA 'FUNCION'
     formatNumber.new(123456779.18, "$") // retorna "$123.456.779,18"

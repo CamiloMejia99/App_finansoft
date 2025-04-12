@@ -20,7 +20,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
         private AccountingContext db = new AccountingContext();
         NumberFormatInfo formato = new CultureInfo("es-CO").NumberFormat;
 
-        
+
         // GET: /Prestamos/
         public ActionResult Index()
         {
@@ -468,10 +468,10 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             string auxCostoAET = coll["auxCostoAdicionalEnEltiempo"].ToString();
             string auxValorPCA = coll["auxValorPorcentajeCostoAnticipado"].ToString();
             int costoADET = 0, costoAET = 0;
-            decimal valorPCA=0;
-            if(auxCostoADET!=null && auxCostoADET != "") { costoADET = Convert.ToInt32(auxCostoADET); }
-            if(auxCostoAET != null && auxCostoAET != "") { costoAET = Convert.ToInt32(auxCostoAET); }
-            if(auxValorPCA != null && auxValorPCA != "") { valorPCA = Convert.ToDecimal(auxValorPCA)/10; }
+            decimal valorPCA = 0;
+            if (auxCostoADET != null && auxCostoADET != "") { costoADET = Convert.ToInt32(auxCostoADET); }
+            if (auxCostoAET != null && auxCostoAET != "") { costoAET = Convert.ToInt32(auxCostoAET); }
+            if (auxValorPCA != null && auxValorPCA != "") { valorPCA = Convert.ToDecimal(auxValorPCA) / 10; }
 
             int periodo = (int)PrestamosYGarantias.ValorPeriodo / 30;//calcula la periodicidad del crédito (mensual,trimestral,semestral...)
 
@@ -493,53 +493,53 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                 Destino_Id = PrestamosYGarantias.Destino_Id,
                 myselect = PrestamosYGarantias.myselect,
                 ValorPeriodo = PrestamosYGarantias.ValorPeriodo,
-                ValorSeguro =(PrestamosYGarantias.Destino_Id==2)? (Convert.ToInt32(PrestamosYGarantias.Capital * decimal.Divide((decimal)0.059, 100)) * periodo):0,//Convert.ToInt32((costoAET + costoADET)/PrestamosYGarantias.Plazo),
+                ValorSeguro = (PrestamosYGarantias.Destino_Id == 2) ? (Convert.ToInt32(PrestamosYGarantias.Capital * decimal.Divide((decimal)0.059, 100)) * periodo) : 0,//Convert.ToInt32((costoAET + costoADET)/PrestamosYGarantias.Plazo),
                 ValorSeguroPorcentaje = PrestamosYGarantias.ValorSeguroPorcentaje,
                 ValDiasInt = PrestamosYGarantias.ValDiasInt,
                 difdias = PrestamosYGarantias.difdias,
-                fechadesembolso = Convert.ToDateTime( PrestamosYGarantias.fechadesembolso),
+                fechadesembolso = Convert.ToDateTime(PrestamosYGarantias.fechadesembolso),
                 costoAdicionalEnEltiempo = costoAET,
                 costoAdicionalAnticipado = PrestamosYGarantias.costoAdicionalAnticipado,
                 costoAdicionalPrimeraCuota = PrestamosYGarantias.costoAdicionalPrimeraCuota,
                 costoAdicionalDividoEnElTiempo = costoADET,
                 ValorPorcentajeCostoAnticipado = valorPCA,
                 ValorPorcentajeCostoEnCadaCuota = PrestamosYGarantias.ValorPorcentajeCostoEnCadaCuota,
-                CtoAdmon = (PrestamosYGarantias.Destino_Id==2)? GetCostoAdministracion((int)PrestamosYGarantias.Capital,(int)PrestamosYGarantias.Plazo, periodo) : 0
+                CtoAdmon = (PrestamosYGarantias.Destino_Id == 2) ? GetCostoAdministracion((int)PrestamosYGarantias.Capital, (int)PrestamosYGarantias.Plazo, periodo) : 0
 
-        };
-                db.Prestamos.Add(VPrestamos);
+            };
+            db.Prestamos.Add(VPrestamos);
 
-                var VGarantiasCreditos = new GarantiasCreditos()
-                {
-                    garantia_id = PrestamosYGarantias.garantia_id,
-                    Real_Valor = PrestamosYGarantias.mivalor,
-                    pagare = PrestamosYGarantias.Pagare,
-                    codeudor_nit = unchecked((int)PrestamosYGarantias.codeudor_nit),
-                    nombre_codeudor = PrestamosYGarantias.nombre_codeudor,
-                    valor_credito = unchecked((int)PrestamosYGarantias.Capital)
-                };
+            var VGarantiasCreditos = new GarantiasCreditos()
+            {
+                garantia_id = PrestamosYGarantias.garantia_id,
+                Real_Valor = PrestamosYGarantias.mivalor,
+                pagare = PrestamosYGarantias.Pagare,
+                codeudor_nit = unchecked((int)PrestamosYGarantias.codeudor_nit),
+                nombre_codeudor = PrestamosYGarantias.nombre_codeudor,
+                valor_credito = unchecked((int)PrestamosYGarantias.Capital)
+            };
 
-                db.GarantiasCreditos.Add(VGarantiasCreditos);
-                db.SaveChanges();
+            db.GarantiasCreditos.Add(VGarantiasCreditos);
+            db.SaveChanges();
             /*
                 var consecutivo = db.CConsecutivos.FirstOrDefault(j => j.idDestino == PrestamosYGarantias.Destino_Id & j.estado == true);
                 consecutivo.consecutivoPagareActual = consecutivo.consecutivoPagareActual + 1;
                 db.SaveChanges();
             */
-                //return RedirectToAction("Index");
-            
+            //return RedirectToAction("Index");
 
-           /* if (ModelState.IsValid)
-            {
-                db.Prestamos.Add(prestamos);
-                db.SaveChanges();
 
-                var consecutivo = db.CConsecutivos.FirstOrDefault(x => x.idDestino == prestamos.Destino_Id);
-                consecutivo.consecutivoPagareActual = consecutivo.consecutivoPagareActual + 1;
-                db.SaveChanges();
-                return RedirectToAction("Index");          
-            }
-            */
+            /* if (ModelState.IsValid)
+             {
+                 db.Prestamos.Add(prestamos);
+                 db.SaveChanges();
+
+                 var consecutivo = db.CConsecutivos.FirstOrDefault(x => x.idDestino == prestamos.Destino_Id);
+                 consecutivo.consecutivoPagareActual = consecutivo.consecutivoPagareActual + 1;
+                 db.SaveChanges();
+                 return RedirectToAction("Index");          
+             }
+             */
             ViewBag.Forma_Pago_Id = new SelectList(db.Forma_Pago, "Forma_Pago_Id", "Forma_Pago_Descripcion", PrestamosYGarantias.Forma_Pago_Id);
             ViewBag.Tipo_Periodo_Id = new SelectList(db.Tipo_Periodo, "Tipo_Periodo_Id", "Tipo_Periodo_Descripcion", PrestamosYGarantias.Tipo_Periodo_Id);
 
@@ -676,9 +676,9 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             return RedirectToAction("Index");
         }
 
-        public int GetCostoAdministracion(int capital,int plazo,int periodo)
+        public int GetCostoAdministracion(int capital, int plazo, int periodo)
         {
-            int CtoAdmon = (Convert.ToInt32(capital*0.01)/plazo)*periodo;
+            int CtoAdmon = (Convert.ToInt32(capital * 0.01) / plazo) * periodo;
             //if (capital >= 0 && capital <= 10000000) { CtoAdmon = (Convert.ToInt32(capital * 0.015) / plazo) * periodo; }
             //else if (capital > 10000000 && capital <= 15000000) { CtoAdmon = (Convert.ToInt32(capital * 0.012) / plazo) * periodo; }
             //else { CtoAdmon = (Convert.ToInt32(capital * 0.01) / plazo) * periodo; }
@@ -688,13 +688,13 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
 
         [HttpPost]
         public JsonResult GetAmortizacion(int seleccion, int capital, string interes, int plazo, DateTime FechaPrestamo, string VPS, int costoAdicionalPrimeraCuota, int costoAdicionalDividoEnElTiempo,
-            string ValorPorcentajeCostoAnticipado, string ValorPorcentajeCostoEnCadaCuota, int costoAdicionalEnEltiempo, int costoAdicionalAnticipado, int ValDiasInt, int Periodo,int IdDestino)
+            string ValorPorcentajeCostoAnticipado, string ValorPorcentajeCostoEnCadaCuota, int costoAdicionalEnEltiempo, int costoAdicionalAnticipado, int ValDiasInt, int Periodo, int IdDestino)
         {
 
             Periodo = Periodo / 30;
 
             //obtenemos costo de administracion
-            int CtoAdmon = (IdDestino==2) ? GetCostoAdministracion(capital, plazo, Periodo) : 0; //se agrega condición sobre el destino, si es diferente a destino de crédito ordinario su valor debe ser cero.
+            int CtoAdmon = (IdDestino == 2) ? GetCostoAdministracion(capital, plazo, Periodo) : 0; //se agrega condición sobre el destino, si es diferente a destino de crédito ordinario su valor debe ser cero.
 
 
             //VPS: valor porcentaje seguro
@@ -702,7 +702,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             double VPCECC = Convert.ToDouble(ValorPorcentajeCostoEnCadaCuota);//valor porcentaje costo en cada cuota
             double VPCA = Convert.ToDouble(ValorPorcentajeCostoAnticipado);//valor porcentaje costo anticipado
 
-            double valorInteres = (Convert.ToDouble(interes) / 1000)*Periodo;
+            double valorInteres = (Convert.ToDouble(interes) / 1000) * Periodo;
             double porcentajeSeguro = Convert.ToDouble(VPS);
             double ValorPorcentajeParaTabla = 0;
             if (porcentajeSeguro != 0)
@@ -727,15 +727,15 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
 
             //int valorCostoFijo = ((Convert.ToInt32(costoAdicionalEnEltiempo + costoAdicionalPrimeraCuota + costoAdicionalDividoEnElTiempo)) / 12) * plazo;
             int valorCostoFijo = costoAdicionalEnEltiempo;
-            int valorCostoFijoCuota = (IdDestino==2) ? (Convert.ToInt32(capital * decimal.Divide((decimal)0.059,100))*Periodo) : 0;//(valorCostoFijo / plazo)*Periodo;
+            int valorCostoFijoCuota = (IdDestino == 2) ? (Convert.ToInt32(capital * decimal.Divide((decimal)0.059, 100)) * Periodo) : 0;//(valorCostoFijo / plazo)*Periodo;
 
 
-            double cuota = (capital * (valorInteres / (1 - Math.Pow(1 + valorInteres, -(plazo/Periodo)))));
+            double cuota = (capital * (valorInteres / (1 - Math.Pow(1 + valorInteres, -(plazo / Periodo)))));
             double abonoInteres = capital * valorInteres;
             double abonoCapital = cuota - abonoInteres;
 
             int valorCuota = 0;
-            valorCuota = Convert.ToInt32(abonoCapital + abonoInteres + costoAdicionalPrimeraCuota + costoAdicionalDividoEnElTiempo + ValorPorcentajeParaTabla+valorCostoFijoCuota+CtoAdmon);
+            valorCuota = Convert.ToInt32(abonoCapital + abonoInteres + costoAdicionalPrimeraCuota + costoAdicionalDividoEnElTiempo + ValorPorcentajeParaTabla + valorCostoFijoCuota + CtoAdmon);
             int valorCuotaSinCostoAdicionalPrimeraCuota = Convert.ToInt32(abonoCapital + abonoInteres + costoAdicionalEnEltiempo + costoAdicionalDividoEnElTiempo + porcentajeSeguro);
             int ValorCostoFijoSinCostoPrimeraCuotaSinInteresAnticipado = costoAdicionalEnEltiempo + costoAdicionalDividoEnElTiempo;
             double saldoCapital = 0;
@@ -747,7 +747,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
 
 
             int J = 1;
-            for (int i = Periodo; i <= plazo; i+=Periodo)
+            for (int i = Periodo; i <= plazo; i += Periodo)
             {
                 interesMensual = Math.Round(valorInteres * capital, 2);
                 capitalAux = Math.Round(capital - cuota + interesMensual, 2);
@@ -767,19 +767,19 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                 abonoInteres = saldoCapital * valorInteres;
                 abonoCapital = cuota - abonoInteres;
                 saldoCapital = saldoCapital - abonoCapital;
-                
+
                 if (ValorPorcentajeParaTabla != 0)
                 {
                     ValorPorcentajeParaTabla = saldoCapital - porcentajeSeguro;
                 }
-                valorCuota = Convert.ToInt32(abonoCapital + abonoInteres + ValorPorcentajeParaTabla+valorCostoFijoCuota+CtoAdmon);
+                valorCuota = Convert.ToInt32(abonoCapital + abonoInteres + ValorPorcentajeParaTabla + valorCostoFijoCuota + CtoAdmon);
 
                 list.Add(array);
                 J++;
             }
 
 
-            return new JsonResult { Data = new { status = true,list } };
+            return new JsonResult { Data = new { status = true, list } };
         }
 
         protected override void Dispose(bool disposing)

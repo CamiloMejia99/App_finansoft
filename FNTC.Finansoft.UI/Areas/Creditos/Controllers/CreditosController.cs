@@ -1,16 +1,4 @@
-﻿using DocumentFormat.OpenXml.Drawing.Charts;
-using DocumentFormat.OpenXml.Drawing;
-using FNTC.Finansoft.Accounting.BLL;
-using FNTC.Finansoft.Accounting.BLL.FabricaCreditosBll;
-using FNTC.Finansoft.Accounting.DTO;
-using FNTC.Finansoft.Accounting.DTO.Contabilidad;
-using FNTC.Finansoft.Accounting.DTO.MCreditos;
-using FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes;
-using FNTC.Finansoft.UI.Tools;
-using Microsoft.Ajax.Utilities;
-using Newtonsoft.Json;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -18,8 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using static FNTC.Finansoft.UI.Enums.EnumsProgram;
-using System.Globalization;
+using FNTC.Finansoft.Accounting.BLL;
+using FNTC.Finansoft.Accounting.DTO;
+using FNTC.Finansoft.Accounting.DTO.Contabilidad;
+using FNTC.Finansoft.Accounting.DTO.MCreditos;
+using FNTC.Finansoft.Accounting.BLL.FabricaCreditosBll;
+using FNTC.Finansoft.UI.Tools;
 //using .Terceros;
 
 namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
@@ -62,7 +54,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                 presta.Capital = prestamo.Capital;
                 presta.Plazo = prestamo.Plazo;
                 presta.Interes = prestamo.Interes;
-                presta.NOMBRE = (prestamo.terceroFK!=null) ? prestamo.terceroFK.NOMBRE1+" "+ prestamo.terceroFK.NOMBRE2 + " "+ prestamo.terceroFK.APELLIDO1+" "+ prestamo.terceroFK.APELLIDO2 : "";
+                presta.NOMBRE = (prestamo.terceroFK != null) ? prestamo.terceroFK.NOMBRE1 + " " + prestamo.terceroFK.NOMBRE2 + " " + prestamo.terceroFK.APELLIDO1 + " " + prestamo.terceroFK.APELLIDO2 : "";
                 presta.NIT = prestamo.NIT;
                 presta.estado = prestamo.estado;
 
@@ -75,7 +67,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             };
             return Json(respuesta, JsonRequestBehavior.AllowGet);
             // return Json(new { data = respuesta }, JsonRequestBehavior.AllowGet);
-        }  
+        }
 
         public ActionResult ImprimirAmortizacion(int id)
         {
@@ -186,7 +178,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                     obj.destino = item.Destino_Id.ToString();
                     _Amortizacion.Add(obj);
                 }
-                
+
                 return View("ImprimirAmortizacion", _Amortizacion);
             }
             else
@@ -470,7 +462,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             var InteresAnticipado = InteresDiario * dias;
             var conversion = InteresAnticipado.ToString();
             var intereses = Convert.ToDecimal(conversion);
-            
+
             var resultad = Convert.ToDecimal(InteresAnticipado);
             var decimalValu = decimal.Round(resultad, 0);
             ViewBag.ValorInteres = ValorInteres;
@@ -587,7 +579,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
 
                 return PartialView("_EliminarCredito");
             }
-            
+
         }
 
         [HttpPost]
@@ -595,12 +587,12 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
         {
 
             Prestamos prestamos = db.Prestamos.Find(id);
-            if (prestamos!=null)
+            if (prestamos != null)
             {
                 db.Prestamos.Remove(prestamos);
                 db.SaveChanges();
             }
-      
+
             var deleteCostoPrestamos = from Costoprestamo in db.CostosPrestamos
                                        where Costoprestamo.Pagare == pagare
                                        select Costoprestamo;
@@ -650,7 +642,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RealizarDesembolso([Bind(Include = "saldoCreditoDesembolsado,id,fechadesembolso,diapago,BANCO,cajain,Interes,Resultado")] ViewModelDesembolso datosDesembolso)
         {
-            
+
             var prestamo = db.Prestamos.FirstOrDefault(j => j.id == datosDesembolso.id);
             var cuentaCreditoCod = (from pc in db.Cuentas where pc.Funcion == "F3" && pc.Destino_Id == prestamo.Destino_Id select pc).FirstOrDefault();
             var cuentaDebitoCod = (from pc in db.Cuentas where pc.Funcion == "F1" && pc.Destino_Id == prestamo.Destino_Id select pc).FirstOrDefault();
@@ -659,7 +651,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             var papeleriaNC = (from pc in db.Cuentas where pc.Funcion == "F17" && pc.Destino_Id == prestamo.Destino_Id select pc).FirstOrDefault();
 
             var Periodo = Convert.ToInt32(prestamo.Tipo_Periodo.Tipo_Periodo_Valor) / 30;
-            
+
             prestamo.ValDiasInt = 0;
             prestamo.difdias = 0;
             string fecha = "1/01/0001";
@@ -673,7 +665,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             {
                 FechaDeDesembolso = datosDesembolso.fechadesembolso;
             }
-            
+
             prestamo.fechadesembolso = FechaDeDesembolso;
             var idLinea = (from pc in db.Destinos where pc.Destino_Id == prestamo.Destino_Id select pc.Lineas_Id).Single();
             var garantiasCreditos = db.GarantiasCreditos.FirstOrDefault(j => j.pagare == prestamo.Pagare);
@@ -687,8 +679,8 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                 return RedirectToAction("Index", new { Controller = "Default", Area = "Dashboard" });
             }
 
-            var InteresDividido = (prestamo.Interes / 100)*Periodo;
-            var opera = Math.Pow(Convert.ToDouble((1 + InteresDividido)), Convert.ToDouble(-prestamo.Plazo/Periodo));
+            var InteresDividido = (prestamo.Interes / 100) * Periodo;
+            var opera = Math.Pow(Convert.ToDouble((1 + InteresDividido)), Convert.ToDouble(-prestamo.Plazo / Periodo));
             var Cuota = (prestamo.Capital) * (InteresDividido / (1 - Convert.ToDecimal(opera)));
 
             var costoAdicionalEnEltiempo = prestamo.costoAdicionalEnEltiempo;
@@ -699,8 +691,8 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             var ValorPorcentajeCostoEnCadaCuota = prestamo.ValorPorcentajeCostoEnCadaCuota;
 
             var Capital = Convert.ToDecimal(prestamo.Capital);
-            var AbonoInteres = (Capital) * ((prestamo.Interes / 100)*Periodo);
-            var AbonosInteres = (Capital) * (prestamo.Interes / 100)*Periodo;
+            var AbonoInteres = (Capital) * ((prestamo.Interes / 100) * Periodo);
+            var AbonosInteres = (Capital) * (prestamo.Interes / 100) * Periodo;
             var AbonoCapital = Cuota - AbonoInteres;
             var Plazo = Convert.ToInt32(prestamo.Plazo);
             var seleccion = prestamo.myselect;
@@ -747,14 +739,14 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             }
 
             //var ValorCuota = (AbonoCapital + AbonoInteres + costoAdicionalPrimeraCuota + costoAdicionalDividoEnElTiempo+ ValorPorcentajeParaTabla);
-            var ValorCuota = (AbonoCapital + AbonoInteres+prestamo.ValorSeguro+prestamo.CtoAdmon);
+            var ValorCuota = (AbonoCapital + AbonoInteres + prestamo.ValorSeguro + prestamo.CtoAdmon);
             var ValorCuotaSinCostoAdicionalPrimeraCuota = (AbonoCapital + AbonoInteres + costoAdicionalEnEltiempo + costoAdicionalDividoEnElTiempo + ValorPorcentaje);
             var ValorCostoFijo = costoAdicionalEnEltiempo + costoAdicionalPrimeraCuota + costoAdicionalDividoEnElTiempo;
-            int ValorCostoFijoCuota = Convert.ToInt32( ValorCostoFijo / prestamo.Plazo)*Periodo;
+            int ValorCostoFijoCuota = Convert.ToInt32(ValorCostoFijo / prestamo.Plazo) * Periodo;
             var ValorCostoFijoSinCostoPrimeraCuotaSinInteresAnticipado = costoAdicionalEnEltiempo + costoAdicionalDividoEnElTiempo;
             var SaldoCapital = Capital - AbonoCapital;
 
-            
+
 
             DateTime FechaProxPag = new DateTime(prestamo.fechadesembolso.Year, prestamo.fechadesembolso.Month, datosDesembolso.diapago);
             prestamo.Fecha_Prestamo = FechaProxPag;
@@ -780,14 +772,14 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
 
             //...
             int J = 1;
-            for (var i = Periodo; i <= Plazo; i+=Periodo)
+            for (var i = Periodo; i <= Plazo; i += Periodo)
             {
                 var InteresMensual = InteresDividido * Capital;
                 //Capital = Math.Round((Capital - Cuota + InteresMensual), 0, MidpointRounding.ToEven);
 
                 AuxCapital = AbonoCapital;
-                AuxSaldoCapital = SaldoCapital+AbonoCapital;
-                AuxValorCuota= ValorCuota;
+                AuxSaldoCapital = SaldoCapital + AbonoCapital;
+                AuxValorCuota = ValorCuota;
 
                 var lineaAmortizacion = new Amortizaciones()
                 {
@@ -813,8 +805,8 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                     SaldoCapitalEnCuota = Math.Round(AuxSaldoCapital, 0, MidpointRounding.ToEven),
                     InteresCorriente = (J == 1) ? Math.Round(AbonosInteres, 0, MidpointRounding.ToEven) : 0,
                     InteresMora = 0,
-                    Seguro = (J==1) ? prestamo.ValorSeguro : 0,
-                    CtoAdmon = (J==1) ? prestamo.CtoAdmon : 0,
+                    Seguro = (J == 1) ? prestamo.ValorSeguro : 0,
+                    CtoAdmon = (J == 1) ? prestamo.CtoAdmon : 0,
                     ValorCuota = (J == 1) ? Math.Round(AuxValorCuota, 0, MidpointRounding.ToEven) : Math.Round(AuxValorCuota - AbonoInteres, 0, MidpointRounding.ToEven),
                     EstadoEnCredito = "AD",
                     EstadoEnOperacion = (J == 1) ? true : false
@@ -830,7 +822,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                 {
                     ValorPorcentajeParaTabla = Convert.ToInt32(SaldoCapital * ValorPorcentaje);
                 }
-                ValorCuota = (AbonoCapital + AbonoInteres) ;
+                ValorCuota = (AbonoCapital + AbonoInteres);
 
                 J++;
             }
@@ -844,11 +836,11 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                 InteresCorrienteTotal = 0,
                 InteresMoraTotal = 0,
                 SeguroTotal = 0,
-                CtoAdmonTotal=0,
+                CtoAdmonTotal = 0,
                 InteresCorrientePendiente = Math.Round(AbonosInteres, 0, MidpointRounding.ToEven),
                 InteresMoraPendiente = 0,
                 SeguroPendiente = prestamo.ValorSeguro,
-                CtoAdmonPendiente=prestamo.CtoAdmon,
+                CtoAdmonPendiente = prestamo.CtoAdmon,
                 FechaProximoPago = FechaProxPagoTotales,
                 DiasMora = 0,
                 Estado = "AD"
@@ -890,7 +882,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             db.Creditos.Add(varBCreditos);
             var valorInteresMora = Convert.ToDecimal(3.6);
             var proximoPago = FechaProxPag.AddMonths(Periodo);
-            
+
 
             //CONTRUIR EL COMPROBANTE
             var consecutivoComprobante = db.TiposComprobantes.FirstOrDefault(x => x.CODIGO == cuentaCreditoCod.TipoComprobante & x.INACTIVO == false);
@@ -994,7 +986,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                         //    sumaDeCostos += Convert.ToInt32(valorIVA);
                         //}
 
-                        
+
                     }
                 }
             }
@@ -1053,7 +1045,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             }
             if (datosDesembolso.BANCO != "0")
             {
-                
+
                 var mov4 = new Movimiento()
                 {
                     TIPO = cuentaCreditoCod.TipoComprobante,
@@ -1206,7 +1198,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
         private Int64 GetCostoAdicionalAnticipado(decimal capital)
         {
             Int64 valor = 0;
-            if (capital >= 0 && capital <= 10000000) { valor = Convert.ToInt64(capital*(Convert.ToDecimal(1.5)/100)); }
+            if (capital >= 0 && capital <= 10000000) { valor = Convert.ToInt64(capital * (Convert.ToDecimal(1.5) / 100)); }
             else if (capital > 10000000 && capital <= 15000000) { valor = Convert.ToInt64(capital * (Convert.ToDecimal(1.2) / 100)); }
             else { valor = Convert.ToInt64(capital * (Convert.ToDecimal(1.0) / 100)); }
             return valor;

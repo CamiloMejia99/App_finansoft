@@ -282,6 +282,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
 
 
         }
+
         //------------------------------------- ESTADO DE CUENTAS --------------------------------------
 
         [HttpPost]
@@ -550,8 +551,96 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
         }
 
         //---------------------------------------------------------- FIN FACTURA AHORRO CONTRACTUAL -----------------------------------------------------------------------------
+        //---------------------------------------------------------- FACTURA CREDITOS -----------------------------------------------------------------------------
+        public JsonResult EnviaCorreoDetailsConsCuotaCredito(string asunto, string mensaje, string para, string nit, int id)
+        {
 
-        //-------------------------------------------------------------------- CONTROLADORES PARA FactOpCaja  ----------------------------------------------
+
+            string subject = "FACTURA PAGO CREDITO ASOPASCUALINA";
+            string message = "Señor(a) usuario, la asociacion mutual \"Asopascualina\" le comparte su factura de su factura de su pago Credito.";
+            var Estado = "1";
+            var query = db.ConfiguracionCorreo.Where(x => x.estado == "1").ToList();
+
+            if (query != null)
+            {
+                var email = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.email).Single();
+                var pass = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.password).Single();
+                var smtpClient = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.smtp).Single();
+                var puertoSmtp = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.puerto).Single();
+
+                if (asunto != "")
+                {
+                    subject = asunto;
+                }
+                if (mensaje != "")
+                {
+                    message = mensaje;
+                }
+
+                try
+                {
+                    MailMessage correo = new MailMessage();
+                    correo.From = new MailAddress(email);
+                    correo.To.Add(para);
+                    correo.Subject = subject;
+                    correo.Body = message;
+                    correo.IsBodyHtml = true;
+                    correo.Priority = MailPriority.Normal;
+
+                    //  Cambiar por     n             ↓↓↓↓↓
+                    var actionPDF = new ActionAsPdf("Details", new { nit, id })
+                    {
+                        FileName = nit + ".pdf",
+                        PageOrientation = Rotativa.Options.Orientation.Portrait,
+                        PageMargins = { Left = 1, Right = 1 }
+                    };
+
+                    byte[] applicationPDFData = actionPDF.BuildPdf(this.ControllerContext);
+                    MemoryStream pdfStream = new MemoryStream(applicationPDFData);
+                    Attachment pdf = new Attachment(pdfStream, nit + ".pdf");
+
+                    //STMP HOTMAIL
+                    /* las credencial
+                     * smtp.UseDefaultCredentials = false;
+                     */
+
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = smtpClient;
+
+                    smtp.Host = smtpClient;
+                    smtp.Port = puertoSmtp;
+                    smtp.EnableSsl = true;
+                    smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+                    smtp.Timeout = 10000;//
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;//
+                    smtp.UseDefaultCredentials = false;
+                    string cuentaCorreo = email;
+                    string passwordCorreo = pass;
+                    smtp.Credentials = new NetworkCredential(cuentaCorreo, passwordCorreo);
+                    correo.BodyEncoding = UTF8Encoding.UTF8;//
+                    correo.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;//
+                    correo.Attachments.Add(pdf);
+                    smtp.Send(correo);
+                    return new JsonResult { Data = new { status = true } };
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    return new JsonResult { Data = new { status = false } };
+                }
+
+            }
+            else
+            {
+                return new JsonResult { Data = new { status = false } };
+            }
+
+        }
+        //---------------------------------------------------------- FIN FACTURA CREDITOS -----------------------------------------------------------------------------
+
+        //-------------------------------------------------------------------- CONTROLADORES PARA FactOpCaja  ------------------------------------------------------------
 
         public ActionResult Details(string nit, int id)
         {
@@ -604,6 +693,39 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
                 ViewBag.movimientos = movimientos;
 
             return View(factOpcaja);
+        }
+
+        public ActionResult DetailsConsCuotaCredito(string nit, int id)
+        {
+            //nit = "36994839";
+            #region datosTerceros
+            var tercero = (from pc in db.Terceros where pc.NIT == nit select pc).FirstOrDefault();
+            if (tercero != null)
+            {
+                var dataAgencia = (from pc in db.agencias where pc.codigoagencia == tercero.DEPENDENCIA select pc.nombreagencia).FirstOrDefault();
+
+            }
+            #endregion
+            FactOpcaja factOpcaja = db.FactOpcaja.Find(id);
+            if (factOpcaja == null)
+            {
+                return HttpNotFound();
+            }
+            //obtenemos los movimientos adicionales a caja y la cuenta configurada para aportes ordinarios
+            var movimientos = db.Movimientos.Where(x => x.TIPO == factOpcaja.TIPO && x.NUMERO == factOpcaja.NUMERO).ToList();
+            if (movimientos.Count() > 0)
+                //movimientos.RemoveRange(1, 1);//se elimina las cuentas de cuenta de caja y la de aportes y se deja las demás
+                ViewBag.movimientos = movimientos;
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            factOpCajaConsCuotaCredito factOpCajaConsCuotaCredito = db.factOpCajaConsCuotaCredito.Find(id);
+            if (factOpCajaConsCuotaCredito == null)
+            {
+                return HttpNotFound();
+            }
+            return View(factOpCajaConsCuotaCredito);
         }
 
 

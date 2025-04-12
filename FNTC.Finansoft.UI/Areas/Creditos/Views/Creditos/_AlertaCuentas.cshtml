@@ -10,18 +10,18 @@
 
         <div class="modal-body">
             <dl class="dl-horizontal"></dl>
-            <input type="text" value="@Model.NOMBRE" id="alerta" hidden="hidden">           
+            <input type="text" value="@Model.NOMBRE" id="alerta" hidden="hidden">
         </div>
     </div>
 </div>
 
 <script>
-    $(document).ready(function () {       
+    $(document).ready(function () {
         var alerta = $("#alerta").val();
         swal({
             title: "Alerta",
             type: "error",
             text: alerta,
-        })    
+        })
     });
 </script>

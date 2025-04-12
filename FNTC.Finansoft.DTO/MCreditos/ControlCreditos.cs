@@ -29,6 +29,5 @@ namespace FNTC.Finansoft.Accounting.DTO.MCreditos
         public decimal ValorCuota { get; set; }
         public string EstadoEnCredito { get; set; }
         public bool EstadoEnOperacion { get; set; }
-        public decimal ValorCuotaExtra { get; set; }
     }
 }

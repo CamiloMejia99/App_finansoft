@@ -12,15 +12,15 @@ using System.Web.Script.Serialization;
 
 namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
 {
-    
+
     public class ProcesosCrediticiosController : Controller
     {
         NumberFormatInfo formato = new CultureInfo("es-CO").NumberFormat;
         [AllowAnonymous]
         public void RealizarCausacion()
         {
-            var respuesta = new  ProcesoCrediticioBLL().RealizarCausacion();
-            
+            var respuesta = new ProcesoCrediticioBLL().RealizarCausacion();
+
         }
 
         [Authorize]
@@ -29,22 +29,22 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             var respuesta = new ProcesoCrediticioBLL().GetCuotaActual(Pagare);
 
             return respuesta;
-            
+
         }
 
         [Authorize]
-        public JsonResult Pago(string Pagare, string Opcion, string ValorRecibido, string FormaPago,string FechaPago,string NumFactura)
+        public JsonResult Pago(string Pagare, string Opcion, string ValorRecibido, string FormaPago, string FechaPago, string NumFactura)
         {
             string UsuarioActual = User.Identity.Name;
-            var respuesta = new ProcesoCrediticioBLL().Pago(Pagare,Opcion,ValorRecibido,UsuarioActual,FormaPago,FechaPago,NumFactura);
+            var respuesta = new ProcesoCrediticioBLL().Pago(Pagare, Opcion, ValorRecibido, UsuarioActual, FormaPago, FechaPago, NumFactura);
             return respuesta;
         }
 
         [Authorize]
-        public JsonResult Abono(string Pagare,string ValorConsignado, string ValorRecibido, string FormaPago, string FechaPago,string NumFactura)
+        public JsonResult Abono(string Pagare, string ValorConsignado, string ValorRecibido, string FormaPago, string FechaPago, string NumFactura)
         {
             string UsuarioActual = User.Identity.Name;
-            var respuesta = new ProcesoCrediticioBLL().Abono(Pagare,ValorConsignado, ValorRecibido, UsuarioActual,FormaPago,FechaPago,NumFactura);
+            var respuesta = new ProcesoCrediticioBLL().Abono(Pagare, ValorConsignado, ValorRecibido, UsuarioActual, FormaPago, FechaPago, NumFactura);
             return respuesta;
         }
 
@@ -53,22 +53,22 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
         {
             formato.CurrencyGroupSeparator = ".";
             formato.NumberDecimalSeparator = ",";
-            decimal VP = 0,VR=0,Cambio=0;
+            decimal VP = 0, VR = 0, Cambio = 0;
 
             VP = (ValorPagar != null && ValorPagar != "") ? Convert.ToDecimal(ValorPagar.Replace(".", "")) : 0;
             VR = (ValorRecibido != null && ValorRecibido != "") ? Convert.ToDecimal(ValorRecibido.Replace(".", "")) : 0;
 
-            if((VR-VP)>=0)
+            if ((VR - VP) >= 0)
             {
                 Cambio = VR - VP;
                 var C = Cambio.ToString("N0", formato);
-                return new JsonResult { Data = new { status = true,Cambio=C } };
+                return new JsonResult { Data = new { status = true, Cambio = C } };
             }
             else
             {
                 return new JsonResult { Data = new { status = false } };
             }
-            
+
         }
 
         [Authorize]
@@ -82,10 +82,10 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
         public ActionResult FacturaExcel(int Id)
         {
             //imprime la factura en Excel
-            using(var ctx = new AccountingContext())
+            using (var ctx = new AccountingContext())
             {
                 var Factura = ctx.factOpCajaConsCuotaCredito.Find(Id);
-                if(Factura!=null)
+                if (Factura != null)
                 {
                     Response.Clear();
                     Response.ClearContent();
@@ -114,7 +114,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                         ws.Cells["L" + 1].Value = "SALDO CAPITAL";
 
                         ws.Cells["A" + 2].Value = Factura.fecha.ToString("dd/MM/yyyy");
-                        ws.Cells["B" + 2].Value = (Factura.Terceros!=null) ? Factura.Terceros.NombreComercial+" "+Factura.Terceros.APELLIDO1 + " " + Factura.Terceros.APELLIDO2 + " " + Factura.Terceros.NOMBRE1 + " " + Factura.Terceros.NOMBRE2 : "";
+                        ws.Cells["B" + 2].Value = (Factura.Terceros != null) ? Factura.Terceros.NombreComercial + " " + Factura.Terceros.APELLIDO1 + " " + Factura.Terceros.APELLIDO2 + " " + Factura.Terceros.NOMBRE1 + " " + Factura.Terceros.NOMBRE2 : "";
                         ws.Cells["C" + 2].Value = Factura.NIT;
                         ws.Cells["D" + 2].Value = Factura.pagare;
                         ws.Cells["E" + 2].Value = Factura.FormaPago;
@@ -134,10 +134,10 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                     Response.End();
 
                 }
-                
+
             }
 
-            return RedirectToAction("../InformesCartera/Index?="+Id);
+            return RedirectToAction("../InformesCartera/Index?=" + Id);
         }
 
         [Authorize(Roles = "Admin")]
@@ -154,7 +154,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             var respuesta = new ProcesoCrediticioBLL().ConsultarPagares();
             return respuesta;
         }
-        
+
         [Authorize]
         public JsonResult GetCuotasCredito(string Pagare)
         {
@@ -163,16 +163,16 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
         }
 
         [Authorize]
-        public JsonResult CalcularIM(int Id,int DiasMora)
+        public JsonResult CalcularIM(int Id, int DiasMora)
         {
             var respuesta = new ProcesoCrediticioBLL().CalcularIM(Id, DiasMora);
             return respuesta;
         }
 
-        [Authorize(Roles ="Admin")]
-        public JsonResult GuardarValores(int Id, string IC, string IM,string seguro, string admon)
+        [Authorize(Roles = "Admin")]
+        public JsonResult GuardarValores(int Id, string IC, string IM, string seguro, string admon)
         {
-            var respuesta = new ProcesoCrediticioBLL().GuardarValores(Id,IC,IM,seguro,admon);
+            var respuesta = new ProcesoCrediticioBLL().GuardarValores(Id, IC, IM, seguro, admon);
             return respuesta;
         }
 

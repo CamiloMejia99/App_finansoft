@@ -686,6 +686,7 @@
     <Content Include="Scripts\Creditos\ValidacionesAgregarCuenta.js" />
     <Content Include="Scripts\Creditos\verifcarTercero.js" />
     <Content Include="Scripts\Email\EmailAhorroContractual.js" />
+    <Content Include="Scripts\Email\EmailDetailsConsCuotaCredito.js" />
     <Content Include="Scripts\Email\EmailAportes.js" />
     <Content Include="Scripts\FormularioApertura\FiltrosTabla.js" />
     <Content Include="Scripts\FormularioApertura\NuevoFormulario.js" />
@@ -1983,6 +1984,7 @@
     <Content Include="Areas\Creditos\Views\Causacion\Index.cshtml" />
     <Content Include="Areas\Email\Views\Email\Details.cshtml" />
     <Content Include="Areas\Email\Views\Email\DetalleFacturaAhorroContractual.cshtml" />
+    <Content Include="Areas\Email\Views\Email\DetailsConsCuotaCredito.cshtml" />
     <None Include="Content\js\prueba.json" />
     <Content Include="Content\styleMenu.css" />
     <Content Include="Content\font-awesome.css" />

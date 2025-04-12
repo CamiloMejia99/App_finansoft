@@ -15,13 +15,13 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        
+
         <div class="form-horizontal">
             <h4>BCreditos</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Creditos_Id)
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Creditos_Cedula, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -29,7 +29,7 @@
                     @Html.ValidationMessageFor(model => model.Creditos_Cedula, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Lineas_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -37,7 +37,7 @@
                     @Html.ValidationMessageFor(model => model.Lineas_Id, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Destino_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -45,7 +45,7 @@
                     @Html.ValidationMessageFor(model => model.Destino_Id, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Garantias_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -53,7 +53,7 @@
                     @Html.ValidationMessageFor(model => model.Garantias_Id, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Capital, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -61,7 +61,7 @@
                     @Html.ValidationMessageFor(model => model.Capital, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Creditos_Estado, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -71,7 +71,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Creditos_Interes, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -79,7 +79,7 @@
                     @Html.ValidationMessageFor(model => model.Creditos_Interes, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Creditos_Plazo, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -87,7 +87,7 @@
                     @Html.ValidationMessageFor(model => model.Creditos_Plazo, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Creditos_Cuota, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -95,7 +95,7 @@
                     @Html.ValidationMessageFor(model => model.Creditos_Cuota, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Creditos_Interes_Mora, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -103,7 +103,7 @@
                     @Html.ValidationMessageFor(model => model.Creditos_Interes_Mora, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Creditos_Saldo_Capital, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -111,7 +111,7 @@
                     @Html.ValidationMessageFor(model => model.Creditos_Saldo_Capital, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Codigo_Operador_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -119,7 +119,7 @@
                     @Html.ValidationMessageFor(model => model.Codigo_Operador_Id, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Save" class="btn btn-default" />
@@ -127,7 +127,7 @@
             </div>
         </div>
     }
-    
+
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>

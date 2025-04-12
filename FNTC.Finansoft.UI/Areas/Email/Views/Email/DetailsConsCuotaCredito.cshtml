@@ -37,7 +37,6 @@
     <br />
     <div class="row" style="margin-left:2%">
         <p class="col-md-12"><b>Id:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.id)</p>
-        @Html.HiddenFor(model => model.id, new { id = "idRecibo" })
 
         <p class="col-md-12"><b>Código caja:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.codigoCaja)
         <p class="col-md-12"><b>Cédula Cajero:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.nitCajero)</p>
@@ -115,13 +114,6 @@
 
 </div>
 
-
-<p>
-    <button id="btnRegresar" class="btn btn-default">Regresar</button>
-    <input type="button" class="btn btn-default" onclick="printDiv('areaImprimir')" value="Imprimir" />
-    <button type="button" id="BtnEnviarEmailDetailsConsCuotaCredito" class="btn btn-default">Enviar por correo</button>
-    <button type="button" class="btn btn-default" id="BtnExcel">Excel</button>
-</p>
 
 
 <script src="~/Scripts/sweetalert.min.js"></script>

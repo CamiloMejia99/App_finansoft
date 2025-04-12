@@ -24,7 +24,7 @@
             <div class="space-10"></div>
             <div class="modal-footer">
                 <div class="ui-dialog-buttonset">
-                   
+
                     <button id="eliminarprestamoq" name="eliminarprestamo" class="btn btn-danger">Si</button>
                     <button data-dismiss="modal" type="button" class="btn btn-sm btn btn-success"><i class="ace-icon fa fa-times bigger-110"></i>&nbsp;&nbsp;No&nbsp;&nbsp;</button>
                 </div>
@@ -34,12 +34,12 @@
     </div>
 </div>
 <script>
-   
+
     $("#eliminarprestamoq").click(function () {
 
         var id = $("#credito_id").val();
         var pagare = $("#pagare").val();
-     
+
                 $.ajax({
                     url: "@Url.Action("_EliminarCreditoPost", "Creditos")",
                     datatype: "Json",
@@ -47,7 +47,7 @@
                     type: 'post',
                 }).done(function (data) {
                     if (data.status == true) {
-                                               
+
                         location.reload(true)
                     }
                     else if (data.status == false)
