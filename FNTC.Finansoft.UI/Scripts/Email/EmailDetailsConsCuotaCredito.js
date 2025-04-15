@@ -77,6 +77,6 @@
         });//fin ajax enviarCorreo
 
 
-    });//fin btnEnviaCorreoAportes
+    });//fin 
 })
 

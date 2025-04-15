@@ -734,20 +734,18 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
             if (tercero != null)
             {
                 var dataAgencia = (from pc in db.agencias where pc.codigoagencia == tercero.DEPENDENCIA select pc.nombreagencia).FirstOrDefault();
-
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             #endregion
-            FactOpcaja factOpcaja = db.FactOpcaja.Find(id);
-            if (factOpcaja == null)
+            factOpCajaConsCuotaCredito factOpCajaConsCuotaCredito = db.factOpCajaConsCuotaCredito.Find(id);
+            if (factOpCajaConsCuotaCredito == null)
             {
                 return HttpNotFound();
             }
-            //obtenemos los movimientos adicionales a caja y la cuenta configurada para aportes ordinarios
-            var movimientos = db.Movimientos.Where(x => x.TIPO == factOpcaja.TIPO && x.NUMERO == factOpcaja.NUMERO).ToList();
-            if (movimientos.Count() > 0)
-                //movimientos.RemoveRange(1, 1);//se elimina las cuentas de cuenta de caja y la de aportes y se deja las demás
-                ViewBag.movimientos = movimientos;
-            return View(factOpcaja);
+            return View(factOpCajaConsCuotaCredito);
         }
 
 
