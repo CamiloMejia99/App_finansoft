@@ -945,7 +945,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
 
                         var cuentaCosto = Convert.ToString(costoAdicional.Cuenta_Cod);
                         var valorPorcentaje = Convert.ToDecimal(costoAdicional.CA_Porcentaje.Replace(".", ","));
-                        //valorPorcentaje = (valorPorcentaje / 100) * prestamo.Capital;
+                        valorPorcentaje = (valorPorcentaje / 100) * prestamo.Capital;
                         valorPorcentaje = GetCostoAdicionalAnticipado(Capital);
                         var papeleriaAnt = prestamo.costoAdicionalAnticipado;
                         var mov = new Movimiento()

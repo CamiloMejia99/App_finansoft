@@ -26,7 +26,7 @@
 <div class="center contenido" id="areaImprimir">
     <br>
     @Html.HiddenFor(model => model.id)
-    <div style=" position: relative; top: 0px;  left: 100px;  background-color: white;  width: 1000px;">
+    
 
         <p class="col-md-12"><b>Id:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.id)</p>
         @Html.HiddenFor(model => model.id, new { id = "idRecibo" })
@@ -214,7 +214,7 @@
 
 
         </div>
-    </div>
+  
 
     @* ENVIAR FACTURA POR CORREO *@
 
@@ -223,7 +223,7 @@
             <div class="modal-content">
                 <center>
                     <h3>
-                        <b>Enviando factura de Ahorro contractual!!</b>
+                        <b>Enviando factura de Ahorros!!</b>
                         <p>Por favor espere...</p>
                     </h3>
                 </center>
@@ -247,11 +247,11 @@
                     <form>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Asunto:</label>
-                            <input type="text" class="form-control" id="txtAsunto" placeholder="FACTURA AHORRO NAVIDEÑO ASOPASCUALINA" value="FACTURA AHORRO NAVIDEÑO ASOPASCUALINA" readonly>
+                            <input type="text" class="form-control" id="txtAsunto" placeholder="FACTURA ASOPASCUALINOS AHORRO " value="FACTURA ASOPASCUALINOS AHORRO " >
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Mensaje:</label>
-                            <textarea class="form-control" id="txtMensaje" readonly>Señor(a) usuario, la asociacion mutual "Asopascualina" le comparte su factura de Ahorro Navideño.
+                            <textarea class="form-control" id="txtMensaje"> Señor(a) usuario, la asociacion mutual "Asopascualinos" le comparte su factura de Ahorro 
                              </textarea>
                         </div>
                     </form>

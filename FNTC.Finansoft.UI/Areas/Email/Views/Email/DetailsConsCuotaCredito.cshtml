@@ -37,6 +37,7 @@
     <br />
     <div class="row" style="margin-left:2%">
         <p class="col-md-12"><b>Id:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.id)</p>
+        @Html.HiddenFor(model => model.id, new { id = "idRecibo" })
 
         <p class="col-md-12"><b>Código caja:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.codigoCaja)
         <p class="col-md-12"><b>Cédula Cajero:</b>&nbsp;&nbsp;@Html.DisplayFor(model => model.nitCajero)</p>
@@ -93,11 +94,11 @@
                     <form>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Asunto:</label>
-                            <input type="text" class="form-control" id="txtAsunto" placeholder="FACTURA PAGO CREDITO ASOPASCUALINA" value="FACTURA PAGO CREDITO ASOPASCUALINA" readonly>
+                            <input type="text" class="form-control" id="txtAsunto" placeholder="FACTURA PAGO CREDITO ASOPASCUALINOS" value="FACTURA PAGO CREDITO ASOPASCUALINOS" readonly>
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Mensaje:</label>
-                            <textarea class="form-control" id="txtMensaje" readonly>Señor(a) usuario, la asociacion mutual "Asopascualina" le comparte su factura de su pago Credito.
+                            <textarea class="form-control" id="txtMensaje" readonly>Señor(a) usuario, la asociacion mutual "Asopascualinos" le comparte su factura de su pago Credito.
                              </textarea>
                         </div>
                     </form>
