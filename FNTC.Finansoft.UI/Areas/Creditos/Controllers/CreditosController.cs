@@ -761,7 +761,8 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             }
 
             //var ValorCuota = (AbonoCapital + AbonoInteres + costoAdicionalPrimeraCuota + costoAdicionalDividoEnElTiempo+ ValorPorcentajeParaTabla);
-            var ValorCuota = (AbonoCapital + AbonoInteres + prestamo.ValorSeguro + prestamo.CtoAdmon);
+            //var ValorCuota = (AbonoCapital + AbonoInteres + prestamo.ValorSeguro + prestamo.CtoAdmon);
+            var ValorCuota = (AbonoCapital + AbonoInteres + (prestamo.ValorSeguro * Periodo));
             var ValorCuotaSinCostoAdicionalPrimeraCuota = (AbonoCapital + AbonoInteres + costoAdicionalEnEltiempo + costoAdicionalDividoEnElTiempo + ValorPorcentaje);
             var ValorCostoFijo = costoAdicionalEnEltiempo + costoAdicionalPrimeraCuota + costoAdicionalDividoEnElTiempo;
             int ValorCostoFijoCuota = Convert.ToInt32(ValorCostoFijo / prestamo.Plazo) * Periodo;
