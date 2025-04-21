@@ -53,5 +53,6 @@ namespace FNTC.Finansoft.Accounting.DTO.MCreditos
         public decimal costoAdicionalDividoEnElTiempo { get; set; }
         public decimal ValorPorcentajeCostoAnticipado { get; set; }
         public decimal ValorPorcentajeCostoEnCadaCuota { get; set; }
+        public string prestamosArrayJSON { get; set; }
     }
 }

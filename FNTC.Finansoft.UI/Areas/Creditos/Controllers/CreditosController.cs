@@ -1,4 +1,16 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Drawing.Charts;
+using DocumentFormat.OpenXml.Drawing;
+using FNTC.Finansoft.Accounting.BLL;
+using FNTC.Finansoft.Accounting.BLL.FabricaCreditosBll;
+using FNTC.Finansoft.Accounting.DTO;
+using FNTC.Finansoft.Accounting.DTO.Contabilidad;
+using FNTC.Finansoft.Accounting.DTO.MCreditos;
+using FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes;
+using FNTC.Finansoft.UI.Tools;
+using Microsoft.Ajax.Utilities;
+using Newtonsoft.Json;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,12 +18,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using FNTC.Finansoft.Accounting.BLL;
-using FNTC.Finansoft.Accounting.DTO;
-using FNTC.Finansoft.Accounting.DTO.Contabilidad;
-using FNTC.Finansoft.Accounting.DTO.MCreditos;
-using FNTC.Finansoft.Accounting.BLL.FabricaCreditosBll;
-using FNTC.Finansoft.UI.Tools;
+using static FNTC.Finansoft.UI.Enums.EnumsProgram;
+using System.Globalization;
 //using .Terceros;
 
 namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
@@ -72,11 +80,11 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
         public ActionResult ImprimirAmortizacion(int id)
         {
             List<ViewModelCreditos> _Amortizacion = new List<ViewModelCreditos>();
-            /*
-            var companiaLista = (from s in db.Compania where id == 1 select s).First();
-            var nombreCompania = companiaLista.nombrecompañia;
-            var nitcompania = companiaLista.nit;
-            */
+
+            var datosEmpresa = db.Empresa.ToList();
+            ViewBag.nombre = datosEmpresa.Select(x => x.nombre).FirstOrDefault();
+            ViewBag.nit = datosEmpresa.Select(x => x.nit).FirstOrDefault();
+
             var prestam = db.Prestamos.FirstOrDefault(j => j.id == id);
             var prestamosdestinoid = prestam.Destino_Id;
 
@@ -89,8 +97,13 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             var NITTercero = prestam.NIT;
 
             var companiaLista = db.Compania.FirstOrDefault(j => j.id == 1);
-            var nombreCompania = companiaLista.nombrecompañia;
-            var nitcompania = companiaLista.nit;
+            var nombreCompania = "";
+            var nitcompania = "";
+            if (companiaLista != null)
+            {
+                nombreCompania = companiaLista.nombrecompañia;
+                nitcompania = companiaLista.nit;
+            }
 
             var dtoTercero = new FNTC.Finansoft.Accounting.DAL.TercerosDAL().GetTerceros(NITTercero).First();
 
@@ -137,7 +150,9 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                                     gartantiasCreditos.codeudor_nit,
                                     gartantiasCreditos.nombre_codeudor,
 
-                                    prestamo.Destino_Id
+                                    prestamo.Destino_Id,
+                                    prestamo.prestamosArrayJSON
+
 
                                 }).ToList();
                 foreach (var item in ListaCre)
@@ -176,6 +191,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                     obj.ValorPorcentajeCostoAnticipado = item.ValorPorcentajeCostoAnticipado;
                     obj.ValorPorcentajeCostoEnCadaCuota = item.ValorPorcentajeCostoEnCadaCuota;
                     obj.destino = item.Destino_Id.ToString();
+                    obj.prestamosArrayJSON = item.prestamosArrayJSON;
                     _Amortizacion.Add(obj);
                 }
 
@@ -222,7 +238,8 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                                          gartantiasCreditos.codeudor_nit,
                                          gartantiasCreditos.nombre_codeudor,
 
-                                         prestamo.Destino_Id
+                                         prestamo.Destino_Id,
+                                         prestamo.prestamosArrayJSON
                                      }).ToList();
 
                 foreach (var item in ListaCreditos)
@@ -261,6 +278,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                     obj.ValorPorcentajeCostoAnticipado = item.ValorPorcentajeCostoAnticipado;
                     obj.ValorPorcentajeCostoEnCadaCuota = item.ValorPorcentajeCostoEnCadaCuota;
                     obj.destino = item.Destino_Id.ToString();
+                    obj.prestamosArrayJSON = item.prestamosArrayJSON;
                     _Amortizacion.Add(obj);
                 }
                 return View("ImprimirAmortizacion", _Amortizacion);
@@ -317,7 +335,8 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                                     gartantiasCreditos.codeudor_nit,
                                     gartantiasCreditos.nombre_codeudor,
 
-                                    prestamo.Destino_Id
+                                    prestamo.Destino_Id,
+                                    prestamo.prestamosArrayJSON
 
                                 }).ToList();
 
@@ -350,6 +369,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                     obj.ValorPorcentajeCostoAnticipado = item.ValorPorcentajeCostoAnticipado;
                     obj.ValorPorcentajeCostoEnCadaCuota = item.ValorPorcentajeCostoEnCadaCuota;
                     obj.destino = item.Destino_Id.ToString();
+                    obj.prestamosArrayJSON = item.prestamosArrayJSON;
                     _Amortizacion.Add(obj);
                 }
                 return PartialView("_Amortizacion", _Amortizacion);
@@ -394,7 +414,8 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                                          prestamo.ValorPorcentajeCostoAnticipado,
                                          prestamo.ValorPorcentajeCostoEnCadaCuota,
 
-                                         prestamo.Destino_Id
+                                         prestamo.Destino_Id,
+                                         prestamo.prestamosArrayJSON
 
                                      }).ToList();
 
@@ -427,6 +448,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
                     obj.ValorPorcentajeCostoAnticipado = item.ValorPorcentajeCostoAnticipado;
                     obj.ValorPorcentajeCostoEnCadaCuota = item.ValorPorcentajeCostoEnCadaCuota;
                     obj.destino = item.Destino_Id.ToString();
+                    obj.prestamosArrayJSON = item.prestamosArrayJSON;
                     _Amortizacion.Add(obj);
                 }
                 return PartialView("_Amortizacion", _Amortizacion);

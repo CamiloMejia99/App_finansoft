@@ -91,5 +91,6 @@ namespace FNTC.Finansoft.Accounting.DTO.MCreditos
         public decimal CtoAdmon { get; set; }
 
         public virtual Tercero terceroFK { get; set; }
+        public string prestamosArrayJSON { get; set; }
     }
 }

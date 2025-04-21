@@ -21,6 +21,7 @@
     @Html.TextBoxFor(model => item.ValorPorcentajeCostoEnCadaCuota, new { @id = "ValorPorcentajeCostoEnCadaCuota", @style = "display: none;" })
 
     @Html.HiddenFor(model => item.destino, new { @id = "Destino_Id" })
+    @Html.HiddenFor(model => item.prestamosArrayJSON, new { @id = "prestamosArrayJSON" })
 }
 
 
@@ -117,6 +118,7 @@
                             <th>#</th>
                             <th>Calendario de Pagos</th>
                             <th>Valor Cuota</th>
+                            <th>Valor Cuota Extra</th>
                             <th>Abono Capital</th>
                             <th>Abono Interes</th>
                             <th>Saldo Capital</th>
@@ -164,11 +166,11 @@
             var Plazo = $("#Plazo").val();
             var plazo = parseFloat(Plazo);
             var Periodo = $("#Tipo_Periodo_Id").val();
-            var Int = (parseFloat(Interes) / 100).toFixed(3);
+            var Int = (parseFloat(Interes) / 100).toFixed(4);
             var cuota = Capital * (Int / (1 - Math.pow((1 + Int), -plazo)));
             var InteresMensual = 0;
             var ValDiasInt = $("#ValDiasInt").val();
-
+            var prestamosArrayJSON = $("#prestamosArrayJSON").val();
             ValDiasInt = parseInt(ValDiasInt);
 
             var Periodo = $("#ValorPeriodo").val();
@@ -280,13 +282,15 @@
                     costoAdicionalPrimeraCuota: costoAdicionalPrimeraCuota,
                     costoAdicionalDividoEnElTiempo: costoAdicionalDividoEnElTiempo,
                     Periodo: Per,
-                    IdDestino: IdDestino
+                    IdDestino: IdDestino,
+                    PrestamosArray: prestamosArrayJSON
+
             },
             type: 'post',
             }).done(function (data) {
                 if (data.status == true) {
                     $.each(data.list, function (index, value) {
-                        $("#TablaAmortizacion").append("<tr><td>" + value[0] + "</td><td>" + value[1] + "</td><td>" + value[2] + "</td><td>" + value[3] + "</td><td>" + value[4] + "</td><td>" + value[5] + "</td><td>" + value[6] + "</td><td>" + value[7] + "</td></tr>");
+                        $("#TablaAmortizacion").append("<tr><td>" + value[0] + "</td><td>" + value[1] + "</td><td>" + value[2] + "</td><td>" + value[8] + "</td><td>" + value[3] + "</td><td>" + value[4] + "</td><td>" + value[5] + "</td><td>" + value[6] + "</td><td>" + value[7] + "</td></tr>");
                     });
                 }
                 else if (data.status == false) {
