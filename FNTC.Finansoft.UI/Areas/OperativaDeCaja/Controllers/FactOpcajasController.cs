@@ -10,23 +10,28 @@ using FNTC.Finansoft.Accounting.DTO.OperativaDeCaja;
 using FNTC.Finansoft.Accounting.DTO.Terceros;
 using FNTC.Finansoft.Accounting.DTO.TercerosOtrasEntidades;
 using FNTC.Finansoft.Areas.Aportes.Controllers;
-using FNTC.Finansoft.UI.Areas.Terceros.Controllers;
+using FNTC.Finansoft.UI.Areas.Terceros.Controllers; 
 using FNTC.Framework.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.IO;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.tool.xml;
 
 namespace FNTC.Finansoft.UI.Areas.OperativaDeCaja.Controllers
 {
@@ -153,47 +158,11 @@ namespace FNTC.Finansoft.UI.Areas.OperativaDeCaja.Controllers
             //movimientos.RemoveRange(1, 1);//se elimina las cuentas de cuenta de caja y la de aportes y se deja las demás
             ViewBag.movimientos = movimientos;
             return View(factOpcaja);
-
-
-
         }
 
-        class program
-        {
-            static void main(string[] args)
-            {
-                MailMessage ms = new MailMessage();
-                SmtpClient smtp = new SmtpClient();
+       
+        
 
-                ms.From = new MailAddress("loantech99@gmail.com");
-                ms.To.Add(new MailAddress("camilomp@hotmail.com"));
-
-                ms.Subject = "FACTURA ASOPASCUALINOS - DETALLES";
-
-                string html = " <!DOCTYPE html> <html> <head> </head> <body> <div style=\"width: 100%;\"> <div style=\"margin: auto; width: 50%; background-color: black;\"> <h1 style=\"color: white;\"> DETALLES DE FACTURA</h1> <LABEl style=\"color: white;\"> FACTURA ASOPASCUALINOS C# </LABEl> </div> </div> </body> </html> ";
-
-                AlternateView htmlView = AlternateView.CreateAlternateViewFromString(html, Encoding.UTF8, MediaTypeNames.Text.Html);
-                ms.AlternateViews.Add(htmlView);
-
-                smtp.Host = "smtp.gmail.com"; //gmail
-                //smtp.Host = "smtp.live.com"; //hotmail
-                //smtp.Host = "smtp-mail.outlook.com; //hotmail";
-                //smtp.Port = 995; //gmail
-                smtp.Port = 587; //hotmail
-
-                smtp.Credentials = new NetworkCredential("loantech99@gmail.com", "ofzn oigl idqe gmpz");
-                smtp.EnableSsl = true;
-
-                try
-                {
-                    smtp.Send(ms);
-                    Console.WriteLine("Envio correcto de email");
-                }catch(Exception ex)
-                {
-                    Console.WriteLine("Error de envio de email" + ex.Message);
-                }
-            }   
-        }
 
         public ActionResult DetalleFacturaAhorroContractual(int? id)
         {
@@ -3031,7 +3000,7 @@ namespace FNTC.Finansoft.UI.Areas.OperativaDeCaja.Controllers
             
             return Json(cuentas, JsonRequestBehavior.AllowGet);
         }
-
+         
         #region PROCESOS DE ADMINISTRADOR
 
         [Authorize(Roles = "Admin")]

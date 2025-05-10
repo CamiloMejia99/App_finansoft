@@ -1,4 +1,18 @@
-﻿using FNTC.Finansoft.Accounting.DTO;
+﻿using FNTC.Finansoft.Accounting.BLL;
+using FNTC.Finansoft.Accounting.BLL.Caja;
+using FNTC.Finansoft.Accounting.BLL.ProcesosCrediticios;
+using FNTC.Finansoft.Accounting.DTO;
+using FNTC.Finansoft.Accounting.DTO.Contabilidad;
+using FNTC.Finansoft.Accounting.DTO.Fichas;
+using FNTC.Finansoft.Accounting.DTO.MCreditos;
+using FNTC.Finansoft.Accounting.DTO.OperativaDeCaja;
+using FNTC.Finansoft.Accounting.DTO.Terceros;
+using FNTC.Finansoft.Accounting.DTO.TercerosOtrasEntidades;
+using FNTC.Finansoft.Areas.Aportes.Controllers;
+using FNTC.Finansoft.UI.Areas.Terceros.Controllers;
+using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Spreadsheet;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using Rotativa;
 using System;
 using System.Collections.Generic;
@@ -12,6 +26,17 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using FNTC.Framework.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.Data;
+using System.Data.Entity;
+using System.Net.Mime;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.tool.xml;
+using FNTC.Finansoft.Accounting.DTO.EstadoDeCuenta;
 
 namespace FNTC.Finansoft.UI.Areas.Email.Controllers
 {
@@ -135,26 +160,27 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
         {
             string error = "";
             var dataTercero = db.Terceros.Where(x => x.NIT == nit).FirstOrDefault();
-            if(dataTercero!=null)
+            if (dataTercero != null)
             {
-                if(dataTercero.EMAIL!=null && dataTercero.EMAIL!="")
+                if (dataTercero.EMAIL != null && dataTercero.EMAIL != "")
                 {
                     string correo = dataTercero.EMAIL;
                     bool bandera = IsValidEmail(correo);
-                    if(!bandera)
+                    if (!bandera)
                     {
                         error = "El correo registrado no contiene un formato válido. Por favor verifique los datos del asociado";
-                        return new JsonResult { Data = new { status = false,error } };
-                    }else
+                        return new JsonResult { Data = new { status = false, error } };
+                    }
+                    else
                     {
-                        return new JsonResult { Data = new { status = true,correo } };
+                        return new JsonResult { Data = new { status = true, correo } };
                     }
 
                 }
                 else
                 {
                     error = "El asociado no tiene un correo registrado";
-                    return new JsonResult { Data = new { status = false,error } };
+                    return new JsonResult { Data = new { status = false, error } };
                 }
             }
 
@@ -167,9 +193,9 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
             var asociados = db.Terceros.Where(x => x.EMAIL != "" && x.EMAIL != null).ToList();
             int n = 0;
             var texto = "activo";
-            if(asociados!=null)
+            if (asociados != null)
             {
-                foreach(var item in asociados)
+                foreach (var item in asociados)
                 {
 
                     bool bandera = sendEmail(item.EMAIL, item.NIT);
@@ -178,22 +204,22 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
                         return new JsonResult { Data = new { status = false } };
                     }
                 }
-                
+
             }
-           return new JsonResult { Data = new { status = true, numero = n.ToString() } };
+            return new JsonResult { Data = new { status = true, numero = n.ToString() } };
 
         }
 
         public bool sendEmail(string para, string nit)
         {
-            string subject = "Estado de cuenta cooperativa de aporte y crédito ASOPASCUALINOS";
+            string subject = "Estado de Cuenta Asociacion Mutual 'Asopascualina' ";
             string message = "";
             var Estado = "1";
             var query = db.ConfiguracionCorreo.Where(x => x.estado == "1").ToList();
 
             if (query != null)
             {
-                
+
                 var email = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.email).Single();
                 var pass = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.password).Single();
                 var smtpClient = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.smtp).Single();
@@ -253,17 +279,17 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
             {
                 return false;
             }
-            
-           
-        }
 
+
+        }
+        //------------------------------------- ESTADO DE CUENTAS --------------------------------------
 
         [HttpPost]
-        public JsonResult EnviarCorreo(string asunto,string mensaje,string para,string nit)
+        public JsonResult EnviarCorreo(string asunto, string mensaje, string para, string nit)
         {
 
 
-            string subject = "Estado de cuenta cooperativa de aporte y crédito ASOPASCUALINOS";
+            string subject = "Estado de Cuenta Asociacion Mutual 'Asopascualina'";
             string message = "";
             var Estado = "1";
             var query = db.ConfiguracionCorreo.Where(x => x.estado == "1").ToList();
@@ -310,7 +336,9 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
                      * smtp.UseDefaultCredentials = false;
                      */
 
-                    SmtpClient smtp = new SmtpClient("domain-com.mail.protection.outlook.com");
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = smtpClient;
+
                     smtp.Host = smtpClient;
                     smtp.Port = puertoSmtp;
                     smtp.EnableSsl = true;
@@ -319,7 +347,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
                     smtp.DeliveryMethod = SmtpDeliveryMethod.Network;//
                     smtp.UseDefaultCredentials = false;
                     string cuentaCorreo = email;
-                    string passwordCorreo = "Finant123*";
+                    string passwordCorreo = pass;
                     smtp.Credentials = new NetworkCredential(cuentaCorreo, passwordCorreo);
                     correo.BodyEncoding = UTF8Encoding.UTF8;//
                     correo.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;//
@@ -344,6 +372,244 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
         }
 
 
+
+
+        //---------------------------------------------------------- FACTURA APORTES -----------------------------------------------------------------------------
+        public JsonResult EnviarCorreoAportes(string asunto, string mensaje, string para, string nit, int id)
+        {
+
+
+            string subject = "FACTURA APORTES ASOPASCUALINA";
+            string message = "Señor(a) usuario, la asociacion mutual \"Asopascualina\" le comparte su factura de Aportes.";
+            var Estado = "1";
+            var query = db.ConfiguracionCorreo.Where(x => x.estado == "1").ToList();
+
+            if (query != null)
+            {
+                var email = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.email).Single();
+                var pass = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.password).Single();
+                var smtpClient = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.smtp).Single();
+                var puertoSmtp = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.puerto).Single();
+
+                if (asunto != "")
+                {
+                    subject = asunto;
+                }
+                if (mensaje != "")
+                {
+                    message = mensaje;
+                }
+
+                try
+                {
+                    MailMessage correo = new MailMessage();
+                    correo.From = new MailAddress(email);
+                    correo.To.Add(para);
+                    correo.Subject = subject;
+                    correo.Body = message;
+                    correo.IsBodyHtml = true;
+                    correo.Priority = MailPriority.Normal;
+
+                    //  Cambiar por     n             ↓↓↓↓↓
+                    var actionPDF = new ActionAsPdf("Details", new { nit, id })
+                    {
+                        FileName = nit + ".pdf",
+                        PageOrientation = Rotativa.Options.Orientation.Portrait,
+                        PageMargins = { Left = 1, Right = 1 }
+                    };
+
+                    byte[] applicationPDFData = actionPDF.BuildPdf(this.ControllerContext);
+                    MemoryStream pdfStream = new MemoryStream(applicationPDFData);
+                    Attachment pdf = new Attachment(pdfStream, nit + ".pdf");
+
+                    //STMP HOTMAIL
+                    /* las credencial
+                     * smtp.UseDefaultCredentials = false;
+                     */
+
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = smtpClient;
+
+                    smtp.Host = smtpClient;
+                    smtp.Port = puertoSmtp;
+                    smtp.EnableSsl = true;
+                    smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+                    smtp.Timeout = 10000;//
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;//
+                    smtp.UseDefaultCredentials = false;
+                    string cuentaCorreo = email;
+                    string passwordCorreo = pass;
+                    smtp.Credentials = new NetworkCredential(cuentaCorreo, passwordCorreo);
+                    correo.BodyEncoding = UTF8Encoding.UTF8;//
+                    correo.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;//
+                    correo.Attachments.Add(pdf);
+                    smtp.Send(correo);
+                    return new JsonResult { Data = new { status = true } };
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    return new JsonResult { Data = new { status = false } };
+                }
+
+            }
+            else
+            {
+                return new JsonResult { Data = new { status = false } };
+            }
+
+        }
+        //---------------------------------------------------------- FIN FACTURA APORTES -----------------------------------------------------------------------------
+       
+        //---------------------------------------------------------- FACTURA AHORRO CONTRACTUAL -----------------------------------------------------------------------------
+        public JsonResult EnviarCorreoAhorroContractual(string asunto, string mensaje, string para, string nit, int id)
+        {
+            string subject = "FACTURA AHORRO CONTRACTUAL AHORRO NAVIDEÑO";
+            string message = "Señor(a) usuario, la asociacion mutual \"Asopascualina\" le comparte su factura de Ahorro Navideño.";
+            var Estado = "1";
+            var query = db.ConfiguracionCorreo.Where(x => x.estado == "1").ToList();
+
+            if (query != null)
+            {
+                var email = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.email).Single();
+                var pass = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.password).Single();
+                var smtpClient = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.smtp).Single();
+                var puertoSmtp = (from ep in db.ConfiguracionCorreo where ep.estado == Estado select ep.puerto).Single();
+
+                if (asunto != "")
+                {
+                    subject = asunto;
+                }
+                if (mensaje != "")
+                {
+                    message = mensaje;
+                }
+
+                try
+                {
+                    MailMessage correo = new MailMessage();
+                    correo.From = new MailAddress(email);
+                    correo.To.Add(para);
+                    correo.Subject = subject;
+                    correo.Body = message;
+                    correo.IsBodyHtml = true;
+                    correo.Priority = MailPriority.Normal;
+
+                    //  Cambiar por     n             ↓↓↓↓↓
+                    var actionPDF = new ActionAsPdf("DetalleFacturaAhorroContractual", new { nit, id })
+                    {
+                        FileName = nit + ".pdf",
+                        PageOrientation = Rotativa.Options.Orientation.Portrait,
+                        PageMargins = { Left = 1, Right = 1 }
+                    };
+
+                    byte[] applicationPDFData = actionPDF.BuildPdf(this.ControllerContext);
+                    MemoryStream pdfStream = new MemoryStream(applicationPDFData);
+                    Attachment pdf = new Attachment(pdfStream, nit + ".pdf");
+
+                    //STMP HOTMAIL
+                    /* las credencial
+                     * smtp.UseDefaultCredentials = false;
+                     */
+
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = smtpClient;
+
+                    smtp.Host = smtpClient;
+                    smtp.Port = puertoSmtp;
+                    smtp.EnableSsl = true;
+                    smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+                    smtp.Timeout = 10000;//
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;//
+                    smtp.UseDefaultCredentials = false;
+                    string cuentaCorreo = email;
+                    string passwordCorreo = pass;
+                    smtp.Credentials = new NetworkCredential(cuentaCorreo, passwordCorreo);
+                    correo.BodyEncoding = UTF8Encoding.UTF8;//
+                    correo.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;//
+                    correo.Attachments.Add(pdf);
+                    smtp.Send(correo);
+                    return new JsonResult { Data = new { status = true } };
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    return new JsonResult { Data = new { status = false } };
+                }
+
+            }
+            else
+            {
+                return new JsonResult { Data = new { status = false } };
+            }
+
+        }
+
+        //---------------------------------------------------------- FIN FACTURA AHORRO CONTRACTUAL -----------------------------------------------------------------------------
+
+        //-------------------------------------------------------------------- CONTROLADORES PARA FactOpCaja  ----------------------------------------------
+
+        public ActionResult Details(string nit, int id)
+        {
+            //nit = "36994839";
+            #region datosTerceros
+            var tercero = (from pc in db.Terceros where pc.NIT == nit select pc).FirstOrDefault();
+            if (tercero != null)
+            {
+                var dataAgencia = (from pc in db.agencias where pc.codigoagencia == tercero.DEPENDENCIA select pc.nombreagencia).FirstOrDefault();
+
+            }
+            #endregion
+            FactOpcaja factOpcaja = db.FactOpcaja.Find(id);
+            if (factOpcaja == null)
+            {
+                return HttpNotFound();
+            }
+            //obtenemos los movimientos adicionales a caja y la cuenta configurada para aportes ordinarios
+            var movimientos = db.Movimientos.Where(x => x.TIPO == factOpcaja.TIPO && x.NUMERO == factOpcaja.NUMERO).ToList();
+            if (movimientos.Count() > 0)
+                //movimientos.RemoveRange(1, 1);//se elimina las cuentas de cuenta de caja y la de aportes y se deja las demás
+                ViewBag.movimientos = movimientos;
+            return View(factOpcaja);
+        }
+
+        public ActionResult DetalleFacturaAhorroContractual(string nit, int id)
+        {
+            //nit = "36994839";
+            #region datosTerceros
+            var tercero = (from pc in db.Terceros where pc.NIT == nit select pc).FirstOrDefault();
+            if (tercero != null)
+            {
+                var dataAgencia = (from pc in db.agencias where pc.codigoagencia == tercero.DEPENDENCIA select pc.nombreagencia).FirstOrDefault();
+
+            }
+            #endregion
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            FactOpcaja factOpcaja = db.FactOpcaja.Find(id);
+            if (factOpcaja == null)
+            {
+                return HttpNotFound();
+            }
+            var movimientos = db.Movimientos.Where(x => x.TIPO == factOpcaja.TIPO && x.NUMERO == factOpcaja.NUMERO).ToList();
+            if (movimientos.Count() > 0)
+                //movimientos.RemoveRange(1, 1);//se elimina las cuentas de cuenta de caja y la de aportes y se deja las demás
+                ViewBag.movimientos = movimientos;
+
+            return View(factOpcaja);
+        }
+
+
+
+        //-------------------------------------------------------------------- FIN CONTROLADORES PARA FactOpCaja  ----------------------------------------------
+
         public ActionResult EstadoDeCuentaPDF(string nit)
         {
             //nit = "36994839";
@@ -361,13 +627,13 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
             string agencia = "";
 
             var tercero = (from pc in db.Terceros where pc.NIT == nit select pc).FirstOrDefault();
-            if(tercero!=null)
+            if (tercero != null)
             {
                 documento = nit;
                 nombreasociado = tercero.NOMBRE1 + " " + tercero.NOMBRE2 + " " + tercero.APELLIDO1 + " " + tercero.APELLIDO2;
                 salario = Convert.ToInt32(tercero.SALARIO).ToString("N0", formato);
-                var dataAgencia=(from pc in db.agencias where pc.codigoagencia == tercero.DEPENDENCIA select pc.nombreagencia).FirstOrDefault();
-                if(dataAgencia!=null)
+                var dataAgencia = (from pc in db.agencias where pc.codigoagencia == tercero.DEPENDENCIA select pc.nombreagencia).FirstOrDefault();
+                if (dataAgencia != null)
                 {
                     agencia = dataAgencia;
                 }
@@ -377,11 +643,11 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
 
 
             #region APORTES
-            
+
             var fichaAporte = (from fp in db.FichasAportes where fp.idPersona == nit select fp).FirstOrDefault();
 
             List<Array> aportes = new List<Array>();
-            if(fichaAporte!=null)
+            if (fichaAporte != null)
             {
                 string[] data = new string[5];
 
@@ -421,7 +687,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
 
                 data[0] = fichaAporte.numeroCuenta;
                 data[1] = fichaAporte.fechaApertura.ToString();
-                data[2] = Convert.ToInt32(fichaAporte.valor.Replace(".", "")).ToString("N2",formato);
+                data[2] = Convert.ToInt32(fichaAporte.valor.Replace(".", "")).ToString("N2", formato);
                 data[3] = Convert.ToInt32(fichaAporte.totalAportes).ToString("N2", formato);
                 var NumeroDePagos = (from pc in db.FactOpcaja where pc.nit_propietario_cuenta == tercero.NIT select pc).Count();
                 var SaldoEnMora = ((diferenciaMeses - NumeroDePagos) * (Convert.ToInt32(fichaAporte.valor))).ToString("N2", formato);
@@ -441,7 +707,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
 
                   ).ToList();
             List<Array> prestamos = new List<Array>();
-            if(consulta.Count>0)
+            if (consulta.Count > 0)
             {
                 foreach (var item in consulta)
                 {
@@ -478,7 +744,31 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
 
                 totalG = totalCapital + totalCorriente + totalMora - totalCapitalMora;
             }
-            
+
+            #endregion
+
+            #region AHORRO CONTRACTUAL
+            var ahorroContractualList = new List<ViewModelAhorrosContractualEstadoCuenta>();
+            var fichasAC = db.FichasAhorroContractual.Where(x => x.IdAsociado == nit).ToList();
+            foreach (var item in fichasAC)
+            {
+                var model = new ViewModelAhorrosContractualEstadoCuenta()
+                {
+                    Cuenta = item.NumeroCuenta,
+                    TipoAhorro = item.ConfACFK.NombreConfiguracion.ToUpper(),
+                    Plazo = item.Plazo.ToString(),
+                    FechaApertura = item.FechaApertura.ToString("dd-MM-yyyy"),
+                    FechaVencimiento = item.FechaVencimiento.ToString("dd-MM-yyyy"),
+                    TEM = GetFormatNumberMiles(item.TasaEfectiva, 2),
+                    ValorCuota = GetFormatNumberMiles(item.ValorCuota, 0),
+                    TotalAhorros = GetFormatNumberMiles(item.TotalAhorro, 0),
+                    Rendimientos = GetFormatNumberMiles(item.Interes, 0),
+                    SaldoTotal = GetFormatNumberMiles(item.TotalAhorro + item.Interes, 0),
+                    Estado = (item.Estado) ? "Activo" : "Inactivo"
+                };
+                ahorroContractualList.Add(model);
+            }
+            ViewBag.ahorroContractual = ahorroContractualList;
             #endregion
 
             #region ViewBag
@@ -490,7 +780,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
             ViewBag.agencia = agencia;
             ViewBag.aportes = aportes;
             ViewBag.prestamos = prestamos;
-            ViewBag.totalCapital = totalCapital.ToString("N2",formato);
+            ViewBag.totalCapital = totalCapital.ToString("N2", formato);
             ViewBag.totalMora = totalMora.ToString("N2", formato);
             ViewBag.totalGeneral = totalG.ToString("N2", formato);
 
@@ -499,16 +789,32 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
             return View();
         }
 
+        private string GetFormatNumberMiles(decimal numero, int parteDecimal)
+        {
+            NumberFormatInfo formato = new CultureInfo("es-CO").NumberFormat;
+            formato.CurrencyGroupSeparator = ".";
+            formato.NumberDecimalSeparator = ",";
+            string valor = "";
+            try
+            {
+                valor = numero.ToString("N" + parteDecimal, formato);
+            }
+            catch (Exception ex)
+            {
+            }
+            return valor;
+        }
+
         public ActionResult Print()
         {
             string nit = "36994839";
 
-            string filePath = Server.MapPath("~/Temporal/"+nit+".pdf");
-            var actionPDF = new ActionAsPdf("EstadoDeCuentaPDF", new {nit})
+            string filePath = Server.MapPath("~/Temporal/" + nit + ".pdf");
+            var actionPDF = new ActionAsPdf("EstadoDeCuentaPDF", new { nit })
             {
-                FileName = nit+".pdf",
+                FileName = nit + ".pdf",
                 PageOrientation = Rotativa.Options.Orientation.Portrait,
-                PageMargins = {Left=1,Right=1}
+                PageMargins = { Left = 1, Right = 1 }
             };
 
             //byte[] applicationPDFData = actionPDF.BuildPdf(ControllerContext);

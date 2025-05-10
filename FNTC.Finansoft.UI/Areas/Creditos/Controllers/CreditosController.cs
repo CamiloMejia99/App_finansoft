@@ -1,4 +1,16 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Drawing.Charts;
+using DocumentFormat.OpenXml.Drawing;
+using FNTC.Finansoft.Accounting.BLL;
+using FNTC.Finansoft.Accounting.BLL.FabricaCreditosBll;
+using FNTC.Finansoft.Accounting.DTO;
+using FNTC.Finansoft.Accounting.DTO.Contabilidad;
+using FNTC.Finansoft.Accounting.DTO.MCreditos;
+using FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes;
+using FNTC.Finansoft.UI.Tools;
+using Microsoft.Ajax.Utilities;
+using Newtonsoft.Json;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,12 +18,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using FNTC.Finansoft.Accounting.BLL;
-using FNTC.Finansoft.Accounting.DTO;
-using FNTC.Finansoft.Accounting.DTO.Contabilidad;
-using FNTC.Finansoft.Accounting.DTO.MCreditos;
-using FNTC.Finansoft.Accounting.BLL.FabricaCreditosBll;
-using FNTC.Finansoft.UI.Tools;
+using static FNTC.Finansoft.UI.Enums.EnumsProgram;
+using System.Globalization;
 //using .Terceros;
 
 namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers

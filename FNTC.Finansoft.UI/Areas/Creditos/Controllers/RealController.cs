@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -38,7 +37,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
         }
 
         // GET: /Real/Create
-        public ActionResult _Real()
+        public ActionResult Create()
         {
             //saca el ultimo id de de la tabla prestamos
             var ultimpid = db.Prestamos.Max(u => u.id);
@@ -48,20 +47,18 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
         }
 
         // POST: /Real/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        // [ValidateAntiForgeryToken]
-        public ActionResult _Real([Bind(Include = "Real_Valor,PagareId")] Real real)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Real_Id,Real_Valor,PagareId")] Real real)
         {
             if (ModelState.IsValid)
             {
                 db.Real.Add(real);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Lineas");
+                return Json(new { success = true });
             }
 
-            return View(real);
+            return Json(new { error = "Error al crear la garantía" });
         }
 
         // GET: /Real/Edit/5
@@ -80,11 +77,9 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
         }
 
         // POST: /Real/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Real_Id,Real_Valor,Prestamos_id")] Real real)
+        public ActionResult Edit([Bind(Include = "Real_Id,Real_Valor,PagareId")] Real real)
         {
             if (ModelState.IsValid)
             {
@@ -119,6 +114,50 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             db.Real.Remove(real);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public JsonResult GetGarantias(string pagareId)
+        {
+            try
+            {
+                var garantias = db.Real
+                    .Where(r => r.PagareId == pagareId)
+                    .Select(r => new
+                    {
+                        Id = r.Real_Id,
+                        TipoGarantia = "Garantía Real",
+                        Valor = r.Real_Valor,
+                        Estado = "Activa"
+                    })
+                    .ToList();
+
+                return Json(garantias, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult DeleteGarantia(int id)
+        {
+            try
+            {
+                var garantia = db.Real.Find(id);
+                if (garantia != null)
+                {
+                    db.Real.Remove(garantia);
+                    db.SaveChanges();
+                    return Json(new { success = true });
+                }
+                return Json(new { error = "Garantía no encontrada" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message });
+            }
         }
 
         protected override void Dispose(bool disposing)

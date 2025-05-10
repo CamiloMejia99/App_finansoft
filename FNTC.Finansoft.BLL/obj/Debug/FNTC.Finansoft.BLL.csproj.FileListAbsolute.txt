@@ -599,3 +599,37 @@ C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.BLL\obj\Debug\FNTC.F
 C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.BLL\obj\Debug\FNTC.Fin.D33237A3.Up2Date
 C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.BLL\obj\Debug\FNTC.Finansoft.Accounting.BLL.dll
 C:\Users\camil\source\repos\Proyecto20250109\FNTC.Finansoft.BLL\obj\Debug\FNTC.Finansoft.Accounting.BLL.pdb
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.BLL.dll.config
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.BLL.dll
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.BLL.pdb
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.DAL.dll
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Framework.dll
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.DAL.pdb
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.DAL.dll.config
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll.config
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Framework.pdb
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Framework.dll.config
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\obj\Debug\FNTC.Finansoft.BLL.csproj.AssemblyReference.cache
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\obj\Debug\FNTC.Finansoft.BLL.csproj.CoreCompileInputs.cache
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\obj\Debug\FNTC.Fin.D33237A3.Up2Date
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\obj\Debug\FNTC.Finansoft.Accounting.BLL.dll
+D:\SOFINANTEC_2025\DETAILS_FUNCIONAL_08_04_2025_SOFT_CAILO_FACTURA CORREO\App_finansoft\FNTC.Finansoft.BLL\obj\Debug\FNTC.Finansoft.Accounting.BLL.pdb
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.BLL.dll.config
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.BLL.dll
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.BLL.pdb
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.DAL.dll
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Framework.dll
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.DAL.pdb
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.DAL.dll.config
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.DTO.pdb
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Finansoft.Accounting.DTO.dll.config
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Framework.pdb
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\bin\Debug\FNTC.Framework.dll.config
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\obj\Debug\FNTC.Finansoft.BLL.csproj.AssemblyReference.cache
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\obj\Debug\FNTC.Finansoft.BLL.csproj.CoreCompileInputs.cache
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\obj\Debug\FNTC.Fin.D33237A3.Up2Date
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\obj\Debug\FNTC.Finansoft.Accounting.BLL.dll
+D:\SOFINANTEC_2025\MUTUALES_ACTUALIZACION_10_04_2025\App_finansoft\FNTC.Finansoft.BLL\obj\Debug\FNTC.Finansoft.Accounting.BLL.pdb

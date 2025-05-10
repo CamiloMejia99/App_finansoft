@@ -3,6 +3,7 @@
     $("#BtnEnviarEmail").click(function () {
 
         var nit = $("#Tercero").val();
+        //var nit = $("#nitAsociado").val();
 
         if (nit != "") {
             $.ajax({

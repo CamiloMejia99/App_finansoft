@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\FNTC.Finansoft.DAL",
+    "\\FNTC.Finansoft.DAL\\Caja",
+    "\\FNTC.Finansoft.UI",
+    "\\FNTC.Finansoft.UI\\Identity"
   ],
-  "SelectedNode": "\\FNTC.FNSOFT.sln (App_finansoft\\FNTC.FNSOFT.sln)",
   "PreviewInSolutionExplorer": true
 }

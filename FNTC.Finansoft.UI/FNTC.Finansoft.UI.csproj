@@ -55,6 +55,9 @@
       <HintPath>..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
     <Reference Include="ClosedXML, Version=0.93.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ClosedXML.0.93.1\lib\net40\ClosedXML.dll</HintPath>
     </Reference>
@@ -86,6 +89,12 @@
     </Reference>
     <Reference Include="IronPdf.Assets.Rendering.Windows, Version=21.0.0.0, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
       <HintPath>..\packages\IronPdf.Assets.Rendering.Windows.21.0.0\lib\net40\IronPdf.Assets.Rendering.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.13.4\lib\net461\itextsharp.xmlworker.dll</HintPath>
     </Reference>
     <Reference Include="Lib.Web.Mvc, Version=6.7.0.0, Culture=neutral, PublicKeyToken=92212eec0425916e, processorArchitecture=MSIL">
       <HintPath>..\packages\Lib.Web.Mvc.6.7.0\lib\net40\Lib.Web.Mvc.dll</HintPath>
@@ -474,6 +483,7 @@
     <Compile Include="Areas\Unions\UnionsAreaRegistration.cs" />
     <Compile Include="Controllers\UploadFilesController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
+    <Compile Include="Enums\EnumsProgram.cs" />
     <Compile Include="Filters\AllowAttribute.cs" />
     <Compile Include="Functions\Encriptacion.cs" />
     <Compile Include="Global.asax.cs">
@@ -675,6 +685,8 @@
     <Content Include="Scripts\Creditos\BusquedaFormularios.js" />
     <Content Include="Scripts\Creditos\ValidacionesAgregarCuenta.js" />
     <Content Include="Scripts\Creditos\verifcarTercero.js" />
+    <Content Include="Scripts\Email\EmailAhorroContractual.js" />
+    <Content Include="Scripts\Email\EmailAportes.js" />
     <Content Include="Scripts\FormularioApertura\FiltrosTabla.js" />
     <Content Include="Scripts\FormularioApertura\NuevoFormulario.js" />
     <Content Include="Scripts\FormularioVinculacion\filtrosBusqueda.js" />
@@ -1969,6 +1981,8 @@
     <Content Include="Areas\DescuentosNomina\Views\GestionPlanos\EditarDetallesAsociados.cshtml" />
     <Content Include="Areas\DescuentosNomina\Views\GestionPlanos\DetallesInfo.cshtml" />
     <Content Include="Areas\Creditos\Views\Causacion\Index.cshtml" />
+    <Content Include="Areas\Email\Views\Email\Details.cshtml" />
+    <Content Include="Areas\Email\Views\Email\DetalleFacturaAhorroContractual.cshtml" />
     <None Include="Content\js\prueba.json" />
     <Content Include="Content\styleMenu.css" />
     <Content Include="Content\font-awesome.css" />
