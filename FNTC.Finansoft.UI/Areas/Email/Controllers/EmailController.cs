@@ -695,38 +695,7 @@ namespace FNTC.Finansoft.UI.Areas.Email.Controllers
             return View(factOpcaja);
         }
 
-        //public ActionResult DetailsConsCuotaCredito(string nit, int id)
-        //{
-        //    //nit = "36994839";
-        //    #region datosTerceros
-        //    var tercero = (from pc in db.Terceros where pc.NIT == nit select pc).FirstOrDefault();
-        //    if (tercero != null)
-        //    {
-        //        var dataAgencia = (from pc in db.agencias where pc.codigoagencia == tercero.DEPENDENCIA select pc.nombreagencia).FirstOrDefault();
-
-        //    }
-        //    #endregion
-        //    FactOpcaja factOpcaja = db.FactOpcaja.Find(id);
-        //    if (factOpcaja == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    //obtenemos los movimientos adicionales a caja y la cuenta configurada para aportes ordinarios
-        //    var movimientos = db.Movimientos.Where(x => x.TIPO == factOpcaja.TIPO && x.NUMERO == factOpcaja.NUMERO).ToList();
-        //    if (movimientos.Count() > 0)
-        //        //movimientos.RemoveRange(1, 1);//se elimina las cuentas de cuenta de caja y la de aportes y se deja las demás
-        //        ViewBag.movimientos = movimientos;
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    factOpCajaConsCuotaCredito factOpCajaConsCuotaCredito = db.factOpCajaConsCuotaCredito.Find(id);
-        //    if (factOpCajaConsCuotaCredito == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(factOpCajaConsCuotaCredito);
-        //}
+        
         public ActionResult DetailsConsCuotaCredito(string nit, int id)
         {
             #region datosTerceros

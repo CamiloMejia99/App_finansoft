@@ -126,8 +126,10 @@
 
             $.post('/accounting/Tiposcomprobantes/@action', theForm.serialize())
                 .done(function (result) {
-                //    alert(result);
+                //   alert(result);
                     $('button[class=close]').trigger("click");
+                    location.reload();
+                    alert("Click en 'Aceptar' para continuar...");
                   
                 }).fail(function (data) {
                     alert("Error");

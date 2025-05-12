@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>D:\PUBLICADOS_PRUEBA</_PublishTargetUrl>
-    <History>True|2025-04-14T20:38:27.0277142Z||;True|2025-04-14T14:09:14.8541781-05:00||;True|2025-04-14T14:08:44.3913686-05:00||;True|2025-03-03T14:12:34.0970520-05:00||;True|2025-03-03T14:06:15.4325875-05:00||;True|2025-02-28T17:14:19.1411110-05:00||;False|2025-02-28T09:41:32.1085615-05:00||;False|2025-02-28T09:41:08.0120455-05:00||;True|2022-07-19T08:19:44.7893480-05:00||;True|2022-07-15T07:54:07.2092555-05:00||;True|2022-07-11T09:28:11.0920679-05:00||;True|2022-07-07T08:36:57.3110482-05:00||;False|2022-07-05T09:09:53.4599742-05:00||;True|2022-06-17T09:59:56.7060006-05:00||;True|2022-04-27T14:03:58.6380324-05:00||;</History>
+    <History>True|2025-04-30T15:35:48.1035214Z||;True|2025-04-29T15:40:55.0657268-05:00||;True|2025-04-15T10:47:59.9317807-05:00||;True|2025-04-14T15:38:27.0277142-05:00||;True|2025-04-14T14:09:14.8541781-05:00||;True|2025-04-14T14:08:44.3913686-05:00||;True|2025-03-03T14:12:34.0970520-05:00||;True|2025-03-03T14:06:15.4325875-05:00||;True|2025-02-28T17:14:19.1411110-05:00||;False|2025-02-28T09:41:32.1085615-05:00||;False|2025-02-28T09:41:08.0120455-05:00||;True|2022-07-19T08:19:44.7893480-05:00||;True|2022-07-15T07:54:07.2092555-05:00||;True|2022-07-11T09:28:11.0920679-05:00||;True|2022-07-07T08:36:57.3110482-05:00||;False|2022-07-05T09:09:53.4599742-05:00||;True|2022-06-17T09:59:56.7060006-05:00||;True|2022-04-27T14:03:58.6380324-05:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -76,7 +76,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/11/2025 08:57:54</publishTime>
     </File>
     <File Include="Areas/Accounting/Views/Informes/Index.cshtml">
-      <publishTime>04/11/2025 08:57:54</publishTime>
+      <publishTime>04/24/2025 09:47:45</publishTime>
     </File>
     <File Include="Areas/Accounting/Views/Informes/Test.cshtml">
       <publishTime>04/11/2025 08:57:54</publishTime>
@@ -253,7 +253,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/11/2025 08:57:54</publishTime>
     </File>
     <File Include="Areas/Aportes/Views/Aportes/Index.cshtml">
-      <publishTime>04/11/2025 08:57:54</publishTime>
+      <publishTime>04/16/2025 10:54:28</publishTime>
     </File>
     <File Include="Areas/Aportes/Views/Aportes/OtrasCuentas.cshtml">
       <publishTime>04/11/2025 08:57:54</publishTime>
@@ -919,13 +919,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/11/2025 08:57:54</publishTime>
     </File>
     <File Include="Areas/Email/Views/Email/Details.cshtml">
-      <publishTime>04/11/2025 08:58:31</publishTime>
+      <publishTime>04/15/2025 08:43:08</publishTime>
     </File>
     <File Include="Areas/Email/Views/Email/DetailsConsCuotaCredito.cshtml">
-      <publishTime>04/14/2025 09:24:36</publishTime>
+      <publishTime>04/15/2025 08:42:50</publishTime>
     </File>
     <File Include="Areas/Email/Views/Email/DetalleFacturaAhorroContractual.cshtml">
-      <publishTime>04/14/2025 08:33:00</publishTime>
+      <publishTime>04/15/2025 08:42:30</publishTime>
     </File>
     <File Include="Areas/Email/Views/Email/EstadoDeCuentaPDF.cshtml">
       <publishTime>04/11/2025 08:58:31</publishTime>
@@ -1570,7 +1570,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/11/2025 08:57:54</publishTime>
     </File>
     <File Include="Areas/formularioVinculacion/Imagenes/LOGO.png">
-      <publishTime>04/11/2025 08:57:54</publishTime>
+      <publishTime>04/15/2025 08:32:52</publishTime>
     </File>
     <File Include="Areas/formularioVinculacion/Imagenes/LOGOCOOMISOL.png">
       <publishTime>01/12/2021 16:04:00</publishTime>
@@ -1900,7 +1900,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/11/2025 08:57:54</publishTime>
     </File>
     <File Include="Areas/OperativaDeCaja/Views/FactOpcajas/CuentaOperacion.cshtml">
-      <publishTime>04/11/2025 08:58:31</publishTime>
+      <publishTime>04/15/2025 08:49:05</publishTime>
     </File>
     <File Include="Areas/OperativaDeCaja/Views/FactOpcajas/CuentaOperacionEntidadDos.cshtml">
       <publishTime>04/11/2025 08:57:54</publishTime>
@@ -1909,13 +1909,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/11/2025 08:57:54</publishTime>
     </File>
     <File Include="Areas/OperativaDeCaja/Views/FactOpcajas/Details.cshtml">
-      <publishTime>04/11/2025 08:58:31</publishTime>
+      <publishTime>04/15/2025 08:44:48</publishTime>
     </File>
     <File Include="Areas/OperativaDeCaja/Views/FactOpcajas/DetailsConsAbonoCredito.cshtml">
       <publishTime>04/11/2025 08:57:54</publishTime>
     </File>
     <File Include="Areas/OperativaDeCaja/Views/FactOpcajas/DetailsConsCuotaCredito.cshtml">
-      <publishTime>04/14/2025 09:24:33</publishTime>
+      <publishTime>04/15/2025 08:44:34</publishTime>
     </File>
     <File Include="Areas/OperativaDeCaja/Views/FactOpcajas/DetailsConsCuotaCreditoEntidadDos.cshtml">
       <publishTime>04/11/2025 08:57:54</publishTime>
@@ -1930,7 +1930,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/11/2025 08:57:54</publishTime>
     </File>
     <File Include="Areas/OperativaDeCaja/Views/FactOpcajas/DetalleFacturaAhorroContractual.cshtml">
-      <publishTime>04/14/2025 08:35:36</publishTime>
+      <publishTime>04/15/2025 08:44:16</publishTime>
     </File>
     <File Include="Areas/OperativaDeCaja/Views/FactOpcajas/DetallesApEx.cshtml">
       <publishTime>04/11/2025 08:57:54</publishTime>
@@ -2491,46 +2491,46 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/11/2025 08:58:06</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.BLL.dll">
-      <publishTime>04/11/2025 09:12:25</publishTime>
+      <publishTime>04/30/2025 10:35:29</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.BLL.dll.config">
-      <publishTime>04/11/2025 08:57:52</publishTime>
+      <publishTime>04/30/2025 10:34:44</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.BLL.pdb">
-      <publishTime>04/11/2025 09:12:25</publishTime>
+      <publishTime>04/30/2025 10:35:29</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.DAL.dll">
-      <publishTime>04/11/2025 09:12:23</publishTime>
+      <publishTime>04/30/2025 10:35:27</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.DAL.dll.config">
-      <publishTime>04/11/2025 08:57:53</publishTime>
+      <publishTime>04/30/2025 10:34:36</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.DAL.pdb">
-      <publishTime>04/11/2025 09:12:23</publishTime>
+      <publishTime>04/30/2025 10:35:27</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.DTO.dll">
-      <publishTime>04/11/2025 09:12:21</publishTime>
+      <publishTime>04/30/2025 10:35:24</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.DTO.dll.config">
-      <publishTime>04/11/2025 08:57:53</publishTime>
+      <publishTime>04/30/2025 10:34:23</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.Accounting.DTO.pdb">
-      <publishTime>04/11/2025 09:12:21</publishTime>
+      <publishTime>04/30/2025 10:35:24</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.UI.dll">
-      <publishTime>04/14/2025 09:34:26</publishTime>
+      <publishTime>04/30/2025 10:35:35</publishTime>
     </File>
     <File Include="bin/FNTC.Finansoft.UI.pdb">
-      <publishTime>04/14/2025 09:34:26</publishTime>
+      <publishTime>04/30/2025 10:35:35</publishTime>
     </File>
     <File Include="bin/FNTC.Framework.dll">
-      <publishTime>04/11/2025 09:12:20</publishTime>
+      <publishTime>04/30/2025 10:35:24</publishTime>
     </File>
     <File Include="bin/FNTC.Framework.dll.config">
-      <publishTime>04/11/2025 08:58:03</publishTime>
+      <publishTime>04/30/2025 10:33:59</publishTime>
     </File>
     <File Include="bin/FNTC.Framework.pdb">
-      <publishTime>04/11/2025 09:12:20</publishTime>
+      <publishTime>04/30/2025 10:35:24</publishTime>
     </File>
     <File Include="bin/IronPdf.Assets.Rendering.Windows.dll">
       <publishTime>04/11/2025 08:58:08</publishTime>
@@ -5392,7 +5392,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/11/2025 08:57:55</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>04/11/2025 08:58:31</publishTime>
+      <publishTime>04/30/2025 10:34:11</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
       <publishTime>06/09/2021 14:48:49</publishTime>
@@ -5434,7 +5434,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/11/2025 08:57:55</publishTime>
     </File>
     <File Include="Scripts/Areas/EstadoDeCuenta/EstadoDeCuenta.js">
-      <publishTime>04/11/2025 08:57:55</publishTime>
+      <publishTime>04/15/2025 10:27:04</publishTime>
     </File>
     <File Include="Scripts/Areas/OperativaDeCaja/FactOpcajas/CreateConsAC.js">
       <publishTime>04/11/2025 08:57:55</publishTime>
@@ -5611,7 +5611,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/11/2025 14:46:43</publishTime>
     </File>
     <File Include="Scripts/Email/EmailDetailsConsCuotaCredito.js">
-      <publishTime>04/14/2025 09:21:13</publishTime>
+      <publishTime>04/15/2025 09:59:45</publishTime>
     </File>
     <File Include="Scripts/espanol.js">
       <publishTime>04/11/2025 08:57:55</publishTime>
@@ -6670,7 +6670,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/11/2025 08:57:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/14/2025 15:38:18</publishTime>
+      <publishTime>04/30/2025 10:35:38</publishTime>
     </File>
   </ItemGroup>
 </Project>

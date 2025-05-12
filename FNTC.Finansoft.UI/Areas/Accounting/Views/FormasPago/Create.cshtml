@@ -127,11 +127,16 @@
         //alert(theAction);
         $.post('/accounting/FormasPago/@action', theForm.serialize())
             .done(function (result) {
-                 $('button[class=close]').trigger("click");
+                $('button[class=close]').trigger("click");
+                location.reload();
+                alert("Click en 'Aceptar' para continuar...");
+               
                 // $('#centro').removeData('bs.modal')
                // alert("posted");
                 //  $("#mostrar").html(result);
+
             });
+
     });
 
     $(document).ready(function () {
@@ -164,7 +169,7 @@
 
 
         ////////SUBMIT FORM
-     
+
 
     });
 
