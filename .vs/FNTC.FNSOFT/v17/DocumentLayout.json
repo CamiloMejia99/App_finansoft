@@ -1,18 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\camil\\source\\repos\\App_finansoft\\",
+  "WorkspaceRootPath": "C:\\Users\\camil\\source\\repos\\App_finansoft rama camilo\\App_finansoft\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|c:\\users\\camil\\source\\repos\\app_finansoft\\fntc.finansoft.ui\\areas\\accounting\\views\\formaspago\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\accounting\\views\\formaspago\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|C:\\Users\\camil\\source\\repos\\App_finansoft rama camilo\\App_finansoft\\fntc.finansoft.ui\\areas\\accounting\\views\\informes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\accounting\\views\\informes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|C:\\Users\\camil\\source\\repos\\App_finansoft\\fntc.finansoft.ui\\areas\\dashboard\\views\\default\\catalogos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\dashboard\\views\\default\\catalogos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|C:\\Users\\camil\\source\\repos\\App_finansoft\\fntc.finansoft.ui\\areas\\accounting\\views\\centrocosto\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\accounting\\views\\centrocosto\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|C:\\Users\\camil\\source\\repos\\App_finansoft rama camilo\\App_finansoft\\fntc.finansoft.ui\\areas\\accounting\\controllers\\informes\\informescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E72C5AF-9C93-4821-9BFD-3CC31377A06B}|FNTC.Finansoft.UI\\FNTC.Finansoft.UI.csproj|solutionrelative:fntc.finansoft.ui\\areas\\accounting\\controllers\\informes\\informescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,39 +27,28 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Accounting\\Views\\FormasPago\\Create.cshtml",
-              "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Accounting\\Views\\FormasPago\\Create.cshtml",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Accounting\\Views\\FormasPago\\Create.cshtml",
-              "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Accounting\\Views\\FormasPago\\Create.cshtml",
-              "ViewState": "AgIAAHIAAAAAAAAAAAAAAIIAAAAQAAAAAAAAAA==",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft rama camilo\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Accounting\\Views\\Informes\\Index.cshtml",
+              "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Accounting\\Views\\Informes\\Index.cshtml",
+              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft rama camilo\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Accounting\\Views\\Informes\\Index.cshtml",
+              "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Accounting\\Views\\Informes\\Index.cshtml",
+              "ViewState": "AgIAAIMBAAAAAAAAAAAAAIMBAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-08T22:35:33.519Z",
+              "WhenOpened": "2025-05-20T00:11:05.345Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Accounting\\Views\\CentroCosto\\Index.cshtml",
-              "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Accounting\\Views\\CentroCosto\\Index.cshtml",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Accounting\\Views\\CentroCosto\\Index.cshtml",
-              "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Accounting\\Views\\CentroCosto\\Index.cshtml",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-08T22:34:37.465Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "catalogos.cshtml",
-              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Dashboard\\Views\\Default\\catalogos.cshtml",
-              "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Dashboard\\Views\\Default\\catalogos.cshtml",
-              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Dashboard\\Views\\Default\\catalogos.cshtml",
-              "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Dashboard\\Views\\Default\\catalogos.cshtml",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAACkAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-08T19:00:36.343Z"
+              "Title": "InformesController.cs",
+              "DocumentMoniker": "C:\\Users\\camil\\source\\repos\\App_finansoft rama camilo\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Accounting\\Controllers\\Informes\\InformesController.cs",
+              "RelativeDocumentMoniker": "FNTC.Finansoft.UI\\Areas\\Accounting\\Controllers\\Informes\\InformesController.cs",
+              "ToolTip": "C:\\Users\\camil\\source\\repos\\App_finansoft rama camilo\\App_finansoft\\FNTC.Finansoft.UI\\Areas\\Accounting\\Controllers\\Informes\\InformesController.cs",
+              "RelativeToolTip": "FNTC.Finansoft.UI\\Areas\\Accounting\\Controllers\\Informes\\InformesController.cs",
+              "ViewState": "AgIAAM8FAAAAAAAAAAASwDoFAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T20:15:36.282Z",
+              "EditorCaption": ""
             }
           ]
         }

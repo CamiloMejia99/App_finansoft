@@ -12,68 +12,68 @@
 
 <h2>Detalles</h2>
 
-<div>
+<div style="text-align: left;">
     <h4>Prestamos</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal" style="text-align:left;">
 
 
 
 
-        <dt>
+        <dt style="text-align:left">
             @Html.DisplayNameFor(model => model.Forma_Pago.Forma_Pago_Descripcion)
         </dt>
 
-        <dd>
+        <dd style="text-align:left">
             @Html.DisplayFor(model => model.Forma_Pago.Forma_Pago_Descripcion)
         </dd>
 
-        <dt>
+        <dt style="text-align:left">
             @Html.DisplayNameFor(model => model.Tipo_Periodo.Tipo_Periodo_Descripcion)
         </dt>
 
-        <dd>
+        <dd style="text-align:left">
             @Html.DisplayFor(model => model.Tipo_Periodo.Tipo_Periodo_Descripcion)
         </dd>
 
-        <dt>
+        <dt style="text-align:left">
             @Html.DisplayNameFor(model => model.Capital)
         </dt>
 
-        <dd>
+        <dd style="text-align:left">
             @*@Html.DisplayFor(model => model.Capital)*@
             @Html.Raw("$" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-CO"), "{0:N0}", Convert.ToDecimal(@Model.Capital)))
         </dd>
 
-        <dt>
+        <dt style="text-align:left">
             @Html.DisplayNameFor(model => model.Interes)
         </dt>
 
-        <dd>
+        <dd style="text-align:left">
             @Html.DisplayFor(model => model.Interes)
         </dd>
 
-        <dt>
+        <dt style="text-align:left">
             @Html.DisplayNameFor(model => model.Plazo)
         </dt>
 
-        <dd>
+        <dd style="text-align:left">
             @Html.DisplayFor(model => model.Plazo)
         </dd>
 
-        <dt>
+        <dt style="text-align:left">
             @Html.DisplayNameFor(model => model.Fecha_Prestamo)
         </dt>
 
-        <dd>
+        <dd style="text-align:left">
             @Html.DisplayFor(model => model.Fecha_Prestamo)
         </dd>
 
-        <dt>
+        <dt style="text-align:left">
             @Html.DisplayNameFor(model => model.Fecha_Primer_Pago)
         </dt>
 
-        <dd>
+        <dd style="text-align:left">
             @Html.DisplayFor(model => model.Fecha_Primer_Pago)
         </dd>
 

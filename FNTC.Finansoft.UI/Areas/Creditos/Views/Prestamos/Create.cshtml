@@ -87,6 +87,7 @@
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label class="control-label col-md-10">
+                                                    Destino
                                                 </label>
                                                 <div class="col-md-10">
                                                     @Html.DropDownList("Destino_Id", new SelectList(string.Empty, "Value", "Text"), "Seleccione Un Destino", new { @style = "width:250px;", @class = "form-control" })
@@ -377,8 +378,45 @@
                                     <h3 class="panel-title">Lista Garantias</h3>
                                 </div>
                                 <div class="panel-body">
+                                    <!-- Botón para abrir el modal de garantías -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalGarantias">
+                                        <i class="glyphicon glyphicon-list"></i> Ver Garantias Registradas
+                                    </button>
                                     <table id="table1" class="compact table table-bordered table-striped"></table>
+                                </div>
+                            </div>
 
+                            <!-- Modal para mostrar la lista de garantías -->
+                            <div class="modal fade" id="modalGarantias" tabindex="-1" role="dialog" aria-labelledby="modalGarantiasLabel">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="modalGarantiasLabel">
+                                                <i class="glyphicon glyphicon-th-list"></i> Lista de Garantias Disponibles
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- Mensaje de bienvenida -->
+                                            <div class="alert alert-info">
+                                                <h4><i class="glyphicon glyphicon-info-sign"></i>Bienvenido</h4>
+                                                <p>En esta seccion podra visualizar todas las garantias disponibles para el prestamo.</p>
+                                            </div>
+                                            <!-- Contenedor para la tabla de garantías -->
+                                            <div id="listaGarantias">
+                                                <div class="text-center">
+                                                    <i class="glyphicon glyphicon-refresh"></i> Cargando garantías...
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                <i class="glyphicon glyphicon-remove"></i> Cerrar
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -458,24 +496,21 @@
 <div class="modal fade" id="myModal2">
     <div class="modal-dialog">
         <div class="modal-content">
-
             <div class="modal-header">
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
                 <h3 class="modal-title">Garantias</h3>
-
             </div>
             <div class="modal-body">
-
                 <form id="myForm2" name="myForm2">
                     <input type="text" id="PagarePer" name="PagarePer" required value="" readonly hidden="hidden">
-                    @*@Html.ListBox("NIT", ViewBag.NIT as MultiSelectList, new { @class = "chosen-select-multiple" })*@
-                    @Html.DropDownList("NIT", null, new { @class = "chosen-select-single", id = "codeudor" })
+                    <div class="form-group">
+                        <label>Codeudor</label>
+                        @Html.DropDownList("NIT", null, new { @class = "chosen-select-single", id = "codeudor" })
+                    </div>
                 </form>
-
                 <div style="text-align:center;display:none" id="loaderDiv2">
-                    <img src="~/Content/assets/img/loading.gif" width="20" /> @* //put any image in content folder*@
+                    <img src="~/Content/assets/img/loading.gif" width="20" />
                 </div>
-
             </div>
             <div class="modal-footer">
                 <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
@@ -600,15 +635,44 @@
     </div>
 </div>
 
+@*Fin Tabla de Amortizacion Para Intereses Anticipados*@
+
+<!-- Modal de éxito al guardar garantía -->
+<div class="modal fade" id="modalExito" tabindex="-1" role="dialog" aria-labelledby="modalExitoLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modalExitoLabel">
+                    <i class="glyphicon glyphicon-ok-circle"></i> EXITO
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success">
+                    <h4><i class="glyphicon glyphicon-check"></i> !Garantia guardada con exito!</h4>
+                    <p>La garantia ha sido registrada correctamente en el sistema.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">
+                    <i class="glyphicon glyphicon-ok"></i> Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
     <script src="~/Scripts/chosen.jquery.min.js"></script>
     <script src="~/Scripts/moment.js"></script>
-    
+
     <script>
         $("#DataCredito").click(function () {
-            
+
             location.href = '@Url.Action("Imagen", "Prestamos")';
     });
 
@@ -620,7 +684,7 @@
             location.href = '@Url.Action("Imagen", "Prestamos")';
     });
 
-    </script> 
+    </script>
 
     <script>
         $(document).ready(function () {
@@ -666,7 +730,6 @@
                                 $("#Real_Valor").val("1");
                                 $('#Real_Valor').attr('readonly', true);
                                 $("#btnSubmit").click(function () {
-
                                     $("#loaderDiv").show();
 
                                     var myformdata = $("#myForm").serialize();
@@ -677,6 +740,8 @@
                                         success: function () {
                                             $("#loaderDiv").hide();
                                             $("#myModal").modal("hide");
+                                            // Mostrar modal de éxito
+                                            $("#modalExito").modal("show");
                                         }
                                     })
                                 })
@@ -724,6 +789,8 @@
                         success: function () {
                             $("#loaderDiv").hide();
                             $("#myModal").modal("hide");
+                            // Mostrar modal de éxito
+                            $("#modalExito").modal("show");
                         }
                     })
                 })
@@ -743,23 +810,32 @@
             else if (valorPag != null || valorPag != 0) {
                 $('#PagarePer').val(valorPag);
                 $("#btnSubmit2").click(function () {
-
-                    $("#loaderDiv2").show();
-
-                    var myformdata = $("#myForm2").serialize();
-                    //var myformdata = $("#NIT, #Prestamos_id").serialize();
-
+                    var data = $("#myForm2").serialize();
                     $.ajax({
                         type: "POST",
-                        url: "@Url.Action("Create","Personal")",
-                        data: myformdata,
-                        success: function () {
-                            $("#loaderDiv2").hide();
-                            $("#myModal2").modal("hide");
-
+                        url: "/Creditos/Prestamos/AgregarGarantia",
+                        data: data,
+                        success: function (result) {
+                            if (result) {
+                                $("#myModal2").modal("hide");
+                                $("#myForm2")[0].reset();
+                                // Mostrar modal de éxito
+                                $("#modalExito").modal("show");
+                                // Actualizar la tabla de garantías
+                                var garantia = {
+                                    Garantias_Descripcion: $("#Garantia_Id option:selected").text(),
+                                    Real_Valor: $("#Real_Valor").val(),
+                                    pagare: $("#Pagare").val(),
+                                    valor_credito: $("#Capital").val(),
+                                    Garantias_Codeudor: $("#Garantia_Id option:selected").data("codeudor"),
+                                    codeudor_nit: $("#codeudor").val(),
+                                    nombre_codeudor: $("#nombre_codeudor").val(),
+                                    telefono_codeudor: $("#telefono_codeudor").val(),
+                                };
+                                actualizarTablaGarantias(garantia);
+                            }
                         }
-
-                    })
+                    });
                 })
             }
         })
@@ -770,7 +846,7 @@
             $('#Lineas_Id').change(function ()
             {
                 $('#Destino_Id').empty();
-                $.ajax({
+            $.ajax({
                     type: "POST",
                     //url: "/Costos_Adicionales/GetStatesByCountryId",
                     url: "@Url.Action("GetStatesByCountryId", "Costos_Adicionales")",
@@ -802,7 +878,7 @@
                                 text: "El destino seleccionado no tiene un pagaré configurado",
                             })
                             $('#Pagare').val("");
-                        } else {
+                    } else {
                             $('#Pagare').val(data.cod + data.actual + "(" + data.prestamo + ")");
                             if (data.esaut == 1) {
                                 $('#Pagare').attr("readonly", "readonly");
@@ -1030,7 +1106,7 @@
 
                                         if (valorf != 0 && porcentaje == 0) {
                                             val = parseFloat(valorf);
-                                            $.ajax({
+                $.ajax({
                                                 type: "POST",
                                                 //url: "/Costos_Adicionales/GetStatesByCountryId",
                                                 url: "@Url.Action("qDecrecienteCA", "Prestamos")",
@@ -1174,7 +1250,7 @@
             var Capital = parseInt($("#Capital").val());
 
             var Interes = $("#Interes").val();
-            
+
             var Plazo = $("#Plazo").val();
             var plazo = parseFloat(Plazo);
             var Periodo = $("#Tipo_Periodo_Id").val();
@@ -1191,7 +1267,7 @@
             var Periodo = $("#ValorPeriodo").val();
             var Per = parseInt(Periodo);
             var FechaPrestamo = $("#Fecha_Prestamo").val();
-            
+
 
 
 
@@ -1795,4 +1871,107 @@
             }
         })//fin blur
     </script><!--Validaciones antes de enviar formulario-->
+
+    <script>
+        $(document).ready(function() {
+            // Función para cargar las garantías en el modal
+            function cargarGarantias() {
+                console.log('Iniciando carga de garantías...');
+                $.ajax({
+                    url: '@Url.Action("GetGarantias", "Prestamos")',
+                    type: 'GET',
+                    beforeSend: function() {
+                        $('#listaGarantias').html('<div class="text-center"><i class="glyphicon glyphicon-refresh"></i> Cargando garantías...</div>');
+                    },
+                    success: function(data) {
+                        console.log('Datos recibidos:', data);
+
+                        if (data && data.length > 0) {
+                            var html = '<div class="table-responsive">';
+                            html += '<table class="table table-bordered table-hover">';
+                            html += '<thead><tr class="info">';
+                            html += '<th>ID</th>';
+                            html += '<th>Codigo</th>';
+                            html += '<th>Descripcion</th>';
+                            html += '<th>Clase</th>';
+                            html += '<th>Requiere Codeudor</th>';
+                            html += '<th>Hipotecaria</th>';
+                            html += '<th>% Credito</th>';
+                            html += '<th>Valor Garantia</th>';
+                            html += '<th>NIT Codeudor</th>';
+                            html += '<th>Nombre Codeudor</th>';
+                            html += '<th>Valor Credito</th>';
+                            html += '</tr></thead>';
+                            html += '<tbody>';
+
+                            data.forEach(function(garantia) {
+                                html += '<tr>';
+                                html += '<td>' + (garantia.Garantias_Id || '-') + '</td>';
+                                html += '<td>' + (garantia.Garantias_Codigo || '-') + '</td>';
+                                html += '<td>' + (garantia.Garantias_Descripcion || '-') + '</td>';
+                                html += '<td>' + (garantia.Clase_Garantias_Id || '-') + '</td>';
+                                html += '<td>' + (garantia.Garantias_Codeudor ? 'Si' : 'No') + '</td>';
+                                html += '<td>' + (garantia.Garantias_Hipotecarias ? 'Si' : 'No') + '</td>';
+                                html += '<td>' + (garantia.Garantias_Porcentaje_Credito_Pagado || '0') + '%</td>';
+                                html += '<td>$' + (garantia.Real_Valor ? garantia.Real_Valor.toLocaleString() : '0') + '</td>';
+                                html += '<td>' + (garantia.Codeudor_NIT || '-') + '</td>';
+                                html += '<td>' + (garantia.Codeudor_Nombre || '-') + '</td>';
+                                html += '<td>$' + (garantia.Valor_Credito ? garantia.Valor_Credito.toLocaleString() : '0') + '</td>';
+                                html += '</tr>';
+                            });
+
+                            html += '</tbody></table></div>';
+                            $('#listaGarantias').html(html);
+                            console.log('Tabla de garantías generada correctamente');
+                        } else {
+                            console.log('No se encontraron garantías');
+                            $('#listaGarantias').html('<div class="alert alert-info">No hay garantías registradas</div>');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error al cargar garantías:', error);
+                        console.error('Estado:', status);
+                        console.error('Respuesta:', xhr.responseText);
+                        $('#listaGarantias').html('<div class="alert alert-danger">Error al cargar las garantías: ' + error + '</div>');
+                    }
+                });
+            }
+
+            // Cargar garantías cuando se abre el modal
+            $('#modalGarantias').on('show.bs.modal', function() {
+                console.log('Modal de garantías abierto');
+                cargarGarantias();
+            });
+        });
+    </script>
+
+    <script>
+        $("#codeudor").change(function () {
+            var codeudorId = $(this).val();
+            if (codeudorId) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Creditos/Prestamos/GetCodeudorInfo",
+                    data: { id: codeudorId },
+                    success: function (result) {
+                        if (result) {
+                            $("#nombre_codeudor").val(result.NOMBRE);
+                            $("#codeudor_nit").val(result.NIT);
+                            // Actualizar la tabla de garantías
+                            var garantia = {
+                                Garantias_Descripcion: $("#Garantia_Id option:selected").text(),
+                                Real_Valor: $("#Real_Valor").val(),
+                                pagare: $("#Pagare").val(),
+                                valor_credito: $("#Capital").val(),
+                                Garantias_Codeudor: $("#Garantia_Id option:selected").data("codeudor"),
+                                codeudor_nit: result.NIT,
+                                nombre_codeudor: result.NOMBRE
+                            };
+                            actualizarTablaGarantias(garantia);
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 }

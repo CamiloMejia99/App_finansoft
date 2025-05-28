@@ -1490,6 +1490,8 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         }
                         #endregion
                         break;
+
+
                     case 4:
                         #region informe4 Balance General
                         List<Movimiento> saldosCuentas = new List<Movimiento>();
@@ -1503,6 +1505,8 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                             filtro = desdeSaldoAno + " : " + GetMes(hastaSaldo);
                         else
                             filtro = desdeSaldoAno.ToString();
+
+
 
                         ws = pack.Workbook.Worksheets.Add("Balance General");
                         // encabezado
@@ -1525,6 +1529,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
                         ws.Cells["A6:I6"].Merge = true;
 
                         //fin encabezado
+
 
 
                         int J = 7, G = 7; decimal totalActivo = 0, totalPasivo = 0;
@@ -4960,7 +4965,7 @@ namespace FNTC.Finansoft.UI.Areas.Accounting.Controllers.Movimientos.Informes
 
                                 if (item.asesor != null && item.asesor != "")
                                 {
-                                    var tercero = db.ControlAccesos.Where(x => x.nombre == item.asesor).FirstOrDefault();
+                                    var tercero = db.ControlAccesos.Where(x => x.usuario == item.asesor).FirstOrDefault();
                                     if (tercero != null)
                                     {
                                         nomAsesor = tercero.nombre;

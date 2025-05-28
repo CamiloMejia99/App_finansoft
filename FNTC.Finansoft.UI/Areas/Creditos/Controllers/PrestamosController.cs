@@ -694,7 +694,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
             Periodo = Periodo / 30;
 
             //obtenemos costo de administracion
-            int CtoAdmon = (IdDestino == 2) ? GetCostoAdministracion(capital, plazo, Periodo) : 0; //se agrega condición sobre el destino, si es diferente a destino de crédito ordinario su valor debe ser cero.
+            int CtoAdmon = (IdDestino == 1006) ? GetCostoAdministracion(capital, plazo, Periodo) : 0; //se agrega condición sobre el destino, si es diferente a destino de crédito ordinario su valor debe ser cero.
 
 
             //VPS: valor porcentaje seguro
@@ -727,7 +727,7 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
 
             //int valorCostoFijo = ((Convert.ToInt32(costoAdicionalEnEltiempo + costoAdicionalPrimeraCuota + costoAdicionalDividoEnElTiempo)) / 12) * plazo;
             int valorCostoFijo = costoAdicionalEnEltiempo;
-            int valorCostoFijoCuota = (IdDestino == 2) ? (Convert.ToInt32(capital * decimal.Divide((decimal)0.059, 100)) * Periodo) : 0;//(valorCostoFijo / plazo)*Periodo;
+            int valorCostoFijoCuota = (IdDestino == 1006) ? (Convert.ToInt32(capital * decimal.Divide((decimal)0.059, 100)) * Periodo) : 0;//(valorCostoFijo / plazo)*Periodo;
 
 
             double cuota = (capital * (valorInteres / (1 - Math.Pow(1 + valorInteres, -(plazo / Periodo)))));
@@ -780,6 +780,64 @@ namespace FNTC.Finansoft.UI.Areas.Creditos.Controllers
 
 
             return new JsonResult { Data = new { status = true, list } };
+        }
+
+        [HttpGet]
+        public JsonResult GetGarantias()
+        {
+            try
+            {
+                var garantias = (from g in db.Garantias
+                                 join gc in db.GarantiasCreditos on g.Garantias_Id equals gc.garantia_id into gj
+                                 from gc in gj.DefaultIfEmpty()
+                                 select new
+                                 {
+                                     g.Garantias_Id,
+                                     g.Garantias_Codigo,
+                                     g.Garantias_Descripcion,
+                                     g.Clase_Garantias_Id,
+                                     g.Garantias_Codeudor,
+                                     g.Garantias_Hipotecarias,
+                                     g.Garantias_Porcentaje_Credito_Pagado,
+                                     Real_Valor = gc != null ? gc.Real_Valor : 0,
+                                     Codeudor_Nombre = gc != null ? gc.nombre_codeudor : null,
+                                     Codeudor_NIT = gc != null ? gc.codeudor_nit.ToString() : null,
+                                     Valor_Credito = gc != null ? gc.valor_credito : 0
+                                 }).ToList();
+
+                return Json(garantias, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error en GetGarantias: " + ex.Message);
+                return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult GetCodeudorInfo(string id)
+        {
+            var codeudor = db.Terceros.FirstOrDefault(t => t.NIT == id);
+            if (codeudor != null)
+            {
+                return Json(new { NOMBRE = codeudor.NOMBRE, NIT = codeudor.NIT });
+            }
+            return Json(null);
+        }
+
+        public ActionResult VerGarantias(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var garantias = db.GarantiasCreditos
+                .Where(g => g.pagare == id)
+                .ToList();
+
+            ViewBag.Pagare = id;
+            return View(garantias);
         }
 
         protected override void Dispose(bool disposing)
